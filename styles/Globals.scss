@@ -1,0 +1,109 @@
+@import "Vars";
+@import "Utilities";
+
+
+@font-face {
+  font-family: font-primary;
+  src: url("/assets/fonts/iranyekanregular.ttf");
+}
+@font-face {
+  font-family: font-primary-bold;
+  src: url("/assets/fonts/iranyekanbold.ttf");
+}
+
+::placeholder {
+  color: #666;
+  font-size: 1.6rem;
+}
+
+
+*,
+*:before,
+*:after {
+  margin: 0 ;
+  padding: 0 ;
+  box-sizing: border-box;
+  direction: rtl;
+  //text-align: justify;
+  font-family: inherit;
+
+
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 62.5%;
+  font-family: font-primary, Tahoma, sans-serif;
+
+
+}
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  //padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+a,
+a:active,
+a:checked {
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.btn {
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .7rem;
+
+  &:focus {
+    outline: none;
+  }
+
+
+
+}
+
+.btn-primary{
+  background-color: $color-primary;
+  color: white;
+  transition: background-color .4s;
+
+
+  &:hover {
+    background-color: lighten($color-primary, 10%);
+  }
+
+
+
+}
+
+.footer-link {
+  color: white;
+  font-size: 1.6rem;
+  display: block;
+  justify-content: flex-start;
+  transition: background-color .4s;
+
+  &:hover{
+    background-color: rgba(black,.1);
+  }
+
+
+
+}
+
+

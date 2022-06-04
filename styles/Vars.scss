@@ -1,0 +1,29 @@
+//$color-primary:#CE3175;
+$color-primary:#692c8a;
+$color-secondary:#563fa6;
+$color-ternary: #9273fa;
+$color-primary-white: #ddd;
+
+
+
+
+$gradient-primary:linear-gradient(135deg ,$color-secondary,$color-primary 30% 60%, $color-secondary);
+
+@function gradientGenerator($opacity1,$opacity2){
+  $gradient :linear-gradient(rgba($color-primary,$opacity1),rgba($color-secondary,$opacity2));
+  @return $gradient
+}
+
+
+$pd-sm:1rem;
+$pd-md:2rem;
+$pd-lg:3rem;
+
+
+$mg-sm:1rem;
+$mg-md:2rem;
+$mg-lg:3rem;
+
+$br-sm: .7rem;
+$br-md:2rem;
+$br-lg:5rem;

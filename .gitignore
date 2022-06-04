@@ -12,9 +12,11 @@
 /.next/
 /out/
 
+#assets
+/public
 # production
 /build
-
+Artboard 1.png
 # misc
 .DS_Store
 *.pem
