@@ -18,8 +18,8 @@ const Hero = () => {
 
     return(
 
-        <Grid container item direction={"row"} justifyContent={"center"} component={"section"}>
-            <Grid container item xs={4} bgcolor={"#11AE77"}  py={"8rem"} px={"4rem"} gap={"4rem"}>
+        <Grid container item direction={"row"} justifyContent={"center"} component={"section"} mt={10}>
+            <Grid container item direction={"column"} xs={4} bgcolor={"#069f69"}  py={"8rem"} px={"4rem"} gap={"4rem"}>
                 <Grid item>
                     <Typography variant={"h1"} fontSize={"4rem"} color={"common.white"}>
                         خانه رویایی خود را به واقعیت تبدیل کنید
@@ -38,7 +38,7 @@ const Hero = () => {
                 </Grid>
             </Grid>
             <Grid item xs={7}>
-                <Box sx={styles.heroImageBox}>
+                <Box width={1} sx={styles.heroImageBox}>
                     <Image src={"/assets/pictures/hero_img.jpg"} alt={"hero_image_interior_design"} layout="fill" />
                 </Box>
             </Grid>

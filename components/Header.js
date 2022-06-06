@@ -1,10 +1,9 @@
 import MainNavigation from "./MainNavigation";
 import {Grid, IconButton,Button, InputAdornment, TextField, useMediaQuery, useTheme} from "@mui/material";
-import {Search, ShoppingBagOutlined,Login} from "@mui/icons-material";
+import {Search, ShoppingBagOutlined, Login, PersonOutlineOutlined} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
-
-// import Hero from "./Hero";
+import Hero from "./Hero";
 
 const styles = {
     searchField: {
@@ -49,19 +48,19 @@ const Header = () => {
 
     return (
         <Grid container direction={"column"} component={"header"}>
-            <Grid container item direction={"row"} justifyContent={"center"}>
+            <Grid container item direction={"row"} justifyContent={"center"} >
 
-                <Grid container item direction={"row"}  alignItems={"center"} xs={11}
-                      justifySelf={"center"}>
-                    <Grid item xs={1} minWidth={140} minHeight={140}>
+                <Grid container item direction={"row"} alignItems={"center"} xs={11}
+                      justifySelf={"center"} pt={20}>
+                    <Grid container item xs={1} minWidth={90} minHeight={90}>
                         <Link href={"/"}>
                             <a>
-                                <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={140} height={140}/>
+                                <Image src={"/assets/pictures/logo2.png"} alt={"dival-logo"} width={90} height={90}/>
                             </a>
                         </Link>
                     </Grid>
-                    <Grid item xs={4}>
-                        <Grid container item xs justifyContent={"flex-start"} mr={10} alignItems={"center"}>
+                    <Grid item xs={5}>
+                        <Grid container item xs justifyContent={"center"} alignItems={"center"}>
                             <TextField
                                 placeholder={"جستجو ..."}
                                 sx={styles.searchField}
@@ -86,12 +85,11 @@ const Header = () => {
                         {!matchesMD && <Link href={"/signup"} passHref><Button
                             variant={"contained"}
                             color={"primary"}
-                            startIcon={<Login sx={{fontSize: 10, ml: 5, transform: "rotate(180deg)",}}/>
+                            startIcon={<PersonOutlineOutlined sx={{fontSize: 10, ml: 5}}/>
                             }
                             sx={styles.signupButton}
                         >
-                            ورود / ثبت نام
-
+                            حساب کاربری
                         </Button>
                         </Link>}
                         {matchesMD &&
@@ -108,12 +106,8 @@ const Header = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item>
                 <MainNavigation/>
-            </Grid>
-            <Grid item>
-                {/*<Hero />*/}
-            </Grid>
+                <Hero />
         </Grid>
 
     )

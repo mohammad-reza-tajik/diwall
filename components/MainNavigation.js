@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {Fragment, useState} from "react";
 import {Grid, IconButton, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@mui/material";
-import {Dehaze, LocalPhone} from "@mui/icons-material";
+import {Dehaze, LocalPhoneOutlined} from "@mui/icons-material";
 
 
 const styles = {
@@ -37,7 +37,7 @@ const MainNavigation = () => {
     }
 
     return (
-        <Grid container alignItems={"center"} component={"nav"}  direction={"row"} justifyContent={"center"}>
+        <Grid container item alignItems={"center"} component={"nav"}  direction={"row"} justifyContent={"center"} mt={20}>
                 {!matchesMD &&
                     <Fragment>
                         <Grid item xs={9}>
@@ -58,7 +58,7 @@ const MainNavigation = () => {
                                                                       sx={styles.tabStyle}/></Link>
                             </Tabs>
                         </Grid>
-                        <Grid container item direction={"row"}  xs={2}>
+                        <Grid container item direction={"row"}  xs={2} justifyContent={"flex-end"}>
                             <Grid container item direction={"column"} xs={6}>
                                 <Grid item>
                                     <Typography fontWeight={700} color={"#888"} fontSize={18} variant={"subtitle1"}>021464879</Typography>
@@ -70,7 +70,7 @@ const MainNavigation = () => {
                             </Grid>
                             <Grid item container justifyContent={"center"} alignItems={"flex-end"}  xs={2} mr={"-.7rem"}>
                                 <Grid item>
-                                    <LocalPhone sx={{fontSize: 35}} color={"primary"}/>
+                                    <LocalPhoneOutlined sx={{fontSize: 35}} color={"primary"}/>
                                 </Grid>
                             </Grid>
                         </Grid>
