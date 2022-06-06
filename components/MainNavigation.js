@@ -61,14 +61,14 @@ const MainNavigation = () => {
                         <Grid container item direction={"row"}  xs={2}>
                             <Grid container item direction={"column"} xs={6}>
                                 <Grid item>
-                                    <Typography color={"#888"} fontSize={17} variant={"subtitle1"}>021464879</Typography>
+                                    <Typography fontWeight={700} color={"#888"} fontSize={18} variant={"subtitle1"}>021464879</Typography>
                                 </Grid>
-                                <Grid item>
+                                <Grid item mt={"-.7rem"}>
                                     <Typography color={"#888"} fontSize={12} variant={"subtitle1"}>پشتیبانی مشتریان</Typography>
                                 </Grid>
 
                             </Grid>
-                            <Grid item container justifyContent={"center"} alignItems={"flex-end"}  xs={2}>
+                            <Grid item container justifyContent={"center"} alignItems={"flex-end"}  xs={2} mr={"-.7rem"}>
                                 <Grid item>
                                     <LocalPhone sx={{fontSize: 35}} color={"primary"}/>
                                 </Grid>
