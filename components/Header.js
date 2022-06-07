@@ -4,6 +4,7 @@ import {Search, ShoppingBagOutlined, Login, PersonOutlineOutlined} from "@mui/ic
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "./Hero";
+import Features from "./Features";
 
 const styles = {
     searchField: {
@@ -21,7 +22,7 @@ const styles = {
 
     },
     searchIcon: {
-        fontSize: "2rem",
+        fontSize: "2.5rem",
         color: "primary.main"
     },
     signupButton: {
@@ -47,8 +48,7 @@ const Header = () => {
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
 
     return (
-        <Grid container direction={"column"} component={"header"}>
-            <Grid container item direction={"row"} justifyContent={"center"} >
+        <Grid container item direction={"row"} component={"header"} justifyContent={"center"}>
 
                 <Grid container item direction={"row"} alignItems={"center"} xs={11}
                       justifySelf={"center"} pt={20}>
@@ -104,10 +104,8 @@ const Header = () => {
                             </Link>
                         }
                     </Grid>
-                </Grid>
             </Grid>
                 <MainNavigation/>
-                <Hero />
         </Grid>
 
     )

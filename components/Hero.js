@@ -10,7 +10,7 @@ const styles = {
     },
     heroButton:{
         fontSize:"1.6rem",
-        borderRadius:"5rem",
+        // borderRadius:"5rem",
     }
 }
 
@@ -18,10 +18,10 @@ const Hero = () => {
 
     return(
 
-        <Grid container item direction={"row"} justifyContent={"center"} component={"section"} mt={10}>
+        <Grid container item direction={"row"} justifyContent={"center"} component={"section"} mt={20}>
             <Grid container item direction={"column"} xs={4} bgcolor={"#069f69"}  py={"8rem"} px={"4rem"} gap={"4rem"}>
                 <Grid item>
-                    <Typography variant={"h1"} fontSize={"4rem"} color={"common.white"}>
+                    <Typography variant={"h1"} fontSize={"4rem"} color={"common.white"} fontWeight={700}>
                         خانه رویایی خود را به واقعیت تبدیل کنید
                     </Typography>
                 </Grid>
