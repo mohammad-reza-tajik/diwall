@@ -16,6 +16,21 @@ const styles = {
     },
     signInField: {
         width: .65
+    },
+    footer_download_button:{
+        fontSize:12,
+        fontWeight:700,
+        gap:10,
+        alignItems:"center",
+        color:"#000",
+        border:"1px solid #000",
+        transition: "all .4s",
+
+        "&:hover" : {
+            filter: "invert(40%) sepia(65%) saturate(1062%) hue-rotate(121deg) brightness(95%) contrast(95%);"
+        },
+
+
     }
 }
 
@@ -259,10 +274,10 @@ const Footer = () => {
                     <Typography variant={"h5"} color={"#444"}>
                         دانلود اپلیکیشن دیوال :
                     </Typography>
-                    <Button size={"large"} sx={{fontSize:12,fontWeight:700,gap:10,alignItems:"center",color:"#000",border:"1px solid #000"}} variant={"outlined"} endIcon={<Image src={"/assets/icons/google_play.svg"} alt={"apple_store"} height={20} width={20} />}>
+                    <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"} endIcon={<Image src={"/assets/icons/google_play.svg"} alt={"apple_store"} height={20} width={20} />}>
                         Apple Store
                     </Button>
-                    <Button size={"large"} sx={{fontSize:12,fontWeight:700,gap:10,alignItems:"center",color:"#000",border:"1px solid #000"}} variant={"outlined"} endIcon={<Image src={"/assets/icons/apple.svg"} alt={"apple_store"} height={20} width={20} />}>
+                    <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"} endIcon={<Image src={"/assets/icons/apple.svg"} alt={"apple_store"} height={20} width={20} />}>
                         Google Play
                     </Button>
 
