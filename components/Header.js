@@ -55,7 +55,7 @@ const Header = () => {
                     <Grid container item xs={1} minWidth={90} minHeight={90}>
                         <Link href={"/"}>
                             <a>
-                                <Image src={"/assets/pictures/logo2.png"} alt={"dival-logo"} width={90} height={90}/>
+                                <Image src={"/assets/pictures/logo3.png"} alt={"dival-logo"} width={90} height={90}/>
                             </a>
                         </Link>
                     </Grid>

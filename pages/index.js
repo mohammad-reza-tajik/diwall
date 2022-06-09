@@ -12,10 +12,11 @@ const Home = () => {
       <Grid container direction={"row"} justifyContent={"center"}>
 
       <Head>
-        <title>فروشگاه پوستر و کاغذ دیواری دیوال</title>
+        <title> دیوال : فروشگاه پوستر و کاغذ دیواری </title>
       </Head>
-          <Hero />
-          <Features />
+          {/*<Hero />*/}
+          {/*<Features />*/}
+
       </Grid>
   )
 }

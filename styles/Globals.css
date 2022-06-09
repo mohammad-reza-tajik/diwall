@@ -145,15 +145,4 @@ a:checked {
   background-color: #8638b1;
 }
 
-.footer-link {
-  color: white;
-  font-size: 1.6rem;
-  display: block;
-  justify-content: flex-start;
-  transition: background-color 0.4s;
-}
-.footer-link:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
 /*# sourceMappingURL=Globals.css.map */
