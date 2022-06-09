@@ -27,7 +27,7 @@ const styles = {
         transition: "all .4s",
 
         "&:hover" : {
-            filter: "invert(40%) sepia(65%) saturate(1062%) hue-rotate(121deg) brightness(95%) contrast(95%);"
+            filter: "invert(32%) sepia(64%) saturate(541%) hue-rotate(107deg) brightness(94%) contrast(102%)"
         },
 
 
