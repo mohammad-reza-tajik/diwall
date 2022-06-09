@@ -6,6 +6,7 @@ import Hero from "../components/Hero";
 import Features from "../components/Features";
 import {Grid} from "@mui/material";
 import SeenOn from "../components/SeenOn";
+import Places from "../components/Places";
 
 const Home = () => {
 
@@ -17,6 +18,7 @@ const Home = () => {
       </Head>
           {/*<Hero />*/}
           {/*<Features />*/}
+          <Places />
           <SeenOn />
 
       </Grid>
