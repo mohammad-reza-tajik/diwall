@@ -1,4 +1,4 @@
-import {Box, Button, Grid, IconButton, TextField, Typography} from "@mui/material";
+import {Box, Button, Grid, IconButton, TextField, Typography,Divider} from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import {Circle, Instagram, LinkedIn, LocalPhoneOutlined, Telegram, Twitter} from "@mui/icons-material";
@@ -247,6 +247,10 @@ const Footer = () => {
 
             {/*****************************************************************************************/}
 
+            <Grid item mt={20} xs={11}>
+                <Divider sx={{width:1,bgcolor:"#ddd"}} />
+            </Grid>
+
             <Grid container item my={40} alignItems={"center"} justifyContent={"space-between"}>
                 <Grid container item gap={20} xs={5}>
                     <Link href={"/"} >
@@ -282,6 +286,9 @@ const Footer = () => {
                     </Button>
 
                 </Grid>
+            </Grid>
+            <Grid item xs={11}>
+                <Divider sx={{width:1,bgcolor:"#ddd"}} />
             </Grid>
             <Grid container item justifyContent={"center"} alignItems={"center"} my={20}>
                 <Typography variant={"h6"} color={"#444"}>

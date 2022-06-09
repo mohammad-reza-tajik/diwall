@@ -34,6 +34,9 @@ const theme = createTheme({
 
     typography: {
         fontFamily: "inherit",
+        caption:{
+            fontFamily:"/assets/fonts/iranyekanbold.ttf"
+        }
 
 
     },
