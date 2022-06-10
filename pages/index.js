@@ -18,8 +18,8 @@ const Home = () => {
       </Head>
           {/*<Hero />*/}
           {/*<Features />*/}
-          <Places />
-          <SeenOn />
+          {/*<Places />*/}
+          {/*<SeenOn />*/}
 
       </Grid>
   )

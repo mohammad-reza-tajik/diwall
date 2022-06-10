@@ -26,7 +26,7 @@ const theme = createTheme({
         },
         text: {
             secondary: "#000",
-            primary: "#000"
+            primary: "#1d1d1e"
         }
 
 
@@ -34,6 +34,9 @@ const theme = createTheme({
 
     typography: {
         fontFamily: "inherit",
+        h1:{
+          // color:"#1d1d1e"
+        },
         caption:{
             fontFamily:"/assets/fonts/iranyekanbold.ttf"
         }

@@ -8,7 +8,7 @@ function MyApp({Component, pageProps}) {
     return (
         <ThemeProvider theme={theme}>
             <Grid container direction={"row"} justifyContent={"center"}>
-                {/*<Header/>*/}
+                <Header/>
                 <Component {...pageProps} />
                 <Footer/>
             </Grid>
