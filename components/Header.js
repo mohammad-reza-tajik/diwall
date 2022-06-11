@@ -1,6 +1,6 @@
 import MainNavigation from "./MainNavigation";
 import {Button, Grid, IconButton, InputAdornment, TextField, useMediaQuery, useTheme} from "@mui/material";
-import {Login, Search, ShoppingBagOutlined} from "@mui/icons-material";
+import {FavoriteBorder, FavoriteOutlined, Login, Search, ShoppingBagOutlined} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -58,7 +58,7 @@ const Header = () => {
                         </a>
                     </Link>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={7}>
                     <Grid container item xs justifyContent={"center"} alignItems={"center"}>
                         <TextField
                             placeholder={"جستجو ..."}
@@ -75,7 +75,17 @@ const Header = () => {
                         />
                     </Grid>
                 </Grid>
-                <Grid container item xs={4} justifyContent={"flex-end"}>
+                <Grid container item xs={1} justifyContent={"flex-end"}>
+                    <IconButton color={"primary"}>
+                        <FavoriteBorder sx={{
+                            fontSize: {xs: 40, sm: 50},
+                            border: "2px solid #11AE77",
+                            borderRadius: "50px",
+                            p: ".7rem"
+                        }}/>
+                    </IconButton>
+                </Grid>
+                <Grid container item xs={1} justifyContent={"flex-start"}>
                     <IconButton color={"primary"}>
                         <ShoppingBagOutlined sx={{
                             fontSize: {xs: 40, sm: 50},
