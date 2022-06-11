@@ -1,6 +1,6 @@
 import MainNavigation from "./MainNavigation";
 import {Button, Grid, IconButton, InputAdornment, TextField, useMediaQuery, useTheme} from "@mui/material";
-import {FavoriteBorder, FavoriteOutlined, Login, Search, ShoppingBagOutlined} from "@mui/icons-material";
+import {FavoriteBorder, Login, Search, ShoppingBagOutlined} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -58,8 +58,7 @@ const Header = () => {
                         </a>
                     </Link>
                 </Grid>
-                <Grid item xs={7}>
-                    <Grid container item xs justifyContent={"center"} alignItems={"center"}>
+                <Grid container item alignItems={"center"} xs={7} pr={20}>
                         <TextField
                             placeholder={"جستجو ..."}
                             sx={styles.searchField}
@@ -73,9 +72,8 @@ const Header = () => {
                                 ),
                             }}
                         />
-                    </Grid>
                 </Grid>
-                <Grid container item xs={1} justifyContent={"flex-end"}>
+                <Grid container item xs={2} justifyContent={"flex-end"}>
                     <IconButton color={"primary"}>
                         <FavoriteBorder sx={{
                             fontSize: {xs: 40, sm: 50},
@@ -84,8 +82,6 @@ const Header = () => {
                             p: ".7rem"
                         }}/>
                     </IconButton>
-                </Grid>
-                <Grid container item xs={1} justifyContent={"flex-start"}>
                     <IconButton color={"primary"}>
                         <ShoppingBagOutlined sx={{
                             fontSize: {xs: 40, sm: 50},
@@ -94,7 +90,9 @@ const Header = () => {
                             p: ".7rem"
                         }}/>
                     </IconButton>
+
                 </Grid>
+
                 <Grid item container xs={2} justifyContent={"flex-end"}>
                     {!matchesMD && <Link href={"/sign-in"} passHref><Button
                         variant={"contained"}
