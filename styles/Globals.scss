@@ -1,15 +1,7 @@
 @import "Vars";
 @import "Utilities";
+@import "Fonts";
 
-
-@font-face {
-  font-family: font-primary;
-  src: url("/assets/fonts/iranyekanregular.ttf");
-}
-@font-face {
-  font-family: font-primary-bold;
-  src: url("/assets/fonts/iranyekanbold.ttf");
-}
 
 ::placeholder {
   color: #666;
@@ -24,7 +16,7 @@
   padding: 0 ;
   box-sizing: border-box;
   direction: rtl;
-  //text-align: justify;
+  text-align: justify;
   font-family: inherit;
 
 
@@ -33,7 +25,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 62.5%;
-  font-family: font-primary, Tahoma, sans-serif;
+  font-family: "dana-regular",tahoma ,serif;
+
 
 
 }

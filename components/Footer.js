@@ -168,7 +168,7 @@ const Footer = () => {
                 <Grid item container direction={"row"} alignItems={"center"} gap={10} mt={15}>
                     <Typography variant={"h4"} fontSize={20} color={"#444"}>
                         از جدیدترین تخفیفات <Box component={"span"}
-                                                 sx={{fontWeight: 700, color: "primary.main"}}>دیوال</Box> با خبر شوید!
+                                                 sx={{fontFamily:"dana-black", color: "primary.main"}}>دیوال</Box> با خبر شوید!
                     </Typography>
                 </Grid>
                 <Grid item container direction={"row"} alignItems={"center"} gap={5} mt={15}>
@@ -180,8 +180,7 @@ const Footer = () => {
             <Grid container item alignItems={"center"} justifyContent={"space-around"} my={40}>
                 <Grid container item direction={"column"} xs={10} gap={10}>
                     <Grid item>
-                        <Typography variant={"h4"}>الو <Box component={"span"} sx={{
-                            fontWeight: 700,
+                        <Typography variant={"h4"} color={"#444"} fontFamily={"dana-black"}>الو <Box component={"span"} sx={{
                             color: "primary.main"
                         }}>دیوال</Box></Typography>
                     </Grid>
@@ -213,8 +212,7 @@ const Footer = () => {
 
             <Grid container item justifyContent={"space-between"} alignItems={"center"}>
                 <Grid container item direction={"column"} gap={10} xs={8}>
-                    <Typography variant={"h4"}>فروشگاه اینترنتی <Box component={"span"} sx={{
-                        fontWeight: 700,
+                    <Typography variant={"h4"} color={"#444"} fontFamily={"dana-black"}>فروشگاه اینترنتی <Box component={"span"} sx={{
                         color: "primary.main"
                     }}>دیوال</Box></Typography>
                     <Typography variant={"h5"} color={"#444"}>پوستر دیواری الگوی بسیار مناسبی از یک متریال ایده آل و

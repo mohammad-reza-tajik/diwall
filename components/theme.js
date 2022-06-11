@@ -37,14 +37,14 @@ const theme = createTheme({
         h1:{
           // color:"#1d1d1e"
         },
-        caption:{
-            fontFamily:"/assets/fonts/iranyekanbold.ttf"
-        }
 
 
-    },
+
+    }
+    ,
     components: {
         MuiButton: {
+
             defaultProps: {
                 disableElevation: true
             }

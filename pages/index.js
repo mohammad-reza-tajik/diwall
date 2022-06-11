@@ -7,6 +7,7 @@ import Features from "../components/Features";
 import {Grid} from "@mui/material";
 import SeenOn from "../components/SeenOn";
 import Places from "../components/Places";
+import Footer from "../components/Footer";
 
 const Home = () => {
 
@@ -16,10 +17,12 @@ const Home = () => {
       <Head>
         <title> دیوال : فروشگاه پوستر و کاغذ دیواری </title>
       </Head>
-          {/*<Hero />*/}
-          {/*<Features />*/}
-          {/*<Places />*/}
-          {/*<SeenOn />*/}
+          <Header />
+          <Hero />
+          <Features />
+          <Places />
+          <SeenOn />
+          <Footer />
 
       </Grid>
   )

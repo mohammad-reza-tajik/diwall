@@ -16,10 +16,10 @@ const styles = {
 const Places = () => {
 
     return (
-        <Grid container item component={"section"} my={20} gap={80}>
+        <Grid container item component={"section"} my={60} gap={120}>
             <Grid container item alignItems={"center"} justifyContent={"center"} gap={10} xs={11}>
                 <Circle color={"primary"} sx={{fontSize: 30}}/>
-                <Typography variant={"h3"} color={"#444"}>
+                <Typography variant={"h3"} color={"#444"} fontFamily={"dana-black"}>
                     <Box component={"span"} sx={{color: "primary.main"}}>برای کجا</Box> می خواهید ؟
                 </Typography>
             </Grid>

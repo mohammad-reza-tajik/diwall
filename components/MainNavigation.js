@@ -20,7 +20,8 @@ const styles = {
 
     tabStyle: {
         color: "common.black",
-        fontSize: "1.5rem"
+        fontSize: "1.5rem",
+        fontFamily:"dana-demibold"
 
     }
 }
