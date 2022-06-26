@@ -12,6 +12,7 @@ import LatestProducts from "../components/LatestProducts";
 import SectionHeading from "../components/SectionHeading";
 import BestSoldProducts from "../components/BestSoldProducts";
 import MiddleSection from "../components/MiddleSection";
+import DiscountSection from "../components/DiscountSection";
 
 
 const Home = () => {
@@ -26,6 +27,7 @@ const Home = () => {
           <Hero />
           <Features />
           <Places />
+          <DiscountSection />
           <SectionHeading text={"محصولات جدید"} />
           <LatestProducts />
           <MiddleSection />

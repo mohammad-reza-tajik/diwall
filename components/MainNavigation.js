@@ -51,8 +51,6 @@ const MainNavigation = () => {
                                                                       sx={styles.tabStyle}/></Link>
                                 <Link href={"/custom-poster"} passHref><Tab label={"پوستر سفارشی"}
                                                                       sx={styles.tabStyle}/></Link>
-                                <Link href={"/work-samples"} passHref><Tab label={"نمونه کارها"}
-                                                                      sx={styles.tabStyle}/></Link>
                                 <Link href={"/about"} passHref><Tab label={"راهنما و اطلاعات"}
                                                                       sx={styles.tabStyle}/></Link>
                                 <Link href={"/collaborate with us"} passHref><Tab label={"همکاری با ما"}
