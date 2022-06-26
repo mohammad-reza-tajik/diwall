@@ -21,16 +21,16 @@ const Home = () => {
       <Head>
         <title> دیوال : فروشگاه پوستر و کاغذ دیواری </title>
       </Head>
-          {/*<Header />*/}
-          {/*<Hero />*/}
-          {/*<Features />*/}
-          {/*<Places />*/}
+          <Header />
+          <Hero />
+          <Features />
+          <Places />
           <SectionHeading text={"محصولات جدید"} />
           <LatestProducts />
           <SectionHeading text={"پر فروش ترین محصولات"} />
           <BestSoldProducts />
-          {/*<SeenOn />*/}
-          {/*<Footer />*/}
+          <SeenOn />
+          <Footer />
 
       </Grid>
   )

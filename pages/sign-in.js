@@ -59,6 +59,7 @@ const Signup = () => {
     //********************************** determine the type of form **********************************//
     const [typeOfForm, setTypeOfForm] = useState("signIn")
     const typeOfFormHandler = (event, typeOfForm) => {
+        // the bottom line is written like this so that only one tab can be active or disabled at a time
         if (typeOfForm !== null)
             setTypeOfForm(typeOfForm);
     }
@@ -255,9 +256,11 @@ const Signup = () => {
 
                             }}>{typeOfForm === "signup" ? "ثبت نام" : "ورود"}</Button>
                 </Grid>
-                <Grid item container fontSize={"1.4rem"} mt={15} justifyContent={"center"}>
+
+                {typeOfForm === "signup" ? "" : <Grid item container fontSize={"1.4rem"} mt={15} justifyContent={"center"}>
                     <Link href={"/forgot-password"}>رمز عبور خود را فراموش کرده ام ؟</Link>
                 </Grid>
+                }
             </Grid>
         </Grid>
     )

@@ -6,6 +6,8 @@ const styles = {
     place:{
         transition:"all .4s",
         cursor:"pointer",
+        border:"1px solid rgba(44,44,44,.3)",
+        p:"2rem",
         "&:hover" : {
             filter: "invert(32%) sepia(64%) saturate(541%) hue-rotate(107deg) brightness(94%) contrast(102%)"
 
@@ -16,15 +18,15 @@ const styles = {
 const Places = () => {
 
     return (
-        <Grid container item component={"section"} my={60} gap={120} xs={11}>
+        <Grid container item component={"section"} my={60} gap={80} xs={11}>
             <Grid container item alignItems={"center"} justifyContent={"center"} gap={10} xs={12}>
                 <Circle color={"primary"} sx={{fontSize: 30}}/>
                 <Typography variant={"h3"} color={"#444"} fontFamily={"dana-black"}>
                     <Box component={"span"} sx={{color: "primary.main"}}>برای کجا</Box> می خواهید ؟
                 </Typography>
             </Grid>
-            <Grid container item xs={12} alignItems={"center"} justifyContent={"center"}>
-                <Grid container item direction={"column"} xs={2} alignItems={"center"} gap={10} sx={styles.place}>
+            <Grid container item xs={12} alignItems={"center"} justifyContent={"center"} gap={20}>
+                <Grid container item direction={"column"} xs={2} alignItems={"center"} gap={20} sx={styles.place}>
                     <Image src={"/assets/icons/bed.svg"} width={70} height={70}/>
                     <Typography variant={"h5"} fontFamily={"dana-demibold"}>اتاق خواب</Typography>
                 </Grid>
