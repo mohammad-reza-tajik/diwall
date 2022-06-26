@@ -27,7 +27,7 @@ const Product = (props) => {
             </Grid>
             <Grid container item justifyContent={"center"} alignItems={"center"} height={50}>
                 <Grid item xs={9}>
-                    <Typography variant={"h4"} fontSize={16} color={"#069f69"}>
+                    <Typography variant={"h4"} fontSize={16} fontFamily={"dana-demibold"} color={"#069f69"}>
                         {props.price}
                     </Typography>
                 </Grid>

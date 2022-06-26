@@ -11,13 +11,10 @@ import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-// import latestProducts from "./LatestProducts";
 
 
 const styles = {
-    scrollableSection: {
-        // overflowX: "scroll"
-    }
+
 }
 
 
@@ -42,7 +39,7 @@ const LatestProducts = (props) => {
     }, [])
 
     return (
-        <Grid container item xs={11} alignItems={"center"} sx={styles.scrollableSection}>
+        <Grid container item xs={11} alignItems={"center"}>
             {isLoading && <p>Loading...</p>}
             {!isLoading &&
                 <Swiper spaceBetween={20}
