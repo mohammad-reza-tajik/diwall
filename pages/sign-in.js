@@ -3,18 +3,30 @@ import {Create, Email, Login, Password, Person} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link"
 import {Fragment, useState} from "react";
-// import axios from "axios";
 
+
+
+// const productSchema = new mongoose.Schema(
+//     {
+//
+//         title: String,
+//         price: Number,
+//         views: Number,
+//         purchase_count: Number,
+//         image_url: String,
+//         favourite_count: Number
+//
+//     })
 
 const styles = {
     container: {
         minWidth: "100vw",
         minHeight: "100vh",
         backgroundColor: "#069f69",
-        position:"absolute",
-        top:0,
-        left:0,
-        zIndex:999,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: 999,
         // my:100
     },
     form: {
@@ -151,11 +163,22 @@ const Signup = () => {
     }
 */
     // const disableButton =
+    const signUp = (e) => {
+        e.preventDefault()
+        fetch("/api/hello",{
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(()=>console.log("sent")).catch(()=>console.log("failed"))
+
+
+
+    }
 
 
     return (
         <Grid container alignItems={"center"} justifyContent={"center"} sx={styles.container}>
-            <Grid container item component={"form"} methode={"POST"}
+            <Grid container item component={"form"} onSubmit={signUp}
                   sx={styles.form}>
                 <Grid item container direction={"column"} justifyContent={"center"} alignItems={"center"}>
                     <ToggleButtonGroup fullWidth size={"large"} color={"primary"} value={typeOfForm} exclusive
@@ -164,7 +187,7 @@ const Signup = () => {
                         <ToggleButton sx={{width: .5, fontSize: "1.6rem"}} value={"signup"}>ثبت نام</ToggleButton>
                     </ToggleButtonGroup>
                 </Grid>
-                <Grid item my={typeOfForm !== "signup" ? 40 :20}>
+                <Grid item my={typeOfForm !== "signup" ? 40 : 20}>
                     <Link href={"/"}>
                         <a>
                             <Image src={"/assets/pictures/logo3.png"} alt={"logo"} width={100}
@@ -222,13 +245,13 @@ const Signup = () => {
                 </Grid>
                 <Grid item container justifyContent={"center"}>
                     <Button type={"submit"} variant={"contained"}
-                            disabled={true}
-                            startIcon={typeOfForm === "signup" ? <Create/> : <Login/>}
+                             startIcon={typeOfForm === "signup" ? <Create/> : <Login/>}
                             sx={{
                                 width: {xs: .8, sm: .7},
                                 height: 55,
                                 fontSize: "1.8rem",
-                                gap: 10
+                                gap: 10,
+                                alignItems:"center"
 
                             }}>{typeOfForm === "signup" ? "ثبت نام" : "ورود"}</Button>
                 </Grid>

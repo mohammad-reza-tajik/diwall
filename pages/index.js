@@ -8,6 +8,9 @@ import {Grid} from "@mui/material";
 import SeenOn from "../components/SeenOn";
 import Places from "../components/Places";
 import Footer from "../components/Footer";
+import LatestProducts from "../components/LatestProducts";
+import SectionHeading from "../components/SectionHeading";
+
 
 const Home = () => {
 
@@ -17,12 +20,14 @@ const Home = () => {
       <Head>
         <title> دیوال : فروشگاه پوستر و کاغذ دیواری </title>
       </Head>
-          <Header />
-          <Hero />
-          <Features />
-          <Places />
-          <SeenOn />
-          <Footer />
+          {/*<Header />*/}
+          {/*<Hero />*/}
+          {/*<Features />*/}
+          {/*<Places />*/}
+          <SectionHeading text={"محصولات جدید"} />
+          <LatestProducts />
+          {/*<SeenOn />*/}
+          {/*<Footer />*/}
 
       </Grid>
   )

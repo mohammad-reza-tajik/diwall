@@ -23,8 +23,8 @@ const Places = () => {
                     <Box component={"span"} sx={{color: "primary.main"}}>برای کجا</Box> می خواهید ؟
                 </Typography>
             </Grid>
-            <Grid container item xs={12} alignItems={"center"}>
-                <Grid container item direction={"column"} xs={2} alignItems={"center"} gap={20} sx={styles.place}>
+            <Grid container item xs={12} alignItems={"center"} justifyContent={"center"}>
+                <Grid container item direction={"column"} xs={2} alignItems={"center"} gap={10} sx={styles.place}>
                     <Image src={"/assets/icons/bed.svg"} width={70} height={70}/>
                     <Typography variant={"h5"} fontFamily={"dana-demibold"}>اتاق خواب</Typography>
                 </Grid>
@@ -40,10 +40,10 @@ const Places = () => {
                     <Image src={"/assets/icons/kitchen.svg"} width={70} height={70}/>
                     <Typography variant={"h5"} fontFamily={"dana-demibold"}>آشپزخانه</Typography>
                 </Grid>
-                <Grid container item direction={"column"} xs={2} alignItems={"center"} gap={20} sx={styles.place}>
+                {/*<Grid container item direction={"column"} xs={2} alignItems={"center"} gap={20} sx={styles.place}>
                     <Image src={"/assets/icons/office.svg"} width={70} height={70}/>
                     <Typography variant={"h5"} fontFamily={"dana-demibold"}>اتاق کار</Typography>
-                </Grid>
+                </Grid>*/}
                 <Grid container item direction={"column"} xs={2} alignItems={"center"} gap={20} sx={styles.place}>
                     <Image src={"/assets/icons/sofa.svg"} width={70} height={70}/>
                     <Typography variant={"h5"} fontFamily={"dana-demibold"}>حال و پذیرایی</Typography>
