@@ -10,6 +10,7 @@ import Places from "../components/Places";
 import Footer from "../components/Footer";
 import LatestProducts from "../components/LatestProducts";
 import SectionHeading from "../components/SectionHeading";
+import BestSoldProducts from "../components/BestSoldProducts";
 
 
 const Home = () => {
@@ -26,6 +27,8 @@ const Home = () => {
           {/*<Places />*/}
           <SectionHeading text={"محصولات جدید"} />
           <LatestProducts />
+          <SectionHeading text={"پر فروش ترین محصولات"} />
+          <BestSoldProducts />
           {/*<SeenOn />*/}
           {/*<Footer />*/}
 

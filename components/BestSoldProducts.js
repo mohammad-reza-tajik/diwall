@@ -11,27 +11,24 @@ import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-// import latestProducts from "./LatestProducts";
 
 
 const styles = {
-    scrollableSection: {
-        // overflowX: "scroll"
-    }
+
 }
 
 
-const ScrollableSection = (props) => {
+const BestSoldProducts = (props) => {
     const [isLoading,setIsLoading] = useState(false)
-    const [latestProducts, setLatestProducts] = useState([])
+    const [bestSoldProducts, setBestSoldProducts] = useState([])
 
     useEffect(() => {
         try {
             const fetchData = async () => {
                 setIsLoading(true)
-                const response = await axios.get("/api/latest-products")
+                const response = await axios.get("/api/best-sold-products")
                 console.log(response.data)
-                setLatestProducts(response.data)
+                setBestSoldProducts(response.data)
                 setIsLoading(false)
 
             }
@@ -45,21 +42,21 @@ const ScrollableSection = (props) => {
         <Grid container item xs={11} alignItems={"center"} sx={styles.scrollableSection}>
             {isLoading && <p>Loading...</p>}
             {!isLoading &&
-            <Swiper spaceBetween={20}
-                    slidesPerView={4}
-                    modules={[Navigation, A11y]}
-                    navigation
+                <Swiper spaceBetween={20}
+                        slidesPerView={4}
+                        modules={[Navigation, A11y]}
+                        navigation
 
-            >
-                {latestProducts.map((product) =>
-                    <SwiperSlide key={product._id}>
-                        <Product {...product} />
-                    </SwiperSlide>)}
-            </Swiper>
+                >
+                    {bestSoldProducts.map((product) =>
+                        <SwiperSlide key={product._id}>
+                            <Product {...product} />
+                        </SwiperSlide>)}
+                </Swiper>
             }
         </Grid>
     )
 
 }
 
-export default ScrollableSection
+export default BestSoldProducts
