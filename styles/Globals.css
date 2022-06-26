@@ -163,4 +163,18 @@ a:checked {
   background-color: #8638b1;
 }
 
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #069f69 !important;
+  border-radius: 50% !important;
+  width: 5rem !important;
+  height: 5rem !important;
+  color: white !important;
+  padding: 2rem !important;
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 2rem !important;
+}
+
 /*# sourceMappingURL=Globals.css.map */

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-// mongoose.connect("mongodb+srv://MORTA:Lant12344321@cluster0.ax5a2.mongodb.net/?retryWrites=true&w=majority"
+
 const productSchema = new mongoose.Schema({
+
     title:{
         type:String,
         required:true
@@ -45,6 +46,10 @@ const productSchema = new mongoose.Schema({
 
 })
 
-export default mongoose.model("Product",productSchema)
+// export default mongoose.model("Product",productSchema)
+
+// I was getting an error which was saying that you're re-creating model so i find below solution from stack overflow
+export default  mongoose.models.Product || mongoose.model('Product', productSchema);
+
 
 

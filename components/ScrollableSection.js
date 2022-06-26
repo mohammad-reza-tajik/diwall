@@ -45,10 +45,11 @@ const ScrollableSection = (props) => {
         <Grid container item xs={11} alignItems={"center"} sx={styles.scrollableSection}>
             {isLoading && <p>Loading...</p>}
             {!isLoading &&
-            <Swiper spaceBetween={30}
+            <Swiper spaceBetween={20}
                     slidesPerView={4}
                     modules={[Navigation, A11y]}
                     navigation
+
             >
                 {latestProducts.map((product) =>
                     <SwiperSlide key={product._id}>
