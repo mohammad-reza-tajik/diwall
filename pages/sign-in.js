@@ -3,6 +3,7 @@ import {Create, Email, Login, Password, Person} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link"
 import {Fragment, useState} from "react";
+import axios from "axios";
 
 
 
@@ -63,14 +64,14 @@ const Signup = () => {
         if (typeOfForm !== null)
             setTypeOfForm(typeOfForm);
     }
-    //
-    // //********************************** form fields states **********************************//
-    //
-    // const [usernameValue, setUsernameValue] = useState("")
-    // const [emailValue, setEmailValue] = useState("")
-    // const [passwordValue, setPasswordValue] = useState("")
-    // const [usernameOrEmailValue, setUsernameOrEmailValue] = useState("")
-    //
+
+    //********************************** form fields states **********************************//
+
+    const [usernameValue, setUsernameValue] = useState("")
+    const [emailValue, setEmailValue] = useState("")
+    const [passwordValue, setPasswordValue] = useState("")
+    const [usernameOrEmailValue, setUsernameOrEmailValue] = useState("")
+
     // //********************************** form fields touch states **********************************//
     //
     // const [usernameValueIsTouched, setUsernameValueIsTouched] = useState(false)
@@ -88,7 +89,7 @@ const Signup = () => {
 
     //********************************** form fields change handlers **********************************//
 
-    /* const usernameChangeHandler = (e) => {
+     const usernameChangeHandler = (e) => {
          setUsernameValue(e.target.value)
      }
      const emailChangeHandler = (e) => {
@@ -99,7 +100,7 @@ const Signup = () => {
      }
      const usernameOrEmailChangeHandler = (e) => {
          setUsernameOrEmailValue(e.target.value)
-     }*/
+     }
 
     /*const changHandler = (e) => {
 
@@ -147,39 +148,28 @@ const Signup = () => {
         }
 
     }
+*/
 
-
-    //!********************************** form submission **********************************!//
+    //********************************* form submission **********************************!//
 
 
     const signupHandler = async (e) => {
         e.preventDefault()
-        const response = await axios.post("/api/hello", {
-            name: usernameValue,
+        const response = await axios.post(`/api/${typeOfForm==="signup"?"signup":"sign-in"}`,{
+            username: usernameValue,
             email: emailValue,
             password: passwordValue
         })
-        console.log(response)
+        console.log(response.data)
 
     }
-*/
-    // const disableButton =
-    const signUp = (e) => {
-        e.preventDefault()
-        fetch("/api/hello",{
-            headers:{
-                "Content-Type":"application/json"
-            }
-        }).then(()=>console.log("sent")).catch(()=>console.log("failed"))
 
 
-
-    }
 
 
     return (
         <Grid container alignItems={"center"} justifyContent={"center"} sx={styles.container}>
-            <Grid container item component={"form"} onSubmit={signUp}
+            <Grid container item component={"form"} onSubmit={typeOfForm === "signup" ? signupHandler:()=>console.log("hello")}
                   sx={styles.form}>
                 <Grid item container direction={"column"} justifyContent={"center"} alignItems={"center"}>
                     <ToggleButtonGroup fullWidth size={"large"} color={"primary"} value={typeOfForm} exclusive
@@ -199,6 +189,8 @@ const Signup = () => {
                 {typeOfForm === "signup" ? <Fragment>
                     <Grid item container justifyContent={"center"}>
                         <TextField
+                            value={usernameValue}
+                            onChange={usernameChangeHandler}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -211,6 +203,8 @@ const Signup = () => {
                     </Grid>
                     <Grid item container justifyContent={"center"}>
                         <TextField
+                            value={emailValue}
+                            onChange={emailChangeHandler}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -222,6 +216,9 @@ const Signup = () => {
                             placeholder={"ایمیل"}/>
                     </Grid></Fragment> : <Grid item container justifyContent={"center"}>
                     <TextField
+                        value={usernameOrEmailValue}
+                        onChange={usernameOrEmailChangeHandler}
+
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -234,6 +231,9 @@ const Signup = () => {
                 </Grid>}
                 <Grid item container justifyContent={"center"}>
                     <TextField
+                        value={passwordValue}
+                        onChange={passwordChangeHandler}
+
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
