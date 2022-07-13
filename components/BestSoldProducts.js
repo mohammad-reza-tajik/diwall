@@ -27,7 +27,6 @@ const BestSoldProducts = (props) => {
             const fetchData = async () => {
                 setIsLoading(true)
                 const response = await axios.get("/api/best-sold-products")
-                console.log(response.data)
                 setBestSoldProducts(response.data)
                 setIsLoading(false)
 

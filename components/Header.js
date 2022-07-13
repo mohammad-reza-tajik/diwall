@@ -1,8 +1,11 @@
 import MainNavigation from "./MainNavigation";
+import SearchResults from "./SearchResults";
 import {Button, Grid, IconButton, InputAdornment, TextField, useMediaQuery, useTheme} from "@mui/material";
 import {FavoriteBorder, Login, Search, ShoppingBagOutlined} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
+import {useState} from "react";
+import axios from "axios";
 
 const styles = {
     searchField: {
@@ -23,6 +26,22 @@ const styles = {
         fontSize: "2.5rem",
         color: "primary.main"
     },
+
+    searchResultsContainer:{
+        position:"absolute",
+        top:"100%",
+        right:20,
+        width: {xs: .8, md: 400},
+        zIndex:50,
+        // gap: 5,
+        // pr:10,
+        // pt:5,
+        border: "1px solid #ccc",
+        borderTop:"none",
+        bgcolor:"white.main"
+
+    },
+
     signInButton: {
 
         width: "20rem",
@@ -37,14 +56,31 @@ const styles = {
             color: "white"
         }
 
-    }
+    },
 }
 
 const Header = () => {
 
     const theme = useTheme()
+    const [isLoading,setIsLoading] = useState(false)
+    const [search,setSearch] = useState("")
+    const [searchResults,setSearchResults] = useState([])
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+
+    const searchChangeHandler = (e) => {
+        setSearch(e.target.value)
+
+    }
+
+    const submitSearchHandler = (e) => {
+        e.preventDefault()
+        axios.post("/api/search",{search}).then(res => {
+            setSearchResults(res.data)
+            console.log(res.data)
+        }).catch(err => console.log(err))
+
+    }
 
     return (
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"}>
@@ -58,20 +94,30 @@ const Header = () => {
                         </a>
                     </Link>
                 </Grid>
-                <Grid container item alignItems={"center"} xs={7} pr={20}>
-                        <TextField
+                <Grid position={"relative"} container direction={"column"} item justifyContent={"center"} alignItems={"flex-start"} xs={7} pr={20} component={"form"} onSubmit={submitSearchHandler}>
+                       <Grid item xs={12}>
+
+                    <TextField
                             placeholder={"جستجو ..."}
+                            value={search}
+                            onChange={searchChangeHandler}
                             sx={styles.searchField}
                             variant="outlined"
                             size={matchesSM ? "small" : "medium"}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <IconButton><Search sx={styles.searchIcon}/></IconButton>
+                                        <IconButton type={"submit"}>
+                                            <Search sx={styles.searchIcon}/>
+                                        </IconButton>
                                     </InputAdornment>
                                 ),
                             }}
                         />
+                       </Grid>
+                    <Grid container item sx={styles.searchResultsContainer}>
+                        <SearchResults results={searchResults} />
+                    </Grid>
                 </Grid>
                 <Grid container item xs={2} justifyContent={"flex-end"}>
                     <IconButton color={"primary"}>

@@ -1,44 +1,48 @@
-import {Button, Grid, InputAdornment, TextField, ToggleButton, ToggleButtonGroup,} from "@mui/material";
-import {Create, Email, Login, Password, Person} from "@mui/icons-material";
+import {
+    Box,
+    Button,
+    CircularProgress,
+    Grid,
+    IconButton,
+    InputAdornment,
+    Snackbar,
+    TextField,
+    ToggleButton,
+    ToggleButtonGroup
+} from "@mui/material";
+
+import {Close, Create, Email, Login, Password, Person} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link"
 import {Fragment, useState} from "react";
 import axios from "axios";
 
 
-
-// const productSchema = new mongoose.Schema(
-//     {
-//
-//         title: String,
-//         price: Number,
-//         views: Number,
-//         purchase_count: Number,
-//         image_url: String,
-//         favourite_count: Number
-//
-//     })
-
 const styles = {
     container: {
         minWidth: "100vw",
         minHeight: "100vh",
-        backgroundColor: "#069f69",
+        // backgroundColor: "#02011e",
+        // backgroundImage:"url('assets/pictures/hero_img4.jpg')",
+        // backgroundRepeat:"no-repeat",
+        // backgroundSize:"100% 100%",
+        // filter:"blur(5px)",
+        // backgroundColor: "#069f69",
         position: "absolute",
         top: 0,
         left: 0,
-        zIndex: 999,
+        zIndex: 50,
         // my:100
     },
     form: {
-        bgcolor: "common.white",
+        bgcolor: "white.main",
         alignItems: "center",
         flexDirection: "column",
         justifyContent: "flex-start",
         width: {xs: 1, sm: 550},
         height: {xs: "100vh", sm: 550},
-        // boxShadow:"2px 2px 5px rgba(0,0,0,.7)"
-
+        // boxShadow:"2px 2px 5px rgba(0,0,0,.4)",
+        zIndex: 99
 
     },
     inputField: {
@@ -52,13 +56,48 @@ const styles = {
         fontSize: "2rem",
         color: "primary.main"
     },
+    backgroundImage: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        backgroundImage: "linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)) , url('assets/pictures/hero_img4.jpg')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "100% 100%",
+        filter: "blur(10px)",
+    },
+    snackbar: {
+        '& .css-1kr9x0n-MuiSnackbarContent-action': {
+            mr: 70,
+            pl: .1
+        },
+
+        '& .css-1exqwzz-MuiSnackbarContent-message': {
+            p: 13
+        },
+    }
+
 
 }
 
 const Signup = () => {
 
     //********************************** determine the type of form **********************************//
+    let err = null
+    const [isLoading, setIsLoading] = useState(false)
+    const [openSnackbar, setOpenSnackbar] = useState(false)
     const [typeOfForm, setTypeOfForm] = useState("signIn")
+
+
+    const openSnackbarHandler = () => {
+        setOpenSnackbar(true)
+
+    }
+
+    const closeSnackbarHandler = () => {
+        setOpenSnackbar(false)
+    }
     const typeOfFormHandler = (event, typeOfForm) => {
         // the bottom line is written like this so that only one tab can be active or disabled at a time
         if (typeOfForm !== null)
@@ -89,18 +128,18 @@ const Signup = () => {
 
     //********************************** form fields change handlers **********************************//
 
-     const usernameChangeHandler = (e) => {
-         setUsernameValue(e.target.value)
-     }
-     const emailChangeHandler = (e) => {
-         setEmailValue(e.target.value)
-     }
-     const passwordChangeHandler = (e) => {
-         setPasswordValue(e.target.value)
-     }
-     const usernameOrEmailChangeHandler = (e) => {
-         setUsernameOrEmailValue(e.target.value)
-     }
+    const usernameChangeHandler = (e) => {
+        setUsernameValue(e.target.value)
+    }
+    const emailChangeHandler = (e) => {
+        setEmailValue(e.target.value)
+    }
+    const passwordChangeHandler = (e) => {
+        setPasswordValue(e.target.value)
+    }
+    const usernameOrEmailChangeHandler = (e) => {
+        setUsernameOrEmailValue(e.target.value)
+    }
 
     /*const changHandler = (e) => {
 
@@ -150,26 +189,50 @@ const Signup = () => {
     }
 */
 
+    const action = (
+        <IconButton
+            size="medium"
+            color={"white"}
+            onClick={closeSnackbarHandler}>
+            <Close fontSize={"large"}/>
+        </IconButton>
+    )
+
+
     //********************************* form submission **********************************!//
 
 
     const signupHandler = async (e) => {
         e.preventDefault()
-        const response = await axios.post(`/api/${typeOfForm==="signup"?"signup":"sign-in"}`,{
-            username: usernameValue,
-            email: emailValue,
-            password: passwordValue
-        })
-        console.log(response.data)
+        setIsLoading(true)
+        try {
+
+            const response = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`, {
+                username: usernameValue,
+                email: emailValue,
+                password: passwordValue
+            })
+            console.log(response)
+
+        } catch (e) {
+            err = e.response.status
+            console.log(e)
+            setIsLoading(false)
+            openSnackbarHandler()
+
+
+        }
+        setIsLoading(false)
+        openSnackbarHandler()
 
     }
 
 
-
-
     return (
         <Grid container alignItems={"center"} justifyContent={"center"} sx={styles.container}>
-            <Grid container item component={"form"} onSubmit={typeOfForm === "signup" ? signupHandler:()=>console.log("hello")}
+            <Box sx={styles.backgroundImage}/>
+            <Grid container item component={"form"}
+                  onSubmit={typeOfForm === "signup" ? signupHandler : () => console.log("hello")}
                   sx={styles.form}>
                 <Grid item container direction={"column"} justifyContent={"center"} alignItems={"center"}>
                     <ToggleButtonGroup fullWidth size={"large"} color={"primary"} value={typeOfForm} exclusive
@@ -246,22 +309,42 @@ const Signup = () => {
                 </Grid>
                 <Grid item container justifyContent={"center"}>
                     <Button type={"submit"} variant={"contained"}
-                             startIcon={typeOfForm === "signup" ? <Create/> : <Login/>}
+                            startIcon={isLoading ?
+                                <CircularProgress color={"white"} size={25}/> : typeOfForm === "signup" ? <Create/> :
+                                    <Login/>}
                             sx={{
                                 width: {xs: .8, sm: .7},
                                 height: 55,
                                 fontSize: "1.8rem",
                                 gap: 10,
-                                alignItems:"center"
+                                alignItems: "center"
 
                             }}>{typeOfForm === "signup" ? "ثبت نام" : "ورود"}</Button>
                 </Grid>
 
-                {typeOfForm === "signup" ? "" : <Grid item container fontSize={"1.4rem"} mt={15} justifyContent={"center"}>
-                    <Link href={"/forgot-password"}>رمز عبور خود را فراموش کرده ام ؟</Link>
-                </Grid>
+                {typeOfForm === "signup" ? "" :
+                    <Grid item container fontSize={"1.4rem"} mt={15} justifyContent={"center"}>
+                        <Link href={"/forgot-password"}>رمز عبور خود را فراموش کرده ام ؟</Link>
+                    </Grid>
                 }
             </Grid>
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={500000}
+                sx={{
+                    ...styles.snackbar,
+                    '& .css-1qe5cpw-MuiPaper-root-MuiSnackbarContent-root': {
+                        fontSize: "16px !important",
+                        fontFamily: "dana-demibold",
+                        backgroundColor: (err === null ? "success.main" : "error.main"),
+                    },
+                }}
+                onClose={closeSnackbarHandler}
+                message="ثبت نام با موفقیت انجام شد "
+                action={action}
+                anchorOrigin={{vertical: "bottom", horizontal: "right"}}
+            />
+
         </Grid>
     )
 }

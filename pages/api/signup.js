@@ -4,11 +4,15 @@ import User from "../../db/userModel";
 export default async function handler(req,res){
     if (req.method !== "POST")
         return
+    // User.find()
+    // if (req.body.username)
     const user = new User(
         {...req.body}
     )
     user.save()
+
     res.send(req.body)
+
 
 
 

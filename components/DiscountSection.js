@@ -26,7 +26,6 @@ const DiscountSection = () => {
             const fetchData = async () => {
                 setIsLoading(true)
                 const response = await axios.get("/api/discounted-products")
-                console.log(response.data)
                 setDiscountedProducts(response.data)
                 setIsLoading(false)
 

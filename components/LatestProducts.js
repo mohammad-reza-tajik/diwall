@@ -27,7 +27,6 @@ const LatestProducts = (props) => {
             const fetchData = async () => {
                 setIsLoading(true)
                 const response = await axios.get("/api/latest-products")
-                console.log(response.data)
                 setLatestProducts(response.data)
                 setIsLoading(false)
 

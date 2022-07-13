@@ -14,6 +14,15 @@ import BestSoldProducts from "../components/BestSoldProducts";
 import MiddleSection from "../components/MiddleSection";
 import DiscountSection from "../components/DiscountSection";
 
+/*const person1 = {
+
+    name:"peter",
+    lastname:"parker",
+    age:25
+
+}*/
+
+// const {namee = 50,lastname:surname} = person1
 
 const Home = () => {
 
@@ -24,17 +33,19 @@ const Home = () => {
         <title> دیوال : فروشگاه پوستر و کاغذ دیواری </title>
       </Head>
           <Header />
-          <Hero />
-          <Features />
-          <Places />
-          <DiscountSection />
-          <SectionHeading text={"محصولات جدید"} />
-          <LatestProducts />
-          <MiddleSection />
-          <SectionHeading text={"پر فروش ترین محصولات"} />
-          <BestSoldProducts />
-          <SeenOn />
-          <Footer />
+          {/*<Hero />*/}
+          {/*<Features />*/}
+          {/*<Places />*/}
+          {/*<DiscountSection />*/}
+          {/*<SectionHeading text={"محصولات جدید"} />*/}
+          {/*<SectionHeading text={namee} />*/}
+          {/*<SectionHeading text={surname} />*/}
+          {/*<LatestProducts />*/}
+          {/*<MiddleSection />*/}
+          {/*<SectionHeading text={"پر فروش ترین محصولات"} />*/}
+          {/*<BestSoldProducts />*/}
+          {/*<SeenOn />*/}
+          {/*<Footer />*/}
 
       </Grid>
   )

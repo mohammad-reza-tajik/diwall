@@ -155,12 +155,12 @@ a:checked {
 }
 
 .btn-primary {
-  background-color: #692c8a;
+  background-color: #069f69;
   color: white;
   transition: background-color 0.4s;
 }
 .btn-primary:hover {
-  background-color: #8638b1;
+  background-color: #08d089;
 }
 
 .swiper-button-prev,
