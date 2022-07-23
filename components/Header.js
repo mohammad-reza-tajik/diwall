@@ -1,13 +1,27 @@
 import MainNavigation from "./MainNavigation";
-import SearchResults from "./SearchResults";
-import {Button, Grid, IconButton, InputAdornment, TextField, useMediaQuery, useTheme} from "@mui/material";
-import {FavoriteBorder, Login, Search, ShoppingBagOutlined} from "@mui/icons-material";
+import {
+    Button, CircularProgress,
+    Grid,
+    IconButton,
+    InputAdornment,
+    List,
+    ListItem,
+    TextField,
+    Typography,
+    useMediaQuery,
+    useTheme
+} from "@mui/material";
+import {Close, FavoriteBorder, Login, Search, ShoppingBagOutlined} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import {useState} from "react";
 import axios from "axios";
 
 const styles = {
+    seeAllButton:{
+        w:1,
+        justifyContent: "center"
+    },
     searchField: {
         width: {xs: .8, md: 400},
         height: 1,
@@ -24,21 +38,33 @@ const styles = {
     },
     searchIcon: {
         fontSize: "2.5rem",
-        color: "primary.main"
+        color: "primary.main",
+        mr:-15,
+        ml:10
+    },
+    closeIcon:{
+        color: "primary.main",
+        fontSize: "2rem",
+        ml:-15,
+
+
     },
 
-    searchResultsContainer:{
-        position:"absolute",
-        top:"100%",
-        right:20,
+    searchResultsContainer: {
+        position: "absolute",
+        top: "100%",
+        right: 20,
         width: {xs: .8, md: 400},
-        zIndex:50,
-        // gap: 5,
-        // pr:10,
-        // pt:5,
+        zIndex: 50,
+        maxHeight: 400,
         border: "1px solid #ccc",
-        borderTop:"none",
-        bgcolor:"white.main"
+        borderTop: "none",
+        bgcolor: "white.main",
+        justifyContent:"center",
+        alignItems:"center",
+        overflowY: "scroll",
+        // p:20
+
 
     },
 
@@ -47,13 +73,25 @@ const styles = {
         width: "20rem",
         height: "4rem",
         borderRadius: 2,
-        fontFamily:"dana-demibold",
+        fontFamily: "dana-demibold",
         mr: "auto",
         fontSize: "1.4rem",
         gap: 10,
         color: "white",
         "&> *": {
             color: "white"
+        },
+        listItem: {
+            gap: 10,
+            p:0
+
+
+        },
+        list: {
+            width: 1,
+            height:"auto",
+            // maxHeight:400,
+
         }
 
     },
@@ -62,9 +100,10 @@ const styles = {
 const Header = () => {
 
     const theme = useTheme()
-    const [isLoading,setIsLoading] = useState(false)
-    const [search,setSearch] = useState("")
-    const [searchResults,setSearchResults] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    const [search, setSearch] = useState("")
+    const [searchResults, setSearchResults] = useState([])
+    const [searchResultsDisplay,setSearchResultsDisplay] = useState("none")
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
 
@@ -75,12 +114,35 @@ const Header = () => {
 
     const submitSearchHandler = (e) => {
         e.preventDefault()
-        axios.post("/api/search",{search}).then(res => {
+        if (search.trim() === ""){
+            return
+        }
+        setSearchResultsDisplay("flex")
+        setIsLoading(true)
+        axios.post("/api/search", {search}).then(res => {
             setSearchResults(res.data)
             console.log(res.data)
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            setIsLoading(false)
+            console.log(err)
+
+        })
+        setIsLoading(false)
+
 
     }
+
+
+    const clearSearchHandler = () => {
+        setSearch("")
+        setSearchResultsDisplay("none")
+
+    }
+    const closeButton =<InputAdornment position="end">
+            <IconButton onClick={clearSearchHandler}>
+                <Close sx={{...styles.closeIcon , opacity:search.trim() === "" ? 0 : 1}}/>
+            </IconButton>
+        </InputAdornment>
 
     return (
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"}>
@@ -94,10 +156,11 @@ const Header = () => {
                         </a>
                     </Link>
                 </Grid>
-                <Grid position={"relative"} container direction={"column"} item justifyContent={"center"} alignItems={"flex-start"} xs={7} pr={20} component={"form"} onSubmit={submitSearchHandler}>
-                       <Grid item xs={12}>
+                <Grid position={"relative"} container direction={"column"} item justifyContent={"center"}
+                      alignItems={"flex-start"} xs={7} pr={20} component={"form"} onSubmit={submitSearchHandler}>
+                    <Grid item xs={12}>
 
-                    <TextField
+                        <TextField
                             placeholder={"جستجو ..."}
                             value={search}
                             onChange={searchChangeHandler}
@@ -112,12 +175,34 @@ const Header = () => {
                                         </IconButton>
                                     </InputAdornment>
                                 ),
+                                endAdornment:(closeButton)
                             }}
                         />
-                       </Grid>
-                    <Grid container item sx={styles.searchResultsContainer}>
-                        <SearchResults results={searchResults} />
                     </Grid>
+
+                    {/******** handling search results *******/}
+
+                    {<Grid container item sx={{...styles.searchResultsContainer,display:searchResultsDisplay}}>
+                        {isLoading ?<CircularProgress  color={"primary"} size={45}/> :
+                        <List sx={styles.list}>
+                            {searchResults.length !== 0 && searchResults.map((item) => {
+                                return (
+                                    <ListItem button divider sx={styles.listItem} key={item._id}>
+                                        <Image src={item.image} width={90} height={90} alt={item.title}/>
+                                        <Typography variant={"h4"} fontSize={18} color={"#666"}>
+                                            {item.title}
+                                        </Typography>
+                                    </ListItem>
+                                )
+                            })}
+                            {!isLoading && <ListItem button sx={styles.seeAllButton}>
+                                <Typography variant={"h4"} fontSize={18} color={"#666"}>مشاهده همه</Typography>
+                            </ListItem>
+                            }
+
+                        </List>
+                        }
+                    </Grid>}
                 </Grid>
                 <Grid container item xs={2} justifyContent={"flex-end"}>
                     <IconButton color={"primary"}>
@@ -143,7 +228,7 @@ const Header = () => {
                     {!matchesMD && <Link href={"/sign-in"} passHref><Button
                         variant={"contained"}
                         color={"primary"}
-                        startIcon={<Login sx={{fontSize: 10, ml: 5,transform:"rotateZ(180deg)"}}/>
+                        startIcon={<Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
                         }
                         sx={styles.signInButton}
                     >
@@ -163,7 +248,7 @@ const Header = () => {
                     }
                 </Grid>
             </Grid>
-            <MainNavigation/>
+            {/*<MainNavigation/>*/}
         </Grid>
 
     )

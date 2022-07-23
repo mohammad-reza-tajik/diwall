@@ -12,5 +12,9 @@ export default async function handler(req,res) {
     console.log(regexp)
     const relatedProducts = await Product.find({title: regexp })
     // console.log(relatedProducts)
-    res.send(relatedProducts)
+
+    if(relatedProducts.length > 3)
+        res.send(relatedProducts.slice(0,3))
+    else
+        res.send(relatedProducts)
 }
