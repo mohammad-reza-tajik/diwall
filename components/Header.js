@@ -16,6 +16,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {useState} from "react";
 import axios from "axios";
+import {useRouter} from "next/router";
 
 const styles = {
     seeAllButton:{
@@ -56,7 +57,8 @@ const styles = {
         right: 20,
         width: {xs: .8, md: 400},
         zIndex: 50,
-        maxHeight: 400,
+        minHeight: 200,
+        maxHeight:400,
         border: "1px solid #ccc",
         borderTop: "none",
         bgcolor: "white.main",
@@ -100,6 +102,7 @@ const styles = {
 const Header = () => {
 
     const theme = useTheme()
+    const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [search, setSearch] = useState("")
     const [searchResults, setSearchResults] = useState([])
@@ -117,17 +120,25 @@ const Header = () => {
         if (search.trim() === ""){
             return
         }
-        setSearchResultsDisplay("flex")
-        setIsLoading(true)
+        // setSearchResultsDisplay("flex")
+        // setIsLoading(true)
         axios.post("/api/search", {search}).then(res => {
-            setSearchResults(res.data)
+            // setSearchResults(res.data)
+            // setIsLoading(false)
+            router.push(
+                {
+                    pathname:"/search-results",
+                    query:{
+                        search
+                    }
+
+            })
             console.log(res.data)
         }).catch(err => {
             setIsLoading(false)
             console.log(err)
 
         })
-        setIsLoading(false)
 
 
     }
@@ -145,7 +156,7 @@ const Header = () => {
         </InputAdornment>
 
     return (
-        <Grid container item direction={"row"} component={"header"} justifyContent={"center"}>
+        <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={50}>
 
             <Grid container item direction={"row"} alignItems={"center"} xs={11}
                   justifySelf={"center"} pt={20}>
@@ -185,6 +196,11 @@ const Header = () => {
                     {<Grid container item sx={{...styles.searchResultsContainer,display:searchResultsDisplay}}>
                         {isLoading ?<CircularProgress  color={"primary"} size={45}/> :
                         <List sx={styles.list}>
+                            {searchResults.length === 0 &&
+                                <ListItem>
+                                <Typography variant={"h4"} fontSize={20} color={"#666"}>نتیجه ای پیدا نشد!</Typography>
+
+                            </ListItem> }
                             {searchResults.length !== 0 && searchResults.map((item) => {
                                 return (
                                     <ListItem button divider sx={styles.listItem} key={item._id}>
@@ -195,7 +211,7 @@ const Header = () => {
                                     </ListItem>
                                 )
                             })}
-                            {!isLoading && <ListItem button sx={styles.seeAllButton}>
+                            {!isLoading && searchResults.length !==0 && <ListItem button sx={styles.seeAllButton}>
                                 <Typography variant={"h4"} fontSize={18} color={"#666"}>مشاهده همه</Typography>
                             </ListItem>
                             }

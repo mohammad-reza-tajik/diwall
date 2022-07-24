@@ -37,7 +37,7 @@ const styles = {
 const Footer = () => {
 
     return (
-        <Grid container item xs={11} component={"footer"} justifyContent={"space-around"}>
+        <Grid container item xs={11} component={"footer"} justifyContent={"space-around"} mt={50}>
             <Grid container item direction={"column"} xs={2} alignItems={"flex-start"} gap={7}>
                 <Grid item mb={10}>
                     <Typography variant={"h5"} color={"#444"} fontSize={18} fontWeight={700}>فروشگاه دیوال</Typography>
@@ -276,11 +276,17 @@ const Footer = () => {
                     <Typography variant={"h5"} color={"#444"}>
                         دانلود اپلیکیشن دیوال :
                     </Typography>
-                    <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"} endIcon={<Image src={"/assets/icons/google_play.svg"} alt={"apple_store"} height={20} width={20} />}>
-                        Apple Store
+                    <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"} endIcon={<Image src={"/assets/icons/google_play.svg"} alt={"apple_store"} height={15} width={15} />}>
+                        <Box component={"span"} position={"relative"} top={2}>
+
+                            Apple Store
+                        </Box>
                     </Button>
-                    <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"} endIcon={<Image src={"/assets/icons/apple.svg"} alt={"apple_store"} height={20} width={20} />}>
+                    <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"} endIcon={<Image src={"/assets/icons/apple.svg"} alt={"apple_store"} height={15} width={15} />}>
+                        <Box component={"span"} position={"relative"} top={2}>
+
                         Google Play
+                        </Box>
                     </Button>
 
                 </Grid>
