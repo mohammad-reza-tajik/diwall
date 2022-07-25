@@ -37,7 +37,7 @@ const styles = {
 const Footer = () => {
 
     return (
-        <Grid container item xs={11} component={"footer"} justifyContent={"space-around"} mt={50}>
+        <Grid container item xs={11} component={"footer"} justifyContent={"space-around"} mt={100}>
             <Grid container item direction={"column"} xs={2} alignItems={"flex-start"} gap={7}>
                 <Grid item mb={10}>
                     <Typography variant={"h5"} color={"#444"} fontSize={18} fontWeight={700}>فروشگاه دیوال</Typography>

@@ -36,7 +36,7 @@ const Product = (props) => {
                         <ShoppingBagOutlined color={"primary"}
                                              sx={
                                                  {
-                                                     fontSize: {xs: 30, sm: 35},
+                                                     fontSize: {xs: 35, sm: 40},
                                                      border: "2px solid #11AE77",
                                                      borderRadius: "50px",
                                                      p: ".4rem"

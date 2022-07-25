@@ -15,7 +15,11 @@ import {Close, Create, Email, Login, Password, Person} from "@mui/icons-material
 import Image from "next/image";
 import Link from "next/link"
 import {Fragment, useState} from "react";
+// import classes from "../styles/sign-in.modules.css"
+// import "../styles/SignIn.css";
 import axios from "axios";
+import {useRouter} from "next/router";
+
 
 
 const styles = {
@@ -28,7 +32,7 @@ const styles = {
         // backgroundSize:"100% 100%",
         // filter:"blur(5px)",
         // backgroundColor: "#069f69",
-        position: "absolute",
+        position: "fixed",
         top: 0,
         left: 0,
         zIndex: 50,
@@ -57,7 +61,7 @@ const styles = {
         color: "primary.main"
     },
     backgroundImage: {
-        position: "absolute",
+        position: "fixed",
         top: 0,
         left: 0,
         width: "100vw",
@@ -65,7 +69,7 @@ const styles = {
         backgroundImage: "linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)) , url('assets/pictures/hero_img4.jpg')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
-        filter: "blur(10px)",
+        filter: "blur(5px)",
     },
     snackbar: {
         '& .css-1kr9x0n-MuiSnackbarContent-action': {
@@ -81,13 +85,16 @@ const styles = {
 
 }
 
-const Signup = () => {
+const SignIn = () => {
 
     //********************************** determine the type of form **********************************//
     let err = null
     const [isLoading, setIsLoading] = useState(false)
     const [openSnackbar, setOpenSnackbar] = useState(false)
     const [typeOfForm, setTypeOfForm] = useState("signIn")
+
+
+
 
 
     const openSnackbarHandler = () => {
@@ -348,4 +355,4 @@ const Signup = () => {
         </Grid>
     )
 }
-export default Signup
+export default SignIn

@@ -156,7 +156,7 @@ const Header = () => {
         </InputAdornment>
 
     return (
-        <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={50}>
+        <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={100}>
 
             <Grid container item direction={"row"} alignItems={"center"} xs={11}
                   justifySelf={"center"} pt={20}>
@@ -181,8 +181,8 @@ const Header = () => {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <IconButton type={"submit"}>
-                                            <Search sx={styles.searchIcon}/>
+                                        <IconButton type={"submit"} sx={styles.searchIcon}>
+                                            <Search />
                                         </IconButton>
                                     </InputAdornment>
                                 ),

@@ -32,7 +32,7 @@ const Home = () => {
       <Head>
         <title> دیوال : فروشگاه پوستر و کاغذ دیواری </title>
       </Head>
-          <Header />
+          {/*<Header />*/}
           {/*<Hero />*/}
           {/*<Features />*/}
           {/*<Places />*/}
