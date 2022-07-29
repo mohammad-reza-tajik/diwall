@@ -23,7 +23,7 @@ const styles = {
         height: "6rem",
         borderRadius: 2,
         fontFamily: "dana-demibold",
-        mr: "auto",
+        // mr: "auto",
         fontSize: "1.5rem",
         gap: 10,
         color: "white",
@@ -135,7 +135,7 @@ const ProductDetails = () => {
                         {/*<Grid item>*/}
                         {/*</Grid>*/}
                     </Grid>
-                    <Grid container item justifyContent={"flex-end"}>
+                    <Grid container item justifyContent={"flex-end"} alignItems={"center"}>
                         <Button
                             variant={"contained"}
                             color={"primary"}

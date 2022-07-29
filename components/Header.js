@@ -156,7 +156,7 @@ const Header = () => {
         </InputAdornment>
 
     return (
-        <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={100}>
+        <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={20}>
             <Grid container item direction={"row"} alignItems={"center"} xs={11}
                   justifySelf={"center"} pt={20}>
                 <Grid container item xs={1} minWidth={90} minHeight={90}>
@@ -263,7 +263,7 @@ const Header = () => {
                     }
                 </Grid>
             </Grid>
-            {/*<MainNavigation/>*/}
+            <MainNavigation/>
         </Grid>
 
     )
