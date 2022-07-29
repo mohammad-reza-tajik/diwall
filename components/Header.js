@@ -82,7 +82,7 @@ const styles = {
         color: "white",
         "&> *": {
             color: "white"
-        },
+        }},
         listItem: {
             gap: 10,
             p:0
@@ -96,7 +96,7 @@ const styles = {
 
         }
 
-    },
+    ,
 }
 
 const Header = () => {
@@ -157,7 +157,6 @@ const Header = () => {
 
     return (
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={100}>
-
             <Grid container item direction={"row"} alignItems={"center"} xs={11}
                   justifySelf={"center"} pt={20}>
                 <Grid container item xs={1} minWidth={90} minHeight={90}>
@@ -181,8 +180,8 @@ const Header = () => {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <IconButton type={"submit"} sx={styles.searchIcon}>
-                                            <Search />
+                                        <IconButton type={"submit"}>
+                                            <Search sx={styles.searchIcon} />
                                         </IconButton>
                                     </InputAdornment>
                                 ),

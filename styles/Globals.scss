@@ -33,7 +33,7 @@ html {
 
 body {
   width: 100vw;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   position: relative;
   //padding: 1rem;
   display: flex;

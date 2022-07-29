@@ -33,18 +33,16 @@ const Home = () => {
         <title> دیوال : فروشگاه پوستر و کاغذ دیواری </title>
       </Head>
           {/*<Header />*/}
-          {/*<Hero />*/}
-          {/*<Features />*/}
-          {/*<Places />*/}
-          {/*<DiscountSection />*/}
-          {/*<SectionHeading text={"محصولات جدید"} />*/}
-          {/*<SectionHeading text={namee} />*/}
-          {/*<SectionHeading text={surname} />*/}
-          {/*<LatestProducts />*/}
-          {/*<MiddleSection />*/}
-          {/*<SectionHeading text={"پر فروش ترین محصولات"} />*/}
-          {/*<BestSoldProducts />*/}
-          {/*<SeenOn />*/}
+          <Hero />
+          <Features cols={11} />
+          <Places />
+          <DiscountSection />
+          <SectionHeading text={"محصولات جدید"} />
+          <LatestProducts />
+          <MiddleSection />
+          <SectionHeading text={"پر فروش ترین محصولات"} />
+          <BestSoldProducts />
+          <SeenOn />
           {/*<Footer />*/}
 
       </Grid>

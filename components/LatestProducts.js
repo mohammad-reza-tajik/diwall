@@ -21,6 +21,7 @@ const styles = {
 const LatestProducts = (props) => {
     const [isLoading,setIsLoading] = useState(false)
     const [latestProducts, setLatestProducts] = useState([])
+    // const router = useRouter()
 
     useEffect(() => {
         try {

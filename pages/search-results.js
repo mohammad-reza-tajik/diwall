@@ -15,12 +15,10 @@ const SearchResults = () => {
 
 
     useEffect(()=>{
-
+        setIsLoading(true)
         axios.post("/api/search", {search:router.query.search,all:true}).then(res => {
             setSearchResults(res.data)
-            // router.push("/")
             setIsLoading(false)
-            console.log(res.data)
         }).catch(err => {
             setIsLoading(false)
             console.log(err)

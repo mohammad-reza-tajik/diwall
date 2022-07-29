@@ -6,10 +6,10 @@ import {
     WorkspacePremiumOutlined
 } from "@mui/icons-material";
 
-const Features = () => {
+const Features = (props) => {
 
     return (
-        <Grid container item component={"section"} justifyContent={"space-around"} xs={11} my={70}>
+        <Grid container item component={"section"} justifyContent={"space-around"} xs={props.cols}>
             <Grid container item xs={3} direction={"row"} justifyContent={"center"} alignItems={"center"}>
                 <Grid item xs={3}>
                     <LocalShippingOutlined color={"primary"} sx={{fontSize: 50}}/>

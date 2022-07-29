@@ -1,6 +1,8 @@
 import {Box, Grid, IconButton, Typography} from "@mui/material";
 import Image from "next/image"
 import {ShoppingBagOutlined} from "@mui/icons-material";
+import {useRouter} from "next/router";
+
 
 
 const styles = {
@@ -14,15 +16,28 @@ const styles = {
     }
 }
 
+
 const Product = (props) => {
+    const router = useRouter()
+    const clickHandler = async () => {
+        await router.push({
+            pathname:`/products/${props.title}`,
+            // query:{
+                // prod_title:props.title
+            // }
+        }
+
+        )
+
+    }
     return (
         <Grid container item direction={"column"} sx={styles.product}>
-            <Grid item xs={11}  borderRadius={2} overflow={"hidden"}>
-                <Image src={props.image} alt={"product"} width={400} height={400}/>
+            <Grid item xs={11}  borderRadius={2} overflow={"hidden"} onClick={clickHandler} cursor={"pointer"}>
+                <Image src={props.image} alt={"product"} width={400} height={400} className={"pointer"}/>
             </Grid>
             <Grid container item height={50} alignItems={"center"}>
-                <Grid item xs>
-                    <Typography variant={"h4"} fontSize={16} fontFamily={"dana-demibold"}>{props.title}</Typography>
+                <Grid item xs onClick={clickHandler}>
+                    <Typography variant={"h4"} fontSize={16} fontFamily={"dana-demibold"} className={"pointer"}>{props.title}</Typography>
                 </Grid>
             </Grid>
             <Grid container item justifyContent={"center"} alignItems={"center"} height={50}>
