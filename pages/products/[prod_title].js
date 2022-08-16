@@ -64,6 +64,7 @@ const ProductDetails = () => {
             setPresetSizes(presetSizes);
     }
 
+
     return (
         <Grid container item direction={"column"} xs={11}>
 
@@ -108,11 +109,11 @@ const ProductDetails = () => {
                         <ToggleButtonGroup sx={{gap: 10}} fullWidth size={"large"} color={"primary"} value={presetSizes}
                                            exclusive
                                            onChange={presetSizesHandler}>
-                            <ToggleButton sx={{width: .4, fontSize: "1.6rem"}} value={"1"}>طول و عرض : 10m x
+                            <ToggleButton sx={{width: .4, height:40, fontSize: "1.6rem"}} value={"1"}>طول و عرض : 10m x
                                 3m</ToggleButton>
-                            <ToggleButton sx={{width: .4, fontSize: "1.6rem"}} value={"2"}>طول و عرض : 20m x
+                            <ToggleButton sx={{width: .4, height:40,fontSize: "1.6rem"}} value={"2"}>طول و عرض : 20m x
                                 3m</ToggleButton>
-                            <ToggleButton sx={{width: .4, fontSize: "1.6rem"}} value={"3"}>طول و عرض : 30m x
+                            <ToggleButton sx={{width: .4,height:40, fontSize: "1.6rem"}} value={"3"}>طول و عرض : 30m x
                                 3m</ToggleButton>
                         </ToggleButtonGroup>
                     </Grid>

@@ -39,7 +39,7 @@ const MainNavigation = () => {
                 {!matchesMD &&
                     <Fragment>
                         <Grid container alignItems={"center"} item xs={9} sx={styles.main_nav}>
-                                <Link href={"/"}><Box component={"a"} sx={styles.main_nav_link}>صفحه نخست</Box></Link>
+                                <Link href={"/"}><Box component={"a"} sx={styles.main_nav_link}>دسته بندی ها</Box></Link>
                                 <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>پوستر دیواری</Box></Link>
                                 <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>برای خانه</Box></Link>
                                 <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>برای کسب و کار</Box></Link>

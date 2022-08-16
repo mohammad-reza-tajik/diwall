@@ -93,7 +93,8 @@ const styles = {
 const SignIn = () => {
 
     //********************************** determine the type of form **********************************//
-    let err = null
+    const [error,setError] = useState(false)
+    const [message,setMessage] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const [openSnackbar, setOpenSnackbar] = useState(false)
     const [typeOfForm, setTypeOfForm] = useState("signIn")
@@ -219,6 +220,8 @@ const SignIn = () => {
     const formHandler = async (e) => {
         e.preventDefault()
         setIsLoading(true)
+        setMessage("")
+        setError(false)
 
         const user = typeOfForm === "signup" ? {
             username: usernameValue,
@@ -233,12 +236,16 @@ const SignIn = () => {
         try {
 
             const response = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`,user)
+            setMessage(response.data.message)
+            console.log(response.data.message)
+            setError(!response.data.ok)
 
             console.log(response)
 
         } catch (e) {
-            err = e.response.status
             console.log(e)
+            setMessage(e.response.data.message)
+            setError(!e.response.data.ok)
             setIsLoading(false)
             openSnackbarHandler()
 
@@ -355,17 +362,18 @@ const SignIn = () => {
             </Grid>
             <Snackbar
                 open={openSnackbar}
-                autoHideDuration={500000}
+                autoHideDuration={5000}
                 sx={{
                     ...styles.snackbar,
                     '& .css-1qe5cpw-MuiPaper-root-MuiSnackbarContent-root': {
                         fontSize: "16px !important",
                         fontFamily: "dana-demibold",
-                        backgroundColor: (err === null ? "success.main" : "error.main"),
+                        // width:"70px",
+                        backgroundColor: (error === false ? "success.main" : "error.main"),
                     },
                 }}
+                message={message}
                 onClose={closeSnackbarHandler}
-                message="ثبت نام با موفقیت انجام شد "
                 action={action}
                 anchorOrigin={{vertical: "bottom", horizontal: "right"}}
             />

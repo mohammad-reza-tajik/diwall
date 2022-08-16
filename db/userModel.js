@@ -14,41 +14,40 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        // favoriteList: {
-        //     items:[{
-        //         productId:{
-        //             type:mongoose.Schema.Types.ObjectId,
-        //             ref:"Product",
-        //             required:true
-        //         }
-        //     }],
-        //     required: true
-        // },
-        // cart: {
-        //     items: [{
-        //         productId: {
-        //             type: mongoose.Schema.Types.ObjectId,
-        //             required: true
-        //         },
-        //         number: {
-        //             type: Number,
-        //             required: true
-        //
-        //         }
-        //     }],
-        //     required: true
-        // },
-        // comments: [{
-        //     body:{
-        //         type:"String",
-        //         required:true
-        //     },
-        //     date:{
-        //         type:mongoose.Schema.Types.Date,
-        //         required:true
-        //     }
-        //
-        // }]
+        favoriteList: {
+            items:[
+                {
+                productId:{
+                    type:mongoose.Schema.Types.ObjectId,
+                    ref:"Product",
+                }
+            }],
+        },
+       /* cart: {
+            items: [{
+                productId: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    required: true
+                },
+                number: {
+                    type: Number,
+                    required: true
+
+                }
+            }],
+            required: true
+        },*//*
+        comments: [{
+            body:{
+                type:"String",
+                required:true
+            },
+            date:{
+                type:mongoose.Schema.Types.Date,
+                required:true
+            }
+
+        }]*/
     }
 
 )
