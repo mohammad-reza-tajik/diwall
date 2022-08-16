@@ -37,10 +37,10 @@ const Home = () => {
           <Features cols={11} />
           <Places />
           <DiscountSection />
-          <SectionHeading text={"محصولات جدید"} />
+          <SectionHeading text={"محصولات جدید"} seeAll={true} route={"/latest-products"} />
           <LatestProducts />
           <MiddleSection />
-          <SectionHeading text={"پر فروش ترین محصولات"} />
+          <SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"best-sold-products"} />
           <BestSoldProducts />
           <SeenOn />
           {/*<Footer />*/}

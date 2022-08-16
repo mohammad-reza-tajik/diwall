@@ -3,12 +3,13 @@ import Image from "next/image"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {Fragment} from "react";
+import Link from "next/link";
 
 const NotFound = () => {
 
     return (
         <Fragment>
-            <Header/>
+            {/*<Header/>*/}
             <Grid container item xs={11} direction={"column"} alignItems={"center"} justifyContent={"center"} gap={35}
                   mb={120}>
                 <Grid item>
@@ -25,14 +26,16 @@ const NotFound = () => {
                     </Typography>
                 </Grid>
                 <Grid item>
+                    <Link href={"/"} passHref>
                     <Button variant={"contained"} sx={{fontSize: 20,}}>
                         بازگشت به صفحه اصلی
                     </Button>
+                    </Link>
                 </Grid>
 
 
             </Grid>
-            <Footer/>
+            {/*<Footer/>*/}
         </Fragment>
     )
 }

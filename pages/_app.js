@@ -6,6 +6,8 @@ import theme from "../components/theme";
 import {Grid, ThemeProvider} from "@mui/material";
 import Footer from "../components/Footer";
 import {useRouter} from "next/router";
+import AuthContext from "../store/auth-context"
+import {useState} from "react"
 
 
 function MyApp({Component, pageProps}) {
@@ -25,12 +27,31 @@ function MyApp({Component, pageProps}) {
     }
 
     //**************************************************************************//
+    const [isLoggedIn,setIsLoggedIn] = useState(false)
+    const [user,setUser] = useState(undefined)
 
 
 
 
 
     return (
+        <AuthContext.Provider value={{
+            isLoggedIn,
+            user,
+            login() {
+                setIsLoggedIn(true)
+            },
+            logout() {
+                setIsLoggedIn(false)
+            },
+            addToFavorites(product){
+                this.user.favorites.push(product)
+            },
+            addToCart(product){
+                this.user.cart.push(product)
+            }
+        }}>
+
         <ThemeProvider theme={theme}>
             <Head>
                 <title>
@@ -38,11 +59,12 @@ function MyApp({Component, pageProps}) {
                 </title>
             </Head>
             <Grid container direction={"row"} justifyContent={"center"}>
-                <Header/>
+                {router.pathname === "/sign-in" ? "" :<Header/>}
                 <Component {...pageProps} />
-                <Footer/>
+                {router.pathname === "/sign-in" ? "" :<Footer/>}
             </Grid>
         </ThemeProvider>
+        </AuthContext.Provider>
     )
 }
 

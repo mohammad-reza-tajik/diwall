@@ -1,69 +1,59 @@
 import Link from "next/link";
 import {Fragment, useState} from "react";
-import {Grid, IconButton, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Box, Grid, IconButton, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {Dehaze, LocalPhoneOutlined} from "@mui/icons-material";
 
 
 const styles = {
 
-    nav: {
-        gap: "2rem",
-        px: "2rem"
-    },
-    nav_link: {
-        fontSize: "2rem",
+    main_nav: {
+        fontSize: 16,
+        fontFamily:"dana-medium",
+        gap: 20
 
     },
-    tabsStyle: {
-        color: "common.white"
-    },
+    main_nav_link: {
+        color: "#888",
+        transition:"color .4s",
 
-    tabStyle: {
-        color: "common.black",
-        fontSize: "1.5rem",
-        fontFamily:"dana-demibold"
+        "&:hover" :{
+            color:"primary.main"
+        }
 
     }
 }
 
 const MainNavigation = () => {
 
-    const [value, setValue] = useState(0)
+    // const [value, setValue] = useState(0)
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
-    const changeHandler = (e, newValue) => {
+    /*const changeHandler = (e, newValue) => {
         setValue(newValue)
 
-    }
+    }*/
 
     return (
         <Grid container item alignItems={"center"} component={"nav"}  direction={"row"} justifyContent={"center"} mt={20}>
                 {!matchesMD &&
                     <Fragment>
-                        <Grid item xs={9}>
-                            <Tabs value={value} onChange={changeHandler} sx={styles.tabsStyle}>
-                                <Link href={"/wallpapers"} passHref><Tab label={"کاغذ دیواری"} sx={styles.tabStyle}/></Link>
-                                <Link href={"/posters"} passHref><Tab label={"پوستر دیواری"}
-                                                                         sx={styles.tabStyle}/></Link>
-                                <Link href={"/for-house"} passHref><Tab label={"برای خانه"} sx={styles.tabStyle}/></Link>
-                                <Link href={"/for-business"} passHref><Tab label={"برای کسب و کار"}
-                                                                      sx={styles.tabStyle}/></Link>
-                                <Link href={"/custom-poster"} passHref><Tab label={"پوستر سفارشی"}
-                                                                      sx={styles.tabStyle}/></Link>
-                                <Link href={"/about"} passHref><Tab label={"راهنما و اطلاعات"}
-                                                                      sx={styles.tabStyle}/></Link>
-                                <Link href={"/collaborate with us"} passHref><Tab label={"همکاری با ما"}
-                                                                      sx={styles.tabStyle}/></Link>
-                            </Tabs>
+                        <Grid container alignItems={"center"} item xs={9} sx={styles.main_nav}>
+                                <Link href={"/"}><Box component={"a"} sx={styles.main_nav_link}>صفحه نخست</Box></Link>
+                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>پوستر دیواری</Box></Link>
+                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>برای خانه</Box></Link>
+                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>برای کسب و کار</Box></Link>
+                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>پوستر سفارشی</Box></Link>
+                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>راهنما و اطلاعات</Box></Link>
+                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>همکاری با ما</Box></Link>
                         </Grid>
                         <Grid container item direction={"row"}  xs={2} justifyContent={"flex-end"}>
                             <Grid container item direction={"column"} xs={6}>
                                 <Grid item>
-                                    <Typography fontWeight={700} color={"#888"} fontSize={18} variant={"subtitle1"}>021464879</Typography>
+                                    <Typography fontWeight={700} color={"#666"} fontSize={18} variant={"subtitle1"}>021464879</Typography>
                                 </Grid>
                                 <Grid item mt={"-.7rem"}>
-                                    <Typography color={"#888"} fontSize={12} variant={"subtitle1"}>پشتیبانی مشتریان</Typography>
+                                    <Typography color={"#666"} fontSize={12} variant={"subtitle1"}>پشتیبانی مشتریان</Typography>
                                 </Grid>
 
                             </Grid>

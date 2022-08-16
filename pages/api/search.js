@@ -9,9 +9,7 @@ export default async function handler(req,res) {
     // the only way to put a variable in a regex
 
     const regexp = new RegExp(req.body.search , "g") // output => /req.body.search/g
-    // console.log(regexp)
     const relatedProducts = await Product.find({title: regexp })
-    // console.log(relatedProducts)
     if (req.body.all)
         res.send(relatedProducts)
     else {

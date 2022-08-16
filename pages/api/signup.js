@@ -6,12 +6,17 @@ export default async function handler(req,res){
         return
     // User.find()
     // if (req.body.username)
+    console.log(req.body)
     const user = new User(
-        {...req.body}
+        {...req.body,
+            favorites:[],
+            cart:[],
+            tokens:[]
+        }
     )
     user.save()
 
-    res.send(req.body)
+    res.send("done")
 
 
 

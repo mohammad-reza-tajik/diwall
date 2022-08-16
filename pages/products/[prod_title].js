@@ -74,10 +74,10 @@ const ProductDetails = () => {
                             <Image src={imageURL} alt={"product-image"} width={510} height={510}/>
                     }
                 </Grid>
-                <Grid container item direction={"column"} gap={40} height={700} xs={7} pr={30}>
+                <Grid container item direction={"column"} gap={30} height={700} xs={7} pr={30}>
                     <Grid container item>
                         <Grid item xs={8}>
-                            <Typography variant={"h1"} fontSize={30} fontFamily={"dana-demibold"} color={"#333"}>
+                            <Typography variant={"h1"} fontSize={25} fontFamily={"dana-demibold"} color={"#333"}>
                                 {product.title}
                             </Typography>
                         </Grid>
@@ -90,7 +90,7 @@ const ProductDetails = () => {
                         </Grid>
                     </Grid>
                     <Grid item mb={20}>
-                        <Typography variant={"h1"} fontSize={25} fontFamily={"dana-demibold"} color={"primary"}>
+                        <Typography variant={"h1"} fontSize={20} fontFamily={"dana-demibold"} color={"primary"}>
                             {product.price}
                         </Typography>
                     </Grid>
@@ -119,33 +119,34 @@ const ProductDetails = () => {
                     <Grid item container direction={"column"} gap={10}>
                         <Grid item>
                             <Typography variant={"h5"} fontSize={16}>
-                                سایز دلخواه :
+                                سایز دلخواه (واحد متر) :
                             </Typography>
                         </Grid>
                         <Grid container item>
-                            <Grid container item xs={6} alignItems={"center"} gap={10}>
-                                <Box component={"span"} sx={{fontSize: 16}}>طول </Box>
-                                <TextField/>
+                            <Grid container item xs={3} alignItems={"center"} gap={10}>
+                                <Box component={"span"} sx={{fontSize: 16}}>طول  : </Box>
+                                <TextField sx={{width:100}}/>
                             </Grid>
-                            <Grid container item xs={6} alignItems={"center"} gap={10}>
-                                <Box component={"span"} sx={{fontSize: 16}}>عرض </Box>
-                                <TextField/>
+                            <Grid container item xs={3} alignItems={"center"} gap={10}>
+                                <Box component={"span"} sx={{fontSize: 16}}>عرض  : </Box>
+                                <TextField sx={{width:100}}/>
+                            </Grid>
+                            <Grid xs={6} container item justifyContent={"flex-end"} alignItems={"center"}>
+                                <Button
+                                    variant={"contained"}
+                                    color={"primary"}
+                                    startIcon={<ShoppingBagOutlined sx={{fontSize: 15, ml: 5,}}/>
+                                    }
+                                    sx={styles.addToCartButton}
+                                >
+                                    افزودن به سبد خرید
+                                </Button>
                             </Grid>
                         </Grid>
                         {/*<Grid item>*/}
                         {/*</Grid>*/}
                     </Grid>
-                    <Grid container item justifyContent={"flex-end"} alignItems={"center"}>
-                        <Button
-                            variant={"contained"}
-                            color={"primary"}
-                            startIcon={<ShoppingBagOutlined sx={{fontSize: 15, ml: 5,}}/>
-                            }
-                            sx={styles.addToCartButton}
-                        >
-                            افزودن به سبد خرید
-                        </Button>
-                    </Grid>
+
                 </Grid>
 
 

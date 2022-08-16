@@ -18,7 +18,7 @@ const styles = {
 const Places = () => {
 
     return (
-        <Grid container item component={"section"} my={60} gap={80} xs={11}>
+        <Grid container item component={"section"} my={80} gap={80} xs={11}>
             <Grid container item alignItems={"center"} justifyContent={"center"} gap={10} xs={12}>
                 <Circle color={"primary"} sx={{fontSize: 30}}/>
                 <Typography variant={"h3"} color={"#444"} fontFamily={"dana-black"}>

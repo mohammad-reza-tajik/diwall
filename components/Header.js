@@ -105,6 +105,8 @@ const Header = () => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [search, setSearch] = useState("")
+    const [isWrong,setIsWrong] = useState(false)
+    const [helperText,setHelperText] = useState("")
     const [searchResults, setSearchResults] = useState([])
     const [searchResultsDisplay,setSearchResultsDisplay] = useState("none")
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
@@ -118,13 +120,17 @@ const Header = () => {
     const submitSearchHandler = (e) => {
         e.preventDefault()
         if (search.trim() === ""){
+            setIsWrong(true)
+            setHelperText("لطفا عبارتی برای جستجو وارد کنید")
             return
         }
+        setHelperText("")
+        setIsWrong(false)
         // setSearchResultsDisplay("flex")
         // setIsLoading(true)
         axios.post("/api/search", {search}).then(res => {
             // setSearchResults(res.data)
-            // setIsLoading(false)
+            setIsLoading(false)
             router.push(
                 {
                     pathname:"/search-results",
@@ -133,7 +139,7 @@ const Header = () => {
                     }
 
             })
-            console.log(res.data)
+            setSearch("")
         }).catch(err => {
             setIsLoading(false)
             console.log(err)
@@ -156,7 +162,7 @@ const Header = () => {
         </InputAdornment>
 
     return (
-        <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={20}>
+        <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={40}>
             <Grid container item direction={"row"} alignItems={"center"} xs={11}
                   justifySelf={"center"} pt={20}>
                 <Grid container item xs={1} minWidth={90} minHeight={90}>
@@ -171,6 +177,8 @@ const Header = () => {
                     <Grid item xs={12}>
 
                         <TextField
+                            error={isWrong}
+                            helperText={helperText}
                             placeholder={"جستجو ..."}
                             value={search}
                             onChange={searchChangeHandler}

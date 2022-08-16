@@ -11,14 +11,19 @@ import {
     ToggleButtonGroup
 } from "@mui/material";
 
+
+
+
+import Head from "next/head";
 import {Close, Create, Email, Login, Password, Person} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link"
-import {Fragment, useState} from "react";
+import {Fragment, useContext, useState} from "react";
 // import classes from "../styles/sign-in.modules.css"
 // import "../styles/SignIn.css";
 import axios from "axios";
 import {useRouter} from "next/router";
+import AuthContext from "../store/auth-context";
 
 
 
@@ -205,20 +210,30 @@ const SignIn = () => {
         </IconButton>
     )
 
+    const authctx =useContext(AuthContext)
+
 
     //********************************* form submission **********************************!//
 
 
-    const signupHandler = async (e) => {
+    const formHandler = async (e) => {
         e.preventDefault()
         setIsLoading(true)
+
+        const user = typeOfForm === "signup" ? {
+            username: usernameValue,
+            email: emailValue,
+            password: passwordValue
+        } :
+            {
+            usernameOrEmail:usernameOrEmailValue,
+            password: passwordValue
+
+        }
         try {
 
-            const response = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`, {
-                username: usernameValue,
-                email: emailValue,
-                password: passwordValue
-            })
+            const response = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`,user)
+
             console.log(response)
 
         } catch (e) {
@@ -237,9 +252,12 @@ const SignIn = () => {
 
     return (
         <Grid container alignItems={"center"} justifyContent={"center"} sx={styles.container}>
+            <Head>
+                <title>ورود/ثبت نام</title>
+            </Head>
             <Box sx={styles.backgroundImage}/>
             <Grid container item component={"form"}
-                  onSubmit={typeOfForm === "signup" ? signupHandler : () => console.log("hello")}
+                  onSubmit={formHandler}
                   sx={styles.form}>
                 <Grid item container direction={"column"} justifyContent={"center"} alignItems={"center"}>
                     <ToggleButtonGroup fullWidth size={"large"} color={"primary"} value={typeOfForm} exclusive
