@@ -71,7 +71,7 @@ const ProductDetails = () => {
             <Grid container item xs justifyContent={"center"}>
                 <Grid container item xs={5} justifyContent={"center"} alignItems={isLoading ? "center" : "flex-start"}>
                     {
-                        isLoading ? <CircularProgress  color={"primary"} size={45}/> :
+                        isLoading ? <CircularProgress color={"primary"} size={45}/> :
                             <Image src={imageURL} alt={"product-image"} width={510} height={510}/>
                     }
                 </Grid>
@@ -85,7 +85,7 @@ const ProductDetails = () => {
                         <Grid container item xs={4} justifyContent={"flex-end"} alignItems={"center"}>
                             <Typography variant={"h3"} fontSize={16} borderRadius={20} px={20} py={10}
                                         color={"white.main"}
-                                        bgcolor={isLoading ? "transparent" :  product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
+                                        bgcolor={isLoading ? "transparent" : product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
                                 {isLoading ? <CircularProgress/> : product.numbers_in_stock > 0 ? "موجود" : "ناموجود"}
                             </Typography>
                         </Grid>
@@ -109,11 +109,11 @@ const ProductDetails = () => {
                         <ToggleButtonGroup sx={{gap: 10}} fullWidth size={"large"} color={"primary"} value={presetSizes}
                                            exclusive
                                            onChange={presetSizesHandler}>
-                            <ToggleButton sx={{width: .4, height:40, fontSize: "1.6rem"}} value={"1"}>طول و عرض : 10m x
+                            <ToggleButton sx={{width: .4, height: 40, fontSize: "1.6rem"}} value={"1"}>طول و عرض : 10m x
                                 3m</ToggleButton>
-                            <ToggleButton sx={{width: .4, height:40,fontSize: "1.6rem"}} value={"2"}>طول و عرض : 20m x
+                            <ToggleButton sx={{width: .4, height: 40, fontSize: "1.6rem"}} value={"2"}>طول و عرض : 20m x
                                 3m</ToggleButton>
-                            <ToggleButton sx={{width: .4,height:40, fontSize: "1.6rem"}} value={"3"}>طول و عرض : 30m x
+                            <ToggleButton sx={{width: .4, height: 40, fontSize: "1.6rem"}} value={"3"}>طول و عرض : 30m x
                                 3m</ToggleButton>
                         </ToggleButtonGroup>
                     </Grid>
@@ -125,12 +125,12 @@ const ProductDetails = () => {
                         </Grid>
                         <Grid container item>
                             <Grid container item xs={3} alignItems={"center"} gap={10}>
-                                <Box component={"span"} sx={{fontSize: 16}}>طول  : </Box>
-                                <TextField sx={{width:100}}/>
+                                <Box component={"span"} sx={{fontSize: 16}}>طول : </Box>
+                                <TextField sx={{width: 100}}/>
                             </Grid>
                             <Grid container item xs={3} alignItems={"center"} gap={10}>
-                                <Box component={"span"} sx={{fontSize: 16}}>عرض  : </Box>
-                                <TextField sx={{width:100}}/>
+                                <Box component={"span"} sx={{fontSize: 16}}>عرض : </Box>
+                                <TextField sx={{width: 100}}/>
                             </Grid>
                             <Grid xs={6} container item justifyContent={"flex-end"} alignItems={"center"}>
                                 <Button

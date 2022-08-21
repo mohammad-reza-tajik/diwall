@@ -20,6 +20,7 @@ import Image from "next/image";
 import Link from "next/link"
 import {Fragment, useContext, useState} from "react";
 // import classes from "../styles/sign-in.modules.css"
+
 // import "../styles/SignIn.css";
 import axios from "axios";
 import {useRouter} from "next/router";
@@ -202,6 +203,8 @@ const SignIn = () => {
     }
 */
 
+    const router = useRouter()
+
     const action = (
         <IconButton
             size="medium"
@@ -211,7 +214,7 @@ const SignIn = () => {
         </IconButton>
     )
 
-    const authctx =useContext(AuthContext)
+    const authContext =useContext(AuthContext)
 
 
     //********************************* form submission **********************************!//
@@ -237,8 +240,10 @@ const SignIn = () => {
 
             const response = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`,user)
             setMessage(response.data.message)
-            console.log(response.data.message)
             setError(!response.data.ok)
+
+            await router.back()
+            authContext.login(response.data.user)
 
             console.log(response)
 

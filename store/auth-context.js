@@ -1,10 +1,19 @@
 import {createContext} from "react";
 
-const AuthContext =createContext({
-    isLoggedIn:false
+const authContext =createContext({
+    isLoggedIn:false,
+    user:{},
+    login() {
+    },
+    logout() {
+    },
+    addToFavorites(product){
+    },
+    addToCart(product){
+    }
 })
 
-export default AuthContext
+export default authContext
 
 
 

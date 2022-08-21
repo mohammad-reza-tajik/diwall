@@ -18,7 +18,7 @@ const styles = {
 }
 
 
-const BestSoldProducts = (props) => {
+const BestSellingProducts = (props) => {
     const [isLoading,setIsLoading] = useState(false)
     const [bestSoldProducts, setBestSoldProducts] = useState([])
 
@@ -58,4 +58,4 @@ const BestSoldProducts = (props) => {
 
 }
 
-export default BestSoldProducts
+export default BestSellingProducts

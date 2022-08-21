@@ -38,14 +38,17 @@ function MyApp({Component, pageProps}) {
         <AuthContext.Provider value={{
             isLoggedIn,
             user,
-            login() {
+            login(user) {
                 setIsLoggedIn(true)
+                setUser(user)
             },
             logout() {
                 setIsLoggedIn(false)
+                setUser(undefined)
+
             },
             addToFavorites(product){
-                this.user.favorites.push(product)
+                this.user.favoriteList.push(product)
             },
             addToCart(product){
                 this.user.cart.push(product)

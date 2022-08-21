@@ -22,9 +22,7 @@ const Product = (props) => {
     const clickHandler = async () => {
         await router.push({
             pathname:`/products/${props.title}`,
-            // query:{
-                // prod_title:props.title
-            // }
+
         }
 
         )
