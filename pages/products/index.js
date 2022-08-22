@@ -10,7 +10,7 @@ const Products = () => {
 
 
     const [products, setProducts] = useState([])
-    const [page,setPage] = useState(1)
+    // const [page,setPage] = useState(1)
     const [pageInformation, setPageInformation] = useState(1)
     // const [title , setTitle] = useState("همه محصولات")
     const [isLoading, setIsLoading] = useState(false)
@@ -21,16 +21,15 @@ const Products = () => {
     useEffect(()=>{
         setIsLoading(true)
         axios.post("/api/products",{
-
             search:router.query.search,
-            page:router.query.page
+            page:+router.query.page || 1
 
         }).then(res => {
+            console.log(res.data)
             setProducts(res.data.relatedProducts)
             // setTitle(res.data.title)
             setPageInformation(res.data)
             setIsLoading(false)
-            console.log(res.data)
         }).catch(err => {
             setIsLoading(false)
             console.log(err)
@@ -61,7 +60,7 @@ const Products = () => {
 
                 )}
 
-                <Pagination {...pageInformation}  />
+                {isLoading ? "" :<Pagination {...pageInformation} /> }
 
 
             </Grid>

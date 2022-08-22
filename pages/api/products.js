@@ -1,3 +1,4 @@
+import "../../db/database_connect"
 import Product from "../../db/productModel";
 
 export default async function handler(req, res) {
@@ -10,7 +11,7 @@ export default async function handler(req, res) {
         // console.log(req.query)
 
 
-        const ITEMS_PER_PAGE = 2
+        const ITEMS_PER_PAGE = 10
         const page = +req.body.page || 1
 
 
