@@ -8,6 +8,7 @@ import {
     List,
     ListItem,
     TextField,
+    Tooltip,
     Typography,
     useMediaQuery,
     useTheme
@@ -98,8 +99,6 @@ const styles = {
         // maxHeight:400,
 
     }
-
-    ,
 }
 
 const Header = () => {
@@ -110,7 +109,6 @@ const Header = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [search, setSearch] = useState("")
     const [isWrong, setIsWrong] = useState(false)
-    const [helperText, setHelperText] = useState("")
     const [searchResults, setSearchResults] = useState([])
     const [searchResultsDisplay, setSearchResultsDisplay] = useState("none")
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
@@ -121,14 +119,12 @@ const Header = () => {
 
     }
 
-    const submitSearchHandler = (e) => {
+    const submitSearchHandler = async (e) => {
         e.preventDefault()
         if (search.trim() === "") {
             setIsWrong(true)
-            setHelperText("لطفا عبارتی برای جستجو وارد کنید")
             return
         }
-        setHelperText("")
         setIsWrong(false)
         // setSearchResultsDisplay("flex")
         // setIsLoading(true)
@@ -141,14 +137,14 @@ const Header = () => {
                     pathname: `/products`,
                     query: {
                         search,
-                        page:1
+                        page: 1
                     }
 
                 })
             setSearch("")
         }).catch(err => {
             setIsLoading(false)
-            console.log(err)
+            // console.log(err)
 
         })
 
@@ -181,10 +177,10 @@ const Header = () => {
                 <Grid position={"relative"} container direction={"column"} item justifyContent={"center"}
                       alignItems={"flex-start"} xs={7} pr={20} component={"form"} onSubmit={submitSearchHandler}>
                     <Grid item xs={12}>
+                        <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom-end"} arrow>
 
                         <TextField
                             error={isWrong}
-                            helperText={helperText}
                             placeholder={"جستجو ..."}
                             value={search}
                             onChange={searchChangeHandler}
@@ -202,6 +198,7 @@ const Header = () => {
                                 endAdornment: (closeButton)
                             }}
                         />
+                        </Tooltip>
                     </Grid>
 
                     {/******** handling search results *******/}
@@ -235,22 +232,27 @@ const Header = () => {
                     </Grid>}
                 </Grid>
                 <Grid container item xs={2} justifyContent={"flex-end"}>
-                    <IconButton color={"primary"}>
-                        <FavoriteBorder sx={{
-                            fontSize: {xs: 40, sm: 50},
-                            border: "2px solid #11AE77",
-                            borderRadius: "50px",
-                            p: ".7rem"
-                        }}/>
-                    </IconButton>
-                    <IconButton color={"primary"}>
-                        <ShoppingBagOutlined sx={{
-                            fontSize: {xs: 40, sm: 50},
-                            border: "2px solid #11AE77",
-                            borderRadius: "50px",
-                            p: ".7rem"
-                        }}/>
-                    </IconButton>
+                    <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
+                        <IconButton color={"primary"}>
+                            <FavoriteBorder sx={{
+                                fontSize: {xs: 40, sm: 50},
+                                border: "2px solid #11AE77",
+                                borderRadius: "50px",
+                                p: ".7rem"
+                            }}/>
+                        </IconButton>
+                    </Tooltip>
+
+                    <Tooltip title={"سبد خرید شما"} arrow enterDelay={1000}>
+                        <IconButton color={"primary"}>
+                            <ShoppingBagOutlined sx={{
+                                fontSize: {xs: 40, sm: 50},
+                                border: "2px solid #11AE77",
+                                borderRadius: "50px",
+                                p: ".7rem"
+                            }}/>
+                        </IconButton>
+                    </Tooltip>
 
                 </Grid>
 
@@ -260,7 +262,7 @@ const Header = () => {
                             color={"primary"}
                             startIcon={
                                 <Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
-                                }
+                            }
                             sx={styles.signInButton}
                         > ورود / ثبت نام </Button>
                         </Link>

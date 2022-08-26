@@ -181,4 +181,9 @@ a:checked {
   padding: 0 !important;
 }
 
+.MuiTooltip-tooltip, .MuiTooltip-arrow::before {
+  background-color: #333;
+  font-size: 14px;
+}
+
 /*# sourceMappingURL=Globals.css.map */

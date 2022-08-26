@@ -88,6 +88,7 @@ button{
 
 }
 
+// manipulating swiper next and prev buttons
 .swiper-button-prev,
 .swiper-button-next{
   background-color: #069f69 !important;
@@ -102,10 +103,17 @@ button{
     font-size: 2rem !important;
   }
 }
-
+// manipulating list component padding
 .css-h4y409-MuiList-root{
   padding: 0 !important;
 
+}
+
+
+// manipulating tooltip background color and fontsize
+.MuiTooltip-tooltip,.MuiTooltip-arrow::before{
+  background-color: #333;
+  font-size: 14px;
 }
 //.footer-link {
 //  color: white;

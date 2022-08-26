@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         const page = +req.body.page || 1
 
 
-        if (req.body.search) {
+        if (req.body.search && req.body.search.trim().length !== 0) {
 
             // the only way to put a variable in a regex
             const title = `نتایج جستجو برای ${req.body.search}`
