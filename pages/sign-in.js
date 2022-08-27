@@ -25,6 +25,7 @@ import {Fragment, useContext, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import AuthContext from "../store/auth-context";
+import {storeTokenAndUser} from "../middleware/tokenManager";
 
 
 
@@ -241,9 +242,8 @@ const SignIn = () => {
             const response = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`,user)
             setMessage(response.data.message)
             setError(!response.data.ok)
-
-            await router.back()
             authContext.login(response.data.user)
+            await router.back()
 
             console.log(response)
 

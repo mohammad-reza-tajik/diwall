@@ -257,7 +257,7 @@ const Header = () => {
                 </Grid>
 
                 <Grid item container xs={2} justifyContent={"flex-end"}>
-                    {!matchesMD && !authCtx.isLoggedIn ? <Link href={"/sign-in"} passHref><Button
+                    {!matchesMD &&  !authCtx.user?.username  ? <Link href={"/sign-in"} passHref><Button
                             variant={"contained"}
                             color={"primary"}
                             startIcon={
@@ -267,12 +267,12 @@ const Header = () => {
                         > ورود / ثبت نام </Button>
                         </Link>
                         :
-                        <Link href={`/user/${authCtx.user.username}`} passHref><Button
+                        <Link href={`/user/${authCtx.user?.username}`} passHref><Button
                             variant={"contained"}
                             color={"primary"}
                             startIcon={""}
                             sx={styles.signInButton}
-                        >{authCtx.user.username}</Button>
+                        >{authCtx.user?.username}</Button>
                         </Link>
 
                     }

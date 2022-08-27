@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
     {
         username: {
             type: String,
-            required: true
+            required: true,
         },
         password: {
             type: String,
@@ -14,29 +14,20 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        favoriteList: {
-            items:[
+        favoriteList:[
                 {
                 productId:{
                     type:mongoose.Schema.Types.ObjectId,
                     ref:"Product",
                 }
             }],
-        },
-       /* cart: {
-            items: [{
-                productId: {
+
+        cart:[
+                {
                     type: mongoose.Schema.Types.ObjectId,
                     required: true
-                },
-                number: {
-                    type: Number,
-                    required: true
-
                 }
-            }],
-            required: true
-        },*//*
+            ],/*
         comments: [{
             body:{
                 type:"String",

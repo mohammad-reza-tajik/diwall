@@ -1,5 +1,6 @@
 import "../../db/database_connect"
 import User from "../../db/userModel";
+import bcrypt from "bcryptjs";
 
 const errorMessage1 = "این نام کاربری موجود نیست"
 const errorMessage2 = "نام کاربری یا رمز عبور نادرست است"
@@ -11,18 +12,19 @@ export default async function handler(req,res){
     if (req.method !== "POST")
         return
 
+    const {usernameOrEmail,password} = req.body
     //*** check if the user exists ***//
-    const regexp = new RegExp(`^${req.body.usernameOrEmail}$`,"i")
-    const exists =await User.find({$or:[{username:regexp},{email:regexp}]}) // this syntax is for matching either username or email
-    // console.log(exists)
+    const regexp = new RegExp(`^${usernameOrEmail}$`,"i")
+    const user =await User.find({$or:[{username:regexp},{email:regexp}]}).exec() // this syntax is for matching either username or email
+    // console.log(user)
 
-    if (exists.length !== 0){
-        if (exists[0].password === req.body.password)
+    if (user.length !== 0){
+        if ( await bcrypt.compare(user[0].password ,password))
             res.status(200).send({
                 ok:true,
                 status:200,
                 message:successMessage,
-                user:exists[0]
+                user:user[0]
 
             })
         else
@@ -33,9 +35,9 @@ export default async function handler(req,res){
             })
     }
     else {
-        res.status(404).send({
+        res.status(401).send({
             ok:false,
-            status:404,
+            status:401,
             message:errorMessage1
         })
     }
