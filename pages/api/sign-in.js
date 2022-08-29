@@ -1,6 +1,7 @@
 import "../../db/database_connect"
 import User from "../../db/userModel";
 import bcrypt from "bcryptjs";
+import {generateToken} from "../../middleware/tokenManager";
 
 const errorMessage1 = "این نام کاربری موجود نیست"
 const errorMessage2 = "نام کاربری یا رمز عبور نادرست است"
@@ -19,12 +20,12 @@ export default async function handler(req,res){
     // console.log(user)
 
     if (user.length !== 0){
-        if ( await bcrypt.compare(user[0].password ,password))
+        if ( await bcrypt.compare(password,user[0].password))
             res.status(200).send({
                 ok:true,
                 status:200,
                 message:successMessage,
-                user:user[0]
+                user: {username:user[0].username,userId:user[0]._id,token:generateToken(user),cart:user[0].cart,favoriteList:user[0].favoriteList},
 
             })
         else

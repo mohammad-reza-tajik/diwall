@@ -12,20 +12,30 @@ export const storeTokenAndUser = (user) => {
     }
 }
 
-export const getTokenAndUser = () => {
+export const getStoredToken = () => {
     if (typeof window !== 'undefined') {
-        localStorage.getItem("userId")
-        localStorage.getItem("username")
-        localStorage.getItem("token")
+        const token = localStorage.getItem("token")
+        const userId = localStorage.getItem("userId")
+        const username = localStorage.getItem("username")
+        const user = {
+            token,
+            username,
+            userId
+        }
+        if (token)
+            return user
+        else
+            return undefined
+
+    }}
+
+    export const validateToken = (token) => {
+        return jwt.verify(token, "thisIsPrivate")
     }
 
-}
 
-export const validateToken = (token) => {
+    export const removeToken = () => {
+        if (typeof window !== 'undefined')
+            localStorage.clear()
+    }
 
-}
-
-export const removeToken = () => {
-    if (typeof window !== 'undefined')
-         localStorage.clear()
-}

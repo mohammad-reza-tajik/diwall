@@ -7,8 +7,8 @@ import {Grid, ThemeProvider} from "@mui/material";
 import Footer from "../components/Footer";
 import {useRouter} from "next/router";
 import AuthContext from "../store/auth-context"
-import {useState} from "react"
-import {removeToken, storeTokenAndUser} from "../middleware/tokenManager";
+import {useEffect, useState} from "react"
+import {getStoredToken, removeToken, storeTokenAndUser} from "../middleware/tokenManager";
 
 
 function MyApp({Component, pageProps}) {
@@ -32,11 +32,12 @@ function MyApp({Component, pageProps}) {
     const [user,setUser] = useState(undefined)
     // const [token,setToken] = useState(undefined)
 
-    if (typeof window !== 'undefined') {
-        const savedToken = localStorage.getItem("token")
-        // if (savedToken)
-            // setToken(savedToken)
-    }
+
+    // to prevent an infinite loop
+    useEffect(()=>{
+        setUser(getStoredToken())
+    },[])
+
 
 
 
@@ -49,8 +50,9 @@ function MyApp({Component, pageProps}) {
                 setUser(user)
                 // setToken(user.token)
                 storeTokenAndUser(user)
-                setTimeout(removeToken,3600000)
+                // setTimeout(removeToken,3600000)
                 setIsLoggedIn(true)
+                setTimeout(removeToken,5000)
             },
             logout() {
                 setIsLoggedIn(false)
