@@ -7,16 +7,28 @@ import {
     InputAdornment,
     List,
     ListItem,
+    Menu,
+    MenuItem,
     TextField,
     Tooltip,
+    Avatar,
     Typography,
     useMediaQuery,
-    useTheme
+    useTheme, ListItemIcon, Divider
 } from "@mui/material";
-import {Close, FavoriteBorder, Login, Search, ShoppingBagOutlined} from "@mui/icons-material";
+import {
+    Close,
+    FavoriteBorder,
+    Login,
+    Logout, Person,
+    PersonAdd,
+    Search,
+    Settings,
+    ShoppingBagOutlined
+} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
-import {useContext, useState} from "react";
+import {Fragment, useContext, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import authContext from "../store/auth-context"
@@ -87,6 +99,22 @@ const styles = {
             color: "white"
         }
     },
+    signInPopup: {
+        position: "absolute",
+        top: "100%",
+        right: 20,
+        width: {xs: .8, md: 400},
+        zIndex: 50,
+        minHeight: 200,
+        maxHeight: 400,
+        border: "1px solid #ccc",
+        borderTop: "none",
+        bgcolor: "white.main",
+        justifyContent: "center",
+        alignItems: "center",
+        overflowY: "scroll",
+
+    },
     listItem: {
         gap: 10,
         p: 0
@@ -106,13 +134,28 @@ const Header = () => {
     const theme = useTheme()
     const authCtx = useContext(authContext)
     const router = useRouter()
+
     const [isLoading, setIsLoading] = useState(false)
     const [search, setSearch] = useState("")
     const [isWrong, setIsWrong] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null)
     const [searchResults, setSearchResults] = useState([])
     const [searchResultsDisplay, setSearchResultsDisplay] = useState("none")
+
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+
+
+    //*** menu logic ***//
+
+    const openMenu = Boolean(anchorEl)
+
+    const closeMenu = () => {
+        setAnchorEl(null);
+    }
+
+
+    //*** search form logic ***//
 
     const searchChangeHandler = (e) => {
         setSearch(e.target.value)
@@ -177,27 +220,28 @@ const Header = () => {
                 <Grid position={"relative"} container direction={"column"} item justifyContent={"center"}
                       alignItems={"flex-start"} xs={7} pr={20} component={"form"} onSubmit={submitSearchHandler}>
                     <Grid item xs={12}>
-                        <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom-end"} arrow>
+                        <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom-end"}
+                                 arrow>
 
-                        <TextField
-                            error={isWrong}
-                            placeholder={"جستجو ..."}
-                            value={search}
-                            onChange={searchChangeHandler}
-                            sx={styles.searchField}
-                            variant="outlined"
-                            size={matchesSM ? "small" : "medium"}
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <IconButton type={"submit"}>
-                                            <Search sx={styles.searchIcon}/>
-                                        </IconButton>
-                                    </InputAdornment>
-                                ),
-                                endAdornment: (closeButton)
-                            }}
-                        />
+                            <TextField
+                                error={isWrong}
+                                placeholder={"جستجو ..."}
+                                value={search}
+                                onChange={searchChangeHandler}
+                                sx={styles.searchField}
+                                variant="outlined"
+                                size={matchesSM ? "small" : "medium"}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <IconButton type={"submit"}>
+                                                <Search sx={styles.searchIcon}/>
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                    endAdornment: (closeButton)
+                                }}
+                            />
                         </Tooltip>
                     </Grid>
 
@@ -256,8 +300,8 @@ const Header = () => {
 
                 </Grid>
 
-                <Grid item container xs={2} justifyContent={"flex-end"}>
-                    {!matchesMD &&  !authCtx.user?.username  ? <Link href={"/sign-in"} passHref><Button
+                <Grid item container xs={2} justifyContent={"flex-end"} position={"relative"}>
+                    {!matchesMD && !authCtx.user?.username ? <Link href={"/sign-in"} passHref><Button
                             variant={"contained"}
                             color={"primary"}
                             startIcon={
@@ -267,13 +311,54 @@ const Header = () => {
                         > ورود / ثبت نام </Button>
                         </Link>
                         :
-                        <Link href={`/user/${authCtx.user?.username}`} passHref><Button
-                            variant={"contained"}
-                            color={"primary"}
-                            startIcon={""}
-                            sx={styles.signInButton}
-                        >{authCtx.user?.username}</Button>
-                        </Link>
+                        <Fragment>
+
+                            <Button
+                                variant={"contained"}
+                                onClick={(e) => {
+                                    setAnchorEl(anchorEl ? null : e.currentTarget)
+                                }}
+                                color={"primary"}
+                                startIcon={""}
+                                sx={styles.signInButton}> {authCtx.user?.username} </Button>
+
+                            <Menu
+                                anchorEl={anchorEl}
+                                id="account-menu"
+                                open={openMenu}
+                                disableScrollLock={true} // to prevent adding padding to the body on opening the menu
+                                onClose={closeMenu}
+                                onClick={closeMenu}
+                                PaperProps={{
+                                    elevation: 0,
+                                    sx: {
+                                        overflow: 'visible',
+                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                        mt: 1.5,
+
+                                    },
+                                }}
+                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                            >
+                                <MenuItem onClick={()=>router.push("/profile/"+ authCtx.user?.username)}>
+                                    <ListItemIcon>
+                                        <Person sx={{fontSize:25}} color={"primary"} />
+                                    </ListItemIcon>
+                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"} color={"#333"}>
+                                        مشاهده پروفایل
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem onClick={() => authCtx.logout()}>
+                                    <ListItemIcon>
+                                        <Logout sx={{fontSize:25}} color={"primary"} />
+                                    </ListItemIcon>
+                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"} color={"#333"}>
+                                        خروج از حساب کاربری
+                                    </Typography>
+                                </MenuItem>
+                            </Menu>
+                        </Fragment>
 
                     }
 

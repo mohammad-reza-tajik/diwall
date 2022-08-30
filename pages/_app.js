@@ -50,9 +50,9 @@ function MyApp({Component, pageProps}) {
                 setUser(user)
                 // setToken(user.token)
                 storeTokenAndUser(user)
-                // setTimeout(removeToken,3600000)
                 setIsLoggedIn(true)
-                setTimeout(removeToken,5000)
+                setTimeout(removeToken,3600000)
+                // setTimeout(removeToken,5000)
             },
             logout() {
                 setIsLoggedIn(false)
