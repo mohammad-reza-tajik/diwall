@@ -7,25 +7,16 @@ import {
     InputAdornment,
     List,
     ListItem,
+    ListItemIcon,
     Menu,
     MenuItem,
     TextField,
     Tooltip,
-    Avatar,
     Typography,
     useMediaQuery,
-    useTheme, ListItemIcon, Divider
+    useTheme
 } from "@mui/material";
-import {
-    Close,
-    FavoriteBorder,
-    Login,
-    Logout, Person,
-    PersonAdd,
-    Search,
-    Settings,
-    ShoppingBagOutlined
-} from "@mui/icons-material";
+import {Close, FavoriteBorder, Login, Logout, Person, Search, ShoppingBagOutlined} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import {Fragment, useContext, useState} from "react";
@@ -324,9 +315,8 @@ const Header = () => {
 
                             <Menu
                                 anchorEl={anchorEl}
-                                id="account-menu"
                                 open={openMenu}
-                                disableScrollLock={true} // to prevent adding padding to the body on opening the menu
+                                // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
                                 onClose={closeMenu}
                                 onClick={closeMenu}
                                 PaperProps={{
@@ -338,22 +328,22 @@ const Header = () => {
 
                                     },
                                 }}
-                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                                transformOrigin={{horizontal: 'right', vertical: 'top'}}
+                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
-                                <MenuItem onClick={()=>router.push("/profile/"+ authCtx.user?.username)}>
+                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.username)}>
                                     <ListItemIcon>
-                                        <Person sx={{fontSize:25}} color={"primary"} />
+                                        <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"} color={"#333"}>
-                                        مشاهده پروفایل
+                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}> مشاهده
+                                        پروفایل
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => authCtx.logout()}>
                                     <ListItemIcon>
-                                        <Logout sx={{fontSize:25}} color={"primary"} />
+                                        <Logout sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"} color={"#333"}>
+                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
                                         خروج از حساب کاربری
                                     </Typography>
                                 </MenuItem>

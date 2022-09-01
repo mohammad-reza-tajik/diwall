@@ -1,4 +1,4 @@
-import {CircularProgress, Grid, Typography} from "@mui/material";
+import {CircularProgress, Grid, Typography,} from "@mui/material";
 import SectionHeading from "../../components/SectionHeading";
 import axios from "axios";
 import {useEffect, useState} from "react";
@@ -22,7 +22,8 @@ const Products = () => {
         setIsLoading(true)
         axios.post("/api/products",{
             search:router.query.search,
-            page:+router.query.page || 1
+            page:+router.query.page || 1,
+            sortBy:+router.query.sortBy || 1
 
         }).then(res => {
             console.log(res.data)
@@ -35,7 +36,7 @@ const Products = () => {
             console.log(err)
 
         })
-    },[router.query.search,router.query.page])
+    },[router.query.search,router.query.page,router.query.sortBy])
 
 
 
@@ -43,7 +44,7 @@ const Products = () => {
         <Grid container item xs={11} direction={"column"}>
             <Grid item xs>
                 {router.query.search &&
-                <SectionHeading text={`محصولات مرتبط با جستجو "${router.query.search}"`} />
+                <SectionHeading text={`محصولات مرتبط با جستجو "${router.query.search}"`}  sortBy={true}/>
                 }
             </Grid>
             <Grid container item xs spacing={25}>
@@ -61,6 +62,7 @@ const Products = () => {
                 )}
 
                 {isLoading || products.length === 0 ? "" :<Pagination {...pageInformation} /> }
+                {/*{isLoading || products.length === 0 ? "" :<Pagination color={"primary"}  count={pageInformation.lastPage} size={"large"} /> }*/}
 
 
             </Grid>

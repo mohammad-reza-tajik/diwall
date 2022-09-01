@@ -72,6 +72,29 @@ const theme = createTheme({
                     color: "white"
                 }
             }
+        },
+        MuiTypography:{
+            styleOverrides:{
+                root:{
+                    color:"#333"
+                }
+            }
+        },
+        MuiPaginationItem:{
+            styleOverrides:{
+                root:{
+                    fontSize:16,
+                    padding:10,
+                    color:"#333"
+
+                }
+            }
+        },
+        MuiMenu:{
+            defaultProps:{
+                disableScrollLock:true
+            }
+
         }
 
     }

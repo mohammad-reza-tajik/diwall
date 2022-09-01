@@ -13,6 +13,7 @@ export default async function handler(req, res) {
 
         const ITEMS_PER_PAGE = 10
         const page = +req.body.page || 1
+        const sortBy = +req.body.sortBy || 1
 
 
         if (req.body.search && req.body.search.trim().length !== 0) {
@@ -26,25 +27,32 @@ export default async function handler(req, res) {
             it returns thenable it means you can use then/catch , but you can't
             use async/await to use async/await you should use exec method at the end of the expression
             */
-
             const relatedProductsCount = await Product.countDocuments({title: regexp}).exec()
-            console.log(relatedProductsCount)
-            const relatedProducts = await Product.find({title: regexp}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
 
-            if (req.query.sort) {
-                const title = `پرفروش`
-                const regexp = new RegExp(req.query.sort, "g");
+            let relatedProducts;
 
-
+            if (sortBy === 2) { // best-selling products
+                relatedProducts = await Product.find({title: regexp}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+            }
+            else if (sortBy === 3) { // oldest products
+                // const title = `پرفروش`
+                relatedProducts = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+            }
+            else if (sortBy === 4) {
+                relatedProducts = await Product.find({title: regexp}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+            }
+            else { // newest products
+                console.log(relatedProductsCount)
+                relatedProducts = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             res.send({
                 relatedProducts,
                 relatedProductsCount,
-                hasNextPage: ITEMS_PER_PAGE * page < relatedProductsCount,
-                hasPreviousPage: page > 1,
-                currentPage:page,
-                nextPage: page + 1,
-                previousPage: page - 1,
+                // hasNextPage: ITEMS_PER_PAGE * page < relatedProductsCount,
+                // hasPreviousPage: page > 1,
+                currentPage: page,
+                // nextPage: page + 1,
+                // previousPage: page - 1,
                 lastPage: Math.ceil(relatedProductsCount / ITEMS_PER_PAGE),
                 title
             })
@@ -58,11 +66,11 @@ export default async function handler(req, res) {
             res.send({
                 relatedProducts,
                 relatedProductsCount,
-                hasNextPage: ITEMS_PER_PAGE * page < relatedProductsCount,
-                hasPreviousPage: page > 1,
-                currentPage:page,
-                nextPage: page + 1,
-                previousPage: page - 1,
+                // hasNextPage: ITEMS_PER_PAGE * page < relatedProductsCount,
+                // hasPreviousPage: page > 1,
+                currentPage: page,
+                // nextPage: page + 1,
+                // previousPage: page - 1,
                 lastPage: Math.ceil(relatedProductsCount / ITEMS_PER_PAGE),
                 title
             })
