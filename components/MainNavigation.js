@@ -42,8 +42,8 @@ const MainNavigation = () => {
                                 <Link href={"/"}><Box component={"a"} sx={styles.main_nav_link}>صفحه نخست</Box></Link>
                                 {/*<Link href={"/products"}><Box component={"a"} sx={styles.main_nav_link}>همه محصولات</Box></Link>*/}
                                 <Link href={"/products"}><Box component={"a"} sx={styles.main_nav_link}>جدیدترین ها</Box></Link>
-                                <Link href={"/products?sorBy=2"}><Box component={"a"} sx={styles.main_nav_link}>پرفروش ترین ها</Box></Link>
-                                <Link href={"/products?sorBy=3"}><Box component={"a"} sx={styles.main_nav_link}>محبوب ترین ها</Box></Link>
+                                <Link href={"/products?sortBy=2"}><Box component={"a"} sx={styles.main_nav_link}>پرفروش ترین ها</Box></Link>
+                                <Link href={"/products?sortBy=3"}><Box component={"a"} sx={styles.main_nav_link}>محبوب ترین ها</Box></Link>
                                 <Link href={"/about"}><Box component={"a"} sx={styles.main_nav_link}>درباره ما</Box></Link>
                                 <Link href={"/collaboration"}><Box component={"a"} sx={styles.main_nav_link}>همکاری با ما</Box></Link>
                         </Grid>

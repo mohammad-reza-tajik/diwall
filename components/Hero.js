@@ -18,7 +18,7 @@ const Hero = () => {
 
     return(
 
-        <Grid container item direction={"row"} justifyContent={"center"} component={"section"} mb={70}>
+        <Grid container item xs={12} direction={"row"} justifyContent={"center"} component={"section"} mb={70}>
             <Grid container item direction={"column"} xs={4} bgcolor={"#069f69"}  py={"10rem"} px={"8rem"} gap={"4rem"}>
                 <Grid item>
                     <Typography lineHeight={1.4} fontFamily={"dana-black"}  variant={"h1"} fontSize={"3.2rem"} color={"common.white"}>
@@ -37,7 +37,7 @@ const Hero = () => {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid item xs={7}>
+            <Grid item xs={8}>
                 <Box width={1} sx={styles.heroImageBox}>
                     <Image src={"/assets/pictures/hero_img4.jpg"} alt={"hero_image_interior_design"} layout="fill"  />
                 </Box>

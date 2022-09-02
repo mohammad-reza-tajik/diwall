@@ -39,7 +39,7 @@ const LatestProducts = (props) => {
     }, [])
 
     return (
-        <Grid container item xs={11} alignItems={"center"}>
+        <Grid container item xs alignItems={"center"}>
             {isLoading && <p>Loading...</p>}
             {!isLoading &&
                 <Swiper spaceBetween={20}

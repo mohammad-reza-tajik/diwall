@@ -13,7 +13,7 @@ const styles = {
 const SeenOn = () => {
 
     return (
-        <Grid container item component={"section"} xs={8} my={50}>
+        <Grid container item component={"section"} xs={9} my={50}>
             <Box width={1} sx={styles.heroImageBox}>
                 <Image src={"/assets/pictures/seen_on.png"} alt={"شرکت های که از خدمات ما استفاده کردند"}
                        layout={"fill"}/>

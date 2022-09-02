@@ -13,7 +13,7 @@ const styles = {
 const MiddleSection= () => {
     return(
 
-    <Grid container item xs={11} justifyContent={"space-between"} my={50}>
+    <Grid container item xs={12} justifyContent={"space-between"} my={50}>
         <Grid container item xs={6} justifyContent={"flex-start"} sx={styles.pictures}>
             <Image src={"/assets/pictures/3D_posters.png"} width={610} height={320} layout={"fixed"} alt={"3D-posters"} />
         </Grid>

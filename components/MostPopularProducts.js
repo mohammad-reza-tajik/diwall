@@ -37,7 +37,7 @@ const MostPopularProducts = (props) => {
     return (
         <Grid container item xs alignItems={"center"} justifyContent={"center"}>
 
-            <Grid container item xs={12} justifyContent={"center"} alignItems={"center"} bgcolor={"primary.main"}
+            <Grid container item xs justifyContent={"center"} alignItems={"center"} bgcolor={"primary.main"}
                   p={60}>
                 <Grid container item xs={2} direction={"column"} alignItems={"flex-start"} gap={50}>
                     <Typography variant={"h3"} lineHeight={1.4} color={"white.main"} fontFamily={"dana-black"}
