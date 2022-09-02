@@ -34,11 +34,8 @@ export default async function handler(req, res) {
             if (sortBy === 2) { // best-selling products
                 relatedProducts = await Product.find({title: regexp}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
-            else if (sortBy === 3) { // oldest products
-                // const title = `پرفروش`
-                relatedProducts = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
-            }
-            else if (sortBy === 4) {
+
+            else if (sortBy === 3) { // most popular products
                 relatedProducts = await Product.find({title: regexp}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // newest products
@@ -59,9 +56,21 @@ export default async function handler(req, res) {
 
 
         } else if (!req.body.search) {
+            console.log(req.body)
             const title = `پرفروش`
-            const relatedProducts = await Product.find().skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             const relatedProductsCount = await Product.countDocuments().exec()
+            let relatedProducts;
+
+            if (sortBy === 2) { // best-selling products
+                relatedProducts = await Product.find().sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+            }
+            else if (sortBy === 3) { // most popular products
+                relatedProducts = await Product.find().sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+            }
+            else { // newest products
+                console.log(relatedProductsCount)
+                relatedProducts = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+            }
 
             res.send({
                 relatedProducts,

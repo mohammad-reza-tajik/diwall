@@ -13,28 +13,26 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 
-const styles = {
-
-}
+const styles = {}
 
 
 const BestSellingProducts = (props) => {
-    const [isLoading,setIsLoading] = useState(false)
-    const [bestSoldProducts, setBestSoldProducts] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    const [bestSellingProducts, setBestSellingProducts] = useState([])
 
     useEffect(() => {
-        try {
-            const fetchData = async () => {
-                setIsLoading(true)
-                const response = await axios.get("/api/best-sold-products")
-                setBestSoldProducts(response.data)
-                setIsLoading(false)
-
+        setIsLoading(true)
+        axios.post("/api/products", {sortBy: 2}).then(res => {
+            setBestSellingProducts(res.data.relatedProducts)
+            console.log(res.data)
+            setIsLoading(false)
             }
-            fetchData()
-        } catch (e) {
-            console.log(e)
-        }
+        ).catch(err => {
+            setIsLoading(false)
+            console.log(err)
+        })
+
+
     }, [])
 
     return (
@@ -47,7 +45,7 @@ const BestSellingProducts = (props) => {
                         navigation
 
                 >
-                    {bestSoldProducts.map((product) =>
+                    {bestSellingProducts.map((product) =>
                         <SwiperSlide key={product._id}>
                             <Product {...product} />
                         </SwiperSlide>)}

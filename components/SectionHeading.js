@@ -18,13 +18,17 @@ const SectionHeading = (props) => {
 
     const [sortBy, setSortBy] = useState(1);
     const router = useRouter()
+
+
     useEffect(() => {
+    if (props.sortBy){
         if (router.query.sortBy)
             setSortBy(+router.query.sortBy)
 
         else
             router.push({pathname: router.pathname, query: {...router.query, sortBy}}).then(()=>{})
 
+    }
     }, [])
 
 
@@ -34,12 +38,12 @@ const SectionHeading = (props) => {
         // setAge(e.target.value)
         // console.log(age)
 
-        // i've encountered a major bug and that happens when you try to log sortBy right after setSortBy . the value of sort isn't updated.
+        // I've encountered a major bug and that happens when you try to log sortBy right after setSortBy . the value of sort isn't updated.
         await router.push({pathname: router.pathname, query: {...router.query, sortBy:e.target.value}})
     }
 
     return (
-        <Grid container item xs alignItems={"center"} justifyContent={"space-between"} my={30}>
+        <Grid container item alignItems={"center"} justifyContent={"space-between"} my={30}>
             <Grid container item xs={8} gap={10}>
                 <Circle fontSize={"large"} color={"primary"}/>
                 <Typography fontFamily={"dana-black"} variant={"h4"} color={"#444"}>
@@ -72,10 +76,6 @@ const SectionHeading = (props) => {
                                         ترین</Typography>
                                 </MenuItem>
                                 <MenuItem value={3}>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>قدیمی
-                                        ترین</Typography>
-                                </MenuItem>
-                                <MenuItem value={4}>
                                     <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>محبوب
                                         ترین</Typography>
                                 </MenuItem>

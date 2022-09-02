@@ -10,9 +10,8 @@ const Products = () => {
 
 
     const [products, setProducts] = useState([])
-    // const [page,setPage] = useState(1)
     const [pageInformation, setPageInformation] = useState(1)
-    // const [title , setTitle] = useState("همه محصولات")
+    const [title , setTitle] = useState("همه محصولات")
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
 
@@ -28,7 +27,7 @@ const Products = () => {
         }).then(res => {
             console.log(res.data)
             setProducts(res.data.relatedProducts)
-            // setTitle(res.data.title)
+            setTitle(res.data.title)
             setPageInformation(res.data)
             setIsLoading(false)
         }).catch(err => {
@@ -46,12 +45,21 @@ const Products = () => {
                 {router.query.search &&
                 <SectionHeading text={`محصولات مرتبط با جستجو "${router.query.search}"`}  sortBy={true}/>
                 }
+                {!router.query.search && +router.query.sortBy ===2  &&
+                    <SectionHeading text={"پرفروش ترین محصولات"} sortBy={true} />
+                }
+                {!router.query.search && +router.query.sortBy ===3  &&
+                    <SectionHeading text={"محبوب ترین محصولات"} sortBy={true} />
+                }
+                {!router.query.search && (+router.query.sortBy === 1 || !router.query.sortBy) &&
+                    <SectionHeading text={"جدید ترین محصولات"} sortBy={true} />
+                }
             </Grid>
             <Grid container item xs spacing={25}>
                 {isLoading ? <CircularProgress  color={"primary"} size={45}/> :
                     products.length === 0 ?
                         <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
-                            <Typography variant={"h2"} color={"#333"} fontFamily={"dana-demibold"}>هیچ محصولی مرتبط با جستجو شما موجود نیست !</Typography>
+                            <Typography fontSize={20} variant={"h2"} color={"#333"} fontFamily={"dana-demibold"}>هیچ محصولی مرتبط با جستجو شما موجود نیست !</Typography>
                         </Grid> :
                     products.map((product)=>
 

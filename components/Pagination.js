@@ -6,12 +6,15 @@ const Pagination = (props) => {
 
     const [page, setPage] = useState(1)
     const router = useRouter()
-    console.log(props)
+    // console.log(props)
     // console.log(props)
 
     useEffect(()=>{
         if (router.query.page)
             setPage(+router.query.page)
+        else
+            router.push({pathname:router.pathname,query:{...router.query,page}})
+
 
     },[])
 

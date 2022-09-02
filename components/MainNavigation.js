@@ -40,12 +40,12 @@ const MainNavigation = () => {
                     <Fragment>
                         <Grid container alignItems={"center"} item xs={9} sx={styles.main_nav}>
                                 <Link href={"/"}><Box component={"a"} sx={styles.main_nav_link}>صفحه نخست</Box></Link>
-                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>پرفروش ترین ها</Box></Link>
-                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>جدیدترین ها</Box></Link>
-                                {/*<Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>برای کسب و کار</Box></Link>*/}
-                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>پوستر سفارشی</Box></Link>
-                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>راهنما و اطلاعات</Box></Link>
-                                <Link href={"/wallpapers"}><Box component={"a"} sx={styles.main_nav_link}>همکاری با ما</Box></Link>
+                                {/*<Link href={"/products"}><Box component={"a"} sx={styles.main_nav_link}>همه محصولات</Box></Link>*/}
+                                <Link href={"/products"}><Box component={"a"} sx={styles.main_nav_link}>جدیدترین ها</Box></Link>
+                                <Link href={"/products?sorBy=2"}><Box component={"a"} sx={styles.main_nav_link}>پرفروش ترین ها</Box></Link>
+                                <Link href={"/products?sorBy=3"}><Box component={"a"} sx={styles.main_nav_link}>محبوب ترین ها</Box></Link>
+                                <Link href={"/about"}><Box component={"a"} sx={styles.main_nav_link}>درباره ما</Box></Link>
+                                <Link href={"/collaboration"}><Box component={"a"} sx={styles.main_nav_link}>همکاری با ما</Box></Link>
                         </Grid>
                         <Grid container item direction={"row"}  xs={2} justifyContent={"flex-end"}>
                             <Grid container item direction={"column"} xs={6}>

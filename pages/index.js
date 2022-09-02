@@ -1,20 +1,16 @@
 import Head from 'next/head'
-import Hero from "../components/Hero";
-import Features from "../components/Features";
 import {Grid} from "@mui/material";
-import SeenOn from "../components/SeenOn";
-import Places from "../components/Places";
-import LatestProducts from "../components/LatestProducts";
 import SectionHeading from "../components/SectionHeading";
 import BestSellingProducts from "../components/BestSellingProducts";
-import MiddleSection from "../components/MiddleSection";
-import DiscountSection from "../components/DiscountSection";
+import LatestProducts from "../components/LatestProducts";
+import MostPopularProducts from "../components/MostPopularProducts";
+
 
 
 const Home = () => {
 
     return (
-        <Grid container direction={"row"} justifyContent={"center"}>
+        <Grid container item xs={11} direction={"row"} justifyContent={"center"}>
 
             <Head>
                 <title> دیوال : فروشگاه پوستر و کاغذ دیواری </title>
@@ -22,12 +18,12 @@ const Home = () => {
             {/*<Hero/>*/}
             {/*<Features cols={11}/>*/}
             {/*<Places/>*/}
-            {/*<DiscountSection/>*/}
-            {/*<SectionHeading text={"محصولات جدید"} seeAll={true} route={"/latest-products"}/>*/}
-            {/*<LatestProducts/>*/}
+            <MostPopularProducts route={"/products?sortBy=3"}/>
+            <SectionHeading text={"محصولات جدید"} seeAll={true} route={"/products"}/>
+            <LatestProducts/>
             {/*<MiddleSection/>*/}
-            {/*<SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"best-sold-products"}/>*/}
-            {/*<BestSellingProducts/>*/}
+            <SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"/products?sortBy=2"}/>
+            <BestSellingProducts/>
             {/*<SeenOn/>*/}
         </Grid>
     )
