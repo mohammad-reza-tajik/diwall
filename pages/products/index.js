@@ -1,18 +1,21 @@
 import {CircularProgress, Grid, Typography,} from "@mui/material";
 import SectionHeading from "../../components/SectionHeading";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import {useEffect, useState,useContext} from "react";
 import {useRouter} from "next/router";
 import Product from "../../components/Product";
 import Pagination from "../../components/Pagination";
+import loadingContext from "../../store/loading-context";
 
 const Products = () => {
 
 
     const [products, setProducts] = useState([])
     const [pageInformation, setPageInformation] = useState(1)
-    const [title , setTitle] = useState("همه محصولات")
-    const [isLoading, setIsLoading] = useState(false)
+    // const [title , setTitle] = useState("همه محصولات")
+
+    const {isLoading ,setIsLoading} = useContext(loadingContext)
+
     const router = useRouter()
 
 
@@ -27,7 +30,7 @@ const Products = () => {
         }).then(res => {
             console.log(res.data)
             setProducts(res.data.products)
-            setTitle(res.data.title)
+            // setTitle(res.data.title)
             setPageInformation(res.data)
             setIsLoading(false)
         }).catch(err => {
@@ -40,7 +43,7 @@ const Products = () => {
 
 
     return(
-        <Grid container item xs={11} direction={"column"}>
+        <Grid container item xs={12} direction={"column"}>
             <Grid item xs>
                 {router.query.search &&
                 <SectionHeading text={`محصولات مرتبط با جستجو "${router.query.search}"`}  sortBy={true}/>

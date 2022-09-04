@@ -26,6 +26,7 @@ import axios from "axios";
 import {useRouter} from "next/router";
 import AuthContext from "../store/auth-context";
 import {storeTokenAndUser} from "../middleware/tokenManager";
+import loadingContext from "../store/loading-context";
 
 
 
@@ -97,7 +98,6 @@ const SignIn = () => {
     //********************************** determine the type of form **********************************//
     const [error,setError] = useState(false)
     const [message,setMessage] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
     const [openSnackbar, setOpenSnackbar] = useState(false)
     const [typeOfForm, setTypeOfForm] = useState("signIn")
 
@@ -216,6 +216,8 @@ const SignIn = () => {
     )
 
     const authContext =useContext(AuthContext)
+    const {isLoading ,setIsLoading} = useContext(loadingContext)
+
 
 
     //********************************* form submission **********************************!//

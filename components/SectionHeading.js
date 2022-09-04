@@ -43,7 +43,7 @@ const SectionHeading = (props) => {
     }
 
     return (
-        <Grid container item alignItems={"center"} justifyContent={"space-between"} my={30}>
+        <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"} my={30}>
             <Grid container item xs={8} gap={10}>
                 <Circle fontSize={"large"} color={"primary"}/>
                 <Typography fontFamily={"dana-black"} variant={"h4"} color={"#444"}>

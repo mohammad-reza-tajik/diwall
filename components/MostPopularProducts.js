@@ -5,26 +5,28 @@ import {A11y, Navigation} from 'swiper';
 import Product from "./Product";
 import axios from "axios"
 
-import {useEffect, useState} from "react";
+import {useEffect, useState,useContext} from "react";
 
 import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Link from "next/link";
+import loadingContext from "../store/loading-context";
 
 
 const styles = {}
 
 const MostPopularProducts = (props) => {
-    const [isLoading, setIsLoading] = useState(false)
+
+    const {isLoading ,setIsLoading} = useContext(loadingContext)
     const [mostPopularProducts, setMostPopularProducts] = useState([])
 
     useEffect(() => {
         setIsLoading(true)
         axios.post("/api/products", {sortBy: 3}).then(res => {
             setMostPopularProducts(res.data.products)
-            console.log(res.data.products)
+            // console.log(res.data.products)
             setIsLoading(false)
         })
             .catch(e => {
@@ -38,7 +40,7 @@ const MostPopularProducts = (props) => {
         <Grid container item xs alignItems={"center"} justifyContent={"center"}>
 
             <Grid container item xs justifyContent={"center"} alignItems={"center"} bgcolor={"primary.main"}
-                  p={60}>
+                  p={50}>
                 <Grid container item xs={2} direction={"column"} alignItems={"flex-start"} gap={50}>
                     <Typography variant={"h3"} lineHeight={1.4} color={"white.main"} fontFamily={"dana-black"}
                                 textAlign={"right"}>

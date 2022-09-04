@@ -5,7 +5,7 @@ import {A11y, Navigation} from 'swiper';
 import Product from "./Product";
 import axios from "axios"
 
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 
 import "swiper/css";
 import 'swiper/css/navigation';
@@ -17,14 +17,15 @@ const styles = {}
 
 
 const BestSellingProducts = (props) => {
-    const [isLoading, setIsLoading] = useState(false)
+
+    const {isLoading ,setIsLoading} = useContext(loadingContext)
     const [bestSellingProducts, setBestSellingProducts] = useState([])
 
     useEffect(() => {
         setIsLoading(true)
         axios.post("/api/products", {sortBy: 2}).then(res => {
             setBestSellingProducts(res.data.products)
-            console.log(res.data)
+            // console.log(res.data)
             setIsLoading(false)
             }
         ).catch(err => {

@@ -23,6 +23,7 @@ import {Fragment, useContext, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import authContext from "../store/auth-context"
+import loadingContext from "../store/loading-context";
 
 const styles = {
     seeAllButton: {
@@ -126,12 +127,13 @@ const Header = () => {
     const authCtx = useContext(authContext)
     const router = useRouter()
 
-    const [isLoading, setIsLoading] = useState(false)
     const [search, setSearch] = useState("")
     const [isWrong, setIsWrong] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null)
     const [searchResults, setSearchResults] = useState([])
     const [searchResultsDisplay, setSearchResultsDisplay] = useState("none")
+
+    const {isLoading ,setIsLoading} = useContext(loadingContext)
 
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
@@ -145,13 +147,14 @@ const Header = () => {
         setAnchorEl(null);
     }
 
-
     //*** search form logic ***//
 
     const searchChangeHandler = (e) => {
         setSearch(e.target.value)
 
     }
+
+
 
     const submitSearchHandler = async (e) => {
         e.preventDefault()
@@ -164,7 +167,7 @@ const Header = () => {
         // setIsLoading(true)
         axios.post(`/api/products`, {search}).then(res => {
             // setSearchResults(res.data)
-            setIsLoading(false)
+            // loadingCtx.loading()
             // router.query.search = search
             router.push(
                 {
@@ -177,7 +180,7 @@ const Header = () => {
                 })
             setSearch("")
         }).catch(err => {
-            setIsLoading(false)
+            setIsLoading(true)
             // console.log(err)
 
         })

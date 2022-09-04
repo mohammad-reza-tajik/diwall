@@ -1,20 +1,13 @@
 import {useRouter} from "next/router";
-import {
-    Box,
-    Button,
-    CircularProgress,
-    Grid, Skeleton,
-    TextField,
-    ToggleButton,
-    ToggleButtonGroup,
-    Typography
-} from "@mui/material";
+import {Box, Button, Grid, Skeleton, TextField, ToggleButton, ToggleButtonGroup, Typography} from "@mui/material";
 import Image from "next/image"
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {ShoppingBagOutlined} from "@mui/icons-material";
 import Features from "../../components/Features";
 import RelatedProducts from "../../components/RelatedProducts";
+import loadingContext from "../../store/loading-context";
+import SectionHeading from "../../components/SectionHeading";
 
 
 const styles = {
@@ -37,24 +30,25 @@ const styles = {
 const ProductDetails = () => {
 
     const [product, setProduct] = useState({})
-    const [relatedProducts,setRelatedProducts] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
+    const [relatedProducts, setRelatedProducts] = useState([])
     const [presetSizes, setPresetSizes] = useState("1")
     const [imageURL, setImageURL] = useState("/assets/images/product_placeholder.png")
 
+    const {isLoading, setIsLoading} = useContext(loadingContext)
     const router = useRouter()
+
     useEffect(() => {
-                setIsLoading(true)
-                axios.post("/api/product-details", {
-                    title: router.query.prod_title
-                }).then(res=>{
-                //
-                 setImageURL(res.data.productDetails[0].image_full)
-                 setProduct(res.data.productDetails[0])
-                    setRelatedProducts(res.data.relatedProducts)
-                    console.log(res)
-                setIsLoading(false)
-                }).catch (e => console.log(e))
+        setIsLoading(true)
+        axios.post("/api/product-details", {
+            title: router.query.prod_title
+        }).then(res => {
+            //
+            setImageURL(res.data.productDetails[0].image_full)
+            setProduct(res.data.productDetails[0])
+            setRelatedProducts(res.data.relatedProducts)
+            // console.log(res)
+            setIsLoading(false)
+        }).catch(e => console.log(e))
 
     }, [router.query.prod_title])
 
@@ -65,39 +59,62 @@ const ProductDetails = () => {
 
 
     return (
-        <Grid container item direction={"column"} xs={11}>
+        <Grid container item xs={12}>
 
             <Grid container item xs justifyContent={"center"}>
-                <Grid container item xs={5} justifyContent={"center"} alignItems={isLoading ? "center" : "flex-start"}>
+                <Grid container item xs={5} justifyContent={"center"} height={500}>
                     {
-                        isLoading ? <CircularProgress color={"primary"} size={45}/> :
-                            <Image src={imageURL} alt={"product-image"} width={510} height={510}/>
+                        isLoading ? <Skeleton variant="rectangular" animation={"wave"} width={500} height={500}/>
+                            :
+                            <Image src={imageURL} alt={"product-image"} width={500} height={500}/>
                     }
                 </Grid>
-                <Grid container item direction={"column"} gap={30} height={700} xs={7} pr={30}>
+                <Grid container item direction={"column"} gap={30} height={600} xs={7} pr={30}>
                     <Grid container item>
                         <Grid item xs={8}>
-                            <Typography variant={"h1"} fontSize={25} fontFamily={"dana-demibold"} color={"#333"}>
-                                {product.title}
-                            </Typography>
+                            {
+                                isLoading ? <Skeleton variant="text" animation={"wave"} sx={{fontSize: 25}}/>
+                                    :
+                                    <Typography variant={"h1"} fontSize={25} fontFamily={"dana-demibold"}
+                                                color={"#333"}>
+                                        {product.title}
+                                    </Typography>
+                            }
                         </Grid>
                         <Grid container item xs={4} justifyContent={"flex-end"} alignItems={"center"}>
                             <Typography variant={"h3"} fontSize={16} borderRadius={20} px={20} py={10}
                                         color={"white.main"}
                                         bgcolor={isLoading ? "transparent" : product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
-                                {isLoading ? <CircularProgress/> : product.numbers_in_stock > 0 ? "موجود" : "ناموجود"}
+                                {isLoading ? <Skeleton variant={"text"} animation={"wave"} width={100}
+                                                       sx={{fontSize: 16}}/> : product.numbers_in_stock > 0 ? "موجود" : "ناموجود"}
                             </Typography>
                         </Grid>
                     </Grid>
                     <Grid item mb={20}>
-                        <Typography variant={"h1"} fontSize={20} fontFamily={"dana-demibold"} color={"primary"}>
-                            {product.price}
-                        </Typography>
+                        {
+                            isLoading ? <Skeleton variant="text" animation={"wave"} width={300} sx={{fontSize: 20}}/>
+                                :
+
+                                <Typography variant={"h1"} fontSize={20} fontFamily={"dana-demibold"} color={"primary"}>
+                                    {product.price}
+                                </Typography>
+                        }
                     </Grid>
                     <Grid item>
-                        <Typography variant={"caption"} fontSize={16}>
-                            {product.details}
-                        </Typography>
+                        {
+                            isLoading ?
+                                <Typography variant={"caption"} fontSize={16}>
+                                    <Skeleton variant="text" animation={"wave"}/>
+                                    <Skeleton variant="text" animation={"wave"}/>
+                                    <Skeleton variant="text" animation={"wave"}/>
+                                    <Skeleton variant="text" animation={"wave"}/>
+                                    <Skeleton variant="text" animation={"wave"}/>
+                                </Typography>
+                                :
+                                <Typography variant={"caption"} fontSize={16}>
+                                    {product.details}
+                                </Typography>
+                        }
                     </Grid>
                     <Grid item container direction={"column"} gap={10}>
                         <Grid item>
@@ -143,17 +160,28 @@ const ProductDetails = () => {
                                 </Button>
                             </Grid>
                         </Grid>
-                        {/*<Grid item>*/}
-                        {/*</Grid>*/}
                     </Grid>
 
                 </Grid>
 
+                <Grid item xs={12} mt={-40} mb={20}>
 
-                <Features cols={12}/>
-                {isLoading ? <Skeleton /> : <RelatedProducts products={relatedProducts}/>
-                }
+                    <Features cols={12}/>
+                </Grid>
+
             </Grid>
+            <Grid item xs={12}>
+                <SectionHeading text={"محصولات مشابه"}/>
+            </Grid>
+            {isLoading ?
+                <Grid item xs={12} my={20}>
+                    <Skeleton variant={"rectangular"} animation={"wave"} height={400}/>
+                </Grid>
+                : <Grid item xs={12}>
+                    <RelatedProducts products={relatedProducts}/>
+                    {/*<LatestProducts product={relatedProducts} />*/}
+                </Grid>
+            }
 
 
         </Grid>

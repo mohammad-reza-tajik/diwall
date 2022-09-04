@@ -38,7 +38,7 @@ export default async function handler(req, res) {
             else if (sortBy === 3) { // most popular products
                 products = await Product.find({title: regexp}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
-            else { // newest products
+            else { // latest products
                 console.log(productsCount)
                 products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
@@ -67,7 +67,7 @@ export default async function handler(req, res) {
             else if (sortBy === 3) { // most popular products
                 products = await Product.find().sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
-            else { // newest products
+            else { // latest products
                 console.log(productsCount)
                 products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }

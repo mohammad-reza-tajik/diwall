@@ -2,6 +2,8 @@ import {Box, Grid, IconButton, Typography} from "@mui/material";
 import Image from "next/image"
 import {ShoppingBagOutlined} from "@mui/icons-material";
 import {useRouter} from "next/router";
+import {useContext} from "react";
+import loadingContext from "../store/loading-context";
 
 
 
@@ -19,6 +21,7 @@ const styles = {
 
 const Product = (props) => {
     const router = useRouter()
+    const {isLoading ,setIsLoading} = useContext(loadingContext)
     const clickHandler = async () => {
         await router.push({
             pathname:`/products/${props.title}`,
@@ -29,8 +32,10 @@ const Product = (props) => {
 
     }
     return (
-        <Grid container item direction={"column"} sx={styles.product}>
+        <Grid container item direction={"column"} sx={styles.product} xs={"auto"}>
+
             <Grid item xs={11}  borderRadius={2} overflow={"hidden"} onClick={clickHandler} cursor={"pointer"}>
+
                 <Image src={props.image} alt={"product"} width={400} height={400} className={"pointer"}/>
             </Grid>
             <Grid container item height={50} alignItems={"center"}>

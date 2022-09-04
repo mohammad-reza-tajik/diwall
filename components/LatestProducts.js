@@ -5,26 +5,28 @@ import {A11y, Navigation} from 'swiper';
 import Product from "./Product";
 import axios from "axios"
 
-import {useEffect, useState} from "react";
+import {useEffect, useState,useContext} from "react";
 
 import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import loadingContext from "../store/loading-context";
 
 
 const styles = {}
 
 
 const LatestProducts = (props) => {
-    const [isLoading, setIsLoading] = useState(false)
+
+    const {isLoading ,setIsLoading} = useContext(loadingContext)
     const [latestProducts, setLatestProducts] = useState([])
     // const router = useRouter()
 
     useEffect(() => {
         setIsLoading(true)
         axios.post("/api/products",{sortBy:1}).then(res => {
-            console.log(res)
+            // console.log(res)
             setLatestProducts(res.data.products)
             setIsLoading(false)
         })
@@ -34,21 +36,18 @@ const LatestProducts = (props) => {
     }, [])
 
     return (
-        <Grid container item xs alignItems={"center"}>
-            {isLoading && <p>Loading...</p>}
-            {!isLoading &&
+        <Grid container item xs={12} alignItems={"center"}>
                 <Swiper spaceBetween={20}
                         slidesPerView={4}
                         modules={[Navigation, A11y]}
                         navigation
-
                 >
                     {latestProducts.map((product) =>
                         <SwiperSlide key={product._id}>
                             <Product {...product} />
                         </SwiperSlide>)}
                 </Swiper>
-            }
+
         </Grid>
     )
 

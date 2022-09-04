@@ -1,4 +1,4 @@
-import {Box, Button, Grid, Typography} from "@mui/material";
+import {Box, Button, Grid, Skeleton, Typography} from "@mui/material";
 import Image from "next/image";
 
 const styles = {
@@ -19,7 +19,7 @@ const Hero = () => {
     return(
 
         <Grid container item xs={12} direction={"row"} justifyContent={"center"} component={"section"} mb={70}>
-            <Grid container item direction={"column"} xs={4} bgcolor={"#069f69"}  py={"10rem"} px={"8rem"} gap={"4rem"}>
+            <Grid container item direction={"column"} xs={4} bgcolor={"#069f69"}  py={100} px={50} gap={"4rem"}>
                 <Grid item>
                     <Typography lineHeight={1.4} fontFamily={"dana-black"}  variant={"h1"} fontSize={"3.2rem"} color={"common.white"}>
                         خانه رویایی خود را به واقعیت تبدیل کنید
