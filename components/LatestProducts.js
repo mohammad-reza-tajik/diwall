@@ -13,29 +13,24 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 
-const styles = {
-
-}
+const styles = {}
 
 
 const LatestProducts = (props) => {
-    const [isLoading,setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [latestProducts, setLatestProducts] = useState([])
     // const router = useRouter()
 
     useEffect(() => {
-        try {
-            const fetchData = async () => {
-                setIsLoading(true)
-                const response = await axios.get("/api/latest-products")
-                setLatestProducts(response.data)
-                setIsLoading(false)
+        setIsLoading(true)
+        axios.post("/api/products",{sortBy:1}).then(res => {
+            console.log(res)
+            setLatestProducts(res.data.products)
+            setIsLoading(false)
+        })
+            .catch(e => console.log(e))
 
-            }
-            fetchData()
-        } catch (e) {
-            console.log(e)
-        }
+
     }, [])
 
     return (

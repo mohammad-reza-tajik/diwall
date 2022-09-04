@@ -3,7 +3,7 @@ import {
     Box,
     Button,
     CircularProgress,
-    Grid,
+    Grid, Skeleton,
     TextField,
     ToggleButton,
     ToggleButtonGroup,
@@ -14,6 +14,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {ShoppingBagOutlined} from "@mui/icons-material";
 import Features from "../../components/Features";
+import RelatedProducts from "../../components/RelatedProducts";
 
 
 const styles = {
@@ -36,26 +37,24 @@ const styles = {
 const ProductDetails = () => {
 
     const [product, setProduct] = useState({})
+    const [relatedProducts,setRelatedProducts] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [presetSizes, setPresetSizes] = useState("1")
     const [imageURL, setImageURL] = useState("/assets/images/product_placeholder.png")
 
     const router = useRouter()
     useEffect(() => {
-        try {
-            const fetchData = async () => {
                 setIsLoading(true)
-                const response = await axios.post("/api/product-details", {
-                    prod_title: router.query.prod_title
-                })
-                setImageURL(response.data[0].image_full)
-                setProduct(response.data[0])
+                axios.post("/api/product-details", {
+                    title: router.query.prod_title
+                }).then(res=>{
+                //
+                 setImageURL(res.data.productDetails[0].image_full)
+                 setProduct(res.data.productDetails[0])
+                    setRelatedProducts(res.data.relatedProducts)
+                    console.log(res)
                 setIsLoading(false)
-            }
-            fetchData()
-        } catch (e) {
-            console.log(e)
-        }
+                }).catch (e => console.log(e))
 
     }, [router.query.prod_title])
 
@@ -152,7 +151,8 @@ const ProductDetails = () => {
 
 
                 <Features cols={12}/>
-
+                {isLoading ? <Skeleton /> : <RelatedProducts products={relatedProducts}/>
+                }
             </Grid>
 
 

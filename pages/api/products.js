@@ -27,98 +27,64 @@ export default async function handler(req, res) {
             it returns thenable it means you can use then/catch , but you can't
             use async/await to use async/await you should use exec method at the end of the expression
             */
-            const relatedProductsCount = await Product.countDocuments({title: regexp}).exec()
+            const productsCount = await Product.countDocuments({title: regexp}).exec()
 
-            let relatedProducts;
+            let products;
 
             if (sortBy === 2) { // best-selling products
-                relatedProducts = await Product.find({title: regexp}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find({title: regexp}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
 
             else if (sortBy === 3) { // most popular products
-                relatedProducts = await Product.find({title: regexp}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find({title: regexp}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // newest products
-                console.log(relatedProductsCount)
-                relatedProducts = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                console.log(productsCount)
+                products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             res.send({
-                relatedProducts,
-                relatedProductsCount,
-                // hasNextPage: ITEMS_PER_PAGE * page < relatedProductsCount,
+                products,
+                productsCount,
+                // hasNextPage: ITEMS_PER_PAGE * page < productsCount,
                 // hasPreviousPage: page > 1,
                 currentPage: page,
                 // nextPage: page + 1,
                 // previousPage: page - 1,
-                lastPage: Math.ceil(relatedProductsCount / ITEMS_PER_PAGE),
+                lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
                 title
             })
 
 
         } else if (!req.body.search) {
             console.log(req.body)
-            const title = `پرفروش`
-            const relatedProductsCount = await Product.countDocuments().exec()
-            let relatedProducts;
+            // const title = `پرفروش`
+            const productsCount = await Product.countDocuments().exec()
+            let products;
 
             if (sortBy === 2) { // best-selling products
-                relatedProducts = await Product.find().sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find().sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else if (sortBy === 3) { // most popular products
-                relatedProducts = await Product.find().sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find().sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // newest products
-                console.log(relatedProductsCount)
-                relatedProducts = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                console.log(productsCount)
+                products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
 
             res.send({
-                relatedProducts,
-                relatedProductsCount,
-                // hasNextPage: ITEMS_PER_PAGE * page < relatedProductsCount,
+                products,
+                productsCount,
+                // hasNextPage: ITEMS_PER_PAGE * page < productsCount,
                 // hasPreviousPage: page > 1,
                 currentPage: page,
                 // nextPage: page + 1,
                 // previousPage: page - 1,
-                lastPage: Math.ceil(relatedProductsCount / ITEMS_PER_PAGE),
-                title
+                lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
+                // title
             })
         }
 
-        // results for the latest products
-
-        else if (req.query.sort && req.query.sort === 1) {
-            const title = `نتایج جستجو برای ${req.query.sort}`
-            const bestSoldProducts = await Product.find()
-            res.send(bestSoldProducts)
-
-        }
-        // results for the best-selling products
-
-        else if (req.query.sort && req.query.sort === 2) {
-            const title = `نتایج جستجو برای ${req.query.sort}`
-            const bestSoldProducts = await Product.find()
-            res.send(bestSoldProducts)
-
-        }
-
-        // results for the most expensive products
-
-        else if (req.query.sort && req.query.sort === 3) {
-            const title = `نتایج جستجو برای ${req.query.sort}`
-            const bestSoldProducts = await Product.find()
-            res.send(bestSoldProducts)
-
-        }
-
-        // results for the cheapest products
-
-        else if (req.query.sort && req.query.sort === 4) {
-            const title = `نتایج جستجو برای ${req.query.sort}`
-            const bestSoldProducts = await Product.find()
-            res.send(bestSoldProducts)
-
-        }
 
 
     }

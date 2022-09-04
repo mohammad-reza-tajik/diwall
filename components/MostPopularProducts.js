@@ -23,8 +23,8 @@ const MostPopularProducts = (props) => {
     useEffect(() => {
         setIsLoading(true)
         axios.post("/api/products", {sortBy: 3}).then(res => {
-            setMostPopularProducts(res.data.relatedProducts)
-            console.log(res.data.relatedProducts)
+            setMostPopularProducts(res.data.products)
+            console.log(res.data.products)
             setIsLoading(false)
         })
             .catch(e => {

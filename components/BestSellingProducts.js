@@ -23,7 +23,7 @@ const BestSellingProducts = (props) => {
     useEffect(() => {
         setIsLoading(true)
         axios.post("/api/products", {sortBy: 2}).then(res => {
-            setBestSellingProducts(res.data.relatedProducts)
+            setBestSellingProducts(res.data.products)
             console.log(res.data)
             setIsLoading(false)
             }

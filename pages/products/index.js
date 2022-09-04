@@ -26,7 +26,7 @@ const Products = () => {
 
         }).then(res => {
             console.log(res.data)
-            setProducts(res.data.relatedProducts)
+            setProducts(res.data.products)
             setTitle(res.data.title)
             setPageInformation(res.data)
             setIsLoading(false)

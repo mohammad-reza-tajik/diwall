@@ -32,9 +32,7 @@ const Hero = () => {
                     </Typography>
                 </Grid>
                 <Grid item>
-                    <Button variant={"outlined"} color={"white"} sx={styles.heroButton}>
-                        سفارش اختصاصی
-                    </Button>
+                    <Button variant={"outlined"} color={"white"} sx={styles.heroButton}>مشاهده محصولات</Button>
                 </Grid>
             </Grid>
             <Grid item xs={8}>
