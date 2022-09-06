@@ -1,7 +1,7 @@
 import {createContext} from "react";
 
 const authContext =createContext({
-    isLoggedIn:false,
+    isAuthenticated:false,
     user:{},
     login() {
     },
@@ -10,7 +10,9 @@ const authContext =createContext({
     addToFavorites(product){
     },
     addToCart(product){
-    }
+    },
+
+
 })
 
 export default authContext

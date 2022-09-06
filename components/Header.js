@@ -295,7 +295,7 @@ const Header = () => {
                 </Grid>
 
                 <Grid item container xs={2} justifyContent={"flex-end"} position={"relative"}>
-                    {!matchesMD && !authCtx.user?.username ? <Link href={"/sign-in"} passHref><Button
+                    {!authCtx.user.username ? <Link href={"/sign-in"} passHref><Button
                             variant={"contained"}
                             color={"primary"}
                             startIcon={
@@ -314,7 +314,7 @@ const Header = () => {
                                 }}
                                 color={"primary"}
                                 startIcon={""}
-                                sx={styles.signInButton}> {authCtx.user?.username} </Button>
+                                sx={styles.signInButton}> {authCtx.user.username} </Button>
 
                             <Menu
                                 anchorEl={anchorEl}
@@ -334,7 +334,7 @@ const Header = () => {
                                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
-                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.username)}>
+                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user.username)}>
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>

@@ -8,6 +8,7 @@ import Features from "../../components/Features";
 import RelatedProducts from "../../components/RelatedProducts";
 import loadingContext from "../../store/loading-context";
 import SectionHeading from "../../components/SectionHeading";
+import authContext from "../../store/auth-context";
 
 
 const styles = {
@@ -35,6 +36,7 @@ const ProductDetails = () => {
     const [imageURL, setImageURL] = useState("/assets/images/product_placeholder.png")
 
     const {isLoading, setIsLoading} = useContext(loadingContext)
+    const authCtx = useContext(authContext)
     const router = useRouter()
 
     useEffect(() => {
@@ -46,7 +48,7 @@ const ProductDetails = () => {
             setImageURL(res.data.productDetails[0].image_full)
             setProduct(res.data.productDetails[0])
             setRelatedProducts(res.data.relatedProducts)
-            // console.log(res)
+            // console.log(res.data.productDetails[0])
             setIsLoading(false)
         }).catch(e => console.log(e))
 
@@ -55,6 +57,26 @@ const ProductDetails = () => {
     const presetSizesHandler = (e, presetSizes) => {
         if (presetSizes !== null)
             setPresetSizes(presetSizes);
+    }
+
+    const addToCartHandler = () => {
+        if (authCtx.isAuthenticated){
+            authCtx.addToCart(product._id)
+            axios.put("/api/add-to-cart",{productId : product._id , userId: authCtx.user.userId , token: authCtx.user.token}).then(res => {
+                console.log("added successfully")
+                // console.log(res)
+                    authCtx.login(res)
+
+                }
+
+            ).catch(e => console.log(e))
+        }
+        else
+            router.push("/sign-in")
+
+        // console.log(authCtx.user.cart)
+
+
     }
 
 
@@ -150,6 +172,7 @@ const ProductDetails = () => {
                             </Grid>
                             <Grid xs={6} container item justifyContent={"flex-end"} alignItems={"center"}>
                                 <Button
+                                    onClick={addToCartHandler}
                                     variant={"contained"}
                                     color={"primary"}
                                     startIcon={<ShoppingBagOutlined sx={{fontSize: 15, ml: 5,}}/>

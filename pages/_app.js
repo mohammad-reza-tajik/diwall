@@ -28,7 +28,7 @@ function MyApp({Component, pageProps}) {
     }
 
     //**************************************************************************//
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [user, setUser] = useState(undefined)
     const [isLoading, setIsLoading] = useState(false)
     // const [token,setToken] = useState(undefined)
@@ -36,7 +36,10 @@ function MyApp({Component, pageProps}) {
 
     // to prevent an infinite loop
     useEffect(() => {
-        setUser(getStoredToken())
+        const storedUser = getStoredToken()
+        if (storedUser){
+            setUser(storedUser)
+        }
     }, [])
 
 
@@ -50,31 +53,32 @@ function MyApp({Component, pageProps}) {
             }
         }}>
             <AuthContext.Provider value={{
-                isLoggedIn,
+                isAuthenticated,
                 user,
                 // token,
                 login(user) {
                     setUser(user)
                     // setToken(user.token)
                     storeTokenAndUser(user)
-                    setIsLoggedIn(true)
+                    setIsAuthenticated(true)
                     setTimeout(removeToken, 3600000)
                     // setTimeout(removeToken,5000)
                 },
                 logout() {
-                    setIsLoggedIn(false)
+                    setIsAuthenticated(false)
                     setUser(undefined)
                     // setToken(undefined)
                     removeToken()
 
 
                 },
-                addToFavorites(product) {
-                    this.user.favoriteList.push(product)
-                },
-                addToCart(product) {
-                    this.user.cart.push(product)
-                }
+                // addToFavorites(product) {
+                //     this.favoriteList.push(product)
+                // },
+                // addToCart(product) {
+                //     console.log("hello from context")
+                //     // this.cart.push(product)
+                // }
             }}>
 
 
@@ -88,7 +92,7 @@ function MyApp({Component, pageProps}) {
                         {router.pathname === "/sign-in" ? "" : <Header/>}
                         <Grid item xs={11}>
 
-                        <Component {...pageProps} />
+                            <Component {...pageProps} />
                         </Grid>
                         {router.pathname === "/sign-in" ? "" : <Footer/>}
                     </Grid>

@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken"
+import axios from "axios";
 
 export const generateToken = (user) => {
     return  jwt.sign({userId:user._id},"thisIsPrivate",{expiresIn: "1h"})
@@ -12,18 +13,23 @@ export const storeTokenAndUser = (user) => {
     }
 }
 
-export const getStoredToken = () => {
+export const getStoredToken = async () => {
     if (typeof window !== 'undefined') {
         const token = localStorage.getItem("token")
+
         const userId = localStorage.getItem("userId")
-        const username = localStorage.getItem("username")
-        const user = {
-            token,
-            username,
-            userId
-        }
-        if (token)
+
+        let user;
+        // const username = localStorage.getItem("username")
+        if (userId){
+
+            const response = await axios.post("/api/get-user",{userId,token})
+            user= response.data.user
+            console.log(response.data.user)
+
             return user
+
+        }
         else
             return undefined
 

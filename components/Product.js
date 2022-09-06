@@ -4,6 +4,8 @@ import {ShoppingBagOutlined} from "@mui/icons-material";
 import {useRouter} from "next/router";
 import {useContext} from "react";
 import loadingContext from "../store/loading-context";
+import axios from "axios";
+import authContext from "../store/auth-context";
 
 
 
@@ -21,7 +23,10 @@ const styles = {
 
 const Product = (props) => {
     const router = useRouter()
+    const authCtx = useContext(authContext)
     const {isLoading ,setIsLoading} = useContext(loadingContext)
+
+
     const clickHandler = async () => {
         await router.push({
             pathname:`/products/${props.title}`,
@@ -31,6 +36,27 @@ const Product = (props) => {
         )
 
     }
+
+    const addToCartHandler = () => {
+        if (authCtx.isAuthenticated){
+            authCtx.addToCart(props._id)
+            axios.put("/api/add-to-cart",{productId : props._id , userId: authCtx.user.userId, token: authCtx.user.token}).then(res => {
+                    console.log("added successfully")
+                authCtx.login(res)
+                    // console.log(res)
+                }
+
+            ).catch(e => console.log(e))
+        }
+        else
+            router.push("/sign-in")
+
+        // console.log(authCtx.user.cart)
+
+
+    }
+
+
     return (
         <Grid container item direction={"column"} sx={styles.product} xs={"auto"}>
 
@@ -50,7 +76,7 @@ const Product = (props) => {
                     </Typography>
                 </Grid>
                 <Grid container item xs={3} justifyContent={"flex-end"}>
-                    <IconButton>
+                    <IconButton onClick={addToCartHandler}>
                         <ShoppingBagOutlined color={"primary"}
                                              sx={
                                                  {

@@ -245,9 +245,9 @@ const SignIn = () => {
             setMessage(response.data.message)
             setError(!response.data.ok)
             authContext.login(response.data.user)
+            console.log(response)
             await router.back()
 
-            console.log(response)
 
         } catch (e) {
             console.log(e)
