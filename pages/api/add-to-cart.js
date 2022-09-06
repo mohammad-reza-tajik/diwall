@@ -5,10 +5,10 @@ export default async function handler(req, res) {
     const userId = req.body.userId
     const productId = req.body.productId
     const token = req.body.token
-    console.log(userId)
-    console.log(productId)
+    // console.log(userId)
+    // console.log(productId)
     const user = await User.findById(userId).exec()
-    console.log(user)
+    // console.log(user)
     user.cart.push(productId)
     await user.save()
 

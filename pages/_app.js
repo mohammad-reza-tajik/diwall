@@ -10,6 +10,7 @@ import AuthContext from "../store/auth-context"
 import LoadingContext from "../store/loading-context";
 import {useEffect, useState} from "react"
 import {getStoredToken, removeToken, storeTokenAndUser} from "../middleware/tokenManager";
+import axios from "axios";
 
 
 function MyApp({Component, pageProps}) {
@@ -36,10 +37,31 @@ function MyApp({Component, pageProps}) {
 
     // to prevent an infinite loop
     useEffect(() => {
-        const storedUser = getStoredToken()
-        if (storedUser){
-            setUser(storedUser)
+
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem("token")
+            const userId = localStorage.getItem("userId")
+            // console.log(localStorage)
+            console.log(userId)
+            if (userId && userId !== "undefined") {
+                axios.post("/api/get-user", {userId, token}).then(res => {
+
+                        setUser(res.data.user)
+
+                    console.log(res)
+                        setIsAuthenticated(true)
+                    }
+                ).catch(e => console.log(e))
+
+            }
+
         }
+        // const storedUser = getStoredToken()
+        //
+        // if (storedUser){
+        //     setUser(storedUser)
+        //     setIsAuthenticated(true)
+        // }
     }, [])
 
 

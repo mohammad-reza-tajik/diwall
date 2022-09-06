@@ -124,7 +124,6 @@ const styles = {
 const Header = () => {
 
     const theme = useTheme()
-    const authCtx = useContext(authContext)
     const router = useRouter()
 
     const [search, setSearch] = useState("")
@@ -133,7 +132,7 @@ const Header = () => {
     const [searchResults, setSearchResults] = useState([])
     const [searchResultsDisplay, setSearchResultsDisplay] = useState("none")
 
-    const {isLoading ,setIsLoading} = useContext(loadingContext)
+    const {isLoading, setIsLoading} = useContext(loadingContext)
 
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
@@ -153,7 +152,6 @@ const Header = () => {
         setSearch(e.target.value)
 
     }
-
 
 
     const submitSearchHandler = async (e) => {
@@ -194,6 +192,8 @@ const Header = () => {
         setSearchResultsDisplay("none")
 
     }
+    const authCtx = useContext(authContext)
+    console.log(authCtx)
     const closeButton = <InputAdornment position="end">
         <IconButton onClick={clearSearchHandler}>
             <Close sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}/>
@@ -295,14 +295,15 @@ const Header = () => {
                 </Grid>
 
                 <Grid item container xs={2} justifyContent={"flex-end"} position={"relative"}>
-                    {!authCtx.user.username ? <Link href={"/sign-in"} passHref><Button
-                            variant={"contained"}
-                            color={"primary"}
-                            startIcon={
-                                <Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
-                            }
-                            sx={styles.signInButton}
-                        > ورود / ثبت نام </Button>
+                    {!authCtx.isAuthenticated ? <Link href={"/sign-in"} passHref>
+                            <Button
+                                variant={"contained"}
+                                color={"primary"}
+                                startIcon={
+                                    <Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
+                                }
+                                sx={styles.signInButton}
+                            > ورود / ثبت نام </Button>
                         </Link>
                         :
                         <Fragment>
@@ -314,7 +315,7 @@ const Header = () => {
                                 }}
                                 color={"primary"}
                                 startIcon={""}
-                                sx={styles.signInButton}> {authCtx.user.username} </Button>
+                                sx={styles.signInButton}> {authCtx.user?.username} </Button>
 
                             <Menu
                                 anchorEl={anchorEl}
@@ -334,7 +335,7 @@ const Header = () => {
                                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
-                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user.username)}>
+                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.username)}>
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>

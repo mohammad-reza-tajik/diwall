@@ -39,7 +39,7 @@ const Product = (props) => {
 
     const addToCartHandler = () => {
         if (authCtx.isAuthenticated){
-            authCtx.addToCart(props._id)
+            // authCtx.addToCart(props._id)
             axios.put("/api/add-to-cart",{productId : props._id , userId: authCtx.user.userId, token: authCtx.user.token}).then(res => {
                     console.log("added successfully")
                 authCtx.login(res)

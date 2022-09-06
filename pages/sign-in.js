@@ -12,22 +12,17 @@ import {
 } from "@mui/material";
 
 
-
-
 import Head from "next/head";
 import {Close, Create, Email, Login, Password, Person} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link"
 import {Fragment, useContext, useState} from "react";
 // import classes from "../styles/sign-in.modules.css"
-
 // import "../styles/SignIn.css";
 import axios from "axios";
 import {useRouter} from "next/router";
 import AuthContext from "../store/auth-context";
-import {storeTokenAndUser} from "../middleware/tokenManager";
 import loadingContext from "../store/loading-context";
-
 
 
 const styles = {
@@ -96,13 +91,10 @@ const styles = {
 const SignIn = () => {
 
     //********************************** determine the type of form **********************************//
-    const [error,setError] = useState(false)
-    const [message,setMessage] = useState("")
+    const [error, setError] = useState(false)
+    const [message, setMessage] = useState("")
     const [openSnackbar, setOpenSnackbar] = useState(false)
     const [typeOfForm, setTypeOfForm] = useState("signIn")
-
-
-
 
 
     const openSnackbarHandler = () => {
@@ -215,51 +207,50 @@ const SignIn = () => {
         </IconButton>
     )
 
-    const authContext =useContext(AuthContext)
-    const {isLoading ,setIsLoading} = useContext(loadingContext)
-
+    const authContext = useContext(AuthContext)
+    const {isLoading, setIsLoading} = useContext(loadingContext)
 
 
     //********************************* form submission **********************************!//
 
 
-    const formHandler = async (e) => {
+    const formHandler = (e) => {
         e.preventDefault()
         setIsLoading(true)
         setMessage("")
         setError(false)
 
         const user = typeOfForm === "signup" ? {
-            username: usernameValue,
-            email: emailValue,
-            password: passwordValue
-        } :
+                username: usernameValue,
+                email: emailValue,
+                password: passwordValue
+            } :
             {
-            usernameOrEmail:usernameOrEmailValue,
-            password: passwordValue
+                usernameOrEmail: usernameOrEmailValue,
+                password: passwordValue
 
-        }
-        try {
-
-            const response = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`,user)
-            setMessage(response.data.message)
-            setError(!response.data.ok)
-            authContext.login(response.data.user)
-            console.log(response)
-            await router.back()
+            }
 
 
-        } catch (e) {
+        axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`, user).then(res => {
+
+                setMessage(res.data.message)
+                setError(!res.data.ok)
+                authContext.login(res.data.user)
+                console.log(res)
+                setIsLoading(false)
+                openSnackbarHandler()
+                router.back()
+
+            }
+        ).catch(e => {
             console.log(e)
             setMessage(e.response.data.message)
             setError(!e.response.data.ok)
             setIsLoading(false)
             openSnackbarHandler()
+        })
 
-
-        }
-        setIsLoading(false)
-        openSnackbarHandler()
 
     }
 
