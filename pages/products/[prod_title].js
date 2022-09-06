@@ -64,8 +64,8 @@ const ProductDetails = () => {
             // authCtx.addToCart(product._id)
             axios.put("/api/add-to-cart",{productId : product._id , userId: authCtx.user.userId , token: authCtx.user.token}).then(res => {
                 console.log("added successfully")
-                // console.log(res)
-                    authCtx.login(res)
+                console.log(res)
+                    authCtx.login(res.data.user)
 
                 }
 

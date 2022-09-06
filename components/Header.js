@@ -193,7 +193,7 @@ const Header = () => {
 
     }
     const authCtx = useContext(authContext)
-    console.log(authCtx)
+    // console.log(authCtx)
     const closeButton = <InputAdornment position="end">
         <IconButton onClick={clearSearchHandler}>
             <Close sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}/>

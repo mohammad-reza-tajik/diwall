@@ -1,8 +1,8 @@
 import {Box, Grid, IconButton, Typography} from "@mui/material";
 import Image from "next/image"
-import {ShoppingBagOutlined} from "@mui/icons-material";
+import {Favorite, HeartBroken, ShoppingBagOutlined} from "@mui/icons-material";
 import {useRouter} from "next/router";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import loadingContext from "../store/loading-context";
 import axios from "axios";
 import authContext from "../store/auth-context";
@@ -17,6 +17,13 @@ const styles = {
         bgcolor:"#fff"
         // gap:10
 
+    },
+    addToFavoritesButton:{
+        position:"absolute",
+        left:3,
+        top:3,
+        zIndex:20,
+
     }
 }
 
@@ -24,7 +31,8 @@ const styles = {
 const Product = (props) => {
     const router = useRouter()
     const authCtx = useContext(authContext)
-    const {isLoading ,setIsLoading} = useContext(loadingContext)
+    const [heartIsVisible,setHeartIsVisible] = useState(false)
+    // const {isLoading ,setIsLoading} = useContext(loadingContext)
 
 
     const clickHandler = async () => {
@@ -37,12 +45,12 @@ const Product = (props) => {
 
     }
 
-    const addToCartHandler = () => {
+    /*const addToCartHandler = () => {
         if (authCtx.isAuthenticated){
             // authCtx.addToCart(props._id)
             axios.put("/api/add-to-cart",{productId : props._id , userId: authCtx.user.userId, token: authCtx.user.token}).then(res => {
                     console.log("added successfully")
-                authCtx.login(res)
+                authCtx.login(res.data.user)
                     // console.log(res)
                 }
 
@@ -54,15 +62,38 @@ const Product = (props) => {
         // console.log(authCtx.user.cart)
 
 
+    }*/
+    const addToFavorites = () => {
+        if (authCtx.isAuthenticated){
+            // authCtx.addToCart(props._id)
+            axios.put("/api/add-to-favorites",{productId : props._id , userId: authCtx.user.userId, token: authCtx.user.token}).then(res => {
+                    console.log("added successfully")
+                    authCtx.login(res.data.user)
+                    // console.log(res)
+                }
+
+            ).catch(e => console.log(e))
+        }
+        else
+            router.push("/sign-in")
+
     }
 
 
     return (
         <Grid container item direction={"column"} sx={styles.product} xs={"auto"}>
 
-            <Grid item xs={11}  borderRadius={2} overflow={"hidden"} onClick={clickHandler} cursor={"pointer"}>
+            <Grid item xs={11}  borderRadius={2} position={"relative"} overflow={"hidden"}
+                  onMouseEnter={()=> setHeartIsVisible(true)}
+                  onMouseLeave={()=>setHeartIsVisible(false)}
+                   cursor={"pointer"}>
+                <Grid item sx={{...styles.addToFavoritesButton ,opacity:heartIsVisible ? 1 : 0  }}>
+                    <IconButton onClick={addToFavorites}>
+                        <Favorite sx={{fontSize:50,borderRadius:20,p:8,bgcolor:"rgba(50,50,50,0.3)",color:"#fff"}} />
+                    </IconButton>
+                </Grid>
 
-                <Image src={props.image} alt={"product"} width={400} height={400} className={"pointer"}/>
+                <Image src={props.image}  onClick={clickHandler} alt={"product"} width={400} height={400} className={"pointer"}/>
             </Grid>
             <Grid container item height={50} alignItems={"center"}>
                 <Grid item xs onClick={clickHandler}>
@@ -70,12 +101,12 @@ const Product = (props) => {
                 </Grid>
             </Grid>
             <Grid container item justifyContent={"center"} alignItems={"center"} height={50}>
-                <Grid item xs={9}>
+                <Grid item xs={12}>
                     <Typography variant={"h4"} fontSize={16} fontFamily={"dana-demibold"} color={"#069f69"}>
                         {props.price}
                     </Typography>
                 </Grid>
-                <Grid container item xs={3} justifyContent={"flex-end"}>
+               {/* <Grid container item xs={3} justifyContent={"flex-end"}>
                     <IconButton onClick={addToCartHandler}>
                         <ShoppingBagOutlined color={"primary"}
                                              sx={
@@ -87,7 +118,7 @@ const Product = (props) => {
                                                  }
                                              }/>
                     </IconButton>
-                </Grid>
+                </Grid>*/}
             </Grid>
         </Grid>
     )
