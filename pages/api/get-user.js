@@ -24,6 +24,7 @@ export default async function handler(req, res) {
                 user: {
                     username: user.username,
                     userId: user._id,
+                    email:user.email,
                     token,
                     cart: user.cart,
                     favoriteList: user.favoriteList
