@@ -32,7 +32,9 @@ const Product = (props) => {
     const router = useRouter()
     const authCtx = useContext(authContext)
     const [heartIsVisible,setHeartIsVisible] = useState(false)
-    const [isFavorite,setIsFavorite] = useState(false)
+    const isFavorite = authCtx.user?.favoriteList.includes(props._id)
+
+    // const [isFavorite,setIsFavorite] = useState(false)
     // const {isLoading ,setIsLoading} = useContext(loadingContext)
 
 
@@ -66,10 +68,16 @@ const Product = (props) => {
     }*/
     const addToFavorites = () => {
         if (authCtx.isAuthenticated){
+            if (isFavorite){
+                // console.log(authCtx.user)
+                authCtx.login({...authCtx.user , favoriteList:authCtx.user.favoriteList.filter((element)=> element != props._id)})
+
+            }
+
             // authCtx.addToCart(props._id)
             axios.put("/api/add-to-favorites",{productId : props._id , userId: authCtx.user.userId, token: authCtx.user.token}).then(res => {
-                    console.log("added successfully")
-                setIsFavorite(true)
+                    // console.log("added successfully")
+                // setIsFavorite(true)
                     authCtx.login(res.data.user)
                     // console.log(res)
                 }
@@ -80,6 +88,7 @@ const Product = (props) => {
             router.push("/sign-in")
 
     }
+
 
 
     return (

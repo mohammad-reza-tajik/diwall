@@ -36,6 +36,8 @@ const ProductDetails = () => {
     const [imageURL, setImageURL] = useState("/assets/images/product_placeholder.png")
 
     const {isLoading, setIsLoading} = useContext(loadingContext)
+    // const isInCart = authCtx.user?.cart.includes(product._id)
+
     const authCtx = useContext(authContext)
     const router = useRouter()
 

@@ -42,13 +42,13 @@ function MyApp({Component, pageProps}) {
             const token = localStorage.getItem("token")
             const userId = localStorage.getItem("userId")
             // console.log(localStorage)
-            console.log(userId)
+            // console.log(userId)
             if (userId && userId !== "undefined") {
                 axios.post("/api/get-user", {userId, token}).then(res => {
 
                         setUser(res.data.user)
 
-                    console.log(res)
+                    // console.log(res)
                         setIsAuthenticated(true)
                     }
                 ).catch(e => console.log(e))

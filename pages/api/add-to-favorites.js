@@ -9,11 +9,24 @@ export default async function handler(req, res) {
     // console.log(productId)
     const user = await User.findById(userId).exec()
     // console.log(user)
-    user.favoriteList.push(productId)
-    await user.save()
+
+    // if product already exists , then it gets removed
+    if (user.favoriteList.includes(productId)) {
+        user.favoriteList = user.favoriteList.filter((element) => element != productId)
+        // console.log(user)
+        await user.save()
+
+        // console.log("exists")
+        // console.log(user)
+
+    } else {
+        user.favoriteList.push(productId)
+        await user.save()
+        console.log("doesn't exists")
+    }
 
     res.send({
-        user:{
+        user: {
             username: user.username,
             userId: user._id,
             token,

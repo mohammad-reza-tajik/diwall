@@ -19,7 +19,7 @@ export default async function handler(req, res) {
         if (req.body.search && req.body.search.trim().length !== 0) {
 
             // the only way to put a variable in a regex
-            const title = `نتایج جستجو برای ${req.body.search}`
+            // const title = `نتایج جستجو برای ${req.body.search}`
             const regexp = new RegExp(req.body.search, "g") // output => /req.body.search/g
 
             /*
@@ -51,7 +51,7 @@ export default async function handler(req, res) {
                 // nextPage: page + 1,
                 // previousPage: page - 1,
                 lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
-                title
+                // title
             })
 
 

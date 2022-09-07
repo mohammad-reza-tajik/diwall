@@ -16,7 +16,7 @@ import Head from "next/head";
 import {Close, Create, Email, Login, Password, Person} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link"
-import {Fragment, useContext, useState} from "react";
+import {Fragment, useContext, useRef, useState} from "react";
 // import classes from "../styles/sign-in.modules.css"
 // import "../styles/SignIn.css";
 import axios from "axios";
@@ -97,6 +97,8 @@ const SignIn = () => {
     const [typeOfForm, setTypeOfForm] = useState("signIn")
 
 
+
+
     const openSnackbarHandler = () => {
         setOpenSnackbar(true)
 
@@ -111,12 +113,12 @@ const SignIn = () => {
             setTypeOfForm(typeOfForm);
     }
 
-    //********************************** form fields states **********************************//
+    //********************************** form fields refs **********************************//
 
-    const [usernameValue, setUsernameValue] = useState("")
-    const [emailValue, setEmailValue] = useState("")
-    const [passwordValue, setPasswordValue] = useState("")
-    const [usernameOrEmailValue, setUsernameOrEmailValue] = useState("")
+    const usernameRef = useRef()
+    const emailRef = useRef()
+    const passwordRef = useRef()
+    const usernameOrEmail = useRef()
 
     // //********************************** form fields touch states **********************************//
     //
@@ -135,7 +137,7 @@ const SignIn = () => {
 
     //********************************** form fields change handlers **********************************//
 
-    const usernameChangeHandler = (e) => {
+    /*const usernameChangeHandler = (e) => {
         setUsernameValue(e.target.value)
     }
     const emailChangeHandler = (e) => {
@@ -147,7 +149,7 @@ const SignIn = () => {
     const usernameOrEmailChangeHandler = (e) => {
         setUsernameOrEmailValue(e.target.value)
     }
-
+*/
     /*const changHandler = (e) => {
 
         let valid;
@@ -221,13 +223,13 @@ const SignIn = () => {
         setError(false)
 
         const user = typeOfForm === "signup" ? {
-                username: usernameValue,
-                email: emailValue,
-                password: passwordValue
+                username: usernameRef.current.value,
+                email: emailRef.current.value,
+                password: passwordRef.current.value
             } :
             {
-                usernameOrEmail: usernameOrEmailValue,
-                password: passwordValue
+                usernameOrEmail: usernameRef.current.value,
+                password: passwordRef.current.value
 
             }
 
@@ -282,8 +284,9 @@ const SignIn = () => {
                 {typeOfForm === "signup" ? <Fragment>
                     <Grid item container justifyContent={"center"}>
                         <TextField
-                            value={usernameValue}
-                            onChange={usernameChangeHandler}
+                            // value={usernameValue}
+                            // onChange={usernameChangeHandler}
+                            inputRef={usernameRef} // to use refs on textField components
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -296,8 +299,9 @@ const SignIn = () => {
                     </Grid>
                     <Grid item container justifyContent={"center"}>
                         <TextField
-                            value={emailValue}
-                            onChange={emailChangeHandler}
+                            // value={emailValue}
+                            // onChange={emailChangeHandler}
+                            inputRef={emailRef}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -309,8 +313,9 @@ const SignIn = () => {
                             placeholder={"ایمیل"}/>
                     </Grid></Fragment> : <Grid item container justifyContent={"center"}>
                     <TextField
-                        value={usernameOrEmailValue}
-                        onChange={usernameOrEmailChangeHandler}
+                        // value={usernameOrEmailValue}
+                        // onChange={usernameOrEmailChangeHandler}
+                        inputRef={usernameOrEmail}
 
                         InputProps={{
                             startAdornment: (
@@ -324,8 +329,9 @@ const SignIn = () => {
                 </Grid>}
                 <Grid item container justifyContent={"center"}>
                     <TextField
-                        value={passwordValue}
-                        onChange={passwordChangeHandler}
+                        // value={passwordValue}
+                        // onChange={passwordChangeHandler}
+                        inputRef={passwordRef}
 
                         InputProps={{
                             startAdornment: (

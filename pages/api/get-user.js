@@ -17,15 +17,16 @@ export default async function handler(req, res) {
 
 
             // const regexp = new RegExp(userId , "g") // output => /req.body.search/g
-            const user = await User.find({_id: userId}).exec()
+            // const user = await User.find({_id: userId}).exec()
+            const user = await User.findById(userId).exec()
             // console.log(user)
             res.send({
                 user: {
-                    username: user[0].username,
-                    userId: user[0]._id,
+                    username: user.username,
+                    userId: user._id,
                     token,
-                    cart: user[0].cart,
-                    favoriteList: user[0].favoriteList
+                    cart: user.cart,
+                    favoriteList: user.favoriteList
                 }
             })
 
