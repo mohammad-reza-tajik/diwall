@@ -32,12 +32,13 @@ const Product = (props) => {
     const router = useRouter()
     const authCtx = useContext(authContext)
     const [heartIsVisible,setHeartIsVisible] = useState(false)
+    const [isFavorite,setIsFavorite] = useState(false)
     // const {isLoading ,setIsLoading} = useContext(loadingContext)
 
 
     const clickHandler = async () => {
         await router.push({
-            pathname:`/products/${props.title}`,
+            pathname:`/products/${props._id}`,
 
         }
 
@@ -68,6 +69,7 @@ const Product = (props) => {
             // authCtx.addToCart(props._id)
             axios.put("/api/add-to-favorites",{productId : props._id , userId: authCtx.user.userId, token: authCtx.user.token}).then(res => {
                     console.log("added successfully")
+                setIsFavorite(true)
                     authCtx.login(res.data.user)
                     // console.log(res)
                 }
@@ -89,7 +91,9 @@ const Product = (props) => {
                    cursor={"pointer"}>
                 <Grid item sx={{...styles.addToFavoritesButton ,opacity:heartIsVisible ? 1 : 0  }}>
                     <IconButton onClick={addToFavorites}>
+                        {isFavorite ? <Favorite sx={{fontSize:50,borderRadius:20,p:8,bgcolor:"rgba(50,50,50,0.3)",color:"primary.main"}} /> :
                         <Favorite sx={{fontSize:50,borderRadius:20,p:8,bgcolor:"rgba(50,50,50,0.3)",color:"#fff"}} />
+                        }
                     </IconButton>
                 </Grid>
 

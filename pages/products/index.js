@@ -28,7 +28,7 @@ const Products = () => {
             sortBy:+router.query.sortBy || 1
 
         }).then(res => {
-            console.log(res.data)
+            // console.log(res.data)
             setProducts(res.data.products)
             // setTitle(res.data.title)
             setPageInformation(res.data)

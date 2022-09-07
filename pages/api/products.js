@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     if (req.method === "POST" || req.method === "GET") {
 
 
-        console.log(req.body)
+        // console.log(req.body)
         // console.log(req.query)
 
 
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
                 products = await Product.find({title: regexp}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // latest products
-                console.log(productsCount)
+                // console.log(productsCount)
                 products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             res.send({
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
 
 
         } else if (!req.body.search) {
-            console.log(req.body)
+            // console.log(req.body)
             // const title = `پرفروش`
             const productsCount = await Product.countDocuments().exec()
             let products;
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
                 products = await Product.find().sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // latest products
-                console.log(productsCount)
+                // console.log(productsCount)
                 products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
 

@@ -8,9 +8,9 @@ export default async function handler(req, res) {
     // console.log(userId)
     // console.log(productId)
     const user = await User.findById(userId).exec()
-    console.log(user)
-    // user.favoriteList.push(productId)
-    // await user.save()
+    // console.log(user)
+    user.favoriteList.push(productId)
+    await user.save()
 
     res.send({
         user:{

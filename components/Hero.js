@@ -1,27 +1,29 @@
-import {Box, Button, Grid, Skeleton, Typography} from "@mui/material";
+import {Box, Button, Grid, Typography} from "@mui/material";
 import Image from "next/image";
+import Link from "next/link"
 
 const styles = {
-    heroImageBox:{
+    heroImageBox: {
         width: 1,
         height: 1,
-        position:"relative"
+        position: "relative"
 
     },
-    heroButton:{
-        fontSize:"1.8rem",
+    heroButton: {
+        fontSize: "1.8rem",
         // borderRadius:"5rem",
     }
 }
 
 const Hero = () => {
 
-    return(
+    return (
 
         <Grid container item xs={12} direction={"row"} justifyContent={"center"} component={"section"} mb={70}>
-            <Grid container item direction={"column"} xs={4} bgcolor={"#069f69"}  py={100} px={50} gap={"4rem"}>
+            <Grid container item direction={"column"} xs={4} bgcolor={"#069f69"} py={100} px={50} gap={"4rem"}>
                 <Grid item>
-                    <Typography lineHeight={1.4} fontFamily={"dana-black"}  variant={"h1"} fontSize={"3.2rem"} color={"common.white"}>
+                    <Typography lineHeight={1.4} fontFamily={"dana-black"} variant={"h1"} fontSize={"3.2rem"}
+                                color={"common.white"}>
                         خانه رویایی خود را به واقعیت تبدیل کنید
                     </Typography>
                 </Grid>
@@ -32,12 +34,14 @@ const Hero = () => {
                     </Typography>
                 </Grid>
                 <Grid item>
-                    <Button variant={"outlined"} color={"white"} sx={styles.heroButton}>مشاهده محصولات</Button>
+                    <Link href={"/products"} passHref>
+                        <Button variant={"outlined"} color={"white"} sx={styles.heroButton}>مشاهده محصولات</Button>
+                    </Link>
                 </Grid>
             </Grid>
             <Grid item xs={8}>
                 <Box width={1} sx={styles.heroImageBox}>
-                    <Image src={"/assets/pictures/hero_img4.jpg"} alt={"hero_image_interior_design"} layout="fill"  />
+                    <Image src={"/assets/pictures/hero_img4.jpg"} alt={"hero_image_interior_design"} layout="fill"/>
                 </Box>
             </Grid>
         </Grid>

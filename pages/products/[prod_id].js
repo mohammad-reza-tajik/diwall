@@ -41,18 +41,19 @@ const ProductDetails = () => {
 
     useEffect(() => {
         setIsLoading(true)
+        // console.log(router.query)
         axios.post("/api/product-details", {
-            title: router.query.prod_title
+            productId: router.query.prod_id
         }).then(res => {
             //
-            setImageURL(res.data.productDetails[0].image_full)
-            setProduct(res.data.productDetails[0])
+            setImageURL(res.data.productDetails.image_full)
+            setProduct(res.data.productDetails)
             setRelatedProducts(res.data.relatedProducts)
             // console.log(res.data.productDetails[0])
             setIsLoading(false)
         }).catch(e => console.log(e))
 
-    }, [router.query.prod_title])
+    }, [router.query.prod_id])
 
     const presetSizesHandler = (e, presetSizes) => {
         if (presetSizes !== null)
@@ -63,8 +64,8 @@ const ProductDetails = () => {
         if (authCtx.isAuthenticated){
             // authCtx.addToCart(product._id)
             axios.put("/api/add-to-cart",{productId : product._id , userId: authCtx.user.userId , token: authCtx.user.token}).then(res => {
-                console.log("added successfully")
-                console.log(res)
+                // console.log("added successfully")
+                // console.log(res)
                     authCtx.login(res.data.user)
 
                 }
