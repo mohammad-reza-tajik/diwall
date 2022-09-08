@@ -2,7 +2,7 @@ import {Box, Grid, IconButton, Typography} from "@mui/material";
 import Image from "next/image"
 import {Favorite, HeartBroken, ShoppingBagOutlined} from "@mui/icons-material";
 import {useRouter} from "next/router";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import loadingContext from "../store/loading-context";
 import axios from "axios";
 import authContext from "../store/auth-context";
@@ -30,12 +30,22 @@ const styles = {
 
 const Product = (props) => {
     const router = useRouter()
+    // console.log(props)
     const authCtx = useContext(authContext)
     const [heartIsVisible,setHeartIsVisible] = useState(false)
     const isFavorite = authCtx.user?.favoriteList.includes(props._id)
+    const [image,setImage] = useState("/assets/pictures/product_placeholder.png")
 
     // const [isFavorite,setIsFavorite] = useState(false)
     // const {isLoading ,setIsLoading} = useContext(loadingContext)
+
+
+    // if image is not loaded use the placeholder
+    useEffect(()=>{
+        if(props.image){
+            setImage(props.image)
+        }
+    },[props.image])
 
 
     const clickHandler = async () => {
@@ -106,7 +116,7 @@ const Product = (props) => {
                     </IconButton>
                 </Grid>
 
-                <Image src={props.image}  onClick={clickHandler} alt={"product"} width={400} height={400} className={"pointer"}/>
+                <Image src={image} onClick={clickHandler} alt={"product"} width={400} height={400} className={"pointer"}/>
             </Grid>
             <Grid container item height={50} alignItems={"center"}>
                 <Grid item xs onClick={clickHandler}>

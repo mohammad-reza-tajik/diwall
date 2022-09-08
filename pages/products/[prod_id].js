@@ -33,7 +33,7 @@ const ProductDetails = () => {
     const [product, setProduct] = useState({})
     const [relatedProducts, setRelatedProducts] = useState([])
     const [presetSizes, setPresetSizes] = useState("1")
-    const [imageURL, setImageURL] = useState("/assets/images/product_placeholder.png")
+    const [imageURL, setImageURL] = useState("/assets/pictures/product_placeholder.png")
 
     const {isLoading, setIsLoading} = useContext(loadingContext)
     // const isInCart = authCtx.user?.cart.includes(product._id)

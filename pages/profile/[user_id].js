@@ -1,9 +1,13 @@
 import {useRouter} from "next/router";
 import {Box, Button, Grid, Tab, Tabs, TextField, ToggleButton, ToggleButtonGroup, Typography} from "@mui/material";
 import TabPanel from '@mui/lab/TabPanel';
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {TabContext, TabList} from "@mui/lab";
 import authContext from "../../store/auth-context";
+import SectionHeading from "../../components/SectionHeading";
+import Product from "../../components/Product";
+import Products from "../products";
+import axios from "axios";
 
 const styles = {
     tab : {
@@ -19,12 +23,26 @@ const styles = {
 const Profile = () => {
     const router = useRouter()
     const authCtx = useContext(authContext)
+    const [isLoading,setIsLoading] = useState(false)
+    const [favoriteList,setFavoriteList] = useState([])
 
     const [tab, setTab] =useState("1");
 
     const tabChangeHandler = ( _ , newTab) => {
         setTab(newTab);
     };
+
+   useEffect(()=>{
+
+        axios.post("/api/get-favorite-list",{userId:authCtx.user?.userId,token:authCtx.user?.token}).then(res => {
+            // console.log(res)
+            // authCtx.login(res.data.user)
+            setFavoriteList(res.data.user.favoriteList)
+
+            })
+   }
+        ,[])
+
 
     // const [tab, setTab] = useState(1);
     //
@@ -46,9 +64,9 @@ const Profile = () => {
                         </Tabs>
 
             </Grid>
-                    <Grid container item xs={10} p={40} borderRight={"1px solid #069f69"} borderTop={"1px solid #069f69"}>
+                    <Grid container item xs={10} >
                     <TabPanel value="1" sx={{width:1}}>
-                        <Grid container item xs={12} direction={"column"} gap={40}>
+                        <Grid container item xs={12} p={40} direction={"column"} gap={40} borderRight={"1px solid #069f69"} borderTop={"1px solid #069f69"}>
                             <Grid container item xs={3} alignItems={"center"} gap={10}>
                                 <Box component={"span"} sx={{fontSize: 20}}>نام و نام خانوادگی  : </Box>
                                 <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={16}>
@@ -98,7 +116,17 @@ const Profile = () => {
                             </Grid>
                         </Grid>
                     </TabPanel>
-                    <TabPanel value="2" sx={{width:1}}>Item Two</TabPanel>
+                    <TabPanel value="2" sx={{width:1}}>
+                        <Grid container item xs={12} p={10} spacing={20}>
+                            <SectionHeading text={"لیست کالاهای مورد علاقه شما"} />
+
+                            {favoriteList.map(item =>
+                                <Grid item xs={4} key={item._id}>
+                                <Product  {...item} />
+                                </Grid>
+                            )}
+                        </Grid>
+                    </TabPanel>
                     <TabPanel value="3" sx={{width:1}} >Item Three</TabPanel>
                     </Grid>
 
