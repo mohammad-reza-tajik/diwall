@@ -25,7 +25,8 @@ const Products = () => {
         axios.post("/api/products",{
             search:router.query.search,
             page:+router.query.page || 1,
-            sortBy:+router.query.sortBy || 1
+            sortBy:+router.query.sortBy || 1,
+            category:router.query.category
 
         }).then(res => {
             // console.log(res.data)
@@ -45,18 +46,33 @@ const Products = () => {
     return(
         <Grid container item xs={12} direction={"column"}>
             <Grid item xs>
-                {router.query.search &&
+                {router.query.search && !router.query.category &&
                 <SectionHeading text={`محصولات مرتبط با "${router.query.search}"`}  sortBy={true}/>
                 }
-                {!router.query.search && +router.query.sortBy ===2  &&
+                {!router.query.search && +router.query.sortBy ===2  && !router.query.category &&
                     <SectionHeading text={"پرفروش ترین محصولات"} sortBy={true} />
                 }
-                {!router.query.search && +router.query.sortBy ===3  &&
+                {!router.query.search && +router.query.sortBy ===3  && !router.query.category &&
                     <SectionHeading text={"محبوب ترین محصولات"} sortBy={true} />
                 }
-                {!router.query.search && (+router.query.sortBy === 1 || !router.query.sortBy) &&
+                {!router.query.search && (+router.query.sortBy === 1 || !router.query.sortBy) && !router.query.category &&
                     <SectionHeading text={"جدید ترین محصولات"} sortBy={true} />
                 }
+                {!router.query.search && router.query.category && router.query.category === "kitchen_poster" &&
+                    <SectionHeading text={"پوستر برای آشپزخانه"} sortBy={true} />
+                }
+                {!router.query.search && router.query.category && router.query.category === "child_room_poster" &&
+                    <SectionHeading text={"پوستر برای اتاق کودک"} sortBy={true} />
+                }
+                {!router.query.search && router.query.category && router.query.category === "living_room_poster" &&
+                    <SectionHeading text={"پوستر برای حال و پذیرایی"} sortBy={true} />
+                }
+                {!router.query.search && router.query.category && router.query.category === "office_poster" &&
+                    <SectionHeading text={"پوستر برای اداره و محل کار"} sortBy={true} />
+                }
+                {/*{!router.query.search && router.query.category && router.query.category === "_room_poster" &&*/}
+                {/*    <SectionHeading text={"پوستر برای اتاق کودک"} sortBy={true} />*/}
+                {/*}*/}
             </Grid>
             <Grid container item xs spacing={25}>
                 {isLoading ? <CircularProgress  color={"primary"} size={45}/> :
