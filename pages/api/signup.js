@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         return
 
     const {username, email, password} = req.body
-    console.log(req.body)
+    // console.log(req.body)
     //*** check if the user already exists ***//
     const username_regexp = new RegExp(`^${username}$`, "i")
     const email_regexp = new RegExp(`^${email}$`, "i")

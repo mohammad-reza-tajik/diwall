@@ -46,7 +46,7 @@ const Products = () => {
         <Grid container item xs={12} direction={"column"}>
             <Grid item xs>
                 {router.query.search &&
-                <SectionHeading text={`محصولات مرتبط با جستجو "${router.query.search}"`}  sortBy={true}/>
+                <SectionHeading text={`محصولات مرتبط با "${router.query.search}"`}  sortBy={true}/>
                 }
                 {!router.query.search && +router.query.sortBy ===2  &&
                     <SectionHeading text={"پرفروش ترین محصولات"} sortBy={true} />

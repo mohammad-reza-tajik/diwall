@@ -8,9 +8,12 @@ export default async function handler (req,res) {
 
         const userId = req.body.userId
         const token = req.body.token
-
+        console.log(userId)
         const user = await User.findById(userId).populate("favoriteList").exec()
         console.log(user)
+        if (user){
+
+        }
 
         res.send({
             user: {

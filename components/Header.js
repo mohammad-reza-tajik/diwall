@@ -154,6 +154,24 @@ const Header = () => {
 
     }
 
+    const goToFavorites = async (e) => {
+        if (authCtx.isAuthenticated) {
+            await router.push({pathname: `/profile/${authCtx.user?.userId}`, query: {tab: 2}})
+
+        } else
+            await router.push("/sign-in")
+    }
+
+
+    const goToCart = async (e) => {
+        if (authCtx.isAuthenticated) {
+            await router.push({pathname: `/profile/${authCtx.user?.userId}`, query: {tab: 3}})
+
+        } else
+            await router.push("/sign-in")
+
+    }
+
 
     const submitSearchHandler = async (e) => {
         e.preventDefault()
@@ -194,7 +212,7 @@ const Header = () => {
 
     }
     const authCtx = useContext(authContext)
-    console.log(authCtx)
+    // console.log(authCtx)
     const closeButton = <InputAdornment position="end">
         <IconButton onClick={clearSearchHandler}>
             <Close sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}/>
@@ -272,9 +290,11 @@ const Header = () => {
                 </Grid>
                 <Grid container item xs={2} justifyContent={"flex-end"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
-                        <Badge  showZero max={99} badgeContent={authCtx.user?.favoriteList.length || 0} color="primary" overlap="circular" sx={{ "& .MuiBadge-badge": { fontSize: 16, height: 30, minWidth: 30,borderRadius:30 } }}
+                        <Badge showZero max={99} badgeContent={authCtx.user?.favoriteList.length || 0} color="primary"
+                               overlap="circular"
+                               sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}
                         >
-                            <IconButton color={"primary"} onClick={()=> authCtx.isAuthenticated ?  router.push({ pathname:"/profile/"+ (authCtx.user?.userId) , query:{tab:2} }): router.push("/sign-in")}>
+                            <IconButton color={"primary"} onClick={goToFavorites}>
                                 <FavoriteBorder sx={{
                                     fontSize: {xs: 40, sm: 50},
                                     border: "2px solid #11AE77",
@@ -285,8 +305,10 @@ const Header = () => {
                         </Badge>
                     </Tooltip>
                     <Tooltip title={"سبد خرید شما"} arrow enterDelay={1000}>
-                        <Badge showZero max={99} badgeContent={authCtx.user?.cart.length || 0} color="primary" overlap="circular" sx={{ "& .MuiBadge-badge": { fontSize: 16, height: 30, minWidth: 30,borderRadius:30 } }}>
-                            <IconButton color={"primary"} onClick={()=>authCtx.isAuthenticated ?  router.push({ pathname:"/profile/"+ (authCtx.user?.userId) , query:{tab:3} }): router.push("/sign-in") }>
+                        <Badge showZero max={99} badgeContent={authCtx.user?.cart.length || 0} color="primary"
+                               overlap="circular"
+                               sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}>
+                            <IconButton color={"primary"} onClick={goToCart}>
                                 <ShoppingBagOutlined sx={{
                                     fontSize: {xs: 40, sm: 50},
                                     border: "2px solid #11AE77",

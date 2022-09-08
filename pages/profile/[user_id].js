@@ -1,20 +1,19 @@
 import {useRouter} from "next/router";
-import {Box, Button, Grid, Tab, Tabs, TextField, ToggleButton, ToggleButtonGroup, Typography} from "@mui/material";
+import {Box, Button, Grid, Tab, Tabs, Typography} from "@mui/material";
 import TabPanel from '@mui/lab/TabPanel';
 import {useContext, useEffect, useState} from "react";
-import {TabContext, TabList} from "@mui/lab";
+import {TabContext} from "@mui/lab";
 import authContext from "../../store/auth-context";
 import SectionHeading from "../../components/SectionHeading";
 import Product from "../../components/Product";
-import Products from "../products";
 import axios from "axios";
 
 const styles = {
-    tab : {
-        fontSize:16,
-        color:"#333",
-        fontFamily:"dana-demibold",
-        my:10,
+    tab: {
+        fontSize: 16,
+        color: "#333",
+        fontFamily: "dana-demibold",
+        my: 10,
         // bgcolor:"primary"
     }
 }
@@ -23,25 +22,46 @@ const styles = {
 const Profile = () => {
     const router = useRouter()
     const authCtx = useContext(authContext)
-    const [isLoading,setIsLoading] = useState(false)
-    const [favoriteList,setFavoriteList] = useState([])
+    // console.log(router)
+    // const [isLoading,setIsLoading] = useState(false)
+    const [favoriteList, setFavoriteList] = useState([])
 
-    const [tab, setTab] =useState("1");
+    const [tab, setTab] = useState("1");
 
-    const tabChangeHandler = ( _ , newTab) => {
+
+    const tabChangeHandler = (_, newTab) => {
         setTab(newTab);
+        router.push({pathname: router.pathname, query: {...router.query, tab: newTab}})
     };
 
-   useEffect(()=>{
+    const queryTab = router.query.tab
 
-        axios.post("/api/get-favorite-list",{userId:authCtx.user?.userId,token:authCtx.user?.token}).then(res => {
-            // console.log(res)
-            // authCtx.login(res.data.user)
-            setFavoriteList(res.data.user.favoriteList)
+    useEffect(() => {
+        if (router.query.tab) {
+            setTab(router.query.tab.toString())
 
-            })
-   }
-        ,[])
+        } else router.isReady && router.push({pathname: router.pathname, query: {...router.query, tab: 1}})
+
+    }, [queryTab])
+
+    const currentUserFavoriteList = authCtx.user.favoriteList
+
+    useEffect(() => {
+
+            if (authCtx.isAuthenticated) {
+
+                axios.post("/api/get-favorite-list", {
+                    userId: authCtx.user?.userId,
+                    token: authCtx.user?.token
+                }).then(res => {
+                    // console.log(res)
+                    // authCtx.login(res.data.user)
+                    setFavoriteList(res.data.user.favoriteList)
+
+                })
+            }
+        }
+        , [currentUserFavoriteList])
 
 
     // const [tab, setTab] = useState(1);
@@ -54,56 +74,56 @@ const Profile = () => {
     return (
 
         <Grid container item xs={12} minHeight={400}>
-                <TabContext value={tab}>
-            <Grid container item xs={2}>
+            <TabContext value={tab}>
+                <Grid container item xs={2} borderLeft={"5px solid #069f69"}>
 
-                        <Tabs onChange={tabChangeHandler} value={tab} orientation={"vertical"}>
-                            <Tab label="اطلاعات کاربر" value="1"  sx={styles.tab} />
-                            <Tab label="لیست علاقمندی ها" value="2"  sx={styles.tab} />
-                            <Tab label="سبد خرید" value="3"  sx={styles.tab} />
-                        </Tabs>
+                    <Tabs onChange={tabChangeHandler} value={tab} orientation={"vertical"}>
+                        <Tab label="اطلاعات کاربر" value="1" sx={styles.tab}/>
+                        <Tab label="لیست علاقمندی ها" value="2" sx={styles.tab}/>
+                        <Tab label="سبد خرید" value="3" sx={styles.tab}/>
+                    </Tabs>
 
-            </Grid>
-                    <Grid container item xs={10} >
-                    <TabPanel value="1" sx={{width:1}}>
-                        <Grid container item xs={12} p={40} direction={"column"} gap={40} borderRight={"1px solid #069f69"} borderTop={"1px solid #069f69"}>
+                </Grid>
+                <Grid container item xs={10}>
+                    <TabPanel value="1" sx={{width: 1}}>
+                        <Grid container item xs={12} py={20} px={40} direction={"column"} gap={40}>
                             <Grid container item xs={3} alignItems={"center"} gap={10}>
-                                <Box component={"span"} sx={{fontSize: 20}}>نام و نام خانوادگی  : </Box>
+                                <Box component={"span"} sx={{fontSize: 20}}>نام و نام خانوادگی : </Box>
                                 <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={16}>
                                     مشخص نشده !
                                 </Typography>
-                                <Button variant={"outlined"} sx={{fontSize:16}}>تغییر</Button>
+                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
 
                             </Grid>
-                                <Grid container item xs={3} alignItems={"center"} gap={20}>
-                                    <Box component={"span"} sx={{fontSize: 20}}>نام کاربری : </Box>
-                                    <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={20}>
-                                        {authCtx.user?.username}
-                                    </Typography>
-                                    <Button variant={"outlined"} sx={{fontSize:16}}>تغییر</Button>
-                                </Grid>
-                                <Grid container item xs={3} alignItems={"center"} gap={20}>
-                                    <Box component={"span"} sx={{fontSize: 20}}>ایمیل : </Box>
-                                    <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={20}>
-                                        {authCtx.user?.email}
-                                    </Typography>
-                                    <Button variant={"outlined"} sx={{fontSize:16}}>تغییر</Button>
+                            <Grid container item xs={3} alignItems={"center"} gap={20}>
+                                <Box component={"span"} sx={{fontSize: 20}}>نام کاربری : </Box>
+                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={20}>
+                                    {authCtx.user?.username}
+                                </Typography>
+                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
+                            </Grid>
+                            <Grid container item xs={3} alignItems={"center"} gap={20}>
+                                <Box component={"span"} sx={{fontSize: 20}}>ایمیل : </Box>
+                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={20}>
+                                    {authCtx.user?.email}
+                                </Typography>
+                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
 
-                                </Grid>
-                                <Grid container item xs={3} alignItems={"center"} gap={10}>
-                                    <Box component={"span"} sx={{fontSize: 20}}>شماره موبایل : </Box>
-                                    <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={16}>
-                                        مشخص نشده !
-                                    </Typography>
-                                    <Button variant={"outlined"} sx={{fontSize:16}}>تغییر</Button>
+                            </Grid>
+                            <Grid container item xs={3} alignItems={"center"} gap={10}>
+                                <Box component={"span"} sx={{fontSize: 20}}>شماره موبایل : </Box>
+                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={16}>
+                                    مشخص نشده !
+                                </Typography>
+                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
 
-                                </Grid>
+                            </Grid>
                             <Grid container item xs={3} alignItems={"center"} gap={10}>
                                 <Box component={"span"} sx={{fontSize: 20}}> تاریخ تولد : </Box>
                                 <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={16}>
                                     مشخص نشده !
                                 </Typography>
-                                <Button variant={"outlined"} sx={{fontSize:16}}>تغییر</Button>
+                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
 
                             </Grid>
                             <Grid container item xs={3} alignItems={"center"} gap={10}>
@@ -111,24 +131,32 @@ const Profile = () => {
                                 <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={16}>
                                     مشخص نشده !
                                 </Typography>
-                                <Button variant={"outlined"} sx={{fontSize:16}}>تغییر</Button>
+                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
 
                             </Grid>
                         </Grid>
                     </TabPanel>
-                    <TabPanel value="2" sx={{width:1}}>
-                        <Grid container item xs={12} p={10} spacing={20}>
-                            <SectionHeading text={"لیست کالاهای مورد علاقه شما"} />
+                    <TabPanel value="2" sx={{width: 1}}>
+                        <Grid container item xs={12} py={20} px={40} spacing={20}>
+                            <SectionHeading text={"لیست کالاهای مورد علاقه شما"}/>
 
-                            {favoriteList.map(item =>
-                                <Grid item xs={4} key={item._id}>
-                                <Product  {...item} />
-                                </Grid>
-                            )}
+                            {!favoriteList || favoriteList?.length === 0 ?
+                                <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
+                                    <Typography fontSize={20} variant={"body1"} color={"#333"}
+                                                fontFamily={"dana-demibold"}>لیست علاقمندی های شما خالی است
+                                        !</Typography>
+                                </Grid> :
+
+                                favoriteList.map(item =>
+                                    <Grid item xs={4} key={item._id}>
+                                        <Product  {...item} />
+                                    </Grid>
+                                )
+                            }
                         </Grid>
                     </TabPanel>
-                    <TabPanel value="3" sx={{width:1}} >Item Three</TabPanel>
-                    </Grid>
+                    <TabPanel value="3" sx={{width: 1}}>Item Three</TabPanel>
+                </Grid>
 
                 {/*<ToggleButtonGroup
                     sx={{gap: 10}}
@@ -150,7 +178,7 @@ const Profile = () => {
                         salam
                     </ToggleButton>
                 </ToggleButtonGroup>*/}
-                </TabContext>
+            </TabContext>
 
 
         </Grid>

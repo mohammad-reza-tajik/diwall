@@ -11,6 +11,7 @@ import LoadingContext from "../store/loading-context";
 import {useEffect, useState} from "react"
 import {getStoredToken, removeToken, storeTokenAndUser} from "../middleware/tokenManager";
 import axios from "axios";
+import authContext from "../store/auth-context";
 
 
 function MyApp({Component, pageProps}) {
@@ -46,10 +47,11 @@ function MyApp({Component, pageProps}) {
             if (userId && userId !== "undefined") {
                 axios.post("/api/get-user", {userId, token}).then(res => {
 
-                        setUser(res.data.user)
-
-                    // console.log(res)
-                        setIsAuthenticated(true)
+                    setUser(res.data.user)
+                    storeTokenAndUser(res.data.user)
+                    setIsAuthenticated(true)
+                    setTimeout(removeToken, 3600000)
+                    console.log(res)
                     }
                 ).catch(e => console.log(e))
 

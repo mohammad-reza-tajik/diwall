@@ -118,7 +118,7 @@ const SignIn = () => {
     const usernameRef = useRef()
     const emailRef = useRef()
     const passwordRef = useRef()
-    const usernameOrEmail = useRef()
+    const usernameOrEmailRef = useRef()
 
     // //********************************** form fields touch states **********************************//
     //
@@ -223,15 +223,17 @@ const SignIn = () => {
         setError(false)
 
         const user = typeOfForm === "signup" ? {
-                username: usernameRef.current.value,
-                email: emailRef.current.value,
-                password: passwordRef.current.value
+                username: usernameRef.current?.value,
+                email: emailRef.current?.value,
+                password: passwordRef.current?.value
             } :
             {
-                usernameOrEmail: usernameRef.current.value,
-                password: passwordRef.current.value
+                usernameOrEmail: usernameOrEmailRef.current?.value,
+                password: passwordRef.current?.value
 
             }
+
+        // console.log(user)
 
 
         axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`, user).then(res => {
@@ -315,7 +317,7 @@ const SignIn = () => {
                     <TextField
                         // value={usernameOrEmailValue}
                         // onChange={usernameOrEmailChangeHandler}
-                        inputRef={usernameOrEmail}
+                        inputRef={usernameOrEmailRef}
 
                         InputProps={{
                             startAdornment: (
