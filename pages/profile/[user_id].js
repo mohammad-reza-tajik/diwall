@@ -1,20 +1,35 @@
 import {useRouter} from "next/router";
-import {Box, Button, Grid, Tab, Tabs, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    CircularProgress,
+    Grid,
+    List,
+    Tab,
+    Tabs,
+    Typography
+} from "@mui/material";
 import TabPanel from '@mui/lab/TabPanel';
 import {useContext, useEffect, useState} from "react";
 import {TabContext} from "@mui/lab";
 import authContext from "../../store/auth-context";
 import SectionHeading from "../../components/SectionHeading";
+import CartItem from "../../components/CartItem"
 import Product from "../../components/Product";
 import axios from "axios";
+import loadingContext from "../../store/loading-context";
+import Image from "next/image";
+import {AddCircleOutline, Delete, RemoveCircleOutline} from "@mui/icons-material";
 
 const styles = {
     tab: {
-        fontSize: 16,
-        color: "#333",
-        fontFamily: "dana-demibold",
-        my: 10,
-        // bgcolor:"primary"
+        fontSize: 16, color: "#333", fontFamily: "dana-demibold", my: 10, // bgcolor:"primary"
+    },
+        list: {
+        width: 1,
+        height: "auto",
+        // maxHeight:400,
+
     }
 }
 
@@ -24,7 +39,10 @@ const Profile = () => {
     const authCtx = useContext(authContext)
     // console.log(router)
     // const [isLoading,setIsLoading] = useState(false)
+    const {isLoading, setIsLoading} = useContext(loadingContext)
+
     const [favoriteList, setFavoriteList] = useState([])
+    const [cart,setCart]=useState([])
 
     const [tab, setTab] = useState("1");
 
@@ -44,24 +62,33 @@ const Profile = () => {
 
     }, [queryTab])
 
-    const currentUserFavoriteList = authCtx.user.favoriteList
+    const currentUserFavoriteList = authCtx.user?.favoriteList
+    const currentUserCart = authCtx.user?.cart
 
     useEffect(() => {
 
-            if (authCtx.isAuthenticated) {
+        if (authCtx.isAuthenticated) {
+            setIsLoading(true)
 
-                axios.post("/api/get-favorite-list", {
-                    userId: authCtx.user?.userId,
-                    token: authCtx.user?.token
-                }).then(res => {
-                    // console.log(res)
-                    // authCtx.login(res.data.user)
-                    setFavoriteList(res.data.user.favoriteList)
 
-                })
-            }
+            axios.post("/api/get-favorite-list-and-cart", {
+                userId: authCtx.user?.userId, token: authCtx.user?.token
+            }).then(res => {
+                // console.log(res)
+                // authCtx.login(res.data.user)
+                setFavoriteList(res.data.user.favoriteList)
+                setCart(res.data.user.cart)
+                setIsLoading(false)
+
+            })
         }
-        , [currentUserFavoriteList])
+    }, [currentUserFavoriteList,currentUserCart])
+
+
+
+
+
+
 
 
     // const [tab, setTab] = useState(1);
@@ -140,22 +167,50 @@ const Profile = () => {
                         <Grid container item xs={12} py={20} px={40} spacing={20}>
                             <SectionHeading text={"لیست کالاهای مورد علاقه شما"}/>
 
-                            {!favoriteList || favoriteList?.length === 0 ?
+                            {isLoading ?
                                 <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
-                                    <Typography fontSize={20} variant={"body1"} color={"#333"}
-                                                fontFamily={"dana-demibold"}>لیست علاقمندی های شما خالی است
-                                        !</Typography>
-                                </Grid> :
 
-                                favoriteList.map(item =>
-                                    <Grid item xs={4} key={item._id}>
+                                    <CircularProgress color={"primary"} size={45}/>
+                                </Grid> : !favoriteList || favoriteList?.length === 0 ?
+                                    <Grid container item xs minHeight={300} justifyContent={"center"}
+                                          alignItems={"center"}>
+                                        <Typography fontSize={20} variant={"body1"} color={"#333"}
+                                                    fontFamily={"dana-demibold"}>لیست علاقمندی های شما خالی است
+                                            !</Typography>
+                                    </Grid> :
+
+                                    favoriteList.map(item => <Grid item xs={4} key={item._id}>
                                         <Product  {...item} />
-                                    </Grid>
-                                )
-                            }
+                                    </Grid>)}
                         </Grid>
                     </TabPanel>
-                    <TabPanel value="3" sx={{width: 1}}>Item Three</TabPanel>
+                    <TabPanel value="3" sx={{width: 1}}>
+                        <Grid container item xs={12} py={20} px={40} spacing={20}>
+                            <SectionHeading text={"سبد خرید شما"}/>
+
+                            {isLoading ?
+                            <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
+
+                                <CircularProgress color={"primary"} size={45}/>
+                            </Grid> :
+                            <List sx={styles.list}>
+                                {cart.length === 0 &&
+                                    <Grid container item xs minHeight={300} justifyContent={"center"}
+                                          alignItems={"center"}>
+                                        <Typography fontSize={20} variant={"body1"} color={"#333"}
+                                                    fontFamily={"dana-demibold"}>سبد خرید شما خالی است ! </Typography>
+                                    </Grid>}
+                                {cart.length !== 0 && cart.map((item) => {
+                                    return (
+                                        <CartItem key={item._id} {...item} />
+
+                                    )
+                                })}
+
+                            </List>
+                        }
+                        </Grid>
+                    </TabPanel>
                 </Grid>
 
                 {/*<ToggleButtonGroup
@@ -181,8 +236,7 @@ const Profile = () => {
             </TabContext>
 
 
-        </Grid>
-    )
+        </Grid>)
 }
 
 export default Profile

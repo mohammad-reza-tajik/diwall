@@ -59,7 +59,7 @@ export default async function handler(req, res) {
 
         } else if (!req.body.search && !category) {
             // console.log(req.body)
-            console.log("second one is trigggred")
+            // console.log("second one is trigggred")
             // const title = `پرفروش`
             const productsCount = await Product.countDocuments().exec()
             let products;
@@ -90,7 +90,7 @@ export default async function handler(req, res) {
         else if (category) {
             // console.log(req.body)
             // const title = `پرفروش`
-            console.log("category is defined")
+            // console.log("category is defined")
             const productsCount = await Product.countDocuments({category:{$in:[category]}}).exec()
             let products;
 

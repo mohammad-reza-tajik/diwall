@@ -1,4 +1,4 @@
-import {Box, Grid, IconButton, Typography} from "@mui/material";
+import {Box, CircularProgress, Grid, IconButton, Typography} from "@mui/material";
 import Image from "next/image"
 import {Favorite, HeartBroken, ShoppingBagOutlined} from "@mui/icons-material";
 import {useRouter} from "next/router";
@@ -33,6 +33,7 @@ const Product = (props) => {
     // console.log(props)
     const authCtx = useContext(authContext)
     const [heartIsVisible,setHeartIsVisible] = useState(false)
+    const [isLoading,setIsLoading] = useState(false)
     const isFavorite = authCtx.user?.favoriteList.includes(props._id)
     const [image,setImage] = useState("/assets/pictures/product_placeholder.png")
 
@@ -58,26 +59,9 @@ const Product = (props) => {
 
     }
 
-    /*const addToCartHandler = () => {
-        if (authCtx.isAuthenticated){
-            // authCtx.addToCart(props._id)
-            axios.put("/api/add-to-cart",{productId : props._id , userId: authCtx.user.userId, token: authCtx.user.token}).then(res => {
-                    console.log("added successfully")
-                authCtx.login(res.data.user)
-                    // console.log(res)
-                }
-
-            ).catch(e => console.log(e))
-        }
-        else
-            router.push("/sign-in")
-
-        // console.log(authCtx.user.cart)
-
-
-    }*/
     const addToFavorites = () => {
         if (authCtx.isAuthenticated){
+            setIsLoading(true)
             if (isFavorite){
                 // console.log(authCtx.user)
                 authCtx.login({...authCtx.user , favoriteList:authCtx.user.favoriteList.filter((element)=> element != props._id)})
@@ -90,6 +74,7 @@ const Product = (props) => {
                 // setIsFavorite(true)
                     authCtx.login(res.data.user)
                     // console.log(res)
+                setIsLoading(false)
                 }
 
             ).catch(e => console.log(e))
@@ -110,7 +95,7 @@ const Product = (props) => {
                    cursor={"pointer"}>
                 <Grid item sx={{...styles.addToFavoritesButton ,opacity:heartIsVisible ? 1 : 0  }}>
                     <IconButton onClick={addToFavorites}>
-                        {isFavorite ? <Favorite sx={{fontSize:50,borderRadius:20,p:8,bgcolor:"rgba(50,50,50,0.3)",color:"primary.main"}} /> :
+                        {isLoading? <CircularProgress sx={{fontSize:50,borderRadius:20,p:8,bgcolor:"rgba(50,50,50,0.3)",color:"primary.main"}}/> : isFavorite ? <Favorite sx={{fontSize:50,borderRadius:20,p:8,bgcolor:"rgba(50,50,50,0.3)",color:"primary.main"}} /> :
                         <Favorite sx={{fontSize:50,borderRadius:20,p:8,bgcolor:"rgba(50,50,50,0.3)",color:"#fff"}} />
                         }
                     </IconButton>

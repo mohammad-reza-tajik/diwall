@@ -1,5 +1,15 @@
 import {useRouter} from "next/router";
-import {Box, Button, Grid, Skeleton, TextField, ToggleButton, ToggleButtonGroup, Typography} from "@mui/material";
+import {
+    Box,
+    Button,
+    CircularProgress,
+    Grid,
+    Skeleton,
+    TextField,
+    ToggleButton,
+    ToggleButtonGroup,
+    Typography
+} from "@mui/material";
 import Image from "next/image"
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
@@ -24,7 +34,8 @@ const styles = {
         color: "white",
         "&> *": {
             color: "white"
-        }
+        },
+
     }
 }
 
@@ -32,6 +43,8 @@ const ProductDetails = () => {
 
     const [product, setProduct] = useState({})
     const [relatedProducts, setRelatedProducts] = useState([])
+    const [addToCartLoading, setAddToCartLoading] = useState(false)
+    const [isInCart, setIsInCart] = useState(false)
     const [presetSizes, setPresetSizes] = useState("1")
     const [imageURL, setImageURL] = useState("/assets/pictures/product_placeholder.png")
 
@@ -63,18 +76,40 @@ const ProductDetails = () => {
     }
 
     const addToCartHandler = () => {
-        if (authCtx.isAuthenticated){
-            // authCtx.addToCart(product._id)
-            axios.put("/api/add-to-cart",{productId : product._id , userId: authCtx.user.userId , token: authCtx.user.token}).then(res => {
-                // console.log("added successfully")
-                // console.log(res)
+        if (authCtx.isAuthenticated) {
+            setAddToCartLoading(true)
+
+            if (isInCart) {
+                axios.put("/api/remove-from-cart", {
+                    userId: authCtx.user?.userId, token: authCtx.user?.token, productId: product._id
+                }).then(res => {
+                    console.log(res)
                     authCtx.login(res.data.user)
+                    setAddToCartLoading(false)
+                    setIsInCart(false)
+                    // setCart(res.data.user.cart)
 
-                }
+                })
 
-            ).catch(e => console.log(e))
-        }
-        else
+            } else {
+
+                // authCtx.addToCart(product._id)
+                axios.put("/api/add-to-cart", {
+                    productId: product._id,
+                    userId: authCtx.user.userId,
+                    token: authCtx.user.token
+                }).then(res => {
+                        // console.log("added successfully")
+                        // console.log(res)
+                        authCtx.login(res.data.user)
+                        setIsInCart(true)
+                        setAddToCartLoading(false)
+
+
+                    }
+                ).catch(e => console.log(e))
+            }
+        } else
             router.push("/sign-in")
 
         // console.log(authCtx.user.cart)
@@ -173,18 +208,22 @@ const ProductDetails = () => {
                                 <Box component={"span"} sx={{fontSize: 16}}>عرض : </Box>
                                 <TextField sx={{width: 100}}/>
                             </Grid>
+
+
                             <Grid xs={6} container item justifyContent={"flex-end"} alignItems={"center"}>
                                 <Button
                                     onClick={addToCartHandler}
                                     variant={"contained"}
-                                    color={"primary"}
-                                    startIcon={<ShoppingBagOutlined sx={{fontSize: 15, ml: 5,}}/>
+                                    color={isInCart ? "error" : "primary"}
+                                    startIcon={addToCartLoading ? <CircularProgress color={"white"} size={25}/> :
+                                        <ShoppingBagOutlined sx={{fontSize: 15, ml: 5,}}/>
                                     }
                                     sx={styles.addToCartButton}
                                 >
-                                    افزودن به سبد خرید
+                                    {isInCart ? "حذف از سبد خرید" : "افزودن به سبد خرید"}
                                 </Button>
                             </Grid>
+
                         </Grid>
                     </Grid>
 

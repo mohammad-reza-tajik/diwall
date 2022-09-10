@@ -24,13 +24,13 @@ const Home = () => {
             <Hero/>
             <Features cols={12}/>
             <Places/>
-            {/*<MostPopularProducts route={"/products?sortBy=3"}/>*/}
-            {/*<SectionHeading text={"محصولات جدید"} seeAll={true} route={"/products"}/>*/}
-            {/*<LatestProducts/>*/}
-            {/*<MiddleSection/>*/}
-            {/*<SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"/products?sortBy=2"}/>*/}
-            {/*<BestSellingProducts/>*/}
-            {/*<SeenOn/>*/}
+            <MostPopularProducts route={"/products?sortBy=3"}/>
+            <SectionHeading text={"محصولات جدید"} seeAll={true} route={"/products"}/>
+            <LatestProducts/>
+            <MiddleSection/>
+            <SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"/products?sortBy=2"}/>
+            <BestSellingProducts/>
+            <SeenOn/>
         </Grid>
     )
 }

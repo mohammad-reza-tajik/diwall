@@ -28,10 +28,6 @@ const Places = () => {
                 </Typography>
             </Grid>
             <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"}>
-                <Grid container item direction={"column"} xs={2} alignItems={"center"} gap={20} sx={styles.place} onClick={()=>{router.push("/products?category=living_room_poster")}}>
-                    <Image src={"/assets/icons/bed.svg"} width={70} height={70}/>
-                    <Typography variant={"h5"} fontFamily={"dana-demibold"}>اتاق خواب</Typography>
-                </Grid>
                 <Grid container item direction={"column"} xs={2} alignItems={"center"} gap={20} sx={styles.place} onClick={()=>{router.push("/products?category=child_room_poster")}}>
                     <Image src={"/assets/icons/child_room.svg"} width={70} height={70}/>
                     <Typography variant={"h5"} fontFamily={"dana-demibold"}>اتاق کودک</Typography>
@@ -43,6 +39,10 @@ const Places = () => {
                 <Grid container item direction={"column"} xs={2} alignItems={"center"} gap={20} sx={styles.place} onClick={()=>{router.push("/products?category=kitchen_poster")}}>
                     <Image src={"/assets/icons/kitchen.svg"} width={70} height={70}/>
                     <Typography variant={"h5"} fontFamily={"dana-demibold"}>آشپزخانه</Typography>
+                </Grid>
+                <Grid container item direction={"column"} xs={2} alignItems={"center"} gap={20} sx={styles.place} onClick={()=>{router.push("/products?category=living_room_poster")}}>
+                    <Image src={"/assets/icons/bed.svg"} width={70} height={70}/>
+                    <Typography variant={"h5"} fontFamily={"dana-demibold"}>اتاق خواب</Typography>
                 </Grid>
                 {/*<Grid container item direction={"column"} xs={2} alignItems={"center"} gap={20} sx={styles.place}>
                     <Image src={"/assets/icons/office.svg"} width={70} height={70}/>

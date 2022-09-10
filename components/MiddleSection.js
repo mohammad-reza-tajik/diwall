@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const styles = {
     pictures:{
-        cursor:"pointer",
+        // cursor:"pointer",
         borderRadius:5,
         overflow:"hidden"
 
