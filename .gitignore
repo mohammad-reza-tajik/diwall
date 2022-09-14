@@ -13,7 +13,7 @@
 /out/
 
 #assets
-/public
+#/public
 # production
 /build
 Artboard 1.png
