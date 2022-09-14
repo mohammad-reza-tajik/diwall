@@ -1,4 +1,4 @@
-import {Button, Grid, Typography} from "@mui/material";
+import {Button, Grid, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper';
 
@@ -21,6 +21,11 @@ const MostPopularProducts = (props) => {
 
     const {isLoading ,setIsLoading} = useContext(loadingContext)
     const [mostPopularProducts, setMostPopularProducts] = useState([])
+
+    const theme = useTheme()
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
     useEffect(() => {
         setIsLoading(true)
@@ -60,7 +65,7 @@ const MostPopularProducts = (props) => {
                 {!isLoading &&
                     <Grid container item xs={9}>
                         <Swiper spaceBetween={20}
-                                slidesPerView={3}
+                                slidesPerView={matchesSM ? 2 : 3}
                                 modules={[Navigation, A11y]}
                                 navigation
 

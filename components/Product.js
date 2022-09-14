@@ -1,4 +1,4 @@
-import {Box, CircularProgress, Grid, IconButton, Typography} from "@mui/material";
+import {Box, CircularProgress, Grid, IconButton, Typography, useMediaQuery, useTheme} from "@mui/material";
 import Image from "next/image"
 import {Favorite, HeartBroken, ShoppingBagOutlined} from "@mui/icons-material";
 import {useRouter} from "next/router";
@@ -11,7 +11,7 @@ import authContext from "../store/auth-context";
 
 const styles = {
     product: {
-        boxShadow: "-3px 3px 5px rgba(20,20,20,.2) , 3px -3px 5px rgba(20,20,20,.2) ",
+        boxShadow: "2px 2px 2px rgba(20,20,20,.2) ",
         borderRadius: 2,
         p:10,
         bgcolor:"#fff"
@@ -40,6 +40,12 @@ const Product = (props) => {
     // const [isFavorite,setIsFavorite] = useState(false)
     // const {isLoading ,setIsLoading} = useContext(loadingContext)
 
+    const theme = useTheme()
+    const matchesMD = useMediaQuery(theme.breakpoints.up("md"))
+    const matchesSM = useMediaQuery(theme.breakpoints.up("sm"))
+    const matchesXS = useMediaQuery(theme.breakpoints.up("xs"))
+    const matchesLG = useMediaQuery(theme.breakpoints.up("lg"))
+
 
     // if image is not loaded use the placeholder
     useEffect(()=>{
@@ -65,9 +71,7 @@ const Product = (props) => {
             if (isFavorite){
                 // console.log(authCtx.user)
                 authCtx.login({...authCtx.user , favoriteList:authCtx.user.favoriteList.filter((element)=> element != props._id)})
-
             }
-
             // authCtx.addToCart(props._id)
             axios.put("/api/add-to-favorites",{productId : props._id , userId: authCtx.user.userId, token: authCtx.user.token}).then(res => {
                     // console.log("added successfully")
@@ -87,9 +91,9 @@ const Product = (props) => {
 
 
     return (
-        <Grid container item direction={"column"} sx={styles.product} xs={"auto"}>
+        <Grid container item direction={"column"} sx={styles.product} xs={12}>
 
-            <Grid item xs={11}  borderRadius={2} position={"relative"} overflow={"hidden"}
+            <Grid item xs={12}  borderRadius={2} position={"relative"} overflow={"hidden"}
                   onMouseEnter={()=> setHeartIsVisible(true)}
                   onMouseLeave={()=>setHeartIsVisible(false)}
                    cursor={"pointer"}>
@@ -105,12 +109,12 @@ const Product = (props) => {
             </Grid>
             <Grid container item height={50} alignItems={"center"}>
                 <Grid item xs onClick={clickHandler}>
-                    <Typography variant={"h4"} fontSize={16} fontFamily={"dana-demibold"} className={"pointer"}>{props.title}</Typography>
+                    <Typography variant={"h4"} fontSize={{xs:12,sm:20}} fontFamily={"dana-demibold"} className={"pointer"}>{props.title}</Typography>
                 </Grid>
             </Grid>
             <Grid container item justifyContent={"center"} alignItems={"center"} height={50}>
                 <Grid item xs={12}>
-                    <Typography variant={"h4"} fontSize={16} fontFamily={"dana-demibold"} color={"#069f69"}>
+                    <Typography variant={"h4"} fontFamily={"dana-demibold"} color={"#069f69"} sx={{fontSize:{xs:12,md:16}}}>
                         {props.price}
                     </Typography>
                 </Grid>

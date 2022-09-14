@@ -1,4 +1,4 @@
-import {Button, Grid, MenuItem, Select, Typography} from "@mui/material";
+import {Button, Grid, MenuItem, Select, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {Circle,} from "@mui/icons-material";
 import Link from "next/link";
 import {useEffect, useState} from "react";
@@ -11,6 +11,9 @@ const styles = {
     seeAll: {
         fontSize: 16
 
+    },
+    title: {
+
     }
 }
 
@@ -18,6 +21,11 @@ const SectionHeading = (props) => {
 
     const [sortBy, setSortBy] = useState(1);
     const router = useRouter()
+
+    const theme = useTheme()
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
 
     useEffect(() => {
@@ -38,28 +46,28 @@ const SectionHeading = (props) => {
         // setAge(e.target.value)
         // console.log(age)
 
-        // I've encountered a major bug and that happens when you try to log sortBy right after setSortBy . the value of sort isn't updated.
+        // I've encountered a major bug and that happens when you try to console.log sortBy right after setSortBy . the value of sort isn't updated.
         await router.push({pathname: router.pathname, query: {...router.query, sortBy:e.target.value}})
     }
 
     return (
         <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"} my={30}>
-            <Grid container item xs={8} gap={10}>
+            <Grid container item xs={"auto"}  md={8} gap={10} alignItems={"center"}>
                 <Circle fontSize={"large"} color={"primary"}/>
-                <Typography fontFamily={"dana-black"} variant={"h4"} color={"#444"}>
+                <Typography fontFamily={"dana-black"} variant={"h4"} color={"#444"} sx={{fontSize: {xs:14,md:20}}} >
                     {props.text}
                 </Typography>
             </Grid>
-            {props.seeAll ? <Grid container item justifyContent={"flex-end"} xs={2}>
+            {props.seeAll ? <Grid container item justifyContent={"flex-end"} xs={"auto"} md={2}>
                 <Link href={props.route} passHref>
-                    <Button variant={"outlined"} sx={styles.seeAll} component={"a"}>مشاهده همه</Button>
+                    <Button variant={"outlined"} sx={{fontSize:{xs:12,md:16}}} component={"a"}>مشاهده همه</Button>
                 </Link>
             </Grid> : ""}
 
             {
-                props.sortBy ?
+                props.sortBy  ?
                     <Grid container item justifyContent={"flex-end"} xs={4}>
-                        <Grid container item justifyContent={"flex-end"} alignItems={"center"} xs={5}>
+                        <Grid container item justifyContent={"flex-end"} alignItems={"center"} xs={5} sx={{display:{xs:"none",sm:"block"}} }>
                             <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
                                 مرتب سازی بر اساس :
                             </Typography>

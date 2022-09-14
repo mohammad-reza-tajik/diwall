@@ -1,4 +1,4 @@
-import {Grid} from "@mui/material";
+import {Grid, useMediaQuery, useTheme} from "@mui/material";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper';
 
@@ -18,6 +18,12 @@ const styles = {}
 
 
 const BestSellingProducts = (props) => {
+
+    const theme = useTheme()
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+    const matchesXS = useMediaQuery(theme.breakpoints.up("xs"))
+    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
     const {isLoading ,setIsLoading} = useContext(loadingContext)
     const [bestSellingProducts, setBestSellingProducts] = useState([])
@@ -41,8 +47,8 @@ const BestSellingProducts = (props) => {
         <Grid container item xs alignItems={"center"}>
             {isLoading && <p>Loading...</p>}
             {!isLoading &&
-                <Swiper spaceBetween={20}
-                        slidesPerView={4}
+                <Swiper spaceBetween={ matchesSM ? 5 : 20}
+                        slidesPerView={matchesSM ? 2 : 4}
                         modules={[Navigation, A11y]}
                         navigation
 

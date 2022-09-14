@@ -10,6 +10,8 @@ export default async function handler(req, res) {
     const user = await User.findById(userId).exec()
     // console.log(user)
 
+    console.log("hello")
+
     // if product already exists , then it gets removed
     if (user.favoriteList.includes(productId)) {
         user.favoriteList = user.favoriteList.filter((element) => element != productId)

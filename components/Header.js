@@ -137,6 +137,8 @@ const Header = () => {
 
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+    const matchesXS = useMediaQuery(theme.breakpoints.up("xs"))
+    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
 
     //*** menu logic ***//
@@ -223,21 +225,22 @@ const Header = () => {
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={40}>
             <Grid container item direction={"row"} alignItems={"center"} xs={11}
                   justifySelf={"center"} pt={20}>
-                <Grid container item xs={1} minWidth={90} minHeight={90}>
+                <Grid container item xs={"auto"}>
                     <Link href={"/"}>
                         <a>
-                            <Image src={"/assets/pictures/logo3.png"} alt={"dival-logo"} width={90} height={90}/>
+                            <Image src={"/assets/pictures/logo3.png"} alt={"dival-logo"} width={matchesSM? 45 : 90} height={matchesSM? 45 : 90}/>
                         </a>
                     </Link>
                 </Grid>
                 <Grid position={"relative"} container direction={"column"} item justifyContent={"center"}
-                      alignItems={"flex-start"} xs={7} pr={20} component={"form"} onSubmit={submitSearchHandler}>
+                      alignItems={"flex-start"} xs={matchesXS ? 7 : 9} pr={20} component={"form"} onSubmit={submitSearchHandler}>
                     <Grid item xs={12}>
                         <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom-end"}
                                  arrow>
 
                             <TextField
                                 error={isWrong}
+                                fullWidth
                                 placeholder={"جستجو ..."}
                                 value={search}
                                 onChange={searchChangeHandler}
@@ -257,38 +260,38 @@ const Header = () => {
                             />
                         </Tooltip>
                     </Grid>
+                </Grid>
 
                     {/******** handling search results *******/}
 
-                    {<Grid container item sx={{...styles.searchResultsContainer, display: searchResultsDisplay}}>
-                        {isLoading ? <CircularProgress color={"primary"} size={45}/> :
-                            <List sx={styles.list}>
-                                {searchResults.length === 0 &&
-                                    <ListItem>
-                                        <Typography variant={"h4"} fontSize={20} color={"#666"}>نتیجه ای پیدا
-                                            نشد!</Typography>
+                    {/*{<Grid container item sx={{...styles.searchResultsContainer, display: searchResultsDisplay}}>*/}
+                    {/*    {isLoading ? <CircularProgress color={"primary"} size={45}/> :*/}
+                    {/*        <List sx={styles.list}>*/}
+                    {/*            {searchResults.length === 0 &&*/}
+                    {/*                <ListItem>*/}
+                    {/*                    <Typography variant={"h4"} fontSize={20} color={"#666"}>نتیجه ای پیدا*/}
+                    {/*                        نشد!</Typography>*/}
 
-                                    </ListItem>}
-                                {searchResults.length !== 0 && searchResults.map((item) => {
-                                    return (
-                                        <ListItem button divider sx={styles.listItem} key={item._id}>
-                                            <Image src={item.image} width={90} height={90} alt={item.title}/>
-                                            <Typography variant={"h4"} fontSize={18} color={"#666"}>
-                                                {item.title}
-                                            </Typography>
-                                        </ListItem>
-                                    )
-                                })}
-                                {!isLoading && searchResults.length !== 0 && <ListItem button sx={styles.seeAllButton}>
-                                    <Typography variant={"h4"} fontSize={18} color={"#666"}>مشاهده همه</Typography>
-                                </ListItem>
-                                }
+                    {/*                </ListItem>}*/}
+                    {/*            {searchResults.length !== 0 && searchResults.map((item) => {*/}
+                    {/*                return (*/}
+                    {/*                    <ListItem button divider sx={styles.listItem} key={item._id}>*/}
+                    {/*                        <Image src={item.image} width={90} height={90} alt={item.title}/>*/}
+                    {/*                        <Typography variant={"h4"} fontSize={18} color={"#666"}>*/}
+                    {/*                            {item.title}*/}
+                    {/*                        </Typography>*/}
+                    {/*                    </ListItem>*/}
+                    {/*                )*/}
+                    {/*            })}*/}
+                    {/*            {!isLoading && searchResults.length !== 0 && <ListItem button sx={styles.seeAllButton}>*/}
+                    {/*                <Typography variant={"h4"} fontSize={18} color={"#666"}>مشاهده همه</Typography>*/}
+                    {/*            </ListItem>*/}
+                    {/*            }*/}
 
-                            </List>
-                        }
-                    </Grid>}
-                </Grid>
-                <Grid container item xs={2} justifyContent={"flex-end"}>
+                    {/*        </List>*/}
+                    {/*    }*/}
+                    {/*</Grid>}*/}
+                <Grid container item xs={matchesXS ? 2 :2} justifyContent={"flex-end"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
                         <Badge showZero max={99} badgeContent={authCtx.user?.favoriteList.length || 0} color="primary"
                                overlap="circular"
@@ -320,8 +323,9 @@ const Header = () => {
                     </Tooltip>
                 </Grid>
 
-                <Grid item container xs={2} justifyContent={"flex-end"} position={"relative"}>
-                    {!authCtx.isAuthenticated ? <Link href={"/sign-in"} passHref>
+                <Grid item container xs={1} justifyContent={"flex-end"} position={"relative"}>
+
+                    {matchesXS ? !authCtx.isAuthenticated ? <Link href={"/sign-in"} passHref>
                             <Button
                                 variant={"contained"}
                                 color={"primary"}
@@ -342,6 +346,55 @@ const Header = () => {
                                 color={"primary"}
                                 startIcon={""}
                                 sx={styles.signInButton}> {authCtx.user?.username} </Button>
+
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={openMenu}
+                                // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
+                                onClose={closeMenu}
+                                onClick={closeMenu}
+                                PaperProps={{
+                                    elevation: 0,
+                                    sx: {
+                                        overflow: 'visible',
+                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                        mt: 1.5,
+
+                                    },
+                                }}
+                                transformOrigin={{horizontal: 'right', vertical: 'top'}}
+                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                            >
+                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.userId)}>
+                                    <ListItemIcon>
+                                        <Person sx={{fontSize: 25}} color={"primary"}/>
+                                    </ListItemIcon>
+                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}> مشاهده
+                                        پروفایل
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem onClick={() => authCtx.logout()}>
+                                    <ListItemIcon>
+                                        <Logout sx={{fontSize: 25}} color={"primary"}/>
+                                    </ListItemIcon>
+                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                        خروج از حساب کاربری
+                                    </Typography>
+                                </MenuItem>
+                            </Menu>
+                        </Fragment>
+
+                        :
+                        <Fragment>
+
+                            <IconButton color={"primary"}>
+                                <ShoppingBagOutlined sx={{
+                                    fontSize: {xs: 40, sm: 50},
+                                    border: "2px solid #11AE77",
+                                    borderRadius: "50px",
+                                    p: ".7rem"
+                                }}/>
+                            </IconButton>
 
                             <Menu
                                 anchorEl={anchorEl}

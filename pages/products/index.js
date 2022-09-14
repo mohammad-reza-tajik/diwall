@@ -74,7 +74,7 @@ const Products = () => {
                 {/*    <SectionHeading text={"پوستر برای اتاق کودک"} sortBy={true} />*/}
                 {/*}*/}
             </Grid>
-            <Grid container item xs spacing={25}>
+            <Grid container item xs spacing={10}>
                 {isLoading ? <CircularProgress  color={"primary"} size={45}/> :
                     products.length === 0 ?
                         <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
@@ -82,7 +82,7 @@ const Products = () => {
                         </Grid> :
                     products.map((product)=>
 
-                    <Grid item xs={3} key={product._id}>
+                    <Grid item xs={6} sm={3} key={product._id}>
                         <Product {...product} />
                     </Grid>
 
