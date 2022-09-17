@@ -22,7 +22,7 @@ const BestSellingProducts = (props) => {
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-    const matchesXS = useMediaQuery(theme.breakpoints.up("xs"))
+    // const matchesXS = useMediaQuery(theme.breakpoints.up("xs"))
     const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
     const {isLoading ,setIsLoading} = useContext(loadingContext)

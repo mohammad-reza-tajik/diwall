@@ -117,7 +117,7 @@ function MyApp({Component, pageProps}) {
                         {router.pathname === "/sign-in" ? "" : <Header/>}
 
                             <Component {...pageProps} />
-                        {/*{router.pathname === "/sign-in" ? "" : <Footer/>}*/}
+                        {router.pathname === "/sign-in" ? "" : <Footer/>}
                         </Grid>
                     </Grid>
                 </ThemeProvider>
