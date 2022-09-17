@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     const user = await User.findById(userId).exec()
     // console.log(user)
 
-    console.log("hello")
+    // console.log("hello")
 
     // if product already exists , then it gets removed
     if (user.favoriteList.includes(productId)) {
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     } else {
         user.favoriteList.push(productId)
         await user.save()
-        console.log("doesn't exists")
+        // console.log("doesn't exists")
     }
 
     res.send({

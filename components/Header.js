@@ -2,12 +2,9 @@ import MainNavigation from "./MainNavigation";
 import {
     Badge,
     Button,
-    CircularProgress,
     Grid,
     IconButton,
     InputAdornment,
-    List,
-    ListItem,
     ListItemIcon,
     Menu,
     MenuItem,
@@ -17,7 +14,16 @@ import {
     useMediaQuery,
     useTheme
 } from "@mui/material";
-import {Close, FavoriteBorder, Login, Logout, Person, Search, ShoppingBagOutlined} from "@mui/icons-material";
+import {
+    Close,
+    FavoriteBorder,
+    Login,
+    Logout,
+    Person,
+    PersonOutlined,
+    Search,
+    ShoppingBagOutlined
+} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import {Fragment, useContext, useState} from "react";
@@ -32,7 +38,7 @@ const styles = {
         justifyContent: "center"
     },
     searchField: {
-        width: {xs: .8, md: 400},
+        width: {md: 400},
         height: 1,
         fontSize: {xs: 4, sm: "2rem"},
         '& .MuiInput-input': {
@@ -49,7 +55,13 @@ const styles = {
         fontSize: "2.5rem",
         color: "primary.main",
         mr: -15,
-        ml: 10
+        ml: 10,
+        "& *" : {
+            mr: -15,
+            ml: 10,
+
+        }
+
     },
     closeIcon: {
         color: "primary.main",
@@ -137,7 +149,7 @@ const Header = () => {
 
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-    const matchesXS = useMediaQuery(theme.breakpoints.up("xs"))
+    // const matchesXS = useMediaQuery(theme.breakpoints.up("xs"))
     const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
 
@@ -222,18 +234,22 @@ const Header = () => {
     </InputAdornment>
 
     return (
-        <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={40}>
-            <Grid container item direction={"row"} alignItems={"center"} xs={11}
-                  justifySelf={"center"} pt={20}>
-                <Grid container item xs={"auto"}>
+        <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={30} xs={12}>
+            <Grid container item direction={"row"} justifyContent={matchesMD ? "space-between" : "center"} alignItems={"center"} xs={12}
+                   py={matchesMD ? 0 : 20}>
+                <Grid container item xs={"auto"} pl={10}>
                     <Link href={"/"}>
                         <a>
-                            <Image src={"/assets/pictures/logo3.png"} alt={"dival-logo"} width={matchesSM? 45 : 90} height={matchesSM? 45 : 90}/>
+                            <Image src={"/assets/pictures/logo3.png"} alt={"dival-logo"} width={matchesMD ? 40 : 80}
+                                   height={matchesMD ? 40 : 80}/>
                         </a>
                     </Link>
                 </Grid>
-                <Grid position={"relative"} container direction={"column"} item justifyContent={"center"}
-                      alignItems={"flex-start"} xs={matchesXS ? 7 : 9} pr={20} component={"form"} onSubmit={submitSearchHandler}>
+                <Grid position={"relative"} container direction={"column"} item
+                      justifyContent={"center"}
+                      alignItems={"flex-start"} xs={7} pr={matchesMD ? 0 : 20} component={"form"}
+                      onSubmit={submitSearchHandler}
+                >
                     <Grid item xs={12}>
                         <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom-end"}
                                  arrow>
@@ -246,7 +262,7 @@ const Header = () => {
                                 onChange={searchChangeHandler}
                                 sx={styles.searchField}
                                 variant="outlined"
-                                size={matchesSM ? "small" : "medium"}
+                                size={matchesMD ? "small" : "medium"}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -262,36 +278,37 @@ const Header = () => {
                     </Grid>
                 </Grid>
 
-                    {/******** handling search results *******/}
+                {/******** handling search results *******/}
 
-                    {/*{<Grid container item sx={{...styles.searchResultsContainer, display: searchResultsDisplay}}>*/}
-                    {/*    {isLoading ? <CircularProgress color={"primary"} size={45}/> :*/}
-                    {/*        <List sx={styles.list}>*/}
-                    {/*            {searchResults.length === 0 &&*/}
-                    {/*                <ListItem>*/}
-                    {/*                    <Typography variant={"h4"} fontSize={20} color={"#666"}>نتیجه ای پیدا*/}
-                    {/*                        نشد!</Typography>*/}
+                {/*{<Grid container item sx={{...styles.searchResultsContainer, display: searchResultsDisplay}}>*/}
+                {/*    {isLoading ? <CircularProgress color={"primary"} size={45}/> :*/}
+                {/*        <List sx={styles.list}>*/}
+                {/*            {searchResults.length === 0 &&*/}
+                {/*                <ListItem>*/}
+                {/*                    <Typography variant={"h4"} fontSize={20} color={"#666"}>نتیجه ای پیدا*/}
+                {/*                        نشد!</Typography>*/}
 
-                    {/*                </ListItem>}*/}
-                    {/*            {searchResults.length !== 0 && searchResults.map((item) => {*/}
-                    {/*                return (*/}
-                    {/*                    <ListItem button divider sx={styles.listItem} key={item._id}>*/}
-                    {/*                        <Image src={item.image} width={90} height={90} alt={item.title}/>*/}
-                    {/*                        <Typography variant={"h4"} fontSize={18} color={"#666"}>*/}
-                    {/*                            {item.title}*/}
-                    {/*                        </Typography>*/}
-                    {/*                    </ListItem>*/}
-                    {/*                )*/}
-                    {/*            })}*/}
-                    {/*            {!isLoading && searchResults.length !== 0 && <ListItem button sx={styles.seeAllButton}>*/}
-                    {/*                <Typography variant={"h4"} fontSize={18} color={"#666"}>مشاهده همه</Typography>*/}
-                    {/*            </ListItem>*/}
-                    {/*            }*/}
+                {/*                </ListItem>}*/}
+                {/*            {searchResults.length !== 0 && searchResults.map((item) => {*/}
+                {/*                return (*/}
+                {/*                    <ListItem button divider sx={styles.listItem} key={item._id}>*/}
+                {/*                        <Image src={item.image} width={90} height={90} alt={item.title}/>*/}
+                {/*                        <Typography variant={"h4"} fontSize={18} color={"#666"}>*/}
+                {/*                            {item.title}*/}
+                {/*                        </Typography>*/}
+                {/*                    </ListItem>*/}
+                {/*                )*/}
+                {/*            })}*/}
+                {/*            {!isLoading && searchResults.length !== 0 && <ListItem button sx={styles.seeAllButton}>*/}
+                {/*                <Typography variant={"h4"} fontSize={18} color={"#666"}>مشاهده همه</Typography>*/}
+                {/*            </ListItem>*/}
+                {/*            }*/}
 
-                    {/*        </List>*/}
-                    {/*    }*/}
-                    {/*</Grid>}*/}
-                <Grid container item xs={matchesXS ? 2 :2} justifyContent={"flex-end"}>
+                {/*        </List>*/}
+                {/*    }*/}
+                {/*</Grid>}*/}
+
+                { !matchesMD && <Grid container item xs={2} justifyContent={"flex-end"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
                         <Badge showZero max={99} badgeContent={authCtx.user?.favoriteList.length || 0} color="primary"
                                overlap="circular"
@@ -321,117 +338,133 @@ const Header = () => {
                             </IconButton>
                         </Badge>
                     </Tooltip>
-                </Grid>
+                </Grid>}
 
-                <Grid item container xs={1} justifyContent={"flex-end"} position={"relative"}>
+                <Grid item container xs={matchesMD ? "auto" : true} justifyContent={"flex-end"} position={"relative"}>
 
-                    {matchesXS ? !authCtx.isAuthenticated ? <Link href={"/sign-in"} passHref>
-                            <Button
-                                variant={"contained"}
-                                color={"primary"}
-                                startIcon={
-                                    <Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
-                                }
-                                sx={styles.signInButton}
-                            > ورود / ثبت نام </Button>
-                        </Link>
+                    { !matchesMD ? !authCtx.isAuthenticated ? <Link href={"/sign-in"} passHref>
+                                <Button
+                                    variant={"contained"}
+                                    color={"primary"}
+                                    startIcon={
+                                        <Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
+                                    }
+                                    sx={styles.signInButton}
+                                > ورود / ثبت نام </Button>
+                            </Link>
+                            :
+                            <Fragment>
+
+                                <Button
+                                    variant={"contained"}
+                                    onClick={(e) => {
+                                        setAnchorEl(anchorEl ? null : e.currentTarget)
+                                    }}
+                                    color={"primary"}
+                                    startIcon={""}
+                                    sx={styles.signInButton}> {authCtx.user?.username} </Button>
+
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={openMenu}
+                                    // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
+                                    onClose={closeMenu}
+                                    onClick={closeMenu}
+                                    PaperProps={{
+                                        elevation: 0,
+                                        sx: {
+                                            overflow: 'visible',
+                                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                            mt: 1.5,
+
+                                        },
+                                    }}
+                                    transformOrigin={{horizontal: 'right', vertical: 'top'}}
+                                    anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                                >
+                                    <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.userId)}>
+                                        <ListItemIcon>
+                                            <Person sx={{fontSize: 25}} color={"primary"}/>
+                                        </ListItemIcon>
+                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}> مشاهده
+                                            پروفایل
+                                        </Typography>
+                                    </MenuItem>
+                                    <MenuItem onClick={() => authCtx.logout()}>
+                                        <ListItemIcon>
+                                            <Logout sx={{fontSize: 25}} color={"primary"}/>
+                                        </ListItemIcon>
+                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                            خروج از حساب کاربری
+                                        </Typography>
+                                    </MenuItem>
+                                </Menu>
+                            </Fragment>
+
                         :
-                        <Fragment>
+                        authCtx.isAuthenticated ?
 
-                            <Button
-                                variant={"contained"}
-                                onClick={(e) => {
-                                    setAnchorEl(anchorEl ? null : e.currentTarget)
-                                }}
-                                color={"primary"}
-                                startIcon={""}
-                                sx={styles.signInButton}> {authCtx.user?.username} </Button>
+                        <IconButton color={"primary"} onClick={(e) => {
+                            setAnchorEl(anchorEl ? null : e.currentTarget)
+                        }}>
+                            <Person sx={{
+                                fontSize: {xs: 40, sm: 50},
+                                border: "2px solid #11AE77",
+                                borderRadius:"10px",
+                                // p: ".6rem",
+                            }}/>
+                        </IconButton>
 
-                            <Menu
-                                anchorEl={anchorEl}
-                                open={openMenu}
-                                // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
-                                onClose={closeMenu}
-                                onClick={closeMenu}
-                                PaperProps={{
-                                    elevation: 0,
-                                    sx: {
-                                        overflow: 'visible',
-                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                        mt: 1.5,
+                            :
+                            <Fragment>
 
-                                    },
-                                }}
-                                transformOrigin={{horizontal: 'right', vertical: 'top'}}
-                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-                            >
-                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.userId)}>
-                                    <ListItemIcon>
-                                        <Person sx={{fontSize: 25}} color={"primary"}/>
-                                    </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}> مشاهده
-                                        پروفایل
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem onClick={() => authCtx.logout()}>
-                                    <ListItemIcon>
-                                        <Logout sx={{fontSize: 25}} color={"primary"}/>
-                                    </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
-                                        خروج از حساب کاربری
-                                    </Typography>
-                                </MenuItem>
-                            </Menu>
-                        </Fragment>
-
-                        :
-                        <Fragment>
-
-                            <IconButton color={"primary"}>
-                                <ShoppingBagOutlined sx={{
+                            <IconButton color={"primary"} onClick={goToCart}>
+                                <Login sx={{
                                     fontSize: {xs: 40, sm: 50},
                                     border: "2px solid #11AE77",
-                                    borderRadius: "50px",
-                                    p: ".7rem"
+                                    borderRadius: "10px",
+                                    transform: "rotateZ(180deg)",
+                                    p: ".6rem"
                                 }}/>
                             </IconButton>
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={openMenu}
+                                    // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
+                                    onClose={closeMenu}
+                                    onClick={closeMenu}
+                                    PaperProps={{
+                                        elevation: 0,
+                                        sx: {
+                                            overflow: 'visible',
+                                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                            mt: 1.5,
 
-                            <Menu
-                                anchorEl={anchorEl}
-                                open={openMenu}
-                                // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
-                                onClose={closeMenu}
-                                onClick={closeMenu}
-                                PaperProps={{
-                                    elevation: 0,
-                                    sx: {
-                                        overflow: 'visible',
-                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                        mt: 1.5,
+                                        },
+                                    }}
+                                    transformOrigin={{horizontal: 'right', vertical: 'top'}}
+                                    anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                                >
+                                    <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.userId)}>
+                                        <ListItemIcon>
+                                            <Person sx={{fontSize: 25}} color={"primary"}/>
+                                        </ListItemIcon>
+                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}> مشاهده
+                                            پروفایل
+                                        </Typography>
+                                    </MenuItem>
+                                    <MenuItem onClick={() => authCtx.logout()}>
+                                        <ListItemIcon>
+                                            <Logout sx={{fontSize: 25}} color={"primary"}/>
+                                        </ListItemIcon>
+                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                            خروج از حساب کاربری
+                                        </Typography>
+                                    </MenuItem>
+                                </Menu>
+                            </Fragment>
 
-                                    },
-                                }}
-                                transformOrigin={{horizontal: 'right', vertical: 'top'}}
-                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-                            >
-                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.userId)}>
-                                    <ListItemIcon>
-                                        <Person sx={{fontSize: 25}} color={"primary"}/>
-                                    </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}> مشاهده
-                                        پروفایل
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem onClick={() => authCtx.logout()}>
-                                    <ListItemIcon>
-                                        <Logout sx={{fontSize: 25}} color={"primary"}/>
-                                    </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
-                                        خروج از حساب کاربری
-                                    </Typography>
-                                </MenuItem>
-                            </Menu>
-                        </Fragment>
+
 
                     }
 

@@ -5,7 +5,7 @@ import {A11y, Navigation} from 'swiper';
 import Product from "./Product";
 import axios from "axios"
 
-import {useEffect, useState,useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 
 import "swiper/css";
 import 'swiper/css/navigation';
@@ -13,13 +13,14 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Link from "next/link";
 import loadingContext from "../store/loading-context";
+import SectionHeading from "./SectionHeading";
 
 
 const styles = {}
 
 const MostPopularProducts = (props) => {
 
-    const {isLoading ,setIsLoading} = useContext(loadingContext)
+    const {isLoading, setIsLoading} = useContext(loadingContext)
     const [mostPopularProducts, setMostPopularProducts] = useState([])
 
     const theme = useTheme()
@@ -44,28 +45,31 @@ const MostPopularProducts = (props) => {
     return (
         <Grid container item xs alignItems={"center"} justifyContent={"center"}>
 
-            <Grid container item xs justifyContent={"center"} alignItems={"center"} bgcolor={"primary.main"}
-                  p={50}>
-                <Grid container item xs={2} direction={"column"} alignItems={"flex-start"} gap={50}>
-                    <Typography variant={"h3"} lineHeight={1.4} color={"white.main"} fontFamily={"dana-black"}
-                                textAlign={"right"}>
+            <Grid container item justifyContent={"center"} alignItems={"center"} bgcolor={"primary.main"}
+                  p={matchesMD ? matchesSM ? 15 : 30 : 50} width={"100vw"}>
+                {matchesLG ?
+                    <SectionHeading text={"محبوب ترین محصولات"} seeAll={true} route={"/products?sortBy=3"} white/> :
+                    <Grid container item xs={2} direction={"column"} alignItems={"flex-start"} gap={50}>
+                        <Typography variant={"h3"} lineHeight={1.4} color={"white.main"} fontFamily={"dana-black"}
+                                    textAlign={"right"}>
 
-                        محبوب ترین
-                        <br/>
-                        محصولات
-                        <br/>
-                        دیوال
-                    </Typography>
-                    <Link href={props.route} passHref>
-                        <Button variant={"outlined"} color={"white"} sx={{fontSize: 16}}>مشاهده همه</Button>
-                    </Link>
+                            محبوب ترین
+                            <br/>
+                            محصولات
+                            <br/>
+                            دیوال
+                        </Typography>
+                        <Link href={props.route} passHref>
+                            <Button variant={"outlined"} color={"white"} sx={{fontSize: 16}}>مشاهده همه</Button>
+                        </Link>
 
-                </Grid>
+                    </Grid>
+                }
                 {isLoading && <p>Loading...</p>}
                 {!isLoading &&
-                    <Grid container item xs={9}>
-                        <Swiper spaceBetween={20}
-                                slidesPerView={matchesSM ? 2 : 3}
+                    <Grid container item md={12} lg={8}>
+                        <Swiper spaceBetween={matchesLG ? 5 : 20}
+                                slidesPerView={matchesMD ? 2 : 3}
                                 modules={[Navigation, A11y]}
                                 navigation
 

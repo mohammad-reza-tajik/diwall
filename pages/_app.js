@@ -113,12 +113,12 @@ function MyApp({Component, pageProps}) {
                         </title>
                     </Head>
                     <Grid container direction={"row"} justifyContent={"center"}>
-                        {router.pathname === "/sign-in" ? "" : <Header/>}
                         <Grid item xs={11}>
+                        {router.pathname === "/sign-in" ? "" : <Header/>}
 
                             <Component {...pageProps} />
+                        {/*{router.pathname === "/sign-in" ? "" : <Footer/>}*/}
                         </Grid>
-                        {router.pathname === "/sign-in" ? "" : <Footer/>}
                     </Grid>
                 </ThemeProvider>
             </AuthContext.Provider>

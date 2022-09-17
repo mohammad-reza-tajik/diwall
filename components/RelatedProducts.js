@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {Grid, IconButton, Skeleton, Typography} from "@mui/material";
+import {Grid, IconButton, Skeleton, Typography, useMediaQuery, useTheme} from "@mui/material";
 import Product from "./Product";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from "swiper";
@@ -27,6 +27,10 @@ const styles = {
 
 const RelatedProducts = (props) => {
     // const {isLoading, setIsLoading} = useContext(loadingContext)
+    const theme = useTheme()
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
 
 
@@ -34,8 +38,8 @@ const RelatedProducts = (props) => {
 
     return (
         <Grid container item xs={12}>
-            <Swiper spaceBetween={10}
-                    slidesPerView={4}
+            <Swiper spaceBetween={matchesSM ? 5 : 20}
+                    slidesPerView={matchesSM ? 2 : 4}
                     modules={[Navigation, A11y]}
                     navigation
             >

@@ -1,28 +1,26 @@
-import {Box, CircularProgress, Grid, IconButton, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {CircularProgress, Grid, IconButton, Typography, useMediaQuery, useTheme} from "@mui/material";
 import Image from "next/image"
-import {Favorite, HeartBroken, ShoppingBagOutlined} from "@mui/icons-material";
+import {Favorite} from "@mui/icons-material";
 import {useRouter} from "next/router";
 import {useContext, useEffect, useState} from "react";
-import loadingContext from "../store/loading-context";
 import axios from "axios";
 import authContext from "../store/auth-context";
-
 
 
 const styles = {
     product: {
         boxShadow: "2px 2px 2px rgba(20,20,20,.2) ",
         borderRadius: 2,
-        p:10,
-        bgcolor:"#fff"
+        p: 10,
+        bgcolor: "#fff"
         // gap:10
 
     },
-    addToFavoritesButton:{
-        position:"absolute",
-        left:3,
-        top:3,
-        zIndex:20,
+    addToFavoritesButton: {
+        position: "absolute",
+        left: {xs:1,sm:3},
+        top: {xs:1,sm:3},
+        zIndex: 20,
 
     }
 }
@@ -32,93 +30,114 @@ const Product = (props) => {
     const router = useRouter()
     // console.log(props)
     const authCtx = useContext(authContext)
-    const [heartIsVisible,setHeartIsVisible] = useState(false)
-    const [isLoading,setIsLoading] = useState(false)
+    // const [heartIsVisible, setHeartIsVisible] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const isFavorite = authCtx.user?.favoriteList.includes(props._id)
-    const [image,setImage] = useState("/assets/pictures/product_placeholder.png")
+    const [image, setImage] = useState("/assets/pictures/product_placeholder.png")
 
     // const [isFavorite,setIsFavorite] = useState(false)
     // const {isLoading ,setIsLoading} = useContext(loadingContext)
 
     const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.up("md"))
-    const matchesSM = useMediaQuery(theme.breakpoints.up("sm"))
-    const matchesXS = useMediaQuery(theme.breakpoints.up("xs"))
-    const matchesLG = useMediaQuery(theme.breakpoints.up("lg"))
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+    // const matchesXS = useMediaQuery(theme.breakpoints.down("xs"))
+    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
 
     // if image is not loaded use the placeholder
-    useEffect(()=>{
-        if(props.image){
+    useEffect(() => {
+        if (props.image) {
             setImage(props.image)
         }
-    },[props.image])
+    }, [props.image])
 
 
     const clickHandler = async () => {
         await router.push({
-            pathname:`/products/${props._id}`,
+                pathname: `/products/${props._id}`,
 
-        }
-
+            }
         )
 
     }
 
     const addToFavorites = () => {
-        if (authCtx.isAuthenticated){
+        if (authCtx.isAuthenticated) {
             setIsLoading(true)
-            if (isFavorite){
+            if (isFavorite) {
                 // console.log(authCtx.user)
-                authCtx.login({...authCtx.user , favoriteList:authCtx.user.favoriteList.filter((element)=> element != props._id)})
+                authCtx.login({
+                    ...authCtx.user,
+                    favoriteList: authCtx.user.favoriteList.filter((element) => element != props._id)
+                })
             }
             // authCtx.addToCart(props._id)
-            axios.put("/api/add-to-favorites",{productId : props._id , userId: authCtx.user.userId, token: authCtx.user.token}).then(res => {
+            axios.put("/api/add-to-favorites", {
+                productId: props._id,
+                userId: authCtx.user.userId,
+                token: authCtx.user.token
+            }).then(res => {
                     // console.log("added successfully")
-                // setIsFavorite(true)
+                    // setIsFavorite(true)
                     authCtx.login(res.data.user)
                     // console.log(res)
-                setIsLoading(false)
+                    setIsLoading(false)
                 }
-
             ).catch(e => console.log(e))
-        }
-        else
+        } else
             router.push("/sign-in")
 
     }
 
 
-
     return (
         <Grid container item direction={"column"} sx={styles.product} xs={12}>
 
-            <Grid item xs={12}  borderRadius={2} position={"relative"} overflow={"hidden"}
-                  onMouseEnter={()=> setHeartIsVisible(true)}
-                  onMouseLeave={()=>setHeartIsVisible(false)}
-                   cursor={"pointer"}>
-                <Grid item sx={{...styles.addToFavoritesButton ,opacity:heartIsVisible ? 1 : 0  }}>
+            <Grid item xs={12} borderRadius={2} position={"relative"} overflow={"hidden"}
+                  cursor={"pointer"}>
+                <Grid item sx={styles.addToFavoritesButton}>
                     <IconButton onClick={addToFavorites}>
-                        {isLoading? <CircularProgress sx={{fontSize:50,borderRadius:20,p:8,bgcolor:"rgba(50,50,50,0.3)",color:"primary.main"}}/> : isFavorite ? <Favorite sx={{fontSize:50,borderRadius:20,p:8,bgcolor:"rgba(50,50,50,0.3)",color:"primary.main"}} /> :
-                        <Favorite sx={{fontSize:50,borderRadius:20,p:8,bgcolor:"rgba(50,50,50,0.3)",color:"#fff"}} />
+                        {isLoading ? <CircularProgress size={matchesMD ? matchesSM ? 35 : 45 : 50} sx={{
+                            borderRadius: 20,
+                            p: {xs:4,md:5,lg:8},
+                            bgcolor: "rgba(50,50,50,0.3)",
+                            color: "#fff"
+                        }}/> : isFavorite ? <Favorite size={100} sx={{
+                            fontSize:{xs:35,sm:45, md:50},
+                                borderRadius: 20,
+                                p: {xs:4,md:5,lg:8},
+                                bgcolor: "rgba(50,50,50,0.3)",
+                                color: "primary.main"
+                            }}/> :
+                            <Favorite size={100} sx={{
+                                fontSize:{xs:35,sm:45, md:50},
+                                borderRadius: 20,
+                                p: {xs:4,md:5,lg:8},
+                                bgcolor: "rgba(50,50,50,0.3)",
+                                color: "#fff"
+                            }}/>
                         }
                     </IconButton>
                 </Grid>
 
-                <Image src={image} onClick={clickHandler} alt={"product"} width={400} height={400} className={"pointer"}/>
+                <Image src={image} onClick={clickHandler} alt={"product"} width={400} height={400}
+                       className={"pointer"}/>
             </Grid>
             <Grid container item height={50} alignItems={"center"}>
                 <Grid item xs onClick={clickHandler}>
-                    <Typography variant={"h4"} fontSize={{xs:12,sm:20}} fontFamily={"dana-demibold"} className={"pointer"}>{props.title}</Typography>
+                    <Typography variant={"h4"} fontSize={{xs: 12, sm :14, md: 16}} fontFamily={"dana-demibold"}
+                                className={"pointer"}>{props.title}</Typography>
                 </Grid>
             </Grid>
             <Grid container item justifyContent={"center"} alignItems={"center"} height={50}>
                 <Grid item xs={12}>
-                    <Typography variant={"h4"} fontFamily={"dana-demibold"} color={"#069f69"} sx={{fontSize:{xs:12,md:16}}}>
+                    <Typography variant={"h4"} fontFamily={"dana-demibold"} color={"#069f69"}
+                                sx={{fontSize: {xs: 12, sm :14, md: 16}}}>
                         {props.price}
                     </Typography>
                 </Grid>
-               {/* <Grid container item xs={3} justifyContent={"flex-end"}>
+                {/* <Grid container item xs={3} justifyContent={"flex-end"}>
                     <IconButton onClick={addToCartHandler}>
                         <ShoppingBagOutlined color={"primary"}
                                              sx={

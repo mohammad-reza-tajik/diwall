@@ -122,27 +122,27 @@ const ProductDetails = () => {
         <Grid container item xs={12}>
 
             <Grid container item xs justifyContent={"center"}>
-                <Grid container item xs={5} justifyContent={"center"} height={500}>
+                <Grid container item xs={12} sm={5} justifyContent={"center"} height={500}>
                     {
                         isLoading ? <Skeleton variant="rectangular" animation={"wave"} width={500} height={500}/>
                             :
                             <Image src={imageURL} alt={"product-image"} width={500} height={500}/>
                     }
                 </Grid>
-                <Grid container item direction={"column"} gap={30} height={600} xs={7} pr={30}>
+                <Grid container item direction={"column"} gap={30} height={600} xs={12} sm={7} pr={30}>
                     <Grid container item>
                         <Grid item xs={8}>
                             {
                                 isLoading ? <Skeleton variant="text" animation={"wave"} sx={{fontSize: 25}}/>
                                     :
-                                    <Typography variant={"h1"} fontSize={25} fontFamily={"dana-demibold"}
+                                    <Typography variant={"h1"} sx={{fontSize: {xs:20,md:25}}} fontFamily={"dana-demibold"}
                                                 color={"#333"}>
                                         {product.title}
                                     </Typography>
                             }
                         </Grid>
                         <Grid container item xs={4} justifyContent={"flex-end"} alignItems={"center"}>
-                            <Typography variant={"h3"} fontSize={16} borderRadius={20} px={20} py={10}
+                            <Typography variant={"h3"} sx={{fontSize: {xs:14,md:16}}} borderRadius={20} px={20} py={10}
                                         color={"white.main"}
                                         bgcolor={isLoading ? "transparent" : product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
                                 {isLoading ? <Skeleton variant={"text"} animation={"wave"} width={100}

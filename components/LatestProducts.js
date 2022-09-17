@@ -45,7 +45,7 @@ const LatestProducts = (props) => {
     return (
         <Grid container item xs={12} alignItems={"center"}>
                 <Swiper spaceBetween={matchesSM ? 5 : 20}
-                        slidesPerView={matchesSM ? 2 : 4}
+                        slidesPerView={matchesLG ? matchesMD ? 2 : 3 : 4}
                         modules={[Navigation, A11y]}
                         navigation
                 >

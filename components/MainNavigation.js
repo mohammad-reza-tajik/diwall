@@ -35,7 +35,7 @@ const MainNavigation = () => {
     }*/
 
     return (
-        <Grid container item alignItems={"center"} component={"nav"}  direction={"row"} justifyContent={"center"} mt={20}>
+        <Grid container item alignItems={"center"} component={"nav"}  direction={"row"} justifyContent={"space-between"} xs={12}>
                 {!matchesMD &&
                     <Fragment>
                         <Grid container alignItems={"center"} item xs={9} sx={styles.main_nav}>
