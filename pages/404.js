@@ -1,6 +1,6 @@
 import {Button, Grid, Typography} from "@mui/material";
 import Image from "next/image"
-import Header from "../components/Header";
+import HeaderDesktop from "../components/Header/HeaderDesktop";
 import Footer from "../components/Footer";
 import {Fragment} from "react";
 import Link from "next/link";
@@ -9,7 +9,7 @@ const NotFound = () => {
 
     return (
         <Fragment>
-            {/*<Header/>*/}
+            {/*<HeaderDesktop/>*/}
             <Grid container item xs={11} direction={"column"} alignItems={"center"} justifyContent={"center"} gap={35}
                   mb={120}>
                 <Grid item>

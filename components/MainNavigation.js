@@ -66,15 +66,15 @@ const MainNavigation = () => {
                 </Fragment>
 
                 }
-                {matchesMD &&
-                    <IconButton my={20}
-                                sx={{}}
-                                variant={"contained"}
-                                color={"primary"}
-                    >
-                        <Dehaze sx={{fontSize: 40}}/>
-                    </IconButton>
-                }
+                {/*{matchesMD &&*/}
+                {/*    <IconButton my={20}*/}
+                {/*                sx={{}}*/}
+                {/*                variant={"contained"}*/}
+                {/*                color={"primary"}*/}
+                {/*    >*/}
+                {/*        <Dehaze sx={{fontSize: 40}}/>*/}
+                {/*    </IconButton>*/}
+                {/*}*/}
         </Grid>
     )
 }

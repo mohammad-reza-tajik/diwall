@@ -2,7 +2,7 @@ import '../styles/Globals.css';
 import "../styles/Fonts.css";
 import Header from "../components/Header";
 import Head from "next/head"
-import theme from "../components/theme";
+import theme from "../styles/theme";
 import {Grid, ThemeProvider} from "@mui/material";
 import Footer from "../components/Footer";
 import {useRouter} from "next/router";
@@ -117,7 +117,7 @@ function MyApp({Component, pageProps}) {
                         {router.pathname === "/sign-in" ? "" : <Header/>}
 
                             <Component {...pageProps} />
-                        {router.pathname === "/sign-in" ? "" : <Footer/>}
+                        {/*{router.pathname === "/sign-in" ? "" : <Footer/>}*/}
                         </Grid>
                     </Grid>
                 </ThemeProvider>
