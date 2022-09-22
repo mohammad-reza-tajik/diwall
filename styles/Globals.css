@@ -162,6 +162,17 @@ a:checked {
   background-color: #08d089;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .swiper-button-prev,
 .swiper-button-next {
   background-color: #069f69 !important;

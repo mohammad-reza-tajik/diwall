@@ -1,14 +1,5 @@
 import {useRouter} from "next/router";
-import {
-    Box,
-    Button,
-    CircularProgress,
-    Grid,
-    List,
-    Tab,
-    Tabs,
-    Typography
-} from "@mui/material";
+import {Box, Button, CircularProgress, Grid, List, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@mui/material";
 import TabPanel from '@mui/lab/TabPanel';
 import {useContext, useEffect, useState} from "react";
 import {TabContext} from "@mui/lab";
@@ -18,14 +9,17 @@ import CartItem from "../../components/CartItem"
 import Product from "../../components/Product";
 import axios from "axios";
 import loadingContext from "../../store/loading-context";
-import Image from "next/image";
-import {AddCircleOutline, Delete, RemoveCircleOutline} from "@mui/icons-material";
 
 const styles = {
     tab: {
-        fontSize: 16, color: "#333", fontFamily: "dana-demibold", my: 10, // bgcolor:"primary"
+        fontSize: {xs: 12, md: 16},
+        color: "#333",
+        fontFamily: "dana-demibold",
+        // my: 10,
+        // mt:10
+        // bgcolor:"primary"
     },
-        list: {
+    list: {
         width: 1,
         height: "auto",
         // maxHeight:400,
@@ -42,7 +36,7 @@ const Profile = () => {
     const {isLoading, setIsLoading} = useContext(loadingContext)
 
     const [favoriteList, setFavoriteList] = useState([])
-    const [cart,setCart]=useState([])
+    const [cart, setCart] = useState([])
 
     const [tab, setTab] = useState("1");
 
@@ -82,13 +76,7 @@ const Profile = () => {
 
             })
         }
-    }, [currentUserFavoriteList,currentUserCart])
-
-
-
-
-
-
+    }, [currentUserFavoriteList, currentUserCart])
 
 
     // const [tab, setTab] = useState(1);
@@ -98,117 +86,132 @@ const Profile = () => {
     //         setTab(tab);
     // };
 
+    const theme = useTheme()
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
+
     return (
 
         <Grid container item xs={12} minHeight={400}>
             <TabContext value={tab}>
-                <Grid container item xs={12} md={2} borderLeft={"5px solid #069f69"}>
-
-                    <Tabs onChange={tabChangeHandler} value={tab} orientation={{xs:"horizontal",md:"vertical"}}>
+                <Grid container item xs={12} md={3} lg={2} mt={10} borderLeft={{xs: "none", md: "5px solid #069f69"}}>
+                    <Tabs onChange={tabChangeHandler} value={tab} orientation={matchesMD ? "horizontal" : "vertical"}>
                         <Tab label="اطلاعات کاربر" value="1" sx={styles.tab}/>
                         <Tab label="لیست علاقمندی ها" value="2" sx={styles.tab}/>
                         <Tab label="سبد خرید" value="3" sx={styles.tab}/>
                     </Tabs>
 
                 </Grid>
-                <Grid container item xs={10}>
+                <Grid container item xs={12} md={9} lg={10} height={500}>
+                    {/*height 500 because tab indicator for third tab gets stuck at a wrong place*/}
                     <TabPanel value="1" sx={{width: 1}}>
-                        <Grid container item xs={12} py={20} px={40} direction={"column"} gap={40}>
-                            <Grid container item xs={3} alignItems={"center"} gap={10}>
-                                <Box component={"span"} sx={{fontSize: 20}}>نام و نام خانوادگی : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={16}>
+                        <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} direction={"column"} gap={40}>
+                            <Grid container item xs={12} md={3} alignItems={"center"} gap={10}>
+                                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام و نام خانوادگی : </Box>
+                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                            fontSize={{xs: 14, md: 16}}>
                                     مشخص نشده !
                                 </Typography>
-                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
+                                <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                             </Grid>
-                            <Grid container item xs={3} alignItems={"center"} gap={20}>
-                                <Box component={"span"} sx={{fontSize: 20}}>نام کاربری : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={20}>
+                            <Grid container item xs={12} md={3} alignItems={"center"} gap={20}>
+                                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام کاربری : </Box>
+                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                            fontSize={{xs: 14, md: 16}}>
                                     {authCtx.user?.username}
                                 </Typography>
-                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
+                                <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
                             </Grid>
-                            <Grid container item xs={3} alignItems={"center"} gap={20}>
-                                <Box component={"span"} sx={{fontSize: 20}}>ایمیل : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={20}>
+                            <Grid container item xs={12} md={3} alignItems={"center"} gap={20}>
+                                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>ایمیل : </Box>
+                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                            fontSize={{xs: 14, md: 16}}>
                                     {authCtx.user?.email}
                                 </Typography>
-                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
+                                <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                             </Grid>
-                            <Grid container item xs={3} alignItems={"center"} gap={10}>
-                                <Box component={"span"} sx={{fontSize: 20}}>شماره موبایل : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={16}>
+                            <Grid container item xs={12} md={3} alignItems={"center"} gap={10}>
+                                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>شماره موبایل : </Box>
+                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                            fontSize={{xs: 14, md: 16}}>
                                     مشخص نشده !
                                 </Typography>
-                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
+                                <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                             </Grid>
-                            <Grid container item xs={3} alignItems={"center"} gap={10}>
-                                <Box component={"span"} sx={{fontSize: 20}}> تاریخ تولد : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={16}>
+                            <Grid container item xs={12} md={3} alignItems={"center"} gap={10}>
+                                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}> تاریخ تولد : </Box>
+                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                            fontSize={{xs: 14, md: 16}}>
                                     مشخص نشده !
                                 </Typography>
-                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
+                                <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                             </Grid>
-                            <Grid container item xs={3} alignItems={"center"} gap={10}>
-                                <Box component={"span"} sx={{fontSize: 20}}> شغل : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"} fontSize={16}>
+                            <Grid container item xs={12} md={3} alignItems={"center"} gap={10}>
+                                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}> شغل : </Box>
+                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                            fontSize={{xs: 14, md: 16}}>
                                     مشخص نشده !
                                 </Typography>
-                                <Button variant={"outlined"} sx={{fontSize: 16}}>تغییر</Button>
+                                <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                             </Grid>
                         </Grid>
                     </TabPanel>
                     <TabPanel value="2" sx={{width: 1}}>
-                        <Grid container item xs={12} py={20} px={40} spacing={20}>
-                            <SectionHeading text={"لیست کالاهای مورد علاقه شما"}/>
+                        <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10}>
+
+                            {isLoading ?
+                                <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
+                                    <CircularProgress color={"primary"} size={45}/>
+                                </Grid> :
+                                !favoriteList || favoriteList?.length === 0 ?
+                                    <Grid container item xs minHeight={300} justifyContent={"center"}
+                                          alignItems={"center"}>
+                                        <Typography fontSize={16} variant={"body1"} color={"#333"}
+                                                    fontFamily={"dana-demibold"}>
+                                            لیست علاقمندی های شما خالی است!
+                                        </Typography>
+                                    </Grid> :
+
+                                    favoriteList.map(item =>
+                                        <Grid item  xs={6} sm={4}  key={item._id}>
+                                            <Product  {...item} />
+                                        </Grid>)}
+                        </Grid>
+                    </TabPanel>
+                    <TabPanel value="3" sx={{width: 1}}>
+                        <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10}>
+                            {/*<SectionHeading text={"سبد خرید شما"}/>*/}
 
                             {isLoading ?
                                 <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
 
                                     <CircularProgress color={"primary"} size={45}/>
-                                </Grid> : !favoriteList || favoriteList?.length === 0 ?
-                                    <Grid container item xs minHeight={300} justifyContent={"center"}
-                                          alignItems={"center"}>
-                                        <Typography fontSize={20} variant={"body1"} color={"#333"}
-                                                    fontFamily={"dana-demibold"}>لیست علاقمندی های شما خالی است
-                                            !</Typography>
-                                    </Grid> :
+                                </Grid> :
+                                <Grid container item sx={styles.list} gap={10}>
+                                    {cart.length === 0  ?
+                                        <Grid container item xs minHeight={300} justifyContent={"center"}
+                                              alignItems={"center"}>
+                                            <Typography fontSize={16} variant={"body1"} color={"#333"}
+                                                        fontFamily={"dana-demibold"}>سبد خرید شما خالی است
+                                                ! </Typography>
+                                        </Grid> :
+                                    cart.length !== 0 && cart.map((item) => {
+                                        return (
 
-                                    favoriteList.map(item => <Grid item xs={4} key={item._id}>
-                                        <Product  {...item} />
-                                    </Grid>)}
-                        </Grid>
-                    </TabPanel>
-                    <TabPanel value="3" sx={{width: 1}}>
-                        <Grid container item xs={12} py={20} px={40} spacing={20}>
-                            <SectionHeading text={"سبد خرید شما"}/>
+                                            <CartItem {...item} key={item._id} />
 
-                            {isLoading ?
-                            <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
 
-                                <CircularProgress color={"primary"} size={45}/>
-                            </Grid> :
-                            <List sx={styles.list}>
-                                {cart.length === 0 &&
-                                    <Grid container item xs minHeight={300} justifyContent={"center"}
-                                          alignItems={"center"}>
-                                        <Typography fontSize={20} variant={"body1"} color={"#333"}
-                                                    fontFamily={"dana-demibold"}>سبد خرید شما خالی است ! </Typography>
-                                    </Grid>}
-                                {cart.length !== 0 && cart.map((item) => {
-                                    return (
-                                        <CartItem key={item._id} {...item} />
+                                        )
+                                    })}
 
-                                    )
-                                })}
-
-                            </List>
-                        }
+                                </Grid>
+                            }
                         </Grid>
                     </TabPanel>
                 </Grid>

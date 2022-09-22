@@ -16,7 +16,7 @@ const styles = {
         justifyContent: "space-between",
     },
     headerIcon: {
-        fontSize: {xs: 35, sm: 50},
+        fontSize: {xs: 35, md: 50},
         ml: -10,
 
     }

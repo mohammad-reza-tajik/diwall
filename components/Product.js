@@ -98,22 +98,22 @@ const Product = (props) => {
                   cursor={"pointer"}>
                 <Grid item sx={styles.addToFavoritesButton}>
                     <IconButton onClick={addToFavorites}>
-                        {isLoading ? <CircularProgress size={matchesMD ? matchesSM ? 35 : 45 : 50} sx={{
+                        {isLoading ? <CircularProgress size={matchesMD ? matchesSM ? 30 : 40 : 40} sx={{
                             borderRadius: 20,
-                            p: {xs:4,md:5,lg:8},
+                            p: {xs:4,md:5,},
                             bgcolor: "rgba(50,50,50,0.3)",
                             color: "#fff"
                         }}/> : isFavorite ? <Favorite size={100} sx={{
-                            fontSize:{xs:35,sm:45, md:50},
+                            fontSize:{xs:30,sm:40},
                                 borderRadius: 20,
-                                p: {xs:4,md:5,lg:8},
+                                p: {xs:4,md:5,},
                                 bgcolor: "rgba(50,50,50,0.3)",
                                 color: "primary.main"
                             }}/> :
                             <Favorite size={100} sx={{
-                                fontSize:{xs:35,sm:45, md:50},
+                                fontSize:{xs:30,sm:40,},
                                 borderRadius: 20,
-                                p: {xs:4,md:5,lg:8},
+                                p: {xs:4,md:5,},
                                 bgcolor: "rgba(50,50,50,0.3)",
                                 color: "#fff"
                             }}/>
@@ -126,14 +126,14 @@ const Product = (props) => {
             </Grid>
             <Grid container item height={50} alignItems={"center"}>
                 <Grid item xs onClick={clickHandler}>
-                    <Typography variant={"h4"} fontSize={{xs: 12, sm :14, md: 16}} fontFamily={"dana-demibold"}
-                                className={"pointer"}>{props.title}</Typography>
+                    <Typography variant={"h4"} fontSize={{xs: 12, md :14,lg:16}} fontFamily={"dana-demibold"}
+                                className={"pointer"} lineHeight={1.5}>{props.title}</Typography>
                 </Grid>
             </Grid>
             <Grid container item justifyContent={"center"} alignItems={"center"} height={50}>
                 <Grid item xs={12}>
                     <Typography variant={"h4"} fontFamily={"dana-demibold"} color={"#069f69"}
-                                sx={{fontSize: {xs: 12, sm :14, md: 16}}}>
+                                sx={{fontSize: {xs: 12, md :14,lg:16}}}>
                         {props.price}
                     </Typography>
                 </Grid>

@@ -78,7 +78,7 @@ const Products = () => {
                 {isLoading ? <CircularProgress  color={"primary"} size={45}/> :
                     products.length === 0 ?
                         <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
-                            <Typography fontSize={20} variant={"h2"} color={"#333"} fontFamily={"dana-demibold"}>هیچ محصولی مرتبط با جستجو شما موجود نیست !</Typography>
+                            <Typography fontSize={20} variant={"h2"} color={"#333"} fontFamily={"dana-demibold"}>هیچ محصول مرتبطی  موجود نیست !</Typography>
                         </Grid> :
                     products.map((product)=>
 
