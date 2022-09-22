@@ -46,10 +46,10 @@ const styles = {
         alignItems: "center",
         flexDirection: "column",
         justifyContent: "flex-start",
-        width: {xs: 1, sm: 550},
-        height: {xs: "100vh", sm: 550},
+        width: {xs: 1, md: 570},
+        height: {xs: "100vh", md: 570},
         // boxShadow:"2px 2px 5px rgba(0,0,0,.4)",
-        zIndex: 99
+        zIndex: "mobileStepper"
 
     },
     inputField: {
@@ -275,7 +275,7 @@ const SignIn = () => {
                         <ToggleButton sx={{width: .5, fontSize: "1.6rem"}} value={"signup"}>ثبت نام</ToggleButton>
                     </ToggleButtonGroup>
                 </Grid>
-                <Grid item my={typeOfForm !== "signup" ? 40 : 20}>
+                <Grid item my={20}>
                     <Link href={"/"}>
                         <a>
                             <Image src={"/assets/pictures/logo3.png"} alt={"logo"} width={100}

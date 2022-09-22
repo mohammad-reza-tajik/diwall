@@ -25,7 +25,8 @@ const styles = {
         // justifyContent:{xs:"center",md:"flex-start"},
         // alignItems:{xs:"center",md:"flex-start"},
         // position: {xs:"absolute",md:"static"},
-        zIndex:20,
+        // zIndex:20,
+        // backdropFilter: "blur(10px)",
         // height:{xs:490 * 4,md:"auto"}
 
     }
