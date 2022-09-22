@@ -10,24 +10,20 @@ const styles = {
         // borderRadius:"5rem",
     },
     bannerTextBox:{
-        backgroundImage:"linear-gradient(rgba(44, 44, 44,.5),rgba(44, 44, 44,.5)) ,  url('/assets/pictures/hero_img4.jpg')",
+        backgroundImage:"linear-gradient(rgba(44, 44, 44,.6),rgba(44, 44, 44,.6)) ,  url('/assets/pictures/hero_img5.jpg')",
         // backgroundSize:"100% 100%",
         backgroundSize:{xs:"100% 100%",sm:"cover"},
         // backgroundPosition:"center",
         // backgroundRepeat:"no-repeat",
         backgroundAttachment:"fixed",
         py:100,
-        // justifyContent:"space-evenly",
-        // alignItems:"center",
         px:{xs:50,sm:90},
-        // height:"80vh",
         gap:60,
         // justifyContent:{xs:"center",md:"flex-start"},
         // alignItems:{xs:"center",md:"flex-start"},
         // position: {xs:"absolute",md:"static"},
         // zIndex:20,
         // backdropFilter: "blur(10px)",
-        // height:{xs:490 * 4,md:"auto"}
 
     }
 }
@@ -56,7 +52,6 @@ const BannerMobile = () => {
                     </Link>
                 </Grid>
             </Grid>
-
         </Grid>
     );
 };

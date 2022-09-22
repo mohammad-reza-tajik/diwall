@@ -102,9 +102,9 @@ const Profile = () => {
 
         <Grid container item xs={12} minHeight={400}>
             <TabContext value={tab}>
-                <Grid container item xs={2} borderLeft={"5px solid #069f69"}>
+                <Grid container item xs={12} md={2} borderLeft={"5px solid #069f69"}>
 
-                    <Tabs onChange={tabChangeHandler} value={tab} orientation={"vertical"}>
+                    <Tabs onChange={tabChangeHandler} value={tab} orientation={{xs:"horizontal",md:"vertical"}}>
                         <Tab label="اطلاعات کاربر" value="1" sx={styles.tab}/>
                         <Tab label="لیست علاقمندی ها" value="2" sx={styles.tab}/>
                         <Tab label="سبد خرید" value="3" sx={styles.tab}/>
