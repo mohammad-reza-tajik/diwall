@@ -28,6 +28,7 @@ const MainNavigation = () => {
     // const [value, setValue] = useState(0)
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+    const matches1277 = useMediaQuery('(max-width:1277px)');
 
     /*const changeHandler = (e, newValue) => {
         setValue(newValue)
@@ -47,7 +48,7 @@ const MainNavigation = () => {
                                 <Link href={"/about"}><Box component={"a"} sx={styles.main_nav_link}>درباره ما</Box></Link>
                                 <Link href={"/collaboration"}><Box component={"a"} sx={styles.main_nav_link}>همکاری با ما</Box></Link>
                         </Grid>
-                        <Grid container item direction={"row"}  xs={2} justifyContent={"flex-end"}>
+                        <Grid container item direction={"row"}  xs={2} justifyContent={"flex-end"} display={matches1277 && "none"}>
                             <Grid container item direction={"column"} xs={6}>
                                 <Grid item>
                                     <Typography fontWeight={700} color={"#666"} fontSize={18} variant={"subtitle1"}>021464879</Typography>
