@@ -28,33 +28,33 @@ const styles = {
     }
 }
 
-const Hero = () => {
+const BannerDesktop = () => {
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    const [height, setHeight] = useState(0)
+    // const [height, setHeight] = useState(0)
 
 
     const imageRef = useRef()
-    useEffect(()=>setHeight(imageRef.current.clientHeight))
+    // useEffect(()=>setHeight(imageRef.current.clientHeight))
 
     return (
 
         <Grid container item direction={"row"} justifyContent={"center"} component={"section"} mb={{xs:40,sm:70}} position={"relative"} minWidth={matchesMD && "100vw"}>
-            <Grid container item direction={"column"} xs={12} md={4} sx={styles.heroTextBox} height={height}>
+            <Grid container item direction={"column"} xs={12} md={4} sx={styles.heroTextBox}>
                 <Grid container item justifyContent={"center"}>
-                    <Typography lineHeight={1.4} fontFamily={"dana-black"} variant={"h1"} fontSize={{xs:25,md:30}}
-                                color={"white.main"} textAlign={matchesMD && "justify"}>
+                    <Typography lineHeight={1.4} fontFamily={"dana-black"} variant={"h1"} fontSize={{xs:20,lg:25}}
+                                color={"white.main"}>
                         خانه رویایی خود را به واقعیت تبدیل کنید
                     </Typography>
                 </Grid>
                 <Grid container item justifyContent={"center"}>
-                    <Typography variant={"caption"} fontSize={{xs:16,md:18}} color={"white.main"} textAlign={"justify"}>
+                    <Typography variant={"caption"} fontSize={{xs:16,lg:18}} color={"white.main"} textAlign={"justify"}>
                         از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                         آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
                     </Typography>
                 </Grid>
-                <Grid container item  >
+                <Grid container item >
                     <Link href={"/products"} passHref>
                         <Button variant={matchesMD ? "contained" : "outlined"} color={matchesMD ? "primary" : "white"} size={"medium"} sx={styles.heroButton}>مشاهده محصولات</Button>
                     </Link>
@@ -62,11 +62,10 @@ const Hero = () => {
             </Grid>
             <Grid item xs={12} md={8}>
                 <Box sx={styles.heroImageBox} ref={imageRef}>
-                    {matchesMD ? <Image src={"/assets/pictures/hero_img4.jpg"} alt={"hero_image_interior_design"} width={1000} height={490 * 3} layout="responsive"/>
-                    : <Image src={"/assets/pictures/hero_img4.jpg"} alt={"hero_image_interior_design"}  layout="fill"/>}
+                     <Image src={"/assets/pictures/hero_img4.jpg"} alt={"hero_image_interior_design"}  layout="fill"/>
                 </Box>
             </Grid>
         </Grid>
     )
 }
-export default Hero
+export default BannerDesktop

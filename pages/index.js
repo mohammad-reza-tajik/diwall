@@ -4,12 +4,12 @@ import SectionHeading from "../components/SectionHeading";
 import BestSellingProducts from "../components/BestSellingProducts";
 import LatestProducts from "../components/LatestProducts";
 import MostPopularProducts from "../components/MostPopularProducts";
-import Hero from "../components/Hero";
 import Features from "../components/Features";
 import Places from "../components/Places";
 import MiddleSection from "../components/MiddleSection";
 import SeenOn from "../components/SeenOn";
 import RelatedProducts from "../components/RelatedProducts";
+import Banner from "../components/Banner";
 
 
 
@@ -21,7 +21,7 @@ const Home = () => {
             <Head>
                 <title> دیوال : فروشگاه پوستر و کاغذ دیواری </title>
             </Head>
-            <Hero/>
+            <Banner />
             {/*<Features cols={12}/>*/}
             {/*<Places/>*/}
             {/*<MostPopularProducts route={"/products?sortBy=3"}/>*/}
@@ -30,7 +30,7 @@ const Home = () => {
             {/*<MiddleSection/>*/}
             {/*<SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"/products?sortBy=2"}/>*/}
             {/*<BestSellingProducts/>*/}
-            <SeenOn/>
+            {/*<SeenOn/>*/}
         </Grid>
     )
 }
