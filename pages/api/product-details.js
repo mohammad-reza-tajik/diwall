@@ -6,6 +6,8 @@ export default async function handler(req,res){
         return
     const productId = req.body.productId
     console.log(productId)
+
+    if (productId){
     // const regexp = new RegExp(req.body.productId , "g") // output => /req.body.search/g
     const productDetails = await Product.findById(productId).exec()
     // console.log(productDetails)
@@ -16,4 +18,6 @@ export default async function handler(req,res){
     const relatedProducts = await Product.find({category:{$elemMatch:{$eq:productDetails?.category[1]}}})
     res.send({productDetails,relatedProducts})
 
+    }
+    else res.send(undefined)
 }

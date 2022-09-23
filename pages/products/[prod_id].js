@@ -83,6 +83,8 @@ const ProductDetails = () => {
     useEffect(() => {
         setIsLoading(true)
         // console.log(router.query)
+        if (router.isReady) {
+
         axios.post("/api/product-details", {
             productId: router.query.prod_id
         }).then(res => {
@@ -94,6 +96,7 @@ const ProductDetails = () => {
             setIsLoading(false)
         }).catch(e => console.log(e))
 
+        }
     }, [router.query.prod_id])
 
     const presetSizesHandler = (e, presetSizes) => {
@@ -228,11 +231,11 @@ const ProductDetails = () => {
                         {
                             isLoading ?
                                 <Fragment>
-                                    <Skeleton variant="text" animation={"wave"} sx={{fontSize: {xs: 16, md: 25}}}/>
-                                    <Skeleton variant="text" animation={"wave"} sx={{fontSize: {xs: 16, md: 25}}}/>
-                                    <Skeleton variant="text" animation={"wave"} sx={{fontSize: {xs: 16, md: 25}}}/>
-                                    <Skeleton variant="text" animation={"wave"} sx={{fontSize: {xs: 16, md: 25}}}/>
-                                    <Skeleton variant="text" animation={"wave"} sx={{fontSize: {xs: 16, md: 25}}}/>
+                                    <Skeleton variant="text" width={300} animation={"wave"} sx={{fontSize: {xs: 14, md: 16}}}/>
+                                    <Skeleton variant="text" width={300} animation={"wave"} sx={{fontSize: {xs: 14, md: 16}}}/>
+                                    <Skeleton variant="text" width={300} animation={"wave"} sx={{fontSize: {xs: 14, md: 16}}}/>
+                                    <Skeleton variant="text" width={300} animation={"wave"} sx={{fontSize: {xs: 14, md: 16}}}/>
+                                    <Skeleton variant="text" width={300} animation={"wave"} sx={{fontSize: {xs: 14, md: 16}}}/>
                                 </Fragment>
                                 :
                                 <Typography variant={"caption"} fontSize={{xs: 14, md: 16}}
@@ -331,7 +334,7 @@ const ProductDetails = () => {
                 </Grid>
             </Grid>
 
-            <Grid item xs={12} my={20}>
+            <Grid item xs={12} my={30}>
                 <Features cols={12}/>
             </Grid>
 

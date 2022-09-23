@@ -114,10 +114,10 @@ function MyApp({Component, pageProps}) {
                     </Head>
                     <Grid container direction={"row"} justifyContent={"center"}>
                         <Grid item xs={11}>
-                        {router.pathname === "/sign-in" ? "" : <Header/>}
+                        {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Header/>}
 
                             <Component {...pageProps} />
-                        {/*{router.pathname === "/sign-in" ? "" : <Footer/>}*/}
+                        {/*{router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Footer/>}*/}
                         </Grid>
                     </Grid>
                 </ThemeProvider>

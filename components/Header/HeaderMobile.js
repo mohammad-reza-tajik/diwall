@@ -1,10 +1,9 @@
 import {Grid, IconButton, ListItemIcon, Menu, MenuItem, Typography} from "@mui/material";
-import {Login, Logout, Person, Search , Menu as Humburger} from "@mui/icons-material";
+import {Favorite, Login, Logout, Menu as Humburger, Person, Search, ShoppingBag} from "@mui/icons-material";
 import {Fragment, useContext, useState} from "react";
 import {useRouter} from "next/router";
 import authContext from "../../context/auth-context";
 import Link from "next/link";
-import Image from "next/image";
 
 
 const styles = {
@@ -43,9 +42,9 @@ const HeaderMobile = () => {
             <Grid container item xs={7} alignItems={"center"} spacing={10}>
                 <Grid container item xs={"auto"}>
 
-                <IconButton color={"primary"} sx={{mr:-10}}>
-                    <Humburger sx={styles.headerIcon}/>
-                </IconButton>
+                    <IconButton color={"primary"} sx={{mr: -10}}>
+                        <Humburger sx={styles.headerIcon}/>
+                    </IconButton>
                 </Grid>
 
                 {/*<Link href={"/"}>*/}
@@ -54,13 +53,13 @@ const HeaderMobile = () => {
                 {/*               height={40}/>*/}
                 {/*    </a>*/}
                 {/*</Link>*/}
-            <Grid container item xs={"auto"} position={"relative"} top={3}>
-                <Link href={"/"} passHref>
-                    <Typography variant={"caption"} fontFamily={"dana-black"} color={"primary"} fontSize={25}>
-                        Dival
-                    </Typography>
-                </Link>
-            </Grid>
+                <Grid container item xs={"auto"} position={"relative"} top={3}>
+                    <Link href={"/"} passHref>
+                        <Typography variant={"caption"} fontFamily={"dana-black"} color={"primary"} fontSize={25}>
+                            Dival
+                        </Typography>
+                    </Link>
+                </Grid>
             </Grid>
 
 
@@ -74,15 +73,14 @@ const HeaderMobile = () => {
                     !authCtx.isAuthenticated ?
 
                         <Link href={"/sign-in"} passHref>
-                        <IconButton color={"primary"}>
-                            <Login sx={styles.headerIcon}/>
-                        </IconButton>
+                            <IconButton color={"primary"}>
+                                <Login sx={styles.headerIcon}/>
+                            </IconButton>
                         </Link>
 
 
                         :
                         <Fragment>
-
 
 
                             <IconButton color={"primary"} onClick={(e) => {
@@ -116,24 +114,41 @@ const HeaderMobile = () => {
                                         پروفایل
                                     </Typography>
                                 </MenuItem>
-                                <MenuItem onClick={() => authCtx.logout()}>
+                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.userId + "?tab=2")}>
                                     <ListItemIcon>
-                                        <Logout sx={{fontSize: 25}} color={"primary"}/>
+                                        <Favorite sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
                                     <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
-                                        خروج از حساب کاربری
+                                        علاقمندی ها
                                     </Typography>
                                 </MenuItem>
+                                    <MenuItem
+                                        onClick={() => router.push("/profile/" + authCtx.user?.userId + "?tab=3")}>
+                                        <ListItemIcon>
+                                            <ShoppingBag sx={{fontSize: 25}} color={"primary"}/>
+                                        </ListItemIcon>
+                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                            سبد خرید
+                                        </Typography>
+                                    </MenuItem>
+                                    <MenuItem onClick={() => authCtx.logout()}>
+                                        <ListItemIcon>
+                                            <Logout sx={{fontSize: 25}} color={"primary"}/>
+                                        </ListItemIcon>
+                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                            خروج از حساب کاربری
+                                        </Typography>
+                                    </MenuItem>
                             </Menu>
                         </Fragment>
 
+                    }
+                    </Grid>
+
+
+                    </Grid>
+                    )
+
                 }
-            </Grid>
 
-
-        </Grid>
-    )
-
-}
-
-export default HeaderMobile
+                export default HeaderMobile

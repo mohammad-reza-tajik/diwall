@@ -108,8 +108,8 @@ const Profile = () => {
                 <Grid container item xs={12} md={9} lg={10} height={500}>
                     {/*height 500 because tab indicator for third tab gets stuck at a wrong place*/}
                     <TabPanel value="1" sx={{width: 1}}>
-                        <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} direction={"column"} gap={40}>
-                            <Grid container item xs={12} md={3} alignItems={"center"} gap={10}>
+                        <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40}>
+                            <Grid container item xs={12} alignItems={"center"} gap={10}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام و نام خانوادگی : </Box>
                                 <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
                                             fontSize={{xs: 14, md: 16}}>
@@ -118,7 +118,7 @@ const Profile = () => {
                                 <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                             </Grid>
-                            <Grid container item xs={12} md={3} alignItems={"center"} gap={20}>
+                            <Grid container item xs={12} alignItems={"center"} gap={20}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام کاربری : </Box>
                                 <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
                                             fontSize={{xs: 14, md: 16}}>
@@ -126,7 +126,7 @@ const Profile = () => {
                                 </Typography>
                                 <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
                             </Grid>
-                            <Grid container item xs={12} md={3} alignItems={"center"} gap={20}>
+                            <Grid container item xs={12} alignItems={"center"} gap={20}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>ایمیل : </Box>
                                 <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
                                             fontSize={{xs: 14, md: 16}}>
@@ -135,7 +135,7 @@ const Profile = () => {
                                 <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                             </Grid>
-                            <Grid container item xs={12} md={3} alignItems={"center"} gap={10}>
+                            <Grid container item xs={12} alignItems={"center"} gap={10}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>شماره موبایل : </Box>
                                 <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
                                             fontSize={{xs: 14, md: 16}}>
@@ -144,7 +144,7 @@ const Profile = () => {
                                 <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                             </Grid>
-                            <Grid container item xs={12} md={3} alignItems={"center"} gap={10}>
+                            <Grid container item xs={12} alignItems={"center"} gap={10}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}> تاریخ تولد : </Box>
                                 <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
                                             fontSize={{xs: 14, md: 16}}>
@@ -153,7 +153,7 @@ const Profile = () => {
                                 <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                             </Grid>
-                            <Grid container item xs={12} md={3} alignItems={"center"} gap={10}>
+                            <Grid container item xs={12} alignItems={"center"} gap={10}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}> شغل : </Box>
                                 <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
                                             fontSize={{xs: 14, md: 16}}>
@@ -191,7 +191,7 @@ const Profile = () => {
                             {/*<SectionHeading text={"سبد خرید شما"}/>*/}
 
                             {isLoading ?
-                                <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
+                                <Grid container item xs  justifyContent={"center"} alignItems={"center"}>
 
                                     <CircularProgress color={"primary"} size={45}/>
                                 </Grid> :
