@@ -9,7 +9,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import SectionHeading from "./SectionHeading";
-import loadingContext from "../store/loading-context";
+import loadingContext from "../context/loading-context";
 import Image from "next/image";
 import {ShoppingBagOutlined} from "@mui/icons-material";
 
@@ -39,7 +39,7 @@ const RelatedProducts = (props) => {
     return (
         <Grid container item xs={12}>
             <Swiper spaceBetween={matchesSM ? 5 : 20}
-                    slidesPerView={matchesSM ? 2 : 4}
+                    slidesPerView={matchesLG ? matchesMD ? 2 : 3 : 4}
                     modules={[Navigation, A11y]}
                     navigation
             >

@@ -3,12 +3,12 @@ import {Box, Button, CircularProgress, Grid, List, Tab, Tabs, Typography, useMed
 import TabPanel from '@mui/lab/TabPanel';
 import {useContext, useEffect, useState} from "react";
 import {TabContext} from "@mui/lab";
-import authContext from "../../store/auth-context";
+import authContext from "../../context/auth-context";
 import SectionHeading from "../../components/SectionHeading";
 import CartItem from "../../components/CartItem"
 import Product from "../../components/Product";
 import axios from "axios";
-import loadingContext from "../../store/loading-context";
+import loadingContext from "../../context/loading-context";
 
 const styles = {
     tab: {
@@ -90,12 +90,14 @@ const Profile = () => {
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
     const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
+    const matches1040 = useMediaQuery('(max-width:1040px)')
+
 
     return (
 
         <Grid container item xs={12} minHeight={400}>
             <TabContext value={tab}>
-                <Grid container item xs={12} md={3} lg={2} mt={10} borderLeft={{xs: "none", md: "5px solid #069f69"}}>
+                <Grid container item xs={12} md={ matches1040 ? 3 : 2} mt={10} borderLeft={{xs: "none", md: "5px solid #069f69"}}>
                     <Tabs onChange={tabChangeHandler} value={tab} orientation={matchesMD ? "horizontal" : "vertical"}>
                         <Tab label="اطلاعات کاربر" value="1" sx={styles.tab}/>
                         <Tab label="لیست علاقمندی ها" value="2" sx={styles.tab}/>

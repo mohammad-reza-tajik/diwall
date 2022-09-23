@@ -5,7 +5,7 @@ import {useContext, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Product from "../../components/Product";
 import Pagination from "../../components/Pagination";
-import loadingContext from "../../store/loading-context";
+import loadingContext from "../../context/loading-context";
 
 const Products = () => {
 

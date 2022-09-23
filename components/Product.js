@@ -4,7 +4,7 @@ import {Favorite} from "@mui/icons-material";
 import {useRouter} from "next/router";
 import {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import authContext from "../store/auth-context";
+import authContext from "../context/auth-context";
 
 
 const styles = {
@@ -30,9 +30,9 @@ const Product = (props) => {
     const router = useRouter()
     // console.log(props)
     const authCtx = useContext(authContext)
+    const isFavorite = authCtx.user?.favoriteList.includes(props._id)
     // const [heartIsVisible, setHeartIsVisible] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const isFavorite = authCtx.user?.favoriteList.includes(props._id)
     const [image, setImage] = useState("/assets/pictures/product_placeholder.png")
 
     // const [isFavorite,setIsFavorite] = useState(false)
@@ -62,7 +62,7 @@ const Product = (props) => {
 
     }
 
-    const addToFavorites = () => {
+    const addToFavoritesHandler = () => {
         if (authCtx.isAuthenticated) {
             setIsLoading(true)
             if (isFavorite) {
@@ -97,7 +97,7 @@ const Product = (props) => {
             <Grid item xs={12} borderRadius={2} position={"relative"} overflow={"hidden"}
                   cursor={"pointer"}>
                 <Grid item sx={styles.addToFavoritesButton}>
-                    <IconButton onClick={addToFavorites}>
+                    <IconButton onClick={addToFavoritesHandler}>
                         {isLoading ? <CircularProgress size={matchesMD ? matchesSM ? 30 : 40 : 40} sx={{
                             borderRadius: 20,
                             p: {xs:4,md:5,},

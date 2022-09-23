@@ -12,7 +12,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Link from "next/link";
-import loadingContext from "../store/loading-context";
+import loadingContext from "../context/loading-context";
 import SectionHeading from "./SectionHeading";
 
 

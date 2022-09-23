@@ -21,8 +21,8 @@ import {Fragment, useContext, useRef, useState} from "react";
 // import "../styles/SignIn.css";
 import axios from "axios";
 import {useRouter} from "next/router";
-import AuthContext from "../store/auth-context";
-import loadingContext from "../store/loading-context";
+import AuthContext from "../context/auth-context";
+import loadingContext from "../context/loading-context";
 
 
 const styles = {

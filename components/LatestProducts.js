@@ -11,7 +11,7 @@ import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import loadingContext from "../store/loading-context";
+import loadingContext from "../context/loading-context";
 
 
 const styles = {}

@@ -2,7 +2,7 @@ import {Avatar, Grid, IconButton, ListItem, TextField, Typography, useMediaQuery
 import Image from "next/image";
 import {AddCircleOutline, Delete, RemoveCircleOutline} from "@mui/icons-material";
 import {useContext, useState} from "react";
-import authContext from "../store/auth-context";
+import authContext from "../context/auth-context";
 import axios from "axios";
 import {useRouter} from "next/router";
 

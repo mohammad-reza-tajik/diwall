@@ -2,7 +2,7 @@ import {Grid, IconButton, ListItemIcon, Menu, MenuItem, Typography} from "@mui/m
 import {Login, Logout, Person, Search , Menu as Humburger} from "@mui/icons-material";
 import {Fragment, useContext, useState} from "react";
 import {useRouter} from "next/router";
-import authContext from "../../store/auth-context";
+import authContext from "../../context/auth-context";
 import Link from "next/link";
 import Image from "next/image";
 

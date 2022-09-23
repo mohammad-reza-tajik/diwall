@@ -29,8 +29,8 @@ import Link from "next/link";
 import {Fragment, useContext, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
-import authContext from "../../store/auth-context"
-import loadingContext from "../../store/loading-context";
+import authContext from "../../context/auth-context"
+import loadingContext from "../../context/loading-context";
 
 const styles = {
     seeAllButton: {

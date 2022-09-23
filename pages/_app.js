@@ -6,12 +6,12 @@ import theme from "../styles/theme";
 import {Grid, ThemeProvider} from "@mui/material";
 import Footer from "../components/Footer";
 import {useRouter} from "next/router";
-import AuthContext from "../store/auth-context"
-import LoadingContext from "../store/loading-context";
+import AuthContext from "../context/auth-context"
+import LoadingContext from "../context/loading-context";
 import {useEffect, useState} from "react"
 import {getStoredToken, removeToken, storeTokenAndUser} from "../middleware/tokenManager";
 import axios from "axios";
-import authContext from "../store/auth-context";
+import authContext from "../context/auth-context";
 
 
 function MyApp({Component, pageProps}) {
