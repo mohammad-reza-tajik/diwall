@@ -1,6 +1,5 @@
 import '../styles/Globals.css';
 import "../styles/Fonts.css";
-import Header from "../components/Header";
 import Head from "next/head"
 import theme from "../styles/theme";
 import {Grid, ThemeProvider} from "@mui/material";
@@ -9,9 +8,8 @@ import {useRouter} from "next/router";
 import AuthContext from "../context/auth-context"
 import LoadingContext from "../context/loading-context";
 import {useEffect, useState} from "react"
-import {getStoredToken, removeToken, storeTokenAndUser} from "../middleware/tokenManager";
+import {removeToken, storeTokenAndUser} from "../Utilities";
 import axios from "axios";
-import authContext from "../context/auth-context";
 
 
 function MyApp({Component, pageProps}) {
@@ -47,11 +45,11 @@ function MyApp({Component, pageProps}) {
             if (userId && userId !== "undefined") {
                 axios.post("/api/get-user", {userId, token}).then(res => {
 
-                    setUser(res.data.user)
-                    storeTokenAndUser(res.data.user)
-                    setIsAuthenticated(true)
-                    setTimeout(removeToken, 3600000)
-                    console.log(res)
+                        setUser(res.data.user)
+                        storeTokenAndUser(res.data.user)
+                        setIsAuthenticated(true)
+                        setTimeout(removeToken, 3600000)
+                        console.log(res)
                     }
                 ).catch(e => console.log(e))
 
@@ -111,13 +109,17 @@ function MyApp({Component, pageProps}) {
                         <title>
                             دیوال : فروشگاه پوستر و کاغذ دیواری
                         </title>
+                        <meta charSet="utf-8"/>
+                        <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="keywords" content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری" />
                     </Head>
                     <Grid container direction={"row"} justifyContent={"center"}>
                         <Grid item xs={11}>
-                        {/*{router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Header/>}*/}
+                            {/*{router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Header/>}*/}
 
                             <Component {...pageProps} />
-                        {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Footer/>}
+                            {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Footer/>}
                         </Grid>
                     </Grid>
                 </ThemeProvider>

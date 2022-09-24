@@ -1,6 +1,14 @@
 import jwt from "jsonwebtoken"
 import axios from "axios";
 
+
+export  const IdGenerator =function () {
+    return (Math.random()+ Math.random()).toString(16).slice(2)+
+           (Math.random()+Math.random()).toString(36).slice(2)+
+           new Date().getTime().toString(36);
+}
+
+
 export const generateToken = (user) => {
     return jwt.sign({userId: user._id}, "thisIsPrivate", {expiresIn: "1h"})
 }
@@ -50,4 +58,8 @@ export const removeToken = () => {
     if (typeof window !== 'undefined')
         localStorage.clear()
 }
+
+
+
+
 
