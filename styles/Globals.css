@@ -196,4 +196,8 @@ input[type=number] {
   font-size: 14px;
 }
 
+.css-n8417t-MuiSvgIcon-root-MuiPaginationItem-icon {
+  transform: rotate(180deg);
+}
+
 /*# sourceMappingURL=Globals.css.map */

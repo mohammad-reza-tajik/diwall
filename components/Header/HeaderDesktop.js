@@ -144,7 +144,7 @@ const HeaderDesktop = () => {
     const [searchResults, setSearchResults] = useState([])
     const [searchResultsDisplay, setSearchResultsDisplay] = useState("none")
 
-    const {isLoading, setIsLoading} = useContext(loadingContext)
+    // const {isLoading, setIsLoading} = useContext(loadingContext)
 
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matches1277 = useMediaQuery('(max-width:1277px)')
@@ -211,8 +211,8 @@ const HeaderDesktop = () => {
                 })
             setSearch("")
         }).catch(err => {
-            setIsLoading(true)
-            // console.log(err)
+            // setIsLoading(true)
+            console.log(err)
 
         })
 

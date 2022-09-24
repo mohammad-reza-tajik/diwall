@@ -105,7 +105,7 @@ const Profile = () => {
                     </Tabs>
 
                 </Grid>
-                <Grid container item xs={12} md={9} lg={10} height={500}>
+                <Grid container item xs={12} md={9} lg={10}>
                     {/*height 500 because tab indicator for third tab gets stuck at a wrong place*/}
                     <TabPanel value="1" sx={{width: 1}}>
                         <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40}>

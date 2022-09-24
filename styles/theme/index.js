@@ -4,7 +4,7 @@ const theme = createTheme({
 
 
     spacing: 1,
-    direction: "rtl",
+    // direction: "rtl",
     common: {
         white: "#eee",
         black: "#1d1d1e"
@@ -15,6 +15,7 @@ const theme = createTheme({
         mode: "light",
 
         primary: {
+            light:"#01faa2",
             main: "#069f69",
             // main: "#000",
         },
@@ -57,10 +58,6 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     fontSize: "1.6rem",
-                    "&::placeholder": {
-                        color: "blue"
-                    }
-
                 },
 
             }
@@ -83,9 +80,9 @@ const theme = createTheme({
         MuiPaginationItem:{
             styleOverrides:{
                 root:{
-                    fontSize:16,
+                    fontSize:14,
                     padding:10,
-                    color:"#333"
+                    color:"#333",
 
                 }
             }
