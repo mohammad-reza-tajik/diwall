@@ -1,4 +1,4 @@
-import {Box, Button, Grid, IconButton, TextField, Typography,Divider} from "@mui/material";
+import {Box, Button, Divider, Grid, IconButton, TextField, Typography} from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import {Circle, Instagram, LinkedIn, LocalPhoneOutlined, Telegram, Twitter} from "@mui/icons-material";
@@ -6,7 +6,7 @@ import {Circle, Instagram, LinkedIn, LocalPhoneOutlined, Telegram, Twitter} from
 
 const styles = {
     footer_link: {
-        fontSize: "1.4rem",
+        fontSize: 14,
         color: "#444",
         transition: "color .4s",
 
@@ -15,18 +15,18 @@ const styles = {
         }
     },
     signInField: {
-        width: .65
+        width: 1
     },
-    footer_download_button:{
-        fontSize:12,
-        fontWeight:700,
-        gap:10,
-        alignItems:"center",
-        color:"#000",
-        border:"1px solid #000",
+    footer_download_button: {
+        fontSize: 12,
+        fontWeight: 700,
+        gap: 10,
+        alignItems: "center",
+        color: "#000",
+        border: "1px solid #000",
         transition: "all .4s",
 
-        "&:hover" : {
+        "&:hover": {
             filter: "invert(32%) sepia(64%) saturate(541%) hue-rotate(107deg) brightness(94%) contrast(102%)"
         },
 
@@ -37,94 +37,98 @@ const styles = {
 const Footer = () => {
 
     return (
-        <Grid container item xs={12} component={"footer"} justifyContent={"space-around"} mt={100}>
-            <Grid container item direction={"column"} xs={2} alignItems={"flex-start"} gap={7}>
-                <Grid item mb={10}>
-                    <Typography variant={"h5"} color={"#444"} fontSize={18} fontWeight={700}>فروشگاه دیوال</Typography>
+        <Grid container item xs={12} component={"footer"} justifyContent={{xs:"center",md:"space-between"}} mt={100}>
+            <Grid container item xs={6} md={2} alignItems={"flex-start"} spacing={10}>
+                <Grid item xs={12} mb={10}>
+                    <Typography variant={"h5"} color={"#444"} fontSize={18} fontFamily={"dana-demibold"}>فروشگاه
+                        دیوال</Typography>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10} xs={12}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>پوستر سفارشی</Box>
                     </Link>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
-                    <Circle sx={{fontSize: 5, color: "#666"}}/>
-                    <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>نمونه کارها</Box>
-                    </Link>
-                </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                {/*<Grid item container alignItems={"center"} gap={10} xs={12}>*/}
+                {/*    <Circle sx={{fontSize: 5, color: "#666"}}/>*/}
+                {/*    <Link href={"/cloths"}>*/}
+                {/*        <Box component={"a"} sx={styles.footer_link}>نمونه کارها</Box>*/}
+                {/*    </Link>*/}
+                {/*</Grid>*/}
+                <Grid item container alignItems={"center"} gap={10} xs={12}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>همکاری با ما</Box>
                     </Link>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10} xs={12}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>تماس با ما</Box>
                     </Link>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10} xs={12}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>درباره ما</Box>
                     </Link>
                 </Grid>
             </Grid>
-            <Grid container item direction={"column"} xs={2} alignItems={"flex-start"} gap={7}>
+            <Grid container item xs={6} md={2} alignItems={"flex-start"} spacing={10}>
                 <Grid item mb={10}>
-                    <Typography variant={"h5"} color={"#444"} fontSize={18} fontWeight={700}>خدمات دیوال</Typography>
+                    <Typography variant={"h5"} color={"#444"} fontSize={18} fontFamily={"dana-demibold"}>خدمات
+                        دیوال</Typography>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>مشاوره رایگان</Box>
                     </Link>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>دیدن آلبوم ها در منزل</Box>
                     </Link>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>اندازه گیری دقیق و برآورد هزینه</Box>
+                        <Box component={"a"} sx={styles.footer_link}> برآورد هزینه</Box>
                     </Link>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10} xs={"auto"}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>اجرای کار توسط متخصصین</Box>
                     </Link>
                 </Grid>
             </Grid>
-            <Grid container item direction={"column"} xs={2} alignItems={"flex-start"} gap={7}>
+            <Grid container item xs={2} display={{xs: "none", lg: "flex"}} alignItems={"flex-start"} spacing={10}>
                 <Grid item mb={10}>
-                    <Typography variant={"h5"} color={"#444"} fontSize={18} fontWeight={700}>خدمات مشتریان</Typography>
+                    <Typography variant={"h5"} color={"#444"} fontSize={18} fontFamily={"dana-demibold"}>
+                        خدمات مشتریان
+                    </Typography>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>پرسش های متداول</Box>
                     </Link>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>تحویل و ارسال کالا</Box>
                     </Link>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>سیاست حفظ حریم خصوصی</Box>
                     </Link>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
+                <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
                         <Box component={"a"} sx={styles.footer_link}>شرایط و قوانین</Box>
@@ -134,74 +138,106 @@ const Footer = () => {
 
             {/********************************************************************************/}
 
-            <Grid container item direction={"column"} xs={4} alignItems={"flex-start"} gap={7}>
-                <Grid item mb={10}>
-                    <Typography variant={"h5"} color={"#444"} fontSize={18} fontWeight={700}>دیوال را دنبال
+            <Grid container item xs={12} md={5} lg={4} alignItems={"center"} my={{xs: 30, md: 0}}>
+                <Grid item xs={"auto"} md={12}>
+                    <Typography variant={"h5"} color={"#444"} fontSize={{xs: 14, md: 18}} fontFamily={"dana-demibold"}>
+                        دیوال
+                        را دنبال
                         کنید</Typography>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10}>
-                    <Link href={"/cloths"}>
+                <Grid item container justifyContent={{xs:"flex-end",md:"flex-start"}} alignItems={"center"} xs md={12}>
+                    <Grid item xs={"auto"}>
                         <IconButton>
                             <Telegram color={"primary"}
-                                      sx={{fontSize: 50, border: "2px solid #11AE77", borderRadius: "50px", p: 10}}/>
+                                      sx={{
+                                          fontSize: {xs: 30, md: 50},
+                                          border: {xs: "none", md: "2px solid #11AE77"},
+                                          borderRadius: "50px",
+                                          p: {xs: 1, md: 7}
+                                      }}/>
                         </IconButton>
-                    </Link>
-                    <Link href={"/cloths"}>
-                        <IconButton>
-                            <Instagram color={"primary"}
-                                       sx={{fontSize: 50, border: "2px solid #11AE77", borderRadius: "50px", p: 10}}/>
-                        </IconButton>
-                    </Link>
-                    <Link href={"/cloths"}>
+                    </Grid>
+
+                    <Grid item xs={"auto"}>
                         <IconButton>
                             <Twitter color={"primary"}
-                                     sx={{fontSize: 50, border: "2px solid #11AE77", borderRadius: "50px", p: 10}}/>
+                                     sx={{
+                                         fontSize: {xs: 30, md: 50},
+                                         border: {xs: "none", md: "2px solid #11AE77"},
+                                         borderRadius: "50px",
+                                         p: {xs: 1, md: 7}
+                                     }}/>
                         </IconButton>
-                    </Link>
-                    <Link href={"/cloths"}>
+                    </Grid>
+                    <Grid item xs={"auto"}>
+                        <IconButton>
+                            <Instagram color={"primary"}
+                                       sx={{
+                                           fontSize: {xs: 30, md: 50},
+                                           border: {xs: "none", md: "2px solid #11AE77"},
+                                           borderRadius: "50px",
+                                           p: {xs: 1, md: 7}
+                                       }}/>
+                        </IconButton>
+                    </Grid>
+
+                    <Grid item xs={"auto"}>
                         <IconButton>
                             <LinkedIn color={"primary"}
-                                      sx={{fontSize: 50, border: "2px solid #11AE77", borderRadius: "50px", p: 10}}/>
+                                      sx={{
+                                          fontSize: {xs: 30, md: 50},
+                                          border: {xs: "none", md: "2px solid #11AE77"},
+                                          borderRadius: "50px",
+                                          p: {xs: 1, md: 7}
+                                      }}/>
                         </IconButton>
-                    </Link>
+                    </Grid>
+
+
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={10} mt={15}>
-                    <Typography variant={"h4"} fontSize={20} color={"#444"}>
+                <Grid item container alignItems={"center"} gap={10} mt={30} xs={12}>
+                    <Typography variant={"h4"} fontSize={{xs: 16, md: 18}} color={"#444"}>
                         از جدیدترین تخفیفات <Box component={"span"}
-                                                 sx={{fontFamily:"dana-black", color: "primary.main"}}>دیوال</Box> با خبر شوید!
+                                                 sx={{fontFamily: "dana-black", color: "primary.main"}}>دیوال</Box> با
+                        خبر شوید!
                     </Typography>
                 </Grid>
-                <Grid item container direction={"row"} alignItems={"center"} gap={5} mt={15}>
-                    <TextField sx={styles.signInField} placeholder={"ایمیل خود را وارد کنید"}/>
-                    <Button variant={"contained"} sx={{height: 55, fontSize: 16}}>عضویت</Button>
+                <Grid item container alignItems={"center"} gap={5} mt={15} xs={12}>
+                    <Grid item xs sm={6} md>
+                        <TextField sx={styles.signInField} type={"email"} placeholder={"ایمیل خود را وارد کنید"}/>
+                    </Grid>
+                    <Grid item xs={"auto"}>
+                        <Button variant={"contained"} sx={{height: 55, fontSize: 16}}>عضویت</Button>
+                    </Grid>
                 </Grid>
             </Grid>
 
-            <Grid container item alignItems={"center"} justifyContent={"space-around"} my={40}>
-                <Grid container item direction={"column"} xs={10} gap={10}>
-                    <Grid item>
-                        <Typography variant={"h4"} color={"#444"} fontFamily={"dana-black"}>الو <Box component={"span"} sx={{
-                            color: "primary.main"
-                        }}>دیوال</Box></Typography>
+            <Grid container item alignItems={"center"} justifyContent={"space-between"} my={40} xs={12} display={{xs:"none",md:"flex"}}>
+                <Grid container item xs={"auto"} gap={10}>
+                    <Grid item xs={12}>
+                        <Typography variant={"h4"} color={"#444"} fontFamily={"dana-black"}>الو <Box component={"span"}
+                                                                                                     sx={{
+                                                                                                         color: "primary.main"
+                                                                                                     }}>دیوال</Box></Typography>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
                         <Typography variant={"h5"} color={"#444"}>24 ساعت در هفت روز هفته آماده خدمت رسانی به مشتریان
                             هستیم</Typography>
                     </Grid>
 
                 </Grid>
-                <Grid container item direction={"row"} xs={2}>
-                    <Grid container item direction={"column"} xs={6}>
-                        <Grid item>
-                            <Typography fontWeight={700} color={"#888"} fontSize={18}
+                <Grid container item xs={"auto"} justifyContent={"flex-end"}>
+                    <Grid container item xs={6}>
+                        <Grid item xs={12}>
+                            <Typography color={"#888"} fontSize={18} fontFamily={"dana-demibold"}
                                         variant={"subtitle1"}>021464879</Typography>
                         </Grid>
-                        <Grid item mt={"-.7rem"}>
+                        <Grid item xs={12}>
                             <Typography color={"#888"} fontSize={12} variant={"subtitle1"}>پشتیبانی مشتریان</Typography>
                         </Grid>
 
                     </Grid>
-                    <Grid item container justifyContent={"center"} alignItems={"flex-end"} xs={2} mr={"-.7rem"}>
+                    <Grid item container alignItems={"flex-end"} xs={"auto"}>
                         <Grid item>
                             <LocalPhoneOutlined sx={{fontSize: 35}} color={"primary"}/>
                         </Grid>
@@ -210,12 +246,13 @@ const Footer = () => {
             </Grid>
 
 
-            <Grid container item justifyContent={"space-between"} alignItems={"center"}>
-                <Grid container item direction={"column"} gap={10} xs={8}>
-                    <Typography variant={"h4"} color={"#444"} fontFamily={"dana-black"}>فروشگاه اینترنتی <Box component={"span"} sx={{
+            <Grid container item justifyContent={"space-between"} alignItems={"center"} spacing={{xs:0,lg:50}}>
+                <Grid container item gap={10} xs={12} lg>
+                    <Typography variant={"h4"} color={"#444"} fontFamily={"dana-black"} fontSize={{xs:16,md:20}}>فروشگاه اینترنتی <Box
+                        component={"span"} sx={{
                         color: "primary.main"
                     }}>دیوال</Box></Typography>
-                    <Typography variant={"h5"} color={"#444"}>پوستر دیواری الگوی بسیار مناسبی از یک متریال ایده آل و
+                    <Typography variant={"h5"} lineHeight={1.5} textAlign={"justify"} display={"block"}  color={"#444"} fontSize={{xs:14,md:16}}>پوستر دیواری الگوی بسیار مناسبی از یک متریال ایده آل و
                         پرکاربرد در
                         دکوراسیون
                         داخلی بوده که توانسته با
@@ -233,73 +270,87 @@ const Footer = () => {
                         خرید برای شما فراهم می گردد تا ما بتوانیم خدمت ویژه خود را برای شما عزیزان فراهم کنیم.
                     </Typography>
                 </Grid>
-                <Grid container item xs={3}>
+                <Grid container justifyContent={"center"} item xs={12} lg={"auto"}>
                     <Grid item>
-                        <Image src={"/assets/pictures/enamad.png"} alt={"نماد اعتماد الکترونیکی"} width={150} height={150}/>
+                        <Image src={"/assets/pictures/enamad.png"} alt={"نماد اعتماد الکترونیکی"} width={150}
+                               height={150}/>
                     </Grid>
                     <Grid item>
-                        <Image src={"/assets/pictures/national_digital_media_badge.png"} alt={"نشان ملی ثبت رسانه های دیجیتال"} width={150} height={150}/>
+                        <Image src={"/assets/pictures/national_digital_media_badge.png"}
+                               alt={"نشان ملی ثبت رسانه های دیجیتال"} width={150} height={150}/>
                     </Grid>
                 </Grid>
             </Grid>
 
             {/*****************************************************************************************/}
 
-            <Grid item mt={20} xs={11}>
-                <Divider sx={{width:1,bgcolor:"#ddd"}} />
+            <Grid item mt={20} xs={12}>
+                <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
             </Grid>
 
-            <Grid container item my={40} alignItems={"center"} justifyContent={"space-between"}>
-                <Grid container item gap={20} xs={5}>
-                    <Link href={"/"} >
+            <Grid container item xs={12} my={40} alignItems={"center"} justifyContent={"space-between"} >
+                <Grid container item gap={20} xs={12} md={"auto"} display={{xs:"none",lg:"flex"}}>
+                    <Link href={"/"}>
                         <Box component={"a"} sx={styles.footer_link}>
                             همکاری با ما
                         </Box>
                     </Link>
-                    <Link href={"/"} >
+                    <Link href={"/"}>
                         <Box component={"a"} sx={styles.footer_link}>
                             سفارش پوستر اختصاصی
                         </Box>
                     </Link>
-                    <Link href={"/"} >
+                    <Link href={"/"}>
                         <Box component={"a"} sx={styles.footer_link}>
                             نمونه کارها
                         </Box>
                     </Link>
-                    <Link href={"/"} >
+                    <Link href={"/"}>
                         <Box component={"a"} sx={styles.footer_link}>
                             راهنمای استفاده
                         </Box>
                     </Link>
                 </Grid>
-                <Grid container item xs={5} gap={10} alignItems={"center"}>
+
+                <Grid container item xs={12} lg={"auto"} gap={{xs:20,md:10}} justifyContent={"space-between"} alignItems={"center"}>
+                    <Grid item xs={12} md={"auto"}>
+
                     <Typography variant={"h5"} color={"#444"}>
                         دانلود اپلیکیشن دیوال :
                     </Typography>
-                    <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"} endIcon={<Image src={"/assets/icons/google_play.svg"} alt={"apple_store"} height={15} width={15} />}>
+                    </Grid>
+                    <Grid container item xs={12} md={"auto"} gap={10} justifyContent={{xs:"center",md:"flex-start"}}>
+
+
+                    <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"}
+                            endIcon={<Image src={"/assets/icons/google_play.svg"} alt={"apple_store"} height={15}
+                                            width={15}/>}>
                         <Box component={"span"} position={"relative"} top={2}>
 
                             Apple Store
                         </Box>
                     </Button>
-                    <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"} endIcon={<Image src={"/assets/icons/apple.svg"} alt={"apple_store"} height={15} width={15} />}>
+                    <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"}
+                            endIcon={<Image src={"/assets/icons/apple.svg"} alt={"apple_store"} height={15}
+                                            width={15}/>}>
                         <Box component={"span"} position={"relative"} top={2}>
 
-                        Google Play
+                            Google Play
                         </Box>
                     </Button>
 
+                    </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={11}>
-                <Divider sx={{width:1,bgcolor:"#ddd"}} />
+            <Grid item xs={12}>
+                <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
             </Grid>
             <Grid container item justifyContent={"center"} alignItems={"center"} my={20}>
-                <Typography variant={"h6"} color={"#444"}>
-                    تمامی حقوق مادی و معنوی این سایت متعلق به دیوال می باشد و هر گونه کپی برداری پیگرد قانونی خواهد داشت .
+                <Typography variant={"h6"} fontSize={{xs:12,md:14}} color={"#444"} textAlign={"center"}>
+                    تمامی حقوق مادی و معنوی این سایت متعلق به دیوال می باشد و هر گونه کپی برداری پیگرد قانونی خواهد داشت
+                    .
                 </Typography>
             </Grid>
-
 
 
         </Grid>

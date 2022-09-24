@@ -11,6 +11,7 @@ const styles = {
     product: {
         boxShadow: "2px 2px 2px rgba(20,20,20,.2) ",
         borderRadius: 2,
+        justifyContent:"center",
         p: 10,
         bgcolor: "#fff"
         // gap:10
@@ -92,7 +93,7 @@ const Product = (props) => {
 
 
     return (
-        <Grid container item direction={"column"} sx={styles.product} xs={12}>
+        <Grid container item sx={styles.product} xs={12}>
 
             <Grid item xs={12} borderRadius={2} position={"relative"} overflow={"hidden"}
                   cursor={"pointer"}>
@@ -124,8 +125,8 @@ const Product = (props) => {
                 <Image src={image} onClick={clickHandler} alt={"product"} width={400} height={400}
                        className={"pointer"}/>
             </Grid>
-            <Grid container item height={50} alignItems={"center"}>
-                <Grid item xs onClick={clickHandler}>
+            <Grid container item height={50} alignItems={"center"} xs={12}>
+                <Grid item xs={12} onClick={clickHandler}>
                     <Typography variant={"h4"} fontSize={{xs: 12, md :14,lg:16}} fontFamily={"dana-demibold"}
                                 className={"pointer"} lineHeight={1.5}>{props.title}</Typography>
                 </Grid>

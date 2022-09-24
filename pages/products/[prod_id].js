@@ -227,16 +227,16 @@ const ProductDetails = () => {
                                 </Typography>
                         }
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
                         {
                             isLoading ?
-                                <Fragment>
+                                <Grid item>
                                     <Skeleton variant="text" width={300} animation={"wave"} sx={{fontSize: {xs: 14, md: 16}}}/>
                                     <Skeleton variant="text" width={300} animation={"wave"} sx={{fontSize: {xs: 14, md: 16}}}/>
                                     <Skeleton variant="text" width={300} animation={"wave"} sx={{fontSize: {xs: 14, md: 16}}}/>
                                     <Skeleton variant="text" width={300} animation={"wave"} sx={{fontSize: {xs: 14, md: 16}}}/>
                                     <Skeleton variant="text" width={300} animation={"wave"} sx={{fontSize: {xs: 14, md: 16}}}/>
-                                </Fragment>
+                                </Grid>
                                 :
                                 <Typography variant={"caption"} fontSize={{xs: 14, md: 16}}
                                             lineHeight={{xs: 1.8, md: 1.6}}>

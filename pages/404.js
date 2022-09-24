@@ -4,6 +4,7 @@ import Image from "next/image"
 // import Footer from "../components/Footer";
 import {Fragment} from "react";
 import Link from "next/link";
+import Head from "next/head";
 // import {useRouter} from "next/router";
 
 
@@ -11,30 +12,14 @@ const styles = {
     container: {
         minWidth: "100vw",
         minHeight: "100vh",
-        // backgroundColor: "#02011e",
-        // backgroundImage:"url('assets/pictures/hero_img4.jpg')",
-        // backgroundRepeat:"no-repeat",
-        // backgroundSize:"100% 100%",
-        // filter:"blur(5px)",
-        // backgroundColor: "#069f69",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        zIndex: 50,
+        // position: "fixed",
+        // top: 0,
+        // left: 0,
+        // zIndex: 50,
         overflow:"scroll"
         // my:100
     },
-    form: {
-        bgcolor: "white.main",
-        alignItems: "center",
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        width: {xs: 1, md: 570},
-        height: {xs: "100vh", md: 570},
-        // boxShadow:"2px 2px 5px rgba(0,0,0,.4)",
-        zIndex: "mobileStepper"
 
-    },
 
 
 
@@ -45,8 +30,14 @@ const NotFound = () => {
     // console.log(router)
 
     return (
+        <Fragment>
+        <Head>
+            <title>
+                صفحه مورد نظر پیدا نشد !
+            </title>
+        </Head>
             <Grid container item xs={12} justifyContent={"center"} alignItems={"center"} px={10} sx={styles.container}>
-                <Grid container item xs={12} gap={30} position={"relative"} top={-70}>
+                <Grid container item xs={12} gap={30}>
 
                 <Grid container justifyContent={"center"} item xs={12}>
                     <Image src={"/assets/pictures/not_found_page2.svg"} width={400} height={400}/>
@@ -73,6 +64,7 @@ const NotFound = () => {
 
 
             </Grid>
+        </Fragment>
     )
 }
 
