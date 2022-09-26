@@ -315,7 +315,7 @@ const ProductDetails = () => {
                                     }
                                 </Button>
                             </Grid>
-                            <Grid item xs md={"auto"} justifyContent={"flex-end"}>
+                            <Grid item xs sm={"auto"} justifyContent={"flex-end"}>
                                 <Button
                                     onClick={addToCartHandler}
                                     variant={"contained"}

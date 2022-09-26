@@ -34,6 +34,8 @@ const styles = {
     }
 }
 
+console.log("hello from footer")
+
 const Footer = () => {
 
     return (

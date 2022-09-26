@@ -26,7 +26,7 @@ import {
 } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
-import {Fragment, useContext, useState} from "react";
+import {Fragment, useCallback, useContext, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import authContext from "../../context/auth-context"
@@ -141,8 +141,10 @@ const HeaderDesktop = () => {
 
     const [search, setSearch] = useState("")
     const [isWrong, setIsWrong] = useState(false)
-    const [searchResults, setSearchResults] = useState([])
+    // const [searchResults, setSearchResults] = useState([])
     const [searchResultsDisplay, setSearchResultsDisplay] = useState("none")
+    const [temp,setTemp]=useState(true)
+
 
     // const {isLoading, setIsLoading} = useContext(loadingContext)
 
@@ -194,12 +196,7 @@ const HeaderDesktop = () => {
             return
         }
         setIsWrong(false)
-        // setSearchResultsDisplay("flex")
-        // setIsLoading(true)
         axios.post(`/api/products`, {search}).then(res => {
-            // setSearchResults(res.data)
-            // loadingCtx.loading()
-            // router.query.search = search
             router.push(
                 {
                     pathname: `/products`,
@@ -211,20 +208,20 @@ const HeaderDesktop = () => {
                 })
             setSearch("")
         }).catch(err => {
-            // setIsLoading(true)
             console.log(err)
 
         })
 
 
     }
+        // console.log("hello from header")
 
 
-    const clearSearchHandler = () => {
+
+    const clearSearchHandler = useCallback( () => {
         setSearch("")
-        setSearchResultsDisplay("none")
+    },[])
 
-    }
     const authCtx = useContext(authContext)
     // console.log(authCtx)
     const closeButton = <InputAdornment position="end">
@@ -378,40 +375,6 @@ const HeaderDesktop = () => {
             </Grid>
             <MainNavigation/>
         </Grid>
-
     )
-
 }
-
 export default HeaderDesktop
-
-
-{/******** handling search results *******/}
-
-{/*{<Grid container item sx={{...styles.searchResultsContainer, display: searchResultsDisplay}}>*/}
-{/*    {isLoading ? <CircularProgress color={"primary"} size={45}/> :*/}
-{/*        <List sx={styles.list}>*/}
-{/*            {searchResults.length === 0 &&*/}
-{/*                <ListItem>*/}
-{/*                    <Typography variant={"h4"} fontSize={20} color={"#666"}>نتیجه ای پیدا*/}
-{/*                        نشد!</Typography>*/}
-
-{/*                </ListItem>}*/}
-{/*            {searchResults.length !== 0 && searchResults.map((item) => {*/}
-{/*                return (*/}
-{/*                    <ListItem button divider sx={styles.listItem} key={item._id}>*/}
-{/*                        <Image src={item.image} width={90} height={90} alt={item.title}/>*/}
-{/*                        <Typography variant={"h4"} fontSize={18} color={"#666"}>*/}
-{/*                            {item.title}*/}
-{/*                        </Typography>*/}
-{/*                    </ListItem>*/}
-{/*                )*/}
-{/*            })}*/}
-{/*            {!isLoading && searchResults.length !== 0 && <ListItem button sx={styles.seeAllButton}>*/}
-{/*                <Typography variant={"h4"} fontSize={18} color={"#666"}>مشاهده همه</Typography>*/}
-{/*            </ListItem>*/}
-{/*            }*/}
-
-{/*        </List>*/}
-{/*    }*/}
-{/*</Grid>}*/}

@@ -20,7 +20,7 @@ const styles = {}
 const LatestProducts = (props) => {
 
 
-    const {isLoading ,setIsLoading} = useContext(loadingContext)
+    const {setIsLoading} = useContext(loadingContext)
     const [latestProducts, setLatestProducts] = useState([])
     // const router = useRouter()
 

@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://127.0.0.1:27017/online_shop")
+
+// console.log(process.env.mongodb_url)
+
+mongoose.connect(process.env.mongodb_url)
     .then(() => {
     console.log("connected to db successfully!")
 }).catch((err) => console.log(err))

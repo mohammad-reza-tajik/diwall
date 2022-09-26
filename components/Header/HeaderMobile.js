@@ -138,12 +138,7 @@ const HeaderMobile = () => {
         }
         setIsWrong(false)
         console.log(searchRef.current.value)
-        // setSearchResultsDisplay("flex")
-        // setIsLoading(true)
         axios.post(`/api/products`, {search:searchRef.current.value}).then(res => {
-            // setSearchResults(res.data)
-            // loadingCtx.loading()
-            // router.query.search = search
             router.push(
                 {
                     pathname: `/products`,
@@ -155,9 +150,7 @@ const HeaderMobile = () => {
                 })
             searchRef.current.value = ""
             setOpenSearchDrawer(false)
-            // setSearch("")
         }).catch(err => {
-            // setIsLoading(true)
             console.log(err)
 
         })
@@ -166,14 +159,6 @@ const HeaderMobile = () => {
     }
 
 
-
-
-
-    // const closeButton = <InputAdornment position="end">
-    //     <IconButton onClick={()=>searchRef.current.value = ""}>
-    //         <Close sx={{...styles.closeIcon, opacity: searchRef.current?.value.trim() === "" ? 0 : 1}}/>
-    //     </IconButton>
-    // </InputAdornment>
 
     return (
         <Grid container item xs={12}>
