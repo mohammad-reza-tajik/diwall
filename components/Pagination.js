@@ -8,7 +8,7 @@ const Pagination = (props) => {
     const router = useRouter()
     // console.log(props)
     // console.log(props)
-    console.log("hellor from pagination")
+    // console.log("hellor from pagination")
 
     useEffect(()=>{
         if (router.query.page)

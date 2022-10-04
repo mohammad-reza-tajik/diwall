@@ -21,7 +21,7 @@ const Places = () => {
     const router = useRouter();
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    console.log("hello from places")
+    // console.log("hello from places")
 
 
     return (

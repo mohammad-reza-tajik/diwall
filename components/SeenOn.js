@@ -7,7 +7,7 @@ const SeenOn = () => {
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     // const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-    console.log("hello from seen on")
+    // console.log("hello from seen on")
 
     return (
         <Grid container item component={"section"} xs={11} md={11} mt={50} bgcolor={"white.main"}>

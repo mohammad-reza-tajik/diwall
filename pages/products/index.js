@@ -16,7 +16,7 @@ const Products = (props) => {
 
     const [isLoading, setIsLoading] = useState(false)
 
-    console.log("hello from products")
+    // console.log("hello from products")
 
     const router = useRouter()
     const {search,page,sortBy,category} = router.query
