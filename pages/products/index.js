@@ -1,31 +1,33 @@
 import {CircularProgress, Grid, Typography,} from "@mui/material";
 import SectionHeading from "../../components/SectionHeading";
 import axios from "axios";
-import {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Product from "../../components/Product";
 import Pagination from "../../components/Pagination";
-import loadingContext from "../../context/loading-context";
 
-const Products = () => {
+const Products = (props) => {
+    console.log(props)
 
 
     const [products, setProducts] = useState([])
     const [pageInformation, setPageInformation] = useState(1)
     // const [title , setTitle] = useState("همه محصولات")
 
-    const {isLoading, setIsLoading} = useContext(loadingContext)
+    const [isLoading, setIsLoading] = useState(false)
+
+    console.log("hello from products")
 
     const router = useRouter()
-
+    const {search,page,sortBy,category} = router.query
 
     useEffect(() => {
         setIsLoading(true)
         axios.post("/api/products", {
-            search: router.query.search,
-            page: +router.query.page || 1,
-            sortBy: +router.query.sortBy || 1,
-            category: router.query.category
+            search: search,
+            page: +page || 1,
+            sortBy: +sortBy || 1,
+            category: category
 
         }).then(res => {
             // console.log(res.data)
@@ -38,7 +40,7 @@ const Products = () => {
             console.log(err)
 
         })
-    }, [router.query.search, router.query.page, router.query.sortBy])
+    }, [search,page,sortBy])
 
 
     return (
@@ -99,4 +101,16 @@ const Products = () => {
     )
 }
 
-export default Products
+export async function getStaticProps(context){
+    console.log(context.params)
+    console.log("hello from getStaticProps")
+    return {
+        props:{
+            name:"hello"
+        },
+        revalidate: 5
+    }
+
+}
+
+export default React.memo(Products)

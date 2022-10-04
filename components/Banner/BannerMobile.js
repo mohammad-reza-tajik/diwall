@@ -32,7 +32,7 @@ const BannerMobile = () => {
 
 
     return (
-        <Grid container item direction={"row"} justifyContent={"center"} component={"section"} mb={40} minWidth={"100vw"}>
+        <Grid container item xs direction={"row"} justifyContent={"center"} component={"section"} mb={40} minWidth={"100vw"}>
             <Grid container item direction={"column"} xs={12} sx={styles.bannerTextBox}>
                 <Grid container item justifyContent={"center"}>
                     <Typography lineHeight={1.4} fontFamily={"dana-black"} variant={"h1"} fontSize={25}

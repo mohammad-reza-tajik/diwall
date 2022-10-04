@@ -95,13 +95,6 @@ function MyApp({Component, pageProps}) {
 
 
                 },
-                // addToFavorites(product) {
-                //     this.favoriteList.push(product)
-                // },
-                // addToCart(product) {
-                //     console.log("hello from context")
-                //     // this.cart.push(product)
-                // }
             }}>
 
 

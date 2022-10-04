@@ -32,27 +32,33 @@ const Profile = () => {
     const router = useRouter()
     const authCtx = useContext(authContext)
     // console.log(router)
-    // const [isLoading,setIsLoading] = useState(false)
-    const {isLoading, setIsLoading} = useContext(loadingContext)
-
+    const [isLoading, setIsLoading] = useState(false)
     const [favoriteList, setFavoriteList] = useState([])
     const [cart, setCart] = useState([])
-
     const [tab, setTab] = useState("1");
 
 
     const tabChangeHandler = (_, newTab) => {
         setTab(newTab);
-        router.push({pathname: router.pathname, query: {...router.query, tab: newTab}})
+        // router.push({pathname: router.pathname, query: {...router.query, tab: newTab}})
     };
 
     const queryTab = router.query.tab
 
     useEffect(() => {
-        if (router.query.tab) {
-            setTab(router.query.tab.toString())
+        // console.log(authCtx.isAuthenticated)
+        if (authCtx.isAuthenticated) {
+            if (router.query.tab) {
+                setTab(router.query.tab.toString())
 
-        } else router.isReady && router.push({pathname: router.pathname, query: {...router.query, tab: 1}})
+            }
+        }
+        else {
+            router.replace("/sign-in").then(()=>console.log("hello"))
+
+        }
+        // else
+        //     router.isReady && router.push({pathname: router.pathname, query: {...router.query, tab: 1}})
 
     }, [queryTab])
 

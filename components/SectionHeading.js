@@ -33,8 +33,8 @@ const SectionHeading = (props) => {
         if (router.query.sortBy)
             setSortBy(+router.query.sortBy)
 
-        else
-            router.push({pathname: router.pathname, query: {...router.query, sortBy}}).then(()=>{})
+        // else
+            // router.push({pathname: router.pathname, query: {...router.query, sortBy}}).then(()=>{})
 
     }
     }, [])

@@ -45,8 +45,9 @@ const MostPopularProducts = (props) => {
     return (
         <Grid container item xs alignItems={"center"} justifyContent={"center"}>
 
-            <Grid container item justifyContent={"center"} alignItems={"center"} bgcolor={"primary.main"}
-                  p={matchesMD ? matchesSM ? 15 : 30 : 50} width={"100vw"}>
+            <Grid container item alignItems={"center"} justifyContent={"center"} bgcolor={"primary.main"}
+                  p={matchesMD ? matchesSM ? 15 : 30 : 50}
+                  width={"100vw"}>
                 {matchesLG ?
                     <SectionHeading text={"محبوب ترین محصولات"} seeAll={true} route={"/products?sortBy=3"} white/> :
                     <Grid container item xs={2} direction={"column"} alignItems={"flex-start"} gap={50}>

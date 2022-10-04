@@ -2,7 +2,7 @@ import {CircularProgress, Grid, IconButton, Typography, useMediaQuery, useTheme}
 import Image from "next/image"
 import {Favorite} from "@mui/icons-material";
 import {useRouter} from "next/router";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import authContext from "../context/auth-context";
 
@@ -156,4 +156,4 @@ const Product = (props) => {
     )
 }
 
-export default Product
+export default React.memo(Product)
