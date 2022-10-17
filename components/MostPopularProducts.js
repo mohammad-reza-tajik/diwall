@@ -14,11 +14,13 @@ import 'swiper/css/scrollbar';
 import Link from "next/link";
 import loadingContext from "../context/loading-context";
 import SectionHeading from "./SectionHeading";
+// import {useContext} from "react";
 
 
 const styles = {}
 
 const MostPopularProducts = (props) => {
+    // const { mostPopularProducts } = props.products
 
     const {isLoading, setIsLoading} = useContext(loadingContext)
     const [mostPopularProducts, setMostPopularProducts] = useState([])
@@ -81,6 +83,7 @@ const MostPopularProducts = (props) => {
                                 </SwiperSlide>)}
                         </Swiper>
                     </Grid>
+
                 }
 
 

@@ -17,7 +17,7 @@ import loadingContext from "../context/loading-context";
 const styles = {}
 
 
-const BestSellingProducts = (props) => {
+const BestSellingProducts = () => {
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
@@ -59,6 +59,7 @@ const BestSellingProducts = (props) => {
                         </SwiperSlide>)}
                 </Swiper>
             }
+
         </Grid>
     )
 

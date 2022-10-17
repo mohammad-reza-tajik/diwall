@@ -1,14 +1,15 @@
 import {useRouter} from "next/router";
-import {Box, Button, CircularProgress, Grid, List, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Box, Button, CircularProgress, Grid, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@mui/material";
 import TabPanel from '@mui/lab/TabPanel';
-import {useContext, useEffect, useState} from "react";
+import {Fragment, useContext, useEffect, useState} from "react";
 import {TabContext} from "@mui/lab";
 import authContext from "../../context/auth-context";
-import SectionHeading from "../../components/SectionHeading";
+// import SectionHeading from "../../components/SectionHeading";
 import CartItem from "../../components/CartItem"
 import Product from "../../components/Product";
 import axios from "axios";
-import loadingContext from "../../context/loading-context";
+import Head from "next/head";
+// import loadingContext from "../../context/loading-context";
 
 const styles = {
     tab: {
@@ -17,7 +18,6 @@ const styles = {
         fontFamily: "dana-demibold",
         // my: 10,
         // mt:10
-        // bgcolor:"primary"
     },
     list: {
         width: 1,
@@ -33,6 +33,8 @@ const Profile = () => {
     const authCtx = useContext(authContext)
     // console.log(router)
     const [isLoading, setIsLoading] = useState(false)
+    // const [pageTitle,setPageTitle] = useState("لطفا صبر کنید ...")
+
     const [favoriteList, setFavoriteList] = useState([])
     const [cart, setCart] = useState([])
     const [tab, setTab] = useState("1");
@@ -44,6 +46,7 @@ const Profile = () => {
     };
 
     const queryTab = router.query.tab
+    
 
     useEffect(() => {
         // console.log(authCtx.isAuthenticated)
@@ -85,33 +88,44 @@ const Profile = () => {
     }, [currentUserFavoriteList, currentUserCart])
 
 
-    // const [tab, setTab] = useState(1);
-    //
-    // const handleChange = (event, tab) => {
-    //     if (tab !== null)
-    //         setTab(tab);
-    // };
+
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
+    // const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+    // const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
     const matches1040 = useMediaQuery('(max-width:1040px)')
 
 
     return (
+        <Fragment>
+            <Head>
+                <title>
+                    حساب کاربری
+                </title>
+            </Head>
 
-        <Grid container item xs={12} minHeight={400}>
+
+        <Grid container item xs={12} minHeight={400} alignItems={"flex-start"}>
             <TabContext value={tab}>
                 <Grid container item xs={12} md={ matches1040 ? 3 : 2} mt={10} borderLeft={{xs: "none", md: "5px solid #069f69"}}>
-                    <Tabs onChange={tabChangeHandler} value={tab} orientation={matchesMD ? "horizontal" : "vertical"}>
+                    <Tabs
+                        
+                        // the following lines are for solving strange behavior in tabs indicator in phone for cart tab
+
+                        TabIndicatorProps={{
+                        sx: {
+                            top: "85%",
+                            left:0
+                        }
+                    }} onChange={tabChangeHandler} value={tab} orientation={matchesMD ? "horizontal" : "vertical"}>
                         <Tab label="اطلاعات کاربر" value="1" sx={styles.tab}/>
                         <Tab label="لیست علاقمندی ها" value="2" sx={styles.tab}/>
                         <Tab label="سبد خرید" value="3" sx={styles.tab}/>
                     </Tabs>
 
                 </Grid>
-                <Grid container item xs={12} md={9} lg={10}>
+                <Grid container item xs={12} md={9} lg={10} minHeight={400}>
                     {/*height 500 because tab indicator for third tab gets stuck at a wrong place*/}
                     <TabPanel value="1" sx={{width: 1}}>
                         <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40}>
@@ -247,7 +261,10 @@ const Profile = () => {
             </TabContext>
 
 
-        </Grid>)
+        </Grid>
+
+        </Fragment>
+            )
 }
 
 export default Profile

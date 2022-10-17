@@ -6,6 +6,7 @@ import {useRouter} from "next/router";
 import Product from "../../components/Product";
 import Pagination from "../../components/Pagination";
 
+
 const Products = (props) => {
     console.log(props)
 
@@ -101,16 +102,15 @@ const Products = (props) => {
     )
 }
 
-export async function getStaticProps(context){
-    console.log(context.params)
-    console.log("hello from getStaticProps")
-    return {
-        props:{
-            name:"hello"
-        },
-        revalidate: 5
-    }
-
-}
+// export async function getStaticProps(context){
+//     console.log(context)
+//     console.log("hello from getStaticProps")
+//
+//     return {
+//         props:{
+//
+//         }
+//     }
+// }
 
 export default React.memo(Products)

@@ -36,8 +36,8 @@ body {
   overflow-x: hidden !important;
   position: relative;
   //padding: 1rem;
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
 
 }
 
@@ -73,6 +73,7 @@ button{
 
 
 }
+
 
 .btn-primary{
   background-color: $color-primary;
@@ -127,11 +128,15 @@ input[type=number] {
   font-size: 14px;
 }
 
-.css-n8417t-MuiSvgIcon-root-MuiPaginationItem-icon{
-  transform: rotate(180deg);
-
-
-}
+//.css-n8417t-MuiSvgIcon-root-MuiPaginationItem-icon{
+//  transform: rotate(180deg);
+//
+//
+//}
+//
+//.MuiModal-root , .MuiDrawer-root {
+//  direction: ltr !important;
+//}
 //.MuiPagination-root {
   //direction: ltr !important;
 //}

@@ -21,6 +21,7 @@ import loadingContext from "../../context/loading-context";
 import SectionHeading from "../../components/SectionHeading";
 import authContext from "../../context/auth-context";
 import {Favorite, FavoriteBorder, ShoppingBagOutlined} from "@mui/icons-material";
+import Head from "next/head";
 
 
 const styles = {
@@ -60,6 +61,7 @@ const ProductDetails = () => {
     const [relatedProducts, setRelatedProducts] = useState([])
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToFavoritesLoading, setAddToFavoritesLoading] = useState(false)
+    const [pageTitle,setPageTitle] = useState("لطفا صبر کنید ...")
     // const [isInCart, setIsInCart] = useState(false)
     const [presetSizes, setPresetSizes] = useState("1")
     const [imageURL, setImageURL] = useState("/assets/pictures/product_placeholder.png")
@@ -92,6 +94,7 @@ const ProductDetails = () => {
             setImageURL(res.data.productDetails.image_full)
             setProduct(res.data.productDetails)
             setRelatedProducts(res.data.relatedProducts)
+            setPageTitle(res.data.productDetails.title)
             // console.log(res.data.productDetails[0])
             setIsLoading(false)
         }).catch(e => console.log(e))
@@ -175,6 +178,14 @@ const ProductDetails = () => {
 
 
     return (
+        <Fragment>
+            <Head>
+                <title>
+                    {pageTitle}
+                </title>
+                <meta name={"description"} content={pageTitle} />
+            </Head>
+
         <Grid container item xs={12}>
             <Grid container item xs={12} justifyContent={"center"}>
                 <Grid container item xs={12} md={5} justifyContent={"center"} height={{xs:350,md:"auto"}}
@@ -355,6 +366,7 @@ const ProductDetails = () => {
 
 
         </Grid>
+        </Fragment>
     )
 
 

@@ -126,8 +126,6 @@ body {
   width: 100vw;
   overflow-x: hidden !important;
   position: relative;
-  display: flex;
-  flex-direction: column;
 }
 
 a,
@@ -194,10 +192,6 @@ input[type=number] {
 .MuiTooltip-tooltip, .MuiTooltip-arrow::before {
   background-color: #333;
   font-size: 14px;
-}
-
-.css-n8417t-MuiSvgIcon-root-MuiPaginationItem-icon {
-  transform: rotate(180deg);
 }
 
 /*# sourceMappingURL=Globals.css.map */

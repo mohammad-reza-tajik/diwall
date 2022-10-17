@@ -30,21 +30,15 @@ const productSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    category:{
-        type:Array,
-        required:true
-    },
+    category:[{type:String}]   ,
     numbers_in_stock:{
         type:Number,
         required:true
     },
-    date:{
-        type:String,
-        required:true
-    }
 
 
-})
+
+},{timestamps:true})
 
 // export default mongoose.model("Product",productSchema)
 

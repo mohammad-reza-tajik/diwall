@@ -17,7 +17,8 @@ import loadingContext from "../context/loading-context";
 const styles = {}
 
 
-const LatestProducts = (props) => {
+const LatestProducts = () => {
+    // const { latestProducts } = props.products
 
 
     const {setIsLoading} = useContext(loadingContext)

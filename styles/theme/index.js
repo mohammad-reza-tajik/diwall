@@ -4,7 +4,7 @@ const theme = createTheme({
 
 
     spacing: 1,
-    // direction: "rtl",
+    direction: "rtl",
     common: {
         white: "#eee",
         black: "#1d1d1e"
@@ -77,12 +77,25 @@ const theme = createTheme({
                 }
             }
         },
+        MuiPagination:{
+            styleOverrides:{
+                root:{
+                    direction:"rtl"
+                }
+            }
+
+        }
+        ,
         MuiPaginationItem:{
+            defaultProps:{
+                dir:"rtl"
+            },
             styleOverrides:{
                 root:{
                     fontSize:14,
                     padding:10,
                     color:"#333",
+                    direction:"rtl"
 
                 }
             }
@@ -92,7 +105,8 @@ const theme = createTheme({
                 disableScrollLock:true
             }
 
-        }
+        },
+
 
     }
 

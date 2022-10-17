@@ -30,7 +30,7 @@ const Pagination = (props) => {
     }
 
     return (
-        <Grid component={"section"} container item xs={12} my={20} justifyContent={"center"} alignItems={"center"}>
+        <Grid component={"section"}  container item xs={12} my={20} justifyContent={"center"} alignItems={"center"}>
             <MUIPagination size={"large"} color={"primary"} variant={"outlined"} shape={"rounded"} count={props.lastPage}  page={page} hideNextButton={props.lastPage == 1 } hidePrevButton={props.lastPage == 1 } defaultPage={props.currentPage} onChange={pageHandler} />
         </Grid>
     )

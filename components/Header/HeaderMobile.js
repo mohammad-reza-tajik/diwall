@@ -166,7 +166,16 @@ const HeaderMobile = () => {
             <Grid container item xs={7} alignItems={"center"} spacing={10}>
                 <Grid container item xs={"auto"}>
 
-                    <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} anchor={"right"} open={openMenuDrawer} onOpen={()=>setOpenMenuDrawer(true)} onClose={()=> setOpenMenuDrawer(false)}>
+                    <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS}
+
+                                     // the following props is for fixing drawer in rtl languages
+
+                                     anchor={"left"} PaperProps={{
+                        sx: {
+                            left: 'unset !important',
+                            right: '0 !important'
+                        }
+                    }} open={openMenuDrawer} onOpen={()=>setOpenMenuDrawer(true)} onClose={()=> setOpenMenuDrawer(false)}>
                         <Grid container item xs={12} width={matchesSM ? "75vw" : "50vw"} p={20} >
 
 
@@ -255,7 +264,7 @@ const HeaderMobile = () => {
 
                 <Grid container item xs={"auto"} position={"relative"} top={3}>
                     <Link href={"/"} passHref>
-                        <Typography variant={"caption"} fontFamily={"dana-black"} color={"primary"} fontSize={25}>
+                        <Typography className={"pointer"} variant={"caption"} fontFamily={"dana-black"} color={"primary"} fontSize={25}>
                             Dival
                         </Typography>
                     </Link>
