@@ -64,7 +64,7 @@ const ProductDetails = () => {
     const [pageTitle,setPageTitle] = useState("لطفا صبر کنید ...")
     // const [isInCart, setIsInCart] = useState(false)
     const [presetSizes, setPresetSizes] = useState("1")
-    const [imageURL, setImageURL] = useState("/assets/pictures/product_placeholder.png")
+    // const [imageURL, setImageURL] = useState("/assets/pictures/product_placeholder.png")
 
     const [isLoading, setIsLoading] = useState(false)
     // const isInCart = authCtx.user?.cart.includes(product._id)
@@ -91,7 +91,7 @@ const ProductDetails = () => {
             productId: router.query.prod_id
         }).then(res => {
             //
-            setImageURL(res.data.productDetails.image_full)
+            // setImageURL(res.data.productDetails.image_full)
             setProduct(res.data.productDetails)
             setRelatedProducts(res.data.relatedProducts)
             setPageTitle(res.data.productDetails.title)
@@ -194,7 +194,7 @@ const ProductDetails = () => {
                         isLoading ? <Skeleton variant="rectangular" animation={"wave"} width={500}
                                               sx={{height: {xs: 350, md: 500}}}/>
                             :
-                            <Image src={imageURL} alt={"product-image"} layout={"fill"}/>
+                            <Image src={`/assets/pictures/products/${product.title}.jpg`} alt={`${product.title}`} layout={"fill"}/>
                     }
                 </Grid>
 

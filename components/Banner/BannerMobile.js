@@ -1,6 +1,6 @@
-import {Box, Button, Grid, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Button, Grid, Typography,} from "@mui/material";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 
 
 
@@ -10,7 +10,7 @@ const styles = {
         // borderRadius:"5rem",
     },
     bannerTextBox:{
-        backgroundImage:"linear-gradient(rgba(44, 44, 44,.6),rgba(44, 44, 44,.6)) ,  url('/assets/pictures/hero_img5.jpg')",
+        backgroundImage:"linear-gradient(rgba(44, 44, 44,.6),rgba(44, 44, 44,.6)) ,  url('/assets/pictures/hero-image-mobile.jpg')",
         // backgroundSize:"100% 100%",
         backgroundSize:{xs:"100% 100%",sm:"cover"},
         // backgroundPosition:"center",

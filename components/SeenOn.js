@@ -13,27 +13,27 @@ const SeenOn = () => {
         <Grid container item component={"section"} xs={11} md={11} mt={50} bgcolor={"white.main"}>
             <ImageList sx={{width: 1}}  cols={ matchesMD ? 3 :6} gap={50} rowHeight={matchesMD ? 20 :100}>
                 <ImageListItem>
-                    <Image src={"/assets/pictures/digistyle.svg"} alt={"دیجی استایل"}
+                    <Image src={"/assets/pictures/seen-on/digistyle.svg"} alt={"دیجی استایل"}
                            width={80} height={80} layout={"responsive"}  />
                 </ImageListItem>
                 <ImageListItem>
-                    <Image src={"/assets/pictures/ganjeh.svg"} alt={"گنجه"}
+                    <Image src={"/assets/pictures/seen-on/ganjeh.svg"} alt={"گنجه"}
                            width={80} height={80} layout={"responsive"}/>
                 </ImageListItem>
                 <ImageListItem>
-                    <Image src={"/assets/pictures/fidibo.svg"} alt={"فیدیبو"}
+                    <Image src={"/assets/pictures/seen-on/fidibo.svg"} alt={"فیدیبو"}
                            width={80} height={80} layout={"responsive"}/>
                 </ImageListItem>
                 <ImageListItem>
-                    <Image src={"/assets/pictures/digiexpress.svg"} alt={"دیجی اکپرس"}
+                    <Image src={"/assets/pictures/seen-on/komoda.svg"} alt={"دیجی اکپرس"}
                            width={80} height={80} layout={"responsive"}/>
                 </ImageListItem>
                 <ImageListItem>
-                    <Image src={"/assets/pictures/pindo.svg"} alt={"پیندو"}
+                    <Image src={"/assets/pictures/seen-on/pindo.svg"} alt={"پیندو"}
                            width={80} height={80} layout={"responsive"}/>
                 </ImageListItem>
                 <ImageListItem>
-                    <Image src={"/assets/pictures/magnet.svg"} alt={"مگنت"}
+                    <Image src={"/assets/pictures/seen-on/magnet.svg"} alt={"مگنت"}
                            width={80} height={80} layout={"responsive"}/>
                 </ImageListItem>
             </ImageList>

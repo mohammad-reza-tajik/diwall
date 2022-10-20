@@ -237,7 +237,7 @@ const HeaderDesktop = () => {
                 <Grid container item xs={"auto"} pl={10}>
                     <Link href={"/"}>
                         <a>
-                            <Image src={"/assets/pictures/logo3.png"} alt={"dival-logo"} width={80}
+                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={80}
                                    height={80}/>
                         </a>
                     </Link>

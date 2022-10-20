@@ -69,7 +69,7 @@ const styles = {
         left: 0,
         width: "100vw",
         height: "100vh",
-        backgroundImage: "linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)) , url('assets/pictures/hero_img4.jpg')",
+        backgroundImage: "linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)) , url('assets/pictures/hero-image-desktop.jpg')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
         filter: "blur(5px)",
@@ -201,7 +201,7 @@ const SignIn = () => {
                 <Grid item my={20}>
                     <Link href={"/"}>
                         <a>
-                            <Image src={"/assets/pictures/logo3.png"} alt={"logo"} width={100}
+                            <Image src={"/assets/pictures/logo.png"} alt={"logo"} width={100}
                                    height={100}/>
                         </a>
                     </Link>

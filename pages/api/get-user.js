@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         const userId = req.body.userId
         let token = req.body.token
 
-        console.log(token)
+        // console.log(token)
 
         if (userId && token) {
             const tokenIsValid = await validateToken(token)
@@ -34,7 +34,7 @@ export default async function handler(req, res) {
 
             token = generateToken(user)
 
-            console.log(token)
+            // console.log(token)
             // console.log(user)
             res.send({
                 user: {

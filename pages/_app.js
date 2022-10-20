@@ -54,9 +54,11 @@ function MyApp({Component, pageProps}) {
                     }
                 ).catch(e => {
 
-                    localStorage.clear()
-                    // console.log(e)
-                }
+                        localStorage.clear()
+                        setIsAuthenticated(false)
+
+                        // console.log(e)
+                    }
                 )
 
             }

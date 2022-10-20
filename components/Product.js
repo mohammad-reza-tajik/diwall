@@ -34,7 +34,7 @@ const Product = (props) => {
     const isFavorite = authCtx.user?.favoriteList.includes(props._id)
     // const [heartIsVisible, setHeartIsVisible] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const [image, setImage] = useState("/assets/pictures/product_placeholder.png")
+    // const [image, setImage] = useState("/assets/pictures/product_placeholder.png")
 
     // const [isFavorite,setIsFavorite] = useState(false)
     // const {isLoading ,setIsLoading} = useContext(loadingContext)
@@ -47,11 +47,11 @@ const Product = (props) => {
 
 
     // if image is not loaded use the placeholder
-    useEffect(() => {
-        if (props.image) {
-            setImage(props.image)
-        }
-    }, [props.image])
+    // useEffect(() => {
+        // if (props.image) {
+            // setImage(props.image)
+        // }
+    // }, [props.image])
 
 
     const clickHandler = async () => {
@@ -122,7 +122,7 @@ const Product = (props) => {
                     </IconButton>
                 </Grid>
 
-                <Image src={image} onClick={clickHandler} alt={"product"} width={400} height={400}
+                <Image src={`/assets/pictures/products/${props.title}.jpg`} onClick={clickHandler} alt={`${props.title}`} width={400} height={400}
                        className={"pointer"}/>
             </Grid>
             <Grid container item height={50} alignItems={"center"} xs={12}>

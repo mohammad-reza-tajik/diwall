@@ -40,7 +40,7 @@ const NotFound = () => {
                 <Grid container item xs={12} gap={30}>
 
                 <Grid container justifyContent={"center"} item xs={12}>
-                    <Image src={"/assets/pictures/not_found_page2.svg"} width={400} height={400} alt={"صفحه مورد نظر شما یافت نشد !"}/>
+                    <Image src={"/assets/pictures/not_found_page.svg"} width={400} height={400} alt={"صفحه مورد نظر شما یافت نشد !"}/>
                 </Grid>
                 <Grid container justifyContent={"center"} item  xs={12}>
                     <Typography variant={"h1"} fontFamily={"dana-black"} sx={{color: "#333",fontSize:{xs:25,md:40}}}>
