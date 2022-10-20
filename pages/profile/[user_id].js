@@ -46,7 +46,9 @@ const Profile = () => {
     };
 
     const queryTab = router.query.tab
-    
+    const isAuthenticated = authCtx.isAuthenticated
+
+
 
     useEffect(() => {
         // console.log(authCtx.isAuthenticated)
@@ -63,14 +65,14 @@ const Profile = () => {
         // else
         //     router.isReady && router.push({pathname: router.pathname, query: {...router.query, tab: 1}})
 
-    }, [queryTab])
+    }, [queryTab,isAuthenticated])
 
     const currentUserFavoriteList = authCtx.user?.favoriteList
     const currentUserCart = authCtx.user?.cart
 
     useEffect(() => {
 
-        if (authCtx.isAuthenticated) {
+        if (isAuthenticated) {
             setIsLoading(true)
 
 

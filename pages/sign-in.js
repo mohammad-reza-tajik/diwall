@@ -133,7 +133,7 @@ const SignIn = () => {
     )
 
     const authContext = useContext(AuthContext)
-    const {isLoading, setIsLoading} = useContext(loadingContext)
+    const [isLoading, setIsLoading] = useState(false)
 
 
     //********************************* form submission **********************************!//
