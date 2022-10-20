@@ -62,7 +62,7 @@ const BannerDesktop = () => {
             </Grid>
             <Grid item xs={12} md={8}>
                 <Box sx={styles.heroImageBox} ref={imageRef}>
-                     <Image src={"/assets/pictures/hero_img4.jpg"} alt={"hero_image_interior_design"}  layout="fill"/>
+                     <Image src={"/assets/pictures/hero-image-desktop.jpg"} alt={"hero_image_interior_design"}  layout="fill"/>
                 </Box>
             </Grid>
         </Grid>

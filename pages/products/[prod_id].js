@@ -194,7 +194,7 @@ const ProductDetails = () => {
                         isLoading ? <Skeleton variant="rectangular" animation={"wave"} width={500}
                                               sx={{height: {xs: 350, md: 500}}}/>
                             :
-                            <Image src={`/assets/pictures/products/${product.title}.jpg`} alt={`${product.title}`} layout={"fill"}/>
+                            <Image src={`/assets/pictures/products/${product.title ?.replaceAll(" ","-")}.jpg`} alt={`${product.title}`} layout={"fill"}/>
                     }
                 </Grid>
 

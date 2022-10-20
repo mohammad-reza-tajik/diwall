@@ -190,8 +190,22 @@ input[type=number] {
 }
 
 .MuiTooltip-tooltip, .MuiTooltip-arrow::before {
-  background-color: #333;
-  font-size: 14px;
+  background-color: #333 !important;
+  font-size: 14px !important;
+}
+
+.MuiSnackbarContent-root, .css-1qe5cpw-MuiPaper-root-MuiSnackbarContent-root {
+  justify-content: space-between !important;
+}
+
+.MuiSnackbarContent-action, .css-1kr9x0n-MuiSnackbarContent-action {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.MuiSnackbarContent-message, .css-1exqwzz-MuiSnackbarContent-message {
+  font-size: 15px !important;
 }
 
 /*# sourceMappingURL=Globals.css.map */

@@ -75,7 +75,6 @@ const Profile = () => {
         if (isAuthenticated) {
             setIsLoading(true)
 
-
             axios.post("/api/get-favorite-list-and-cart", {
                 userId: authCtx.user?.userId, token: authCtx.user?.token
             }).then(res => {

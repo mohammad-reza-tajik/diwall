@@ -74,16 +74,16 @@ const styles = {
         backgroundSize: "100% 100%",
         filter: "blur(5px)",
     },
-    snackbar: {
-        '& .css-1kr9x0n-MuiSnackbarContent-action': {
-            mr: 70,
-            pl: .1
-        },
-
-        '& .css-1exqwzz-MuiSnackbarContent-message': {
-            p: 13
-        },
-    }
+    // snackbar: {
+    //     '& .css-1kr9x0n-MuiSnackbarContent-action': {
+    //         mr: 70,
+    //         pl: .1
+    //     },
+    //
+    //     '& .css-1exqwzz-MuiSnackbarContent-message': {
+    //         p: 13
+    //     },
+    // }
 
 
 }
@@ -291,15 +291,11 @@ const SignIn = () => {
             </Grid>
             <Snackbar
                 open={openSnackbar}
-                autoHideDuration={5000}
+                autoHideDuration={500000}
                 sx={{
-                    ...styles.snackbar,
-                    '& .css-1qe5cpw-MuiPaper-root-MuiSnackbarContent-root': {
-                        fontSize: "16px !important",
                         fontFamily: "dana-demibold",
                         // width:"70px",
-                        backgroundColor: (error === false ? "success.main" : "error.main"),
-                    },
+                        backgroundColor: "error.main !important",
                 }}
                 message={message}
                 onClose={closeSnackbarHandler}

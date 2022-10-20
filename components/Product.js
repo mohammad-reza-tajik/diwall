@@ -122,7 +122,7 @@ const Product = (props) => {
                     </IconButton>
                 </Grid>
 
-                <Image src={`/assets/pictures/products/${props.title}.jpg`} onClick={clickHandler} alt={`${props.title}`} width={400} height={400}
+                <Image src={`/assets/pictures/products/${props.title ?.replaceAll(" ","-")}.jpg`} onClick={clickHandler} alt={`${props.title}`} width={400} height={400}
                        className={"pointer"}/>
             </Grid>
             <Grid container item height={50} alignItems={"center"} xs={12}>
