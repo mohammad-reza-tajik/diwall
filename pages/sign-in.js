@@ -120,83 +120,6 @@ const SignIn = () => {
     const passwordRef = useRef()
     const usernameOrEmailRef = useRef()
 
-    // //********************************** form fields touch states **********************************//
-    //
-    // const [usernameValueIsTouched, setUsernameValueIsTouched] = useState(false)
-    // const [emailValueIsTouched, setEmailValueIsTouched] = useState(false)
-    // const [passwordValueIsTouched, setPasswordValueIsTouched] = useState(false)
-    // const [usernameOrEmailValueIsTouched, setUsernameOrEmailValueIsTouched] = useState(false)
-    //
-    //
-    // //********************************** form fields helper text states **********************************//
-    //
-    // const [usernameHelperText, setUsernameHelperText] = useState("")
-    // const [emailHelperText, setEmailHelperText] = useState("")
-    // const [passwordHelperText, setPasswordHelperText] = useState("")
-    // const [usernameOrEmailHelperText, setUsernameOrEmailHelperText] = useState("")
-
-    //********************************** form fields change handlers **********************************//
-
-    /*const usernameChangeHandler = (e) => {
-        setUsernameValue(e.target.value)
-    }
-    const emailChangeHandler = (e) => {
-        setEmailValue(e.target.value)
-    }
-    const passwordChangeHandler = (e) => {
-        setPasswordValue(e.target.value)
-    }
-    const usernameOrEmailChangeHandler = (e) => {
-        setUsernameOrEmailValue(e.target.value)
-    }
-*/
-    /*const changHandler = (e) => {
-
-        let valid;
-        switch (e.target.id) {
-            case "username-field":
-                setUsernameValue(e.target.value)
-                valid = e.target.value.trim().length !== 0
-                if (!valid)
-                    setUsernameHelperText("نام کاربری باید حداکثر 3 کاراکتر داشته باشد !")
-                else
-                    setUsernameHelperText("")
-
-                break
-
-            case "email-field":
-                setEmailValue(e.target.value)
-                valid = e.target.value.toLowerCase().match(/\S+@\S+\.\S+/)
-                if (!valid)
-                    setEmailHelperText("ایمیل وارد شده صحیح نمی باشد !")
-                else
-                    setEmailHelperText("")
-                break
-
-            case "password-field":
-                setPasswordValue(e.target.value)
-                valid = e.target.value.length >= 6
-                if (!valid)
-                    setPasswordHelperText("رمز ورود باید حداقل 6 کاراکتر داشته باشد !")
-                else
-                    setEmailHelperText("")
-                break
-
-            case "username-or-email":
-                setUsernameOrEmailValue(e.target.value)
-                valid = e.target.value.length >= 3
-                if (!valid)
-                    setUsernameOrEmailHelperText("این فیلد باید بیش از 3 کاراکتر داشته باشد !")
-                else
-                    setUsernameOrEmailHelperText("")
-
-                break
-
-
-        }
-
-    }
-*/
 
     const router = useRouter()
 
@@ -241,7 +164,7 @@ const SignIn = () => {
                 setMessage(res.data.message)
                 setError(!res.data.ok)
                 authContext.login(res.data.user)
-                console.log(res)
+                // console.log(res)
                 setIsLoading(false)
                 openSnackbarHandler()
                 router.back()

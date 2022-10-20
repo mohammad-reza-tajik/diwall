@@ -57,7 +57,7 @@ const Profile = () => {
             }
         }
         else {
-            router.replace("/sign-in").then(()=>console.log("hello"))
+            router.replace("/sign-in")
 
         }
         // else

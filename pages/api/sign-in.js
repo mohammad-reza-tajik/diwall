@@ -1,7 +1,7 @@
 import "../../db/database_connect"
 import User from "../../db/userModel";
 import bcrypt from "bcryptjs";
-import {generateToken} from "../../Utilities";
+import {generateToken} from "../../utilities";
 
 const errorMessage1 = "این نام کاربری موجود نیست"
 const errorMessage2 = "نام کاربری یا رمز عبور نادرست است"

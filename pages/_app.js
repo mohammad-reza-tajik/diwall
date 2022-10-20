@@ -8,7 +8,7 @@ import {useRouter} from "next/router";
 import AuthContext from "../context/auth-context"
 import LoadingContext from "../context/loading-context";
 import {useEffect, useState} from "react"
-import {removeToken, storeTokenAndUser} from "../Utilities";
+import {removeToken, storeTokenAndUser} from "../utilities";
 import axios from "axios";
 import Header from "../components/Header";
 
@@ -49,10 +49,15 @@ function MyApp({Component, pageProps}) {
                         setUser(res.data.user)
                         storeTokenAndUser(res.data.user)
                         setIsAuthenticated(true)
-                        setTimeout(removeToken, 3600000)
-                        console.log(res)
+                        // setTimeout(removeToken, 3600000)
+                        // console.log(res)
                     }
-                ).catch(e => console.log(e))
+                ).catch(e => {
+
+                    localStorage.clear()
+                    // console.log(e)
+                }
+                )
 
             }
 
@@ -105,9 +110,10 @@ function MyApp({Component, pageProps}) {
                         </title>
                         <meta charSet="utf-8"/>
                         <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                        <meta name="keywords" content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری" />
-                        <meta name="description" content={"خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"} />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                        <meta name="keywords"
+                              content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری"/>
+                        <meta name="description" content={"خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"}/>
 
                     </Head>
                     <Grid container direction={"row"} justifyContent={"center"}>

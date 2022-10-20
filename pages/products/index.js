@@ -7,9 +7,7 @@ import Product from "../../components/Product";
 import Pagination from "../../components/Pagination";
 
 
-const Products = (props) => {
-    console.log(props)
-
+const Products = () => {
 
     const [products, setProducts] = useState([])
     const [pageInformation, setPageInformation] = useState(1)
