@@ -1,4 +1,4 @@
-import {Button, Grid, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Button, CircularProgress, Grid, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper';
 
@@ -14,6 +14,7 @@ import 'swiper/css/scrollbar';
 import Link from "next/link";
 import loadingContext from "../context/loading-context";
 import SectionHeading from "./SectionHeading";
+import React from "react";
 // import {useContext} from "react";
 
 
@@ -22,7 +23,7 @@ const styles = {}
 const MostPopularProducts = (props) => {
     // const { mostPopularProducts } = props.products
 
-    const {isLoading, setIsLoading} = useContext(loadingContext)
+    const [isLoading, setIsLoading] = useState(false)
     const [mostPopularProducts, setMostPopularProducts] = useState([])
 
     const theme = useTheme()
@@ -48,7 +49,7 @@ const MostPopularProducts = (props) => {
         <Grid container item xs alignItems={"center"} justifyContent={"center"}>
 
             <Grid container item alignItems={"center"} justifyContent={"center"} bgcolor={"primary.main"}
-                  p={{sm:15,md:30,lg:50}}
+                  p={{xs:15,md:30,lg:50}}
                   width={"100vw"}>
                 {matchesLG ?
                     <SectionHeading text={"محبوب ترین محصولات"} seeAll={true} route={"/products?sortBy=3"} white/> :
@@ -68,7 +69,12 @@ const MostPopularProducts = (props) => {
 
                     </Grid>
                 }
-                {isLoading && <p>Loading...</p>}
+                {isLoading &&
+
+                    <Grid container item xs justifyContent={"center"}>
+                        <CircularProgress color={"white"} size={45}/>
+                    </Grid>
+                }
                 {!isLoading &&
                     <Grid container item md={12} lg={8}>
                         <Swiper spaceBetween={matchesLG ? 5 : 20}

@@ -2,7 +2,7 @@ import {CircularProgress, Grid, IconButton, Typography, useMediaQuery, useTheme}
 import Image from "next/image"
 import {Favorite} from "@mui/icons-material";
 import {useRouter} from "next/router";
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import axios from "axios";
 import authContext from "../context/auth-context";
 

@@ -17,7 +17,6 @@ import {Fragment, useContext, useEffect, useState} from "react";
 import axios from "axios";
 import Features from "../../components/Features";
 import RelatedProducts from "../../components/RelatedProducts";
-import loadingContext from "../../context/loading-context";
 import SectionHeading from "../../components/SectionHeading";
 import authContext from "../../context/auth-context";
 import {Favorite, FavoriteBorder, ShoppingBagOutlined} from "@mui/icons-material";
@@ -354,9 +353,10 @@ const ProductDetails = () => {
             </Grid>
 
             {isLoading ?
-                <Grid item xs={12}>
-                    <Skeleton variant={"rectangular"} animation={"wave"} height={400}/>
+                <Grid container item xs justifyContent={"center"}>
+                    <CircularProgress color={"primary"} size={45}/>
                 </Grid>
+
                 :
                 <Grid item xs={12}>
                     <RelatedProducts products={relatedProducts}/>

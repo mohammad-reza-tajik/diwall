@@ -17,12 +17,9 @@ import {Close, Create, Email, Login, Password, Person} from "@mui/icons-material
 import Image from "next/image";
 import Link from "next/link"
 import {Fragment, useContext, useRef, useState} from "react";
-// import classes from "../styles/sign-in.modules.css"
-// import "../styles/SignIn.css";
 import axios from "axios";
 import {useRouter} from "next/router";
 import AuthContext from "../context/auth-context";
-import loadingContext from "../context/loading-context";
 
 
 const styles = {

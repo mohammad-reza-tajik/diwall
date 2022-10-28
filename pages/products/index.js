@@ -75,7 +75,7 @@ const Products = () => {
             </Grid>
             <Grid container item xs spacing={10}>
                 {isLoading ?
-                    <Grid container item xs={12} justifyContent={"center"}>
+                    <Grid container item xs justifyContent={"center"}>
                         <CircularProgress color={"primary"} size={45}/>
                     </Grid>
                     :

@@ -1,4 +1,4 @@
-import {Grid, useMediaQuery, useTheme} from "@mui/material";
+import {CircularProgress, Grid, useMediaQuery, useTheme} from "@mui/material";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper';
 
@@ -12,6 +12,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import loadingContext from "../context/loading-context";
+import React from "react";
 
 
 const styles = {}
@@ -25,7 +26,7 @@ const BestSellingProducts = () => {
     // const matchesXS = useMediaQuery(index.breakpoints.up("xs"))
     const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
-    const {isLoading ,setIsLoading} = useContext(loadingContext)
+    const [isLoading ,setIsLoading] = useState(false)
     const [bestSellingProducts, setBestSellingProducts] = useState([])
 
     useEffect(() => {
@@ -45,7 +46,11 @@ const BestSellingProducts = () => {
 
     return (
         <Grid container item xs={12} alignItems={"center"}>
-            {isLoading && <p>Loading...</p>}
+            {isLoading &&
+                <Grid container item xs justifyContent={"center"}>
+                <CircularProgress color={"primary"} size={45}/>
+            </Grid>
+            }
             {!isLoading &&
                 <Swiper spaceBetween={ matchesSM ? 5 : 20}
                         slidesPerView={matchesLG ? matchesMD ? 2 : 3 : 4}

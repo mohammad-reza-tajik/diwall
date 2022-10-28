@@ -1,11 +1,8 @@
-import {Box, Button, Grid, Typography} from "@mui/material";
+import {Button, Grid, Typography} from "@mui/material";
 import Image from "next/image"
-// import HeaderDesktop from "../components/Header/HeaderDesktop";
-// import Footer from "../components/Footer";
 import {Fragment} from "react";
 import Link from "next/link";
 import Head from "next/head";
-// import {useRouter} from "next/router";
 
 
 const styles = {
