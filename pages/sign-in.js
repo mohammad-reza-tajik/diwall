@@ -20,6 +20,7 @@ import {Fragment, useContext, useRef, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import AuthContext from "../context/auth-context";
+// import {useSelector , useDispatch} from "react-redux";
 
 
 const styles = {
@@ -92,6 +93,10 @@ const SignIn = () => {
     const [message, setMessage] = useState("")
     const [openSnackbar, setOpenSnackbar] = useState(false)
     const [typeOfForm, setTypeOfForm] = useState("signIn")
+
+
+    // const dispatch = useDispatch()
+    // const user = useSelector( state => )
 
 
 

@@ -11,6 +11,8 @@ import {useEffect, useState} from "react"
 import {removeToken, storeTokenAndUser} from "../utilities";
 import axios from "axios";
 import Header from "../components/Header";
+import {Provider} from "react-redux";
+import store from "../store/index"
 
 
 function MyApp({Component, pageProps}) {
@@ -118,6 +120,8 @@ function MyApp({Component, pageProps}) {
                         <meta name="description" content={"خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"}/>
 
                     </Head>
+                    <Provider store={store}>
+
                     <Grid container direction={"row"} justifyContent={"center"}>
                         <Grid item xs={11}>
                             {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Header/>}
@@ -126,6 +130,7 @@ function MyApp({Component, pageProps}) {
                             {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Footer/>}
                         </Grid>
                     </Grid>
+                    </Provider>
                 </ThemeProvider>
             </AuthContext.Provider>
         </LoadingContext.Provider>
