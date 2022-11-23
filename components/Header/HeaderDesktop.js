@@ -20,7 +20,6 @@ import {
     Login,
     Logout,
     Person,
-    PersonOutlined,
     Search,
     ShoppingBagOutlined
 } from "@mui/icons-material";
@@ -30,7 +29,9 @@ import {Fragment, useCallback, useContext, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import authContext from "../../context/auth-context"
-import loadingContext from "../../context/loading-context";
+import {useSelector, useDispatch} from "react-redux";
+import {userActions} from "../../store";
+
 
 const styles = {
     seeAllButton: {
@@ -138,12 +139,16 @@ const HeaderDesktop = () => {
 
     const theme = useTheme()
     const router = useRouter()
+    const user = useSelector(state => state)
+    const dispatch = useDispatch()
 
     const [search, setSearch] = useState("")
     const [isWrong, setIsWrong] = useState(false)
     // const [searchResults, setSearchResults] = useState([])
     const [searchResultsDisplay, setSearchResultsDisplay] = useState("none")
     const [temp,setTemp]=useState(true)
+
+
 
 
     // const {isLoading, setIsLoading} = useContext(loadingContext)
@@ -358,7 +363,10 @@ const HeaderDesktop = () => {
                                             پروفایل
                                         </Typography>
                                     </MenuItem>
-                                    <MenuItem onClick={() => authCtx.logout()}>
+                                    <MenuItem onClick={() => {
+                                        authCtx.logout()
+                                        dispatch(userActions.logout())
+                                    }}>
                                         <ListItemIcon>
                                             <Logout sx={{fontSize: 25}} color={"primary"}/>
                                         </ListItemIcon>

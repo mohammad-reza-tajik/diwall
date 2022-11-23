@@ -22,6 +22,8 @@ import authContext from "../../context/auth-context";
 import Link from "next/link";
 import Image from "next/image"
 import axios from "axios";
+import {userActions} from "../../store";
+import {useDispatch, useSelector} from "react-redux";
 
 
 const styles = {
@@ -84,6 +86,8 @@ const HeaderMobile = () => {
 
     const router = useRouter()
     const authCtx = useContext(authContext)
+    const user = useSelector(state => state)
+    const dispatch = useDispatch()
 
     const searchRef = useRef()
 
@@ -344,7 +348,10 @@ const HeaderMobile = () => {
                                         سبد خرید
                                     </Typography>
                                 </MenuItem>
-                                <MenuItem onClick={() => authCtx.logout()}>
+                                <MenuItem onClick={() => {
+                                    authCtx.logout();
+                                    dispatch(userActions.logout());
+                                }}>
                                     <ListItemIcon>
                                         <Logout sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>

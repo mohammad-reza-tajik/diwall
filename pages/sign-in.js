@@ -21,7 +21,7 @@ import axios from "axios";
 import {useRouter} from "next/router";
 import AuthContext from "../context/auth-context";
 import {useDispatch, useSelector} from "react-redux";
-import {userActions} from "../store/index"
+import {userActions} from "../store"
 
 
 const styles = {

@@ -6,10 +6,10 @@ import {configureStore, createSlice} from "@reduxjs/toolkit"
 const initialState = {
 
     isAuthenticated: false,
-    username: undefined,
-    email: undefined,
-    userId: undefined,
-    token: undefined,
+    username: null,
+    email: null,
+    userId: null,
+    token: null,
     cart: [],
     favoriteList: []
 
@@ -30,16 +30,16 @@ const userSlice = createSlice({
             state.favoriteList = action.payload.favoriteList;
             state.token = action.payload.token;
         },
-        // logout(state) {
-        //     state.isAuthenticated = false;
-        //     state.username = undefined;
-        //     state.email = undefined;
-        //     state.userId = undefined;
-        //     state.cart = [];
-        //     state.favoriteList = [];
-        //     state.token = undefined;
-        //
-        // },
+        logout(state) {
+            state.isAuthenticated = false;
+            state.username = null;
+            state.email = null;
+            state.userId = null;
+            state.cart = [];
+            state.favoriteList = [];
+            state.token = null;
+
+        },
         addToFavorites(state,action) {
         },
         addToCart(state,action) {
