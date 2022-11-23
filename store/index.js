@@ -1,11 +1,18 @@
 // import {createStore} from "redux"
 import {configureStore, createSlice} from "@reduxjs/toolkit"
+// import {generateToken} from "../utilities";
 
 
 const initialState = {
 
     isAuthenticated: false,
-    user: {},
+    username: undefined,
+    email: undefined,
+    userId: undefined,
+    token: undefined,
+    cart: [],
+    favoriteList: []
+
 
 }
 
@@ -14,11 +21,25 @@ const userSlice = createSlice({
     name: "user" ,
     initialState ,
     reducers : {
-        login(state) {
-            state.isAuthenticated = true
+        login(state , action) {
+            state.isAuthenticated = true;
+            state.username = action.payload.username;
+            state.email =action.payload.email;
+            state.userId = action.payload.userId;
+            state.cart = action.payload.cart;
+            state.favoriteList = action.payload.favoriteList;
+            state.token = action.payload.token;
         },
-        logout(state) {
-        },
+        // logout(state) {
+        //     state.isAuthenticated = false;
+        //     state.username = undefined;
+        //     state.email = undefined;
+        //     state.userId = undefined;
+        //     state.cart = [];
+        //     state.favoriteList = [];
+        //     state.token = undefined;
+        //
+        // },
         addToFavorites(state,action) {
         },
         addToCart(state,action) {
@@ -30,6 +51,6 @@ const userSlice = createSlice({
 
 const store = configureStore({reducer : userSlice.reducer})
 
-export const login = userSlice.actions
+export const userActions = userSlice.actions
 
 export default store

@@ -9,7 +9,7 @@ export const IdGenerator = function () {
 
 
 export const generateToken = (user) => {
-    return jwt.sign({userId: user._id}, "thisIsPrivate", {expiresIn: "5"})
+    return jwt.sign({userId: user._id}, "thisIsPrivate", {expiresIn: "5h"})
 }
 
 export const storeTokenAndUser = (user) => {

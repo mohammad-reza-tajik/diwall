@@ -20,7 +20,8 @@ import {Fragment, useContext, useRef, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import AuthContext from "../context/auth-context";
-// import {useSelector , useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {userActions} from "../store/index"
 
 
 const styles = {
@@ -95,10 +96,9 @@ const SignIn = () => {
     const [typeOfForm, setTypeOfForm] = useState("signIn")
 
 
-    // const dispatch = useDispatch()
-    // const user = useSelector( state => )
-
-
+    const user = useSelector(state => state)
+    const dispatch = useDispatch()
+    console.log(user)
 
 
     const openSnackbarHandler = () => {
@@ -109,6 +109,7 @@ const SignIn = () => {
     const closeSnackbarHandler = () => {
         setOpenSnackbar(false)
     }
+
     const typeOfFormHandler = (event, typeOfForm) => {
         // the bottom line is written like this so that only one tab can be active or disabled at a time
         if (typeOfForm !== null)
@@ -166,6 +167,9 @@ const SignIn = () => {
                 setMessage(res.data.message)
                 setError(!res.data.ok)
                 authContext.login(res.data.user)
+                dispatch(userActions.login(res.data.user))
+
+
                 // console.log(res)
                 setIsLoading(false)
                 openSnackbarHandler()
@@ -295,9 +299,9 @@ const SignIn = () => {
                 open={openSnackbar}
                 autoHideDuration={500000}
                 sx={{
-                        fontFamily: "dana-demibold",
-                        // width:"70px",
-                        backgroundColor: "error.main !important",
+                    fontFamily: "dana-demibold",
+                    // width:"70px",
+                    backgroundColor: "error.main !important",
                 }}
                 message={message}
                 onClose={closeSnackbarHandler}
