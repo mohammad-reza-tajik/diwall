@@ -13,21 +13,13 @@ import {
     Typography,
     useMediaQuery,
 } from "@mui/material";
-import {
-    Close,
-    FavoriteBorder,
-    Login,
-    Logout,
-    Person,
-    Search,
-    ShoppingBagOutlined
-} from "@mui/icons-material";
+import {Close, FavoriteBorder, Login, Logout, Person, Search, ShoppingBagOutlined} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
 import {Fragment, useCallback, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
-import {useSelector, useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {userActions} from "../../store";
 
 
@@ -55,7 +47,7 @@ const styles = {
         color: "primary.main",
         mr: -15,
         ml: 10,
-        "& *" : {
+        "& *": {
             mr: -15,
             ml: 10,
 
@@ -91,7 +83,7 @@ const styles = {
 
     signInButton: {
 
-        width: {xs:160,lg:200},
+        width: {xs: 160, lg: 200},
         height: "4rem",
         borderRadius: 2,
         fontFamily: "dana-bold",
@@ -162,19 +154,23 @@ const HeaderDesktop = () => {
     }
 
     const goToFavorites = async (_) => {
-        if (user) {
+        if (user.username) {
             await router.push({pathname: `/profile/${user?.userId}`, query: {tab: 2}})
 
-        } else
+        } else {
+
             await router.push("/sign-in")
+        }
     }
 
 
     const goToCart = async (_) => {
-        if (user) {
+        if (user.username) {
             await router.push({pathname: `/profile/${user?.userId}`, query: {tab: 3}})
-        } else
+        } else {
+
             await router.push("/sign-in")
+        }
 
     }
 
@@ -201,9 +197,9 @@ const HeaderDesktop = () => {
     }
 
 
-    const clearSearchHandler = useCallback( () => {
+    const clearSearchHandler = useCallback(() => {
         setSearch("")
-    },[])
+    }, [])
 
     const closeButton = <InputAdornment position="end">
         <IconButton onClick={clearSearchHandler}>
@@ -214,7 +210,7 @@ const HeaderDesktop = () => {
     return (
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={30} xs={12}>
             <Grid container item direction={"row"} justifyContent={"center"} alignItems={"center"} xs={12}
-                   py={20}>
+                  py={20}>
                 <Grid container item xs={"auto"} pl={10}>
                     <Link href={"/"}>
                         <a>
@@ -225,7 +221,7 @@ const HeaderDesktop = () => {
                 </Grid>
                 <Grid position={"relative"} container direction={"column"} item
                       justifyContent={"center"}
-                      alignItems={"flex-start"} xs={matches1000 ? true : 7}  pr={20} component={"form"}
+                      alignItems={"flex-start"} xs={matches1000 ? true : 7} pr={20} component={"form"}
                       onSubmit={submitSearchHandler}
 
                 >
@@ -256,7 +252,6 @@ const HeaderDesktop = () => {
                         </Tooltip>
                     </Grid>
                 </Grid>
-
 
 
                 <Grid container item xs={matches1277 ? "auto" : 2} justifyContent={"flex-end"}>
@@ -290,68 +285,68 @@ const HeaderDesktop = () => {
                         </Badge>
                     </Tooltip>
                 </Grid>
-                <Grid item container xs={matches1000 ? "auto" :true} justifyContent={"flex-end"}>
+                <Grid item container xs={matches1000 ? "auto" : true} justifyContent={"flex-end"}>
 
                     {user?.username === null ? <Link href={"/sign-in"} passHref>
-                                <Button
-                                    variant={"contained"}
-                                    color={"primary"}
-                                    startIcon={
-                                        <Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
-                                    }
-                                    sx={styles.signInButton}
-                                > ورود / ثبت نام </Button>
-                            </Link>
-                            :
-                            <Fragment>
-                                <Button
-                                    variant={"contained"}
-                                    onClick={(e) => {
-                                        setAnchorEl(anchorEl ? null : e.currentTarget)
-                                    }}
-                                    color={"primary"}
-                                    startIcon={""}
-                                    sx={styles.signInButton}> {user?.username} </Button>
+                            <Button
+                                variant={"contained"}
+                                color={"primary"}
+                                startIcon={
+                                    <Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
+                                }
+                                sx={styles.signInButton}
+                            > ورود / ثبت نام </Button>
+                        </Link>
+                        :
+                        <Fragment>
+                            <Button
+                                variant={"contained"}
+                                onClick={(e) => {
+                                    setAnchorEl(anchorEl ? null : e.currentTarget)
+                                }}
+                                color={"primary"}
+                                startIcon={""}
+                                sx={styles.signInButton}> {user?.username} </Button>
 
-                                <Menu
-                                    anchorEl={anchorEl}
-                                    open={openMenu}
-                                    // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
-                                    onClose={closeMenu}
-                                    onClick={closeMenu}
-                                    PaperProps={{
-                                        elevation: 0,
-                                        sx: {
-                                            overflow: 'visible',
-                                            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                            mt: 1.5,
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={openMenu}
+                                // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
+                                onClose={closeMenu}
+                                onClick={closeMenu}
+                                PaperProps={{
+                                    elevation: 0,
+                                    sx: {
+                                        overflow: 'visible',
+                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                                        mt: 1.5,
 
-                                        },
-                                    }}
-                                    transformOrigin={{horizontal: 'right', vertical: 'top'}}
-                                    anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-                                >
+                                    },
+                                }}
+                                transformOrigin={{horizontal: 'right', vertical: 'top'}}
+                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                            >
 
-                                    <MenuItem onClick={() => router.push("/profile/" + user?.userId)}>
-                                        <ListItemIcon>
-                                            <Person sx={{fontSize: 25}} color={"primary"}/>
-                                        </ListItemIcon>
-                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}> مشاهده
-                                            پروفایل
-                                        </Typography>
-                                    </MenuItem>
-                                    <MenuItem onClick={() => {
-                                        dispatch(userActions.logout())
-                                    }}>
-                                        <ListItemIcon>
-                                            <Logout sx={{fontSize: 25}} color={"primary"}/>
-                                        </ListItemIcon>
-                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
-                                            خروج از حساب کاربری
-                                        </Typography>
-                                    </MenuItem>
-                                </Menu>
-                            </Fragment>
+                                <MenuItem onClick={() => router.push("/profile/" + user?.userId)}>
+                                    <ListItemIcon>
+                                        <Person sx={{fontSize: 25}} color={"primary"}/>
+                                    </ListItemIcon>
+                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}> مشاهده
+                                        پروفایل
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem onClick={() => {
+                                    dispatch(userActions.logout())
+                                }}>
+                                    <ListItemIcon>
+                                        <Logout sx={{fontSize: 25}} color={"primary"}/>
+                                    </ListItemIcon>
+                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                        خروج از حساب کاربری
+                                    </Typography>
+                                </MenuItem>
+                            </Menu>
+                        </Fragment>
 
                     }
                 </Grid>

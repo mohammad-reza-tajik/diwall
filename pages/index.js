@@ -1,4 +1,3 @@
-// import Head from 'next/head'
 import {Grid} from "@mui/material";
 import SectionHeading from "../components/SectionHeading";
 import BestSellingProducts from "../components/BestSellingProducts";
@@ -8,10 +7,7 @@ import Features from "../components/Features";
 import Places from "../components/Places";
 import MiddleSection from "../components/MiddleSection";
 import SeenOn from "../components/SeenOn";
-// import RelatedProducts from "../components/RelatedProducts";
 import Banner from "../components/Banner";
-
-
 
 
 const Home = () => {
@@ -31,26 +27,6 @@ const Home = () => {
         </Grid>
     )
 }
-
-/*export const getStaticProps = async () => {
-    await mongoose.connect(process.env.mongodb_url)
-    const mostPopularProducts = await Product.find().sort({purchase_count: "desc"}).skip((1 - 1) * 10).limit(10).exec()
-    const bestSellingProducts = await Product.find().sort({favorite_count: "desc"}).skip((1 - 1) * 10).limit(10).exec()
-    const latestProducts = await Product.find().sort({createdAt: "desc"}).skip((1 - 1) * 10).limit(10).exec()
-
-
-
-    return {
-            props:{
-                bestSellingProducts,
-                mostPopularProducts,
-                latestProducts
-            },
-            revalidate:3600
-        }
-
-
-}*/
 
 
 export default Home

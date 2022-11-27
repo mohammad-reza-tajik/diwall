@@ -5,17 +5,14 @@ import {A11y, Navigation} from 'swiper';
 import Product from "./Product";
 import axios from "axios"
 
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 
 import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import loadingContext from "../context/loading-context";
 import React from "react";
 
-
-const styles = {}
 
 
 const BestSellingProducts = () => {
@@ -23,7 +20,6 @@ const BestSellingProducts = () => {
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-    // const matchesXS = useMediaQuery(index.breakpoints.up("xs"))
     const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
     const [isLoading ,setIsLoading] = useState(false)
@@ -33,7 +29,6 @@ const BestSellingProducts = () => {
         setIsLoading(true)
         axios.post("/api/products", {sortBy: 2}).then(res => {
             setBestSellingProducts(res.data.products)
-            // console.log(res.data)
             setIsLoading(false)
             }
         ).catch(err => {

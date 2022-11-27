@@ -11,11 +11,9 @@ const Products = () => {
 
     const [products, setProducts] = useState([])
     const [pageInformation, setPageInformation] = useState(1)
-    // const [title , setTitle] = useState("همه محصولات")
 
     const [isLoading, setIsLoading] = useState(false)
 
-    // console.log("hello from products")
 
     const router = useRouter()
     const {search,page,sortBy,category} = router.query
@@ -29,9 +27,7 @@ const Products = () => {
             category: category
 
         }).then(res => {
-            // console.log(res.data)
             setProducts(res.data.products)
-            // setTitle(res.data.title)
             setPageInformation(res.data)
             setIsLoading(false)
         }).catch(err => {
@@ -69,9 +65,7 @@ const Products = () => {
                 {!router.query.search && router.query.category && router.query.category === "office_poster" &&
                     <SectionHeading text={"پوستر برای اداره و محل کار"} sortBy={true}/>
                 }
-                {/*{!router.query.search && router.query.category && router.query.category === "_room_poster" &&*/}
-                {/*    <SectionHeading text={"پوستر برای اتاق کودک"} sortBy={true} />*/}
-                {/*}*/}
+
             </Grid>
             <Grid container item xs spacing={10}>
                 {isLoading ?
@@ -92,7 +86,6 @@ const Products = () => {
                         )}
 
                 {isLoading || products.length === 0 ? "" : <Pagination {...pageInformation} />}
-                {/*{isLoading || products.length === 0 ? "" :<Pagination color={"primary"}  count={pageInformation.lastPage} size={"large"} /> }*/}
 
 
             </Grid>

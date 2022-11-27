@@ -66,31 +66,30 @@ const ProductDetails = () => {
 
     const router = useRouter()
     const user = useSelector(state => state);
+    console.log(user)
     const dispatch = useDispatch();
 
     const isFavorite = user?.favoriteList.includes(router.query.prod_id)
     const isInCart = user?.cart.includes(router.query.prod_id)
 
+    const prod_id = router.query.prod_id;
 
     useEffect(() => {
         setIsLoading(true)
-        // console.log(router.query)
         if (router.isReady) {
 
             axios.post("/api/product-details", {
                 productId: router.query.prod_id
             }).then(res => {
-                //
-                // setImageURL(res.data.productDetails.image_full)
                 setProduct(res.data.productDetails)
                 setRelatedProducts(res.data.relatedProducts)
                 setPageTitle(res.data.productDetails.title)
-                // console.log(res.data.productDetails[0])
+
                 setIsLoading(false)
             }).catch(e => console.log(e))
 
         }
-    }, [router.query.prod_id])
+    }, [prod_id])
 
     const presetSizesHandler = (e, presetSizes) => {
         if (presetSizes !== null)
@@ -98,7 +97,7 @@ const ProductDetails = () => {
     }
 
     const addToCartHandler = () => {
-        if (user) {
+        if (user?.username) {
             setAddToCartLoading(true)
 
             if (isInCart) {
@@ -135,7 +134,7 @@ const ProductDetails = () => {
                     token: user.token
                 }).then( _ => {
                         setAddToFavoritesLoading(false)
-                        dispatch(userActions.removeFavorite(product._id))
+                        dispatch(userActions.removeFromFavorites(product._id))
                     }
                 ).catch(e => console.log(e))
 
@@ -297,20 +296,17 @@ const ProductDetails = () => {
                                         {addToFavoritesLoading ? <CircularProgress size={30} sx={{
                                             borderRadius: 20,
                                             p: {xs: 2, md: 3,},
-                                            // bgcolor: "rgba(50,50,50,0.3)",
                                             color: "#fff"
                                         }}/> : isFavorite ? <Favorite size={100} sx={{
                                                 fontSize: {xs: 30, sm: 40},
                                                 borderRadius: 20,
                                                 p: {xs: 2, md: 3,},
-                                                // bgcolor: "rgba(50,50,50,0.3)",
                                                 color: "fff"
                                             }}/> :
                                             <FavoriteBorder size={100} sx={{
                                                 fontSize: {xs: 30, sm: 40,},
                                                 borderRadius: 20,
                                                 p: {xs: 2, md: 3,},
-                                                // bgcolor: "rgba(50,50,50,0.3)",
                                                 color: "#fff"
                                             }}/>
                                         }
@@ -351,7 +347,6 @@ const ProductDetails = () => {
                     :
                     <Grid item xs={12}>
                         <RelatedProducts products={relatedProducts}/>
-                        {/*<LatestProducts product={relatedProducts} />*/}
                     </Grid>
                 }
 

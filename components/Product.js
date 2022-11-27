@@ -56,16 +56,30 @@ const Product = (props) => {
     const addToFavoritesHandler = () => {
         if (user?.username) {
             setIsLoading(true)
-            axios.put("/api/add-to-favorites", {
-                productId: props._id,
-                userId: user.userId,
-                token: user.token
-            }).then(_ => {
-                    setIsLoading(false)
-                    dispatch(userActions.addToFavorites(props._id))
-                }
+            if (isFavorite){
+                axios.put("/api/remove-from-favorites", {
+                    productId: router.query.prod_id,
+                    userId: user.userId,
+                    token: user.token
+                }).then( _ => {
+                        setIsLoading(false)
+                        dispatch(userActions.removeFromFavorites(props._id))
+                    }
+                ).catch(e => console.log(e))
 
-            ).catch(e => console.log(e))
+            }
+            else {
+
+                axios.put("/api/add-to-favorites", {
+                    productId: router.query.prod_id,
+                    userId: user.userId,
+                    token: user.token
+                }).then( _ => {
+                        setIsLoading(false)
+                        dispatch(userActions.addToFavorites(props._id))
+                    }
+                ).catch(e => console.log(e))
+            }
         } else {
 
             router.push("/sign-in")

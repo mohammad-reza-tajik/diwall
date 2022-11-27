@@ -5,30 +5,25 @@ import {A11y, Navigation} from 'swiper';
 import Product from "./Product";
 import axios from "axios"
 
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 
 import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Link from "next/link";
-import loadingContext from "../context/loading-context";
 import SectionHeading from "./SectionHeading";
 import React from "react";
-// import {useContext} from "react";
 
 
-const styles = {}
 
 const MostPopularProducts = (props) => {
-    // const { mostPopularProducts } = props.products
 
     const [isLoading, setIsLoading] = useState(false)
     const [mostPopularProducts, setMostPopularProducts] = useState([])
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
     const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
     useEffect(() => {

@@ -11,15 +11,13 @@ import {
     ToggleButtonGroup
 } from "@mui/material";
 
-
 import Head from "next/head";
 import {Close, Create, Email, Login, Password, Person} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link"
-import {Fragment, useContext, useRef, useState} from "react";
+import {Fragment, useRef, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
-import AuthContext from "../context/auth-context";
 import {useDispatch, useSelector} from "react-redux";
 import {userActions} from "../store"
 
@@ -28,17 +26,10 @@ const styles = {
     container: {
         minWidth: "100vw",
         minHeight: "100vh",
-        // backgroundColor: "#02011e",
-        // backgroundImage:"url('assets/pictures/hero_img4.jpg')",
-        // backgroundRepeat:"no-repeat",
-        // backgroundSize:"100% 100%",
-        // filter:"blur(5px)",
-        // backgroundColor: "#069f69",
         position: "fixed",
         top: 0,
         left: 0,
         zIndex: 50,
-        // my:100
     },
     form: {
         bgcolor: "white.main",
@@ -90,7 +81,6 @@ const styles = {
 const SignIn = () => {
 
     //********************************** determine the type of form **********************************//
-    const [error, setError] = useState(false)
     const [message, setMessage] = useState("")
     const [openSnackbar, setOpenSnackbar] = useState(false)
     const [typeOfForm, setTypeOfForm] = useState("signIn")
@@ -135,7 +125,6 @@ const SignIn = () => {
         </IconButton>
     )
 
-    const authContext = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState(false)
 
 
@@ -146,7 +135,6 @@ const SignIn = () => {
         e.preventDefault()
         setIsLoading(true)
         setMessage("")
-        setError(false)
 
         const user = typeOfForm === "signup" ? {
                 username: usernameRef.current?.value,
@@ -159,18 +147,11 @@ const SignIn = () => {
 
             }
 
-        // console.log(user)
-
-
         axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`, user).then(res => {
 
                 setMessage(res.data.message)
-                setError(!res.data.ok)
-                authContext.login(res.data.user)
                 dispatch(userActions.login(res.data.user))
 
-
-                // console.log(res)
                 setIsLoading(false)
                 openSnackbarHandler()
                 router.back()
@@ -178,8 +159,7 @@ const SignIn = () => {
             }
         ).catch(e => {
             console.log(e)
-            setMessage(e.response.data.message)
-            setError(!e.response.data.ok)
+            setMessage(e?.response.data.message)
             setIsLoading(false)
             openSnackbarHandler()
         })
@@ -215,8 +195,6 @@ const SignIn = () => {
                 {typeOfForm === "signup" ? <Fragment>
                     <Grid item container justifyContent={"center"}>
                         <TextField
-                            // value={usernameValue}
-                            // onChange={usernameChangeHandler}
                             inputRef={usernameRef} // to use refs on textField components
                             InputProps={{
                                 startAdornment: (
@@ -230,8 +208,6 @@ const SignIn = () => {
                     </Grid>
                     <Grid item container justifyContent={"center"}>
                         <TextField
-                            // value={emailValue}
-                            // onChange={emailChangeHandler}
                             inputRef={emailRef}
                             InputProps={{
                                 startAdornment: (
@@ -244,8 +220,6 @@ const SignIn = () => {
                             placeholder={"ایمیل"}/>
                     </Grid></Fragment> : <Grid item container justifyContent={"center"}>
                     <TextField
-                        // value={usernameOrEmailValue}
-                        // onChange={usernameOrEmailChangeHandler}
                         inputRef={usernameOrEmailRef}
 
                         InputProps={{
@@ -260,8 +234,6 @@ const SignIn = () => {
                 </Grid>}
                 <Grid item container justifyContent={"center"}>
                     <TextField
-                        // value={passwordValue}
-                        // onChange={passwordChangeHandler}
                         inputRef={passwordRef}
 
                         InputProps={{
@@ -300,7 +272,6 @@ const SignIn = () => {
                 autoHideDuration={500000}
                 sx={{
                     fontFamily: "dana-bold",
-                    // width:"70px",
                     backgroundColor: "error.main !important",
                 }}
                 message={message}
