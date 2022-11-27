@@ -13,14 +13,13 @@ import {
     useTheme
 } from "@mui/material";
 import Image from "next/image"
-import {Fragment, useContext, useEffect, useState} from "react";
+import {Fragment, useEffect, useState} from "react";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {userActions} from "../../store";
 import Features from "../../components/Features";
 import RelatedProducts from "../../components/RelatedProducts";
 import SectionHeading from "../../components/SectionHeading";
-// import authContext from "../../context/auth-context";
 import {Favorite, FavoriteBorder, ShoppingBagOutlined} from "@mui/icons-material";
 import Head from "next/head";
 
@@ -63,28 +62,17 @@ const ProductDetails = () => {
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToFavoritesLoading, setAddToFavoritesLoading] = useState(false)
     const [pageTitle, setPageTitle] = useState("لطفا صبر کنید ...")
-    // const [isInCart, setIsInCart] = useState(false)
     const [presetSizes, setPresetSizes] = useState("1")
-    // const [imageURL, setImageURL] = useState("/assets/pictures/product_placeholder.png")
-
     const [isLoading, setIsLoading] = useState(false)
-    // const isInCart = authCtx.user?.cart.includes(product._id)
 
-    // const authCtx = useContext(authContext)
 
+    const router = useRouter()
     const user = useSelector(state => state);
     const dispatch = useDispatch();
 
-
-    console.log(user)
-    // const token = useSelector(state => state.token);
-    const router = useRouter()
-
     const isFavorite = user?.favoriteList.includes(router.query.prod_id)
-    // const isFavorite = authCtx.user?.favoriteList.includes(router.query.prod_id)
     const isInCart = user?.cart.includes(router.query.prod_id)
-    // const isInCart = authCtx.user?.cart.includes(router.query.prod_id)
-    // console.log(isFavorite)
+
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
@@ -117,40 +105,29 @@ const ProductDetails = () => {
     }
 
     const addToCartHandler = () => {
-        // if (authCtx.isAuthenticated) {
         if (user) {
             setAddToCartLoading(true)
 
             if (isInCart) {
-                dispatch(userActions.addToCart(product._id))
                 axios.put("/api/remove-from-cart", {
-                    // userId: authCtx.user?.userId, token: authCtx.user?.token, productId: product._id
                     userId: user?.userId, token: user?.token, productId: product._id
-                }).then(res => {
-                    // console.log(res)
-                    // authCtx.login(res.data.user)
+                }).then( _ => {
+
                     setAddToCartLoading(false)
-                    // setIsInCart(false)
-                    // setCart(res.data.user.cart)
+                    dispatch(userActions.addToCart(product._id))
+
 
                 })
 
             } else {
-
-                // authCtx.addToCart(product._id)
-                dispatch(userActions.addToCart(product._id))
                 axios.put("/api/add-to-cart", {
                     productId: product._id,
                     userId: user.userId,
-                    // userId: authCtx.user.userId,
                     token: user.token
-                    // token: authCtx.user.token
-                }).then(res => {
-                        // console.log("added successfully")
-                        // console.log(res)
-                        // authCtx.login(res.data.user)
-                        // setIsInCart(true)
+                }).then( _ => {
+
                         setAddToCartLoading(false)
+                        dispatch(userActions.addToCart(product._id))
 
 
                     }
@@ -164,31 +141,15 @@ const ProductDetails = () => {
 
     }
     const addToFavoritesHandler = () => {
-        // if (authCtx.isAuthenticated) {
         if (user) {
             setAddToFavoritesLoading(true)
-            if (isFavorite) {
-                // console.log(authCtx.user)
-                // authCtx.login({
-                //     ...authCtx.user,
-                //     favoriteList: authCtx.user.favoriteList.filter((element) => element != router.query.prod_id)
-                // })
-                dispatch(userActions.addToFavorites(product._id))
-            }
-            // authCtx.addToCart(props._id)
             axios.put("/api/add-to-favorites", {
                 productId: router.query.prod_id,
-                // userId: authCtx.user.userId,
                 userId: user.userId,
-                // token: authCtx.user.token
                 token: user.token
-            }).then(res => {
-                    // console.log("added successfully")
-                    // setIsFavorite(true)
-                    // authCtx.login(res.data.user)
-                    dispatch(userActions.addToFavorites(product._id))
-                    // console.log(res)
+            }).then( _ => {
                     setAddToFavoritesLoading(false)
+                    dispatch(userActions.addToFavorites(product._id))
                 }
             ).catch(e => console.log(e))
         } else

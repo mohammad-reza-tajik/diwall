@@ -36,6 +36,8 @@ const userSlice = createSlice({
             state.cart = [];
             state.favoriteList = [];
             state.token = null;
+            // if (typeof window !== 'undefined')
+            localStorage.clear()
 
         },
         addToFavorites(state, action) {
