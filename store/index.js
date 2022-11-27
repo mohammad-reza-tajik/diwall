@@ -21,7 +21,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         login(state, action) {
-            const {username , email , _id : userId , cart , favoriteList , token} = action.payload
+            const {username , email , userId , cart , favoriteList , token} = action.payload
             state.username = username;
             state.email = email;
             state.userId = userId;

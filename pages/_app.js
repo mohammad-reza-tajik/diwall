@@ -12,6 +12,7 @@ import axios from "axios";
 import Header from "../components/Header";
 import {Provider} from "react-redux";
 import store from "../store/index";
+import Auth from "../components/Auth.tsx"
 // import {useDispatch} from "react-redux"
 
 
@@ -122,12 +123,14 @@ function MyApp({Component, pageProps}) {
                 <Provider store={store}>
 
                     <Grid container direction={"row"} justifyContent={"center"}>
+                        <Auth>
                         <Grid item xs={11}>
                             {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Header/>}
 
                             <Component {...pageProps} />
                             {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Footer/>}
                         </Grid>
+                        </Auth>
                     </Grid>
                 </Provider>
             </ThemeProvider>
