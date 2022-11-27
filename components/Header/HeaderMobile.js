@@ -16,9 +16,8 @@ import {
     useTheme
 } from "@mui/material";
 import {Close, Favorite, Login, Logout, Menu as Hamburger, Person, Search, ShoppingBag} from "@mui/icons-material";
-import {Fragment, useContext, useRef, useState} from "react";
+import {Fragment, useRef, useState} from "react";
 import {useRouter} from "next/router";
-import authContext from "../../context/auth-context";
 import Link from "next/link";
 import Image from "next/image"
 import axios from "axios";
@@ -85,18 +84,13 @@ const styles = {
 const HeaderMobile = () => {
 
     const router = useRouter()
-    const authCtx = useContext(authContext)
     const user = useSelector(state => state)
     const dispatch = useDispatch()
 
     const searchRef = useRef()
 
     const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-    // const matchesXS = useMediaQuery(index.breakpoints.down("xs"))
-    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
-    // const headerRef= useRef()
 
     const [isWrong, setIsWrong] = useState(false)
 
@@ -287,7 +281,7 @@ const HeaderMobile = () => {
                     </Grid>
                 </SwipeableDrawer>
                 {
-                    !authCtx.isAuthenticated ?
+                    user.username === null ?
 
                         <Link href={"/sign-in"} passHref>
                             <IconButton color={"primary"}>
@@ -323,7 +317,7 @@ const HeaderMobile = () => {
                                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
-                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.userId)}>
+                                <MenuItem onClick={() => router.push("/profile/" + user?.userId)}>
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
@@ -331,7 +325,7 @@ const HeaderMobile = () => {
                                         پروفایل
                                     </Typography>
                                 </MenuItem>
-                                <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.userId + "?tab=2")}>
+                                <MenuItem onClick={() => router.push("/profile/" + user?.userId + "?tab=2")}>
                                     <ListItemIcon>
                                         <Favorite sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
@@ -340,7 +334,7 @@ const HeaderMobile = () => {
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem
-                                    onClick={() => router.push("/profile/" + authCtx.user?.userId + "?tab=3")}>
+                                    onClick={() => router.push("/profile/" + user?.userId + "?tab=3")}>
                                     <ListItemIcon>
                                         <ShoppingBag sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
@@ -349,7 +343,6 @@ const HeaderMobile = () => {
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
-                                    authCtx.logout();
                                     dispatch(userActions.logout());
                                 }}>
                                     <ListItemIcon>

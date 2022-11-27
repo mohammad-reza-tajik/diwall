@@ -9,8 +9,6 @@ import {
     ToggleButton,
     ToggleButtonGroup,
     Typography,
-    useMediaQuery,
-    useTheme
 } from "@mui/material";
 import Image from "next/image"
 import {Fragment, useEffect, useState} from "react";
@@ -74,11 +72,6 @@ const ProductDetails = () => {
     const isInCart = user?.cart.includes(router.query.prod_id)
 
 
-    const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-
-
     useEffect(() => {
         setIsLoading(true)
         // console.log(router.query)
@@ -112,11 +105,8 @@ const ProductDetails = () => {
                 axios.put("/api/remove-from-cart", {
                     userId: user?.userId, token: user?.token, productId: product._id
                 }).then( _ => {
-
                     setAddToCartLoading(false)
                     dispatch(userActions.addToCart(product._id))
-
-
                 })
 
             } else {
@@ -125,18 +115,13 @@ const ProductDetails = () => {
                     userId: user.userId,
                     token: user.token
                 }).then( _ => {
-
                         setAddToCartLoading(false)
                         dispatch(userActions.addToCart(product._id))
-
-
                     }
                 ).catch(e => console.log(e))
             }
         } else
             router.push("/sign-in")
-
-        // console.log(authCtx.user.cart)
 
 
     }

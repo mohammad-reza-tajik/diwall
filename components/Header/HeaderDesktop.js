@@ -25,10 +25,9 @@ import {
 } from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link";
-import {Fragment, useCallback, useContext, useState} from "react";
+import {Fragment, useCallback, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
-import authContext from "../../context/auth-context"
 import {useSelector, useDispatch} from "react-redux";
 import {userActions} from "../../store";
 
@@ -137,27 +136,15 @@ const styles = {
 
 const HeaderDesktop = () => {
 
-    const theme = useTheme()
     const router = useRouter()
-    // const user = useSelector(state => state)
+    const user = useSelector(state => state)
     const dispatch = useDispatch()
 
     const [search, setSearch] = useState("")
     const [isWrong, setIsWrong] = useState(false)
-    // const [searchResults, setSearchResults] = useState([])
-    const [searchResultsDisplay, setSearchResultsDisplay] = useState("none")
-    const [temp,setTemp]=useState(true)
 
-
-
-
-    // const {isLoading, setIsLoading} = useContext(loadingContext)
-
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matches1277 = useMediaQuery('(max-width:1277px)')
     const matches1000 = useMediaQuery('(max-width:1000px)')
-    // const matchesXS = useMediaQuery(index.breakpoints.up("xs"))
-    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
 
     //*** menu logic ***//
@@ -176,8 +163,8 @@ const HeaderDesktop = () => {
     }
 
     const goToFavorites = async (e) => {
-        if (authCtx.isAuthenticated) {
-            await router.push({pathname: `/profile/${authCtx.user?.userId}`, query: {tab: 2}})
+        if (user) {
+            await router.push({pathname: `/profile/${user?.userId}`, query: {tab: 2}})
 
         } else
             await router.push("/sign-in")
@@ -185,14 +172,12 @@ const HeaderDesktop = () => {
 
 
     const goToCart = async (e) => {
-        if (authCtx.isAuthenticated) {
-            await router.push({pathname: `/profile/${authCtx.user?.userId}`, query: {tab: 3}})
-
+        if (user) {
+            await router.push({pathname: `/profile/${user?.userId}`, query: {tab: 3}})
         } else
             await router.push("/sign-in")
 
     }
-
 
     const submitSearchHandler = async (e) => {
         e.preventDefault()
@@ -209,26 +194,18 @@ const HeaderDesktop = () => {
                         search,
                         page: 1
                     }
-
                 })
             setSearch("")
         }).catch(err => {
             console.log(err)
-
         })
-
-
     }
-        // console.log("hello from header")
-
 
 
     const clearSearchHandler = useCallback( () => {
         setSearch("")
     },[])
 
-    const authCtx = useContext(authContext)
-    // console.log(authCtx)
     const closeButton = <InputAdornment position="end">
         <IconButton onClick={clearSearchHandler}>
             <Close sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}/>
@@ -285,7 +262,8 @@ const HeaderDesktop = () => {
 
                 <Grid container item xs={matches1277 ? "auto" : 2} justifyContent={"flex-end"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
-                        <Badge showZero max={99} badgeContent={authCtx.user?.favoriteList.length || 0} color="primary"
+                        {/*the following line i used to use context*/}
+                        <Badge showZero max={99} badgeContent={user?.favoriteList.length || 0} color="primary"
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}
                         >
@@ -300,7 +278,8 @@ const HeaderDesktop = () => {
                         </Badge>
                     </Tooltip>
                     <Tooltip title={"سبد خرید شما"} arrow enterDelay={1000}>
-                        <Badge showZero max={99} badgeContent={authCtx.user?.cart.length || 0} color="primary"
+                        {/*the following line i used to use context*/}
+                        <Badge showZero max={99} badgeContent={user?.cart.length || 0} color="primary"
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}>
                             <IconButton color={"primary"} onClick={goToCart}>
@@ -315,8 +294,10 @@ const HeaderDesktop = () => {
                     </Tooltip>
                 </Grid>
                 <Grid item container xs={matches1000 ? "auto" :true} justifyContent={"flex-end"}>
+                    {/*the following line i used to use context*/}
 
-                    {!authCtx.isAuthenticated ? <Link href={"/sign-in"} passHref>
+
+                    {user?.username === null ? <Link href={"/sign-in"} passHref>
                                 <Button
                                     variant={"contained"}
                                     color={"primary"}
@@ -328,6 +309,7 @@ const HeaderDesktop = () => {
                             </Link>
                             :
                             <Fragment>
+                                {/*the following line i used to use context*/}
                                 <Button
                                     variant={"contained"}
                                     onClick={(e) => {
@@ -335,7 +317,7 @@ const HeaderDesktop = () => {
                                     }}
                                     color={"primary"}
                                     startIcon={""}
-                                    sx={styles.signInButton}> {authCtx.user?.username} </Button>
+                                    sx={styles.signInButton}> {user?.username} </Button>
 
                                 <Menu
                                     anchorEl={anchorEl}
@@ -355,7 +337,9 @@ const HeaderDesktop = () => {
                                     transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                     anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                                 >
-                                    <MenuItem onClick={() => router.push("/profile/" + authCtx.user?.userId)}>
+                                    {/*the following line i used to use context*/}
+
+                                    <MenuItem onClick={() => router.push("/profile/" + user?.userId)}>
                                         <ListItemIcon>
                                             <Person sx={{fontSize: 25}} color={"primary"}/>
                                         </ListItemIcon>
@@ -364,7 +348,6 @@ const HeaderDesktop = () => {
                                         </Typography>
                                     </MenuItem>
                                     <MenuItem onClick={() => {
-                                        authCtx.logout()
                                         dispatch(userActions.logout())
                                     }}>
                                         <ListItemIcon>
