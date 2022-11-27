@@ -115,7 +115,6 @@ const HeaderMobile = () => {
             return
         }
         setIsWrong(false)
-        console.log(searchRef.current.value)
         axios.post(`/api/products`, {search: searchRef.current.value}).then(res => {
             router.push(
                 {

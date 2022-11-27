@@ -23,7 +23,7 @@ const CartItem = (props) => {
     const removeFromCart = () => {
         if (user?.username) {
 
-            axios.put("/api/remove-to-cart", {
+            axios.put("/api/remove-from-cart", {
                 userId: user?.userId, token: user?.token, productId: props._id
             }).then(_ => {
                 dispatch(userActions.removeFromCart(props._id))
