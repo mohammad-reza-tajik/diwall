@@ -107,8 +107,7 @@ const HeaderMobile = () => {
         setAnchorEl(null);
     }
 
-    const submitSearchHandler = async (e) => {
-        // e.preventDefault()
+    const submitSearchHandler = async (_) => {
 
         if (searchRef.current?.value.trim() === "") {
             setIsWrong(true)

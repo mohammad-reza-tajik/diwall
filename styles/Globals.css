@@ -153,7 +153,7 @@ a:checked {
 
 .btn-primary {
   background-color: #069f69;
-  color: white;
+  color: #fff;
   transition: background-color 0.4s;
 }
 .btn-primary:hover {
@@ -177,7 +177,7 @@ input[type=number] {
   border-radius: 50% !important;
   width: 5rem !important;
   height: 5rem !important;
-  color: white !important;
+  color: #fff !important;
   padding: 1rem !important;
 }
 .swiper-button-prev:after,
