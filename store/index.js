@@ -21,7 +21,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         login(state, action) {
-            const {username , email , userId , cart , favoriteList , token} = action.payload
+            const {username, email, userId, cart, favoriteList, token} = action.payload
             state.username = username;
             state.email = email;
             state.userId = userId;
@@ -42,38 +42,32 @@ const userSlice = createSlice({
         },
         addToFavorites(state, action) {
             const productId = action.payload;
-            if (state.favoriteList.includes(productId)) {
-                return
-            }
+            if (!state.favoriteList.includes(productId)) {
+                state.favoriteList = [...state.favoriteList, productId]
 
-            state.favoriteList = [...state.favoriteList, productId]
+            }
 
 
         },
-        removeFromFavorites(state,action){
+        removeFromFavorites(state, action) {
             const productId = action.payload;
-            if (!state.favoriteList.includes(productId)){
-                return
+            if (state.favoriteList.includes(productId)) {
+                state.favoriteList = state.favoriteList.filter((id) => id !== productId)
             }
-
-            state.favoriteList = state.favoriteList.filter((id) => id !== productId)
-
 
         },
         addToCart(state, action) {
             const productId = action.payload;
-            if (state.cart.includes(productId)) {
-                return
+            if (!state.cart.includes(productId)) {
+                state.cart = [...state.cart, productId]
             }
-            state.cart = [...state.favoriteList, productId]
 
         },
-        removeFromCart(state,action){
+        removeFromCart(state, action) {
             const productId = action.payload;
-            if (!state.cart.includes(productId)) {
-                return
+            if (state.cart.includes(productId)) {
+                state.cart = state.cart.filter((id) => id !== productId)
             }
-            state.cart = state.cart.filter((id)=> id !== productId)
         }
     }
 
