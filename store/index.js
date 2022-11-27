@@ -36,29 +36,45 @@ const userSlice = createSlice({
             state.cart = [];
             state.favoriteList = [];
             state.token = null;
-            // if (typeof window !== 'undefined')
+
             localStorage.clear()
 
         },
         addToFavorites(state, action) {
             const productId = action.payload;
             if (state.favoriteList.includes(productId)) {
-                state.favoriteList = state.favoriteList.filter((id) => id !== productId)
-
-            } else {
-                state.favoriteList = [...state.favoriteList, productId]
+                return
             }
+
+            state.favoriteList = [...state.favoriteList, productId]
+
+
+        },
+        removeFromFavorites(state,action){
+            const productId = action.payload;
+            if (!state.favoriteList.includes(productId)){
+                return
+            }
+
+            state.favoriteList = state.favoriteList.filter((id) => id !== productId)
+
 
         },
         addToCart(state, action) {
             const productId = action.payload;
             if (state.cart.includes(productId)) {
-                state.cart = state.favoriteList.filter((id) => id !== productId)
-
-            } else {
-                state.cart = [...state.favoriteList, productId]
+                return
             }
+            state.cart = [...state.favoriteList, productId]
+
         },
+        removeFromCart(state,action){
+            const productId = action.payload;
+            if (!state.cart.includes(productId)) {
+                return
+            }
+            state.cart = state.cart.filter((id)=> id !== productId)
+        }
     }
 
 })

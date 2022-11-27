@@ -1,28 +1,19 @@
 import {Avatar, Grid, IconButton, TextField, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {AddCircleOutline, Delete, RemoveCircleOutline} from "@mui/icons-material";
-import {useContext, useState} from "react";
-import authContext from "../context/auth-context";
+import {useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
+import {useSelector , useDispatch} from "react-redux";
+import {userActions} from "../store";
 
-
-const styles = {
-    tab: {
-        fontSize: 16, color: "#333", fontFamily: "dana-bold", my: 10, // bgcolor:"primary"
-    },
-    list: {
-        width: 1,
-        height: "auto",
-        // maxHeight:400,
-
-    }
-}
 
 const CartItem = (props) => {
 
-    const authCtx = useContext(authContext)
     const router = useRouter()
-    // console.log(authCtx)
+
+    const user = useSelector(state => state)
+    const dispatch = useDispatch()
+
     const [numberInCart, setNumberInCart] = useState(1)
     const numbersInCartChangeHandler = (e) => {
         setNumberInCart(e.target.value)
@@ -30,14 +21,12 @@ const CartItem = (props) => {
     }
 
     const removeFromCart = () => {
-        if (authCtx.isAuthenticated) {
+        if (user?.username) {
 
-            axios.put("/api/remove-from-cart", {
-                userId: authCtx.user?.userId, token: authCtx.user?.token, productId: props._id
-            }).then(res => {
-                // console.log(res)
-                authCtx.login(res.data.user)
-                // setCart(res.data.user.cart)
+            axios.put("/api/remove-to-cart", {
+                userId: user?.userId, token: user?.token, productId: props._id
+            }).then(_ => {
+                dispatch(userActions.removeFromCart(props._id))
 
             })
         }

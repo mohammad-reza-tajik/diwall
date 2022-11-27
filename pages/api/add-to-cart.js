@@ -9,6 +9,7 @@ export default async function handler(req, res) {
     // console.log(productId)
     const user = await User.findById(userId).exec()
     // console.log(user)
+
     user.cart.push(productId)
     await user.save()
 

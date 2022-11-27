@@ -106,7 +106,7 @@ const ProductDetails = () => {
                     userId: user?.userId, token: user?.token, productId: product._id
                 }).then( _ => {
                     setAddToCartLoading(false)
-                    dispatch(userActions.addToCart(product._id))
+                    dispatch(userActions.removeFromCart(product._id))
                 })
 
             } else {
@@ -128,6 +128,20 @@ const ProductDetails = () => {
     const addToFavoritesHandler = () => {
         if (user?.username) {
             setAddToFavoritesLoading(true)
+            if (isFavorite){
+                axios.put("/api/remove-from-favorites", {
+                    productId: router.query.prod_id,
+                    userId: user.userId,
+                    token: user.token
+                }).then( _ => {
+                        setAddToFavoritesLoading(false)
+                        dispatch(userActions.removeFavorite(product._id))
+                    }
+                ).catch(e => console.log(e))
+
+            }
+            else {
+
             axios.put("/api/add-to-favorites", {
                 productId: router.query.prod_id,
                 userId: user.userId,
@@ -137,6 +151,7 @@ const ProductDetails = () => {
                     dispatch(userActions.addToFavorites(product._id))
                 }
             ).catch(e => console.log(e))
+            }
         } else
             router.push("/sign-in")
 

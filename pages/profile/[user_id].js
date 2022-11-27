@@ -32,7 +32,8 @@ const Profile = () => {
     // const [pageTitle,setPageTitle] = useState("لطفا صبر کنید ...")
 
     const user = useSelector(state => state)
-    const dispatch = useDispatch()
+
+    console.log(user)
 
     const [populatedFavoriteList, setPopulatedFavoriteList] = useState([])
     const [populatedCart, setPopulatedCart] = useState([])
