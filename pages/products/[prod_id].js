@@ -126,7 +126,7 @@ const ProductDetails = () => {
 
     }
     const addToFavoritesHandler = () => {
-        if (user) {
+        if (user?.username) {
             setAddToFavoritesLoading(true)
             axios.put("/api/add-to-favorites", {
                 productId: router.query.prod_id,

@@ -2,9 +2,10 @@ import {CircularProgress, Grid, IconButton, Typography, useMediaQuery, useTheme}
 import Image from "next/image"
 import {Favorite} from "@mui/icons-material";
 import {useRouter} from "next/router";
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
-import authContext from "../context/auth-context";
+import {useDispatch, useSelector} from "react-redux";
+import {userActions} from "../store";
 
 
 const styles = {
@@ -29,29 +30,18 @@ const styles = {
 
 const Product = (props) => {
     const router = useRouter()
-    // console.log(props)
-    const authCtx = useContext(authContext)
-    const isFavorite = authCtx.user?.favoriteList.includes(props._id)
-    // const [heartIsVisible, setHeartIsVisible] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-    // const [image, setImage] = useState("/assets/pictures/product_placeholder.png")
-
-    // const [isFavorite,setIsFavorite] = useState(false)
-    // const {isLoading ,setIsLoading} = useContext(loadingContext)
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-    // const matchesXS = useMediaQuery(index.breakpoints.down("xs"))
-    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
+    const [isLoading, setIsLoading] = useState(false)
 
-    // if image is not loaded use the placeholder
-    // useEffect(() => {
-        // if (props.image) {
-            // setImage(props.image)
-        // }
-    // }, [props.image])
+    const user = useSelector(state => state)
+    const dispatch = useDispatch()
+
+    const isFavorite = user?.favoriteList.includes(props._id)
+
 
 
     const clickHandler = async () => {
@@ -64,30 +54,22 @@ const Product = (props) => {
     }
 
     const addToFavoritesHandler = () => {
-        if (authCtx.isAuthenticated) {
+        if (user?.username) {
             setIsLoading(true)
-            if (isFavorite) {
-                // console.log(authCtx.user)
-                authCtx.login({
-                    ...authCtx.user,
-                    favoriteList: authCtx.user.favoriteList.filter((element) => element != props._id)
-                })
-            }
-            // authCtx.addToCart(props._id)
             axios.put("/api/add-to-favorites", {
                 productId: props._id,
-                userId: authCtx.user.userId,
-                token: authCtx.user.token
-            }).then(res => {
-                    // console.log("added successfully")
-                    // setIsFavorite(true)
-                    authCtx.login(res.data.user)
-                    // console.log(res)
+                userId: user.userId,
+                token: user.token
+            }).then(_ => {
                     setIsLoading(false)
+                    dispatch(userActions.addToFavorites(props._id))
                 }
+
             ).catch(e => console.log(e))
-        } else
+        } else {
+
             router.push("/sign-in")
+        }
 
     }
 
@@ -138,19 +120,6 @@ const Product = (props) => {
                         {props.price}
                     </Typography>
                 </Grid>
-                {/* <Grid container item xs={3} justifyContent={"flex-end"}>
-                    <IconButton onClick={addToCartHandler}>
-                        <ShoppingBagOutlined color={"primary"}
-                                             sx={
-                                                 {
-                                                     fontSize: {xs: 35, sm: 40},
-                                                     border: "2px solid #11AE77",
-                                                     borderRadius: "50px",
-                                                     p: ".4rem"
-                                                 }
-                                             }/>
-                    </IconButton>
-                </Grid>*/}
             </Grid>
         </Grid>
     )

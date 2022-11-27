@@ -1,31 +1,15 @@
-import {Button, Grid, MenuItem, Select, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {Button, Grid, MenuItem, Select, Typography} from "@mui/material";
 import {Circle,} from "@mui/icons-material";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import axios from "axios";
 
-
-const styles = {
-
-    seeAll: {
-        fontSize: 16
-
-    },
-    title: {
-
-    }
-}
 
 const SectionHeading = (props) => {
 
     const [sortBy, setSortBy] = useState(1);
     const router = useRouter()
 
-    const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
 
     useEffect(() => {
@@ -33,18 +17,12 @@ const SectionHeading = (props) => {
         if (router.query.sortBy)
             setSortBy(+router.query.sortBy)
 
-        // else
-            // router.push({pathname: router.pathname, query: {...router.query, sortBy}}).then(()=>{})
-
     }
     }, [])
 
 
     const sortChangeHandler = async (e) => {
         setSortBy(e.target.value);
-        // console.log(sortBy)
-        // setAge(e.target.value)
-        // console.log(age)
 
         // I've encountered a major bug and that happens when you try to console.log sortBy right after setSortBy . the value of sort isn't updated.
         await router.push({pathname: router.pathname, query: {...router.query, sortBy:e.target.value}})

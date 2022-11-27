@@ -12,7 +12,6 @@ import {
     Tooltip,
     Typography,
     useMediaQuery,
-    useTheme
 } from "@mui/material";
 import {
     Close,
@@ -162,7 +161,7 @@ const HeaderDesktop = () => {
 
     }
 
-    const goToFavorites = async (e) => {
+    const goToFavorites = async (_) => {
         if (user) {
             await router.push({pathname: `/profile/${user?.userId}`, query: {tab: 2}})
 
@@ -171,7 +170,7 @@ const HeaderDesktop = () => {
     }
 
 
-    const goToCart = async (e) => {
+    const goToCart = async (_) => {
         if (user) {
             await router.push({pathname: `/profile/${user?.userId}`, query: {tab: 3}})
         } else
@@ -186,7 +185,7 @@ const HeaderDesktop = () => {
             return
         }
         setIsWrong(false)
-        axios.post(`/api/products`, {search}).then(res => {
+        axios.post(`/api/products`, {search}).then(_ => {
             router.push(
                 {
                     pathname: `/products`,
@@ -262,7 +261,6 @@ const HeaderDesktop = () => {
 
                 <Grid container item xs={matches1277 ? "auto" : 2} justifyContent={"flex-end"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
-                        {/*the following line i used to use context*/}
                         <Badge showZero max={99} badgeContent={user?.favoriteList.length || 0} color="primary"
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}
@@ -278,7 +276,6 @@ const HeaderDesktop = () => {
                         </Badge>
                     </Tooltip>
                     <Tooltip title={"سبد خرید شما"} arrow enterDelay={1000}>
-                        {/*the following line i used to use context*/}
                         <Badge showZero max={99} badgeContent={user?.cart.length || 0} color="primary"
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}>
@@ -294,8 +291,6 @@ const HeaderDesktop = () => {
                     </Tooltip>
                 </Grid>
                 <Grid item container xs={matches1000 ? "auto" :true} justifyContent={"flex-end"}>
-                    {/*the following line i used to use context*/}
-
 
                     {user?.username === null ? <Link href={"/sign-in"} passHref>
                                 <Button
@@ -309,7 +304,6 @@ const HeaderDesktop = () => {
                             </Link>
                             :
                             <Fragment>
-                                {/*the following line i used to use context*/}
                                 <Button
                                     variant={"contained"}
                                     onClick={(e) => {
@@ -337,7 +331,6 @@ const HeaderDesktop = () => {
                                     transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                     anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                                 >
-                                    {/*the following line i used to use context*/}
 
                                     <MenuItem onClick={() => router.push("/profile/" + user?.userId)}>
                                         <ListItemIcon>
