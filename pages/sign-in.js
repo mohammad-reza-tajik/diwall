@@ -86,10 +86,7 @@ const SignIn = () => {
     const [typeOfForm, setTypeOfForm] = useState("signIn")
 
 
-    const user = useSelector(state => state)
     const dispatch = useDispatch()
-    console.log(user)
-
 
     const openSnackbarHandler = () => {
         setOpenSnackbar(true)

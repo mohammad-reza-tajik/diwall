@@ -58,7 +58,7 @@ const Product = (props) => {
             setIsLoading(true)
             if (isFavorite){
                 axios.put("/api/remove-from-favorites", {
-                    productId: router.query.prod_id,
+                    productId: props._id,
                     userId: user.userId,
                     token: user.token
                 }).then( _ => {
@@ -71,7 +71,7 @@ const Product = (props) => {
             else {
 
                 axios.put("/api/add-to-favorites", {
-                    productId: router.query.prod_id,
+                    productId: props._id,
                     userId: user.userId,
                     token: user.token
                 }).then( _ => {

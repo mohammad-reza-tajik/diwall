@@ -5,6 +5,7 @@ import axios from "axios";
 
 const Auth = (props) => {
 
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -13,10 +14,7 @@ const Auth = (props) => {
             const userId = localStorage.getItem("userId")
             if (userId && userId !== "undefined") {
                 axios.post("/api/get-user", {userId, token}).then(res => {
-
                         dispatch(userActions.login(res.data.user))
-                        // console.log(res)
-
                     }
                 ).catch(_ => {
                         localStorage.clear()

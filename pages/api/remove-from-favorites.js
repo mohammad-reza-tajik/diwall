@@ -6,10 +6,11 @@ export default async function handler(req,res){
     const userId = req.body.userId
     const productId = req.body.productId
     const token = req.body.token
+    // console.log(productId)
 
     const user = await User.findById(userId).exec()
 
-    user.cart = user.favoriteList.filter((element)=> element != productId)
+    user.favoriteList = user.favoriteList.filter((element)=> element != productId)
     await user.save()
 
     res.send({

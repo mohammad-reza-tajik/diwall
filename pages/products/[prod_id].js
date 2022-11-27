@@ -66,13 +66,12 @@ const ProductDetails = () => {
 
     const router = useRouter()
     const user = useSelector(state => state);
-    console.log(user)
     const dispatch = useDispatch();
 
     const isFavorite = user?.favoriteList.includes(router.query.prod_id)
     const isInCart = user?.cart.includes(router.query.prod_id)
 
-    const prod_id = router.query.prod_id;
+    const {prod_id} = router.query;
 
     useEffect(() => {
         setIsLoading(true)

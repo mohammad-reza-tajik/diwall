@@ -7,7 +7,7 @@ import CartItem from "../../components/CartItem"
 import Product from "../../components/Product";
 import axios from "axios";
 import Head from "next/head";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 const styles = {
     tab: {
@@ -33,8 +33,6 @@ const Profile = () => {
 
     const user = useSelector(state => state)
 
-    console.log(user)
-
     const [populatedFavoriteList, setPopulatedFavoriteList] = useState([])
     const [populatedCart, setPopulatedCart] = useState([])
     const [tab, setTab] = useState("1");
@@ -59,8 +57,8 @@ const Profile = () => {
         }
     }, [queryTab, isAuthenticated])
 
-    const currentUserFavoriteList = user?.favoriteList
-    const currentUserCart = user?.cart
+    // const currentUserFavoriteList = user?.favoriteList
+    // const currentUserCart = user?.cart
 
 
     useEffect(() => {
@@ -77,7 +75,7 @@ const Profile = () => {
 
             })
         }
-    }, [currentUserFavoriteList, currentUserCart])
+    }, [user.cart , user.favoriteList])
 
 
     const theme = useTheme()

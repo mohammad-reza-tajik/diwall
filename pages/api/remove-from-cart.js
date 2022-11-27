@@ -1,5 +1,4 @@
 import "../../db/database_connect"
-import Product from "../../db/productModel"
 import User from "../../db/userModel";
 
 

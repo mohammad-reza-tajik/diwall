@@ -1,6 +1,5 @@
-// import {createStore} from "redux"
 import {configureStore, createSlice} from "@reduxjs/toolkit"
-// import {generateToken} from "../utilities";
+import {storeTokenAndUser} from "../utilities"
 
 
 const initialState = {
@@ -28,6 +27,7 @@ const userSlice = createSlice({
             state.cart = cart;
             state.favoriteList = favoriteList;
             state.token = token;
+            storeTokenAndUser(state)
         },
         logout(state) {
             state.username = null;
