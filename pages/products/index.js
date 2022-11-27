@@ -81,7 +81,7 @@ const Products = () => {
                     :
                     products.length === 0 ?
                         <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
-                            <Typography fontSize={20} variant={"h2"} color={"#333"} fontFamily={"dana-demibold"}>هیچ
+                            <Typography fontSize={20} variant={"h2"} color={"#333"} fontFamily={"dana-bold"}>هیچ
                                 محصول مرتبطی موجود نیست !</Typography>
                         </Grid> :
                         products.map((product) =>

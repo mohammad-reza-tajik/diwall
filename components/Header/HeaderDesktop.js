@@ -96,7 +96,7 @@ const styles = {
         width: {xs:160,lg:200},
         height: "4rem",
         borderRadius: 2,
-        fontFamily: "dana-demibold",
+        fontFamily: "dana-bold",
         mr: "auto",
         fontSize: "1.4rem",
         gap: 10,
@@ -139,7 +139,7 @@ const HeaderDesktop = () => {
 
     const theme = useTheme()
     const router = useRouter()
-    const user = useSelector(state => state)
+    // const user = useSelector(state => state)
     const dispatch = useDispatch()
 
     const [search, setSearch] = useState("")

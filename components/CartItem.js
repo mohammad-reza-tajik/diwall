@@ -8,7 +8,7 @@ import {useRouter} from "next/router";
 
 const styles = {
     tab: {
-        fontSize: 16, color: "#333", fontFamily: "dana-demibold", my: 10, // bgcolor:"primary"
+        fontSize: 16, color: "#333", fontFamily: "dana-bold", my: 10, // bgcolor:"primary"
     },
     list: {
         width: 1,

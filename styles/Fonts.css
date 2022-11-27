@@ -14,8 +14,8 @@
   font-style: normal;
 }
 @font-face {
-  font-family: "dana-demibold";
-  src: url("/assets/fonts/dana-demibold.ttf") format("truetype");
+  font-family: "dana-bold";
+  src: url("/assets/fonts/dana-bold.ttf") format("truetype");
   font-style: normal;
 }
 @font-face {

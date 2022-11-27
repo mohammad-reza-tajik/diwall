@@ -299,7 +299,7 @@ const SignIn = () => {
                 open={openSnackbar}
                 autoHideDuration={500000}
                 sx={{
-                    fontFamily: "dana-demibold",
+                    fontFamily: "dana-bold",
                     // width:"70px",
                     backgroundColor: "error.main !important",
                 }}

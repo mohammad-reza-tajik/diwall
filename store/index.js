@@ -5,7 +5,6 @@ import {configureStore, createSlice} from "@reduxjs/toolkit"
 
 const initialState = {
 
-    isAuthenticated: false,
     username: null,
     email: null,
     userId: null,
@@ -18,20 +17,19 @@ const initialState = {
 
 const userSlice = createSlice({
 
-    name: "user" ,
-    initialState ,
-    reducers : {
-        login(state , action) {
-            state.isAuthenticated = true;
-            state.username = action.payload.username;
-            state.email =action.payload.email;
-            state.userId = action.payload.userId;
-            state.cart = action.payload.cart;
-            state.favoriteList = action.payload.favoriteList;
-            state.token = action.payload.token;
+    name: "user",
+    initialState,
+    reducers: {
+        login(state, action) {
+            const {username , email , _id : userId , cart , favoriteList , token} = action.payload
+            state.username = username;
+            state.email = email;
+            state.userId = userId;
+            state.cart = cart;
+            state.favoriteList = favoriteList;
+            state.token = token;
         },
         logout(state) {
-            state.isAuthenticated = false;
             state.username = null;
             state.email = null;
             state.userId = null;
@@ -40,16 +38,31 @@ const userSlice = createSlice({
             state.token = null;
 
         },
-        addToFavorites(state,action) {
+        addToFavorites(state, action) {
+            const productId = action.payload;
+            if (state.favoriteList.includes(productId)) {
+                state.favoriteList = state.favoriteList.filter((id) => id !== productId)
+
+            } else {
+                state.favoriteList = [...state.favoriteList, productId]
+            }
+
         },
-        addToCart(state,action) {
+        addToCart(state, action) {
+            const productId = action.payload;
+            if (state.cart.includes(productId)) {
+                state.cart = state.favoriteList.filter((id) => id !== productId)
+
+            } else {
+                state.cart = [...state.favoriteList, productId]
+            }
         },
     }
 
 })
 
 
-const store = configureStore({reducer : userSlice.reducer})
+const store = configureStore({reducer: userSlice.reducer})
 
 export const userActions = userSlice.actions
 

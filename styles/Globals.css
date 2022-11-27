@@ -92,8 +92,8 @@
   font-style: normal;
 }
 @font-face {
-  font-family: "dana-demibold";
-  src: url("/assets/fonts/dana-demibold.ttf") format("truetype");
+  font-family: "dana-bold";
+  src: url("/assets/fonts/dana-bold.ttf") format("truetype");
   font-style: normal;
 }
 @font-face {
@@ -119,7 +119,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 62.5%;
-  font-family: "dana-regular", tahoma, serif;
+  font-family: "dana-regular", tahoma, sans-serif;
 }
 
 body {

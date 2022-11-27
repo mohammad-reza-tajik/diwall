@@ -19,7 +19,7 @@ const Features = (props) => {
                         <Typography variant={"h4"} sx={{fontSize:{xs:12,sm:14,lg:18}}} color={"#444"} fontFamily={"dana-black"}>ارسال <Box component={"span"} sx={{color:"primary.main"}}>رایگان</Box></Typography>
                     </Grid>
                     <Grid item>
-                        <Typography variant={"caption"} fontFamily={"dana-demibold"} sx={{color:"#666",fontSize:{xs:10,md:12}}}>تضمین کیفیت و گارانتی محصولات</Typography>
+                        <Typography variant={"caption"} fontFamily={"dana-bold"} sx={{color:"#666",fontSize:{xs:10,md:12}}}>تضمین کیفیت و گارانتی محصولات</Typography>
                     </Grid>
                 </Grid>
             </Grid>
@@ -32,7 +32,7 @@ const Features = (props) => {
                         <Typography variant={"h4"} sx={{fontSize:{xs:12,sm:14,lg:18}}} color={"#444"} fontFamily={"dana-black"}>بسته بندی <Box component={"span"} sx={{color:"primary.main"}}>رایگان</Box></Typography>
                     </Grid>
                     <Grid item>
-                        <Typography variant={"caption"} fontFamily={"dana-demibold"} sx={{color:"#666",fontSize:{xs:10,md:12}}}>تضمین کیفیت و گارانتی محصولات</Typography>
+                        <Typography variant={"caption"} fontFamily={"dana-bold"} sx={{color:"#666",fontSize:{xs:10,md:12}}}>تضمین کیفیت و گارانتی محصولات</Typography>
                     </Grid>
                 </Grid>
             </Grid>
@@ -45,7 +45,7 @@ const Features = (props) => {
                         <Typography variant={"h4"} sx={{fontSize:{xs:12,sm:14,lg:18}}} color={"#444"} fontFamily={"dana-black"}>تضمین <Box component={"span"} sx={{color:"primary.main"}}>کیفیت</Box></Typography>
                     </Grid>
                     <Grid item>
-                        <Typography variant={"caption"} fontFamily={"dana-demibold"} sx={{color:"#666",fontSize:{xs:10,md:12}}}>تضمین کیفیت و گارانتی محصولات</Typography>
+                        <Typography variant={"caption"} fontFamily={"dana-bold"} sx={{color:"#666",fontSize:{xs:10,md:12}}}>تضمین کیفیت و گارانتی محصولات</Typography>
                     </Grid>
                 </Grid>
             </Grid>
@@ -58,7 +58,7 @@ const Features = (props) => {
                         <Typography variant={"h4"} sx={{fontSize:{xs:12,sm:14,lg:18}}} color={"#444"} fontFamily={"dana-black"}>پشتیبانی <Box component={"span"} sx={{color:"primary.main"}}>آنلاین</Box></Typography>
                     </Grid>
                     <Grid item>
-                        <Typography variant={"caption"} fontFamily={"dana-demibold"} sx={{color:"#666",fontSize:{xs:10,md:12}}}>تضمین کیفیت و گارانتی محصولات</Typography>
+                        <Typography variant={"caption"} fontFamily={"dana-bold"} sx={{color:"#666",fontSize:{xs:10,md:12}}}>تضمین کیفیت و گارانتی محصولات</Typography>
                     </Grid>
                 </Grid>
             </Grid>

@@ -15,7 +15,7 @@ const styles = {
     tab: {
         fontSize: {xs: 12, md: 16},
         color: "#333",
-        fontFamily: "dana-demibold",
+        fontFamily: "dana-bold",
         // my: 10,
         // mt:10
     },
@@ -132,7 +132,7 @@ const Profile = () => {
                         <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40}>
                             <Grid container item xs={12} alignItems={"center"} gap={10}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام و نام خانوادگی : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                                             fontSize={{xs: 14, md: 16}}>
                                     مشخص نشده !
                                 </Typography>
@@ -141,7 +141,7 @@ const Profile = () => {
                             </Grid>
                             <Grid container item xs={12} alignItems={"center"} gap={20}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام کاربری : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                                             fontSize={{xs: 14, md: 16}}>
                                     {authCtx.user?.username}
                                 </Typography>
@@ -149,7 +149,7 @@ const Profile = () => {
                             </Grid>
                             <Grid container item xs={12} alignItems={"center"} gap={20}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>ایمیل : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                                             fontSize={{xs: 14, md: 16}}>
                                     {authCtx.user?.email}
                                 </Typography>
@@ -158,7 +158,7 @@ const Profile = () => {
                             </Grid>
                             <Grid container item xs={12} alignItems={"center"} gap={10}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>شماره موبایل : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                                             fontSize={{xs: 14, md: 16}}>
                                     مشخص نشده !
                                 </Typography>
@@ -167,7 +167,7 @@ const Profile = () => {
                             </Grid>
                             <Grid container item xs={12} alignItems={"center"} gap={10}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}> تاریخ تولد : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                                             fontSize={{xs: 14, md: 16}}>
                                     مشخص نشده !
                                 </Typography>
@@ -176,7 +176,7 @@ const Profile = () => {
                             </Grid>
                             <Grid container item xs={12} alignItems={"center"} gap={10}>
                                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}> شغل : </Box>
-                                <Typography variant={"subtitle1"} fontFamily={"dana-demibold"}
+                                <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                                             fontSize={{xs: 14, md: 16}}>
                                     مشخص نشده !
                                 </Typography>
@@ -196,7 +196,7 @@ const Profile = () => {
                                     <Grid container item xs minHeight={300} justifyContent={"center"}
                                           alignItems={"center"}>
                                         <Typography fontSize={16} variant={"body1"} color={"#333"}
-                                                    fontFamily={"dana-demibold"}>
+                                                    fontFamily={"dana-bold"}>
                                             لیست علاقمندی های شما خالی است!
                                         </Typography>
                                     </Grid> :
@@ -221,7 +221,7 @@ const Profile = () => {
                                         <Grid container item xs minHeight={300} justifyContent={"center"}
                                               alignItems={"center"}>
                                             <Typography fontSize={16} variant={"body1"} color={"#333"}
-                                                        fontFamily={"dana-demibold"}>سبد خرید شما خالی است
+                                                        fontFamily={"dana-bold"}>سبد خرید شما خالی است
                                                 ! </Typography>
                                         </Grid> :
                                     cart.length !== 0 && cart.map((item) => {
