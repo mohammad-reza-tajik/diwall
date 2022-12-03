@@ -1,9 +1,9 @@
-import {Fragment, useEffect} from "react";
+import React, {Fragment, useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {userActions} from "../store"
 import axios from "axios";
 
-const Auth = (props) => {
+const Auth : React.FC = (props) => {
 
 
     const dispatch = useDispatch()

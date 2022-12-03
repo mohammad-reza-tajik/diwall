@@ -1,8 +1,8 @@
 import {Grid, ImageList, ImageListItem, useMediaQuery, useTheme} from "@mui/material";
 import Image from "next/image"
-import React from "react";
+import  React from "react"; // to fix typescript error
 
-const SeenOn = () => {
+const SeenOn : React.FC = () => {
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
