@@ -1,6 +1,8 @@
-import {Button, Grid, Typography} from "@mui/material";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import  Typography from "@mui/material/Typography";
 import Image from "next/image"
-import {Fragment} from "react";
+import React, {Fragment} from "react";
 import Link from "next/link";
 import Head from "next/head";
 
@@ -9,22 +11,13 @@ const styles = {
     container: {
         minWidth: "100vw",
         minHeight: "100vh",
-        // position: "fixed",
-        // top: 0,
-        // left: 0,
-        // zIndex: 50,
         overflow:"scroll"
-        // my:100
-    },
 
-
-
+    }
 
 }
 
-const NotFound = () => {
-    // const router = useRouter()
-    // console.log(router)
+const NotFound : React.FC = () => {
 
     return (
         <Fragment>

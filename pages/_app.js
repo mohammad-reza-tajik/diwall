@@ -2,7 +2,7 @@ import '../styles/Globals.css';
 import "../styles/Fonts.css";
 import Head from "next/head"
 import theme from "../styles/theme";
-import {Container, Grid, ThemeProvider} from "@mui/material";
+import {Grid, ThemeProvider} from "@mui/material";
 import Footer from "../components/Footer";
 import {useRouter} from "next/router";
 import Header from "../components/Header";

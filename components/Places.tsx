@@ -1,5 +1,9 @@
-import {Box, Grid, Typography, useMediaQuery, useTheme} from "@mui/material";
-import {Circle} from "@mui/icons-material";
+import Box from "@mui/material/Box";
+import  Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import  useMediaQuery from "@mui/material/useMediaQuery";
+import {useTheme} from "@mui/material/styles";
+import Circle from "@mui/icons-material/Circle";
 import Image from "next/image"
 import {useRouter} from "next/router";
 import React from "react";
@@ -17,7 +21,9 @@ const styles = {
     }
 }
 
-const Places = () => {
+
+
+const Places : React.FC = () => {
     const router = useRouter();
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))

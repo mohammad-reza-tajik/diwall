@@ -1,4 +1,4 @@
-import {Grid} from "@mui/material";
+import Grid from "@mui/material/Grid";
 import SectionHeading from "../components/SectionHeading";
 import BestSellingProducts from "../components/BestSellingProducts";
 import LatestProducts from "../components/LatestProducts";
@@ -8,14 +8,15 @@ import Places from "../components/Places";
 import MiddleSection from "../components/MiddleSection";
 import SeenOn from "../components/SeenOn";
 import Banner from "../components/Banner";
+import React from "react";
 
 
-const Home = () => {
+const Home : React.FC = () => {
 
     return (
         <Grid container item xs={12} direction={"row"} justifyContent={"center"}>
             <Banner />
-            <Features cols={12}/>
+            <Features />
             <Places/>
             <MostPopularProducts route={"/products?sortBy=3"} />
             <SectionHeading text={"محصولات جدید"} seeAll={true} route={"/products"}/>

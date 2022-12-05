@@ -50,7 +50,6 @@ const MostPopularProducts = (props) => {
                     <Grid container item xs={2} direction={"column"} alignItems={"flex-start"} gap={50}>
                         <Typography variant={"h3"} lineHeight={1.4} color={"white.main"} fontFamily={"dana-black"}
                                     textAlign={"right"}>
-
                             محبوب ترین
                             <br/>
                             محصولات

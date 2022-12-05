@@ -1,17 +1,14 @@
-import {Grid} from "@mui/material";
+import Grid from "@mui/material/Grid";
 import Image from "next/image";
+import React from "react";
 
 const styles = {
     pictures:{
-        // cursor:"pointer",
-        // borderRadius:5,
-        // overflow:"hidden",
         display:{xs:"none",md:"flex"}
-
     }
 }
 
-const MiddleSection= () => {
+const MiddleSection : React.FC = () => {
     return(
 
     <Grid container item xs={12} my={50}>
