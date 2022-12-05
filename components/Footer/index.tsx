@@ -1,7 +1,19 @@
-import {Box, Button, Divider, Grid, IconButton, TextField, Typography} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Divider from "@mui/material/Divider"
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import Image from "next/image";
-import {Circle, Instagram, LinkedIn, LocalPhoneOutlined, Telegram, Twitter} from "@mui/icons-material";
+import Circle from "@mui/icons-material/Circle";
+import Instagram from "@mui/icons-material/Instagram";
+import LinkedIn from "@mui/icons-material/LinkedIn";
+import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
+import Telegram from "@mui/icons-material/Telegram";
+import Twitter from "@mui/icons-material/Twitter";
+import React from "react";
 
 
 const styles = {
@@ -34,7 +46,7 @@ const styles = {
     }
 }
 
-const Footer = () => {
+const Footer: React.FC = () => {
 
     return (
         <Grid container item xs={12} component={"footer"} justifyContent={{xs: "center", md: "space-between"}} mt={100}>

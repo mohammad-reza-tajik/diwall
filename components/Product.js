@@ -1,9 +1,14 @@
-import {CircularProgress, Grid, IconButton, Typography, useMediaQuery, useTheme} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import useMediaQuery from "@mui/material/useMediaQuery"
 import Image from "next/image"
 import {Favorite} from "@mui/icons-material";
 import {useRouter} from "next/router";
 import React, {useState} from "react";
 import axios from "axios";
+import {useTheme} from "@mui/material/styles"
 import {useDispatch, useSelector} from "react-redux";
 import {userActions} from "../store";
 
