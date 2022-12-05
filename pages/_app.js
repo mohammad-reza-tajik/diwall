@@ -2,7 +2,7 @@ import '../styles/Globals.css';
 import "../styles/Fonts.css";
 import Head from "next/head"
 import theme from "../styles/theme";
-import {Grid, ThemeProvider} from "@mui/material";
+import {Container, Grid, ThemeProvider} from "@mui/material";
 import Footer from "../components/Footer";
 import {useRouter} from "next/router";
 import Header from "../components/Header";
@@ -44,7 +44,9 @@ function MyApp({Component, pageProps}) {
                     <meta name="description" content={"خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"}/>
                 </Head>
                 <Provider store={store}>
-                    <Grid container direction={"row"} justifyContent={"center"}>
+                    <Grid container direction={"row"} justifyContent={"center"} maxWidth={1400} mx={"auto"}>
+                    {/*<Container maxWidth={"lg"}>*/}
+
                         <Auth>
                         <Grid item xs={11}>
                             {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Header/>}
@@ -52,6 +54,7 @@ function MyApp({Component, pageProps}) {
                             {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Footer/>}
                         </Grid>
                         </Auth>
+                    {/*</Container>*/}
                     </Grid>
                 </Provider>
             </ThemeProvider>
