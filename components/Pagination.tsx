@@ -1,20 +1,26 @@
-import {Grid,Pagination as MUIPagination, ToggleButton, ToggleButtonGroup} from "@mui/material";
+import Grid from "@mui/material/Grid";
+import MUIPagination  from "@mui/material/Pagination";
 import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
 
-const Pagination = (props) => {
+interface Props {
+    lastPage: number;
+    currentPage:number;
+    productsCount:number;
+
+
+
+}
+
+const Pagination : React.FC<Props> = (props) => {
 
     const [page, setPage] = useState(1)
     const router = useRouter()
-    // console.log(props)
-    // console.log(props)
-    // console.log("hellor from pagination")
+
 
     useEffect(()=>{
         if (router.query.page)
             setPage(+router.query.page)
-        // else
-            // router.push({pathname:router.pathname,query:{...router.query,page}})
 
 
     },[])
