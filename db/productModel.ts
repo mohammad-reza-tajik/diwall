@@ -40,7 +40,20 @@ const productSchema = new mongoose.Schema({
 
 },{timestamps:true})
 
-// export default mongoose.model("Product",productSchema)
+
+export interface ProductType {
+    _id: string ;
+    title: string ;
+    price: string ;
+    image: string ;
+    image_full: string;
+    details: string;
+    numbers_in_stock:number;
+
+}
+
+
+
 
 // I was getting an error which was saying that you're re-creating model so i find below solution from stack overflow
 export default  mongoose.models.Product || mongoose.model('Product', productSchema);

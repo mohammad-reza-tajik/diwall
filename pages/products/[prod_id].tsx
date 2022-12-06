@@ -1,4 +1,5 @@
 import {useRouter} from "next/router";
+import type {ProductType} from "../../db/productModel"
 
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -52,21 +53,12 @@ const styles = {
 }
 
 
- interface Product {
-     _id: string ;
-     title: string ;
-     price: string ;
-     image: string ;
-     image_full: string;
-     details: string;
-     numbers_in_stock:number;
 
- }
 
 
 const ProductDetails = () => {
 
-    const [product, setProduct] = useState<Product>()
+    const [product, setProduct] = useState<ProductType>()
     const [relatedProducts, setRelatedProducts] = useState([])
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToFavoritesLoading, setAddToFavoritesLoading] = useState(false)

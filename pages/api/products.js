@@ -7,13 +7,8 @@ export default async function handler(req, res) {
     if (req.method === "POST" || req.method === "GET") {
 
 
-        // console.log(req.body)
-        // console.log(req.query)
-
-
         const ITEMS_PER_PAGE = 10
         const category = req.body.category
-        // console.log(category)
         const page = +req.body.page || 1
         const sortBy = +req.body.sortBy || 1
 
@@ -21,7 +16,6 @@ export default async function handler(req, res) {
         if (req.body.search && req.body.search.trim().length !== 0) {
 
             // the only way to put a variable in a regex
-            // const title = `نتایج جستجو برای ${req.body.search}`
             const regexp = new RegExp(req.body.search, "g") // output => /req.body.search/g
 
             /*
@@ -58,9 +52,7 @@ export default async function handler(req, res) {
 
 
         } else if (!req.body.search && !category) {
-            // console.log(req.body)
-            // console.log("second one is trigggred")
-            // const title = `پرفروش`
+
             const productsCount = await Product.countDocuments().exec()
             let products;
 
@@ -88,9 +80,7 @@ export default async function handler(req, res) {
             })
         }
         else if (category) {
-            // console.log(req.body)
-            // const title = `پرفروش`
-            // console.log("category is defined")
+
             const productsCount = await Product.countDocuments({category:{$in:[category]}}).exec()
             let products;
 
@@ -101,7 +91,6 @@ export default async function handler(req, res) {
                 products = await Product.find({category:{$in:[category]}}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // latest products
-                // console.log(productsCount)
                 products = await Product.find({category:{$in:[category]}}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
 

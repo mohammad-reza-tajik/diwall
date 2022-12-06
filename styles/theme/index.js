@@ -33,9 +33,7 @@ const theme = createTheme({
 
     typography: {
         fontFamily: "inherit",
-        h1:{
-          // color:"#1d1d1e"
-        },
+
 
 
 
