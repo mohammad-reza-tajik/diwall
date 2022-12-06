@@ -1,5 +1,14 @@
 import {useRouter} from "next/router";
-import {Box, Button, CircularProgress, Grid, Tab, Tabs, Typography, useMediaQuery, useTheme} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Grid from "@mui/material/Grid";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import {useTheme} from "@mui/material/styles";
+
 import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useEffect, useState} from "react";
 import {TabContext} from "@mui/lab";
@@ -7,20 +16,19 @@ import CartItem from "../../components/CartItem"
 import Product from "../../components/Product";
 import axios from "axios";
 import Head from "next/head";
-import {useSelector} from "react-redux";
+import {useAppSelector} from "../../hooks/redux_hooks";
 
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 16},
         color: "#333",
         fontFamily: "dana-bold",
-        // my: 10,
-        // mt:10
+
     },
     list: {
         width: 1,
         height: "auto",
-        // maxHeight:400,
+
 
     }
 }
@@ -28,14 +36,14 @@ const styles = {
 
 const Profile = () => {
     const router = useRouter()
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     // const [pageTitle,setPageTitle] = useState("لطفا صبر کنید ...")
 
-    const user = useSelector(state => state)
+    const user = useAppSelector(state => state)
 
-    const [populatedFavoriteList, setPopulatedFavoriteList] = useState([])
-    const [populatedCart, setPopulatedCart] = useState([])
-    const [tab, setTab] = useState("1");
+    const [populatedFavoriteList, setPopulatedFavoriteList] = useState<any>([])
+    const [populatedCart, setPopulatedCart] = useState<any>([])
+    const [tab, setTab] = useState<string>("1");
 
 
     const tabChangeHandler = (_, newTab) => {
@@ -75,7 +83,7 @@ const Profile = () => {
 
             })
         }
-    }, [user.cart , user.favoriteList])
+    }, [user.cart, user.favoriteList])
 
 
     const theme = useTheme()

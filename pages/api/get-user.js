@@ -1,7 +1,7 @@
 import "../../db/database_connect"
 import User from "../../db/userModel"
-// import mongoose from "mongoose";
-import {generateToken, validateToken} from "../../utilities";
+import tokenGenerator from "../../utilities/generateToken";
+import tokenValidator from "../../utilities/validateToken";
 
 export default async function handler(req, res) {
     if (req.method === "POST") {
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         // console.log(token)
 
         if (userId && token) {
-            const tokenIsValid = await validateToken(token)
+            const tokenIsValid = await tokenValidator(token)
             if (!tokenIsValid) {
                 // console.log(generateToken(user))
                 res.status(401).send({
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
             // const regexp = new RegExp(userId , "g") // output => /req.body.search/g
             // const user = await User.find({_id: userId}).exec()
 
-            token = generateToken(user)
+            token = tokenGenerator(user)
 
             // console.log(token)
             // console.log(user)

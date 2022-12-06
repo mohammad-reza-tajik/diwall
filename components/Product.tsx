@@ -9,8 +9,7 @@ import {useRouter} from "next/router";
 import React, {useState} from "react";
 import axios from "axios";
 import {useTheme} from "@mui/material/styles"
-import {useDispatch, useSelector} from "react-redux";
-import {userActions} from "../store";
+import {userActions , useAppSelector , useAppDispatch} from "../store";
 
 
 const styles = {
@@ -20,7 +19,6 @@ const styles = {
         justifyContent:"center",
         p: 10,
         bgcolor: "#fff"
-        // gap:10
 
     },
     addToFavoritesButton: {
@@ -33,17 +31,25 @@ const styles = {
 }
 
 
-const Product = (props) => {
+interface Product {
+    _id:string;
+    title:string;
+    price:string
+
+
+}
+
+const Product : React.FC<Product> = (props) => {
     const router = useRouter()
 
     const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+    const matchesMD : boolean = useMediaQuery(theme.breakpoints.down("md"))
+    const matchesSM : boolean = useMediaQuery(theme.breakpoints.down("sm"))
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const user = useSelector(state => state)
-    const dispatch = useDispatch()
+    const user = useAppSelector(state =>state)
+    const dispatch = useAppDispatch()
 
     const isFavorite = user?.favoriteList.includes(props._id)
 
@@ -95,9 +101,7 @@ const Product = (props) => {
 
     return (
         <Grid container item sx={styles.product} xs={12}>
-
-            <Grid item xs={12} borderRadius={2} position={"relative"} overflow={"hidden"}
-                  cursor={"pointer"}>
+            <Grid item xs={12} sx={{borderRadius:2,position:"relative",overflow:"hidden",cursor:"pointer"}}>
                 <Grid item sx={styles.addToFavoritesButton}>
                     <IconButton onClick={addToFavoritesHandler}>
                         {isLoading ? <CircularProgress size={matchesMD ? matchesSM ? 30 : 40 : 40} sx={{
@@ -105,14 +109,14 @@ const Product = (props) => {
                             p: {xs:4,md:5,},
                             bgcolor: "rgba(50,50,50,0.3)",
                             color: "#fff"
-                        }}/> : isFavorite ? <Favorite size={100} sx={{
+                        }}/> : isFavorite ? <Favorite sx={{
                             fontSize:{xs:30,sm:40},
                                 borderRadius: 20,
                                 p: {xs:4,md:5,},
                                 bgcolor: "rgba(50,50,50,0.3)",
                                 color: "primary.main"
                             }}/> :
-                            <Favorite size={100} sx={{
+                            <Favorite sx={{
                                 fontSize:{xs:30,sm:40,},
                                 borderRadius: 20,
                                 p: {xs:4,md:5,},

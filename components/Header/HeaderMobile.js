@@ -169,7 +169,7 @@ const HeaderMobile = () => {
 
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/"} passHref>
-                                        <Typography variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
                                             صفحه نخست
                                         </Typography>
                                     </Link>
@@ -177,7 +177,7 @@ const HeaderMobile = () => {
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/products"} passHref>
-                                        <Typography variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
                                             جدیدترین محصولات
                                         </Typography>
                                     </Link>
@@ -185,7 +185,7 @@ const HeaderMobile = () => {
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/products?sortBy=2"} passHref>
-                                        <Typography variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
                                             پرفروش ترین محصولات
                                         </Typography>
                                     </Link>
@@ -193,7 +193,7 @@ const HeaderMobile = () => {
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/products?sortBy=3"} passHref>
-                                        <Typography variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
                                             محبوب ترین محصولات
                                         </Typography>
                                     </Link>
@@ -201,7 +201,7 @@ const HeaderMobile = () => {
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/about"} passHref>
-                                        <Typography variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
                                             درباره ما
                                         </Typography>
                                     </Link>
@@ -210,7 +210,7 @@ const HeaderMobile = () => {
 
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/collaboration"} passHref>
-                                        <Typography variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
                                             همکاری با ما
                                         </Typography>
                                     </Link>

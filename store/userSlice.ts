@@ -1,8 +1,19 @@
-import {configureStore, createSlice} from "@reduxjs/toolkit"
-import {storeTokenAndUser} from "../utilities"
+import {createSlice} from "@reduxjs/toolkit";
+import type {PayloadAction} from "@reduxjs/toolkit"
+import storeTokenAndUser from "../utilities/storeToken";
 
 
-const initialState = {
+interface User {
+    username : null |string ,
+    email: null | string,
+    userId: null | string,
+    token: null | string,
+    cart: string[],
+    favoriteList: string[]
+
+}
+
+const initialState : User = {
 
     username: null,
     email: null,
@@ -14,13 +25,14 @@ const initialState = {
 
 }
 
-const userSlice = createSlice({
 
-    name: "user",
+
+const userSlice = createSlice({
+    name:"user",
     initialState,
     reducers: {
-        login(state, action) {
-            const {username, email, userId, cart, favoriteList, token} = action.payload
+        login(state, action : PayloadAction<User>) {
+            const { username, email, userId, cart, favoriteList, token } = action.payload
             state.username = username;
             state.email = email;
             state.userId = userId;
@@ -36,11 +48,10 @@ const userSlice = createSlice({
             state.cart = [];
             state.favoriteList = [];
             state.token = null;
-
             localStorage.clear()
 
         },
-        addToFavorites(state, action) {
+        addToFavorites(state, action : PayloadAction<string>) {
             const productId = action.payload;
             if (!state.favoriteList.includes(productId)) {
                 state.favoriteList = [...state.favoriteList, productId]
@@ -49,33 +60,30 @@ const userSlice = createSlice({
 
 
         },
-        removeFromFavorites(state, action) {
+        removeFromFavorites(state, action : PayloadAction<string>) {
             const productId = action.payload;
             if (state.favoriteList.includes(productId)) {
                 state.favoriteList = state.favoriteList.filter((id) => id !== productId)
             }
 
         },
-        addToCart(state, action) {
+        addToCart(state, action : PayloadAction<string>) {
             const productId = action.payload;
             if (!state.cart.includes(productId)) {
                 state.cart = [...state.cart, productId]
             }
 
         },
-        removeFromCart(state, action) {
+        removeFromCart(state, action : PayloadAction<string>) {
             const productId = action.payload;
             if (state.cart.includes(productId)) {
                 state.cart = state.cart.filter((id) => id !== productId)
             }
         }
     }
-
 })
-
-
-const store = configureStore({reducer: userSlice.reducer})
 
 export const userActions = userSlice.actions
 
-export default store
+
+export default userSlice.reducer

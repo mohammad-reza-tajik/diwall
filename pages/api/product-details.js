@@ -7,7 +7,7 @@ const handler = async (req, res) => {
     const productId = req.body.productId
 
     if (productId) {
-        const productDetails = await Product.findById(productId).exec()
+        let productDetails = await Product.findById(productId).exec()
 
         // for reference about mongodb operators see https://www.bmc.com/blogs/mongodb-operators/
         // the bottom line returns all matches that are equal to second element in category

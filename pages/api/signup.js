@@ -1,7 +1,7 @@
 import "../../db/database_connect"
 import User from "../../db/userModel";
 import bcrypt from "bcryptjs";
-import {generateToken} from "../../utilities";
+import generateToken from "../../utilities/generateToken";
 // import jwt from "jsonwebtoken"
 
 const errorMessage = "این نام کاربری یا ایمیل  قبلا استفاده شده است"

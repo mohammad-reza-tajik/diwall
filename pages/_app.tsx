@@ -7,11 +7,11 @@ import Footer from "../components/Footer";
 import {useRouter} from "next/router";
 import Header from "../components/Header";
 import {Provider} from "react-redux";
-import store from "../store/index";
-import Auth from "../components/Auth.tsx"
+import store from "../store/store";
+import Auth from "../components/Auth"
 
 
-function MyApp({Component, pageProps}) {
+function MyApp ({Component, pageProps}) {
 
     //****************** to hide the scrollbar in sign-in page *****************//
 

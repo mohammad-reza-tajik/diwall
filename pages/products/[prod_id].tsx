@@ -1,24 +1,27 @@
 import {useRouter} from "next/router";
-import {
-    Box,
-    Button,
-    CircularProgress,
-    Grid,
-    Skeleton,
-    TextField,
-    ToggleButton,
-    ToggleButtonGroup,
-    Typography,
-} from "@mui/material";
+
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Skeleton from "@mui/material/Skeleton";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
+
+
 import Image from "next/image"
 import {Fragment, useEffect, useState} from "react";
 import axios from "axios";
-import {useDispatch, useSelector} from "react-redux";
-import {userActions} from "../../store";
+import {useAppSelector,useAppDispatch,userActions} from "../../store";
 import Features from "../../components/Features";
 import RelatedProducts from "../../components/RelatedProducts";
 import SectionHeading from "../../components/SectionHeading";
-import {Favorite, FavoriteBorder, ShoppingBagOutlined} from "@mui/icons-material";
+import Favorite from "@mui/icons-material/Favorite";
+import  FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import  ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import Head from "next/head";
 
 
@@ -29,7 +32,6 @@ const styles = {
         height: "6rem",
         borderRadius: 2,
         fontFamily: "dana-bold",
-        // mr: "auto",
         fontSize: "1.5rem",
         gap: 10,
         color: "white",
@@ -40,22 +42,31 @@ const styles = {
 
     },
     addToFavoritesButton: {
-        // width: "100%",
-
         width: "6rem",
         height: "6rem",
         borderRadius: 2,
-        // fontSize: 15,
         color: "white",
         border: "1px solid rgba(25,25,25,.1)"
-        // bgcolor:"primary.main"
 
     }
 }
 
+
+ interface Product {
+     _id: string ;
+     title: string ;
+     price: string ;
+     image: string ;
+     image_full: string;
+     details: string;
+     numbers_in_stock:number;
+
+ }
+
+
 const ProductDetails = () => {
 
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState<Product>()
     const [relatedProducts, setRelatedProducts] = useState([])
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToFavoritesLoading, setAddToFavoritesLoading] = useState(false)
@@ -65,11 +76,12 @@ const ProductDetails = () => {
 
 
     const router = useRouter()
-    const user = useSelector(state => state);
-    const dispatch = useDispatch();
+    const user = useAppSelector(state => state);
+    const dispatch = useAppDispatch();
 
-    const isFavorite = user?.favoriteList.includes(router.query.prod_id)
-    const isInCart = user?.cart.includes(router.query.prod_id)
+    /* had to add toString() method to get rid of TS errors */
+    const isFavorite = user?.favoriteList.includes(router.query?.prod_id.toString())
+    const isInCart = user?.cart.includes(router.query?.prod_id.toString())
 
     const {prod_id} = router.query;
 
@@ -83,7 +95,6 @@ const ProductDetails = () => {
                 setProduct(res.data.productDetails)
                 setRelatedProducts(res.data.relatedProducts)
                 setPageTitle(res.data.productDetails.title)
-
                 setIsLoading(false)
             }).catch(e => console.log(e))
 
@@ -296,13 +307,13 @@ const ProductDetails = () => {
                                             borderRadius: 20,
                                             p: {xs: 2, md: 3,},
                                             color: "#fff"
-                                        }}/> : isFavorite ? <Favorite size={100} sx={{
+                                        }}/> : isFavorite ? <Favorite  sx={{
                                                 fontSize: {xs: 30, sm: 40},
                                                 borderRadius: 20,
                                                 p: {xs: 2, md: 3,},
                                                 color: "fff"
                                             }}/> :
-                                            <FavoriteBorder size={100} sx={{
+                                            <FavoriteBorder  sx={{
                                                 fontSize: {xs: 30, sm: 40,},
                                                 borderRadius: 20,
                                                 p: {xs: 2, md: 3,},
@@ -316,7 +327,7 @@ const ProductDetails = () => {
                                         onClick={addToCartHandler}
                                         variant={"contained"}
                                         color={isInCart ? "error" : "primary"}
-                                        startIcon={addToCartLoading ? <CircularProgress color={"white"} size={25}/> :
+                                        startIcon={addToCartLoading ? <CircularProgress sx={{color:"#fff"}} size={25}/> :
                                             <ShoppingBagOutlined sx={{fontSize: 15, ml: 5,}}/>
                                         }
                                         sx={styles.addToCartButton}
@@ -331,7 +342,7 @@ const ProductDetails = () => {
                 </Grid>
 
                 <Grid item xs={12} my={30}>
-                    <Features cols={12}/>
+                    <Features />
                 </Grid>
 
                 <Grid item xs={12}>

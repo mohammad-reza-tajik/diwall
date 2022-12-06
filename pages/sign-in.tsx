@@ -1,25 +1,28 @@
-import {
-    Box,
-    Button,
-    CircularProgress,
-    Grid,
-    IconButton,
-    InputAdornment,
-    Snackbar,
-    TextField,
-    ToggleButton,
-    ToggleButtonGroup
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Snackbar from "@mui/material/Snackbar";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
+import Close from "@mui/icons-material/Close";
+import Create from "@mui/icons-material/Create";
+import Email from "@mui/icons-material/Email";
+import Login from "@mui/icons-material/Login";
+import Password from "@mui/icons-material/Password";
+import Person from "@mui/icons-material/Person";
 
 import Head from "next/head";
-import {Close, Create, Email, Login, Password, Person} from "@mui/icons-material";
 import Image from "next/image";
 import Link from "next/link"
-import {Fragment, useRef, useState} from "react";
+import React, {Fragment, useRef, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
-import {useDispatch, useSelector} from "react-redux";
-import {userActions} from "../store"
+import {userActions , useAppDispatch} from "../store"
 
 
 const styles = {
@@ -38,7 +41,6 @@ const styles = {
         justifyContent: "flex-start",
         width: {xs: 1, md: 570},
         height: {xs: "100vh", md: 570},
-        // boxShadow:"2px 2px 5px rgba(0,0,0,.4)",
         zIndex: "mobileStepper"
 
     },
@@ -64,29 +66,20 @@ const styles = {
         backgroundSize: "100% 100%",
         filter: "blur(5px)",
     },
-    // snackbar: {
-    //     '& .css-1kr9x0n-MuiSnackbarContent-action': {
-    //         mr: 70,
-    //         pl: .1
-    //     },
-    //
-    //     '& .css-1exqwzz-MuiSnackbarContent-message': {
-    //         p: 13
-    //     },
-    // }
+
 
 
 }
 
-const SignIn = () => {
+const SignIn : React.FC = () => {
 
     //********************************** determine the type of form **********************************//
-    const [message, setMessage] = useState("")
-    const [openSnackbar, setOpenSnackbar] = useState(false)
-    const [typeOfForm, setTypeOfForm] = useState("signIn")
+    const [message, setMessage] = useState<string>("")
+    const [openSnackbar, setOpenSnackbar] = useState<boolean>(false)
+    const [typeOfForm, setTypeOfForm] = useState<string>("signIn")
 
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const openSnackbarHandler = () => {
         setOpenSnackbar(true)
@@ -97,18 +90,18 @@ const SignIn = () => {
         setOpenSnackbar(false)
     }
 
-    const typeOfFormHandler = (event, typeOfForm) => {
+    const typeOfFormHandler = ( _ , typeOfForm) => {
         // the bottom line is written like this so that only one tab can be active or disabled at a time
         if (typeOfForm !== null)
             setTypeOfForm(typeOfForm);
     }
 
-    //********************************** form fields refs **********************************//
+    //********************************** form field refs **********************************//
 
-    const usernameRef = useRef()
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const usernameOrEmailRef = useRef()
+    const usernameRef = useRef<HTMLInputElement>()
+    const emailRef = useRef<HTMLInputElement>()
+    const passwordRef = useRef<HTMLInputElement>()
+    const usernameOrEmailRef = useRef<HTMLInputElement>()
 
 
     const router = useRouter()
@@ -116,13 +109,13 @@ const SignIn = () => {
     const action = (
         <IconButton
             size="medium"
-            color={"white"}
+            sx={{color:"#fff"}}
             onClick={closeSnackbarHandler}>
             <Close fontSize={"large"}/>
         </IconButton>
     )
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
 
     //********************************* form submission **********************************!//
@@ -246,7 +239,7 @@ const SignIn = () => {
                 <Grid item container justifyContent={"center"}>
                     <Button type={"submit"} variant={"contained"}
                             startIcon={isLoading ?
-                                <CircularProgress color={"white"} size={25}/> : typeOfForm === "signup" ? <Create/> :
+                                <CircularProgress sx={{color:"#fff"}}  size={25}/> : typeOfForm === "signup" ? <Create/> :
                                     <Login/>}
                             sx={{
                                 width: {xs: .8, sm: .7},

@@ -3,7 +3,11 @@ import {useDispatch} from "react-redux";
 import {userActions} from "../store"
 import axios from "axios";
 
-const Auth : React.FC = (props) => {
+interface Props {
+    children: React.ReactNode;
+}
+
+const Auth : React.FC<Props> = ({children}) => {
 
 
     const dispatch = useDispatch()
@@ -29,7 +33,7 @@ const Auth : React.FC = (props) => {
 
     return (
         <Fragment>
-            {props.children}
+            {children}
         </Fragment>
     )
 }
