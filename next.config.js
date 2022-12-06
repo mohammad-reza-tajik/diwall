@@ -12,16 +12,6 @@ const nextConfig = (phase) => {
             }
         }
 
-    else
-        return {
-            reactStrictMode: true,
-
-            env: {
-                // mongodb_url:"mongodb://root:HoGdhcSA3xKGIQipPXDyP9zS@michael.iran.liara.ir:34004/my-app?authSource=admin&replicaSet=rs0"
-                mongodb_url: "mongodb+srv://MORTA:Lant12344321@cluster0.ax5a2.mongodb.net/online_shop?retryWrites=true&w=majority"
-            }
-
-        }
 }
 
 module.exports = nextConfig
