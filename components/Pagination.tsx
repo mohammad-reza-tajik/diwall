@@ -4,11 +4,9 @@ import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
 
 interface Props {
-    lastPage: number;
-    currentPage:number;
-    productsCount:number;
-
-
+    lastPage? : number;
+    currentPage? : number;
+    productsCount? : number;
 
 }
 
@@ -17,7 +15,6 @@ const Pagination : React.FC<Props> = (props) => {
     const [page, setPage] = useState(1)
     const router = useRouter()
 
-
     useEffect(()=>{
         if (router.query.page)
             setPage(+router.query.page)
@@ -25,14 +22,11 @@ const Pagination : React.FC<Props> = (props) => {
 
     },[])
 
-
-
-    const pageHandler = async (event, page) => {
+    const pageHandler = async ( _ , page) => {
 
         setPage(page);
         // to navigate to the same page with updated query parameters
         await router.push({pathname:router.pathname,query:{...router.query,page}})
-
     }
 
     return (

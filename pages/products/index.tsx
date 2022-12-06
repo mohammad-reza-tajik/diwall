@@ -1,4 +1,6 @@
-import {CircularProgress, Grid, Typography,} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import  Grid from "@mui/material/Grid";
+import  Typography from "@mui/material/Typography";
 import SectionHeading from "../../components/SectionHeading";
 import axios from "axios";
 import React, {useEffect, useState} from "react";
@@ -7,11 +9,18 @@ import Product from "../../components/Product";
 import Pagination from "../../components/Pagination";
 
 
-const Products = () => {
+interface PageInformation {
+    lastPage?: number;
+    currentPage?:number;
+    productsCount?:number;
+
+}
+
+const Products : React.FC = () => {
+
 
     const [products, setProducts] = useState([])
-    const [pageInformation, setPageInformation] = useState(1)
-
+    const [pageInformation, setPageInformation] = useState< PageInformation | {} >({})
     const [isLoading, setIsLoading] = useState(false)
 
 
