@@ -1,4 +1,6 @@
-import {Grid, useMediaQuery, useTheme} from "@mui/material";
+import Grid from "@mui/material/Grid";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import {useTheme} from "@mui/material/styles";
 import Product from "./Product";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from "swiper";
@@ -7,10 +9,15 @@ import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import React from "react";
+import type {ProductType} from "../db/productModel"
+
+interface Props {
+    products:Array<ProductType>
+}
 
 
-
-const RelatedProducts = (props) => {
+const RelatedProducts : React.FC<Props> = (props) => {
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
@@ -25,7 +32,7 @@ const RelatedProducts = (props) => {
                     navigation
             >
                 {props.products.map((product) =>
-                    <SwiperSlide key={product._id}>
+                    <SwiperSlide key={product && product._id}>
                         <Product {...product} />
                     </SwiperSlide>)}
             </Swiper>
