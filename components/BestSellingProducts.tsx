@@ -40,12 +40,11 @@ const BestSellingProducts = () => {
 
     return (
         <Grid container item xs={12} alignItems={"center"}>
-            {isLoading &&
+           {isLoading ?
                 <Grid container item xs justifyContent={"center"}>
                     <CircularProgress color={"primary"} size={45}/>
                 </Grid>
-            }
-            {!isLoading &&
+                :
                 <Swiper spaceBetween={matchesSM ? 5 : 20}
                         slidesPerView={matchesLG ? matchesMD ? 2 : 3 : 4}
                         modules={[Navigation, A11y]}

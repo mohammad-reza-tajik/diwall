@@ -65,8 +65,6 @@ const Profile = () => {
         }
     }, [queryTab, isAuthenticated])
 
-    // const currentUserFavoriteList = user?.favoriteList
-    // const currentUserCart = user?.cart
 
 
     useEffect(() => {
@@ -220,14 +218,7 @@ const Profile = () => {
                                                             fontFamily={"dana-bold"}>سبد خرید شما خالی است
                                                     ! </Typography>
                                             </Grid> :
-                                            populatedCart.length !== 0 && populatedCart.map((item) => {
-                                                return (
-
-                                                    <CartItem {...item} key={item._id}/>
-
-
-                                                )
-                                            })}
+                                            populatedCart.length !== 0 && populatedCart.map((item) => <CartItem {...item} key={item._id}/> )}
 
                                     </Grid>
                                 }
