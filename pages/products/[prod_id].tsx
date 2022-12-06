@@ -58,7 +58,7 @@ const styles = {
 
 const ProductDetails = () => {
 
-    const [product, setProduct] = useState<ProductType>()
+    const [product, setProduct] = useState<ProductType | {} >({})
     const [relatedProducts, setRelatedProducts] = useState([])
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToFavoritesLoading, setAddToFavoritesLoading] = useState(false)
@@ -72,8 +72,8 @@ const ProductDetails = () => {
     const dispatch = useAppDispatch();
 
     /* had to add toString() method to get rid of TS errors */
-    const isFavorite = user?.favoriteList.includes(router.query?.prod_id.toString())
-    const isInCart = user?.cart.includes(router.query?.prod_id.toString())
+    const isFavorite = router.isReady && user?.favoriteList.includes(router.query?.prod_id.toString())
+    const isInCart = router.isReady && user?.cart.includes(router.query?.prod_id.toString())
 
     const {prod_id} = router.query;
 
@@ -103,23 +103,27 @@ const ProductDetails = () => {
             setAddToCartLoading(true)
 
             if (isInCart) {
-                axios.put("/api/remove-from-cart", {
-                    userId: user?.userId, token: user?.token, productId: product._id
-                }).then( _ => {
-                    setAddToCartLoading(false)
-                    dispatch(userActions.removeFromCart(product._id))
-                })
+                if ("_id" in product) {
+                    axios.put("/api/remove-from-cart", {
+                        userId: user?.userId, token: user?.token, productId: product._id
+                    }).then(_ => {
+                        setAddToCartLoading(false)
+                        dispatch(userActions.removeFromCart(product._id))
+                    })
+                }
 
             } else {
-                axios.put("/api/add-to-cart", {
-                    productId: product._id,
-                    userId: user.userId,
-                    token: user.token
-                }).then( _ => {
-                        setAddToCartLoading(false)
-                        dispatch(userActions.addToCart(product._id))
-                    }
-                ).catch(e => console.log(e))
+                if ("_id" in product) {
+                    axios.put("/api/add-to-cart", {
+                        productId: product._id,
+                        userId: user.userId,
+                        token: user.token
+                    }).then(_ => {
+                            setAddToCartLoading(false)
+                            dispatch(userActions.addToCart(product._id))
+                        }
+                    ).catch(e => console.log(e))
+                }
             }
         } else
             router.push("/sign-in")
@@ -136,7 +140,9 @@ const ProductDetails = () => {
                     token: user.token
                 }).then( _ => {
                         setAddToFavoritesLoading(false)
+                    if ("_id" in product) {
                         dispatch(userActions.removeFromFavorites(product._id))
+                    }
                     }
                 ).catch(e => console.log(e))
 
@@ -149,7 +155,9 @@ const ProductDetails = () => {
                 token: user.token
             }).then( _ => {
                     setAddToFavoritesLoading(false)
+                if ("_id" in product) {
                     dispatch(userActions.addToFavorites(product._id))
+                }
                 }
             ).catch(e => console.log(e))
             }
@@ -176,8 +184,8 @@ const ProductDetails = () => {
                             isLoading ? <Skeleton variant="rectangular" animation={"wave"} width={500}
                                                   sx={{height: {xs: 350, md: 500}}}/>
                                 :
-                                <Image src={`/assets/pictures/products/${product.title?.replaceAll(" ", "-")}.jpg`}
-                                       alt={`${product.title}`} layout={"fill"}/>
+                                <Image src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : "" }.jpg`}
+                                       alt={`${"title" in product ? product.title : ""}`} layout={"fill"}/>
                         }
                     </Grid>
 
@@ -192,7 +200,7 @@ const ProductDetails = () => {
                                         <Typography variant={"h1"} sx={{fontSize: {xs: 18, md: 25}}}
                                                     fontFamily={"dana-bold"}
                                                     color={"#333"}>
-                                            {product.title}
+                                            {"title" in product ? product.title :""}
                                         </Typography>
                                 }
                             </Grid>
@@ -201,9 +209,9 @@ const ProductDetails = () => {
                                 <Typography variant={"h3"} sx={{fontSize: {xs: 14, md: 16}}} borderRadius={20} px={20}
                                             py={10}
                                             color={"white.main"}
-                                            bgcolor={isLoading ? "transparent" : product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
+                                            bgcolor={isLoading ? "transparent" : "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
                                     {isLoading ? <Skeleton variant={"text"} animation={"wave"} width={100}
-                                                           sx={{fontSize: 16}}/> : product.numbers_in_stock > 0 ? "موجود" : "ناموجود"}
+                                                           sx={{fontSize: 16}}/> : "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "موجود" : "ناموجود"}
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -217,7 +225,7 @@ const ProductDetails = () => {
                                     <Typography variant={"h1"} fontSize={{xs: 16, md: 20}}
                                                 sx={{textAlign: "justify", flexGrow: 1}} fontFamily={"dana-bold"}
                                                 color={"primary"}>
-                                        {product.price}
+                                        {"price" in product && product.price}
                                     </Typography>
                             }
                         </Grid>
@@ -239,7 +247,7 @@ const ProductDetails = () => {
                                     :
                                     <Typography variant={"caption"} fontSize={{xs: 14, md: 16}}
                                                 lineHeight={{xs: 1.8, md: 1.6}}>
-                                        {product.details}
+                                        {"details" in product && product.details}
                                     </Typography>
                             }
                         </Grid>

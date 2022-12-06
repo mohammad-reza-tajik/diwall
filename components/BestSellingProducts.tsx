@@ -22,7 +22,7 @@ const BestSellingProducts = () => {
     const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [bestSellingProducts, setBestSellingProducts] = useState<[ProductType]>()
+    const [bestSellingProducts, setBestSellingProducts] = useState<[ProductType] | []>([])
 
     useEffect(() => {
         setIsLoading(true)
@@ -53,7 +53,7 @@ const BestSellingProducts = () => {
 
                 >
                     {bestSellingProducts.map((product) =>
-                        <SwiperSlide key={product._id}>
+                        <SwiperSlide key={product && product._id}>
                             <Product {...product} />
                         </SwiperSlide>)}
                 </Swiper>
