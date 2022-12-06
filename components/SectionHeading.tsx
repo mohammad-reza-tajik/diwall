@@ -44,14 +44,14 @@ const SectionHeading : React.FC<Props> = (props) => {
     return (
         <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"} my={30}>
             <Grid container item xs={"auto"}  md={8} gap={10} alignItems={"center"}>
-                <Circle fontSize={"large"}  sx={{fontSize:{xs:16,md:20},color:!props.white ? "primary" : "white"}}/>
+                <Circle fontSize={"large"}  sx={{fontSize:{xs:16,md:20},color:!props.white ? "primary.main" : "white.main"}}/>
                 <Typography fontFamily={"dana-black"} variant={"h4"} color={!props.white ? "#444" : "white.main"} sx={{fontSize: {xs:14,md:20}}} >
                     {props.text}
                 </Typography>
             </Grid>
             {props.seeAll ? <Grid container item justifyContent={"flex-end"} xs={"auto"} md={2}>
                 <Link href={props.route} passHref>
-                    <Button variant={"outlined"}  sx={{fontSize:{xs:12,md:16},color:!props.white ? "primary" : "white" }} component={"a"}>مشاهده همه</Button>
+                    <Button variant={"outlined"}  sx={{fontSize:{xs:12,md:16},color:!props.white ? "primary.main" : "white.main" }} component={"a"}>مشاهده همه</Button>
                 </Link>
             </Grid> : ""}
 

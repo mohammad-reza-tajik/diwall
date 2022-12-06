@@ -1,15 +1,14 @@
-import {createTheme} from "@mui/material";
+import {createTheme, Theme} from "@mui/material/styles";
 
-const theme = createTheme({
+
+
+
+
+const theme  = createTheme({
 
 
     spacing: 1,
     direction: "rtl",
-    common: {
-        white: "#eee",
-        black: "#1d1d1e"
-
-    },
 
     palette: {
         mode: "light",
@@ -109,5 +108,23 @@ const theme = createTheme({
     }
 
 })
+
+declare module '@mui/material/styles' {
+    interface Palette {
+        white: Palette['primary'];
+    }
+
+    // allow configuration using `createTheme`
+    interface PaletteOptions {
+        white?: PaletteOptions['primary'];
+    }
+}
+
+// Update the Button's color prop options
+declare module '@mui/material/Button' {
+    interface ButtonPropsColorOverrides {
+        white: true;
+    }
+}
 
 export default theme

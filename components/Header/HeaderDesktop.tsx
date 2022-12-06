@@ -1,26 +1,33 @@
 import MainNavigation from "../MainNavigation";
-import {
-    Badge,
-    Button,
-    Grid,
-    IconButton,
-    InputAdornment,
-    ListItemIcon,
-    Menu,
-    MenuItem,
-    TextField,
-    Tooltip,
-    Typography,
-    useMediaQuery,
-} from "@mui/material";
-import {Close, FavoriteBorder, Login, Logout, Person, Search, ShoppingBagOutlined} from "@mui/icons-material";
+
+
+import Badge from "@mui/material/Badge";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Menu from "@mui/material/Menu";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+
+import Close from "@mui/icons-material/Close";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Login from "@mui/icons-material/Login";
+import Logout from "@mui/icons-material/Logout";
+import Person from "@mui/icons-material/Person";
+import Search from "@mui/icons-material/Search";
+import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
+
 import Image from "next/image";
 import Link from "next/link";
-import {Fragment, useCallback, useState} from "react";
+import React, {Fragment, useCallback, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
-import {useDispatch, useSelector} from "react-redux";
-import {userActions} from "../../store";
+import {useAppDispatch, useAppSelector, userActions} from "../../store";
 
 
 const styles = {
@@ -125,11 +132,11 @@ const styles = {
     }
 }
 
-const HeaderDesktop = () => {
+const HeaderDesktop: React.FC = () => {
 
     const router = useRouter()
-    const user = useSelector(state => state)
-    const dispatch = useDispatch()
+    const user = useAppSelector(state => state)
+    const dispatch = useAppDispatch()
 
     const [search, setSearch] = useState("")
     const [isWrong, setIsWrong] = useState(false)

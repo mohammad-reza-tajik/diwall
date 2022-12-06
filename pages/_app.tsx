@@ -2,12 +2,13 @@ import '../styles/Globals.css';
 import "../styles/Fonts.css";
 import Head from "next/head"
 import theme from "../styles/theme";
-import {Grid, ThemeProvider} from "@mui/material";
+import {ThemeProvider} from "@mui/material/styles";
+import Grid from "@mui/material/Grid"
 import Footer from "../components/Footer";
 import {useRouter} from "next/router";
 import Header from "../components/Header";
 import {Provider} from "react-redux";
-import store from "../store/store";
+import { store } from "../store";
 import Auth from "../components/Auth"
 
 

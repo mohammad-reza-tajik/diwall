@@ -1,28 +1,34 @@
-import {
-    Divider,
-    Grid,
-    IconButton,
-    InputAdornment,
-    List,
-    ListItem,
-    ListItemIcon,
-    Menu,
-    MenuItem,
-    SwipeableDrawer,
-    TextField,
-    Tooltip,
-    Typography,
-    useMediaQuery,
-    useTheme
-} from "@mui/material";
-import {Close, Favorite, Login, Logout, Menu as Hamburger, Person, Search, ShoppingBag} from "@mui/icons-material";
-import {Fragment, useRef, useState} from "react";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Menu from "@mui/material/Menu";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
+import TextField from "@mui/material/TextField";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import MenuItem from "@mui/material/MenuItem";
+import {useTheme} from "@mui/material/styles";
+
+import Close from "@mui/icons-material/Close";
+import Favorite from "@mui/icons-material/Favorite";
+import Login from "@mui/icons-material/Login";
+import Logout from "@mui/icons-material/Logout";
+import Hamburger from "@mui/icons-material/Menu";
+import Person from "@mui/icons-material/Person";
+import Search from "@mui/icons-material/Search";
+import ShoppingBag from "@mui/icons-material/ShoppingBag";
+
+import React, {Fragment, useRef, useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import Image from "next/image"
 import axios from "axios";
-import {userActions} from "../../store";
-import {useDispatch, useSelector} from "react-redux";
+import {useAppDispatch, useAppSelector, userActions} from "../../store";
 
 
 const styles = {
@@ -56,38 +62,30 @@ const styles = {
     closeIcon: {
         color: "white.main",
         fontSize: 35,
-        // backgroundColor:"rgba(0,0,0,.2)",
         bgcolor: "primary.main",
         borderRadius: 20,
-
-        // position:"absolute",
-        // left:10,
-        // top:10,
 
 
     },
     backDrop: {
-        // height: "100vh",
         justifyContent: "center",
         alignItems: "center",
         width: "100vw",
-        // bgcolor: "primary.main",
         px: 20,
         overflow: "hidden"
-        // backgroundImage:"linear-gradient(rgb(6, 159, 105),rgb(6, 159, 105))"
     }
 
 
 }
 
 
-const HeaderMobile = () => {
+const HeaderMobile: React.FC = () => {
 
     const router = useRouter()
-    const user = useSelector(state => state)
-    const dispatch = useDispatch()
+    const user = useAppSelector(state => state)
+    const dispatch = useAppDispatch()
 
-    const searchRef = useRef()
+    const searchRef = useRef<HTMLInputElement>()
 
     const theme = useTheme()
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
@@ -109,12 +107,12 @@ const HeaderMobile = () => {
 
     const submitSearchHandler = async (_) => {
 
-        if (searchRef.current?.value.trim() === "") {
+        if (searchRef && searchRef.current?.value.trim() === "") {
             setIsWrong(true)
             return
         }
         setIsWrong(false)
-        axios.post(`/api/products`, {search: searchRef.current.value}).then(res => {
+        axios.post(`/api/products`, {search: searchRef.current.value}).then(_ => {
             router.push(
                 {
                     pathname: `/products`,
@@ -169,7 +167,7 @@ const HeaderMobile = () => {
 
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/"} passHref>
-                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             صفحه نخست
                                         </Typography>
                                     </Link>
@@ -177,7 +175,7 @@ const HeaderMobile = () => {
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/products"} passHref>
-                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             جدیدترین محصولات
                                         </Typography>
                                     </Link>
@@ -185,7 +183,7 @@ const HeaderMobile = () => {
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/products?sortBy=2"} passHref>
-                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             پرفروش ترین محصولات
                                         </Typography>
                                     </Link>
@@ -193,7 +191,7 @@ const HeaderMobile = () => {
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/products?sortBy=3"} passHref>
-                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             محبوب ترین محصولات
                                         </Typography>
                                     </Link>
@@ -201,7 +199,7 @@ const HeaderMobile = () => {
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/about"} passHref>
-                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             درباره ما
                                         </Typography>
                                     </Link>
@@ -210,7 +208,7 @@ const HeaderMobile = () => {
 
                                 <ListItem onClick={() => setOpenMenuDrawer(false)}>
                                     <Link href={"/collaboration"} passHref>
-                                        <Typography sx={{cursor:"pointer"}} variant={"subtitle1"} fontSize={14}>
+                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             همکاری با ما
                                         </Typography>
                                     </Link>

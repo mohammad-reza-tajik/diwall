@@ -61,7 +61,7 @@ const MostPopularProducts : React.FC<{ route : string }> = (props) => {
                             دیوال
                         </Typography>
                         <Link href={props.route} passHref>
-                            <Button variant={"outlined"} sx={{fontSize: 16,color:"#fff"}}>مشاهده همه</Button>
+                            <Button variant={"outlined"} color={"white"} sx={{fontSize: 16}}>مشاهده همه</Button>
                         </Link>
 
                     </Grid>

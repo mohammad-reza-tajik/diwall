@@ -6,7 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import Image from "next/image";
 import Link from "next/link"
-import {useRef} from "react";
+import React, {useRef} from "react";
 
 const styles = {
     heroImageBox: {
@@ -28,7 +28,7 @@ const styles = {
     }
 }
 
-const BannerDesktop = () => {
+const BannerDesktop :React.FC = () => {
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))

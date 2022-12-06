@@ -14,11 +14,11 @@ export default async function handler(req, res) {
         return
 
     const {usernameOrEmail, password} = req.body
-    // console.log(req.body)
+
     //*** check if the user exists ***//
     const regexp = new RegExp(`^${usernameOrEmail}$`, "i")
     const user = await User.find({$or: [{username: regexp}, {email: regexp}]}).exec() // this syntax is for matching either username or email
-    // console.log(user)
+
 
     if (user.length !== 0) {
         if (await bcrypt.compare(password, user[0].password))

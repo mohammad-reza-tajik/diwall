@@ -35,19 +35,13 @@ export default async function handler(req, res) {
                 products = await Product.find({title: regexp}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // latest products
-                // console.log(productsCount)
                 products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             res.send({
                 products,
                 productsCount,
-                // hasNextPage: ITEMS_PER_PAGE * page < productsCount,
-                // hasPreviousPage: page > 1,
                 currentPage: page,
-                // nextPage: page + 1,
-                // previousPage: page - 1,
                 lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
-                // title
             })
 
 
@@ -63,20 +57,14 @@ export default async function handler(req, res) {
                 products = await Product.find().sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // latest products
-                // console.log(productsCount)
                 products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
 
             res.send({
                 products,
                 productsCount,
-                // hasNextPage: ITEMS_PER_PAGE * page < productsCount,
-                // hasPreviousPage: page > 1,
                 currentPage: page,
-                // nextPage: page + 1,
-                // previousPage: page - 1,
                 lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
-                // title
             })
         }
         else if (category) {
@@ -97,13 +85,8 @@ export default async function handler(req, res) {
             res.send({
                 products,
                 productsCount,
-                // hasNextPage: ITEMS_PER_PAGE * page < productsCount,
-                // hasPreviousPage: page > 1,
                 currentPage: page,
-                // nextPage: page + 1,
-                // previousPage: page - 1,
                 lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
-                // title
             })
         }
 

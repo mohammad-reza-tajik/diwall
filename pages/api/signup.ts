@@ -2,7 +2,6 @@ import "../../db/database_connect"
 import User from "../../db/userModel";
 import bcrypt from "bcryptjs";
 import generateToken from "../../utilities/generateToken";
-// import jwt from "jsonwebtoken"
 
 const errorMessage = "این نام کاربری یا ایمیل  قبلا استفاده شده است"
 const successMessage = "ثبت نام با موفقیت انجام شد."
@@ -14,7 +13,7 @@ export default async function handler(req, res) {
         return
 
     const {username, email, password} = req.body
-    // console.log(req.body)
+
     //*** check if the user already exists ***//
     const username_regexp = new RegExp(`^${username}$`, "i")
     const email_regexp = new RegExp(`^${email}$`, "i")
@@ -23,7 +22,6 @@ export default async function handler(req, res) {
     if (alreadyExists.length === 0) {
         // the second argument is called salt and determines how complex the hashing process should be , if you put a large number it will take much longer but the hashing is stronger and vice versa.
         const hashedPassword = await bcrypt.hash(password, 8)
-        // console.log(hashedPassword)
         //*** adding new user to data base ***//
         const user = new User(
             {
