@@ -14,7 +14,7 @@ import 'swiper/css/scrollbar';
 import type {ProductType} from "../db/productModel"
 
 
-const BestSellingProducts = () => {
+const BestSellingProducts : React.FC = () => {
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))

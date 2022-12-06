@@ -9,7 +9,7 @@ import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
 import Delete from "@mui/icons-material/Delete";
 import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
 
-import React, {EventHandler, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import {useAppDispatch, useAppSelector, userActions} from "../store";

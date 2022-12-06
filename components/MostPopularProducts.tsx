@@ -1,10 +1,13 @@
-import {Button, CircularProgress, Grid, Typography, useMediaQuery, useTheme} from "@mui/material";
+import {useTheme} from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper';
-
 import Product from "./Product";
 import axios from "axios"
-
 import {useEffect, useState} from "react";
 
 import "swiper/css";
@@ -14,13 +17,15 @@ import 'swiper/css/scrollbar';
 import Link from "next/link";
 import SectionHeading from "./SectionHeading";
 import React from "react";
+import type {ProductType} from "../db/productModel"
 
 
 
-const MostPopularProducts = (props) => {
+
+const MostPopularProducts : React.FC<{ route : string }> = (props) => {
 
     const [isLoading, setIsLoading] = useState(false)
-    const [mostPopularProducts, setMostPopularProducts] = useState([])
+    const [mostPopularProducts, setMostPopularProducts] = useState<[ProductType] | []>([])
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
@@ -30,7 +35,6 @@ const MostPopularProducts = (props) => {
         setIsLoading(true)
         axios.post("/api/products", {sortBy: 3}).then(res => {
             setMostPopularProducts(res.data.products)
-            // console.log(res.data.products)
             setIsLoading(false)
         })
             .catch(e => {
@@ -57,7 +61,7 @@ const MostPopularProducts = (props) => {
                             دیوال
                         </Typography>
                         <Link href={props.route} passHref>
-                            <Button variant={"outlined"} color={"white"} sx={{fontSize: 16}}>مشاهده همه</Button>
+                            <Button variant={"outlined"} sx={{fontSize: 16,color:"#fff"}}>مشاهده همه</Button>
                         </Link>
 
                     </Grid>
@@ -65,7 +69,7 @@ const MostPopularProducts = (props) => {
                 {isLoading &&
 
                     <Grid container item xs justifyContent={"center"}>
-                        <CircularProgress color={"white"} size={45}/>
+                        <CircularProgress sx={{color:"#fff"}} size={45}/>
                     </Grid>
                 }
                 {!isLoading &&
@@ -77,7 +81,7 @@ const MostPopularProducts = (props) => {
 
                         >
                             {mostPopularProducts.map((product) =>
-                                <SwiperSlide key={product._id}>
+                                <SwiperSlide key={product && product._id}>
                                     <Product {...product} />
                                 </SwiperSlide>)}
                         </Swiper>

@@ -1,22 +1,26 @@
-import {CircularProgress, Grid, useMediaQuery, useTheme} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import  Grid from "@mui/material/Grid";
+import  useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme} from "@mui/material/styles";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper';
 import Product from "./Product";
 import axios from "axios"
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import React from "react";
+import type {ProductType} from "../db/productModel"
 
 
 
 
-const LatestProducts = () => {
 
-    const [isLoading , setIsLoading] = useState(false)
-    const [latestProducts, setLatestProducts] = useState([])
+const LatestProducts : React.FC = () => {
+
+    const [isLoading , setIsLoading] = useState<boolean>(false)
+    const [latestProducts, setLatestProducts] = useState<[ProductType] | [] >([])
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
@@ -51,7 +55,7 @@ const LatestProducts = () => {
                         navigation
                 >
                     {latestProducts.map((product) =>
-                        <SwiperSlide key={product._id}>
+                        <SwiperSlide key={product && product._id}>
                             <Product {...product} />
                         </SwiperSlide>)}
                 </Swiper>
