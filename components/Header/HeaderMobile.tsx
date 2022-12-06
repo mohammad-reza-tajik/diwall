@@ -104,7 +104,6 @@ const HeaderMobile: React.FC = () => {
             return
         }
         setIsWrong(false)
-        setOpenSearchDrawer(false)
         axios.post(`/api/products`, {search: searchRef.current.value}).then(_ => {
             router.push(
                 {
@@ -115,6 +114,7 @@ const HeaderMobile: React.FC = () => {
                     }
 
                 })
+            setOpenSearchDrawer(false)
             searchRef.current.value = ""
         }).catch(err => {
             console.log(err)

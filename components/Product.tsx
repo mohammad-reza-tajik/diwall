@@ -132,14 +132,14 @@ const Product : React.FC<Product> = (props) => {
             </Grid>
             <Grid container item height={50} alignItems={"center"} xs={12}>
                 <Grid item xs={12} onClick={clickHandler}>
-                    <Typography variant={"h4"} fontSize={{xs: 12, md :14,lg:16}} fontFamily={"dana-bold"}
+                    <Typography variant={"h4"} fontSize={{xs: 11, md :14,lg:16}} fontFamily={"dana-bold"}
                                 className={"pointer"} lineHeight={1.5}>{props.title}</Typography>
                 </Grid>
             </Grid>
             <Grid container item justifyContent={"center"} alignItems={"center"} height={50}>
                 <Grid item xs={12}>
                     <Typography variant={"h4"} fontFamily={"dana-bold"} color={"#069f69"}
-                                sx={{fontSize: {xs: 12, md :14,lg:16}}}>
+                                sx={{fontSize: {xs: 11, md :14,lg:16}}}>
                         {props.price}
                     </Typography>
                 </Grid>
