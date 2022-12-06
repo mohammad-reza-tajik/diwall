@@ -36,10 +36,7 @@ const styles = {
     headerIcon: {
         fontSize: {xs: 35, md: 50},
         ml: -10,
-
     },
-
-
     seeAllButton: {
         w: 1,
         justifyContent: "center"
@@ -49,22 +46,17 @@ const styles = {
         height: 1,
         fontSize: {xs: 4, sm: "2rem"},
         bgcolor: "#fff",
-        // borderRadius: 30,
-
 
     },
     searchIcon: {
         fontSize: 25,
         color: "primary.main",
-
-
     },
     closeIcon: {
         color: "white.main",
         fontSize: 35,
         bgcolor: "primary.main",
         borderRadius: 20,
-
 
     },
     backDrop: {
@@ -112,6 +104,7 @@ const HeaderMobile: React.FC = () => {
             return
         }
         setIsWrong(false)
+        setOpenSearchDrawer(false)
         axios.post(`/api/products`, {search: searchRef.current.value}).then(_ => {
             router.push(
                 {
@@ -123,7 +116,6 @@ const HeaderMobile: React.FC = () => {
 
                 })
             searchRef.current.value = ""
-            setOpenSearchDrawer(false)
         }).catch(err => {
             console.log(err)
 
