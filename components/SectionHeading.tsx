@@ -51,7 +51,7 @@ const SectionHeading : React.FC<Props> = (props) => {
             </Grid>
             {props.seeAll ? <Grid container item justifyContent={"flex-end"} xs={"auto"} md={2}>
                 <Link href={props.route} passHref>
-                    <Button variant={"outlined"}  sx={{fontSize:{xs:12,md:16},color:!props.white ? "primary.main" : "white.main" }} component={"a"}>مشاهده همه</Button>
+                    <Button variant={"outlined"} color={!props.white ? "primary" : "white"}  sx={{fontSize:{xs:12,md:16}}} component={"a"}>مشاهده همه</Button>
                 </Link>
             </Grid> : ""}
 
