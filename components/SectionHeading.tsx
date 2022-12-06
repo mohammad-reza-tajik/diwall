@@ -1,11 +1,24 @@
-import {Button, Grid, MenuItem, Select, Typography} from "@mui/material";
-import {Circle,} from "@mui/icons-material";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Button from "@mui/material/Button";
+
+import Circle from "@mui/icons-material/Circle";
 import Link from "next/link";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 
+interface Props {
+    sortBy?:string;
+    seeAll?:boolean;
+    text:string;
+    white?:boolean;
+    route?:string
 
-const SectionHeading = (props) => {
+}
+
+const SectionHeading : React.FC<Props> = (props) => {
 
     const [sortBy, setSortBy] = useState(1);
     const router = useRouter()
@@ -31,14 +44,14 @@ const SectionHeading = (props) => {
     return (
         <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"} my={30}>
             <Grid container item xs={"auto"}  md={8} gap={10} alignItems={"center"}>
-                <Circle fontSize={"large"} color={!props.white ? "primary" : "white"} sx={{fontSize:{xs:16,md:20}}}/>
+                <Circle fontSize={"large"}  sx={{fontSize:{xs:16,md:20},color:!props.white ? "primary" : "white"}}/>
                 <Typography fontFamily={"dana-black"} variant={"h4"} color={!props.white ? "#444" : "white.main"} sx={{fontSize: {xs:14,md:20}}} >
                     {props.text}
                 </Typography>
             </Grid>
             {props.seeAll ? <Grid container item justifyContent={"flex-end"} xs={"auto"} md={2}>
                 <Link href={props.route} passHref>
-                    <Button variant={"outlined"} color={!props.white ? "primary" : "white" } sx={{fontSize:{xs:12,md:16}}} component={"a"}>مشاهده همه</Button>
+                    <Button variant={"outlined"}  sx={{fontSize:{xs:12,md:16},color:!props.white ? "primary" : "white" }} component={"a"}>مشاهده همه</Button>
                 </Link>
             </Grid> : ""}
 
@@ -69,28 +82,6 @@ const SectionHeading = (props) => {
                         </Grid>
                     </Grid> : ""
             }
-
-           {/* {
-                props.sorting ?
-
-
-                            <Select id="demo-simple-select" value={age} onChange={sortChangeHandler}>
-                                <MenuItem value={1}>
-                                   1
-                                </MenuItem>
-                                <MenuItem value={2}>
-                                    2
-                                </MenuItem>
-                                <MenuItem value={3}>
-                                    3
-                                </MenuItem>
-                            </Select> : ""
-
-
-
-
-
-            }*/}
 
         </Grid>
     )
