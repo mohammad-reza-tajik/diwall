@@ -21,6 +21,7 @@ function MyApp ({Component, pageProps}) {
     if (typeof window !== "undefined") { // to prevent errors in server side rendering
 
         const body = document.body
+        body.style.backgroundColor = "rgb(248,248,248)"
         if (router.pathname === "/sign-in") {
             body.style.overflow = "hidden"
         } else {

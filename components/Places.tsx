@@ -11,6 +11,7 @@ import React from "react";
 const styles = {
     place: {
         transition: "all .4s",
+        // bgcolor:"#fff",
         cursor: "pointer",
         border: "1px solid rgba(44,44,44,.3)",
         p: "2rem",
@@ -29,14 +30,14 @@ const Places: React.FC = () => {
 
 
     return (
-        <Grid container item component={"section"} my={80} gap={{xs: 50, md: 80}} xs={12}>
+        <Grid container item component={"section"} my={80} gap={{xs: 50, md: 80}} xs={12} >
             <Grid container item alignItems={"center"} justifyContent={"center"} gap={10} xs={12}>
                 <Circle color={"primary"} sx={{fontSize: {xs: 20, md: 30}}}/>
                 <Typography variant={"h3"} color={"#444"} fontFamily={"dana-black"} sx={{fontSize: {xs: 20, md: 30}}}>
                     <Box component={"span"} sx={{color: "primary.main"}}>برای کجا</Box> می خواهید ؟
                 </Typography>
             </Grid>
-            <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"}>
+            <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"} bgcolor={"#fff"}>
                 <Grid container item direction={"column"} xs={6} md={4} lg={2} alignItems={"center"} gap={20}
                       sx={styles.place} onClick={() => {
                     router.push("/products?category=child_room_poster")

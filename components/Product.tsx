@@ -14,11 +14,10 @@ import {userActions , useAppSelector , useAppDispatch} from "../store";
 
 const styles = {
     product: {
-        boxShadow: "2px 2px 2px rgba(20,20,20,.2) ",
         borderRadius: 2,
         justifyContent:"center",
         p: 10,
-        bgcolor: "#fff"
+        bgcolor: "#fff",
 
     },
     addToFavoritesButton: {

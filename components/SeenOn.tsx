@@ -14,7 +14,7 @@ const SeenOn: React.FC = () => {
 
 
     return (
-        <Grid container item component={"section"} xs={11} md={11} mt={50} bgcolor={"white.main"}>
+        <Grid container item component={"section"} xs={11} md={11} mt={50}>
             <ImageList sx={{width: 1}} cols={matchesMD ? 3 : 6} gap={50} rowHeight={matchesMD ? 20 : 100}>
                 <ImageListItem>
                     <Image src={"/assets/pictures/seen-on/digistyle.svg"} alt={"دیجی استایل"}

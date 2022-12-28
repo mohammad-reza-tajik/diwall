@@ -39,6 +39,7 @@ const styles = {
         width: {md: 400},
         height: 1,
         fontSize: {xs: 4, sm: "2rem"},
+        bgcolor:"#fff",
         '& .MuiInput-input': {
             borderRadius: 30
 
@@ -52,13 +53,6 @@ const styles = {
     searchIcon: {
         fontSize: "2.5rem",
         color: "primary.main",
-        mr: -15,
-        ml: 10,
-        "& *": {
-            mr: -15,
-            ml: 10,
-
-        }
 
     },
     closeIcon: {
@@ -83,7 +77,6 @@ const styles = {
         justifyContent: "center",
         alignItems: "center",
         overflowY: "scroll",
-        // p:20
 
 
     },
@@ -127,7 +120,6 @@ const styles = {
     list: {
         width: 1,
         height: "auto",
-        // maxHeight:400,
 
     }
 }
@@ -157,6 +149,7 @@ const HeaderDesktop: React.FC = () => {
 
     const searchChangeHandler = (e) => {
         setSearch(e.target.value)
+        // if (e.target.value === "")
 
     }
 
@@ -185,6 +178,7 @@ const HeaderDesktop: React.FC = () => {
         e.preventDefault()
         if (search.trim() === "") {
             setIsWrong(true)
+            setTimeout(()=> {setIsWrong(false)},5000)
             return
         }
         setIsWrong(false)
@@ -214,6 +208,17 @@ const HeaderDesktop: React.FC = () => {
         </IconButton>
     </InputAdornment>
 
+    const searchIconFix = {
+        mr : search.trim() !== "" && -15,
+        ml: search.trim() !== "" && 10,
+        "& *": {
+            mr: search.trim() !== "" && -15,
+            ml: search.trim() !== "" && 10,
+
+        }
+
+    }
+
     return (
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={30} xs={12}>
             <Grid container item direction={"row"} justifyContent={"center"} alignItems={"center"} xs={12}
@@ -234,7 +239,7 @@ const HeaderDesktop: React.FC = () => {
                 >
                     <Grid item xs={12}>
                         <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom-end"}
-                                 arrow>
+                                 arrow >
 
                             <TextField
                                 error={isWrong}
@@ -249,11 +254,11 @@ const HeaderDesktop: React.FC = () => {
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <IconButton type={"submit"}>
-                                                <Search sx={styles.searchIcon}/>
+                                                <Search sx={{...styles.searchIcon,...searchIconFix}}/>
                                             </IconButton>
                                         </InputAdornment>
                                     ),
-                                    endAdornment: (closeButton)
+                                    endAdornment: (search.trim() !== "" && closeButton)
                                 }}
                             />
                         </Tooltip>
@@ -272,7 +277,8 @@ const HeaderDesktop: React.FC = () => {
                                     fontSize: {xs: 40, sm: 50},
                                     border: "2px solid #11AE77",
                                     borderRadius: "50px",
-                                    p: ".7rem"
+                                    p: ".7rem",
+                                    bgcolor:"#fff"
                                 }}/>
                             </IconButton>
                         </Badge>
@@ -286,7 +292,8 @@ const HeaderDesktop: React.FC = () => {
                                     fontSize: {xs: 40, sm: 50},
                                     border: "2px solid #11AE77",
                                     borderRadius: "50px",
-                                    p: ".7rem"
+                                    p: ".7rem",
+                                    bgcolor:"#fff"
                                 }}/>
                             </IconButton>
                         </Badge>
