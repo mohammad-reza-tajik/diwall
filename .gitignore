@@ -10,7 +10,7 @@
 
 # next.js
 /.next/
-/.idea
+/.idea/
 /out/
 
 next-env.d.ts
