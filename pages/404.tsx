@@ -9,9 +9,10 @@ import Head from "next/head";
 
 const styles = {
     container: {
-        minWidth: "100vw",
-        minHeight: "100vh",
-        overflow:"scroll"
+
+        overflow:"hidden",
+        width:"100%",
+        height:"100vh"
 
     }
 
