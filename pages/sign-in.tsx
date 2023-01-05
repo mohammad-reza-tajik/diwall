@@ -61,7 +61,7 @@ const styles = {
         left: 0,
         width: "100vw",
         height: "100vh",
-        backgroundImage: "linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)) , url('assets/pictures/hero-image-desktop.jpg')",
+        backgroundImage: "linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)) , url('assets/pictures/login_background.jpg')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
         filter: "blur(5px)",
