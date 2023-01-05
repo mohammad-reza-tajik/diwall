@@ -22,6 +22,7 @@ export default async function handler(req, res) {
                 return
             }
 
+            // @ts-ignore
             const user = await User.findById(userId).exec()
 
 

@@ -28,13 +28,16 @@ export default async function handler(req, res) {
             let products;
 
             if (sortBy === 2) { // best-selling products
+                // @ts-ignore
                 products = await Product.find({title: regexp}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
 
             else if (sortBy === 3) { // most popular products
+                // @ts-ignore
                 products = await Product.find({title: regexp}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // latest products
+                // @ts-ignore
                 products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             res.send({
@@ -51,12 +54,15 @@ export default async function handler(req, res) {
             let products;
 
             if (sortBy === 2) { // best-selling products
+                // @ts-ignore
                 products = await Product.find().sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else if (sortBy === 3) { // most popular products
+                // @ts-ignore
                 products = await Product.find().sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // latest products
+                // @ts-ignore
                 products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
 
@@ -73,12 +79,15 @@ export default async function handler(req, res) {
             let products;
 
             if (sortBy === 2) { // best-selling products
+                // @ts-ignore
                 products = await Product.find({category:{$in:[category]}}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else if (sortBy === 3) { // most popular products
+                // @ts-ignore
                 products = await Product.find({category:{$in:[category]}}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
             else { // latest products
+                // @ts-ignore
                 products = await Product.find({category:{$in:[category]}}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
 

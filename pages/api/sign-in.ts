@@ -17,6 +17,7 @@ export default async function handler(req, res) {
 
     //*** check if the user exists ***//
     const regexp = new RegExp(`^${usernameOrEmail}$`, "i")
+    // @ts-ignore
     const user = await User.find({$or: [{username: regexp}, {email: regexp}]}).exec() // this syntax is for matching either username or email
 
 

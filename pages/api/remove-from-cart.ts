@@ -10,7 +10,8 @@ export default async function handler(req,res) {
     const productId = req.body.productId
     const token = req.body.token
 
-    const user = await User.findById(userId).exec()
+        // @ts-ignore
+        const user = await User.findById(userId).exec()
     user.cart = user.cart.filter((element)=> element != productId)
     await user.save()
 

@@ -42,15 +42,15 @@ const productSchema = new mongoose.Schema({
 
 
 export interface ProductType {
-    _id: string ;
-    title: string ;
-    price: string ;
-    image: string ;
+    _id: string;
+    title: string;
+    price: string;
+    image: string;
     image_full: string;
     details: string;
-    numbers_in_stock:number;
-
+    numbers_in_stock: number;
 }
+
 
 
 

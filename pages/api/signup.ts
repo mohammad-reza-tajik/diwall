@@ -17,6 +17,7 @@ export default async function handler(req, res) {
     //*** check if the user already exists ***//
     const username_regexp = new RegExp(`^${username}$`, "i")
     const email_regexp = new RegExp(`^${email}$`, "i")
+    // @ts-ignore
     const alreadyExists = await User.find({$or: [{username: username_regexp}, {email: email_regexp}]}).exec()
 
     if (alreadyExists.length === 0) {

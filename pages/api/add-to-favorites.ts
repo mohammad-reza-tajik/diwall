@@ -6,6 +6,7 @@ export default async function handler(req, res) {
     const productId = req.body.productId
     const token = req.body.token
 
+    // @ts-ignore
     const user = await User.findById(userId).exec()
 
 
