@@ -6,6 +6,7 @@ import Menu from "@mui/material/Menu";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import Drawer from "@mui/material/Drawer";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
@@ -87,7 +88,7 @@ const HeaderMobile: React.FC = () => {
     const [openMenuDrawer, setOpenMenuDrawer] = useState(false)
     const [openSearchDrawer, setOpenSearchDrawer] = useState(false)
 
-    const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+    // const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
     //*** menu logic ***//
 
@@ -97,13 +98,13 @@ const HeaderMobile: React.FC = () => {
         setAnchorEl(null);
     }
 
-    const menuItemsHandler = async ( url:string ) => {
+    const menuItemsHandler = ( url:string ) => {
         setOpenMenuDrawer(false)
-        await router.push(url)
+        router.push(url)
 
     }
 
-    const submitSearchHandler = async (e) => {
+    const submitSearchHandler = (e) => {
         e.preventDefault();
         if (searchRef && searchRef.current?.value.trim() === "") {
             setIsWrong(true)
@@ -139,8 +140,7 @@ const HeaderMobile: React.FC = () => {
             <Grid container item xs={7} alignItems={"center"} spacing={10}>
                 <Grid container item xs={"auto"}>
 
-                    <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS}
-
+                    <SwipeableDrawer
                         // the following props is for fixing drawer in rtl languages
 
                                      anchor={"left"} PaperProps={{
@@ -154,8 +154,8 @@ const HeaderMobile: React.FC = () => {
 
 
                             <List sx={{width: 1}}>
-                                <ListItem sx={{mb: 20}}>
-                                    <ListItemIcon sx={{fontSize: 20,cursor:"pointer"}}  onClick={() => menuItemsHandler("/")}>
+                                <ListItem sx={{mb: 20}} onClick={() => menuItemsHandler("/")}>
+                                    <ListItemIcon sx={{fontSize: 20,cursor:"pointer"}}  >
                                                 <Image src={"/assets/pictures/logo-500.png"} alt={"dival-logo"}
                                                        width={100}
                                                        height={100}/>
