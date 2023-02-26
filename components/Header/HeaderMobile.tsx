@@ -97,13 +97,20 @@ const HeaderMobile: React.FC = () => {
         setAnchorEl(null);
     }
 
-    const submitSearchHandler = async (_) => {
+    const menuItemsHandler = async ( url:string ) => {
+        setOpenMenuDrawer(false)
+        await router.push(url)
 
+    }
+
+    const submitSearchHandler = async (e) => {
+        e.preventDefault();
         if (searchRef && searchRef.current?.value.trim() === "") {
             setIsWrong(true)
             return
         }
         setIsWrong(false)
+        setOpenSearchDrawer(false)
         axios.post(`/api/products`, {search: searchRef.current.value}).then(_ => {
             router.push(
                 {
@@ -114,7 +121,6 @@ const HeaderMobile: React.FC = () => {
                     }
 
                 })
-            setOpenSearchDrawer(false)
             searchRef.current.value = ""
         }).catch(err => {
             console.log(err)
@@ -125,8 +131,10 @@ const HeaderMobile: React.FC = () => {
     }
 
 
+
+
     return (
-        <Grid container item xs={12}>
+        <Grid container item xs={12} >
 
             <Grid container item xs={7} alignItems={"center"} spacing={10}>
                 <Grid container item xs={"auto"}>
@@ -147,63 +155,48 @@ const HeaderMobile: React.FC = () => {
 
                             <List sx={{width: 1}}>
                                 <ListItem sx={{mb: 20}}>
-                                    <ListItemIcon sx={{fontSize: 20}} onClick={() => setOpenMenuDrawer(false)}>
-                                        <Link href={"/"} passHref>
-                                            <a>
-                                                <Image src={"/assets/pictures/logo-500.png"} alt={"dival-logo"} width={100}
+                                    <ListItemIcon sx={{fontSize: 20,cursor:"pointer"}}  onClick={() => menuItemsHandler("/")}>
+                                                <Image src={"/assets/pictures/logo-500.png"} alt={"dival-logo"}
+                                                       width={100}
                                                        height={100}/>
-                                            </a>
-                                        </Link>
                                     </ListItemIcon>
                                 </ListItem>
 
-                                <ListItem onClick={() => setOpenMenuDrawer(false)}>
-                                    <Link href={"/"} passHref>
+                                <ListItem onClick={() => menuItemsHandler("/")}>
                                         <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             صفحه نخست
                                         </Typography>
-                                    </Link>
                                 </ListItem>
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                                <ListItem onClick={() => setOpenMenuDrawer(false)}>
-                                    <Link href={"/products"} passHref>
+                                <ListItem onClick={() => menuItemsHandler("/products")}>
                                         <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             جدیدترین محصولات
                                         </Typography>
-                                    </Link>
                                 </ListItem>
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                                <ListItem onClick={() => setOpenMenuDrawer(false)}>
-                                    <Link href={"/products?sortBy=2"} passHref>
+                                <ListItem onClick={() => menuItemsHandler("/products?sortBy=2")}>
                                         <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             پرفروش ترین محصولات
                                         </Typography>
-                                    </Link>
                                 </ListItem>
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                                <ListItem onClick={() => setOpenMenuDrawer(false)}>
-                                    <Link href={"/products?sortBy=3"} passHref>
+                                <ListItem onClick={() => menuItemsHandler("/products?sortBy=3")}>
                                         <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             محبوب ترین محصولات
                                         </Typography>
-                                    </Link>
                                 </ListItem>
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                                <ListItem onClick={() => setOpenMenuDrawer(false)}>
-                                    <Link href={"/about"} passHref>
+                                <ListItem onClick={() => menuItemsHandler("/about")}>
                                         <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             درباره ما
                                         </Typography>
-                                    </Link>
                                 </ListItem>
                                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
 
-                                <ListItem onClick={() => setOpenMenuDrawer(false)}>
-                                    <Link href={"/collaboration"} passHref>
+                                <ListItem onClick={() => menuItemsHandler("/collaboration")}>
                                         <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
                                             همکاری با ما
                                         </Typography>
-                                    </Link>
                                 </ListItem>
 
                             </List>
@@ -233,8 +226,8 @@ const HeaderMobile: React.FC = () => {
                 </IconButton>
                 <SwipeableDrawer anchor={"top"} open={openSearchDrawer} onOpen={() => setOpenSearchDrawer(true)}
                                  onClose={() => setOpenSearchDrawer(false)}>
-                    <Grid container height={100} item spacing={10} sx={styles.backDrop}>
-                        <Grid item xs>
+                    <Grid container height={100} item spacing={10} sx={styles.backDrop} component={"form"} onSubmit={submitSearchHandler}>
+                        <Grid item xs >
                             <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom"}
                                      arrow>
                                 <TextField
@@ -248,7 +241,7 @@ const HeaderMobile: React.FC = () => {
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <IconButton onClick={submitSearchHandler}>
+                                                <IconButton type={"submit"}>
                                                     <Search sx={styles.searchIcon}/>
                                                 </IconButton>
                                             </InputAdornment>
