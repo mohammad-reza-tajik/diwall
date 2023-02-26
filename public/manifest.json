@@ -9,6 +9,7 @@
   "start_url": "/",
   "lang": "fa-IR",
   "dir": "rtl",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/assets/pictures/logo-500.png",

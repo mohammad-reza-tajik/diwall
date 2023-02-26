@@ -14,14 +14,11 @@ const Auth: React.FC<Props> = ({children}) => {
 
     useEffect(() => {
 
-        // console.log("hello form auth")
-
         // (async () => {
 
             if (typeof window !== 'undefined') {
                 const token = localStorage.getItem("token")
                 const userId = localStorage.getItem("userId")
-                console.log("this is from auth")
                 if (userId && userId !== "undefined") {
                     axios.post("/api/get-user", {userId, token}).then(res => {
                             dispatch(userActions.login(res.data.user))
