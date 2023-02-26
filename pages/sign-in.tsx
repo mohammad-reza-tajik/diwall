@@ -174,11 +174,11 @@ const SignIn : React.FC = () => {
                         <ToggleButton sx={{width: .5, fontSize: "1.6rem"}} value={"signup"}>ثبت نام</ToggleButton>
                     </ToggleButtonGroup>
                 </Grid>
-                <Grid item my={20}>
+                <Grid item my={5}>
                     <Link href={"/"}>
                         <a>
-                            <Image src={"/assets/pictures/logo.png"} alt={"logo"} width={100}
-                                   height={100}/>
+                            <Image src={"/assets/pictures/logo-500.png"} alt={"dival-logo"} width={150}
+                                   height={150}/>
                         </a>
                     </Link>
                 </Grid>

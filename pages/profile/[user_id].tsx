@@ -17,6 +17,7 @@ import Product from "../../components/Product";
 import axios from "axios";
 import Head from "next/head";
 import {useAppSelector} from "../../hooks/redux_hooks";
+import {Modal} from "@mui/material";
 
 const styles = {
     tab: {
@@ -55,12 +56,13 @@ const Profile = () => {
 
 
     useEffect(() => {
-        if (user?.username) {
+        if (isAuthenticated) {
             if (router.query.tab) {
                 setTab(router.query.tab.toString())
             }
         } else {
-            router.replace("/sign-in")
+
+            router.push("/sign-in")
 
         }
     }, [queryTab, isAuthenticated])
@@ -68,6 +70,7 @@ const Profile = () => {
 
 
     useEffect(() => {
+        console.log(isAuthenticated)
 
         if (isAuthenticated) {
             setIsLoading(true)
@@ -121,8 +124,16 @@ const Profile = () => {
                     </Grid>
                     <Grid container item xs={12} md={9} lg={10} minHeight={400}>
                         {/*height 400 because tab indicator for third tab gets stuck at a wrong place*/}
+
+                        {/*  Profile Panel Start */}
+
                         <TabPanel value="1" sx={{width: 1}}>
-                            <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40}>
+                            <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40} position={"relative"}>
+                                <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16},position:"absolute",top:10,left:10}}>تغییر اطلاعات</Button>
+                              {/*  <Modal open={false}>
+
+                                </Modal>*/}
+                                {/*<Button variant={"outlined"} color={"error"} sx={{fontSize: {xs: 12, md: 16},position:"absolute",top:70,left:10}}>تغییر اطلاعات حساب</Button>*/}
                                 <Grid container item xs={12} alignItems={"center"} gap={10}>
                                     <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام و نام خانوادگی
                                         : </Box>
@@ -130,7 +141,6 @@ const Profile = () => {
                                                 fontSize={{xs: 14, md: 16}}>
                                         مشخص نشده !
                                     </Typography>
-                                    <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                                 </Grid>
                                 <Grid container item xs={12} alignItems={"center"} gap={20}>
@@ -139,7 +149,6 @@ const Profile = () => {
                                                 fontSize={{xs: 14, md: 16}}>
                                         {user?.username}
                                     </Typography>
-                                    <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
                                 </Grid>
                                 <Grid container item xs={12} alignItems={"center"} gap={20}>
                                     <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>ایمیل : </Box>
@@ -147,7 +156,6 @@ const Profile = () => {
                                                 fontSize={{xs: 14, md: 16}}>
                                         {user?.email}
                                     </Typography>
-                                    <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                                 </Grid>
                                 <Grid container item xs={12} alignItems={"center"} gap={10}>
@@ -156,7 +164,6 @@ const Profile = () => {
                                                 fontSize={{xs: 14, md: 16}}>
                                         مشخص نشده !
                                     </Typography>
-                                    <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                                 </Grid>
                                 <Grid container item xs={12} alignItems={"center"} gap={10}>
@@ -165,7 +172,6 @@ const Profile = () => {
                                                 fontSize={{xs: 14, md: 16}}>
                                         مشخص نشده !
                                     </Typography>
-                                    <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                                 </Grid>
                                 <Grid container item xs={12} alignItems={"center"} gap={10}>
@@ -174,11 +180,15 @@ const Profile = () => {
                                                 fontSize={{xs: 14, md: 16}}>
                                         مشخص نشده !
                                     </Typography>
-                                    <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16}}}>تغییر</Button>
 
                                 </Grid>
                             </Grid>
                         </TabPanel>
+
+                        {/*  Profile Panel End */}
+
+
+                        {/*  Favorite List Panel Start */}
                         <TabPanel value="2" sx={{width: 1}}>
                             <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10}>
 
@@ -202,6 +212,10 @@ const Profile = () => {
                                             </Grid>)}
                             </Grid>
                         </TabPanel>
+
+                        {/*  Favorite List Panel End */}
+
+                        {/*  Cart Panel Start */}
                         <TabPanel value="3" sx={{width: 1}}>
                             <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10}>
 
@@ -224,6 +238,9 @@ const Profile = () => {
                                 }
                             </Grid>
                         </TabPanel>
+
+                        {/*  Cart Panel End */}
+
                     </Grid>
 
                 </TabContext>

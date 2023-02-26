@@ -146,12 +146,12 @@ const HeaderMobile: React.FC = () => {
 
 
                             <List sx={{width: 1}}>
-                                <ListItem sx={{mb: 20, justifyContent: "center"}}>
+                                <ListItem sx={{mb: 20}}>
                                     <ListItemIcon sx={{fontSize: 20}} onClick={() => setOpenMenuDrawer(false)}>
                                         <Link href={"/"} passHref>
                                             <a>
-                                                <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={80}
-                                                       height={80}/>
+                                                <Image src={"/assets/pictures/logo-500.png"} alt={"dival-logo"} width={100}
+                                                       height={100}/>
                                             </a>
                                         </Link>
                                     </ListItemIcon>

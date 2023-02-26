@@ -133,8 +133,9 @@ const HeaderDesktop: React.FC = () => {
     const [search, setSearch] = useState("")
     const [isWrong, setIsWrong] = useState(false)
 
+    const matches1355 = useMediaQuery('(max-width:1355px)')
     const matches1277 = useMediaQuery('(max-width:1277px)')
-    const matches1000 = useMediaQuery('(max-width:1000px)')
+    const matches1057 = useMediaQuery('(max-width:1057px)')
 
 
     //*** menu logic ***//
@@ -226,14 +227,14 @@ const HeaderDesktop: React.FC = () => {
                 <Grid container item xs={"auto"} pl={10}>
                     <Link href={"/"}>
                         <a>
-                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={80}
-                                   height={80}/>
+                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={100}
+                                   height={100}/>
                         </a>
                     </Link>
                 </Grid>
                 <Grid position={"relative"} container direction={"column"} item
                       justifyContent={"center"}
-                      alignItems={"flex-start"} xs={matches1000 ? true : 7} pr={20} component={"form"}
+                      alignItems={"flex-start"} xs={matches1057 ? true : 7} pr={20} component={"form"}
                       onSubmit={submitSearchHandler}
 
                 >
@@ -266,7 +267,7 @@ const HeaderDesktop: React.FC = () => {
                 </Grid>
 
 
-                <Grid container item xs={matches1277 ? "auto" : 2} justifyContent={"flex-end"}>
+                <Grid container item xs={matches1355 ? "auto" : 2} justifyContent={"flex-end"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
                         <Badge showZero max={99} badgeContent={user?.favoriteList.length || 0} color="primary"
                                overlap="circular"
@@ -299,7 +300,7 @@ const HeaderDesktop: React.FC = () => {
                         </Badge>
                     </Tooltip>
                 </Grid>
-                <Grid item container xs={matches1000 ? "auto" : true} justifyContent={"flex-end"}>
+                <Grid item container xs={matches1057 ? "auto" : true} justifyContent={"flex-end"}>
 
                     {user?.username === null ? <Link href={"/sign-in"} passHref>
                             <Button

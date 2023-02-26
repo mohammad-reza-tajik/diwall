@@ -8,6 +8,7 @@ export default async function handler (req,res) {
         const userId = req.body.userId
         const token = req.body.token
 
+
         // this is for replacing product ids in cart and favoriteList with full product data
         // @ts-ignore
         const user = await User.findById(userId).populate("favoriteList").populate("cart").exec()
