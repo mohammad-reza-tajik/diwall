@@ -5,7 +5,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Menu from "@mui/material/Menu";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+// import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Drawer from "@mui/material/Drawer";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Typography from "@mui/material/Typography";
@@ -140,7 +140,7 @@ const HeaderMobile: React.FC = () => {
             <Grid container item xs={7} alignItems={"center"} spacing={10}>
                 <Grid container item xs={"auto"}>
 
-                    <SwipeableDrawer
+                    <Drawer
                         // the following props is for fixing drawer in rtl languages
 
                                      anchor={"left"} PaperProps={{
@@ -148,7 +148,7 @@ const HeaderMobile: React.FC = () => {
                             left: 'unset !important',
                             right: '0 !important'
                         }
-                    }} open={openMenuDrawer} onOpen={() => setOpenMenuDrawer(true)}
+                    }} open={openMenuDrawer}
                                      onClose={() => setOpenMenuDrawer(false)}>
                         <Grid container item xs={12} width={matchesSM ? "75vw" : "50vw"} p={20}>
 
@@ -203,7 +203,7 @@ const HeaderMobile: React.FC = () => {
 
 
                         </Grid>
-                    </SwipeableDrawer>
+                    </Drawer>
                     <IconButton onClick={() => setOpenMenuDrawer(!openMenuDrawer)} color={"primary"} sx={{mr: -10}}>
                         <Hamburger sx={styles.headerIcon}/>
                     </IconButton>
@@ -224,7 +224,7 @@ const HeaderMobile: React.FC = () => {
                 <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(!openSearchDrawer)}>
                     <Search sx={styles.headerIcon}/>
                 </IconButton>
-                <SwipeableDrawer anchor={"top"} open={openSearchDrawer} onOpen={() => setOpenSearchDrawer(true)}
+                <Drawer anchor={"top"} open={openSearchDrawer}
                                  onClose={() => setOpenSearchDrawer(false)}>
                     <Grid container height={100} item spacing={10} sx={styles.backDrop} component={"form"} onSubmit={submitSearchHandler}>
                         <Grid item xs >
@@ -260,7 +260,7 @@ const HeaderMobile: React.FC = () => {
 
 
                     </Grid>
-                </SwipeableDrawer>
+                </Drawer>
                 {
                     user.username === null ?
 

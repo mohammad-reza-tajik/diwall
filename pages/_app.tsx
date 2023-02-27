@@ -43,8 +43,9 @@ function MyApp({Component, pageProps}) {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 <link rel="manifest"  href="/manifest.json"  />
                 <meta name="keywords"
-                      content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری"/>
+                      content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری" />
                 <meta name="description" content="خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"/>
+                <link rel="icon" href="/favicon.ico" />
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-375.png" sizes="375x375"  />
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-500.png" sizes="500x500"  />
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-250.png" sizes="250x250"  />
