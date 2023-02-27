@@ -1,21 +1,10 @@
-import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
-import InputAdornment from "@mui/material/InputAdornment";
 import Menu from "@mui/material/Menu";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-// import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Drawer from "@mui/material/Drawer";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import MenuDrawer from "../MenuDrawer";
 import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
-import TextField from "@mui/material/TextField";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuItem from "@mui/material/MenuItem";
-import {useTheme} from "@mui/material/styles";
-
-import Close from "@mui/icons-material/Close";
 import Favorite from "@mui/icons-material/Favorite";
 import Login from "@mui/icons-material/Login";
 import Logout from "@mui/icons-material/Logout";
@@ -23,13 +12,12 @@ import Hamburger from "@mui/icons-material/Menu";
 import Person from "@mui/icons-material/Person";
 import Search from "@mui/icons-material/Search";
 import ShoppingBag from "@mui/icons-material/ShoppingBag";
-
-import React, {Fragment, useRef, useState} from "react";
+import React, {Fragment, useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
-import Image from "next/image"
-import axios from "axios";
 import {useAppDispatch, useAppSelector, userActions} from "../../store";
+import BackDrop from "../BackDrop";
+import SearchDrawer from "../SearchDrawer";
 
 
 const styles = {
@@ -42,32 +30,6 @@ const styles = {
         w: 1,
         justifyContent: "center"
     },
-    searchField: {
-        width: {xs: 1, sm: .6, md: .6},
-        height: 1,
-        fontSize: {xs: 4, sm: "2rem"},
-        bgcolor: "#fff",
-
-    },
-    searchIcon: {
-        fontSize: 25,
-        color: "primary.main",
-    },
-    closeIcon: {
-        color: "white.main",
-        fontSize: 35,
-        bgcolor: "primary.main",
-        borderRadius: 20,
-
-    },
-    backDrop: {
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100vw",
-        px: 20,
-        overflow: "hidden"
-    }
-
 
 }
 
@@ -77,18 +39,9 @@ const HeaderMobile: React.FC = () => {
     const router = useRouter()
     const user = useAppSelector(state => state)
     const dispatch = useAppDispatch()
-
-    const searchRef = useRef<HTMLInputElement>()
-
-    const theme = useTheme()
-    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-
-    const [isWrong, setIsWrong] = useState(false)
-
     const [openMenuDrawer, setOpenMenuDrawer] = useState(false)
     const [openSearchDrawer, setOpenSearchDrawer] = useState(false)
 
-    // const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
     //*** menu logic ***//
 
@@ -98,112 +51,15 @@ const HeaderMobile: React.FC = () => {
         setAnchorEl(null);
     }
 
-    const menuItemsHandler = ( url:string ) => {
-        setOpenMenuDrawer(false)
-        router.push(url)
-
-    }
-
-    const submitSearchHandler = (e) => {
-        e.preventDefault();
-        if (searchRef && searchRef.current?.value.trim() === "") {
-            setIsWrong(true)
-            return
-        }
-        setIsWrong(false)
-        axios.post(`/api/products`, {search: searchRef.current.value}).then(_ => {
-            router.push(
-                {
-                    pathname: `/products`,
-                    query: {
-                        search: searchRef.current.value,
-                        page: 1
-                    }
-
-                })
-            searchRef.current.value = ""
-        }).catch(err => {
-            console.log(err)
-
-        })
-        setOpenSearchDrawer(false)
-
-
-    }
-
-
-
 
     return (
-        <Grid container item xs={12} >
+        <Grid container item xs={12}>
 
             <Grid container item xs={7} alignItems={"center"} spacing={10}>
                 <Grid container item xs={"auto"}>
 
-                    <Drawer
-                        // the following props is for fixing drawer in rtl languages
-
-                                     anchor={"left"} PaperProps={{
-                        sx: {
-                            left: 'unset !important',
-                            right: '0 !important'
-                        }
-                    }} open={openMenuDrawer}
-                                     onClose={() => setOpenMenuDrawer(false)}>
-                        <Grid container item xs={12} width={matchesSM ? "75vw" : "50vw"} p={20}>
-
-
-                            <List sx={{width: 1}}>
-                                <ListItem sx={{mb: 20}} onClick={() => menuItemsHandler("/")}>
-                                    <ListItemIcon sx={{fontSize: 20,cursor:"pointer"}}  >
-                                                <Image src={"/assets/pictures/logo-500.png"} alt={"dival-logo"}
-                                                       width={100}
-                                                       height={100}/>
-                                    </ListItemIcon>
-                                </ListItem>
-
-                                <ListItem onClick={() => menuItemsHandler("/")}>
-                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
-                                            صفحه نخست
-                                        </Typography>
-                                </ListItem>
-                                <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                                <ListItem onClick={() => menuItemsHandler("/products")}>
-                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
-                                            جدیدترین محصولات
-                                        </Typography>
-                                </ListItem>
-                                <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                                <ListItem onClick={() => menuItemsHandler("/products?sortBy=2")}>
-                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
-                                            پرفروش ترین محصولات
-                                        </Typography>
-                                </ListItem>
-                                <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                                <ListItem onClick={() => menuItemsHandler("/products?sortBy=3")}>
-                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
-                                            محبوب ترین محصولات
-                                        </Typography>
-                                </ListItem>
-                                <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                                <ListItem onClick={() => menuItemsHandler("/about")}>
-                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
-                                            درباره ما
-                                        </Typography>
-                                </ListItem>
-                                <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-
-                                <ListItem onClick={() => menuItemsHandler("/collaboration")}>
-                                        <Typography sx={{cursor: "pointer"}} variant={"subtitle1"} fontSize={14}>
-                                            همکاری با ما
-                                        </Typography>
-                                </ListItem>
-
-                            </List>
-
-
-                        </Grid>
-                    </Drawer>
+                    <BackDrop onOpen={setOpenMenuDrawer} open={openMenuDrawer}/>
+                    <MenuDrawer open={openMenuDrawer} onOpen={setOpenMenuDrawer}/>
                     <IconButton onClick={() => setOpenMenuDrawer(!openMenuDrawer)} color={"primary"} sx={{mr: -10}}>
                         <Hamburger sx={styles.headerIcon}/>
                     </IconButton>
@@ -224,43 +80,9 @@ const HeaderMobile: React.FC = () => {
                 <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(!openSearchDrawer)}>
                     <Search sx={styles.headerIcon}/>
                 </IconButton>
-                <Drawer anchor={"top"} open={openSearchDrawer}
-                                 onClose={() => setOpenSearchDrawer(false)}>
-                    <Grid container height={100} item spacing={10} sx={styles.backDrop} component={"form"} onSubmit={submitSearchHandler}>
-                        <Grid item xs >
-                            <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom"}
-                                     arrow>
-                                <TextField
-                                    error={isWrong}
-                                    fullWidth
-                                    placeholder={"جستجو ..."}
-                                    inputRef={searchRef}
-                                    sx={styles.searchField}
-                                    variant="outlined"
-                                    size={"medium"}
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <IconButton type={"submit"}>
-                                                    <Search sx={styles.searchIcon}/>
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                        // endAdornment: (closeButton)
-                                    }}
-                                />
-                            </Tooltip>
-                        </Grid>
-                        <Grid item xs={"auto"}>
-                            <IconButton onClick={() => setOpenSearchDrawer(false)}>
-                                <Close sx={styles.closeIcon}/>
-                            </IconButton>
+                <BackDrop onOpen={setOpenSearchDrawer} open={openSearchDrawer} />
+                <SearchDrawer  onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
 
-                        </Grid>
-
-
-                    </Grid>
-                </Drawer>
                 {
                     user.username === null ?
 
