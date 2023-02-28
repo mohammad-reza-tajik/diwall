@@ -134,7 +134,7 @@ const HeaderDesktop: React.FC = () => {
     const [isWrong, setIsWrong] = useState(false)
 
     const matches1355 = useMediaQuery('(max-width:1355px)')
-    const matches1277 = useMediaQuery('(max-width:1277px)')
+    // const matches1277 = useMediaQuery('(max-width:1277px)')
     const matches1057 = useMediaQuery('(max-width:1057px)')
 
 
