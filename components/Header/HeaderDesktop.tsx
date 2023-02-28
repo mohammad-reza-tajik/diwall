@@ -227,7 +227,7 @@ const HeaderDesktop: React.FC = () => {
                 <Grid container item xs={"auto"} pl={10}>
                     <Link href={"/"}>
                         <a>
-                            <Image src={"/assets/pictures/logo-500.png"} alt={"dival-logo"} width={100}
+                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={100}
                                    height={100}/>
                         </a>
                     </Link>

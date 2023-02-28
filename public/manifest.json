@@ -9,27 +9,32 @@
   "start_url": "/",
   "lang": "fa-IR",
   "dir": "rtl",
-  "orientation": "portrait-primary",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "/assets/pictures/logo-500.png",
+      "src": "/assets/pictures/logo-144.png",
       "type": "image/png",
-      "sizes": "500x500"
+      "sizes": "144x144"
     },
     {
-      "src": "/assets/pictures/logo-250.png",
+      "src": "/assets/pictures/logo-152.png",
       "type": "image/png",
-      "sizes": "250x250"
+      "sizes": "152x152"
     },
     {
-      "src": "/assets/pictures/logo-100.png",
+      "src": "/assets/pictures/logo-192.png",
       "type": "image/png",
-      "sizes": "100x100"
+      "sizes": "192x192"
     },
     {
-      "src": "/assets/pictures/logo-375.png",
+      "src": "/assets/pictures/logo-384.png",
       "type": "image/png",
-      "sizes": "375x375"
+      "sizes": "384x384"
+    },
+    {
+      "src": "/assets/pictures/logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ]
 }

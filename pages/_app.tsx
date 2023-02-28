@@ -47,16 +47,21 @@ function MyApp({Component, pageProps}) {
                 </title>
                 <meta charSet="utf-8"/>
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <meta
+                    name="viewport"
+                    content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+                />
                 <link rel="manifest" href="/manifest.json"/>
                 <meta name="keywords"
                       content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری"/>
                 <meta name="description" content="خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"/>
                 <link rel="icon" href="/favicon.ico"/>
-                <link rel="apple-touch-icon" href="/assets/pictures/logo-375.png" sizes="375x375"/>
-                <link rel="apple-touch-icon" href="/assets/pictures/logo-500.png" sizes="500x500"/>
-                <link rel="apple-touch-icon" href="/assets/pictures/logo-250.png" sizes="250x250"/>
-                <link rel="apple-touch-icon" href="/assets/pictures/logo-100.png" sizes="100x100"/>
+                <link rel="apple-touch-icon" href="/assets/pictures/logo-144.png" sizes="144x144"/>
+                <link rel="apple-touch-icon" href="/assets/pictures/logo-152.png" sizes="152x152"/>
+                <link rel="apple-touch-icon" href="/assets/pictures/logo-192.png" sizes="192x192"/>
+                <link rel="apple-touch-icon" href="/assets/pictures/logo-512.png" sizes="512x512"/>
+                <meta name="theme-color" content="#069f69" />
+
             </Head>
             <Provider store={store}>
                 <Grid container direction={"row"} justifyContent={"center"} maxWidth={1400} mx={"auto"}>

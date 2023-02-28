@@ -177,7 +177,7 @@ const SignIn : React.FC = () => {
                 <Grid item my={5}>
                     <Link href={"/"}>
                         <a>
-                            <Image src={"/assets/pictures/logo-500.png"} alt={"dival-logo"} width={150}
+                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={150}
                                    height={150}/>
                         </a>
                     </Link>
