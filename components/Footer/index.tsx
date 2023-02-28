@@ -27,7 +27,8 @@ const styles = {
         }
     },
     signInField: {
-        width: 1
+        width: 1,
+        bgcolor: "#fff",
     },
     footer_download_button: {
         fontSize: 12,

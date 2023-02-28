@@ -8,7 +8,6 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
-
 import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useEffect, useState} from "react";
 import {TabContext} from "@mui/lab";
@@ -17,7 +16,8 @@ import Product from "../../components/Product";
 import axios from "axios";
 import Head from "next/head";
 import {useAppSelector} from "../../hooks/redux_hooks";
-import {Modal} from "@mui/material";
+import {userActions} from "../../store";
+import {useDispatch} from "react-redux";
 
 const styles = {
     tab: {
@@ -38,7 +38,6 @@ const styles = {
 const Profile = () => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    // const [pageTitle,setPageTitle] = useState("لطفا صبر کنید ...")
 
     const user = useAppSelector(state => state)
 
@@ -51,27 +50,42 @@ const Profile = () => {
         setTab(newTab);
     };
 
-    const queryTab = router.query.tab
     const isAuthenticated = user?.username
 
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
-        if (isAuthenticated) {
-            if (router.query.tab) {
-                setTab(router.query.tab.toString())
+
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem("token")
+            const userId = localStorage.getItem("userId")
+            if (userId && userId !== "undefined") {
+
+                axios.post("/api/get-user", {userId, token}).then(res => {
+                        dispatch(userActions.login(res.data.user))
+
+                    }
+                ).catch(e => {
+                        localStorage.clear()
+                        dispatch(userActions.logout())
+                        console.log(e)
+
+                    }
+                )
+
+
+            } else {
+                localStorage.clear()
+                dispatch(userActions.logout())
+                router.push("/sign-in")
+
             }
-        } else {
-
-            router.push("/sign-in")
-
         }
-    }, [queryTab, isAuthenticated])
-
+    }, [dispatch])
 
 
     useEffect(() => {
-        console.log(isAuthenticated)
-
         if (isAuthenticated) {
             setIsLoading(true)
 
@@ -129,11 +143,9 @@ const Profile = () => {
 
                         <TabPanel value="1" sx={{width: 1}}>
                             <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40} position={"relative"}>
-                                <Button variant={"outlined"} sx={{fontSize: {xs: 12, md: 16},position:"absolute",top:10,left:10}}>تغییر اطلاعات</Button>
-                              {/*  <Modal open={false}>
-
-                                </Modal>*/}
-                                {/*<Button variant={"outlined"} color={"error"} sx={{fontSize: {xs: 12, md: 16},position:"absolute",top:70,left:10}}>تغییر اطلاعات حساب</Button>*/}
+                                <Button variant={"outlined"}
+                                        sx={{fontSize: {xs: 12, md: 16}, position: "absolute", top: 10, left: 10}}>تغییر
+                                    اطلاعات</Button>
                                 <Grid container item xs={12} alignItems={"center"} gap={10}>
                                     <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام و نام خانوادگی
                                         : </Box>
@@ -232,7 +244,8 @@ const Profile = () => {
                                                             fontFamily={"dana-bold"}>سبد خرید شما خالی است
                                                     ! </Typography>
                                             </Grid> :
-                                            populatedCart.length !== 0 && populatedCart.map((item) => <CartItem {...item} key={item._id}/> )}
+                                            populatedCart.length !== 0 && populatedCart.map((item) =>
+                                                <CartItem {...item} key={item._id}/>)}
 
                                     </Grid>
                                 }
