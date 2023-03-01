@@ -176,10 +176,7 @@ const SignIn : React.FC = () => {
                 </Grid>
                 <Grid item my={5}>
                     <Link href={"/"}>
-                        <a>
-                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={150}
-                                   height={150}/>
-                        </a>
+                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={150} height={150}/>
                     </Link>
                 </Grid>
                 {typeOfForm === "signup" ? <Fragment>

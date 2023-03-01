@@ -226,10 +226,8 @@ const HeaderDesktop: React.FC = () => {
                   py={20}>
                 <Grid container item xs={"auto"} pl={10}>
                     <Link href={"/"}>
-                        <a>
                             <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={100}
                                    height={100}/>
-                        </a>
                     </Link>
                 </Grid>
                 <Grid position={"relative"} container direction={"column"} item
@@ -302,7 +300,8 @@ const HeaderDesktop: React.FC = () => {
                 </Grid>
                 <Grid item container xs={matches1057 ? "auto" : true} justifyContent={"flex-end"}>
 
-                    {user?.username === null ? <Link href={"/sign-in"} passHref>
+                    {user?.username === null ?
+                        <Link href={"/sign-in"} passHref>
                             <Button
                                 variant={"contained"}
                                 color={"primary"}
