@@ -17,7 +17,7 @@ import Password from "@mui/icons-material/Password";
 import Person from "@mui/icons-material/Person";
 
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link"
 import React, {Fragment, useRef, useState} from "react";
 import axios from "axios";

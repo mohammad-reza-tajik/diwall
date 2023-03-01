@@ -13,7 +13,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 
 
-import Image from "next/image"
+import Image from "next/legacy/image"
 import {Fragment, useEffect, useState} from "react";
 import axios from "axios";
 import {useAppSelector,useAppDispatch,userActions} from "../../store";
@@ -87,7 +87,7 @@ const ProductDetails = () => {
                 setProduct(res.data.productDetails)
                 setRelatedProducts(res.data.relatedProducts)
                 setPageTitle(res.data.productDetails.title)
-                setIsLoading(false)
+                // setIsLoading(false)
             }).catch(e => console.log(e))
 
         }
@@ -206,7 +206,7 @@ const ProductDetails = () => {
                             </Grid>
                             <Grid container item xs={4} justifyContent={"flex-end"} alignItems={"center"}
                                   sx={{display: {xs: "none", md: "flex"}}}>
-                                <Typography variant={"h3"} sx={{fontSize: {xs: 14, md: 16}}} borderRadius={20} px={20}
+                                <Typography variant={"h3"} sx={{fontSize: {xs: 14, md: 16}}} borderRadius={20} px={20} component={"div"}
                                             py={10}
                                             color={"white.main"}
                                             bgcolor={isLoading ? "transparent" : "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>

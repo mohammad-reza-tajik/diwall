@@ -59,26 +59,26 @@ const Footer: React.FC = () => {
                 <Grid item container alignItems={"center"} gap={10} xs={12}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>پوستر سفارشی</Box>
+                        <Box component={"span"} sx={styles.footer_link}>پوستر سفارشی</Box>
                     </Link>
                 </Grid>
 
                 <Grid item container alignItems={"center"} gap={10} xs={12}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>همکاری با ما</Box>
+                        <Box component={"span"} sx={styles.footer_link}>همکاری با ما</Box>
                     </Link>
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10} xs={12}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>تماس با ما</Box>
+                        <Box component={"span"} sx={styles.footer_link}>تماس با ما</Box>
                     </Link>
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10} xs={12}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>درباره ما</Box>
+                        <Box component={"span"} sx={styles.footer_link}>درباره ما</Box>
                     </Link>
                 </Grid>
             </Grid>
@@ -90,25 +90,25 @@ const Footer: React.FC = () => {
                 <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>مشاوره رایگان</Box>
+                        <Box component={"span"} sx={styles.footer_link}>مشاوره رایگان</Box>
                     </Link>
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>دیدن آلبوم ها در منزل</Box>
+                        <Box component={"span"} sx={styles.footer_link}>دیدن آلبوم ها در منزل</Box>
                     </Link>
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}> برآورد هزینه</Box>
+                        <Box component={"span"} sx={styles.footer_link}> برآورد هزینه</Box>
                     </Link>
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10} xs={"auto"}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>اجرای کار توسط متخصصین</Box>
+                        <Box component={"span"} sx={styles.footer_link}>اجرای کار توسط متخصصین</Box>
                     </Link>
                 </Grid>
             </Grid>
@@ -121,25 +121,25 @@ const Footer: React.FC = () => {
                 <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>پرسش های متداول</Box>
+                        <Box component={"span"} sx={styles.footer_link}>پرسش های متداول</Box>
                     </Link>
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>تحویل و ارسال کالا</Box>
+                        <Box component={"span"} sx={styles.footer_link}>تحویل و ارسال کالا</Box>
                     </Link>
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>سیاست حفظ حریم خصوصی</Box>
+                        <Box component={"span"} sx={styles.footer_link}>سیاست حفظ حریم خصوصی</Box>
                     </Link>
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10}>
                     <Circle sx={{fontSize: 5, color: "#666"}}/>
                     <Link href={"/cloths"}>
-                        <Box component={"a"} sx={styles.footer_link}>شرایط و قوانین</Box>
+                        <Box component={"span"} sx={styles.footer_link}>شرایط و قوانین</Box>
                     </Link>
                 </Grid>
             </Grid>
@@ -303,22 +303,22 @@ const Footer: React.FC = () => {
             <Grid container item xs={12} my={40} alignItems={"center"} justifyContent={"space-between"}>
                 <Grid container item gap={20} xs={12} md={"auto"} display={{xs: "none", lg: "flex"}}>
                     <Link href={"/"}>
-                        <Box component={"a"} sx={styles.footer_link}>
+                        <Box component={"span"} sx={styles.footer_link}>
                             همکاری با ما
                         </Box>
                     </Link>
                     <Link href={"/"}>
-                        <Box component={"a"} sx={styles.footer_link}>
+                        <Box component={"span"} sx={styles.footer_link}>
                             سفارش پوستر اختصاصی
                         </Box>
                     </Link>
                     <Link href={"/"}>
-                        <Box component={"a"} sx={styles.footer_link}>
+                        <Box component={"span"} sx={styles.footer_link}>
                             نمونه کارها
                         </Box>
                     </Link>
                     <Link href={"/"}>
-                        <Box component={"a"} sx={styles.footer_link}>
+                        <Box component={"span"} sx={styles.footer_link}>
                             راهنمای استفاده
                         </Box>
                     </Link>

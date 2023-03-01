@@ -41,14 +41,14 @@ const MainNavigation : React.FC= () => {
             {!matchesMD &&
                 <Fragment>
                     <Grid container alignItems={"center"} item xs={9} sx={styles.main_nav}>
-                        <Link href={"/"}><Box component={"a"} sx={styles.main_nav_link}>صفحه نخست</Box></Link>
-                        <Link href={"/products"}><Box component={"a"} sx={styles.main_nav_link}>جدیدترین ها</Box></Link>
-                        <Link href={"/products?sortBy=2"}><Box component={"a"} sx={styles.main_nav_link}>پرفروش ترین
+                        <Link href={"/"}><Box component={"span"} sx={styles.main_nav_link}>صفحه نخست</Box></Link>
+                        <Link href={"/products"}><Box component={"span"} sx={styles.main_nav_link}>جدیدترین ها</Box></Link>
+                        <Link href={"/products?sortBy=2"}><Box component={"span"} sx={styles.main_nav_link}>پرفروش ترین
                             ها</Box></Link>
-                        <Link href={"/products?sortBy=3"}><Box component={"a"} sx={styles.main_nav_link}>محبوب ترین
+                        <Link href={"/products?sortBy=3"}><Box component={"span"} sx={styles.main_nav_link}>محبوب ترین
                             ها</Box></Link>
-                        <Link href={"/about"}><Box component={"a"} sx={styles.main_nav_link}>درباره ما</Box></Link>
-                        <Link href={"/collaboration"}><Box component={"a"} sx={styles.main_nav_link}>همکاری با ما</Box></Link>
+                        <Link href={"/about"}><Box component={"span"} sx={styles.main_nav_link}>درباره ما</Box></Link>
+                        <Link href={"/collaboration"}><Box component={"span"} sx={styles.main_nav_link}>همکاری با ما</Box></Link>
                     </Grid>
                     <Grid container item direction={"row"} xs={2} justifyContent={"flex-end"}
                           display={matches1277 && "none"}>

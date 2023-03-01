@@ -43,7 +43,7 @@ const BannerMobile : React.FC = () => {
                 </Grid>
                 <Grid container item justifyContent={"center"}>
                     <Link href={"/products"} passHref>
-                        <Button variant={"contained"} color={"primary"} size={"medium"} sx={styles.bannerButton}>مشاهده
+                        <Button variant={"contained"} color={"primary"} size={"medium"} sx={styles.bannerButton} component={"span"}>مشاهده
                             محصولات</Button>
                     </Link>
                 </Grid>

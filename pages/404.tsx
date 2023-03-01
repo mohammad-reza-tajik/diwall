@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import  Typography from "@mui/material/Typography";
-import Image from "next/image"
+import Image from "next/legacy/image"
 import React, {Fragment} from "react";
 import Link from "next/link";
 import Head from "next/head";
@@ -44,11 +44,11 @@ const NotFound : React.FC = () => {
                     </Typography>
                 </Grid>
                 <Grid container justifyContent={"center"} item xs={12}>
-                    <Link href={"/"} passHref>
                     <Button variant={"contained"} sx={{fontSize:{xs:16,md:20}}}>
+                    <Link href={"/"}>
                         بازگشت به صفحه اصلی
-                    </Button>
                     </Link>
+                    </Button>
 
                 </Grid>
                 </Grid>

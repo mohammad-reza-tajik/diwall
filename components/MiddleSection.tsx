@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import Image from "next/image";
+import Image from "next/legacy/image"
 import React from "react";
 
 const styles = {

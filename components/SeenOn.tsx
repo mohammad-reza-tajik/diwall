@@ -4,7 +4,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 
-import Image from "next/image"
+import Image from "next/legacy/image"
 import React from "react";
 
 const SeenOn: React.FC = () => {

@@ -6,7 +6,6 @@ const nextConfig = (phase) => {
         return {
 
             reactStrictMode: true,
-
             env: {
                 mongodb_url: "mongodb://127.0.0.1:27017/online_shop"
             }
@@ -16,7 +15,6 @@ const nextConfig = (phase) => {
         return {
 
             reactStrictMode: true,
-
             env: {
                 mongodb_url: "mongodb+srv://MORTA:Lant12344321@cluster0.ax5a2.mongodb.net/online_shop?retryWrites=true&w=majority"
             }

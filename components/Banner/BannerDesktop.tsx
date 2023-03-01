@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
-import Image from "next/image";
+import Image from "next/legacy/image"
 import Link from "next/link"
 import React, {useRef} from "react";
 
@@ -57,7 +57,7 @@ const BannerDesktop :React.FC = () => {
                 <Grid container item>
                     <Link href={"/products"} passHref>
                         <Button variant={matchesMD ? "contained" : "outlined"} color={matchesMD ? "primary" : "white"}
-                                size={"medium"} sx={styles.heroButton}>مشاهده محصولات</Button>
+                                size={"medium"} sx={styles.heroButton} component={"span"}>مشاهده محصولات</Button>
                     </Link>
                 </Grid>
             </Grid>

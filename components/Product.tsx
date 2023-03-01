@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery"
-import Image from "next/image"
+import Image from "next/legacy/image"
 import {Favorite} from "@mui/icons-material";
 import {useRouter} from "next/router";
 import React, {useState} from "react";
