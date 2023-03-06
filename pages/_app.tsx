@@ -15,7 +15,7 @@ import React from "react";
 
 if (typeof window !== "undefined")
     if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("/sw.js").then(() => console.log("sw is registered"))
+        navigator.serviceWorker.register("/sw.js")
     }
 
 
