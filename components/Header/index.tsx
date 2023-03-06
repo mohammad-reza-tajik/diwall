@@ -10,7 +10,6 @@ const Header : React.FC = () => {
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
 
-
     return (
         matchesMD ? <HeaderMobile /> : <HeaderDesktop />
 

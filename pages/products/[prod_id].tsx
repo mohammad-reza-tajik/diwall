@@ -87,7 +87,7 @@ const ProductDetails = () => {
                 setProduct(res.data.productDetails)
                 setRelatedProducts(res.data.relatedProducts)
                 setPageTitle(res.data.productDetails.title)
-                // setIsLoading(false)
+                setIsLoading(false)
             }).catch(e => console.log(e))
 
         }

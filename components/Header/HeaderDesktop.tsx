@@ -10,7 +10,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 
@@ -22,7 +21,7 @@ import Person from "@mui/icons-material/Person";
 import Search from "@mui/icons-material/Search";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import React, {Fragment, useCallback, useState} from "react";
 import axios from "axios";
@@ -95,48 +94,18 @@ const styles = {
             color: "white"
         }
     },
-    signInPopup: {
-        position: "absolute",
-        top: "100%",
-        right: 20,
-        width: {xs: .8, md: 400},
-        zIndex: 50,
-        minHeight: 200,
-        maxHeight: 400,
-        border: "1px solid #ccc",
-        borderTop: "none",
-        bgcolor: "white.main",
-        justifyContent: "center",
-        alignItems: "center",
-        overflowY: "scroll",
 
-    },
-    listItem: {
-        gap: 10,
-        p: 0
-
-
-    },
-    list: {
-        width: 1,
-        height: "auto",
-
-    }
 }
 
 const HeaderDesktop: React.FC = () => {
 
     const router = useRouter()
+
     const user = useAppSelector(state => state)
     const dispatch = useAppDispatch()
 
     const [search, setSearch] = useState("")
     const [isWrong, setIsWrong] = useState(false)
-
-    const matches1355 = useMediaQuery('(max-width:1355px)')
-    // const matches1277 = useMediaQuery('(max-width:1277px)')
-    const matches1057 = useMediaQuery('(max-width:1057px)')
-
 
     //*** menu logic ***//
 
@@ -224,15 +193,15 @@ const HeaderDesktop: React.FC = () => {
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={30} xs={12}>
             <Grid container item direction={"row"} justifyContent={"center"} alignItems={"center"} xs={12}
                   py={20}>
-                <Grid container item xs={"auto"} pl={10}>
+                <Grid container item xs={1} pl={10} height={100}>
                     <Link href={"/"}>
-                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={100}
-                                   height={100}/>
+                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={100} height={100}
+                                  />
                     </Link>
                 </Grid>
                 <Grid position={"relative"} container direction={"column"} item
                       justifyContent={"center"}
-                      alignItems={"flex-start"} xs={matches1057 ? true : 7} pr={20} component={"form"}
+                      alignItems={"flex-start"}  md={true} lg={6} xl={7} pr={20} component={"form"}
                       onSubmit={submitSearchHandler}
 
                 >
@@ -265,7 +234,7 @@ const HeaderDesktop: React.FC = () => {
                 </Grid>
 
 
-                <Grid container item xs={matches1355 ? "auto" : 2} justifyContent={"flex-end"}>
+                <Grid container item md={"auto"} lg={true} xl={2} justifyContent={"flex-end"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
                         <Badge showZero max={99} badgeContent={user?.favoriteList.length || 0} color="primary"
                                overlap="circular"
@@ -298,7 +267,7 @@ const HeaderDesktop: React.FC = () => {
                         </Badge>
                     </Tooltip>
                 </Grid>
-                <Grid item container xs={matches1057 ? "auto" : true} justifyContent={"flex-end"}>
+                <Grid item container md={"auto"} lg={"auto"} xl={2} justifyContent={"flex-end"}>
 
                     {user?.username === null ?
                         <Link href={"/sign-in"} passHref>
