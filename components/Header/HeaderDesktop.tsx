@@ -21,7 +21,7 @@ import Person from "@mui/icons-material/Person";
 import Search from "@mui/icons-material/Search";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import React, {Fragment, useCallback, useState} from "react";
 import axios from "axios";
@@ -35,7 +35,7 @@ const styles = {
         justifyContent: "center"
     },
     searchField: {
-        width: {md: 400},
+        width: {md: 350 , lg: 400},
         height: 1,
         fontSize: {xs: 4, sm: "2rem"},
         bgcolor:"#fff",
@@ -193,7 +193,7 @@ const HeaderDesktop: React.FC = () => {
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={30} xs={12}>
             <Grid container item direction={"row"} justifyContent={"center"} alignItems={"center"} xs={12}
                   py={20}>
-                <Grid container item xs={1} pl={10} height={100}>
+                <Grid container item md={"auto"} lg={1} pl={10} minHeight={100} maxWidth={100}>
                     <Link href={"/"}>
                             <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={100} height={100}
                                   />
