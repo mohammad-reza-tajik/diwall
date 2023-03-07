@@ -7,7 +7,8 @@ self.addEventListener("install",function (event) {
                 "/assets/fonts/dana-bold.ttf",
                 "/assets/fonts/dana-medium.ttf",
                 "/_next/static/chunks/main-27d355ecdf567f83.js",
-                "/_next/static/chunks/pages/_app-fa3935b22e06ea74.js",
+                "/_next/static/chunks/pages/_app-1e9d895f12ee46a3.js",
+                "/_next/static/chunks/pages/index-b7c5352ed1263844.js"
             ])
         })
     )
