@@ -55,14 +55,15 @@ const Profile = () => {
 
     const dispatch = useDispatch()
 
-
-    useEffect(() => {
-
-
+    useEffect(()=> {
         if (queryTab) {
             setTab(queryTab.toString())
         }
 
+    },[queryTab])
+
+
+    useEffect(() => {
 
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem("token")
@@ -90,7 +91,7 @@ const Profile = () => {
 
             }
         }
-    }, [dispatch,queryTab])
+    }, [dispatch])
 
 
     useEffect(() => {
