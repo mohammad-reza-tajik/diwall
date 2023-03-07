@@ -45,7 +45,7 @@ const SectionHeading : React.FC<Props> = (props) => {
         <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"} my={30}>
             <Grid container item xs={"auto"}  md={8} gap={10} alignItems={"center"}>
                 <Circle fontSize={"large"}  sx={{fontSize:{xs:16,md:20},color:!props.white ? "primary.main" : "white.main"}}/>
-                <Typography fontFamily={"dana-black"} variant={"h4"} color={!props.white ? "#444" : "white.main"} sx={{fontSize: {xs:14,md:20}}} >
+                <Typography fontFamily={"dana-black"} variant={"h4"} color={!props.white ? "#555" : "white.main"} sx={{fontSize: {xs:14,md:20}}} >
                     {props.text}
                 </Typography>
             </Grid>

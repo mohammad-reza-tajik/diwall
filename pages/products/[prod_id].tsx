@@ -199,7 +199,7 @@ const ProductDetails = () => {
                                         :
                                         <Typography variant={"h1"} sx={{fontSize: {xs: 18, md: 25}}}
                                                     fontFamily={"dana-bold"}
-                                                    color={"#333"}>
+                                                    color={"#555"}>
                                             {"title" in product ? product.title :""}
                                         </Typography>
                                 }
@@ -246,7 +246,7 @@ const ProductDetails = () => {
                                     </Grid>
                                     :
                                     <Typography variant={"caption"} fontSize={{xs: 14, md: 16}}
-                                                lineHeight={{xs: 1.8, md: 1.6}}>
+                                                lineHeight={{xs: 1.8, md: 1.6}} color={"#555"}>
                                         {"details" in product && product.details}
                                     </Typography>
                             }

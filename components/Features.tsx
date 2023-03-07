@@ -19,7 +19,7 @@ const Features: React.FC = () => {
                 </Grid>
                 <Grid container item xs gap={5} direction={"column"}>
                     <Grid item>
-                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#444"}
+                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
                                     fontFamily={"dana-black"}>ارسال <Box component={"span"}
                                                                          sx={{color: "primary.main"}}>رایگان</Box></Typography>
                     </Grid>
@@ -37,7 +37,7 @@ const Features: React.FC = () => {
                 </Grid>
                 <Grid container item xs gap={5} direction={"column"}>
                     <Grid item>
-                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#444"}
+                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
                                     fontFamily={"dana-black"}>بسته بندی <Box component={"span"}
                                                                              sx={{color: "primary.main"}}>رایگان</Box></Typography>
                     </Grid>
@@ -55,7 +55,7 @@ const Features: React.FC = () => {
                 </Grid>
                 <Grid container item xs gap={5} direction={"column"} justifyContent={"flex-end"}>
                     <Grid item>
-                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#444"}
+                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
                                     fontFamily={"dana-black"}>تضمین <Box component={"span"}
                                                                          sx={{color: "primary.main"}}>کیفیت</Box></Typography>
                     </Grid>
@@ -73,7 +73,7 @@ const Features: React.FC = () => {
                 </Grid>
                 <Grid container item xs gap={5} direction={"column"}>
                     <Grid item>
-                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#444"}
+                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
                                     fontFamily={"dana-black"}>پشتیبانی <Box component={"span"}
                                                                             sx={{color: "primary.main"}}>آنلاین</Box></Typography>
                     </Grid>

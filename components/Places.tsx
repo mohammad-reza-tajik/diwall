@@ -11,7 +11,6 @@ import React from "react";
 const styles = {
     place: {
         transition: "all .4s",
-        // bgcolor:"#fff",
         cursor: "pointer",
         border: "1px solid rgba(44,44,44,.3)",
         p: "2rem",
@@ -19,6 +18,10 @@ const styles = {
             filter: "invert(32%) sepia(64%) saturate(541%) hue-rotate(107deg) brightness(94%) contrast(102%)"
 
         }
+    },
+    place_name: {
+        fontSize: 16
+
     }
 }
 
@@ -30,10 +33,10 @@ const Places: React.FC = () => {
 
 
     return (
-        <Grid container item component={"section"} my={80} gap={{xs: 50, md: 80}} xs={12} >
+        <Grid container item component={"section"} my={80} gap={{xs: 50, md: 80}} xs={12}>
             <Grid container item alignItems={"center"} justifyContent={"center"} gap={10} xs={12}>
                 <Circle color={"primary"} sx={{fontSize: {xs: 20, md: 30}}}/>
-                <Typography variant={"h3"} color={"#444"} fontFamily={"dana-black"} sx={{fontSize: {xs: 20, md: 30}}}>
+                <Typography variant={"h2"} color={"#555"} fontFamily={"dana-black"} sx={{fontSize: {xs: 20, md: 30}}}>
                     <Box component={"span"} sx={{color: "primary.main"}}>برای کجا</Box> می خواهید ؟
                 </Typography>
             </Grid>
@@ -44,7 +47,7 @@ const Places: React.FC = () => {
                 }}>
                     <Image alt={"places_icon"} src={"/assets/icons/child_room.svg"} width={matchesMD ? 40 : 70}
                            height={matchesMD ? 40 : 70}/>
-                    <Typography variant={"h5"} fontFamily={"dana-bold"}>اتاق کودک</Typography>
+                    <Typography variant={"h3"} sx={styles.place_name} fontFamily={"dana-bold"}>اتاق کودک</Typography>
                 </Grid>
                 <Grid container item direction={"column"} xs={6} md={4} lg={2} alignItems={"center"} gap={20}
                       sx={styles.place} onClick={() => {
@@ -52,7 +55,7 @@ const Places: React.FC = () => {
                 }}>
                     <Image alt={"places_icon"} src={"/assets/icons/chair.svg"} width={matchesMD ? 40 : 70}
                            height={matchesMD ? 40 : 70}/>
-                    <Typography variant={"h5"} fontFamily={"dana-bold"}>اداره و دفتر</Typography>
+                    <Typography variant={"h3"} sx={styles.place_name} fontFamily={"dana-bold"}>اداره و دفتر</Typography>
                 </Grid>
                 <Grid container item direction={"column"} xs={6} md={4} lg={2} alignItems={"center"} gap={20}
                       sx={styles.place} onClick={() => {
@@ -60,7 +63,7 @@ const Places: React.FC = () => {
                 }}>
                     <Image alt={"places_icon"} src={"/assets/icons/kitchen.svg"} width={matchesMD ? 40 : 70}
                            height={matchesMD ? 40 : 70}/>
-                    <Typography variant={"h5"} fontFamily={"dana-bold"}>آشپزخانه</Typography>
+                    <Typography variant={"h3"} sx={styles.place_name} fontFamily={"dana-bold"}>آشپزخانه</Typography>
                 </Grid>
                 <Grid container item direction={"column"} xs={6} md={4} lg={2} alignItems={"center"} gap={20}
                       sx={styles.place} onClick={() => {
@@ -68,7 +71,7 @@ const Places: React.FC = () => {
                 }}>
                     <Image alt={"places_icon"} src={"/assets/icons/bed.svg"} width={matchesMD ? 40 : 70}
                            height={matchesMD ? 40 : 70}/>
-                    <Typography variant={"h5"} fontFamily={"dana-bold"}>اتاق خواب</Typography>
+                    <Typography variant={"h3"} sx={styles.place_name} fontFamily={"dana-bold"}>اتاق خواب</Typography>
                 </Grid>
                 <Grid container item direction={"column"} xs={6} md={4} lg={2} alignItems={"center"} gap={20}
                       sx={styles.place} onClick={() => {
@@ -76,7 +79,7 @@ const Places: React.FC = () => {
                 }}>
                     <Image alt={"places_icon"} src={"/assets/icons/office.svg"} width={matchesMD ? 40 : 70}
                            height={matchesMD ? 40 : 70}/>
-                    <Typography variant={"h5"} fontFamily={"dana-bold"}>اتاق کار</Typography>
+                    <Typography variant={"h3"} sx={styles.place_name} fontFamily={"dana-bold"}>اتاق کار</Typography>
                 </Grid>
                 <Grid container item direction={"column"} xs={6} md={4} lg={2} alignItems={"center"} gap={20}
                       sx={styles.place} onClick={() => {
@@ -84,7 +87,8 @@ const Places: React.FC = () => {
                 }}>
                     <Image alt={"places_icon"} src={"/assets/icons/sofa.svg"} width={matchesMD ? 40 : 70}
                            height={matchesMD ? 40 : 70}/>
-                    <Typography variant={"h5"} fontFamily={"dana-bold"}>حال و پذیرایی</Typography>
+                    <Typography variant={"h3"} sx={styles.place_name} fontFamily={"dana-bold"}>حال و
+                        پذیرایی</Typography>
                 </Grid>
             </Grid>
         </Grid>

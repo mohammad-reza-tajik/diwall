@@ -1,5 +1,4 @@
 @import "Vars";
-@import "Utilities";
 @import "Fonts";
 
 
@@ -25,18 +24,13 @@
 html {
   scroll-behavior: smooth;
   font-size: 62.5%;
-  font-family: "dana-regular",tahoma ,sans-serif;
-
-
+  font-family: "dana-medium",tahoma ,sans-serif;
 
 }
 
 body {
   overflow-x: hidden !important;
   position: relative;
-  //padding: 1rem;
-  //display: flex;
-  //flex-direction: column;
 
 }
 
@@ -142,6 +136,10 @@ input[type=number] {
 
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 
 
 .css-1xk4vfn-MuiSnackbar-root .css-1qe5cpw-MuiPaper-root-MuiSnackbarContent-root{
@@ -155,47 +153,5 @@ input[type=number] {
 
 }
 
-//.css-n8417t-MuiSvgIcon-root-MuiPaginationItem-icon{
-//  transform: rotate(180deg);
-//
-//
-//}
-//
-//.MuiModal-root , .MuiDrawer-root {
-//  direction: ltr !important;
-//}
-//.MuiPagination-root {
-  //direction: ltr !important;
-//}
-//.footer-link {
-//  color: white;
-//  font-size: 1.6rem;
-//  display: block;
-//  justify-content: flex-start;
-//  transition: background-color .4s;
-//
-//  &:hover{
-//    background-color: rgba(black,.1);
-//  }
-//
-//
-//
-//}
-//
-//.css-1qe5cpw-MuiPaper-root-MuiSnackbarContent-root {
-//  font-size: 16px !important;
-//  font-family: "dana-bold" , serif;
-//  background-color: $color-primary;
-//  display: flex;
-//  justify-content: center;
-//}
-//
-//.css-1kr9x0n-MuiSnackbarContent-action {
-//  margin-right: 50px;
-//}
-//
-//.css-1exqwzz-MuiSnackbarContent-message {
-//  padding: 13px;
-//}
 
 

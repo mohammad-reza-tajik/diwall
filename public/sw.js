@@ -4,8 +4,8 @@ self.addEventListener("install",function (event) {
             cache.addAll([
                 "/assets/pictures/hero-image-desktop.png",
                 "/",
-                "/assets/fonts/dana-bold.ttf",
-                "/assets/fonts/dana-medium.ttf",
+                "/assets/fonts/dana-fanum-bold.woff2",
+                "/assets/fonts/dana-fanum-medium.woff2",
                 "/_next/static/chunks/main-27d355ecdf567f83.js",
                 "/_next/static/chunks/pages/_app-1e9d895f12ee46a3.js",
                 "/_next/static/chunks/pages/index-b7c5352ed1263844.js"

@@ -19,7 +19,7 @@ import React from "react";
 const styles = {
     footer_link: {
         fontSize: 14,
-        color: "#444",
+        color: "#555",
         transition: "color .4s",
 
         "&:hover": {
@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
         <Grid container item xs={12} component={"footer"} justifyContent={{xs: "center", md: "space-between"}} mt={100}>
             <Grid container item xs={6} md={2} alignItems={"flex-start"} spacing={10}>
                 <Grid item xs={12} mb={10}>
-                    <Typography variant={"h5"} color={"#444"} fontSize={18} fontFamily={"dana-bold"}>فروشگاه
+                    <Typography variant={"h5"} color={"#555"} fontSize={18} fontFamily={"dana-bold"}>فروشگاه
                         دیوال</Typography>
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10} xs={12}>
@@ -84,7 +84,7 @@ const Footer: React.FC = () => {
             </Grid>
             <Grid container item xs={6} md={2} alignItems={"flex-start"} spacing={10}>
                 <Grid item mb={10}>
-                    <Typography variant={"h5"} color={"#444"} fontSize={18} fontFamily={"dana-bold"}>خدمات
+                    <Typography variant={"h5"} color={"#555"} fontSize={18} fontFamily={"dana-bold"}>خدمات
                         دیوال</Typography>
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10}>
@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
             </Grid>
             <Grid container item xs={2} display={{xs: "none", lg: "flex"}} alignItems={"flex-start"} spacing={10}>
                 <Grid item mb={10}>
-                    <Typography variant={"h5"} color={"#444"} fontSize={18} fontFamily={"dana-bold"}>
+                    <Typography variant={"h5"} color={"#555"} fontSize={18} fontFamily={"dana-bold"}>
                         خدمات مشتریان
                     </Typography>
                 </Grid>
@@ -148,7 +148,7 @@ const Footer: React.FC = () => {
 
             <Grid container item xs={12} md={5} lg={4} alignItems={"center"} my={{xs: 30, md: 0}}>
                 <Grid item xs={"auto"} md={12}>
-                    <Typography variant={"h5"} color={"#444"} fontSize={{xs: 14, md: 18}} fontFamily={"dana-bold"}>
+                    <Typography variant={"h5"} color={"#555"} fontSize={{xs: 14, md: 18}} fontFamily={"dana-bold"}>
                         دیوال
                         را دنبال
                         کنید</Typography>
@@ -156,9 +156,7 @@ const Footer: React.FC = () => {
                 <Grid item container justifyContent={{xs: "flex-end", md: "flex-start"}} alignItems={"center"} xs
                       md={12}>
                     <Grid item xs={"auto"}>
-                        <IconButton>
-                            <a href={"https://telegram.org/"}>
-
+                        <IconButton component={"a"} href={"https://telegram.org/"}>
                             <Telegram color={"primary"}
                                       sx={{
                                           fontSize: {xs: 30, md: 50},
@@ -166,14 +164,12 @@ const Footer: React.FC = () => {
                                           borderRadius: "50px",
                                           p: {xs: 1, md: 7}
                                       }}/>
-                            </a>
+
                         </IconButton>
                     </Grid>
 
                     <Grid item xs={"auto"}>
-                        <IconButton>
-                            <a href={"https://twitter.com/?lang=en"}>
-
+                        <IconButton component={"a"} href={"https://twitter.com/?lang=en"}>
                             <Twitter color={"primary"}
                                      sx={{
                                          fontSize: {xs: 30, md: 50},
@@ -181,13 +177,11 @@ const Footer: React.FC = () => {
                                          borderRadius: "50px",
                                          p: {xs: 1, md: 7}
                                      }}/>
-                            </a>
+
                         </IconButton>
                     </Grid>
                     <Grid item xs={"auto"}>
-                        <IconButton>
-                            <a href={"https://www.instagram.com/"}>
-
+                        <IconButton component={"a"} href={"https://www.instagram.com/"}>
                             <Instagram color={"primary"}
                                        sx={{
                                            fontSize: {xs: 30, md: 50},
@@ -195,14 +189,12 @@ const Footer: React.FC = () => {
                                            borderRadius: "50px",
                                            p: {xs: 1, md: 7}
                                        }}/>
-                            </a>
+
                         </IconButton>
                     </Grid>
 
                     <Grid item xs={"auto"}>
-                        <IconButton>
-                            <a href={"https://www.linkedin.com/"}>
-
+                        <IconButton component={"a"} href={"https://www.linkedin.com/"}>
                             <LinkedIn color={"primary"}
                                       sx={{
                                           fontSize: {xs: 30, md: 50},
@@ -210,14 +202,13 @@ const Footer: React.FC = () => {
                                           borderRadius: "50px",
                                           p: {xs: 1, md: 7}
                                       }}/>
-                            </a>
                         </IconButton>
                     </Grid>
 
 
                 </Grid>
                 <Grid item container alignItems={"center"} gap={10} mt={30} xs={12}>
-                    <Typography variant={"h4"} fontSize={{xs: 16, md: 18}} color={"#444"}>
+                    <Typography variant={"h4"} fontSize={{xs: 16, md: 18}} color={"#555"}>
                         از جدیدترین تخفیفات <Box component={"span"}
                                                  sx={{fontFamily: "dana-black", color: "primary.main"}}>دیوال</Box> با
                         خبر شوید!
@@ -237,13 +228,13 @@ const Footer: React.FC = () => {
                   display={{xs: "none", md: "flex"}}>
                 <Grid container item xs={"auto"} gap={10}>
                     <Grid item xs={12}>
-                        <Typography variant={"h4"} color={"#444"} fontFamily={"dana-black"}>الو <Box component={"span"}
+                        <Typography variant={"h4"} color={"#555"} fontFamily={"dana-black"}>الو <Box component={"span"}
                                                                                                      sx={{
                                                                                                          color: "primary.main"
                                                                                                      }}>دیوال</Box></Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant={"h5"} color={"#444"}>24 ساعت در هفت روز هفته آماده خدمت رسانی به مشتریان
+                        <Typography variant={"h5"} color={"#555"}>24 ساعت در هفت روز هفته آماده خدمت رسانی به مشتریان
                             هستیم</Typography>
                     </Grid>
 
@@ -270,12 +261,12 @@ const Footer: React.FC = () => {
 
             <Grid container item justifyContent={"space-between"} alignItems={"center"} spacing={{xs: 0, lg: 50}}>
                 <Grid container item gap={10} xs={12} lg>
-                    <Typography variant={"h4"} color={"#444"} fontFamily={"dana-black"} fontSize={{xs: 16, md: 20}}>فروشگاه
+                    <Typography variant={"h4"} color={"#555"} fontFamily={"dana-black"} fontSize={{xs: 16, md: 20}}>فروشگاه
                         اینترنتی <Box
                             component={"span"} sx={{
                             color: "primary.main"
                         }}>دیوال</Box></Typography>
-                    <Typography variant={"h5"} lineHeight={1.5} textAlign={"justify"} display={"block"} color={"#444"}
+                    <Typography variant={"h5"} lineHeight={1.5} textAlign={"justify"} display={"block"} color={"#555"}
                                 fontSize={{xs: 14, md: 16}}>پوستر دیواری الگوی بسیار مناسبی از یک متریال ایده آل و
                         پرکاربرد در
                         دکوراسیون
@@ -340,7 +331,7 @@ const Footer: React.FC = () => {
                       alignItems={"center"}>
                     <Grid item xs={12} md={"auto"}>
 
-                        <Typography variant={"h5"} color={"#444"}>
+                        <Typography variant={"h5"} color={"#555"}>
                             دانلود اپلیکیشن دیوال :
                         </Typography>
                     </Grid>
@@ -371,7 +362,7 @@ const Footer: React.FC = () => {
                 <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
             </Grid>
             <Grid container item justifyContent={"center"} alignItems={"center"} my={20}>
-                <Typography variant={"h6"} fontSize={{xs: 12, md: 14}} color={"#444"} textAlign={"center"}>
+                <Typography variant={"h6"} fontSize={{xs: 12, md: 14}} color={"#555"} textAlign={"center"}>
                     تمامی حقوق مادی و معنوی این سایت متعلق به دیوال می باشد و هر گونه کپی برداری پیگرد قانونی خواهد داشت
                     .
                 </Typography>
