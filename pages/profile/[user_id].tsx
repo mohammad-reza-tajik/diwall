@@ -50,12 +50,19 @@ const Profile = () => {
         setTab(newTab);
     };
 
-    const isAuthenticated = user?.username
+    const isAuthenticated = user?.username;
+    const queryTab = router.query.tab;
 
     const dispatch = useDispatch()
 
 
     useEffect(() => {
+
+
+        if (queryTab) {
+            setTab(queryTab.toString())
+        }
+
 
         if (typeof window !== 'undefined') {
             const token = localStorage.getItem("token")
@@ -64,6 +71,7 @@ const Profile = () => {
 
                 axios.post("/api/get-user", {userId, token}).then(res => {
                         dispatch(userActions.login(res.data.user))
+
 
                     }
                 ).catch(e => {
@@ -82,7 +90,7 @@ const Profile = () => {
 
             }
         }
-    }, [dispatch])
+    }, [dispatch,queryTab])
 
 
     useEffect(() => {
