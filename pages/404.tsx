@@ -44,11 +44,11 @@ const NotFound : React.FC = () => {
                     </Typography>
                 </Grid>
                 <Grid container justifyContent={"center"} item xs={12}>
+                    <Link href={"/"} passHref>
                     <Button variant={"contained"} sx={{fontSize:{xs:16,md:20}}}>
-                    <Link href={"/"}>
                         بازگشت به صفحه اصلی
-                    </Link>
                     </Button>
+                    </Link>
 
                 </Grid>
                 </Grid>
