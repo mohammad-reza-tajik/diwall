@@ -157,6 +157,8 @@ const Footer: React.FC = () => {
                       md={12}>
                     <Grid item xs={"auto"}>
                         <IconButton>
+                            <a href={"https://telegram.org/"}>
+
                             <Telegram color={"primary"}
                                       sx={{
                                           fontSize: {xs: 30, md: 50},
@@ -164,11 +166,14 @@ const Footer: React.FC = () => {
                                           borderRadius: "50px",
                                           p: {xs: 1, md: 7}
                                       }}/>
+                            </a>
                         </IconButton>
                     </Grid>
 
                     <Grid item xs={"auto"}>
                         <IconButton>
+                            <a href={"https://twitter.com/?lang=en"}>
+
                             <Twitter color={"primary"}
                                      sx={{
                                          fontSize: {xs: 30, md: 50},
@@ -176,10 +181,13 @@ const Footer: React.FC = () => {
                                          borderRadius: "50px",
                                          p: {xs: 1, md: 7}
                                      }}/>
+                            </a>
                         </IconButton>
                     </Grid>
                     <Grid item xs={"auto"}>
                         <IconButton>
+                            <a href={"https://www.instagram.com/"}>
+
                             <Instagram color={"primary"}
                                        sx={{
                                            fontSize: {xs: 30, md: 50},
@@ -187,11 +195,14 @@ const Footer: React.FC = () => {
                                            borderRadius: "50px",
                                            p: {xs: 1, md: 7}
                                        }}/>
+                            </a>
                         </IconButton>
                     </Grid>
 
                     <Grid item xs={"auto"}>
                         <IconButton>
+                            <a href={"https://www.linkedin.com/"}>
+
                             <LinkedIn color={"primary"}
                                       sx={{
                                           fontSize: {xs: 30, md: 50},
@@ -199,6 +210,7 @@ const Footer: React.FC = () => {
                                           borderRadius: "50px",
                                           p: {xs: 1, md: 7}
                                       }}/>
+                            </a>
                         </IconButton>
                     </Grid>
 
