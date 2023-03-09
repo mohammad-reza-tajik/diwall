@@ -48,7 +48,7 @@ const BannerDesktop :React.FC = () => {
                     </Typography>
                 </Grid>
                 <Grid container item justifyContent={"center"}>
-                    <Typography variant={"caption"} fontSize={{xs: 16, lg: 18}} color={"white.main"}
+                    <Typography variant={"caption"} component={"p"} fontSize={{xs: 16, lg: 18}} color={"white.main"}
                                 textAlign={"justify"}>
                         از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                         آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
