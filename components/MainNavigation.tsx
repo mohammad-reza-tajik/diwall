@@ -55,10 +55,10 @@ const MainNavigation : React.FC= () => {
                         <Grid container item direction={"column"} xs={6}>
                             <Grid item>
                                 <Typography fontWeight={700} color={"#666"} fontSize={18}
-                                            variant={"subtitle1"}>021464879</Typography>
+                                            variant={"caption"}>021464879</Typography>
                             </Grid>
                             <Grid item mt={"-.7rem"}>
-                                <Typography color={"#666"} fontSize={12} variant={"subtitle1"}>پشتیبانی
+                                <Typography color={"#666"} fontSize={12} variant={"caption"}>پشتیبانی
                                     مشتریان</Typography>
                             </Grid>
 

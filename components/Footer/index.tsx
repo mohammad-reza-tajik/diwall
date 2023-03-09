@@ -234,7 +234,7 @@ const Footer: React.FC = () => {
                                                                                                      }}>دیوال</Box></Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant={"h5"} color={"#555"}>24 ساعت در هفت روز هفته آماده خدمت رسانی به مشتریان
+                        <Typography variant={"h5"} component={"p"} color={"#555"}>24 ساعت در هفت روز هفته آماده خدمت رسانی به مشتریان
                             هستیم</Typography>
                     </Grid>
 
@@ -243,10 +243,10 @@ const Footer: React.FC = () => {
                     <Grid container item xs={6}>
                         <Grid item xs={12}>
                             <Typography color={"#888"} fontSize={18} fontFamily={"dana-bold"}
-                                        variant={"subtitle1"}>021464879</Typography>
+                                        variant={"caption"}>021464879</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography color={"#888"} fontSize={12} variant={"subtitle1"}>پشتیبانی مشتریان</Typography>
+                            <Typography color={"#888"} fontSize={12} variant={"caption"}>پشتیبانی مشتریان</Typography>
                         </Grid>
 
                     </Grid>
@@ -266,7 +266,7 @@ const Footer: React.FC = () => {
                             component={"span"} sx={{
                             color: "primary.main"
                         }}>دیوال</Box></Typography>
-                    <Typography variant={"h5"} lineHeight={1.5} textAlign={"justify"} display={"block"} color={"#555"}
+                    <Typography variant={"h5"} component={"p"} lineHeight={1.5} textAlign={"justify"} display={"block"} color={"#555"}
                                 fontSize={{xs: 14, md: 16}}>پوستر دیواری الگوی بسیار مناسبی از یک متریال ایده آل و
                         پرکاربرد در
                         دکوراسیون
