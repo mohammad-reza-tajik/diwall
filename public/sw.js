@@ -27,6 +27,8 @@ self.addEventListener("activate",(event)=>{
                 caches.delete(key)
         })
 
+        await self.clients.claim();
+
     })()
     )
 })
