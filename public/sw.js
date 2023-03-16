@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = "static-v3";
+const STATIC_CACHE_NAME = "static-v4";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
 
 self.addEventListener("install", function (event) {
@@ -7,10 +7,19 @@ self.addEventListener("install", function (event) {
             const cache = await caches.open(STATIC_CACHE_NAME);
             await cache.addAll([
                 "/assets/pictures/hero-image-desktop.png",
+                "/assets/pictures/logo.png",
                 "/assets/pictures/hero-image-mobile.jpg",
+                "/assets/icons/bed.svg",
+                "/assets/icons/chair.svg",
+                "/assets/icons/kitchen.svg",
+                "/assets/icons/microphone.svg",
+                "/assets/icons/office.svg",
+                "/assets/icons/sofa.svg",
+                "/assets/icons/child_room.svg",
                 "/",
                 "/assets/fonts/dana-fanum-bold.woff2",
                 "/assets/fonts/dana-fanum-medium.woff2",
+                "/assets/fonts/dana-black.woff2",
             ])
 
         }
