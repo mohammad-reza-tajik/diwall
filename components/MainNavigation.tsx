@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {Fragment} from "react";
+import React, {Fragment} from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";

@@ -60,16 +60,18 @@ function MyApp({Component, pageProps}) {
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-152.png" sizes="152x152"/>
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-192.png" sizes="192x192"/>
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-512.png" sizes="512x512"/>
-                <meta name="theme-color" content="#069f69" />
+                <meta name="theme-color" content="#069f69"/>
 
             </Head>
             <Provider store={store}>
-                <Grid container direction={"row"} justifyContent={"center"} maxWidth={1400} mx={"auto"}>
+                <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
 
                     <Grid item xs={11}>
                         {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Header/>}
                         <Auth>
-                            <Component {...pageProps} />
+                            <main>
+                                <Component {...pageProps} />
+                            </main>
                         </Auth>
                         {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Footer/>}
                     </Grid>

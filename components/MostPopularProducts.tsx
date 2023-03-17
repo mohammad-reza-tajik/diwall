@@ -46,10 +46,10 @@ const MostPopularProducts : React.FC<{ route : string }> = (props) => {
 
     return (
         <Grid container item xs alignItems={"center"} justifyContent={"center"}>
-
             <Grid container item alignItems={"center"} justifyContent={"center"} bgcolor={"primary.main"}
                   p={{xs:15,md:30,lg:50}}>
-                {matchesLG ?
+                {
+                    matchesLG ?
                     <SectionHeading text={"محبوب ترین محصولات"} seeAll={true} route={"/products?sortBy=3"} white/> :
                     <Grid container item xs={2} direction={"column"} alignItems={"flex-start"} gap={50}>
                         <Typography variant={"h3"} lineHeight={1.4} color={"white.main"} fontFamily={"dana-black"}

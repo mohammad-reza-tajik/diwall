@@ -49,28 +49,6 @@ a:checked {
   align-items: center;
 }
 
-.btn {
-  border: none;
-  font-family: inherit;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.7rem;
-}
-.btn:focus {
-  outline: none;
-}
-
-.btn-primary {
-  background-color: #069f69;
-  color: #fff;
-  transition: background-color 0.4s;
-}
-.btn-primary:hover {
-  background-color: #08d089;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
