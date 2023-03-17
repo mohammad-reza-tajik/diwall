@@ -6,7 +6,7 @@ self.addEventListener("install", function (event) {
 
             const cache = await caches.open(STATIC_CACHE_NAME);
             await cache.addAll([
-                "/assets/pictures/banner-desktop.png",
+                "/assets/pictures/banner-desktop.jpg",
                 "/assets/pictures/logo.png",
                 "/assets/pictures/banner-mobile.jpg",
                 "/assets/icons/bed.svg",
