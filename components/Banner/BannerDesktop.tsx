@@ -6,7 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import Image from "next/legacy/image"
 import Link from "next/link"
-import React, {useRef} from "react";
+import React from "react";
 
 const styles = {
     heroImageBox: {
@@ -22,6 +22,7 @@ const styles = {
         py: {xs: 100, md: 100},
         px: {xs: 50, md: 50},
         gap: "4rem",
+        minHeight: 510,
         position: {xs: "absolute", md: "static"},
         zIndex: 20,
 
@@ -32,9 +33,6 @@ const BannerDesktop :React.FC = () => {
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-
-
-    const imageRef = useRef()
 
     return (
 
@@ -62,7 +60,7 @@ const BannerDesktop :React.FC = () => {
                 </Grid>
             </Grid>
             <Grid item xs={12} md={8}>
-                <Box sx={styles.heroImageBox} ref={imageRef}>
+                <Box sx={styles.heroImageBox}>
                     <Image src={"/assets/pictures/hero-image-desktop.png"} placeholder={"blur"} blurDataURL={"/assets/pictures/hero-image-desktop-blur.jpg"} alt={"hero_image_interior_design"}
                            layout="fill" />
                 </Box>
