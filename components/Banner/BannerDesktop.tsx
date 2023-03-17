@@ -61,7 +61,7 @@ const BannerDesktop :React.FC = () => {
             </Grid>
             <Grid item xs={12} md={8}>
                 <Box sx={styles.heroImageBox}>
-                    <Image src={"/assets/pictures/banner-image-desktop.png"} placeholder={"blur"} blurDataURL={"/assets/pictures/banner-image-desktop-blur.jpg"} alt={"hero_image_interior_design"}
+                    <Image src={"/assets/pictures/banner-desktop.jpg"} placeholder={"blur"} blurDataURL={"/assets/pictures/banner-desktop-blur.jpg"} alt={"hero_image_interior_design"}
                            layout="fill" />
                 </Box>
             </Grid>

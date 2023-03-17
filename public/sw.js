@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = "static-v5";
+const STATIC_CACHE_NAME = "static-v6";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
 
 self.addEventListener("install", function (event) {
@@ -6,9 +6,9 @@ self.addEventListener("install", function (event) {
 
             const cache = await caches.open(STATIC_CACHE_NAME);
             await cache.addAll([
-                "/assets/pictures/hero-image-desktop.png",
+                "/assets/pictures/banner-desktop.png",
                 "/assets/pictures/logo.png",
-                "/assets/pictures/hero-image-mobile.jpg",
+                "/assets/pictures/banner-mobile.jpg",
                 "/assets/icons/bed.svg",
                 "/assets/icons/chair.svg",
                 "/assets/icons/kitchen.svg",
