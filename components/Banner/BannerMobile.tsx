@@ -10,7 +10,7 @@ const styles = {
         fontSize: 16,
     },
     bannerTextBox: {
-        backgroundImage: "linear-gradient(rgba(44, 44, 44,.6),rgba(44, 44, 44,.6)) ,  url('/assets/pictures/hero-image-mobile.jpg')",
+        backgroundImage: "linear-gradient(rgba(44, 44, 44,.6),rgba(44, 44, 44,.6)) ,  url('/assets/pictures/banner-image-mobile.jpg')",
         backgroundSize: {xs: "100% 100%", sm: "cover"},
         backgroundAttachment: "fixed",
         py: 100,
