@@ -6,7 +6,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import Image from "next/legacy/image"
 import Link from "next/link"
-import React from "react";
+import React, {useState} from "react";
+import Skeleton from "@mui/material/Skeleton";
 
 const styles = {
     heroImageBox: {
@@ -29,10 +30,16 @@ const styles = {
     }
 }
 
-const BannerDesktop :React.FC = () => {
+const BannerDesktop: React.FC = () => {
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    const imageIsLoaded = () => {
+        setIsLoading(false)
+    }
 
     return (
 
@@ -61,8 +68,11 @@ const BannerDesktop :React.FC = () => {
             </Grid>
             <Grid item xs={12} md={8}>
                 <Box sx={styles.heroImageBox}>
-                    <Image src={"/assets/pictures/banner-desktop.jpg"} placeholder={"blur"} blurDataURL={"/assets/pictures/banner-desktop-blur.jpg"} alt={"hero_image_interior_design"}
-                           layout="fill" />
+                    <Image src={"/assets/pictures/banner-desktop.jpg"} alt={"hero_image_interior_design"}
+                           layout="fill" onLoad={imageIsLoaded}/>
+                    {
+                        isLoading && <Skeleton variant={"rectangular"} animation={"wave"} sx={{width: 1, height: 1}}/>
+                    }
                 </Box>
             </Grid>
         </Grid>
