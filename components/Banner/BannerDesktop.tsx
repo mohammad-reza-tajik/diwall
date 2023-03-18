@@ -6,7 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import Image from "next/legacy/image"
 import Link from "next/link"
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import Skeleton from "@mui/material/Skeleton";
 
 const styles = {
@@ -34,12 +34,11 @@ const BannerDesktop: React.FC = () => {
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+    const [loaded, setLoaded] = useState<boolean>(true);
 
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-
-    const imageIsLoaded = () => {
-        setIsLoading(false)
-    }
+    const imageIsLoaded = useCallback(() => {
+        setLoaded(false)
+    },[])
 
     return (
 
@@ -71,7 +70,7 @@ const BannerDesktop: React.FC = () => {
                     <Image src={"/assets/pictures/banner-desktop.jpg"} alt={"hero_image_interior_design"}
                            layout="fill" onLoad={imageIsLoaded}/>
                     {
-                        isLoading && <Skeleton variant={"rectangular"} animation={"wave"} sx={{width: 1, height: 1}}/>
+                        loaded && <Skeleton variant={"rectangular"} animation={"wave"} sx={{width: 1, height: 1}}/>
                     }
                 </Box>
             </Grid>
