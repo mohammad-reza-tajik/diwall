@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import React from "react";
+import React, {useCallback} from "react";
 import {useTheme} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import List from "@mui/material/List";
@@ -36,11 +36,10 @@ const MenuDrawer: React.FC<Props> = (props) => {
 
     const router = useRouter();
 
-    const menuItemsHandler = (url: string) => {
-
+    const menuItemsHandler = useCallback((url: string) => {
         props.onOpen(false)
         router.push(url)
-    }
+    },[])
 
     return (
             <Grid container item xs={12} width={matchesSM ? "75vw" : "50vw"} sx={{
