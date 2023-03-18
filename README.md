@@ -5,6 +5,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 to see the  live result please visit : 
                                      [https://online-shop-mrt93.vercel.app/](https://online-shop-mrt93.vercel.app/)
-                                     [https://nostalgic-liskov-py7epqacz.iran.liara.run/](https://nostalgic-liskov-py7epqacz.iran.liara.run/)
+                                    
 
 
