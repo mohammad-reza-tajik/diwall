@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
-import MenuDrawer from "../MenuDrawer";
+import MenuDrawer from "./MenuDrawer";
 import Typography from "@mui/material/Typography";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuItem from "@mui/material/MenuItem";
@@ -16,8 +16,8 @@ import React, {Fragment, useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector, userActions} from "../../store";
-import BackDrop from "../BackDrop";
-import SearchDrawer from "../SearchDrawer";
+import BackDrop from "./BackDrop";
+import SearchDrawer from "./SearchDrawer";
 
 
 const styles = {

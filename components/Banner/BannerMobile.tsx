@@ -12,7 +12,6 @@ const styles = {
     bannerTextBox: {
         backgroundImage: "linear-gradient(rgba(44, 44, 44,.6),rgba(44, 44, 44,.6)) ,  url('/assets/pictures/banner-mobile.jpg')",
         backgroundSize: {xs: "100% 100%", sm: "cover"},
-        backgroundAttachment: "fixed",
         py: 100,
         px: {xs: 50, sm: 90},
         gap: 60,
