@@ -101,7 +101,7 @@ const SearchDrawer: React.FC<Props> = (props) => {
         const res = await axios.post(`/api/products`, {search: value})
         setResults(res.data.products.slice(0, 5));
         setIsLoading(false)
-        // console.log(res.data)
+        console.log(res.data)
 
     };
     const optimizedFn = useCallback(debounce(handleChange), []);
@@ -192,7 +192,6 @@ const SearchDrawer: React.FC<Props> = (props) => {
                                         <ListItemButton onClick={() => goToProductHandler(result._id)} sx={{gap:10 , p:5}}>
                                                     <Avatar src={result.image} sx={{width: 50, height: 50}}
                                                             alt={result.title}/>
-
 
                                                     <Typography variant={"h5"} color={"#444"} sx={{ fontSize:{xs:10,sm:14}}}>
                                                         {result.title}

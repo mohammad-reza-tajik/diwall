@@ -178,14 +178,14 @@ const ProductDetails = () => {
 
             <Grid container item xs={12}>
                 <Grid container item xs={12} justifyContent={"center"}>
-                    <Grid container item xs={12} md={5} justifyContent={"center"} height={{xs: 350, md: "auto"}}
+                    <Grid container item xs={12} sm={7} md={5} justifyContent={"center"} maxHeight={500} minHeight={350}
                           position={"relative"}>
                         {
-                            isLoading ? <Skeleton variant="rectangular" animation={"wave"} width={500}
-                                                  sx={{height: {xs: 350, md: 500}}}/>
-                                :
+                            isLoading ?
+                                <Skeleton variant="rectangular" animation={"wave"}
+                                                  sx={{height: 1,width:1}}/> :
                                 <Image src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : "" }.jpg`}
-                                       alt={`${"title" in product ? product.title : ""}`} layout={"fill"}/>
+                                       alt={`${"title" in product ? product.title : ""}`}  layout={"fill"}/>
                         }
                     </Grid>
 
@@ -195,8 +195,7 @@ const ProductDetails = () => {
                                 {
                                     isLoading ?
 
-                                        <Skeleton variant="text" animation={"wave"} sx={{fontSize: {xs: 18, md: 25}}}/>
-                                        :
+                                        <Skeleton variant="text" animation={"wave"} sx={{fontSize: {xs: 18, md: 25}}}/> :
                                         <Typography variant={"h1"} sx={{fontSize: {xs: 18, md: 25}}}
                                                     fontFamily={"dana-bold"}
                                                     color={"#555"}>
