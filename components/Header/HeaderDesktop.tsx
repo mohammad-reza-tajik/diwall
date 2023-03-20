@@ -58,7 +58,7 @@ const styles = {
     closeIcon: {
         color: "primary.main",
         position: "absolute",
-        top:10,
+        top:9,
         left:10,
         zIndex: 50,
         // ml: -15,
