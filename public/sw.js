@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = "static-v11";
+const STATIC_CACHE_NAME = "static-v2";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
 
 self.addEventListener("install", function (event) {
@@ -16,6 +16,7 @@ self.addEventListener("install", function (event) {
                 "/assets/icons/office.svg",
                 "/assets/icons/sofa.svg",
                 "/assets/icons/child_room.svg",
+                "/offline.html",
                 "/",
                 "/assets/fonts/dana-fanum-bold.woff2",
                 "/assets/fonts/dana-fanum-medium.woff2",
@@ -28,27 +29,35 @@ self.addEventListener("install", function (event) {
 
 })
 
-self.addEventListener("activate",(event)=>{
+self.addEventListener("activate", (event) => {
     event.waitUntil((async () => {
-        const keys = await caches.keys();
-        keys.forEach( key => {
-            if (key !== STATIC_CACHE_NAME)
-                caches.delete(key)
-        })
+            const keys = await caches.keys();
+            keys.forEach(key => {
+                if (key !== STATIC_CACHE_NAME)
+                    caches.delete(key)
+            })
 
-        await self.clients.claim();
+            await self.clients.claim();
 
-    })()
+        })()
     )
 })
 
 self.addEventListener("fetch", (event) => {
     event.respondWith((async () => {
-            const res = await caches.match(event.request)
+            let res = await caches.match(event.request)
             if (res)
                 return res
             else
-                return fetch(event.request)
+                try {
+                    res = await fetch(event.request)
+                    return res
+                } catch {
+                    const cache = await caches.open(STATIC_CACHE_NAME)
+                    res = await cache.match("/offline.html")
+                    console.log(res)
+                    return res
+                }
 
         })()
     )

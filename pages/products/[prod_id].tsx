@@ -178,14 +178,16 @@ const ProductDetails = () => {
 
             <Grid container item xs={12}>
                 <Grid container item xs={12} justifyContent={"center"}>
-                    <Grid container item xs={12} sm={7} md={5} justifyContent={"center"} maxHeight={500} minHeight={350}
+                    <Grid container item xs={12} sm={7} md={5} justifyContent={"center"} maxHeight={500} minHeight={250}
                           position={"relative"}>
                         {
                             isLoading ?
                                 <Skeleton variant="rectangular" animation={"wave"}
                                                   sx={{height: 1,width:1}}/> :
-                                <Image src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : "" }.jpg`}
-                                       alt={`${"title" in product ? product.title : ""}`}  layout={"fill"}/>
+
+                                    <Image src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : "" }.jpg`}
+                                       alt={`${"title" in product ? product.title : ""}`} layout={"fill"}/>
+
                         }
                     </Grid>
 
