@@ -189,23 +189,38 @@ const SearchDrawer: React.FC<Props> = (props) => {
                             نتایج جستجو :
                         </Typography>
                         <List>
-                            {results.map((result, index) => {
+                            {results.map((result) => {
+                                if (search.trim() !== "" && results.length !== 0){
+
                                 return (
-                                    <ListItem disablePadding key={index}>
+                                    <ListItem disablePadding key={result._id}>
                                         <ListItemButton onClick={() => goToProductHandler(result._id)} sx={{gap:10 , p:5}}>
                                                     <Avatar src={result.image} sx={{width: 50, height: 50}}
                                                             alt={result.title}/>
-
                                                     <Typography variant={"h5"} color={"#444"} sx={{ fontSize:{xs:10,sm:14}}}>
                                                         {result.title}
                                                     </Typography>
-
-
                                         </ListItemButton>
                                     </ListItem>
+
+
+
                                 )
+                                }
+
+
+
                             })}
-                            {results.length !==0 &&
+                            {results.length === 0 && (
+                                <Grid container justifyContent={"center"} alignItems={"center"}>
+
+                                <Typography variant={"h5"} color={"#666"} fontSize={16}>
+                                نتیجه ای یافت نشد!
+                                </Typography>
+                                </Grid>
+                            )
+                            }
+                            {results.length !==0 && search.trim() !== "" &&
                             <Button variant={"contained"} onClick={submitSearchHandler} sx={{width:1,fontSize:14,mt:15}}>
                                 مشاهده بیشتر
                             </Button>
