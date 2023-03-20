@@ -211,7 +211,7 @@ const SearchDrawer: React.FC<Props> = (props) => {
 
 
                             })}
-                            {results.length === 0 && (
+                            {results.length === 0 && search.trim() !== "" && (
                                 <Grid container justifyContent={"center"} alignItems={"center"}>
 
                                 <Typography variant={"h5"} color={"#666"} fontSize={16}>
