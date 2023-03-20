@@ -14,6 +14,7 @@ import {useRouter} from "next/router";
 import CircularProgress from "@mui/material/CircularProgress";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 
 const styles = {
@@ -136,11 +137,11 @@ const SearchDrawer: React.FC<Props> = (props) => {
         })
         props.onOpen(false)
     }
-    const goToProductHandler = (id) => {
+    const goToProductHandler = useCallback((id) => {
         props.onOpen(false)
         router.push(`/products/${id}`)
 
-    }
+    },[])
     return (
         <Grid container item spacing={10} component={"form"} onSubmit={submitSearchHandler} sx={{
             ...styles.searchDrawer,
@@ -180,7 +181,9 @@ const SearchDrawer: React.FC<Props> = (props) => {
             <Grid item xs={12} height={.7}>
 
                 {isLoading ?
-                    <CircularProgress color={"primary"} size={45}/> :
+                    <Grid container justifyContent={"center"} alignItems={"center"}>
+                    <CircularProgress color={"primary"} size={45}/>
+                    </Grid> :
                     <>
                         <Typography variant={"h4"} component={"p"} color={"#666"} fontSize={18} sx={{mb:20}}>
                             نتایج جستجو :
@@ -202,6 +205,11 @@ const SearchDrawer: React.FC<Props> = (props) => {
                                     </ListItem>
                                 )
                             })}
+                            {results.length !==0 &&
+                            <Button variant={"contained"} onClick={submitSearchHandler} sx={{width:1,fontSize:14,mt:15}}>
+                                مشاهده بیشتر
+                            </Button>
+                            }
                         </List>
                     </>
 
