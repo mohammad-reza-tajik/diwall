@@ -15,6 +15,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Image from "next/image";
 
 
 const styles = {
@@ -195,8 +196,11 @@ const SearchDrawer: React.FC<Props> = (props) => {
                                 return (
                                     <ListItem disablePadding key={result._id}>
                                         <ListItemButton onClick={() => goToProductHandler(result._id)} sx={{gap:10 , p:5}}>
-                                                    <Avatar src={result.image} sx={{width: 50, height: 50}}
-                                                            alt={result.title}/>
+                                            <Image src={`/assets/pictures/products/${result.title ?.replaceAll(" ","-")}.jpg`}
+                                                   alt={result.title}
+                                                   width={50}
+                                                   height={50}
+                                            />
                                                     <Typography variant={"h5"} color={"#444"} sx={{ fontSize:{xs:10,sm:14}}}>
                                                         {result.title}
                                                     </Typography>

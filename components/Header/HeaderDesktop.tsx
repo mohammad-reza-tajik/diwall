@@ -27,13 +27,14 @@ import React, {Fragment, useCallback, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import {useAppDispatch, useAppSelector, userActions} from "../../store";
+import CircularProgress from "@mui/material/CircularProgress";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+
 
 
 const styles = {
-    seeAllButton: {
-        w: 1,
-        justifyContent: "center"
-    },
     searchField: {
         width: {md: 350 , lg: 400},
         height: 1,
@@ -56,8 +57,11 @@ const styles = {
     },
     closeIcon: {
         color: "primary.main",
-        fontSize: "2rem",
-        ml: -15,
+        position: "absolute",
+        top:10,
+        left:10,
+        zIndex: 50,
+        // ml: -15,
 
 
     },
@@ -65,20 +69,22 @@ const styles = {
     searchResultsContainer: {
         position: "absolute",
         top: "100%",
-        right: 20,
-        width: {xs: .8, md: 400},
+        width:  400,
         zIndex: 50,
-        minHeight: 200,
-        maxHeight: 400,
+        p:"1rem",
         border: "1px solid #ccc",
         borderTop: "none",
         bgcolor: "white.main",
         justifyContent: "center",
         alignItems: "center",
-        overflowY: "scroll",
 
 
     },
+    titleInResults : {
+        color:"#444",
+        fontSize:"1.2rem"
+    }
+    ,
 
     signInButton: {
 
@@ -95,6 +101,7 @@ const styles = {
         }
     },
 
+
 }
 
 const HeaderDesktop: React.FC = () => {
@@ -104,8 +111,10 @@ const HeaderDesktop: React.FC = () => {
     const user = useAppSelector(state => state)
     const dispatch = useAppDispatch()
 
-    const [search, setSearch] = useState("")
-    const [isWrong, setIsWrong] = useState(false)
+    const [search, setSearch] = useState<string>("")
+    const [isWrong, setIsWrong] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [results, setResults] = useState<Array<any>>([])
 
     //*** menu logic ***//
 
@@ -115,13 +124,6 @@ const HeaderDesktop: React.FC = () => {
         setAnchorEl(null);
     }
 
-    //*** search form logic ***//
-
-    const searchChangeHandler = (e) => {
-        setSearch(e.target.value)
-        // if (e.target.value === "")
-
-    }
 
     const goToFavorites = async (_) => {
         if (user.username) {
@@ -144,7 +146,7 @@ const HeaderDesktop: React.FC = () => {
 
     }
 
-    const submitSearchHandler = async (e) => {
+    const submitSearchHandler = (e) => {
         e.preventDefault()
         if (search.trim() === "") {
             setIsWrong(true)
@@ -168,26 +170,61 @@ const HeaderDesktop: React.FC = () => {
     }
 
 
-    const clearSearchHandler = useCallback(() => {
+    const closeSearchHandler = useCallback(() => {
         setSearch("")
+
     }, [])
 
     const closeButton = <InputAdornment position="end">
-        <IconButton onClick={clearSearchHandler}>
-            <Close sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}/>
-        </IconButton>
+
     </InputAdornment>
 
-    const searchIconFix = {
-        mr : search.trim() !== "" && -15,
-        ml: search.trim() !== "" && 10,
-        "& *": {
-            mr: search.trim() !== "" && -15,
-            ml: search.trim() !== "" && 10,
+    const searchChangeHandler = (e) => {
+        setSearch(e.target.value)
+        optimizedFn(e.target.value)
+        if (e.target.value.trim() === "") {
+            setIsWrong(true)
+            setTimeout(() => {
+                setIsWrong(false)
+            }, 5000)
 
+        } else {
+            setIsWrong(false)
         }
-
     }
+
+    /*** start of debouncing ***/
+    const debounce = (func) => {
+        let timer;
+        return function (...args) {
+            const context = this;
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => {
+                timer = null;
+                func.apply(context, args);
+            }, 500);
+        };
+    };
+
+
+    const handleChange = async (value) => {
+        setIsLoading(true)
+        const res = await axios.post(`/api/products`, {search: value})
+        setResults(res.data.products.slice(0, 5));
+        setIsLoading(false)
+        console.log(res.data)
+
+    };
+    const optimizedFn = useCallback(debounce(handleChange), []);
+
+    /*** end of debouncing ***/
+
+
+
+    const goToProductHandler = useCallback((id) => {
+        router.push(`/products/${id}`)
+
+    },[])
 
     return (
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={30} xs={12}>
@@ -205,10 +242,9 @@ const HeaderDesktop: React.FC = () => {
                       onSubmit={submitSearchHandler}
 
                 >
-                    <Grid item xs={12}>
+                    <Grid item xs={12} position={"relative"}>
                         <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom-end"}
                                  arrow >
-
                             <TextField
                                 error={isWrong}
                                 fullWidth
@@ -222,14 +258,76 @@ const HeaderDesktop: React.FC = () => {
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <IconButton type={"submit"}>
-                                                <Search sx={{...styles.searchIcon,...searchIconFix}}/>
+                                                <Search sx={{...styles.searchIcon}}/>
                                             </IconButton>
                                         </InputAdornment>
                                     ),
-                                    endAdornment: (search.trim() !== "" && closeButton)
+                                    // endAdornment: (search.trim() !== "" && closeButton)
                                 }}
                             />
                         </Tooltip>
+                        <IconButton sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}} onClick={closeSearchHandler}>
+                            <Close color={"primary"} fontSize={"large"} />
+                        </IconButton>
+
+                        { search.trim() !== "" &&
+
+                        <Grid item xs={12} sx={styles.searchResultsContainer}>
+
+                            {isLoading ?
+                                <Grid container justifyContent={"center"} alignItems={"center"}>
+                                    <CircularProgress color={"primary"} size={45}/>
+                                </Grid> :
+                                <>
+                                  <List>
+                                        {results.map((result) => {
+                                            if (search.trim() !== "" && results.length !== 0){
+
+                                                return (
+                                                    <ListItem disablePadding key={result._id}>
+                                                        <ListItemButton onClick={() => goToProductHandler(result._id)} sx={{gap:10 , p:5}}>
+                                                            <Image src={`/assets/pictures/products/${result.title ?.replaceAll(" ","-")}.jpg`}
+                                                                   alt={result.title}
+                                                                   width={50}
+                                                                   height={50}
+                                                            />
+                                                            <p style={styles.titleInResults}>
+                                                                {result.title}
+                                                            </p>
+
+                                                        </ListItemButton>
+                                                    </ListItem>
+
+
+
+                                                )
+                                            }
+
+
+
+                                        })}
+                                        {results.length === 0 && search.trim() !== "" && (
+                                            <Grid container justifyContent={"center"} alignItems={"center"}>
+
+                                                <Typography variant={"h5"} color={"#666"} fontSize={16}>
+                                                    نتیجه ای یافت نشد!
+                                                </Typography>
+                                            </Grid>
+                                        )
+                                        }
+                                        {results.length !==0 && search.trim() !== "" &&
+                                            <Button variant={"contained"} onClick={submitSearchHandler} sx={{width:1,fontSize:14,mt:15}}>
+                                                مشاهده بیشتر
+                                            </Button>
+                                        }
+                                    </List>
+                                </>
+
+                            }
+
+
+                        </Grid>
+                        }
                     </Grid>
                 </Grid>
 

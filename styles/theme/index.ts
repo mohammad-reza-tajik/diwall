@@ -28,15 +28,13 @@ const theme  = createTheme({
             secondary: "#000",
             primary: "#1d1d1e"
         },
+        background:{
+            paper:"#f5f5f5"
+        }
     },
 
     typography: {
         fontFamily: "inherit",
-
-
-
-
-
     }
     ,
     components: {
@@ -44,11 +42,6 @@ const theme  = createTheme({
 
             defaultProps: {
                 disableElevation: true
-            }
-        },
-        MuiSwitch: {
-            defaultProps: {
-                disableRipple: true
             }
         },
         MuiInputBase: {
