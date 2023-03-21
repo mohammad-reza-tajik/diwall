@@ -8,10 +8,9 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
-import TabPanel from '@mui/lab/TabPanel';
 import {Fragment, useEffect, useState} from "react";
-import {TabContext} from "@mui/lab";
-import CartItem from "../../components/CartItem"
+import CartItem from "../../components/CartItem";
+import TabPanel from "../../components/TabPanel";
 import Product from "../../components/Product";
 import axios from "axios";
 import Head from "next/head";
@@ -43,7 +42,7 @@ const Profile = () => {
 
     const [populatedFavoriteList, setPopulatedFavoriteList] = useState<any>([])
     const [populatedCart, setPopulatedCart] = useState<any>([])
-    const [tab, setTab] = useState<string>("1");
+    const [tab, setTab] = useState<number>(1);
 
 
     const tabChangeHandler = (_, newTab) => {
@@ -57,7 +56,7 @@ const Profile = () => {
 
     useEffect(()=> {
         if (queryTab) {
-            setTab(queryTab.toString())
+            setTab(+queryTab)
         }
 
     },[queryTab])
@@ -125,13 +124,10 @@ const Profile = () => {
 
 
             <Grid container item xs={12} minHeight={400} alignItems={"flex-start"}>
-                <TabContext value={tab}>
                     <Grid container item xs={12} md={matches1040 ? 3 : 2} mt={10}
                           borderLeft={{xs: "none", md: "5px solid #069f69"}}>
                         <Tabs
-
                             // the following lines are for solving strange behavior in tabs indicator in phone for cart tab
-
                             TabIndicatorProps={{
                                 sx: {
                                     top: "85%",
@@ -139,9 +135,9 @@ const Profile = () => {
                                 }
                             }} onChange={tabChangeHandler} value={tab}
                             orientation={matchesMD ? "horizontal" : "vertical"}>
-                            <Tab label="اطلاعات کاربر" value="1" sx={styles.tab}/>
-                            <Tab label="لیست علاقمندی ها" value="2" sx={styles.tab}/>
-                            <Tab label="سبد خرید" value="3" sx={styles.tab}/>
+                            <Tab label="اطلاعات کاربر" value={1} sx={styles.tab}/>
+                            <Tab label="لیست علاقمندی ها" value={2} sx={styles.tab}/>
+                            <Tab label="سبد خرید" value={3} sx={styles.tab}/>
                         </Tabs>
 
                     </Grid>
@@ -150,7 +146,7 @@ const Profile = () => {
 
                         {/*  Profile Panel Start */}
 
-                        <TabPanel value="1" sx={{width: 1}}>
+                        <TabPanel tab={tab} index={1}>
                             <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40} position={"relative"}>
                                 <Button variant={"outlined"}
                                         sx={{fontSize: {xs: 12, md: 16}, position: "absolute", top: 10, left: 10}}>تغییر
@@ -210,7 +206,7 @@ const Profile = () => {
 
 
                         {/*  Favorite List Panel Start */}
-                        <TabPanel value="2" sx={{width: 1}}>
+                        <TabPanel tab={tab} index={2}>
                             <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10}>
 
                                 {isLoading ?
@@ -237,7 +233,7 @@ const Profile = () => {
                         {/*  Favorite List Panel End */}
 
                         {/*  Cart Panel Start */}
-                        <TabPanel value="3" sx={{width: 1}}>
+                        <TabPanel tab={tab} index={3}>
                             <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10}>
 
                                 {isLoading ?
@@ -249,7 +245,7 @@ const Profile = () => {
                                         {user?.username === null || populatedCart.length === 0 ?
                                             <Grid container item xs minHeight={300} justifyContent={"center"}
                                                   alignItems={"center"}>
-                                                <Typography fontSize={16} variant={"body1"} color={"#333"}
+                                                <Typography fontSize={16} variant={"body1"} component={"p"} color={"#333"}
                                                             fontFamily={"dana-bold"}>سبد خرید شما خالی است
                                                     ! </Typography>
                                             </Grid> :
@@ -264,8 +260,6 @@ const Profile = () => {
                         {/*  Cart Panel End */}
 
                     </Grid>
-
-                </TabContext>
 
 
             </Grid>
