@@ -2,16 +2,22 @@
   font-family: "dana-medium";
   src: url("/assets/fonts/dana-fanum-medium.woff2") format("woff2");
   font-style: normal;
+  font-display: fallback;
+
 }
 
 @font-face {
   font-family: "dana-bold";
   src: url("/assets/fonts/dana-fanum-bold.woff2") format("woff2");
   font-style: normal;
+  font-display: fallback;
+
 }
 
 @font-face {
   font-family: "dana-black";
   src: url("/assets/fonts/dana-black.woff2") format("woff2");
   font-style: normal;
+  font-display: fallback;
+
 }
