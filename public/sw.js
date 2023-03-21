@@ -61,7 +61,7 @@ self.addEventListener("fetch", (event) => {
                 } catch {
                     const cache = await caches.open(STATIC_CACHE_NAME)
                     res = await cache.match("/offline.html")
-                    console.log(res)
+                    // console.log(res)
                     return res
                 }
 
