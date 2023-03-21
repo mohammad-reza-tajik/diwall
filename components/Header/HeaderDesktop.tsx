@@ -33,13 +33,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 
 
-
 const styles = {
     searchField: {
-        width: {md: 350 , lg: 400},
+        width: {md: 350, lg: 400},
         height: 1,
         fontSize: {xs: 4, sm: "2rem"},
-        bgcolor:"#fff",
+        bgcolor: "#fff",
         '& .MuiInput-input': {
             borderRadius: 30
 
@@ -58,20 +57,17 @@ const styles = {
     closeIcon: {
         color: "primary.main",
         position: "absolute",
-        top:9,
-        left:10,
+        top: 9,
+        left: 10,
         zIndex: 50,
-        // ml: -15,
-
-
     },
 
     searchResultsContainer: {
         position: "absolute",
         top: "100%",
-        width:  400,
+        width: 400,
         zIndex: 50,
-        p:"1rem",
+        p: "1rem",
         border: "1px solid #ccc",
         borderTop: "none",
         bgcolor: "white.main",
@@ -80,9 +76,9 @@ const styles = {
 
 
     },
-    titleInResults : {
-        color:"#444",
-        fontSize:"1.2rem"
+    titleInResults: {
+        color: "#444",
+        fontSize: "1.2rem"
     }
     ,
 
@@ -150,7 +146,9 @@ const HeaderDesktop: React.FC = () => {
         e.preventDefault()
         if (search.trim() === "") {
             setIsWrong(true)
-            setTimeout(()=> {setIsWrong(false)},5000)
+            setTimeout(() => {
+                setIsWrong(false)
+            }, 5000)
             return
         }
         setIsWrong(false)
@@ -202,7 +200,7 @@ const HeaderDesktop: React.FC = () => {
             timer = setTimeout(() => {
                 timer = null;
                 func.apply(context, args);
-            }, 500);
+            }, 800);
         };
     };
 
@@ -212,7 +210,7 @@ const HeaderDesktop: React.FC = () => {
         const res = await axios.post(`/api/products`, {search: value})
         setResults(res.data.products.slice(0, 5));
         setIsLoading(false)
-        console.log(res.data)
+        // console.log(res.data)
 
     };
     const optimizedFn = useCallback(debounce(handleChange), []);
@@ -224,7 +222,7 @@ const HeaderDesktop: React.FC = () => {
     const goToProductHandler = useCallback((id) => {
         router.push(`/products/${id}`)
 
-    },[])
+    }, [])
 
     return (
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={30} xs={12}>
@@ -232,19 +230,19 @@ const HeaderDesktop: React.FC = () => {
                   py={20}>
                 <Grid container item md={"auto"} lg={1} pl={10} minHeight={100} maxWidth={100}>
                     <Link href={"/"}>
-                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={100} height={100}
-                                  />
+                        <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={100} height={100}
+                        />
                     </Link>
                 </Grid>
                 <Grid position={"relative"} container direction={"column"} item
                       justifyContent={"center"}
-                      alignItems={"flex-start"}  md={true} lg={6} xl={7} pr={20} component={"form"}
+                      alignItems={"flex-start"} md={true} lg={6} xl={7} pr={20} component={"form"}
                       onSubmit={submitSearchHandler}
 
                 >
                     <Grid item xs={12} position={"relative"}>
                         <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom-end"}
-                                 arrow >
+                                 arrow>
                             <TextField
                                 error={isWrong}
                                 fullWidth
@@ -266,67 +264,70 @@ const HeaderDesktop: React.FC = () => {
                                 }}
                             />
                         </Tooltip>
-                        <IconButton sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}} onClick={closeSearchHandler}>
-                            <Close color={"primary"} fontSize={"large"} />
+                        <IconButton sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}
+                                    onClick={closeSearchHandler}>
+                            <Close color={"primary"} fontSize={"large"}/>
                         </IconButton>
 
-                        { search.trim() !== "" &&
+                        {search.trim() !== "" &&
 
-                        <Grid item xs={12} sx={styles.searchResultsContainer}>
+                            <Grid item xs={12} sx={styles.searchResultsContainer}>
 
-                            {isLoading ?
-                                <Grid container justifyContent={"center"} alignItems={"center"}>
-                                    <CircularProgress color={"primary"} size={45}/>
-                                </Grid> :
-                                <>
-                                  <List>
-                                        {results.map((result) => {
-                                            if (search.trim() !== "" && results.length !== 0){
+                                {isLoading ?
+                                    <Grid container justifyContent={"center"} alignItems={"center"}>
+                                        <CircularProgress color={"primary"} size={45}/>
+                                    </Grid> :
+                                    <>
+                                        <List>
+                                            {results.map((result) => {
+                                                if (search.trim() !== "" && results.length !== 0) {
 
-                                                return (
-                                                    <ListItem disablePadding key={result._id}>
-                                                        <ListItemButton onClick={() => goToProductHandler(result._id)} sx={{gap:10 , p:5}}>
-                                                            <Image src={`/assets/pictures/products/${result.title ?.replaceAll(" ","-")}.jpg`}
-                                                                   alt={result.title}
-                                                                   width={50}
-                                                                   height={50}
-                                                            />
-                                                            <p style={styles.titleInResults}>
-                                                                {result.title}
-                                                            </p>
+                                                    return (
+                                                        <ListItem disablePadding key={result._id}>
+                                                            <ListItemButton
+                                                                onClick={() => goToProductHandler(result._id)}
+                                                                sx={{gap: 10, p: 5}}>
+                                                                <Image
+                                                                    src={`/assets/pictures/products/${result.title?.replaceAll(" ", "-")}.jpg`}
+                                                                    alt={result.title}
+                                                                    width={50}
+                                                                    height={50}
+                                                                />
+                                                                <p style={styles.titleInResults}>
+                                                                    {result.title}
+                                                                </p>
 
-                                                        </ListItemButton>
-                                                    </ListItem>
+                                                            </ListItemButton>
+                                                        </ListItem>
 
 
+                                                    )
+                                                }
 
-                                                )
+
+                                            })}
+                                            {results.length === 0 && search.trim() !== "" && (
+                                                <Grid container justifyContent={"center"} alignItems={"center"}>
+
+                                                    <Typography variant={"h5"} color={"#666"} fontSize={16}>
+                                                        نتیجه ای یافت نشد!
+                                                    </Typography>
+                                                </Grid>
+                                            )
                                             }
+                                            {results.length !== 0 && search.trim() !== "" &&
+                                                <Button variant={"contained"} onClick={submitSearchHandler}
+                                                        sx={{width: 1, fontSize: 14, mt: 15}}>
+                                                    مشاهده بیشتر
+                                                </Button>
+                                            }
+                                        </List>
+                                    </>
+
+                                }
 
 
-
-                                        })}
-                                        {results.length === 0 && search.trim() !== "" && (
-                                            <Grid container justifyContent={"center"} alignItems={"center"}>
-
-                                                <Typography variant={"h5"} color={"#666"} fontSize={16}>
-                                                    نتیجه ای یافت نشد!
-                                                </Typography>
-                                            </Grid>
-                                        )
-                                        }
-                                        {results.length !==0 && search.trim() !== "" &&
-                                            <Button variant={"contained"} onClick={submitSearchHandler} sx={{width:1,fontSize:14,mt:15}}>
-                                                مشاهده بیشتر
-                                            </Button>
-                                        }
-                                    </List>
-                                </>
-
-                            }
-
-
-                        </Grid>
+                            </Grid>
                         }
                     </Grid>
                 </Grid>
@@ -344,7 +345,7 @@ const HeaderDesktop: React.FC = () => {
                                     border: "2px solid #11AE77",
                                     borderRadius: "50px",
                                     p: ".7rem",
-                                    bgcolor:"#fff"
+                                    bgcolor: "#fff"
                                 }}/>
                             </IconButton>
                         </Badge>
@@ -359,7 +360,7 @@ const HeaderDesktop: React.FC = () => {
                                     border: "2px solid #11AE77",
                                     borderRadius: "50px",
                                     p: ".7rem",
-                                    bgcolor:"#fff"
+                                    bgcolor: "#fff"
                                 }}/>
                             </IconButton>
                         </Badge>

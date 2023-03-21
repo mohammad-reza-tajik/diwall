@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = "static-v7";
+const STATIC_CACHE_NAME = "static-v8";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
 
 self.addEventListener("install", function (event) {
@@ -12,11 +12,13 @@ self.addEventListener("install", function (event) {
                 "/assets/icons/bed.svg",
                 "/assets/icons/chair.svg",
                 "/assets/icons/kitchen.svg",
+                "/favicon.ico",
                 "/assets/icons/microphone.svg",
                 "/assets/icons/office.svg",
                 "/assets/icons/sofa.svg",
                 "/assets/icons/child_room.svg",
                 "/offline.html",
+                "/manifest.json",
                 "/",
                 "/assets/fonts/dana-fanum-bold.woff2",
                 "/assets/fonts/dana-fanum-medium.woff2",
@@ -25,6 +27,7 @@ self.addEventListener("install", function (event) {
 
         }
     )())
+    self.skipWaiting();
 
 
 })
@@ -51,6 +54,9 @@ self.addEventListener("fetch", (event) => {
             else
                 try {
                     res = await fetch(event.request)
+                    // const dynamicCache = await caches.open(DYNAMIC_CACHE_NAME);
+                    // dynamicCache.put(event.request.url,res)
+                    // console.log(event.request.url)
                     return res
                 } catch {
                     const cache = await caches.open(STATIC_CACHE_NAME)

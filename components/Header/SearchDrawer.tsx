@@ -12,7 +12,6 @@ import React, {useState, useCallback} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import CircularProgress from "@mui/material/CircularProgress";
-import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Image from "next/image";
@@ -67,7 +66,7 @@ const SearchDrawer: React.FC<Props> = (props) => {
     const router = useRouter()
     const [search, setSearch] = useState<string>("")
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [results, setResults] = useState<Array<any>>([])
+    const [results, setResults] = useState<any[]>([])
     const [isWrong, setIsWrong] = useState(false)
 
     const changeHandler = (e) => {
@@ -93,7 +92,7 @@ const SearchDrawer: React.FC<Props> = (props) => {
             timer = setTimeout(() => {
                 timer = null;
                 func.apply(context, args);
-            }, 500);
+            }, 800);
         };
     };
 
@@ -121,7 +120,7 @@ const SearchDrawer: React.FC<Props> = (props) => {
             return
         }
         setIsWrong(false)
-        axios.post(`/api/products`, {search: search}).then(_ => {
+        axios.post(`/api/products`, {search}).then(_ => {
             router.push(
                 {
                     pathname: `/products`,
@@ -142,7 +141,7 @@ const SearchDrawer: React.FC<Props> = (props) => {
         props.onOpen(false)
         router.push(`/products/${id}`)
 
-    },[])
+    }, [])
     return (
         <Grid container item spacing={10} component={"form"} onSubmit={submitSearchHandler} sx={{
             ...styles.searchDrawer,
@@ -183,51 +182,53 @@ const SearchDrawer: React.FC<Props> = (props) => {
 
                 {isLoading ?
                     <Grid container justifyContent={"center"} alignItems={"center"}>
-                    <CircularProgress color={"primary"} size={45}/>
+                        <CircularProgress color={"primary"} size={45}/>
                     </Grid> :
                     <>
-                        <Typography variant={"h4"} component={"p"} color={"#666"} fontSize={18} sx={{mb:20}}>
+                        <Typography variant={"h4"} component={"p"} color={"#666"} fontSize={18} sx={{mb: 20}}>
                             نتایج جستجو :
                         </Typography>
                         <List>
                             {results.map((result) => {
-                                if (search.trim() !== "" && results.length !== 0){
+                                if (search.trim() !== "" && results.length !== 0) {
 
-                                return (
-                                    <ListItem disablePadding key={result._id}>
-                                        <ListItemButton onClick={() => goToProductHandler(result._id)} sx={{gap:10 , p:5}}>
-                                            <Image src={`/assets/pictures/products/${result.title ?.replaceAll(" ","-")}.jpg`}
-                                                   alt={result.title}
-                                                   width={50}
-                                                   height={50}
-                                            />
-                                                    <Typography variant={"h5"} color={"#444"} sx={{ fontSize:{xs:10,sm:14}}}>
-                                                        {result.title}
-                                                    </Typography>
-                                        </ListItemButton>
-                                    </ListItem>
+                                    return (
+                                        <ListItem disablePadding key={result._id}>
+                                            <ListItemButton onClick={() => goToProductHandler(result._id)}
+                                                            sx={{gap: 10, p: 5}}>
+                                                <Image
+                                                    src={`/assets/pictures/products/${result.title?.replaceAll(" ", "-")}.jpg`}
+                                                    alt={result.title}
+                                                    width={50}
+                                                    height={50}
+                                                />
+                                                <Typography variant={"h5"} color={"#444"}
+                                                            sx={{fontSize: {xs: 10, sm: 14}}}>
+                                                    {result.title}
+                                                </Typography>
+                                            </ListItemButton>
+                                        </ListItem>
 
 
-
-                                )
+                                    )
                                 }
 
 
-
                             })}
-                            {results.length === 0 && search.trim() !== "" && (
+                            {results.length === 0 && search.trim() !== "" && !isLoading && (
                                 <Grid container justifyContent={"center"} alignItems={"center"}>
 
-                                <Typography variant={"h5"} color={"#666"} fontSize={16}>
-                                نتیجه ای یافت نشد!
-                                </Typography>
+                                    <Typography variant={"h5"} color={"#666"} fontSize={16}>
+                                        نتیجه ای یافت نشد!
+                                    </Typography>
                                 </Grid>
                             )
                             }
-                            {results.length !==0 && search.trim() !== "" &&
-                            <Button variant={"contained"} onClick={submitSearchHandler} sx={{width:1,fontSize:14,mt:15}}>
-                                مشاهده بیشتر
-                            </Button>
+                            {results.length !== 0 && search.trim() !== "" &&
+                                <Button variant={"contained"} onClick={submitSearchHandler}
+                                        sx={{width: 1, fontSize: 14, mt: 15}}>
+                                    مشاهده بیشتر
+                                </Button>
                             }
                         </List>
                     </>

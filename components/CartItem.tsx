@@ -13,6 +13,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import {useAppDispatch, useAppSelector, userActions} from "../store";
+import Image from "next/image";
 
 interface Props {
     _id: string;
@@ -49,8 +50,6 @@ const CartItem: React.FC<Props> = (props) => {
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
-
 
     return (
         <Grid pb={10} borderBottom={"1px solid rgba(33,33,33,.1)"} container item xs={12} justifyContent={"flex-start"}
@@ -59,11 +58,11 @@ const CartItem: React.FC<Props> = (props) => {
                 <Grid className={"pointer"} container item xs={12} md={true} lg={6} alignItems={"center"}
                       gap={matchesMD ? 10 : 20} onClick={() => router.push("/products/" + props._id.toString())}>
                     <Grid item xs={"auto"}>
-                        <Avatar src={props.image} sx={{width: matchesLG ? 50 : 90, height: matchesLG ? 50 : 90}}
+                        <Image src={`/assets/pictures/products/${props.title?.replaceAll(" ", "-")}.jpg`} width={50} height={50}
                                 alt={props.title}/>
                     </Grid>
                     <Grid item xs>
-                        <Typography variant={"h4"} fontSize={{xs: 14, lg: 18}} color={"#666"}>
+                        <Typography variant={"h4"} fontSize={{xs: 14, lg: 16}} color={"#666"}>
                             {props.title}
                         </Typography>
                     </Grid>
