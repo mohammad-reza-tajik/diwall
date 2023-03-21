@@ -8,7 +8,7 @@ interface TabPanelProps {
     tab: number;
 }
 const TabPanel = (props: TabPanelProps)  => {
-    const { children, tab, index, ...other } = props;
+    const { children, tab, index } = props;
 
     return (
         <div
@@ -16,14 +16,15 @@ const TabPanel = (props: TabPanelProps)  => {
             hidden={tab !== index}
             id={`simple-tabpanel-${index}`}
             aria-labelledby={`simple-tab-${index}`}
-            {...other}
+
         >
-            {tab === index && (
+            {
+                tab === index && (
                 <>
                     {children}
-
                 </>
-            )}
+            )
+            }
         </div>
     );
 }

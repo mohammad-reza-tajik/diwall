@@ -12,20 +12,17 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 
-
 import Image from "next/legacy/image"
 import {Fragment, useEffect, useState} from "react";
 import axios from "axios";
-import {useAppSelector,useAppDispatch,userActions} from "../../store";
+import {useAppSelector, useAppDispatch, userActions} from "../../store";
 import Features from "../../components/Features";
-import RelatedProducts from "../../components/RelatedProducts";
-import SectionHeading from "../../components/SectionHeading";
 import Favorite from "@mui/icons-material/Favorite";
-import  FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import  ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import Head from "next/head";
 import Info from "../../components/DetailPage/Info";
-
+import Divider from "@mui/material/Divider";
 
 
 const styles = {
@@ -55,12 +52,9 @@ const styles = {
 }
 
 
-
-
-
 const ProductDetails = () => {
 
-    const [product, setProduct] = useState<ProductType | {} >({})
+    const [product, setProduct] = useState<ProductType | {}>({})
     const [relatedProducts, setRelatedProducts] = useState([])
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToFavoritesLoading, setAddToFavoritesLoading] = useState(false)
@@ -135,33 +129,32 @@ const ProductDetails = () => {
     const addToFavoritesHandler = () => {
         if (user?.username) {
             setAddToFavoritesLoading(true)
-            if (isFavorite){
+            if (isFavorite) {
                 axios.put("/api/remove-from-favorites", {
                     productId: router.query.prod_id,
                     userId: user.userId,
                     token: user.token
-                }).then( _ => {
+                }).then(_ => {
                         setAddToFavoritesLoading(false)
-                    if ("_id" in product) {
-                        dispatch(userActions.removeFromFavorites(product._id))
-                    }
+                        if ("_id" in product) {
+                            dispatch(userActions.removeFromFavorites(product._id))
+                        }
                     }
                 ).catch(e => console.log(e))
 
-            }
-            else {
+            } else {
 
-            axios.put("/api/add-to-favorites", {
-                productId: router.query.prod_id,
-                userId: user.userId,
-                token: user.token
-            }).then( _ => {
-                    setAddToFavoritesLoading(false)
-                if ("_id" in product) {
-                    dispatch(userActions.addToFavorites(product._id))
-                }
-                }
-            ).catch(e => console.log(e))
+                axios.put("/api/add-to-favorites", {
+                    productId: router.query.prod_id,
+                    userId: user.userId,
+                    token: user.token
+                }).then(_ => {
+                        setAddToFavoritesLoading(false)
+                        if ("_id" in product) {
+                            dispatch(userActions.addToFavorites(product._id))
+                        }
+                    }
+                ).catch(e => console.log(e))
             }
         } else
             router.push("/sign-in")
@@ -185,10 +178,11 @@ const ProductDetails = () => {
                         {
                             isLoading ?
                                 <Skeleton variant="rectangular" animation={"wave"}
-                                                  sx={{height: 1,width:1}}/> :
+                                          sx={{height: 1, width: 1}}/> :
 
-                                    <Image src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : "" }.jpg`}
-                                       alt={`${"title" in product ? product.title : ""}`} layout={"fill"}/>
+                                <Image
+                                    src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : ""}.jpg`}
+                                    alt={`${"title" in product ? product.title : ""}`} layout={"fill"}/>
 
                         }
                     </Grid>
@@ -199,17 +193,19 @@ const ProductDetails = () => {
                                 {
                                     isLoading ?
 
-                                        <Skeleton variant="text" animation={"wave"} sx={{fontSize: {xs: 18, md: 25}}}/> :
+                                        <Skeleton variant="text" animation={"wave"}
+                                                  sx={{fontSize: {xs: 18, md: 25}}}/> :
                                         <Typography variant={"h1"} sx={{fontSize: {xs: 18, md: 25}}}
                                                     fontFamily={"dana-bold"}
                                                     color={"#555"}>
-                                            {"title" in product ? product.title :""}
+                                            {"title" in product ? product.title : ""}
                                         </Typography>
                                 }
                             </Grid>
                             <Grid container item xs={4} justifyContent={"flex-end"} alignItems={"center"}
                                   sx={{display: {xs: "none", md: "flex"}}}>
-                                <Typography variant={"h3"} sx={{fontSize: {xs: 14, md: 16}}} borderRadius={20} px={20} component={"div"}
+                                <Typography variant={"h3"} sx={{fontSize: {xs: 14, md: 16}}} borderRadius={20} px={20}
+                                            component={"div"}
                                             py={10}
                                             color={"white.main"}
                                             bgcolor={isLoading ? "transparent" : "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
@@ -310,13 +306,13 @@ const ProductDetails = () => {
                                             borderRadius: 20,
                                             p: {xs: 2, md: 3,},
                                             color: "#fff"
-                                        }}/> : isFavorite ? <Favorite  sx={{
+                                        }}/> : isFavorite ? <Favorite sx={{
                                                 fontSize: {xs: 30, sm: 40},
                                                 borderRadius: 20,
                                                 p: {xs: 2, md: 3,},
                                                 color: "fff"
                                             }}/> :
-                                            <FavoriteBorder  sx={{
+                                            <FavoriteBorder sx={{
                                                 fontSize: {xs: 30, sm: 40,},
                                                 borderRadius: 20,
                                                 p: {xs: 2, md: 3,},
@@ -330,7 +326,8 @@ const ProductDetails = () => {
                                         onClick={addToCartHandler}
                                         variant={"contained"}
                                         color={isInCart ? "error" : "primary"}
-                                        startIcon={addToCartLoading ? <CircularProgress sx={{color:"#fff"}} size={25}/> :
+                                        startIcon={addToCartLoading ?
+                                            <CircularProgress sx={{color: "#fff"}} size={25}/> :
                                             <ShoppingBagOutlined sx={{fontSize: 15, ml: 5,}}/>
                                         }
                                         sx={styles.addToCartButton}
@@ -342,29 +339,13 @@ const ProductDetails = () => {
                         </Grid>
 
                     </Grid>
+
                 </Grid>
 
-                <Grid item xs={12} my={30}>
-                    <Features />
-                </Grid>
-
-                <Grid item xs={12}>
-                    <SectionHeading text={"محصولات مشابه"}/>
-                </Grid>
-
-                {isLoading ?
-                    <Grid container item xs justifyContent={"center"}>
-                        <CircularProgress color={"primary"} size={45}/>
-                    </Grid>
-
-                    :
-                    <Grid item xs={12}>
-
-                        <Info />
-                        <RelatedProducts products={relatedProducts}/>
-                    </Grid>
-                }
-
+                <Features/>
+                <Divider sx={{width:1,mt:30}} />
+                {/* @ts-ignore */}
+                <Info isLoading={isLoading} products={relatedProducts}/>
 
             </Grid>
         </Fragment>
