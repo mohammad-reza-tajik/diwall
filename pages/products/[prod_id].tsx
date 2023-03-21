@@ -24,6 +24,8 @@ import Favorite from "@mui/icons-material/Favorite";
 import  FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import  ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import Head from "next/head";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 
 const styles = {
@@ -357,6 +359,7 @@ const ProductDetails = () => {
 
                     :
                     <Grid item xs={12}>
+
                         <RelatedProducts products={relatedProducts}/>
                     </Grid>
                 }

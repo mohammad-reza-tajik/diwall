@@ -35,6 +35,22 @@ const productSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
+    comments: [{
+        content:{
+            type:"String",
+            required:true
+        },
+        date:{
+            type:mongoose.Schema.Types.Date,
+            required:true
+        },
+        author:{
+            type:mongoose.Types.ObjectId,
+        ref:"User"
+
+        }
+
+    }]
 
 
 

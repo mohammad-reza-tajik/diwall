@@ -26,18 +26,8 @@ const userSchema = new mongoose.Schema(
                     type: mongoose.Schema.Types.ObjectId,
                     ref:"Product"
                 }
-            ],/*
-        comments: [{
-            body:{
-                type:"String",
-                required:true
-            },
-            date:{
-                type:mongoose.Schema.Types.Date,
-                required:true
-            }
+            ],
 
-        }]*/
     }
 
 )
