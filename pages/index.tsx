@@ -6,9 +6,9 @@ import MostPopularProducts from "../components/MostPopularProducts";
 import Features from "../components/Features";
 import Places from "../components/Places";
 import MiddleSection from "../components/MiddleSection";
-import SeenOn from "../components/SeenOn";
 import Banner from "../components/Banner";
 import React from "react";
+import ShowCase from "../components/ShowCase";
 
 
 const Home : React.FC = () => {
@@ -24,7 +24,7 @@ const Home : React.FC = () => {
             <MiddleSection/>
             <SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"/products?sortBy=2"} />
             <BestSellingProducts />
-            <SeenOn/>
+            <ShowCase />
         </Grid>
     )
 }

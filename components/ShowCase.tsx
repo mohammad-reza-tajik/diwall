@@ -7,7 +7,7 @@ import {useTheme} from "@mui/material/styles";
 import Image from "next/legacy/image"
 import React from "react";
 
-const SeenOn: React.FC = () => {
+const ShowCase: React.FC = () => {
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
@@ -46,4 +46,4 @@ const SeenOn: React.FC = () => {
     )
 }
 
-export default React.memo(SeenOn)
+export default React.memo(ShowCase)

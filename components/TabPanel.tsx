@@ -1,5 +1,3 @@
-import Box from "@mui/material/Box"
-import Typography from "@mui/material/Typography";
 import React from "react";
 
 interface TabPanelProps {
@@ -7,7 +5,7 @@ interface TabPanelProps {
     index: number;
     tab: number;
 }
-const TabPanel = (props: TabPanelProps)  => {
+const TabPanel : React.FC = (props: TabPanelProps)  => {
     const { children, tab, index } = props;
 
     return (
