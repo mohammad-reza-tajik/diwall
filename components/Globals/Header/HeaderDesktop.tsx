@@ -31,6 +31,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
+import SearchResults from "../SearchResults";
 
 
 const styles = {
@@ -218,12 +219,6 @@ const HeaderDesktop: React.FC = () => {
     /*** end of debouncing ***/
 
 
-
-    const goToProductHandler = useCallback((id) => {
-        router.push(`/products/${id}`)
-
-    }, [])
-
     return (
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={30} xs={12}>
             <Grid container item direction={"row"} justifyContent={"center"} alignItems={"center"} xs={12}
@@ -269,65 +264,9 @@ const HeaderDesktop: React.FC = () => {
                             <Close color={"primary"} fontSize={"large"}/>
                         </IconButton>
 
-                        {search.trim() !== "" &&
-
-                            <Grid item xs={12} sx={styles.searchResultsContainer}>
-
-                                {isLoading ?
-                                    <Grid container justifyContent={"center"} alignItems={"center"}>
-                                        <CircularProgress color={"primary"} size={45}/>
-                                    </Grid> :
-                                    <>
-                                        <List>
-                                            {results.map((result) => {
-                                                if (search.trim() !== "" && results.length !== 0) {
-
-                                                    return (
-                                                        <ListItem disablePadding key={result._id}>
-                                                            <ListItemButton
-                                                                onClick={() => goToProductHandler(result._id)}
-                                                                sx={{gap: 10, p: 5}}>
-                                                                <Image
-                                                                    src={`/assets/pictures/products/${result.title?.replaceAll(" ", "-")}.jpg`}
-                                                                    alt={result.title}
-                                                                    width={50}
-                                                                    height={50}
-                                                                />
-                                                                <p style={styles.titleInResults}>
-                                                                    {result.title}
-                                                                </p>
-
-                                                            </ListItemButton>
-                                                        </ListItem>
-
-
-                                                    )
-                                                }
-
-
-                                            })}
-                                            {results.length === 0 && search.trim() !== "" && (
-                                                <Grid container justifyContent={"center"} alignItems={"center"}>
-
-                                                    <Typography variant={"h5"} color={"#666"} fontSize={16}>
-                                                        نتیجه ای یافت نشد!
-                                                    </Typography>
-                                                </Grid>
-                                            )
-                                            }
-                                            {results.length !== 0 && search.trim() !== "" &&
-                                                <Button variant={"contained"} onClick={submitSearchHandler}
-                                                        sx={{width: 1, fontSize: 14, mt: 15}}>
-                                                    مشاهده بیشتر
-                                                </Button>
-                                            }
-                                        </List>
-                                    </>
-
-                                }
-
-
-                            </Grid>
+                        {
+                            search.trim().length >= 3 &&
+                                <SearchResults isLoading={isLoading} results={results} search={search} submitSearchHandler={submitSearchHandler} />
                         }
                     </Grid>
                 </Grid>
