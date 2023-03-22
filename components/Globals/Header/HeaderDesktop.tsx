@@ -174,10 +174,6 @@ const HeaderDesktop: React.FC = () => {
 
     }, [])
 
-    const closeButton = <InputAdornment position="end">
-
-    </InputAdornment>
-
     const searchChangeHandler = (e) => {
         setSearch(e.target.value)
         optimizedFn(e.target.value)
@@ -209,7 +205,7 @@ const HeaderDesktop: React.FC = () => {
     const handleChange = async (value) => {
         setIsLoading(true)
         const res = await axios.post(`/api/products`, {search: value})
-        setResults(res.data.products.slice(0, 5));
+        setResults(res.data.products.slice(0, 4));
         setIsLoading(false)
         // console.log(res.data)
 
@@ -266,7 +262,7 @@ const HeaderDesktop: React.FC = () => {
 
                         {
                             search.trim().length >= 3 &&
-                                <SearchResults isLoading={isLoading} results={results} search={search} submitSearchHandler={submitSearchHandler} />
+                                <SearchResults isLoading={isLoading} results={results} search={search} submitSearchHandler={submitSearchHandler} onClose={closeSearchHandler} />
                         }
                     </Grid>
                 </Grid>

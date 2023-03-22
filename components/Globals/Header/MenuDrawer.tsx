@@ -47,8 +47,6 @@ const MenuDrawer: React.FC<Props> = (props) => {
                 transition: "all .4s",
                 transform: props.open ? "translateX(0)" : "translateX(100%)"
             }}>
-
-
                 <List sx={{width: 1}}>
                     <ListItem sx={{mb: 20}} onClick={() => menuItemsHandler("/")}>
                         <ListItemIcon sx={{fontSize: 20, cursor: "pointer"}}>

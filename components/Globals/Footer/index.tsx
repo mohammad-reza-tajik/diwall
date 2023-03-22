@@ -14,6 +14,7 @@ import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
 import Telegram from "@mui/icons-material/Telegram";
 import Twitter from "@mui/icons-material/Twitter";
 import React from "react";
+import ShowCase from "../ShowCase";
 
 
 const styles = {
@@ -50,6 +51,8 @@ const styles = {
 const Footer: React.FC = () => {
 
     return (
+        <>
+            <ShowCase />
         <Grid container item xs={12} component={"footer"} justifyContent={{xs: "center", md: "space-between"}} mt={100}>
             <Grid container item xs={6} md={2} alignItems={"flex-start"} spacing={10}>
                 <Grid item xs={12} mb={10}>
@@ -370,6 +373,7 @@ const Footer: React.FC = () => {
 
 
         </Grid>
+        </>
     )
 }
 

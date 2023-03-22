@@ -32,15 +32,16 @@ const styles = {
 
     searchDrawer: {
         minHeight: "100vh",
-        overflowY:"scroll",
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "white.main",
+        // backgroundColor: "green",
+
         position: "fixed",
         top: 0,
         right: 0,
         width: "100vw",
         px: 20,
         pt: 30,
-        justifyContent: "center",
+        // justifyContent: "center",
         // alignItems: "center",
         transition: "all .6s",
         zIndex: 1000
@@ -95,9 +96,9 @@ const SearchDrawer: React.FC<Props> = (props) => {
     const handleChange = async (value) => {
         setIsLoading(true)
         const res = await axios.post(`/api/products`, {search: value})
-        setResults(res.data.products.slice(0, 5));
+        setResults(res.data.products.slice(0, 4));
         setIsLoading(false)
-        console.log(res.data)
+        // console.log(res.data)
 
     };
     const optimizedFn = useCallback(debounce(handleChange), []);
@@ -134,11 +135,11 @@ const SearchDrawer: React.FC<Props> = (props) => {
     }
 
     return (
-        <Grid container item spacing={10} component={"form"} onSubmit={submitSearchHandler} sx={{
+        <Grid container item xs={12} component={"form"} onSubmit={submitSearchHandler} sx={{
             ...styles.searchDrawer,
             transform: props.open ? "translateY(0)" : "translateY(-100%)"
         }}>
-            <Grid item xs>
+            <Grid item xs={true} maxHeight={80} overflow={"hidden"} bgcolor={"royalblue"} position={"absolute"} top={30} right={15}>
                 <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom"}
                          arrow>
                     <TextField
@@ -163,18 +164,21 @@ const SearchDrawer: React.FC<Props> = (props) => {
                     />
                 </Tooltip>
             </Grid>
-            <Grid item xs={"auto"}>
+            <Grid item xs={"auto"} maxHeight={80} position={"absolute"} top={30} left={10}>
                 <IconButton onClick={() => props.onOpen(false)}>
                     <Close sx={styles.closeIcon}/>
                 </IconButton>
 
             </Grid>
 
+
+
             {
                 search.trim().length >= 3 &&
                 <SearchResults isLoading={isLoading} results={results} search={search}
-                               submitSearchHandler={submitSearchHandler}/>
+                               submitSearchHandler={submitSearchHandler} onOpen={props.onOpen}/>
             }
+
 
         </Grid>
 

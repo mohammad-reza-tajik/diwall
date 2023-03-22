@@ -10,15 +10,17 @@ import {useRouter} from "next/router";
 
 const styles = {
     searchResultsContainer: {
-        position: {xs: "static", md: "absolute"},
-        top: "100%",
+        position: "absolute",
+        top: {xs: 120, md: "100%"},
         right: 0,
         width: {xs: 1, md: 400},
-        zIndex: 50,
+        zIndex: 1001,
         p: "1rem",
-        border: "1px solid #ccc",
+        // maxHeight:300,
+        border: {xs: "none", md: "1px solid #ccc"},
         borderTop: "none",
         bgcolor: "white.main",
+        // bgcolor: "coral",
         justifyContent: "center",
         alignItems: "center",
 
@@ -26,7 +28,19 @@ const styles = {
     },
     titleInResults: {
         color: "#444",
-        fontSize: "1.2rem"
+        fontSize: "1.2rem",
+        "&:hover": {
+            bgcolor: "rgba(#000000,.2)"
+        }
+    },
+    searchResultsItem : {
+        bgcolor: "white.main",
+        gap: 10,
+        p: 5,
+        cursor:"pointer",
+        "&:hover" : {
+            bgcolor:"background.paper"
+        }
     }
 
 
@@ -37,23 +51,30 @@ interface Props {
     results: any;
     search: string;
     submitSearchHandler: (event?) => void
+    onOpen?: (a: boolean) => void;
+    onClose?: () => void;
 
 }
 
 const SearchResults: React.FC<Props> = (props) => {
 
-    const {isLoading, results, search, submitSearchHandler} = props;
+    const {isLoading, results, search, submitSearchHandler, onOpen, onClose} = props;
     const router = useRouter();
 
 
-    const goToProductHandler = useCallback((id) => {
+    const goToProductHandler = (id) => {
+        if (onClose) {
+            onClose()
+        } else {
+            onOpen(false)
+        }
         router.push(`/products/${id}`)
 
-    }, [])
+    }
 
 
     return (
-        <Grid item xs={12} sx={styles.searchResultsContainer}>
+        <Grid container item xs={12} sx={styles.searchResultsContainer}>
 
             {
                 isLoading ?
@@ -61,14 +82,14 @@ const SearchResults: React.FC<Props> = (props) => {
                         <CircularProgress color={"primary"} size={45}/>
                     </Grid> :
                     <>
-                        <ul>
+                        <Grid component={"ul"} container item xs={12}>
                             {results.map((result) => {
                                 if (search.trim().length >= 3 && results.length !== 0) {
 
                                     return (
                                         <Grid container item alignItems={"center"} xs={12} key={result._id}
-                                            onClick={() => goToProductHandler(result._id)}
-                                            sx={{gap: 10, p: 5}} >
+                                              onClick={() => goToProductHandler(result._id)}
+                                              sx={styles.searchResultsItem}>
 
                                             <Grid item xs={"auto"}>
                                                 <Image
@@ -104,7 +125,7 @@ const SearchResults: React.FC<Props> = (props) => {
                                     مشاهده بیشتر
                                 </Button>
                             }
-                        </ul>
+                        </Grid>
                     </>
 
             }

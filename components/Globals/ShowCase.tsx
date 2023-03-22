@@ -14,7 +14,7 @@ const ShowCase: React.FC = () => {
 
 
     return (
-        <Grid container item component={"section"} xs={11} mt={50}>
+        <Grid container item component={"section"} xs={11} mt={50} mx={"auto"}>
             <ImageList sx={{width: 1}} cols={matchesMD ? 3 : 6} gap={50} rowHeight={matchesMD ? 20 : 100}>
                 <ImageListItem>
                     <Image src={"/assets/pictures/showcase/digistyle.svg"} alt={"دیجی استایل"}

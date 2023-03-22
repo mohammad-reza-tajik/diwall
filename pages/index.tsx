@@ -8,7 +8,6 @@ import Places from "../components/HomePage/Places";
 import MiddleSection from "../components/HomePage/MiddleSection";
 import Banner from "../components/HomePage/Banner";
 import React from "react";
-import ShowCase from "../components/HomePage/ShowCase";
 
 
 const Home : React.FC = () => {
@@ -24,7 +23,6 @@ const Home : React.FC = () => {
             <MiddleSection/>
             <SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"/products?sortBy=2"} />
             <BestSellingProducts />
-            <ShowCase />
         </Grid>
     )
 }

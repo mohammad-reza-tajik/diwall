@@ -203,6 +203,7 @@ const ProductDetails = () => {
                                                   sx={{fontSize: {xs: 18, md: 25}}}/> :
                                         <Typography variant={"h1"} sx={{fontSize: {xs: 18, md: 25}}}
                                                     fontFamily={"dana-bold"}
+                                                    lineHeight={1.8}
                                                     color={"#555"}>
                                             {"title" in product ? product.title : ""}
                                         </Typography>
