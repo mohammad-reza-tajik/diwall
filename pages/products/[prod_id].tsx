@@ -346,7 +346,6 @@ const ProductDetails = () => {
 
                 <Features/>
                 <Divider sx={{width: 1, mt: 30}}/>
-                {/* @ts-ignore */}
                 <Info isLoading={isLoading} products={relatedProducts}/>
 
             </Grid>

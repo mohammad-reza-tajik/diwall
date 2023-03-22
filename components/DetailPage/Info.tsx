@@ -22,7 +22,7 @@ interface Props {
     isLoading: boolean;
 }
 
-const Info: React.FC = (props: Props) => {
+const Info: React.FC<Props> = (props) => {
     const [tab, setTab] = useState(0);
     const changeTabHandler = (event, newValue: number) => {
         setTab(newValue);
