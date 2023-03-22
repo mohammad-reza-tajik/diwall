@@ -48,7 +48,13 @@ const styles = {
         color: "white",
         border: "1px solid rgba(25,25,25,.1)"
 
+    },
+    toggleButton :{
+        width: .4,
+        height: 40,
+        fontSize: {xs: 14, md: 16}
     }
+
 }
 
 
@@ -261,17 +267,9 @@ const ProductDetails = () => {
                                 <ToggleButtonGroup sx={{gap: {xs: 5}}} fullWidth color={"primary"} value={presetSizes}
                                                    exclusive
                                                    onChange={presetSizesHandler}>
-                                    <ToggleButton sx={{width: .4, height: 40, fontSize: {xs: 14, md: 16}}}
-                                                  value={"1"}> 10m
-                                        x
-                                        3m</ToggleButton>
-                                    <ToggleButton sx={{width: .4, height: 40, fontSize: {xs: 14, md: 16}}} value={"2"}>20m
-                                        x
-                                        3m</ToggleButton>
-                                    <ToggleButton sx={{width: .4, height: 40, fontSize: {xs: 14, md: 16}}}
-                                                  value={"3"}> 30m
-                                        x
-                                        3m</ToggleButton>
+                                    <ToggleButton sx={styles.toggleButton} value={"1"}>10mx3m</ToggleButton>
+                                    <ToggleButton sx={styles.toggleButton} value={"2"}>20mx3m</ToggleButton>
+                                    <ToggleButton sx={styles.toggleButton} value={"3"}> 30mx3m</ToggleButton>
                                 </ToggleButtonGroup>
                             </Grid>
                         </Grid>
@@ -296,32 +294,35 @@ const ProductDetails = () => {
 
                             <Grid xs={12} container item justifyContent={"flex-end"} alignItems={"center"} gap={5}>
 
-                                <Grid item xs={"auto"} justifyContent={"flex-end"}>
+
+                                <Grid container justifyContent={"flex-end"} item xs={"auto"}>
+
                                     <Button
                                         onClick={addToFavoritesHandler}
                                         variant={"contained"}
                                         sx={styles.addToFavoritesButton}
                                     >
-                                        {addToFavoritesLoading ? <CircularProgress size={30} sx={{
-                                            borderRadius: 20,
-                                            p: {xs: 2, md: 3,},
-                                            color: "#fff"
-                                        }}/> : isFavorite ? <Favorite sx={{
-                                                fontSize: {xs: 30, sm: 40},
-                                                borderRadius: 20,
-                                                p: {xs: 2, md: 3,},
-                                                color: "fff"
-                                            }}/> :
-                                            <FavoriteBorder sx={{
-                                                fontSize: {xs: 30, sm: 40,},
+                                        {addToFavoritesLoading ?
+                                            <CircularProgress size={30} sx={{
                                                 borderRadius: 20,
                                                 p: {xs: 2, md: 3,},
                                                 color: "#fff"
-                                            }}/>
+                                            }}/> : isFavorite ? <Favorite sx={{
+                                                    fontSize: {xs: 30, sm: 40},
+                                                    borderRadius: 20,
+                                                    p: {xs: 2, md: 3,},
+                                                    color: "fff"
+                                                }}/> :
+                                                <FavoriteBorder sx={{
+                                                    fontSize: {xs: 30, sm: 40,},
+                                                    borderRadius: 20,
+                                                    p: {xs: 2, md: 3,},
+                                                    color: "#fff"
+                                                }}/>
                                         }
                                     </Button>
                                 </Grid>
-                                <Grid item xs sm={"auto"} justifyContent={"flex-end"}>
+                                <Grid container justifyContent={"flex-end"} xs sm={"auto"}>
                                     <Button
                                         onClick={addToCartHandler}
                                         variant={"contained"}
@@ -335,6 +336,7 @@ const ProductDetails = () => {
                                         {isInCart ? "حذف از سبد خرید" : "افزودن به سبد خرید"}
                                     </Button>
                                 </Grid>
+
                             </Grid>
                         </Grid>
 
@@ -343,7 +345,7 @@ const ProductDetails = () => {
                 </Grid>
 
                 <Features/>
-                <Divider sx={{width:1,mt:30}} />
+                <Divider sx={{width: 1, mt: 30}}/>
                 {/* @ts-ignore */}
                 <Info isLoading={isLoading} products={relatedProducts}/>
 

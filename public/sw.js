@@ -18,7 +18,7 @@ self.addEventListener("install", function (event) {
                 "/assets/icons/sofa.svg",
                 "/assets/icons/child_room.svg",
                 "/offline.html",
-                "/manifest.json",
+                // "/manifest.json",
                 "/",
                 "/assets/fonts/dana-fanum-bold.woff2",
                 "/assets/fonts/dana-fanum-medium.woff2",
@@ -62,7 +62,8 @@ self.addEventListener("fetch", (event) => {
                     const cache = await caches.open(STATIC_CACHE_NAME)
                     res = await cache.match("/offline.html")
                     // console.log(res)
-                    return res
+                    if (event.request.url === "/")
+                        return res
                 }
 
         })()

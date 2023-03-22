@@ -11,7 +11,7 @@ import React from "react"
 const Features: React.FC = () => {
 
     return (
-        <Grid container item component={"section"} justifyContent={"space-around"} spacing={10}>
+        <Grid container item xs={12} component={"section"} justifyContent={"center"} mb={10} spacing={10}>
             <Grid container item xs={6} md={3} direction={"row"} gap={{xs: 10, md: 5}}
                   justifyContent={{xs: "flex-start", md: "center"}} alignItems={"center"}>
                 <Grid item xs={3}>
