@@ -169,10 +169,12 @@ const SearchDrawer: React.FC<Props> = (props) => {
                 </IconButton>
 
             </Grid>
-            <Grid item xs={12} height={.7}>
+
+            {
+                search.trim().length >= 3 &&
                 <SearchResults isLoading={isLoading} results={results} search={search}
                                submitSearchHandler={submitSearchHandler}/>
-            </Grid>
+            }
 
         </Grid>
 
