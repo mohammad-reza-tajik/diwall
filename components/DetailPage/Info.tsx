@@ -48,7 +48,7 @@ const Info: React.FC<Props> = (props) => {
                                 <RelatedProducts products={props.products}/>
                             </TabPanel>
                             <TabPanel index={1} tab={tab}>
-                                <Comments />
+                                <Comments comments={[]} />
                             </TabPanel>
                         </>
                 }

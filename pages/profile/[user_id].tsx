@@ -17,6 +17,7 @@ import Head from "next/head";
 import {useAppSelector} from "../../hooks/redux_hooks";
 import {userActions} from "../../store";
 import {useDispatch} from "react-redux";
+import Divider from "@mui/material/Divider";
 
 const styles = {
     tab: {
@@ -56,7 +57,7 @@ const Profile = () => {
 
     useEffect(() => {
         if (queryTab) {
-                setTab(Number(queryTab))
+            setTab(Number(queryTab))
         }
 
     }, [queryTab])
@@ -242,15 +243,26 @@ const Profile = () => {
                                     <CircularProgress color={"primary"} size={45}/>
                                 </Grid> :
                                 <Grid container item sx={styles.list} gap={10}>
-                                    {user?.username === null || populatedCart.length === 0 ?
-                                        <Grid container item xs minHeight={300} justifyContent={"center"}
-                                              alignItems={"center"}>
-                                            <Typography fontSize={16} variant={"body1"} component={"p"} color={"#333"}
-                                                        fontFamily={"dana-bold"}>سبد خرید شما خالی است
-                                                ! </Typography>
-                                        </Grid> :
-                                        populatedCart.length !== 0 && populatedCart.map((item) =>
-                                            <CartItem {...item} key={item._id}/>)}
+                                    {
+                                        user?.username === null || populatedCart.length === 0 ?
+                                            <Grid container item xs minHeight={300} justifyContent={"center"}
+                                                  alignItems={"center"}>
+                                                <Typography fontSize={16} variant={"body1"} component={"p"}
+                                                            color={"#333"} fontFamily={"dana-bold"}>
+                                                    سبد خرید شما خالی است !
+                                                </Typography>
+                                            </Grid> :
+                                            populatedCart.length !== 0 && populatedCart.map((item) =>
+
+                                                <Grid container item xs={12}
+                                                      key={item._id}>
+
+                                                    <CartItem {...item} />
+                                                    <Divider sx={{width: 1}}/>
+
+                                                </Grid>
+                                            )
+                                    }
 
                                 </Grid>
                             }

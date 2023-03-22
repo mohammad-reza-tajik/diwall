@@ -13,7 +13,7 @@ interface Props {
     }>
 }
 
-const Comments: React.FC = (props: Props) => {
+const Comments: React.FC<Props> = (props) => {
     return (
         <>
             {/*<List>

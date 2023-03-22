@@ -1,4 +1,3 @@
-import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
@@ -9,7 +8,7 @@ import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
 import Delete from "@mui/icons-material/Delete";
 import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
 
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import {useAppDispatch, useAppSelector, userActions} from "../store";
@@ -30,10 +29,10 @@ const CartItem: React.FC<Props> = (props) => {
     const dispatch = useAppDispatch()
 
     const [numberInCart, setNumberInCart] = useState(1)
-    const numbersInCartChangeHandler = (e) => {
+    const numbersInCartChangeHandler = useCallback((e) => {
         setNumberInCart(e.target.value)
 
-    }
+    },[])
 
     const removeFromCart = () => {
         if (user?.username) {
@@ -52,8 +51,6 @@ const CartItem: React.FC<Props> = (props) => {
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
 
     return (
-        <Grid pb={10} borderBottom={"1px solid rgba(33,33,33,.1)"} container item xs={12} justifyContent={"flex-start"}
-              alignItems={"flex-start"} key={props._id}>
             <Grid container item xs={12}>
                 <Grid className={"pointer"} container item xs={12} md={true} lg={6} alignItems={"center"}
                       gap={matchesMD ? 10 : 20} onClick={() => router.push("/products/" + props._id.toString())}>
@@ -93,7 +90,7 @@ const CartItem: React.FC<Props> = (props) => {
 
                 </Grid>
             </Grid>
-        </Grid>
+
     )
 
 }
