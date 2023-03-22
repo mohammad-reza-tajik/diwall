@@ -43,7 +43,7 @@ const Comments: React.FC<Props> = (props) => {
                             }
                         </Typography>
                     </Grid>
-                    <Grid xs={12} py={30} px={50} bgcolor={"white.main"}>
+                    <Grid item xs={12} py={30} px={50} bgcolor={"white.main"}>
                         <Typography variant={"body1"} component={"p"} fontSize={14} lineHeight={1.7}>
                             امروز، آمریکا قدرت مسلّط جهان نیست؛ بسیاری از تحلیلگران سیاسی دنیا معتقدند که آمریکا دارد رو
                             به افول می‌رود، ذرّه‌ذرّه دارد آب می‌شود. این را نه اینکه ما بگوییم؛ البتّه عقیده‌ی ما هم
