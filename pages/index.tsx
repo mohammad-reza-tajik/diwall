@@ -3,7 +3,7 @@ import SectionHeading from "../components/Globals/SectionHeading";
 import BestSellingProducts from "../components/HomePage/BestSellingProducts";
 import LatestProducts from "../components/HomePage/LatestProducts";
 import MostPopularProducts from "../components/HomePage/MostPopularProducts";
-import Features from "../components/HomePage/Features";
+import Features from "../components/Globals/Features";
 import Places from "../components/HomePage/Places";
 import MiddleSection from "../components/HomePage/MiddleSection";
 import Banner from "../components/HomePage/Banner";

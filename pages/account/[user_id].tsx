@@ -114,7 +114,7 @@ const Dashboard : React.FC = () => {
                 </title>
             </Head>
 
-            <Grid container item xs={12} minHeight={400} alignItems={"flex-start"}>
+            <Grid container item xs={12} minHeight={400}>
                 <Grid container item xs={12} md={matches1040 ? 3 : 2} mt={10}
                       borderLeft={{xs: "none", md: "5px solid #069f69"}}>
                     <Tabs

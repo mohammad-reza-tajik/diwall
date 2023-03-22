@@ -16,7 +16,7 @@ import Image from "next/legacy/image"
 import {Fragment, useEffect, useState} from "react";
 import axios from "axios";
 import {useAppSelector, useAppDispatch, userActions} from "../../store";
-import Features from "../../components/HomePage/Features";
+import Features from "../../components/Globals/Features";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
@@ -344,6 +344,7 @@ const ProductDetails = () => {
 
                 </Grid>
 
+                <Divider sx={{width: 1, mb: 30}}/>
                 <Features/>
                 <Divider sx={{width: 1, mt: 30}}/>
                 <Info isLoading={isLoading} products={relatedProducts}/>
