@@ -9,7 +9,7 @@ import {useRouter} from "next/router";
 import React, {useState} from "react";
 import axios from "axios";
 import {useTheme} from "@mui/material/styles"
-import {userActions , useAppSelector , useAppDispatch} from "../store";
+import {userActions , useAppSelector , useAppDispatch} from "../../store";
 
 
 const styles = {

@@ -1,14 +1,14 @@
 import Grid from "@mui/material/Grid";
-import SectionHeading from "../components/SectionHeading";
-import BestSellingProducts from "../components/BestSellingProducts";
-import LatestProducts from "../components/LatestProducts";
-import MostPopularProducts from "../components/MostPopularProducts";
-import Features from "../components/Features";
-import Places from "../components/Places";
-import MiddleSection from "../components/MiddleSection";
-import Banner from "../components/Banner";
+import SectionHeading from "../components/Globals/SectionHeading";
+import BestSellingProducts from "../components/HomePage/BestSellingProducts";
+import LatestProducts from "../components/HomePage/LatestProducts";
+import MostPopularProducts from "../components/HomePage/MostPopularProducts";
+import Features from "../components/HomePage/Features";
+import Places from "../components/HomePage/Places";
+import MiddleSection from "../components/HomePage/MiddleSection";
+import Banner from "../components/HomePage/Banner";
 import React from "react";
-import ShowCase from "../components/ShowCase";
+import ShowCase from "../components/HomePage/ShowCase";
 
 
 const Home : React.FC = () => {

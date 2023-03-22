@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper';
-import Product from "./Product";
+import Product from "../Globals/Product";
 import axios from "axios"
 import {useEffect, useState} from "react";
 
@@ -15,9 +15,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Link from "next/link";
-import SectionHeading from "./SectionHeading";
+import SectionHeading from "../Globals/SectionHeading";
 import React from "react";
-import type {ProductType} from "../db/productModel"
+import type {ProductType} from "../../db/productModel"
 
 
 

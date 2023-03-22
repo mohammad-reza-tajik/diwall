@@ -15,7 +15,7 @@ import ShoppingBag from "@mui/icons-material/ShoppingBag";
 import React, {Fragment, useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
-import {useAppDispatch, useAppSelector, userActions} from "../../store";
+import {useAppDispatch, useAppSelector, userActions} from "../../../store";
 import BackDrop from "./BackDrop";
 import SearchDrawer from "./SearchDrawer";
 

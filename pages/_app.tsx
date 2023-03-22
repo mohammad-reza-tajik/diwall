@@ -4,12 +4,12 @@ import Head from "next/head"
 import theme from "../styles/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import Grid from "@mui/material/Grid"
-import Footer from "../components/Footer";
+import Footer from "../components/Globals/Footer";
 import {useRouter} from "next/router";
-import Header from "../components/Header";
+import Header from "../components/Globals/Header";
 import {Provider} from "react-redux";
 import {store} from "../store";
-import Auth from "../components/Auth";
+import Auth from "../components/Globals/Auth";
 import React from "react";
 
 

@@ -26,7 +26,7 @@ import Link from "next/link";
 import React, {Fragment, useCallback, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
-import {useAppDispatch, useAppSelector, userActions} from "../../store";
+import {useAppDispatch, useAppSelector, userActions} from "../../../store";
 import CircularProgress from "@mui/material/CircularProgress";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -123,7 +123,7 @@ const HeaderDesktop: React.FC = () => {
 
     const goToFavorites = async (_) => {
         if (user.username) {
-            await router.push({pathname: `/profile/${user?.userId}`, query: {tab: 2}})
+            await router.push({pathname: `/account/${user?.userId}`, query: {tab: 2}})
 
         } else {
 
@@ -134,7 +134,7 @@ const HeaderDesktop: React.FC = () => {
 
     const goToCart = async (_) => {
         if (user.username) {
-            await router.push({pathname: `/profile/${user?.userId}`, query: {tab: 3}})
+            await router.push({pathname: `/account/${user?.userId}`, query: {tab: 3}})
         } else {
 
             await router.push("/sign-in")
@@ -409,7 +409,7 @@ const HeaderDesktop: React.FC = () => {
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
 
-                                <MenuItem onClick={() => router.push("/profile/" + user?.userId)}>
+                                <MenuItem onClick={() => router.push("/account/" + user?.userId)}>
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>

@@ -16,7 +16,7 @@ import Image from "next/legacy/image"
 import {Fragment, useEffect, useState} from "react";
 import axios from "axios";
 import {useAppSelector, useAppDispatch, userActions} from "../../store";
-import Features from "../../components/Features";
+import Features from "../../components/HomePage/Features";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
@@ -322,7 +322,7 @@ const ProductDetails = () => {
                                         }
                                     </Button>
                                 </Grid>
-                                <Grid container justifyContent={"flex-end"} xs sm={"auto"}>
+                                <Grid container item justifyContent={"flex-end"} xs sm={"auto"}>
                                     <Button
                                         onClick={addToCartHandler}
                                         variant={"contained"}

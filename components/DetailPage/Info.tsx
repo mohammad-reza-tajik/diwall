@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Grid from "@mui/material/Grid";
-import TabPanel from "../TabPanel";
-import RelatedProducts from "../RelatedProducts";
+import TabPanel from "../Globals/TabPanel";
+import RelatedProducts from "./RelatedProducts";
 import CircularProgress from "@mui/material/CircularProgress";
 import Comments from "./Comments";
 

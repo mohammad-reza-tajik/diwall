@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
-import Product from "./Product";
+import Product from "../Globals/Product";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from "swiper";
 
@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import React from "react";
-import type {ProductType} from "../db/productModel"
+import type {ProductType} from "../../db/productModel"
 
 interface Props {
     products:Array<ProductType>

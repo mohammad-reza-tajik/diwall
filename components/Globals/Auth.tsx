@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {userActions} from "../store"
+import {userActions} from "../../store"
 import axios from "axios"
 import {useRouter} from "next/router";
 

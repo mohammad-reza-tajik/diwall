@@ -4,14 +4,14 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper';
-import Product from "./Product";
+import Product from "../Globals/Product";
 import axios from "axios"
 import React, {useEffect, useState} from "react";
 import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import type {ProductType} from "../db/productModel"
+import type {ProductType} from "../../db/productModel"
 
 
 const BestSellingProducts : React.FC = () => {
