@@ -12,10 +12,8 @@ const Profile : React.FC<Props> = (props) => {
     const {user} =props;
 
     return (
-        <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40} position={"relative"}>
-            <Button variant={"outlined"}
-                    sx={{fontSize: {xs: 12, md: 16}, position: "absolute", top: 10, left: 10}}>تغییر
-                اطلاعات</Button>
+        <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40}>
+
             <Grid container item xs={12} alignItems={"center"} gap={10}>
                 <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام و نام خانوادگی
                     : </Box>
@@ -69,3 +67,10 @@ const Profile : React.FC<Props> = (props) => {
 }
 
 export default Profile
+
+/*
+*
+*  <Button variant={"outlined"}
+                    sx={{fontSize: {xs: 12, md: 16}, position: "absolute", top: 10, left: 10}}>تغییر
+                اطلاعات</Button>
+* */

@@ -64,20 +64,21 @@ const CartItem: React.FC<Props> = (props) => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container item xs={12} md={"auto"} lg={6} alignItems={"center"} gap={-20}
+                <Grid container item xs={12} md={"auto"} lg={6} alignItems={"center"}
                       justifyContent={"flex-end"}>
 
                     <IconButton onClick={() => {
-                        setNumberInCart((prevState) => +prevState + 1)
+                        setNumberInCart((prevState) => Number(prevState) + 1)
                     }}>
                         <AddCircleOutline color={"primary"} sx={{fontSize: {xs: 30, md: 30}}}/>
                     </IconButton>
                     <TextField onChange={numbersInCartChangeHandler} value={numberInCart} sx={{width: {xs: 40, md: 80}}}
                                color={"primary"} type={"number"} size={"small"} variant={"standard"}/>
 
-                    {numberInCart != 1 ?
+                    {
+                        numberInCart != 1 ?
                         <IconButton onClick={() => {
-                            setNumberInCart((prevState) => +prevState - 1)
+                            setNumberInCart((prevState) => Number(prevState) - 1)
                         }}>
                             <RemoveCircleOutline color={"primary"} sx={{fontSize: {xs: 30, md: 30}}}/>
                         </IconButton> :

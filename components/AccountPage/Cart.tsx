@@ -3,7 +3,6 @@ import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import CartItem from "./CartItem";
-import Divider from "@mui/material/Divider";
 
 const styles = {
     tab: {
@@ -30,7 +29,7 @@ interface Props {
 const Cart : React.FC<Props> = (props) => {
     const {isLoading , populatedCart , user} = props;
   return (
-          <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10}>
+          <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10} direction={"column"}>
               {isLoading ?
                   <Grid container item xs justifyContent={"center"} alignItems={"center"}>
                       <CircularProgress color={"primary"} size={45}/>
@@ -47,13 +46,8 @@ const Cart : React.FC<Props> = (props) => {
                               </Grid> :
                               populatedCart.length !== 0 && populatedCart.map((item) =>
 
-                                  <Grid container item xs={12}
-                                        key={item._id}>
+                                      <CartItem {...item} key={item._id} />
 
-                                      <CartItem {...item} />
-                                      <Divider sx={{width: 1}}/>
-
-                                  </Grid>
                               )
                       }
 
