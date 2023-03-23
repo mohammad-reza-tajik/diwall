@@ -47,7 +47,7 @@ export const getStaticProps : GetStaticProps = async () => {
             bestSellingProducts:bestSellingProducts.data.products
 
         },
-        revalidate :86400
+        revalidate :(86400 * 30)
 
 
     }
