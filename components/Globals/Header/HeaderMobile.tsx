@@ -12,7 +12,7 @@ import Hamburger from "@mui/icons-material/Menu";
 import Person from "@mui/icons-material/Person";
 import Search from "@mui/icons-material/Search";
 import ShoppingBag from "@mui/icons-material/ShoppingBag";
-import React, {Fragment, useState} from "react";
+import React, {useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector, userActions} from "../../../store";
@@ -70,7 +70,7 @@ const HeaderMobile: React.FC = () => {
 
                     <BackDrop onOpen={setOpenMenuDrawer} open={openMenuDrawer}/>
                     <MenuDrawer open={openMenuDrawer} onOpen={setOpenMenuDrawer}/>
-                    <IconButton onClick={() => setOpenMenuDrawer(!openMenuDrawer)} color={"primary"} sx={{mr: -10}}>
+                    <IconButton onClick={() => setOpenMenuDrawer(!openMenuDrawer)} color={"primary"} sx={{mr: -10}} aria-label="open menu drawer">
                         <Hamburger sx={styles.headerIcon}/>
                     </IconButton>
                 </Grid>
@@ -87,7 +87,7 @@ const HeaderMobile: React.FC = () => {
 
 
             <Grid container item xs={5} justifyContent={"flex-end"}>
-                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(!openSearchDrawer)}>
+                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(!openSearchDrawer)} aria-label="open search drawer">
                     <Search sx={styles.headerIcon}/>
                 </IconButton>
                 <BackDrop onOpen={setOpenSearchDrawer} open={openSearchDrawer} />
@@ -97,17 +97,17 @@ const HeaderMobile: React.FC = () => {
                     user.username === null ?
 
                         <Link href={"/sign-in"} passHref>
-                            <IconButton color={"primary"}>
+                            <IconButton color={"primary"} aria-label="login">
                                 <Login sx={styles.headerIcon}/>
                             </IconButton>
                         </Link>
 
 
                         :
-                        <Fragment>
+                        <>
 
 
-                            <IconButton color={"primary"} onClick={(e) => {
+                            <IconButton aria-label="open user menu" color={"primary"} onClick={(e) => {
                                 setAnchorEl(anchorEl ? null : e.currentTarget)
                             }}>
                                 <Person sx={styles.headerIcon}/>
@@ -166,7 +166,7 @@ const HeaderMobile: React.FC = () => {
                                     </Typography>
                                 </MenuItem>
                             </Menu>
-                        </Fragment>
+                        </>
 
                 }
             </Grid>

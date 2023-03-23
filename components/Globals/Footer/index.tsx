@@ -159,7 +159,7 @@ const Footer: React.FC = () => {
                 <Grid item container justifyContent={{xs: "flex-end", md: "flex-start"}} alignItems={"center"} xs
                       md={12}>
                     <Grid item xs={"auto"}>
-                        <IconButton component={"a"} href={"https://telegram.org/"}>
+                        <IconButton component={"a"} href={"https://telegram.org/"} aria-label="telegram">
                             <Telegram color={"primary"}
                                       sx={{
                                           fontSize: {xs: 30, md: 50},
@@ -172,7 +172,7 @@ const Footer: React.FC = () => {
                     </Grid>
 
                     <Grid item xs={"auto"}>
-                        <IconButton component={"a"} href={"https://twitter.com/?lang=en"}>
+                        <IconButton component={"a"} href={"https://twitter.com/?lang=en"} aria-label="twitter">
                             <Twitter color={"primary"}
                                      sx={{
                                          fontSize: {xs: 30, md: 50},
@@ -184,7 +184,7 @@ const Footer: React.FC = () => {
                         </IconButton>
                     </Grid>
                     <Grid item xs={"auto"}>
-                        <IconButton component={"a"} href={"https://www.instagram.com/"}>
+                        <IconButton component={"a"} href={"https://www.instagram.com/"} aria-label="instagram">
                             <Instagram color={"primary"}
                                        sx={{
                                            fontSize: {xs: 30, md: 50},
@@ -197,7 +197,7 @@ const Footer: React.FC = () => {
                     </Grid>
 
                     <Grid item xs={"auto"}>
-                        <IconButton component={"a"} href={"https://www.linkedin.com/"}>
+                        <IconButton component={"a"} href={"https://www.linkedin.com/"} aria-label="linkedin">
                             <LinkedIn color={"primary"}
                                       sx={{
                                           fontSize: {xs: 30, md: 50},

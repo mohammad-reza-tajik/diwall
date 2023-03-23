@@ -105,7 +105,7 @@ const Product : React.FC<Product> = (props) => {
         <Grid container item sx={styles.product} xs={12}>
             <Grid item xs={12} sx={{borderRadius:2,position:"relative",overflow:"hidden",cursor:"pointer"}}>
                 <Grid item sx={styles.addToFavoritesButton}>
-                    <IconButton onClick={addToFavoritesHandler}>
+                    <IconButton onClick={addToFavoritesHandler} aria-label="add to wishlist">
                         {isLoading ? <CircularProgress size={matchesMD ? matchesSM ? 30 : 40 : 40} sx={{
                             borderRadius: 20,
                             p: {xs:4,md:5,},

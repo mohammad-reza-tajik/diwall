@@ -246,7 +246,7 @@ const HeaderDesktop: React.FC = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <IconButton type={"submit"}>
+                                            <IconButton type={"submit"} aria-label="search button">
                                                 <Search sx={{...styles.searchIcon}}/>
                                             </IconButton>
                                         </InputAdornment>
@@ -255,7 +255,7 @@ const HeaderDesktop: React.FC = () => {
                                 }}
                             />
                         </Tooltip>
-                        <IconButton sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}
+                        <IconButton aria-label="clear search field" sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}
                                     onClick={closeSearchHandler}>
                             <Close color={"primary"} fontSize={"large"}/>
                         </IconButton>
@@ -274,7 +274,7 @@ const HeaderDesktop: React.FC = () => {
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}
                         >
-                            <IconButton color={"primary"} onClick={goToFavorites}>
+                            <IconButton color={"primary"} onClick={goToFavorites} aria-label="go to wishlist">
                                 <FavoriteBorder sx={{
                                     fontSize: {xs: 40, sm: 50},
                                     border: "2px solid #11AE77",
@@ -289,7 +289,7 @@ const HeaderDesktop: React.FC = () => {
                         <Badge showZero max={99} badgeContent={user?.cart.length || 0} color="primary"
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}>
-                            <IconButton color={"primary"} onClick={goToCart}>
+                            <IconButton color={"primary"} onClick={goToCart} aria-label="go to cart">
                                 <ShoppingBagOutlined sx={{
                                     fontSize: {xs: 40, sm: 50},
                                     border: "2px solid #11AE77",
