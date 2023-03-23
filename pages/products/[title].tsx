@@ -77,7 +77,7 @@ const ProductDetails = () => {
     const isFavorite = router.isReady && user?.favoriteList.includes(router.query?.title.toString())
     const isInCart = router.isReady && user?.cart.includes(router.query?.title.toString())
 
-    const  slug  = router.query.title as string;
+    const  slug  = router.isReady ? router.query.title as string : "_";
     const title = slug.split("_").join(" ");
     // console.log(title);
 
