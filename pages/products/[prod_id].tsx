@@ -211,8 +211,8 @@ const ProductDetails = () => {
                             </Grid>
                             <Grid container item xs={4} justifyContent={"flex-end"} alignItems={"center"}
                                   sx={{display: {xs: "none", md: "flex"}}}>
-                                <Typography variant={"h3"} sx={{fontSize: {xs: 14, md: 16}}} borderRadius={20} px={20}
-                                            component={"div"}
+                                <Typography sx={{fontSize: {xs: 14, md: 16}}} borderRadius={20} px={20}
+                                            component={"span"}
                                             py={10}
                                             color={"white.main"}
                                             bgcolor={isLoading ? "transparent" : "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
@@ -259,7 +259,7 @@ const ProductDetails = () => {
                         </Grid>
                         <Grid item container gap={10}>
                             <Grid item xs={12}>
-                                <Typography variant={"h5"} fontSize={{xs: 14, md: 16}}>
+                                <Typography component={"span"} fontSize={{xs: 14, md: 16}}>
                                     سایز های آماده :
                                 </Typography>
                             </Grid>
@@ -276,7 +276,7 @@ const ProductDetails = () => {
                         </Grid>
                         <Grid item container xs={12} gap={30} mb={30}>
                             <Grid item xs={12}>
-                                <Typography variant={"h5"} fontSize={{xs: 14, md: 16}}>
+                                <Typography component={"span"} fontSize={{xs: 14, md: 16}}>
                                     سایز دلخواه (واحد متر) :
                                 </Typography>
                             </Grid>
