@@ -13,7 +13,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 
 import Image from "next/legacy/image"
-import {Fragment, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {useAppSelector, useAppDispatch, userActions} from "../../store";
 import Features from "../../components/Globals/Features";
@@ -64,7 +64,7 @@ const ProductDetails = () => {
     const [relatedProducts, setRelatedProducts] = useState([])
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToFavoritesLoading, setAddToFavoritesLoading] = useState(false)
-    const [pageTitle, setPageTitle] = useState("لطفا صبر کنید ...")
+    // const [pageTitle, setPageTitle] = useState("لطفا صبر کنید ...")
     const [presetSizes, setPresetSizes] = useState("1")
     const [isLoading, setIsLoading] = useState(false)
 
@@ -74,26 +74,28 @@ const ProductDetails = () => {
     const dispatch = useAppDispatch();
 
     /* had to add toString() method to get rid of TS errors */
-    const isFavorite = router.isReady && user?.favoriteList.includes(router.query?.prod_id.toString())
-    const isInCart = router.isReady && user?.cart.includes(router.query?.prod_id.toString())
+    const isFavorite = router.isReady && user?.favoriteList.includes(router.query?.title.toString())
+    const isInCart = router.isReady && user?.cart.includes(router.query?.title.toString())
 
-    const {prod_id} = router.query;
+    const  slug  = router.query.title as string;
+    const title = slug.split("_").join(" ");
+    // console.log(title);
+
 
     useEffect(() => {
         setIsLoading(true)
         if (router.isReady) {
-
             axios.post("/api/product-details", {
-                productId: router.query.prod_id
+                title
             }).then(res => {
                 setProduct(res.data.productDetails)
                 setRelatedProducts(res.data.relatedProducts)
-                setPageTitle(res.data.productDetails.title)
+                // setPageTitle(res.data.productDetails.title)
                 setIsLoading(false)
             }).catch(e => console.log(e))
 
         }
-    }, [prod_id])
+    }, [title])
 
     const presetSizesHandler = (e, presetSizes) => {
         if (presetSizes !== null)
@@ -107,7 +109,7 @@ const ProductDetails = () => {
             if (isInCart) {
                 if ("_id" in product) {
                     axios.put("/api/remove-from-cart", {
-                        userId: user?.userId, token: user?.token, productId: product._id
+                        userId: user?.userId, token: user?.token, title: product._id
                     }).then(_ => {
                         setAddToCartLoading(false)
                         dispatch(userActions.removeFromCart(product._id))
@@ -117,7 +119,7 @@ const ProductDetails = () => {
             } else {
                 if ("_id" in product) {
                     axios.put("/api/add-to-cart", {
-                        productId: product._id,
+                        title: product._id,
                         userId: user.userId,
                         token: user.token
                     }).then(_ => {
@@ -137,7 +139,7 @@ const ProductDetails = () => {
             setAddToFavoritesLoading(true)
             if (isFavorite) {
                 axios.put("/api/remove-from-favorites", {
-                    productId: router.query.prod_id,
+                    title,
                     userId: user.userId,
                     token: user.token
                 }).then(_ => {
@@ -151,7 +153,7 @@ const ProductDetails = () => {
             } else {
 
                 axios.put("/api/add-to-favorites", {
-                    productId: router.query.prod_id,
+                    title,
                     userId: user.userId,
                     token: user.token
                 }).then(_ => {
@@ -169,12 +171,12 @@ const ProductDetails = () => {
 
 
     return (
-        <Fragment>
+        <>
             <Head>
                 <title>
-                    {pageTitle}
+                    {`دیوال - ${ title }`}
                 </title>
-                <meta name={"description"} content={pageTitle}/>
+                <meta name={"description"} content={title}/>
             </Head>
 
             <Grid container item xs={12}>
@@ -351,7 +353,7 @@ const ProductDetails = () => {
                 <Info isLoading={isLoading} products={relatedProducts}/>
 
             </Grid>
-        </Fragment>
+        </>
     )
 
 

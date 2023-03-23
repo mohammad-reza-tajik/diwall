@@ -62,13 +62,13 @@ const SearchResults: React.FC<Props> = (props) => {
     const router = useRouter();
 
 
-    const goToProductHandler = (id) => {
+    const goToProductHandler = (title) => {
         if (onClose) {
             onClose()
         } else {
             onOpen(false)
         }
-        router.push(`/products/${id}`)
+        router.push(`/products/${title.split(" ").join("_")}`)
 
     }
 
@@ -88,7 +88,7 @@ const SearchResults: React.FC<Props> = (props) => {
 
                                     return (
                                         <Grid container item alignItems={"center"} xs={12} key={result._id}
-                                              onClick={() => goToProductHandler(result._id)}
+                                              onClick={() => goToProductHandler(result.title)}
                                               sx={styles.searchResultsItem}>
 
                                             <Grid item xs={"auto"}>

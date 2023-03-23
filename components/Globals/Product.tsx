@@ -52,11 +52,14 @@ const Product : React.FC<Product> = (props) => {
 
     const isFavorite = user?.favoriteList.includes(props._id)
 
+    const { title } = props
+    const slug = title.split(" ").join("_");
+
 
 
     const clickHandler = async () => {
         await router.push({
-                pathname: `/products/${props._id}`,
+                pathname: `/products/${slug}`,
 
             }
         )

@@ -47,13 +47,16 @@ const CartItem: React.FC<Props> = (props) => {
 
     }
 
+
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+
+    const title = props.title.split(" ").join("_")
 
     return (
             <Grid container item xs={12}>
                 <Grid className={"pointer"} container item xs={12} md={true} lg={6} alignItems={"center"}
-                      gap={matchesMD ? 10 : 20} onClick={() => router.push("/products/" + props._id.toString())}>
+                      gap={matchesMD ? 10 : 20} onClick={() => router.push("/products/" + title)}>
                     <Grid item xs={"auto"}>
                         <Image src={`/assets/pictures/products/${props.title?.replaceAll(" ", "-")}.jpg`} width={50} height={50}
                                 alt={props.title}/>
