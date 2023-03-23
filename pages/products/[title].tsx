@@ -64,7 +64,6 @@ const ProductDetails = () => {
     const [relatedProducts, setRelatedProducts] = useState([])
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToFavoritesLoading, setAddToFavoritesLoading] = useState(false)
-    // const [pageTitle, setPageTitle] = useState("لطفا صبر کنید ...")
     const [presetSizes, setPresetSizes] = useState("1")
     const [isLoading, setIsLoading] = useState(false)
 
@@ -90,7 +89,6 @@ const ProductDetails = () => {
             }).then(res => {
                 setProduct(res.data.productDetails)
                 setRelatedProducts(res.data.relatedProducts)
-                // setPageTitle(res.data.productDetails.title)
                 setIsLoading(false)
             }).catch(e => console.log(e))
 
