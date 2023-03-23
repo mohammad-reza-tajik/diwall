@@ -3,12 +3,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import CircularProgress from "@mui/material/CircularProgress";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper';
 import Product from "../Globals/Product";
-import axios from "axios"
-import {useEffect, useState} from "react";
 
 import "swiper/css";
 import 'swiper/css/navigation';
