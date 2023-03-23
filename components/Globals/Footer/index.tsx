@@ -342,7 +342,7 @@ const Footer: React.FC = () => {
 
 
                         <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"}
-                                endIcon={<Image src={"/assets/icons/google_play.svg"} alt={"apple_store"} height={15}
+                                endIcon={<Image src={"/assets/icons/google_play.svg"} alt={"google-play"} height={15}
                                                 width={15}/>}>
                             <Box component={"span"} position={"relative"} top={2}>
 
@@ -350,7 +350,7 @@ const Footer: React.FC = () => {
                             </Box>
                         </Button>
                         <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"}
-                                endIcon={<Image src={"/assets/icons/apple.svg"} alt={"apple_store"} height={15}
+                                endIcon={<Image src={"/assets/icons/apple.svg"} alt={"apple-store"} height={15}
                                                 width={15}/>}>
                             <Box component={"span"} position={"relative"} top={2}>
 
