@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, {Fragment} from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -39,13 +39,13 @@ const MainNavigation : React.FC= () => {
         <Grid container item alignItems={"center"} component={"nav"} direction={"row"} justifyContent={"space-between"}
               xs={12}>
             {!matchesMD &&
-                <Fragment>
+                <>
                     <Grid container alignItems={"center"} item xs={9} sx={styles.main_nav}>
                         <Link href={"/"}><Box component={"span"} sx={styles.main_nav_link}>صفحه نخست</Box></Link>
                         <Link href={"/products"}><Box component={"span"} sx={styles.main_nav_link}>جدیدترین ها</Box></Link>
-                        <Link href={"/products?sortBy=2"}><Box component={"span"} sx={styles.main_nav_link}>پرفروش ترین
+                        <Link rel={"nofollow"} href={"/products?sortBy=2"}><Box component={"span"} sx={styles.main_nav_link}>پرفروش ترین
                             ها</Box></Link>
-                        <Link href={"/products?sortBy=3"}><Box component={"span"} sx={styles.main_nav_link}>محبوب ترین
+                        <Link rel={"nofollow"} href={"/products?sortBy=3"}><Box component={"span"} sx={styles.main_nav_link}>محبوب ترین
                             ها</Box></Link>
                         <Link href={"/about"}><Box component={"span"} sx={styles.main_nav_link}>درباره ما</Box></Link>
                         <Link href={"/collaboration"}><Box component={"span"} sx={styles.main_nav_link}>همکاری با ما</Box></Link>
@@ -69,7 +69,7 @@ const MainNavigation : React.FC= () => {
                             </Grid>
                         </Grid>
                     </Grid>
-                </Fragment>
+                </>
 
             }
 

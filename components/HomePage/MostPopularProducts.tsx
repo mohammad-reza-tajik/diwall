@@ -48,7 +48,7 @@ const MostPopularProducts : React.FC<Props> = (props) => {
     return (
         <Grid container item xs alignItems={"center"} justifyContent={"center"}>
             <Grid container item alignItems={"center"} justifyContent={"center"} bgcolor={"primary.main"}
-                  p={{xs:15,md:30,lg:50}}>
+                  p={{xs:15,md:30}}>
                 {
                     matchesLG ?
                     <SectionHeading text={"محبوب ترین محصولات"} seeAll={true} route={"/products?sortBy=3"} white/> :
