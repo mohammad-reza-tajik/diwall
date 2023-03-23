@@ -16,18 +16,23 @@ import type {ProductType} from "../../db/productModel"
 
 
 
+interface Props {
+    products:ProductType[]
 
-const LatestProducts : React.FC = () => {
+}
+const LatestProducts : React.FC<Props> = (props) => {
 
-    const [isLoading , setIsLoading] = useState<boolean>(false)
-    const [latestProducts, setLatestProducts] = useState<[ProductType] | [] >([])
+    // console.log("[ from latest products] ",props.products)
+
+    // const [isLoading , setIsLoading] = useState<boolean>(false)
+    // const [latestProducts, setLatestProducts] = useState<[ProductType] | [] >([])
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
     const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
-    useEffect(() => {
+   /* useEffect(() => {
         setIsLoading(true)
         axios.post("/api/products",{sortBy:1}).then(res => {
             // console.log(res)
@@ -37,11 +42,32 @@ const LatestProducts : React.FC = () => {
             .catch(e => console.log(e))
 
 
-    }, [])
+    }, [])*/
 
     return (
         <Grid container item xs={12} alignItems={"center"}>
-            {isLoading &&
+
+                <Swiper spaceBetween={matchesSM ? 5 : 20}
+                        slidesPerView={matchesLG ? matchesMD ? 2 : 3 : 4}
+                        modules={[Navigation, A11y]}
+                        navigation
+                >
+                    {props.products.map((product) =>
+                        <SwiperSlide key={product && product._id}>
+                            <Product {...product} />
+                        </SwiperSlide>)}
+                </Swiper>
+
+
+        </Grid>
+    )
+
+}
+
+export default LatestProducts
+
+
+/* {isLoading &&
                 <Grid container item xs justifyContent={"center"}>
                     <CircularProgress color={"primary"} size={45}/>
                 </Grid>
@@ -59,11 +85,4 @@ const LatestProducts : React.FC = () => {
                             <Product {...product} />
                         </SwiperSlide>)}
                 </Swiper>
-            }
-
-        </Grid>
-    )
-
-}
-
-export default LatestProducts
+            }*/

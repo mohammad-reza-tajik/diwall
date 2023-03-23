@@ -20,18 +20,22 @@ import React from "react";
 import type {ProductType} from "../../db/productModel"
 
 
+interface Props {
+    products : ProductType[],
+    route: string;
+}
 
 
-const MostPopularProducts : React.FC<{ route : string }> = (props) => {
+const MostPopularProducts : React.FC<Props> = (props) => {
 
-    const [isLoading, setIsLoading] = useState(false)
-    const [mostPopularProducts, setMostPopularProducts] = useState<[ProductType] | []>([])
+    // const [isLoading, setIsLoading] = useState(false)
+    // const [mostPopularProducts, setMostPopularProducts] = useState<[ProductType] | []>([])
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
 
-    useEffect(() => {
+    /*useEffect(() => {
         setIsLoading(true)
         axios.post("/api/products", {sortBy: 3}).then(res => {
             setMostPopularProducts(res.data.products)
@@ -42,7 +46,7 @@ const MostPopularProducts : React.FC<{ route : string }> = (props) => {
                 console.log(e)
 
             })
-    }, [])
+    }, [])*/
 
     return (
         <Grid container item xs alignItems={"center"} justifyContent={"center"}>
@@ -66,7 +70,33 @@ const MostPopularProducts : React.FC<{ route : string }> = (props) => {
 
                     </Grid>
                 }
-                {isLoading &&
+
+
+                    <Grid container item md={12} lg={8}>
+                        <Swiper spaceBetween={matchesLG ? 5 : 20}
+                                slidesPerView={matchesMD ? 2 : 3}
+                                modules={[Navigation, A11y]}
+                                navigation
+
+                        >
+                            {props.products.map((product) =>
+                                <SwiperSlide key={product && product._id}>
+                                    <Product {...product} />
+                                </SwiperSlide>)}
+                        </Swiper>
+                    </Grid>
+
+
+
+
+            </Grid>
+        </Grid>
+
+    )
+}
+export default MostPopularProducts
+
+/*{isLoading &&
 
                     <Grid container item xs justifyContent={"center"}>
                         <CircularProgress sx={{color:"#fff"}} size={45}/>
@@ -87,12 +117,4 @@ const MostPopularProducts : React.FC<{ route : string }> = (props) => {
                         </Swiper>
                     </Grid>
 
-                }
-
-
-            </Grid>
-        </Grid>
-
-    )
-}
-export default MostPopularProducts
+                }*/
