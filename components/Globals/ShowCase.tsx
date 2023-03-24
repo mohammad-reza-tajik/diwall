@@ -14,30 +14,30 @@ const ShowCase: React.FC = () => {
 
 
     return (
-        <Grid container item component={"section"} justifyContent={"center"} alignItems={"center"} spacing={20} xs={12} md={11} mt={50} mx={"auto"}>
-                <Grid container justifyContent={"center"} alignItems={"center"} item xs={4} md={2}>
+        <Grid container item component={"section"} alignItems={"center"} overflow={"hidden"} xs={11}  mx={"auto"}>
+                <Grid container justifyContent={"center"} p={10} alignItems={"center"} item xs={4} md={2}>
                     <Image src={"/assets/pictures/showcase/digistyle.svg"} alt={"دیجی استایل"}
                            width={matchesMD ? 100 : 150} height={matchesMD ? 100 : 150}/>
                 </Grid>
-                <Grid container justifyContent={"center"} alignItems={"center"} item xs={4} md={2}>
+                <Grid container justifyContent={"center"} p={10} alignItems={"center"} item xs={4} md={2}>
                     <Image src={"/assets/pictures/showcase/ganjeh.svg"} alt={"گنجه"}
                            width={matchesMD ? 100 : 150} height={matchesMD ? 100 : 150}/>
                 </Grid>
-                <Grid container justifyContent={"center"} alignItems={"center"} item xs={4} md={2}>
+                <Grid container justifyContent={"center"} p={10} alignItems={"center"} item xs={4} md={2}>
                     <Image src={"/assets/pictures/showcase/fidibo.svg"} alt={"فیدیبو"}
                            width={matchesMD ? 100 : 150} height={matchesMD ? 100 : 150}/>
                 </Grid>
-                <Grid container justifyContent={"center"} alignItems={"center"} item xs={4} md={2}>
+                <Grid container justifyContent={"center"} p={10} alignItems={"center"} item xs={4} md={2}>
                     <Image src={"/assets/pictures/showcase/komoda.svg"} alt={"کمدا"}
                            width={matchesMD ? 100 : 150} height={matchesMD ? 100 : 150}/>
                 </Grid>
-                <Grid container justifyContent={"center"} alignItems={"center"} item xs={4} md={2}>
+                <Grid container justifyContent={"center"} p={10} alignItems={"center"} item xs={4} md={2}>
                     <Image src={"/assets/pictures/showcase/pindo.svg"} alt={"پیندو"}
                            width={matchesMD ? 100 : 150} height={matchesMD ? 100 : 150}/>
                 </Grid>
-                <Grid container justifyContent={"center"} alignItems={"center"} item xs={4} md={2}>
+                <Grid container justifyContent={"center"} p={10} alignItems={"center"} item xs={4} md={2}>
                     <Image src={"/assets/pictures/showcase/magnet.svg"} alt={"مگنت"}
-                           width={150} height={150}/>
+                           width={matchesMD ? 100 : 150} height={matchesMD ? 100 : 150}/>
                 </Grid>
         </Grid>
     )
