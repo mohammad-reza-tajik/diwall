@@ -16,13 +16,17 @@ import Image from "next/legacy/image"
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useAppSelector, useAppDispatch, userActions} from "../../store";
-import Features from "../../components/Globals/Features";
+// import Features from "../../components/Globals/Features";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import Head from "next/head";
-import Info from "../../components/DetailPage/Info";
+// import Info from "../../components/DetailPage/Info";
 import Divider from "@mui/material/Divider";
+import dynamic from "next/dynamic";
+
+const Info = dynamic(()=>import("../../components/DetailPage/Info"))
+const Features = dynamic(()=>import("../../components/Globals/Features"))
 
 
 const styles = {

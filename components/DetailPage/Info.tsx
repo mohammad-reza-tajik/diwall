@@ -5,7 +5,10 @@ import Grid from "@mui/material/Grid";
 import TabPanel from "../Globals/TabPanel";
 import RelatedProducts from "./RelatedProducts";
 import CircularProgress from "@mui/material/CircularProgress";
-import Comments from "./Comments";
+// import Comments from "./Comments";
+import dynamic from "next/dynamic";
+
+const Comments = dynamic(()=>import("./Comments"))
 
 const styles = {
     tab: {

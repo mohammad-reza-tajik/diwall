@@ -1,16 +1,24 @@
 import Grid from "@mui/material/Grid";
-import SectionHeading from "../components/Globals/SectionHeading";
-import BestSellingProducts from "../components/HomePage/BestSellingProducts";
-import LatestProducts from "../components/HomePage/LatestProducts";
-import MostPopularProducts from "../components/HomePage/MostPopularProducts";
+// import SectionHeading from "../components/Globals/SectionHeading";
+// import BestSellingProducts from "../components/HomePage/BestSellingProducts";
+// import LatestProducts from "../components/HomePage/LatestProducts";
+// import MostPopularProducts from "../components/HomePage/MostPopularProducts";
 import Features from "../components/Globals/Features";
-import Places from "../components/HomePage/Places";
-import MiddleSection from "../components/HomePage/MiddleSection";
+// import Places from "../components/HomePage/Places";
+// import MiddleSection from "../components/HomePage/MiddleSection";
 import Banner from "../components/HomePage/Banner";
 import React from "react";
 import {GetStaticProps} from "next";
 import axios from "axios";
-import type {ProductType} from "../db/productModel"
+import type {ProductType} from "../db/productModel";
+import dynamic from "next/dynamic";
+
+const SectionHeading = dynamic(()=>import("../components/Globals/SectionHeading"))
+const Places = dynamic(()=>import("../components/HomePage/Places"))
+const MiddleSection = dynamic(()=>import("../components/HomePage/MiddleSection"))
+const MostPopularProducts = dynamic(()=>import("../components/HomePage/MostPopularProducts"))
+const LatestProducts = dynamic(()=>import("../components/HomePage/LatestProducts"))
+const BestSellingProducts = dynamic(()=>import("../components/HomePage/BestSellingProducts"))
 
 
 interface Props {

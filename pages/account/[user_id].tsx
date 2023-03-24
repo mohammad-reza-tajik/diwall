@@ -11,9 +11,14 @@ import Head from "next/head";
 import {useAppSelector} from "../../hooks/redux_hooks";
 import {userActions} from "../../store";
 import {useDispatch} from "react-redux";
-import Cart from "../../components/AccountPage/Cart";
-import Wishlist from "../../components/AccountPage/Wishlist";
-import Profile from "../../components/AccountPage/Profile";
+// import Cart from "../../components/AccountPage/Cart";
+// import Wishlist from "../../components/AccountPage/Wishlist";
+// import Profile from "../../components/AccountPage/Profile";
+import dynamic from "next/dynamic";
+
+const Profile = dynamic(()=>import("../../components/AccountPage/Profile"))
+const Wishlist = dynamic(()=>import("../../components/AccountPage/Wishlist"))
+const Cart = dynamic(()=>import("../../components/AccountPage/Cart"))
 
 const styles = {
     tab: {
