@@ -3,6 +3,7 @@ import MainNavigation from "../MainNavigation";
 
 import Badge from "@mui/material/Badge";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -23,7 +24,7 @@ import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 
 import Image from "next/image";
 import Link from "next/link";
-import React, {Fragment, useState} from "react";
+import React, {useState} from "react";
 
 import {useAppDispatch, useAppSelector, userActions} from "../../../store";
 import SearchResults from "../SearchResults";
@@ -147,12 +148,10 @@ const HeaderDesktop: React.FC = () => {
         <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={30} xs={12}>
             <Grid container item direction={"row"} justifyContent={"center"} alignItems={"center"} xs={12}
                   py={20}>
-                <Grid container item md={"auto"} lg={1} pl={10} minHeight={100} maxWidth={100}>
-                    <Link href={"/"}>
+                <Box minHeight={100} maxWidth={100} component={Link} href={"/"}>
                         <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={100} height={100}
                         />
-                    </Link>
-                </Grid>
+                </Box>
                 <Grid position={"relative"} container direction={"column"} item
                       justifyContent={"center"}
                       alignItems={"flex-start"} md={true} lg={6} xl={7} pr={20} component={"form"}
@@ -179,7 +178,6 @@ const HeaderDesktop: React.FC = () => {
                                             </IconButton>
                                         </InputAdornment>
                                     ),
-                                    // endAdornment: (search.trim() !== "" && closeButton)
                                 }}
                             />
                         </Tooltip>
@@ -230,10 +228,11 @@ const HeaderDesktop: React.FC = () => {
                     </Tooltip>
                 </Grid>
                 <Grid item container md={"auto"} lg={"auto"} xl={2} justifyContent={"flex-end"}>
-
-                    {user?.username === null ?
-                        <Link href={"/auth"} passHref>
+                    {
+                        user?.username === null ?
                             <Button
+                                component={Link}
+                                href={"/auth"}
                                 variant={"contained"}
                                 color={"primary"}
                                 startIcon={
@@ -241,9 +240,9 @@ const HeaderDesktop: React.FC = () => {
                                 }
                                 sx={styles.signInButton}
                             > ورود / ثبت نام </Button>
-                        </Link>
+
                         :
-                        <Fragment>
+                        <>
                             <Button
                                 variant={"contained"}
                                 onClick={(e) => {
@@ -291,7 +290,7 @@ const HeaderDesktop: React.FC = () => {
                                     </Typography>
                                 </MenuItem>
                             </Menu>
-                        </Fragment>
+                        </>
 
                     }
                 </Grid>
