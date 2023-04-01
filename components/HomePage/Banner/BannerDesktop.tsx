@@ -33,7 +33,7 @@ const BannerDesktop: React.FC = () => {
 
     return (
 
-        <Grid container item component={"section"} minHeight={510}>
+        <Grid container item component={"section"} minHeight={510} mb={40}>
             <Grid container item direction={"column"}  md={4} sx={styles.heroTextBox}>
                 <Typography  fontFamily={"dana-black"} component={"h1"} fontSize={25}
                             color={"white.main"}>

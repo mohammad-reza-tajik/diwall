@@ -1,12 +1,10 @@
 import Grid from "@mui/material/Grid";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
+import Divider from "@mui/material/Divider";
 
 import Image from "next/legacy/image"
 import React from "react";
-import Divider from "@mui/material/Divider";
 
 const ShowCase: React.FC = () => {
 
