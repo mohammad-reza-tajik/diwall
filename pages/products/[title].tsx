@@ -12,7 +12,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 
-import Image from "next/legacy/image"
+import Image from "next/image"
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useAppSelector, useAppDispatch, userActions} from "../../store";
@@ -192,7 +192,7 @@ const ProductDetails = () => {
 
                                 <Image
                                     src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : ""}.jpg`}
-                                    alt={`${"title" in product ? product.title : ""}`} layout={"fill"}/>
+                                    alt={`${"title" in product ? product.title : ""}`} fill sizes={"500px"} />
 
                         }
                     </Grid>

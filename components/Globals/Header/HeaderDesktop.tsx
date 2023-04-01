@@ -199,7 +199,7 @@ const HeaderDesktop: React.FC = () => {
                         <Badge showZero max={99} badgeContent={user?.favoriteList.length || 0} color="primary"
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}
-                        >
+                         >
                             <IconButton color={"primary"} onClick={goToFavorites} aria-label="go to wishlist">
                                 <FavoriteBorder sx={{
                                     fontSize: {xs: 40, sm: 50},
