@@ -17,8 +17,7 @@ const SectionHeading = dynamic(()=>import("../components/Globals/SectionHeading"
 const Places = dynamic(()=>import("../components/HomePage/Places"))
 const MiddleSection = dynamic(()=>import("../components/HomePage/MiddleSection"))
 const MostPopularProducts = dynamic(()=>import("../components/HomePage/MostPopularProducts"))
-const LatestProducts = dynamic(()=>import("../components/HomePage/LatestProducts"))
-const BestSellingProducts = dynamic(()=>import("../components/HomePage/BestSellingProducts"))
+const SwiperProducts = dynamic(()=>import("../components/HomePage/SwiperProducts"))
 
 
 interface Props {
@@ -35,10 +34,10 @@ const Home : React.FC<Props> = (props) => {
             <Places/>
             <MostPopularProducts products={props.mostPopularProducts} route={"/products?sortBy=3"} />
             <SectionHeading text={"محصولات جدید"} seeAll={true} route={"/products"}/>
-            <LatestProducts products={props.latestProducts} />
+            <SwiperProducts products={props.latestProducts} />
             <MiddleSection/>
             <SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"/products?sortBy=2"} />
-            <BestSellingProducts products={props.bestSellingProducts} />
+            <SwiperProducts products={props.bestSellingProducts} />
         </Grid>
     )
 }
