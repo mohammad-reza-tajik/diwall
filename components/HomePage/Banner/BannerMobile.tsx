@@ -12,7 +12,6 @@ const styles = {
     },
     bannerTextBox: {
         backgroundImage: "linear-gradient(rgba(44, 44, 44,.6),rgba(44, 44, 44,.6))",
-        backgroundSize: {xs: "100% 100%", sm: "cover"},
         py: 100,
         px: {xs: 50, sm: 90},
         gap: 60,
@@ -43,7 +42,7 @@ const BannerMobile: React.FC = () => {
                     محصولات</Button>
 
             </Grid>
-            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} fill sizes={"100vw"}/>
+            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} priority fill sizes={"100vh"}/>
         </Grid>
     );
 };

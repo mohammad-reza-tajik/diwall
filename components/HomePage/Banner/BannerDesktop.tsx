@@ -50,7 +50,7 @@ const BannerDesktop: React.FC = () => {
                 </Button>
             </Grid>
             <Grid item md={8} position={"relative"}>
-                    <Image fill src={"/assets/pictures/banner-desktop.jpg"} alt={"hero_image_interior_design"} sizes={"900px"}
+                    <Image fill src={"/assets/pictures/banner-desktop.jpg"} priority alt={"hero_image_interior_design"} sizes={"900px"}
                             onLoad={imageIsLoaded}/>
                     {
                         loaded && <Skeleton variant={"rectangular"} animation={"wave"} sx={{width: 1, height: 1}}/>

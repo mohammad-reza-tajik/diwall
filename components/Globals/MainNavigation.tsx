@@ -42,7 +42,7 @@ const MainNavigation: React.FC = () => {
                 <>
                     <Grid container alignItems={"center"} component={"nav"} item xs={9} sx={styles.main_nav}>
                         <Box component={Link} href={"/"} sx={styles.main_nav_link}>صفحه نخست</Box>
-                        <Box component={Link} href={"//products"} sx={styles.main_nav_link}>جدیدترین ها</Box>
+                        <Box component={Link} href={"/products"} sx={styles.main_nav_link}>جدیدترین ها</Box>
                         <Box component={Link} href={"/products?sortBy=2"} sx={styles.main_nav_link}>پرفروش ترین
                             ها</Box>
                         <Box component={Link} href={"/products?sortBy=3"} sx={styles.main_nav_link}>محبوب ترین
