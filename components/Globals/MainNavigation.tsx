@@ -27,7 +27,7 @@ const styles = {
     }
 }
 
-const MainNavigation : React.FC= () => {
+const MainNavigation: React.FC = () => {
 
 
     const theme = useTheme()
@@ -36,37 +36,35 @@ const MainNavigation : React.FC= () => {
 
 
     return (
-        <Grid container item alignItems={"center"} component={"nav"} direction={"row"} justifyContent={"space-between"}
-              xs={12}>
-            {!matchesMD &&
+        <Grid container item alignItems={"center"} justifyContent={"space-between"}>
+            {
+                !matchesMD &&
                 <>
-                    <Grid container alignItems={"center"} item xs={9} sx={styles.main_nav}>
-                        <Link href={"/"}><Box component={"span"} sx={styles.main_nav_link}>صفحه نخست</Box></Link>
-                        <Link href={"/products"}><Box component={"span"} sx={styles.main_nav_link}>جدیدترین ها</Box></Link>
-                        <Link rel={"nofollow"} href={"/products?sortBy=2"}><Box component={"span"} sx={styles.main_nav_link}>پرفروش ترین
-                            ها</Box></Link>
-                        <Link rel={"nofollow"} href={"/products?sortBy=3"}><Box component={"span"} sx={styles.main_nav_link}>محبوب ترین
-                            ها</Box></Link>
-                        <Link href={"/about"}><Box component={"span"} sx={styles.main_nav_link}>درباره ما</Box></Link>
-                        <Link href={"/collaboration"}><Box component={"span"} sx={styles.main_nav_link}>همکاری با ما</Box></Link>
+                    <Grid container alignItems={"center"} component={"nav"} item xs={9} sx={styles.main_nav}>
+                        <Box component={Link} href={"/"} sx={styles.main_nav_link}>صفحه نخست</Box>
+                        <Box component={Link} href={"//products"} sx={styles.main_nav_link}>جدیدترین ها</Box>
+                        <Box component={Link} href={"/products?sortBy=2"} sx={styles.main_nav_link}>پرفروش ترین
+                            ها</Box>
+                        <Box component={Link} href={"/products?sortBy=3"} sx={styles.main_nav_link}>محبوب ترین
+                            ها</Box>
+                        <Box component={Link} href={"/about"} sx={styles.main_nav_link}>درباره ما</Box>
+                        <Box component={Link} href={"/collaboration"} sx={styles.main_nav_link}>همکاری با ما</Box>
                     </Grid>
                     <Grid container item direction={"row"} xs={2} justifyContent={"flex-end"}
                           display={matches1277 && "none"}>
                         <Grid container item direction={"column"} xs={6}>
-                            <Grid item>
+
                                 <Typography fontWeight={700} color={"#666"} fontSize={18}
                                             variant={"caption"}>021464879</Typography>
-                            </Grid>
-                            <Grid item mt={"-.7rem"}>
+
+
                                 <Typography color={"#666"} fontSize={12} variant={"caption"}>پشتیبانی
                                     مشتریان</Typography>
-                            </Grid>
+
 
                         </Grid>
-                        <Grid item container justifyContent={"center"} alignItems={"flex-end"} xs={2} mr={"-.7rem"}>
-                            <Grid item>
-                                <LocalPhoneOutlined sx={{fontSize: 35}} color={"primary"}/>
-                            </Grid>
+                        <Grid item container justifyContent={"center"} alignItems={"center"} xs={2}>
+                            <LocalPhoneOutlined sx={{fontSize: 35}} color={"primary"}/>
                         </Grid>
                     </Grid>
                 </>

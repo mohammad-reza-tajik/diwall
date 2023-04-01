@@ -16,32 +16,34 @@ const styles = {
         py: 100,
         px: {xs: 50, sm: 90},
         gap: 60,
-        zIndex:50
+        zIndex: 50
 
 
     }
 }
 
-const BannerMobile : React.FC = () => {
+const BannerMobile: React.FC = () => {
 
 
     return (
-        <Grid container item justifyContent={"center"} component={"section"} mb={40} minWidth={"100vw"} position={"relative"}>
+        <Grid container item justifyContent={"center"} component={"section"} mb={40} minWidth={"100vw"}
+              position={"relative"}>
             <Grid container item direction={"column"} xs={12} sx={styles.bannerTextBox}>
-                    <Typography fontFamily={"dana-black"} component={"h1"} fontSize={25}
-                                color={"white.main"} textAlign={"center"}>
-                        خانه رویایی خود را به واقعیت تبدیل کنید
-                    </Typography>
-                    <Typography variant={"caption"} component={"p"} fontSize={{xs: 16, sm: 18}} color={"white.main"}
-                                textAlign={"center"}>
-                        از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
-                        آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
-                    </Typography>
-                        <Button variant={"contained"} color={"primary"} size={"medium"} sx={styles.bannerButton} component={Link} href={"/products"}>مشاهده
-                            محصولات</Button>
+                <Typography fontFamily={"dana-black"} component={"h1"} fontSize={25}
+                            color={"white.main"} textAlign={"center"}>
+                    خانه رویایی خود را به واقعیت تبدیل کنید
+                </Typography>
+                <Typography lineHeight={1.8} component={"p"} fontSize={{xs: 16, sm: 18}} color={"white.main"}
+                            textAlign={"center"}>
+                    از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
+                    آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
+                </Typography>
+                <Button variant={"contained"} color={"primary"} size={"medium"} sx={styles.bannerButton}
+                        component={Link} href={"/products"}>مشاهده
+                    محصولات</Button>
 
             </Grid>
-           <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} fill sizes={"100vw"} />
+            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} fill sizes={"100vw"}/>
         </Grid>
     );
 };
