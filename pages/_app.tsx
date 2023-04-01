@@ -31,7 +31,7 @@ function MyApp({Component, pageProps}) {
 
         const body = document.body
         body.style.backgroundColor = "rgb(248,248,248)"
-        if (router.pathname === "/sign-in") {
+        if (router.pathname === "/auth") {
             body.style.overflow = "hidden"
         } else {
             body.style.overflow = "scroll"
@@ -69,13 +69,13 @@ function MyApp({Component, pageProps}) {
                 <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
 
                     <Grid item xs={11}>
-                        {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Header/>}
+                        {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Header/>}
                         <Auth>
                             <main>
                                 <Component {...pageProps} />
                             </main>
                         </Auth>
-                        {router.pathname === "/sign-in" || router.pathname === "/404" ? "" : <Footer/>}
+                        {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Footer/>}
                     </Grid>
                 </Grid>
             </Provider>

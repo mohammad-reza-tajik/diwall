@@ -95,7 +95,7 @@ const Product : React.FC<Product> = (props) => {
             }
         } else {
 
-            router.push("/sign-in")
+            router.push("/auth")
         }
 
     }

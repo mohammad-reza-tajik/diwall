@@ -132,7 +132,7 @@ const ProductDetails = () => {
                 }
             }
         } else
-            router.push("/sign-in")
+            router.push("/auth")
 
 
     }
@@ -167,7 +167,7 @@ const ProductDetails = () => {
                 ).catch(e => console.log(e))
             }
         } else
-            router.push("/sign-in")
+            router.push("/auth")
 
     }
 

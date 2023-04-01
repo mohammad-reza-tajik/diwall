@@ -123,7 +123,7 @@ const HeaderDesktop: React.FC = () => {
 
         } else {
 
-            await router.push("/sign-in")
+            await router.push("/auth")
         }
     }
 
@@ -133,7 +133,7 @@ const HeaderDesktop: React.FC = () => {
             await router.push({pathname: `/account/${user?.userId}`, query: {tab: 3}})
         } else {
 
-            await router.push("/sign-in")
+            await router.push("/auth")
         }
 
     }
@@ -232,7 +232,7 @@ const HeaderDesktop: React.FC = () => {
                 <Grid item container md={"auto"} lg={"auto"} xl={2} justifyContent={"flex-end"}>
 
                     {user?.username === null ?
-                        <Link href={"/sign-in"} passHref>
+                        <Link href={"/auth"} passHref>
                             <Button
                                 variant={"contained"}
                                 color={"primary"}

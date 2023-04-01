@@ -11,9 +11,6 @@ import Head from "next/head";
 import {useAppSelector} from "../../hooks/redux_hooks";
 import {userActions} from "../../store";
 import {useDispatch} from "react-redux";
-// import Cart from "../../components/AccountPage/Cart";
-// import Wishlist from "../../components/AccountPage/Wishlist";
-// import Profile from "../../components/AccountPage/Profile";
 import dynamic from "next/dynamic";
 
 const Profile = dynamic(()=>import("../../components/AccountPage/Profile"))
@@ -83,7 +80,7 @@ const Dashboard : React.FC = () => {
             } else {
                 localStorage.clear()
                 dispatch(userActions.logout())
-                router.push("/sign-in")
+                router.push("/auth")
 
             }
         }

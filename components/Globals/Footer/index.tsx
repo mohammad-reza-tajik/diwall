@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
     return (
         <>
             <ShowCase />
-        <Grid container item xs={12} component={"footer"} justifyContent={{xs: "center", md: "space-between"}} mt={100}>
+        <Grid container item xs={12} component={"footer"} justifyContent={{xs: "center", md: "space-between"}} mt={30}>
             <Grid container item xs={6} md={2} alignItems={"flex-start"} spacing={10}>
                 <Grid item xs={12} mb={10}>
                     <Typography variant={"h5"} color={"#555"} fontSize={18} fontFamily={"dana-bold"}>فروشگاه
@@ -270,7 +270,8 @@ const Footer: React.FC = () => {
                             color: "primary.main"
                         }}>دیوال</Box></Typography>
                     <Typography variant={"h5"} component={"p"} lineHeight={1.5} textAlign={"justify"} display={"block"} color={"#555"}
-                                fontSize={{xs: 14, md: 16}}>پوستر دیواری الگوی بسیار مناسبی از یک متریال ایده آل و
+                                fontSize={{xs: 14, md: 16}}>
+                        پوستر دیواری الگوی بسیار مناسبی از یک متریال ایده آل و
                         پرکاربرد در
                         دکوراسیون
                         داخلی بوده که توانسته با

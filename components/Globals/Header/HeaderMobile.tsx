@@ -96,7 +96,7 @@ const HeaderMobile: React.FC = () => {
                 {
                     user.username === null ?
 
-                        <Link href={"/sign-in"} passHref>
+                        <Link href={"/auth"} passHref>
                             <IconButton color={"primary"} aria-label="login">
                                 <Login sx={styles.headerIcon}/>
                             </IconButton>
