@@ -220,8 +220,11 @@ const ProductDetails = () => {
                                             py={10}
                                             color={"white.main"}
                                             bgcolor={isLoading ? "transparent" : "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
-                                    {isLoading ? <Skeleton variant={"text"} animation={"wave"} width={100}
-                                                           sx={{fontSize: 16}}/> : "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "موجود" : "ناموجود"}
+                                    {
+                                        isLoading ?
+                                            <Skeleton variant={"text"} animation={"wave"} width={100} sx={{fontSize: 16}}/> :
+                                            "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "موجود" : "ناموجود"
+                                    }
                                 </Typography>
                             </Grid>
                         </Grid>
