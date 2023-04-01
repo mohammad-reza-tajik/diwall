@@ -23,15 +23,11 @@ import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 
 import Image from "next/image";
 import Link from "next/link";
-import React, {Fragment, useCallback, useState} from "react";
-import axios from "axios";
-import {useRouter} from "next/router";
+import React, {Fragment, useState} from "react";
+
 import {useAppDispatch, useAppSelector, userActions} from "../../../store";
-import CircularProgress from "@mui/material/CircularProgress";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import SearchResults from "../SearchResults";
+import useSearch from "../../../hooks/useSearch";
 
 
 const styles = {
@@ -103,15 +99,14 @@ const styles = {
 
 const HeaderDesktop: React.FC = () => {
 
-    const router = useRouter()
-
     const user = useAppSelector(state => state)
     const dispatch = useAppDispatch()
 
-    const [search, setSearch] = useState<string>("")
-    const [isWrong, setIsWrong] = useState<boolean>(false)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [results, setResults] = useState<Array<any>>([])
+    const {router , search , submitSearchHandler , searchChangeHandler , isWrong , results , isLoading , closeSearchHandlerDesktop} = useSearch("desktop")
+
+
+
+
 
     //*** menu logic ***//
 
@@ -143,74 +138,7 @@ const HeaderDesktop: React.FC = () => {
 
     }
 
-    const submitSearchHandler = (e) => {
-        e.preventDefault()
-        if (search.trim() === "") {
-            setIsWrong(true)
-            setTimeout(() => {
-                setIsWrong(false)
-            }, 5000)
-            return
-        }
-        setIsWrong(false)
-        axios.post(`/api/products`, {search}).then(_ => {
-            router.push(
-                {
-                    pathname: `/products`,
-                    query: {
-                        search,
-                        page: 1
-                    }
-                })
-            setSearch("")
-        }).catch(err => {
-            console.log(err)
-        })
-    }
 
-
-    const closeSearchHandler = useCallback(() => {
-        setSearch("")
-
-    }, [])
-
-    const searchChangeHandler = (e) => {
-        setSearch(e.target.value)
-        optimizedFn(e.target.value)
-        if (e.target.value.trim() === "") {
-            setIsWrong(true)
-            setTimeout(() => {
-                setIsWrong(false)
-            }, 5000)
-
-        } else {
-            setIsWrong(false)
-        }
-    }
-
-    /*** start of debouncing ***/
-    const debounce = (func) => {
-        let timer;
-        return function (...args) {
-            const context = this;
-            if (timer) clearTimeout(timer);
-            timer = setTimeout(() => {
-                timer = null;
-                func.apply(context, args);
-            }, 800);
-        };
-    };
-
-
-    const handleChange = async (value) => {
-        setIsLoading(true)
-        const res = await axios.post(`/api/products`, {search: value})
-        setResults(res.data.products.slice(0, 4));
-        setIsLoading(false)
-        // console.log(res.data)
-
-    };
-    const optimizedFn = useCallback(debounce(handleChange), []);
 
     /*** end of debouncing ***/
 
@@ -256,13 +184,13 @@ const HeaderDesktop: React.FC = () => {
                             />
                         </Tooltip>
                         <IconButton aria-label="clear search field" sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}
-                                    onClick={closeSearchHandler}>
+                                    onClick={closeSearchHandlerDesktop}>
                             <Close color={"primary"} fontSize={"large"}/>
                         </IconButton>
 
                         {
                             search.trim().length >= 3 &&
-                                <SearchResults isLoading={isLoading} results={results} search={search} submitSearchHandler={submitSearchHandler} onClose={closeSearchHandler} />
+                                <SearchResults isLoading={isLoading} results={results} search={search} submitSearchHandler={submitSearchHandler} onClose={closeSearchHandlerDesktop} />
                         }
                     </Grid>
                 </Grid>

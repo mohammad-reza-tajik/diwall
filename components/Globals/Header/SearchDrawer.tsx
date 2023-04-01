@@ -5,10 +5,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Search from "@mui/icons-material/Search";
 import Close from "@mui/icons-material/Close";
-import React, {useState, useCallback} from "react";
-import axios from "axios";
-import {useRouter} from "next/router";
+import React from "react";
+
 import SearchResults from "../SearchResults";
+import useSearch from "../../../hooks/useSearch";
 
 
 const styles = {
@@ -59,80 +59,7 @@ interface Props {
 
 const SearchDrawer: React.FC<Props> = (props) => {
 
-    const router = useRouter()
-    const [search, setSearch] = useState<string>("")
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [results, setResults] = useState<any[]>([])
-    const [isWrong, setIsWrong] = useState(false)
-
-    const changeHandler = (e) => {
-        setSearch(e.target.value)
-        optimizedFn(e.target.value)
-        if (e.target.value.trim() === "") {
-            setIsWrong(true)
-            setTimeout(() => {
-                setIsWrong(false)
-            }, 5000)
-
-        } else {
-            setIsWrong(false)
-        }
-    }
-
-    /*** start of debouncing ***/
-    const debounce = (func) => {
-        let timer;
-        return function (...args) {
-            const context = this;
-            if (timer) clearTimeout(timer);
-            timer = setTimeout(() => {
-                timer = null;
-                func.apply(context, args);
-            }, 800);
-        };
-    };
-
-
-    const handleChange = async (value) => {
-        setIsLoading(true)
-        const res = await axios.post(`/api/products`, {search: value})
-        setResults(res.data.products.slice(0, 4));
-        setIsLoading(false)
-        // console.log(res.data)
-
-    };
-    const optimizedFn = useCallback(debounce(handleChange), []);
-
-    /*** end of debouncing ***/
-
-
-    const submitSearchHandler = (e) => {
-        e.preventDefault();
-        if (search.trim() === "") {
-            setIsWrong(true)
-            setTimeout(() => {
-                setIsWrong(false)
-            }, 5000)
-            return
-        }
-        setIsWrong(false)
-        axios.post(`/api/products`, {search}).then(_ => {
-            router.push(
-                {
-                    pathname: `/products`,
-                    query: {
-                        search,
-                        page: 1
-                    }
-
-                })
-            setSearch("")
-        }).catch(err => {
-            console.log(err)
-
-        })
-        props.onOpen(false)
-    }
+    const {search , isWrong , submitSearchHandler , searchChangeHandler , results , isLoading } = useSearch("mobile" , props);
 
     return (
         <Grid container item xs={12} component={"form"} onSubmit={submitSearchHandler} sx={{
@@ -147,7 +74,7 @@ const SearchDrawer: React.FC<Props> = (props) => {
                         fullWidth
                         placeholder={"جستجو ..."}
                         value={search}
-                        onChange={changeHandler}
+                        onChange={searchChangeHandler}
                         sx={styles.searchField}
                         variant="outlined"
                         size={"medium"}

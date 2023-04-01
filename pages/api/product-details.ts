@@ -22,7 +22,7 @@ const handler = async (req, res) => {
         const relatedProducts = await Product.find({category: {$elemMatch: {$eq: productDetails?.category[1]}}})
         res.send({productDetails, relatedProducts})
 
-    } else res.send(undefined)
+    } else res.send(null)
 }
 
 export default handler
