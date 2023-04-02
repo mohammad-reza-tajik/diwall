@@ -28,7 +28,7 @@ const styles = {
 const BannerMobile: React.FC = () => {
 
     return (
-        <Grid container item justifyContent={"center"} component={"section"} mb={40} minWidth={"100vw"}
+        <Grid container item justifyContent={"center"}  mb={40} minWidth={"100vw"}
               position={"relative"}>
 
             <Grid container item direction={"column"} xs={12} sx={styles.bannerTextBox}>
@@ -46,7 +46,7 @@ const BannerMobile: React.FC = () => {
                     محصولات</Button>
 
             </Grid>
-            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} priority fill sizes={"360px"} className={"cover"}/>
+            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} fill sizes={"360px"} className={"cover"}/>
         </Grid>
     );
 };

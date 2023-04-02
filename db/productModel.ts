@@ -1,60 +1,60 @@
 import mongoose from "mongoose";
+import User from "./userModel";
 
 const productSchema = new mongoose.Schema({
 
-    title:{
-        type:String,
-        required:true
+    title: {
+        type: String,
+        required: true
     },
-    price:{
-        type:String,
-        required:true
+    price: {
+        type: String,
+        required: true
     },
-    image:{
-        type:String,
-        required:true
+    image: {
+        type: String,
+        required: true
     },
-    image_full:{
-        type:String,
-        required:true
+    image_full: {
+        type: String,
+        required: true
     },
-    details:{
-        type:String,
-        required:true
+    details: {
+        type: String,
+        required: true
     },
-    favorite_count:{
-        type:Number,
-        required:true
+    favorite_count: {
+        type: Number,
+        required: true
     },
-    purchase_count:{
-        type:Number,
-        required:true
+    purchase_count: {
+        type: Number,
+        required: true
     },
-    category:[{type:String}]   ,
-    numbers_in_stock:{
-        type:Number,
-        required:true
+    category: [{type: String}],
+    numbers_in_stock: {
+        type: Number,
+        required: true
     },
     comments: [{
-        content:{
-            type:"String",
-            required:true
+        content: {
+            type: "String",
+            required: true
         },
-        date:{
-            type:mongoose.Schema.Types.Date,
-            required:true
+        date: {
+            type: mongoose.Schema.Types.Date,
+            required: true
         },
-        author:{
-            type:mongoose.Types.ObjectId,
-        ref:"User"
+        author: {
+            type: mongoose.Types.ObjectId,
+            ref: "User"
 
         }
 
     }]
 
 
-
-},{timestamps:true})
+}, {timestamps: true})
 
 
 export interface ProductType {
@@ -68,11 +68,8 @@ export interface ProductType {
 }
 
 
-
-
-
-// I was getting an error which was saying that you're re-creating model so i find below solution from stack overflow
-export default  mongoose.models.Product || mongoose.model('Product', productSchema);
+// I was getting an error which was saying that you're re-creating model, so I find below solution from stack overflow
+export default mongoose.models.Product || mongoose.model('Product', productSchema);
 
 
 

@@ -68,7 +68,7 @@ const useAuth = () => {
 
                 setIsLoading(false)
                 openSnackbarHandler()
-                router.back()
+                router.push("/")
 
             }
         ).catch(e => {
