@@ -3,8 +3,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Image from "next/image"
 import Link from "next/link"
-import React, {useCallback, useState} from "react";
-import Skeleton from "@mui/material/Skeleton";
+import React from "react";
 
 const styles = {
 
@@ -25,12 +24,6 @@ const styles = {
 
 const BannerDesktop: React.FC = () => {
 
-    const [loaded, setLoaded] = useState<boolean>(true);
-
-    const imageIsLoaded = useCallback(() => {
-        setLoaded(false)
-    }, [])
-
     return (
 
         <Grid container item component={"section"} minHeight={510} mb={40}>
@@ -44,18 +37,13 @@ const BannerDesktop: React.FC = () => {
                     از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                     آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
                 </Typography>
-                <Button component={Link} href={"/products"} variant={"outlined"} color={"white"}
+                <Button component={Link} href={"/products"} variant={"outlined"} color={"white"} aria-label="visit products"
                         size={"medium"} sx={styles.heroButton}>
                     مشاهده محصولات
                 </Button>
             </Grid>
             <Grid item md={8} position={"relative"}>
-                    <Image fill src={"/assets/pictures/banner-desktop.jpg"} priority alt={"hero_image_interior_design"} sizes={"900px"}
-                            onLoad={imageIsLoaded}/>
-                    {
-                        loaded && <Skeleton variant={"rectangular"} animation={"wave"} sx={{width: 1, height: 1}}/>
-                    }
-
+                    <Image fill src={"/assets/pictures/banner-desktop.jpg"} className={"cover"} priority alt={"banner-mobile"} sizes={"900px"}/>
             </Grid>
         </Grid>
     )

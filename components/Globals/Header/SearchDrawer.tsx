@@ -81,18 +81,18 @@ const SearchDrawer: React.FC<Props> = (props) => {
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <IconButton type={"submit"}>
+                                    <IconButton type={"submit"} aria-label="search">
                                         <Search sx={styles.searchIcon}/>
                                     </IconButton>
                                 </InputAdornment>
                             ),
-                            // endAdornment: (closeButton)
+
                         }}
                     />
                 </Tooltip>
             </Grid>
             <Grid item xs={"auto"} maxHeight={80} position={"absolute"} top={30} left={10}>
-                <IconButton onClick={() => props.onOpen(false)}>
+                <IconButton onClick={() => props.onOpen(false)} aria-label="close search drawer">
                     <Close sx={styles.closeIcon}/>
                 </IconButton>
 

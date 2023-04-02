@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import React, {useState} from "react";
+import React from "react";
 import Image from "next/image";
 
 
@@ -41,12 +41,12 @@ const BannerMobile: React.FC = () => {
                     از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                     آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
                 </Typography>
-                <Button variant={"contained"} color={"primary"} size={"medium"} sx={styles.bannerButton}
+                <Button variant={"contained"} color={"primary"} size={"medium"} sx={styles.bannerButton} aria-label="visit products"
                         component={Link} href={"/products"}>مشاهده
                     محصولات</Button>
 
             </Grid>
-            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} priority fill sizes={"100vh"}/>
+            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} priority fill sizes={"360px"} className={"cover"}/>
         </Grid>
     );
 };

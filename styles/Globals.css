@@ -100,6 +100,18 @@ input[type=number] {
   cursor: pointer;
 }
 
+.contain {
+  object-fit: contain;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.fill {
+  object-fit: fill;
+}
+
 .MuiSnackbarContent-message, .css-1exqwzz-MuiSnackbarContent-message {
   font-size: 15px !important;
 }

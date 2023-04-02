@@ -235,6 +235,7 @@ const HeaderDesktop: React.FC = () => {
                                 href={"/auth"}
                                 variant={"contained"}
                                 color={"primary"}
+                                aria-label="login/signup"
                                 startIcon={
                                     <Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
                                 }
@@ -245,6 +246,7 @@ const HeaderDesktop: React.FC = () => {
                         <>
                             <Button
                                 variant={"contained"}
+                                aria-label="show menu"
                                 onClick={(e) => {
                                     setAnchorEl(anchorEl ? null : e.currentTarget)
                                 }}
