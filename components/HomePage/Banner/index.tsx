@@ -1,19 +1,20 @@
-import useMediaQuery from "@mui/material/useMediaQuery";
-import {useTheme} from "@mui/material/styles"
 import BannerMobile from "./BannerMobile";
 import BannerDesktop from "./BannerDesktop";
 import React from "react";
+import Box from "@mui/material/Box";
 
 
-
-
-const Banner:React.FC = () => {
-
-const theme = useTheme()
-const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+const Banner: React.FC = () => {
 
     return (
-        matchesMD ? <BannerMobile /> : <BannerDesktop />
+        <>
+            <Box display={{xs:"block",md:"none"}}>
+                <BannerMobile/>
+            </Box>
+            <Box display={{xs:"none",md:"block"}}>
+                <BannerDesktop/>
+            </Box>
+        </>
 
     );
 };

@@ -1,20 +1,22 @@
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
-import {useTheme} from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import React from "react";
+import Box from "@mui/material/Box";
 
 
-
-const Header : React.FC = () => {
-    const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+const Header: React.FC = () => {
 
     return (
-        matchesMD ? <HeaderMobile /> : <HeaderDesktop />
+        <>
+            <Box display={{xs: "block", md: "none"}}>
+                <HeaderMobile/>
+            </Box>
+            <Box display={{xs: "none", md: "block"}}>
+                <HeaderDesktop/>
+            </Box>
+        </>
 
     )
-
 
 
 }
