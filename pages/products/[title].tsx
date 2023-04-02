@@ -77,9 +77,11 @@ const ProductDetails = () => {
     const dispatch = useAppDispatch();
 
     /* had to add toString() method to get rid of TS errors */
-    const isFavorite = router.isReady && user?.favoriteList.includes(router.query?.title.toString())
-    const isInCart = router.isReady && user?.cart.includes(router.query?.title.toString())
-
+    // const isFavorite = router.isReady && user?.favoriteList.includes(router.query?.title.toString())
+    // const isInCart = router.isReady && user?.cart.includes(router.query?.title.toString())
+    const isInCart = user?.cart.includes("_id" in product && product._id)
+    const isFavorite = user?.favoriteList.includes("_id" in product && product._id)
+    //
     const  slug  = router.isReady ? router.query.title as string : "_";
     const title = slug.split("_").join(" ");
     // console.log(title);
@@ -112,7 +114,7 @@ const ProductDetails = () => {
             if (isInCart) {
                 if ("_id" in product) {
                     axios.put("/api/remove-from-cart", {
-                        userId: user?.userId, token: user?.token, title: product._id
+                        userId: user?.userId, token: user?.token, productId: product._id
                     }).then(_ => {
                         setAddToCartLoading(false)
                         dispatch(userActions.removeFromCart(product._id))
@@ -122,7 +124,7 @@ const ProductDetails = () => {
             } else {
                 if ("_id" in product) {
                     axios.put("/api/add-to-cart", {
-                        title: product._id,
+                        productId: product._id,
                         userId: user.userId,
                         token: user.token
                     }).then(_ => {
@@ -141,8 +143,9 @@ const ProductDetails = () => {
         if (user?.username) {
             setAddToFavoritesLoading(true)
             if (isFavorite) {
+                if ("_id" in product) {
                 axios.put("/api/remove-from-favorites", {
-                    title,
+                    productId:product._id,
                     userId: user.userId,
                     token: user.token
                 }).then(_ => {
@@ -153,10 +156,10 @@ const ProductDetails = () => {
                     }
                 ).catch(e => console.log(e))
 
-            } else {
-
+            }} else {
+                if ("_id" in product) {
                 axios.put("/api/add-to-favorites", {
-                    title,
+                    productId:product._id,
                     userId: user.userId,
                     token: user.token
                 }).then(_ => {
@@ -166,7 +169,7 @@ const ProductDetails = () => {
                         }
                     }
                 ).catch(e => console.log(e))
-            }
+            }}
         } else
             router.push("/auth")
 
