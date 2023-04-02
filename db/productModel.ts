@@ -38,7 +38,7 @@ const productSchema = new mongoose.Schema({
     },
     comments: [{
         content: {
-            type: "String",
+            type: String,
             required: true
         },
         date: {
@@ -46,7 +46,7 @@ const productSchema = new mongoose.Schema({
             required: true
         },
         author: {
-            type: mongoose.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "User"
 
         }

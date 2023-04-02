@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = "static-v23";
+const STATIC_CACHE_NAME = "static-v24";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
 
 self.addEventListener("install", function (event) {
@@ -44,13 +44,15 @@ self.addEventListener("fetch", (event) => {
             let res = await caches.match(event.request)
             if (res)
                 return res
-            else
+            else {
+
                 // try {
                     res = await fetch(event.request)
                     // const dynamicCache = await caches.open(DYNAMIC_CACHE_NAME);
                     // dynamicCache.put(event.request.url,res)
                     // console.log(event.request.url)
                     return res
+            }
                /* } catch {
                     const cache = await caches.open(STATIC_CACHE_NAME)
                     res = await cache.match("/offline.html")
