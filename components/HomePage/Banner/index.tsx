@@ -8,7 +8,7 @@ const Banner: React.FC = () => {
 
     return (
         <>
-            <Box width={1} display={{xs:"block",md:"none"}}>
+            <Box display={{xs:"block",md:"none"}}>
                 <BannerMobile/>
             </Box>
             <Box width={1} display={{xs:"none",md:"block"}}>

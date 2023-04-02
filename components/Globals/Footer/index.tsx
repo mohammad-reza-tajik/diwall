@@ -306,7 +306,7 @@ const Footer: React.FC = () => {
                                height={150}/>
 
 
-                        <Image src={"/assets/pictures/national_digital_media_badge.png"}
+                        <Image src={"/assets/pictures/national-digital-media-badge.png"}
                                alt={"نشان ملی ثبت رسانه های دیجیتال"} width={150} height={150}/>
 
                     </Grid>
