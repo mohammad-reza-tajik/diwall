@@ -107,6 +107,7 @@ const ProductDetails = () => {
     const addToCartHandler = () => {
         if (user?.username) {
             setAddToCartLoading(true)
+            console.log(user)
 
             if (isInCart) {
                 if ("_id" in product) {

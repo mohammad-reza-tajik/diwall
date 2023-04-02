@@ -12,9 +12,9 @@ export default async function handler(req, res) {
 
 
         // this is for replacing product ids in cart and favoriteList with full product data
-        console.log(userId);
         // @ts-ignore
-        const user = await User.findById(userId).populate("favoriteList").populate("cart").exec()
+        const user = await User.findById(userId).populate("favoriteList").populate("cart").exec();
+        // console.log(user)
         if (user) {
             res.send({
                 cart: user.cart,

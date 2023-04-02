@@ -46,7 +46,7 @@ const BannerMobile: React.FC = () => {
                     محصولات</Button>
 
             </Grid>
-            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} fill sizes={"360px"} className={"cover"}/>
+            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} fill priority  sizes={"360px"} className={"cover"}/>
         </Grid>
     );
 };
