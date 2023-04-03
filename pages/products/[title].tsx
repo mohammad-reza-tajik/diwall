@@ -24,6 +24,7 @@ import Head from "next/head";
 // import Info from "../../components/DetailPage/Info";
 import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
+import comments from "../../components/DetailPage/Comments";
 
 const Info = dynamic(()=>import("../../components/DetailPage/Info"))
 const Features = dynamic(()=>import("../../components/Globals/Features"))
@@ -359,7 +360,7 @@ const ProductDetails = () => {
                 <Divider sx={{width: 1, mb: 30}}/>
                 <Features/>
                 <Divider sx={{width: 1, mt: 30}}/>
-                <Info isLoading={isLoading} products={relatedProducts}/>
+                <Info isLoading={isLoading} products={relatedProducts} comments={"comments" in product ? product.comments : []} />
 
             </Grid>
         </>

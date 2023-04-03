@@ -65,6 +65,11 @@ export interface ProductType {
     image_full: string;
     details: string;
     numbers_in_stock: number;
+    comments : Array<{
+        author:string;
+        data:string;
+        content:string;
+    }>
 }
 
 

@@ -1,69 +1,105 @@
-import React from "react";
+import React, {useState} from "react";
 // import List from "@mui/material/List";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import {useTheme} from "@mui/material/styles";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {A11y, Navigation} from "swiper";
+
+import "swiper/css";
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import Button from "@mui/material/Button";
 
 interface Props {
     comments: Array<{
         content: string;
-        author: string,
+        author: string;
+        date: string;
 
     }>
 }
 
 const Comments: React.FC<Props> = (props) => {
+    const {comments} = props;
+    const [ insertComment,setInsertComment ] = useState<boolean>(false);
+    const toggleCommentsHandler = () => {
+        setInsertComment((prevState)=>{
+            return !prevState
+        })
+    }
+    console.log(comments)
+    const theme = useTheme()
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
+    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
+    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
     return (
-        <>
-            {/*<List>
-              {
-                  props.comments.map((comment)=>{
-                      return (
-                          <li key={comment.author}>
-                              {comment.author}
-                      </li>
-                      )
-                  })
-              }
-          </List>*/}
-
-            <Grid container>
-                <Grid container item xs={6} alignItems={"center"} spacing={20}>
-                   {/* <Grid item xs={"auto"}>
+            <Grid container alignItems={"center"} spacing={20}>
+                <Button variant={"contained"} color={"primary"} onClick={toggleCommentsHandler}>
+                    {
+                        !insertComment ? "درج دیدگاه جدید" : "مشاهده دیدگاه ها"
+                    }
+                </Button>
+                {/* <Grid item xs={"auto"}>
                         <Image src={"/assets/pictures/logo.png"} width={50} height={50} alt={"logo"}/>
                     </Grid>*/}
-                    <Grid container item direction={"column"} xs={true} bgcolor={"white.main"} p={10} gap={10}>
 
+                { !insertComment && <>
+                    {
+                        comments.length !== 0 ?
+                            <Swiper spaceBetween={matchesSM ? 5 : 20}
+                                    slidesPerView={1}
+                                    modules={[Navigation, A11y]}
+                                    navigation
+                            >
 
-                        <Typography variant={"h4"} component={"span"} fontSize={16}>morta</Typography>
-                        <Typography variant={"h4"} component={"span"} fontSize={12}>
-                            {
-                                 Date()
-                            }
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12} py={30} px={50} bgcolor={"white.main"}>
-                        <Typography variant={"body1"} component={"p"} fontSize={14} lineHeight={1.7}>
-                            امروز، آمریکا قدرت مسلّط جهان نیست؛ بسیاری از تحلیلگران سیاسی دنیا معتقدند که آمریکا دارد رو
-                            به افول می‌رود، ذرّه‌ذرّه دارد آب می‌شود. این را نه اینکه ما بگوییم؛ البتّه عقیده‌ی ما هم
-                            همین است امّا تحلیلگران سیاسی دنیا هم این را دارند میگویند. نشانه‌هایش هم واضح است؛ مشکلات
-                            داخلی آمریکا بی‌سابقه است؛ هم مشکلات اقتصادی‌شان، هم مشکلات اجتماعی‌شان، هم مشکلات
-                            اخلاقی‌شان در داخل آمریکا؛ اختلافاتشان، دودستگی‌های خونینشان، خطاهای محاسباتی‌شان در مسائل
-                            دنیا… علائم زیادی وجود دارد که نظم کنونی جهان دارد تغییر پیدا می‌کند و نظم جدیدی بر جهان
-                            حاکم خواهد شد… در این دنیای جدید ایران چه کاره است؟ ایران کجا قرار می‌گیرد؟ جایگاه کشور عزیز
-                            ما کجا است؟ این، آن چیزی است که باید شما روی آن فکر کنید؛ این، آن چیزی است که باید شما
-                            خودتان را برایش آماده کنید؛ این آن چیزی است که جوان ایرانی می‌تواند انجام بدهد. ما می‌توانیم
-                            در این نظم جدید یک جایگاه برجسته‌ای داشته باشیم ۱۴۰۱/۰۸/۱۱
-                        </Typography>
-                    </Grid>
+                                {
+                                    comments.map((comment, index) => {
 
+                                        return (
+                                            <SwiperSlide key={index}>
 
-                </Grid>
+                                                <Grid container item direction={"column"} xs={true}
+                                                      bgcolor={"white.main"}
+                                                      p={10}
+                                                      gap={10}>
 
+                                                    <Typography variant={"h4"} component={"span"} fontSize={16}>
+                                                        {comment.author}
+                                                    </Typography>
+                                                    <Typography variant={"h4"} component={"span"} fontSize={12}>
+                                                        {comment.date}
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid item xs={12} py={30} px={50} bgcolor={"white.main"}>
+                                                    <Typography variant={"body1"} component={"p"} fontSize={14}
+                                                                lineHeight={1.7}>
+                                                        {comment.content}
+                                                    </Typography>
+                                                </Grid>
+                                            </SwiperSlide>
+                                        )
+
+                                    })
+                                }
+                            </Swiper>
+                            :
+                            <Grid container item justifyContent={"center"} alignItems={"center"} xs={12} p={10}
+                                  gap={10}>
+                                <Typography variant={"h4"} component={"span"} fontSize={16}>
+                                    برای این محصول دیدگاهی وجود ندارد !
+                                </Typography>
+                            </Grid>
+                    }
+                </>
+                }
             </Grid>
 
-        </>
+
     )
 
 }

@@ -23,6 +23,7 @@ const styles = {
 interface Props {
     products: any;
     isLoading: boolean;
+    comments:Array<any>
 }
 
 const Info: React.FC<Props> = (props) => {
@@ -37,7 +38,7 @@ const Info: React.FC<Props> = (props) => {
             <Grid item xs={12}>
                 <Tabs value={tab} onChange={changeTabHandler}>
                     <Tab label={"محصولات مشابه"} sx={styles.tab}/>
-                    <Tab label={"نظرات"} sx={styles.tab}/>
+                    <Tab label={"دیدگاه ها"} sx={styles.tab}/>
                 </Tabs>
             </Grid>
             <Grid item xs={12} py={30}>
@@ -51,7 +52,7 @@ const Info: React.FC<Props> = (props) => {
                                 <RelatedProducts products={props.products}/>
                             </TabPanel>
                             <TabPanel index={1} tab={tab}>
-                                <Comments comments={[]} />
+                                <Comments comments={props.comments} />
                             </TabPanel>
                         </>
                 }
