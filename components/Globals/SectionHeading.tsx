@@ -49,11 +49,12 @@ const SectionHeading : React.FC<Props> = (props) => {
                     {props.text}
                 </Typography>
             </Grid>
-            {props.seeAll ? <Grid container item justifyContent={"flex-end"} xs={"auto"} md={2}>
-                <Link href={props.route} passHref>
-                    <Button variant={"outlined"} color={!props.white ? "primary" : "white"}  sx={{fontSize:{xs:12,md:16}}} component={"span"}>مشاهده همه</Button>
-                </Link>
-            </Grid> : ""}
+            {
+            props.seeAll ? 
+            <Grid container item justifyContent={"flex-end"} xs={"auto"} md={2}>
+                    <Button variant={"outlined"} color={!props.white ? "primary" : "white"}  sx={{fontSize:{xs:12,md:16}}} component={Link} href={props.route} aria-label="visit all product">مشاهده همه</Button>
+            </Grid> : ""
+            }
 
             {
                 props.sortBy  ?
