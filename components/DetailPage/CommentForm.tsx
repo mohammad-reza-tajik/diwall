@@ -74,9 +74,9 @@ const CommentForm: React.FC<Props> = (props) => {
                 user.username ?
                     <Grid container item xs={12} md={7} direction={"column"} gap={10} component={"form"}
                           onSubmit={insertCommentHandler}>
-                        <Box component={"textarea"} sx={styles.commentField} ref={commentRef} required/>
+                        <Box component={"textarea"} sx={styles.commentField} ref={commentRef} required placeholder="دیدگاه شما ..."/>
                         <Button type={"submit"} variant={"contained"} color={"primary"} sx={styles.commentButton} startIcon={isLoading ?
-                            <CircularProgress sx={{color: "#fff",position:"relative",top:20}} size={25}/> :  <Create sx={{color: "#fff",position:"relative",top:-2}}/>  }
+                            <CircularProgress sx={{color: "#fff",position:"relative",top:-2}} size={25}/> :  <Create sx={{color: "#fff",position:"relative",top:-2}}/>  }
                                 aria-label={"add comment button"}>
                             درج دیدگاه
                         </Button>
@@ -85,7 +85,7 @@ const CommentForm: React.FC<Props> = (props) => {
                     <Grid container item direction={"column"} justifyContent={"center"} alignItems={"center"} xs={12}
                           p={10}
                           gap={20}>
-                        <Typography variant={"h4"} component={"span"} fontSize={16}>
+                        <Typography variant={"h4"} component={"span"} fontSize={{xs:14,md:16}} textAlign={"center"} lineHeight={1.7}>
                             برای درج دیدگاه باید ابتدا وارد حساب کاربری خود شوید!
                         </Typography>
                         <Button variant={"contained"} color={"primary"} sx={{fontSize: 14}} component={Link}

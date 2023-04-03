@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Image from "next/image";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import {Swiper, SwiperSlide} from "swiper/react";
@@ -60,15 +59,15 @@ const Comments: React.FC<Props> = (props) => {
 
 
     return (
-        <Grid container item xs={12}  alignItems={"center"} spacing={20}>
+        <Grid container item xs={12}  alignItems={"center"}>
             <>
                 { isLoading ?
                     <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
                         <CircularProgress color={"primary"} size={45}/>
                     </Grid> :
                     comments.length !== 0 ?
-                        <Swiper spaceBetween={20}
-                                slidesPerView={matchesMD || comments.length ===1 ? 1 :2}
+                        <Swiper spaceBetween={10}
+                                slidesPerView={matchesMD || comments.length ===1  ? 1 :2}
                                 modules={[Navigation, A11y]}
                                 navigation
                         >
@@ -77,7 +76,7 @@ const Comments: React.FC<Props> = (props) => {
                                 comments.map((comment, index) => {
 
                                     return (
-                                        <SwiperSlide key={index} style={{width:1000}}>
+                                        <SwiperSlide key={index}>
 
 
                                             <Grid container item  direction={"column"} xs={12}
@@ -106,9 +105,8 @@ const Comments: React.FC<Props> = (props) => {
                             }
                         </Swiper>
                         :
-                        <Grid container item justifyContent={"center"} alignItems={"center"} xs={12} p={10}
-                              gap={10}>
-                            <Typography variant={"h4"} component={"span"} fontSize={16}>
+                        <Grid container item xs minHeight={200} justifyContent={"center"} alignItems={"center"}>
+                        <Typography variant={"h4"} component={"span"} fontSize={{xs:14,md:16}}>
                                 برای این محصول دیدگاهی وجود ندارد !
                             </Typography>
                         </Grid>
