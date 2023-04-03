@@ -1,44 +1,69 @@
-import React, {useRef} from "react"
+import React, {useRef, useState} from "react"
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import {css} from "@emotion/react";
-import {useAppSelector, useAppDispatch, userActions} from "../../store";
+import {useAppSelector} from "../../store";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import Box from "@mui/material/Box";
+import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
+import Create from "@mui/icons-material/Create";
+import Login from "@mui/icons-material/Login";
 
 
 const styles = {
     commentField: {
         width: 1,
-        height: 150,
+        height: 250,
         px: 20,
         py: 12,
         border: "1px solid #ccc",
         borderRadius: 2,
         backgroundColor: "white.main",
-        fontSize: 16,
+        fontSize: 14,
         resize: "none",
         "&:focus": {
             outline: "2px solid #069f69"
         },
     },
-        commentButton: {
-            fontSize: {xs:12,md:15},
-            width: 200,
-            py: 10
-        }
+    commentButton: {
+        fontSize: {xs: 12, md: 15},
+        width: {xs:1,md:200},
+        gap:10,
+        py: 10
+    }
 }
 
+interface Props {
+    currentProductId:string;
+    onAddComment:()=>void
+}
 
-const CommentForm: React.FC = () => {
+const CommentForm: React.FC<Props> = (props) => {
     const user = useAppSelector(state => state);
     const commentRef = useRef<HTMLTextAreaElement>();
+    const [isLoading,setIsLoading] = useState<boolean>(false)
 
-    const insertCommentHandler = (e) => {
+    const insertCommentHandler = async (e) => {
         e.preventDefault();
-        console.log("submitted")
+        // console.log(commentRef.current.value)
+        try {
+            setIsLoading(true)
+            await axios.post("/api/add-comment",{
+                comment:{
+                    content:commentRef.current.value,
+                    author:user.username,
+                    date: new Date().toLocaleDateString("fa"),
+                    productId : props.currentProductId
+                }
+            })
+            commentRef.current.value = ""
+            setIsLoading(false);
+            props.onAddComment()
+
+        } catch (e) {
+            console.log(e)
+        }
 
     }
 
@@ -49,8 +74,10 @@ const CommentForm: React.FC = () => {
                 user.username ?
                     <Grid container item xs={12} md={7} direction={"column"} gap={10} component={"form"}
                           onSubmit={insertCommentHandler}>
-                        <Box component={"textarea"} sx={styles.commentField} ref={commentRef} required />
-                        <Button type={"submit"} variant={"contained"} color={"primary"} sx={styles.commentButton} aria-label={"add comment button"}>
+                        <Box component={"textarea"} sx={styles.commentField} ref={commentRef} required/>
+                        <Button type={"submit"} variant={"contained"} color={"primary"} sx={styles.commentButton} startIcon={isLoading ?
+                            <CircularProgress sx={{color: "#fff",position:"relative",top:20}} size={25}/> :  <Create sx={{color: "#fff",position:"relative",top:-2}}/>  }
+                                aria-label={"add comment button"}>
                             درج دیدگاه
                         </Button>
                     </Grid>

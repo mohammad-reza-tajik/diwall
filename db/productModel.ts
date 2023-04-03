@@ -42,12 +42,14 @@ const productSchema = new mongoose.Schema({
             required: true
         },
         date: {
-            type: mongoose.Schema.Types.Date,
+            type: String,
             required: true
         },
         author: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            type: String,
+            required: true
+
+
 
         }
 

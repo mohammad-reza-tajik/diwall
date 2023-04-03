@@ -360,7 +360,7 @@ const ProductDetails = () => {
                 <Divider sx={{width: 1, mb: 30}}/>
                 <Features/>
                 <Divider sx={{width: 1, mt: 30}}/>
-                <Info isLoading={isLoading} products={relatedProducts} comments={"comments" in product ? product.comments : []} />
+                <Info isLoading={isLoading} products={relatedProducts} currentProductId={"_id" in product && product._id} />
 
             </Grid>
         </>

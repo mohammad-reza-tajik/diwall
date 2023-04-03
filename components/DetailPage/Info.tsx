@@ -24,14 +24,19 @@ const styles = {
 interface Props {
     products: any;
     isLoading: boolean;
-    comments:Array<any>
+
+    currentProductId:string;
 }
 
 const Info: React.FC<Props> = (props) => {
     const [tab, setTab] = useState(0);
+    const [addComment,setAddComment] = useState<boolean>(false)
     const changeTabHandler = (event, newValue: number) => {
         setTab(newValue);
     };
+    const addCommentHandler = () =>{
+        setAddComment((prevState)=>!prevState)
+    }
 
 
     return (
@@ -55,10 +60,10 @@ const Info: React.FC<Props> = (props) => {
                                 <RelatedProducts products={props.products}/>
                             </TabPanel>
                             <TabPanel index={1} tab={tab}>
-                                <Comments comments={props.comments} />
+                                <Comments addComment={addComment} />
                             </TabPanel>
                             <TabPanel index={2} tab={tab}>
-                                <CommentForm />
+                                <CommentForm currentProductId={props.currentProductId} onAddComment={addCommentHandler} />
                             </TabPanel>
                         </>
                 }
