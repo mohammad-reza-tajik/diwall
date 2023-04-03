@@ -7,6 +7,7 @@ import RelatedProducts from "./RelatedProducts";
 import CircularProgress from "@mui/material/CircularProgress";
 // import Comments from "./Comments";
 import dynamic from "next/dynamic";
+import CommentForm from "./CommentForm";
 
 const Comments = dynamic(()=>import("./Comments"))
 
@@ -39,6 +40,8 @@ const Info: React.FC<Props> = (props) => {
                 <Tabs value={tab} onChange={changeTabHandler}>
                     <Tab label={"محصولات مشابه"} sx={styles.tab}/>
                     <Tab label={"دیدگاه ها"} sx={styles.tab}/>
+                    <Tab label={"درج دیدگاه"} sx={styles.tab}/>
+
                 </Tabs>
             </Grid>
             <Grid item xs={12} py={30}>
@@ -53,6 +56,9 @@ const Info: React.FC<Props> = (props) => {
                             </TabPanel>
                             <TabPanel index={1} tab={tab}>
                                 <Comments comments={props.comments} />
+                            </TabPanel>
+                            <TabPanel index={2} tab={tab}>
+                                <CommentForm />
                             </TabPanel>
                         </>
                 }

@@ -1,7 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 // import List from "@mui/material/List";
 import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -13,7 +12,8 @@ import "swiper/css";
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import Button from "@mui/material/Button";
+
+
 
 interface Props {
     comments: Array<{
@@ -26,12 +26,12 @@ interface Props {
 
 const Comments: React.FC<Props> = (props) => {
     const {comments} = props;
-    const [ insertComment,setInsertComment ] = useState<boolean>(false);
+   /* const [ insertComment,setInsertComment ] = useState<boolean>(false);
     const toggleCommentsHandler = () => {
         setInsertComment((prevState)=>{
             return !prevState
         })
-    }
+    }*/
     console.log(comments)
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
@@ -39,20 +39,20 @@ const Comments: React.FC<Props> = (props) => {
     const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
     return (
             <Grid container alignItems={"center"} spacing={20}>
-                <Button variant={"contained"} color={"primary"} onClick={toggleCommentsHandler}>
+                {/*<Box width={1} fontSize={15} component={Button} variant={"contained"} color={"primary"} onClick={toggleCommentsHandler} p={0}>
                     {
                         !insertComment ? "درج دیدگاه جدید" : "مشاهده دیدگاه ها"
                     }
-                </Button>
+                </Box>*/}
                 {/* <Grid item xs={"auto"}>
                         <Image src={"/assets/pictures/logo.png"} width={50} height={50} alt={"logo"}/>
                     </Grid>*/}
 
-                { !insertComment && <>
+               <>
                     {
                         comments.length !== 0 ?
                             <Swiper spaceBetween={matchesSM ? 5 : 20}
-                                    slidesPerView={1}
+                                    slidesPerView={2}
                                     modules={[Navigation, A11y]}
                                     navigation
                             >
@@ -96,7 +96,6 @@ const Comments: React.FC<Props> = (props) => {
                             </Grid>
                     }
                 </>
-                }
             </Grid>
 
 
