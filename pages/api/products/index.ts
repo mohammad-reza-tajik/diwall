@@ -1,22 +1,42 @@
-import "../../db/database_connect"
-import Product from "../../db/productModel";
+import "../../../db/database_connect"
+import Product from "../../../db/productModel";
+import {NextApiRequest, NextApiResponse} from "next";
+import type {ProductType} from "../../../db/productModel";
 
-export default async function handler(req, res) {
+interface Response {
+    products: ProductType[];
+    productsCount: number;
+    lastPage: number;
+    currentPage: number;
+
+}
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
 
 
-    if (req.method === "POST" || req.method === "GET") {
+    if (req.method === "GET") {
 
 
         const ITEMS_PER_PAGE = 10
-        const category = req.body.category
-        const page = +req.body.page || 1
-        const sortBy = +req.body.sortBy || 1
+        const category= req.query.category && String(req.query.category);
+        const page = Number(req.query.page) || 1;
+        const sortBy = Number(req.query.sortBy) || 1;
+        const search =  req.query.search && String(req.query.search); // when the search is undefined it turns into string "undefined"
 
+        // console.log(req.query.sortBy)
+        // console.log(" [from search] ",search)
+        // console.log(req.query.sortBy)
+        // console.log(sortBy)
 
-        if (req.body.search && req.body.search.trim().length !== 0) {
+        // console.log(`[from api rout ] ${Number("3")}`)
+
+    
+
+        if (search && search.trim().length !== 0) {
+            // console.log("from search")
 
             // the only way to put a variable in a regex
-            const regexp = new RegExp(req.body.search, "g") // output => /req.body.search/g
+            const regexp = new RegExp(search, "g") // output => /req.body.search/g
 
             /*
             mongoose queries don't return a promise.
@@ -30,13 +50,10 @@ export default async function handler(req, res) {
             if (sortBy === 2) { // best-selling products
                 // @ts-ignore
                 products = await Product.find({title: regexp}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
-            }
-
-            else if (sortBy === 3) { // most popular products
+            } else if (sortBy === 3) { // most popular products
                 // @ts-ignore
                 products = await Product.find({title: regexp}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
-            }
-            else { // latest products
+            } else { // latest products
                 // @ts-ignore
                 products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
@@ -48,7 +65,8 @@ export default async function handler(req, res) {
             })
 
 
-        } else if (!req.body.search && !category) {
+        } else if (!search && !category) {
+            // console.log("from sortby")
 
             const productsCount = await Product.countDocuments().exec()
             let products;
@@ -56,12 +74,10 @@ export default async function handler(req, res) {
             if (sortBy === 2) { // best-selling products
                 // @ts-ignore
                 products = await Product.find().sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
-            }
-            else if (sortBy === 3) { // most popular products
+            } else if (sortBy === 3) { // most popular products
                 // @ts-ignore
                 products = await Product.find().sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
-            }
-            else { // latest products
+            } else { // latest products
                 // @ts-ignore
                 products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
@@ -72,23 +88,21 @@ export default async function handler(req, res) {
                 currentPage: page,
                 lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
             })
-        }
-        else if (category) {
+        } else if (category) {
+            // console.log("from category")
 
-            const productsCount = await Product.countDocuments({category:{$in:[category]}}).exec()
+            const productsCount = await Product.countDocuments({category: {$in: [category]}}).exec()
             let products;
 
             if (sortBy === 2) { // best-selling products
                 // @ts-ignore
-                products = await Product.find({category:{$in:[category]}}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
-            }
-            else if (sortBy === 3) { // most popular products
+                products = await Product.find({category: {$in: [category]}}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+            } else if (sortBy === 3) { // most popular products
                 // @ts-ignore
-                products = await Product.find({category:{$in:[category]}}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
-            }
-            else { // latest products
+                products = await Product.find({category: {$in: [category]}}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+            } else { // latest products
                 // @ts-ignore
-                products = await Product.find({category:{$in:[category]}}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find({category: {$in: [category]}}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
             }
 
             res.send({
@@ -98,7 +112,7 @@ export default async function handler(req, res) {
                 lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
             })
         }
-
+        
 
 
     }

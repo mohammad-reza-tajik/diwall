@@ -1,5 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 import Product from "../../db/productModel";
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { content , author , date , productId } = req.body.comment;
     if (req.method === "POST") {
