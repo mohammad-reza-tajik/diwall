@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react"
+import React, {FormEvent, useRef, useState} from "react"
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {useAppSelector} from "../../store";
@@ -34,7 +34,7 @@ const styles = {
 }
 
 interface Props {
-    currentProductId:string;
+    currentProductTitle:string;
     onAddComment:()=>void
 }
 
@@ -42,26 +42,27 @@ const CommentForm: React.FC<Props> = (props) => {
     const user = useAppSelector(state => state);
     const commentRef = useRef<HTMLTextAreaElement>();
     const [isLoading,setIsLoading] = useState<boolean>(false)
+    console.log(props.currentProductTitle)
 
-    const insertCommentHandler = async (e) => {
-        e.preventDefault();
+    const insertCommentHandler = async (event : FormEvent) => {
+        event.preventDefault();
         // console.log(commentRef.current.value)
         try {
             setIsLoading(true)
-            await axios.post("/api/add-comment",{
+            await axios.post(`/api/products/${props.currentProductTitle}/comments`,{
                 comment:{
                     content:commentRef.current.value,
                     author:user.username,
                     date: new Date().toLocaleDateString("fa"),
-                    productId : props.currentProductId
+                    prodTitle : props.currentProductTitle
                 }
             })
             commentRef.current.value = ""
             setIsLoading(false);
             props.onAddComment()
 
-        } catch (e) {
-            console.log(e)
+        } catch (err) {
+            console.log(err)
         }
 
     }

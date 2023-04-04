@@ -20,23 +20,23 @@ interface Props {
 }
 
 interface Comment {
-
         content: string;
         author: string;
         date: string;
 }
 
 const Comments: React.FC<Props> = (props) => {
-    const router = useRouter();
+
     const {addComment} = props;
+
+    const router = useRouter();
+    
     const [isLoading,setIsLoading] = useState<boolean>(false);
+    const [comments, setComments] = useState<Comment[]>([]);
 
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
-    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"))
-    const [comments, setComments] = useState<Comment[]>([]);
 
     const slug = router.isReady ? router.query.title as string : "_";
     const title = slug.split("_").join(" ");
@@ -45,9 +45,8 @@ const Comments: React.FC<Props> = (props) => {
             (async () => {
                 try {
                 setIsLoading(true)
-                const res = await axios.post("/api/product-details", {title})
-                setComments(res.data.productDetails.comments)
-                // console.log(res.data.productDetails.comments)
+                const res = await axios(`/api/products/${title}/comments`)
+                setComments(res.data.comments)
                 setIsLoading(false)
 
                 }catch (err) {
@@ -55,7 +54,7 @@ const Comments: React.FC<Props> = (props) => {
                 }
             })()
         }
-        , [addComment])
+        , [addComment,title])
 
 
     return (
