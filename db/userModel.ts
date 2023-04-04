@@ -1,8 +1,17 @@
-import mongoose from "mongoose";
+import {Schema , Types , models , model} from "mongoose";
 import Product from "./productModel";
 
 
-const userSchema = new mongoose.Schema(
+interface User {
+    username: string;
+    password: string;
+    email: string;
+    favoriteList:Types.ObjectId[];
+    cart : Types.ObjectId[]
+
+  }
+
+const userSchema = new Schema<User>(
     {
         username: {
             type: String,
@@ -18,14 +27,14 @@ const userSchema = new mongoose.Schema(
         },
         favoriteList:[
                 {
-                    type:mongoose.Schema.Types.ObjectId,
+                    type:Schema.Types.ObjectId,
                     ref:"Product",
 
             }],
 
         cart:[
                 {
-                    type: mongoose.Schema.Types.ObjectId,
+                    type: Schema.Types.ObjectId,
                     ref:"Product"
                 }
             ],
@@ -35,4 +44,4 @@ const userSchema = new mongoose.Schema(
 )
 
 
-export default  mongoose.models.User || mongoose.model('User', userSchema);
+export default  models.User || model<User>('User', userSchema);
