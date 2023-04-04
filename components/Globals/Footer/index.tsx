@@ -55,38 +55,37 @@ const Footer: React.FC = () => {
             <ShowCase/>
             <Grid container item xs={12} component={"footer"} justifyContent={{xs: "center", md: "space-between"}}
                   mt={30}>
-                <Grid container item xs={6} md={2} alignItems={"flex-start"} spacing={10}>
-                    <Grid item xs={12} mb={10}>
+                <Grid container item direction={"column"} xs={6} md={2} spacing={10}>
+                    <Grid item mb={10}>
                         <Typography variant={"h5"} color={"#555"} fontSize={18} fontFamily={"dana-bold"}>فروشگاه
                             دیوال</Typography>
                     </Grid>
-                    <Grid item container alignItems={"center"} gap={10} xs={12}>
+                    <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
                             <Box component={Link} href={"/cloths"} sx={styles.footer_link}>پوستر سفارشی</Box>
 
                     </Grid>
-
-                    <Grid item container alignItems={"center"} gap={10} xs={12}>
+                    <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
                             <Box component={Link} href={"/cloths"} sx={styles.footer_link}>همکاری با ما</Box>
 
                     </Grid>
-                    <Grid item container alignItems={"center"} gap={10} xs={12}>
+                    <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
                             <Box component={Link} href={"/cloths"} sx={styles.footer_link}>تماس با ما</Box>
 
                     </Grid>
-                    <Grid item container alignItems={"center"} gap={10} xs={12}>
+                    <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
                             <Box component={Link} href={"/cloths"} sx={styles.footer_link}>درباره ما</Box>
 
                     </Grid>
                 </Grid>
-                <Grid container item xs={6} md={2} alignItems={"flex-start"} spacing={10}>
+                <Grid container item direction={"column"} xs={6} md={3} lg={2} spacing={10}>
                     <Grid item mb={10}>
                         <Typography variant={"h5"} color={"#555"} fontSize={18} fontFamily={"dana-bold"}>خدمات
                             دیوال</Typography>
@@ -116,7 +115,7 @@ const Footer: React.FC = () => {
 
                     </Grid>
                 </Grid>
-                <Grid container item xs={2} display={{xs: "none", lg: "flex"}} alignItems={"flex-start"} spacing={10}>
+                <Grid container item xs={2} direction={"column"} display={{xs: "none", lg: "flex"}} spacing={10}>
                     <Grid item mb={10}>
                         <Typography variant={"h5"} color={"#555"} fontSize={18} fontFamily={"dana-bold"}>
                             خدمات مشتریان
@@ -151,15 +150,15 @@ const Footer: React.FC = () => {
                 {/********************************************************************************/}
 
                 <Grid container item xs={12} md={5} lg={4} alignItems={"center"} my={{xs: 30, md: 0}}>
-                    <Grid item xs={"auto"} md={12}>
+                    
                         <Typography variant={"h5"} color={"#555"} fontSize={{xs: 14, md: 18}} fontFamily={"dana-bold"}>
                             دیوال
                             را دنبال
                             کنید</Typography>
-                    </Grid>
+                    
                     <Grid item container justifyContent={{xs: "flex-end", md: "flex-start"}} alignItems={"center"} xs
                           md={12}>
-                        <Grid item xs={"auto"}>
+                        
                             <IconButton component={"a"} href={"https://telegram.org/"} aria-label="telegram">
                                 <Telegram color={"primary"}
                                           sx={{
@@ -170,9 +169,9 @@ const Footer: React.FC = () => {
                                           }}/>
 
                             </IconButton>
-                        </Grid>
+                       
 
-                        <Grid item xs={"auto"}>
+                        
                             <IconButton component={"a"} href={"https://twitter.com/?lang=en"} aria-label="twitter">
                                 <Twitter color={"primary"}
                                          sx={{
@@ -183,8 +182,7 @@ const Footer: React.FC = () => {
                                          }}/>
 
                             </IconButton>
-                        </Grid>
-                        <Grid item xs={"auto"}>
+                        
                             <IconButton component={"a"} href={"https://www.instagram.com/"} aria-label="instagram">
                                 <Instagram color={"primary"}
                                            sx={{
@@ -195,9 +193,9 @@ const Footer: React.FC = () => {
                                            }}/>
 
                             </IconButton>
-                        </Grid>
+                     
 
-                        <Grid item xs={"auto"}>
+                        
                             <IconButton component={"a"} href={"https://www.linkedin.com/"} aria-label="linkedin">
                                 <LinkedIn color={"primary"}
                                           sx={{
@@ -207,11 +205,11 @@ const Footer: React.FC = () => {
                                               p: {xs: 1, md: 7}
                                           }}/>
                             </IconButton>
-                        </Grid>
+                      
 
 
                     </Grid>
-                    <Grid item container alignItems={"center"} gap={10} mt={30} xs={12}>
+                    <Grid item container  mt={30} xs={12}>
                         <Typography variant={"h4"} fontSize={{xs: 16, md: 18}} color={"#555"}>
                             از جدیدترین تخفیفات <Box component={"span"}
                                                      sx={{
@@ -233,37 +231,36 @@ const Footer: React.FC = () => {
 
                 <Grid container item alignItems={"center"} justifyContent={"space-between"} my={40} xs={12}
                       display={{xs: "none", md: "flex"}}>
-                    <Grid container item xs={"auto"} gap={10}>
-                        <Grid item xs={12}>
+                    <Grid container item direction={"column"} xs={"auto"} gap={10}>
+                        
                             <Typography variant={"h4"} color={"#555"} fontFamily={"dana-black"}>الو <Box
                                 component={"span"}
                                 sx={{
                                     color: "primary.main"
                                 }}>دیوال</Box></Typography>
-                        </Grid>
-                        <Grid item xs={12}>
+                        
                             <Typography variant={"h5"} component={"p"} color={"#555"}>24 ساعت در هفت روز هفته آماده خدمت
                                 رسانی به مشتریان
                                 هستیم</Typography>
-                        </Grid>
+                       
 
                     </Grid>
                     <Grid container item xs={"auto"} justifyContent={"flex-end"}>
-                        <Grid container item xs={6}>
-                            <Grid item xs={12}>
+                        <Grid container direction={"column"} item xs={true}>
+                           
                                 <Typography color={"#888"} fontSize={18} fontFamily={"dana-bold"}
                                             variant={"caption"}>021464879</Typography>
-                            </Grid>
-                            <Grid item xs={12}>
+                            
+                           
                                 <Typography color={"#888"} fontSize={12} variant={"caption"}>پشتیبانی
                                     مشتریان</Typography>
-                            </Grid>
+                            
 
                         </Grid>
-                        <Grid item container alignItems={"flex-end"} xs={"auto"}>
-                            <Grid item>
+                        <Grid item container alignItems={"center"} xs={"auto"}>
+                            
                                 <LocalPhoneOutlined sx={{fontSize: 35}} color={"primary"}/>
-                            </Grid>
+                            
                         </Grid>
                     </Grid>
                 </Grid>
@@ -303,20 +300,20 @@ const Footer: React.FC = () => {
                     <Grid container justifyContent={"center"} item xs={12} lg={"auto"}>
 
                         <Image src={"/assets/pictures/enamad.png"} alt={"نماد اعتماد الکترونیکی"} width={150}
-                               height={150}/>
+                               height={150} className="cover"/>
 
 
                         <Image src={"/assets/pictures/national-digital-media-badge.png"}
-                               alt={"نشان ملی ثبت رسانه های دیجیتال"} width={150} height={150}/>
+                               alt={"نشان ملی ثبت رسانه های دیجیتال"} width={150} height={150} className="cover"/>
 
                     </Grid>
                 </Grid>
 
                 {/*****************************************************************************************/}
 
-                <Grid item mt={20} xs={12}>
-                    <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                </Grid>
+                
+                    <Divider sx={{width: 1, bgcolor: "#ddd",mt:20}}/>
+                
 
                 <Grid container item xs={12} my={40} alignItems={"center"} justifyContent={"space-between"}>
                     <Grid container item gap={20} xs={12} md={"auto"} display={{xs: "none", lg: "flex"}}>
@@ -424,9 +421,9 @@ const Footer: React.FC = () => {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12}>
+                
                     <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                </Grid>
+                
                 <Grid container item justifyContent={"center"} alignItems={"center"} my={20}>
                     <Typography variant={"h6"} fontSize={{xs: 12, md: 14}} color={"#555"} textAlign={"center"}>
                         تمامی حقوق مادی و معنوی این سایت متعلق به دیوال می باشد و هر گونه کپی برداری پیگرد قانونی خواهد
