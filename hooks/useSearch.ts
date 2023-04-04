@@ -23,7 +23,7 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (boolean) => 
             return
         }
         setIsWrong(false)
-        axios.post(`/api/products`, {search}).then(_ => {
+        axios(`/api/products?search=${search}`).then(_ => {
             router.push(
                 {
                     pathname: `/products`,
@@ -82,9 +82,9 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (boolean) => 
     };
 
 
-    const handleChange = async (value) => {
+    const handleChange = async (search) => {
         setIsLoading(true)
-        const res = await axios.post(`/api/products`, {search: value})
+        const res = await axios(`/api/products?search=${search}`)
         setResults(res.data.products.slice(0, 4));
         setIsLoading(false)
         // console.log(res.data)

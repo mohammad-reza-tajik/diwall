@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid";
 import TabPanel from "../Globals/TabPanel";
 import RelatedProducts from "./RelatedProducts";
 import CircularProgress from "@mui/material/CircularProgress";
-// import Comments from "./Comments";
 import dynamic from "next/dynamic";
 import CommentForm from "./CommentForm";
 
@@ -25,13 +24,13 @@ interface Props {
     products: any;
     isLoading: boolean;
 
-    currentProductId:string;
+    currentProductTitle:string;
 }
 
 const Info: React.FC<Props> = (props) => {
     const [tab, setTab] = useState(0);
     const [addComment,setAddComment] = useState<boolean>(false)
-    const changeTabHandler = (event, newValue: number) => {
+    const changeTabHandler = ( _ , newValue: number) => {
         setTab(newValue);
     };
     const addCommentHandler = () =>{
@@ -63,7 +62,7 @@ const Info: React.FC<Props> = (props) => {
                                 <Comments addComment={addComment} />
                             </TabPanel>
                             <TabPanel index={2} tab={tab}>
-                                <CommentForm currentProductId={props.currentProductId} onAddComment={addCommentHandler} />
+                                <CommentForm currentProductTitle={props.currentProductTitle} onAddComment={addCommentHandler} />
                             </TabPanel>
                         </>
                 }
