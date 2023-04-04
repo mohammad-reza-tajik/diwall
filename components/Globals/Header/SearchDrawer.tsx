@@ -13,7 +13,7 @@ import useSearch from "../../../hooks/useSearch";
 
 const styles = {
     searchField: {
-        width: {xs: 1, sm: .6, md: .6},
+        width: {xs: 1, sm: 1, md: .6},
         fontSize: {xs: 4, sm: "2rem"},
         bgcolor: "#fff",
 
@@ -66,7 +66,7 @@ const SearchDrawer: React.FC<Props> = (props) => {
             ...styles.searchDrawer,
             transform: props.open ? "translateY(0)" : "translateY(-100%)"
         }}>
-            <Grid item xs={true} maxHeight={80} overflow={"hidden"} bgcolor={"royalblue"} position={"absolute"} top={30} right={15}>
+            <Grid item xs={true} maxHeight={80} overflow={"hidden"} position={"absolute"} top={30} right={15}>
                 <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom"}
                          arrow>
                     <TextField

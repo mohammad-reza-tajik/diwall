@@ -16,15 +16,12 @@ import Image from "next/image"
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useAppSelector, useAppDispatch, userActions} from "../../store";
-// import Features from "../../components/Globals/Features";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import Head from "next/head";
-// import Info from "../../components/DetailPage/Info";
 import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
-import comments from "../../components/DetailPage/Comments";
 
 const Info = dynamic(()=>import("../../components/DetailPage/Info"))
 const Features = dynamic(()=>import("../../components/Globals/Features"))
@@ -66,10 +63,10 @@ const styles = {
 const ProductDetails = () => {
 
     const [product, setProduct] = useState<ProductType | {}>({})
-    const [relatedProducts, setRelatedProducts] = useState([])
-    const [addToCartLoading, setAddToCartLoading] = useState(false)
-    const [addToFavoritesLoading, setAddToFavoritesLoading] = useState(false)
-    const [presetSizes, setPresetSizes] = useState("1")
+    const [relatedProducts, setRelatedProducts] = useState<ProductType[]>([])
+    const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false)
+    const [addToFavoritesLoading, setAddToFavoritesLoading] = useState<boolean>(false)
+    const [presetSizes, setPresetSizes] = useState<number>(1)
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
 
@@ -77,15 +74,13 @@ const ProductDetails = () => {
     const user = useAppSelector(state => state);
     const dispatch = useAppDispatch();
 
-    /* had to add toString() method to get rid of TS errors */
-    // const isFavorite = router.isReady && user?.favoriteList.includes(router.query?.title.toString())
-    // const isInCart = router.isReady && user?.cart.includes(router.query?.title.toString())
+
     const isInCart = user?.cart.includes("_id" in product && product._id)
     const isFavorite = user?.favoriteList.includes("_id" in product && product._id)
-    //
+
     const  slug  = router.isReady ? router.query.title as string : "_";
     const title = slug.split("_").join(" ");
-    // console.log(title);
+   
 
 
     useEffect(() => {
@@ -102,7 +97,7 @@ const ProductDetails = () => {
         }
     }, [title])
 
-    const presetSizesHandler = (e, presetSizes) => {
+    const presetSizesHandler = ( _ , presetSizes : number) => {
         if (presetSizes !== null)
             setPresetSizes(presetSizes);
     }
@@ -181,7 +176,7 @@ const ProductDetails = () => {
         <>
             <Head>
                 <title>
-                    {`دیوال - ${ title }`}
+                    {`دیوال - ${ slug.split("_").join(" ") }`}
                 </title>
                 <meta name={"description"} content={title}/>
             </Head>
@@ -240,7 +235,7 @@ const ProductDetails = () => {
                                     <Skeleton variant="text" animation={"wave"} width={300} sx={{fontSize: 20}}/>
                                     :
 
-                                    <Typography variant={"h1"} fontSize={{xs: 16, md: 20}}
+                                    <Typography variant={"h1"} component={"span"} fontSize={{xs: 16, md: 20}}
                                                 sx={{textAlign: "justify", flexGrow: 1}} fontFamily={"dana-bold"}
                                                 color={"primary"}>
                                         {"price" in product && product.price}
@@ -263,7 +258,7 @@ const ProductDetails = () => {
                                                   sx={{fontSize: {xs: 14, md: 16}}}/>
                                     </Grid>
                                     :
-                                    <Typography variant={"caption"} fontSize={{xs: 14, md: 16}}
+                                    <Typography variant={"caption"} component={"p"} fontSize={{xs: 14, md: 16}}
                                                 lineHeight={{xs: 1.8, md: 1.6}} color={"#555"}>
                                         {"details" in product && product.details}
                                     </Typography>
@@ -280,9 +275,9 @@ const ProductDetails = () => {
                                 <ToggleButtonGroup sx={{gap: {xs: 5}}} fullWidth color={"primary"} value={presetSizes}
                                                    exclusive
                                                    onChange={presetSizesHandler}>
-                                    <ToggleButton sx={styles.toggleButton} value={"1"}>10mx3m</ToggleButton>
-                                    <ToggleButton sx={styles.toggleButton} value={"2"}>20mx3m</ToggleButton>
-                                    <ToggleButton sx={styles.toggleButton} value={"3"}> 30mx3m</ToggleButton>
+                                    <ToggleButton sx={styles.toggleButton} value={1}>10mx3m</ToggleButton>
+                                    <ToggleButton sx={styles.toggleButton} value={2}>20mx3m</ToggleButton>
+                                    <ToggleButton sx={styles.toggleButton} value={3}> 30mx3m</ToggleButton>
                                 </ToggleButtonGroup>
                             </Grid>
                         </Grid>
@@ -313,6 +308,7 @@ const ProductDetails = () => {
                                     <Button
                                         onClick={addToFavoritesHandler}
                                         variant={"contained"}
+                                        aria-label="add to wishlist"
                                         sx={styles.addToFavoritesButton}
                                     >
                                         {addToFavoritesLoading ?
@@ -337,6 +333,8 @@ const ProductDetails = () => {
                                 </Grid>
                                 <Grid container item justifyContent={"flex-end"} xs sm={"auto"}>
                                     <Button
+                                    
+                                        aria-label="add to cart"
                                         onClick={addToCartHandler}
                                         variant={"contained"}
                                         color={isInCart ? "error" : "primary"}
