@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import Create from "@mui/icons-material/Create";
-import Login from "@mui/icons-material/Login";
 
 
 const styles = {
@@ -30,7 +29,7 @@ const styles = {
         fontSize: {xs: 12, md: 15},
         width: {xs:1,md:200},
         gap:10,
-        py: 10
+        py: 15
     }
 }
 

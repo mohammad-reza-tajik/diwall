@@ -70,7 +70,7 @@ const ProductDetails = () => {
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToFavoritesLoading, setAddToFavoritesLoading] = useState(false)
     const [presetSizes, setPresetSizes] = useState("1")
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
 
     const router = useRouter()
@@ -110,7 +110,7 @@ const ProductDetails = () => {
     const addToCartHandler = () => {
         if (user?.username) {
             setAddToCartLoading(true)
-            console.log(user)
+            // console.log(user)
 
             if (isInCart) {
                 if ("_id" in product) {
