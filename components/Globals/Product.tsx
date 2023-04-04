@@ -10,7 +10,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import {useTheme} from "@mui/material/styles"
 import {userActions , useAppSelector , useAppDispatch} from "../../store";
-
+import Link from "next/link"
 
 const styles = {
     product: {
@@ -129,22 +129,21 @@ const Product : React.FC<Product> = (props) => {
                     </IconButton>
                 </Grid>
 
-                <Image src={`/assets/pictures/products/${props.title ?.replaceAll(" ","-")}.jpg`} onClick={clickHandler} alt={`${props.title}`} width={400} height={400}
+                <Link href={`/products/${slug}`}>
+                <Image src={`/assets/pictures/products/${props.title ?.replaceAll(" ","-")}.jpg`} alt={`${props.title}`} width={400} height={400}
                        className={"pointer"} />
+                       </Link>
             </Grid>
             <Grid container item height={50} alignItems={"center"} xs={12}>
-                <Grid item xs={12} onClick={clickHandler}>
-                    <Typography variant={"h4"} component={"span"} fontSize={{xs: 11, md :14,lg:15}} fontFamily={"dana-bold"}
+                    <Typography variant={"h4"} component={Link} href={`/products/${slug}`} fontSize={{xs: 11, md :14,lg:15}} fontFamily={"dana-bold"}
                                 className={"pointer"} lineHeight={1.5}>{props.title}</Typography>
-                </Grid>
+                
             </Grid>
-            <Grid container item justifyContent={"center"} alignItems={"center"} height={50}>
-                <Grid item xs={12}>
-                    <Typography variant={"h4"} component={"span"} fontFamily={"dana-medium"} color={"#069f69"}
+            <Grid container item  alignItems={"center"} height={50}>
+                    <Typography variant={"h4"} component={"span"} color={"#069f69"}
                                 sx={{fontSize: {xs: 11, md :14,lg:15}}}>
                         {props.price}
                     </Typography>
-                </Grid>
             </Grid>
         </Grid>
     )

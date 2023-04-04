@@ -192,7 +192,7 @@ const ProductDetails = () => {
 
                                 <Image
                                     src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : ""}.jpg`}
-                                    alt={`${"title" in product ? product.title : ""}`} fill sizes={"500px"} />
+                                    alt={`${"title" in product ? product.title : ""}`} fill sizes={"500px"} className="cover" />
 
                         }
                     </Grid>
