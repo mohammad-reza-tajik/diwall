@@ -1,6 +1,6 @@
-import "../../../db/database_connect"
-import Product from "../../../db/productModel";
-import type {ProductType} from "../../../db/productModel";
+import "../../../../db/database_connect"
+import Product from "../../../../db/productModel";
+import type {ProductType} from "../../../../db/productModel";
 import {NextApiResponse, NextApiRequest} from "next";
 
 interface Response {
@@ -15,11 +15,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Response | null
         return
 
 
-    const {title} = req.query;
+    const title = req.query.title && String(req.query.title);
 
-    if (typeof title === "string") {
         regexp = new RegExp(title, "g");
-    }
+    
     // console.log(`[received title ] ${title}`)
 
     if (title) {
