@@ -1,15 +1,13 @@
-import {Schema , Types , models , model} from "mongoose";
-import Product from "./productModel";
-
+import {Schema, Types, models, model} from "mongoose";
 
 interface User {
     username: string;
     password: string;
     email: string;
-    favoriteList:Types.ObjectId[];
-    cart : Types.ObjectId[]
+    favoriteList: Types.ObjectId[];
+    cart: Types.ObjectId[]
 
-  }
+}
 
 const userSchema = new Schema<User>(
     {
@@ -25,23 +23,22 @@ const userSchema = new Schema<User>(
             type: String,
             required: true
         },
-        favoriteList:[
-                {
-                    type:Schema.Types.ObjectId,
-                    ref:"Product",
+        favoriteList: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Product",
 
             }],
 
-        cart:[
-                {
-                    type: Schema.Types.ObjectId,
-                    ref:"Product"
-                }
-            ],
+        cart: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Product"
+            }
+        ],
 
     }
-
 )
 
 
-export default  models.User || model<User>('User', userSchema);
+export default models.User || model<User>('User', userSchema);

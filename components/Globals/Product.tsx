@@ -56,16 +56,6 @@ const Product : React.FC<Product> = (props) => {
     const slug = title.split(" ").join("_");
 
 
-
-    const clickHandler = async () => {
-        await router.push({
-                pathname: `/products/${slug}`,
-
-            }
-        )
-
-    }
-
     const addToFavoritesHandler = () => {
         if (user?.username) {
             setIsLoading(true)
