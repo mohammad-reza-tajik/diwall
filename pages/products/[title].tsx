@@ -23,8 +23,8 @@ import Head from "next/head";
 import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
 
-const Info = dynamic(()=>import("../../components/DetailPage/Info"))
-const Features = dynamic(()=>import("../../components/Globals/Features"))
+const Info = dynamic(() => import("../../components/DetailPage/Info"))
+const Features = dynamic(() => import("../../components/Globals/Features"))
 
 
 const styles = {
@@ -51,7 +51,7 @@ const styles = {
         border: "1px solid rgba(25,25,25,.1)"
 
     },
-    toggleButton :{
+    toggleButton: {
         width: .4,
         height: 40,
         fontSize: {xs: 14, md: 16}
@@ -74,30 +74,33 @@ const ProductDetails = () => {
     const user = useAppSelector(state => state);
     const dispatch = useAppDispatch();
 
-
+    const {isReady} = router;
     const isInCart = user?.cart.includes("_id" in product && product._id)
     const isFavorite = user?.favoriteList.includes("_id" in product && product._id)
 
-    const  slug  = router.isReady ? router.query.title as string : "_";
+    const slug = isReady ? router.query.title as string : "_";
     const title = slug.split("_").join(" ");
-   
+    // console.log(title)
 
 
     useEffect(() => {
-        setIsLoading(true)
-        if (router.isReady) {
-            axios.post("/api/product-details", {
-                title
-            }).then(res => {
-                setProduct(res.data.productDetails)
-                setRelatedProducts(res.data.relatedProducts)
-                setIsLoading(false)
-            }).catch(e => console.log(e))
+        (async () => {
+            try {
+                setIsLoading(true);
+                if (isReady) {
+                    const res = await axios(`/api/products/${title}`)
+                    setProduct(res.data.product)
+                    setRelatedProducts(res.data.relatedProducts)
+                    setIsLoading(false)
+                }
+            } catch (err) {
+                console.log(err)
+            }
 
-        }
-    }, [title])
+        })()
+    }, [title, isReady])
 
-    const presetSizesHandler = ( _ , presetSizes : number) => {
+    const presetSizesHandler = (_, presetSizes: number) => {
         if (presetSizes !== null)
             setPresetSizes(presetSizes);
     }
@@ -140,32 +143,34 @@ const ProductDetails = () => {
             setAddToFavoritesLoading(true)
             if (isFavorite) {
                 if ("_id" in product) {
-                axios.put("/api/remove-from-favorites", {
-                    productId:product._id,
-                    userId: user.userId,
-                    token: user.token
-                }).then(_ => {
-                        setAddToFavoritesLoading(false)
-                        if ("_id" in product) {
-                            dispatch(userActions.removeFromFavorites(product._id))
+                    axios.put("/api/remove-from-favorites", {
+                        productId: product._id,
+                        userId: user.userId,
+                        token: user.token
+                    }).then(_ => {
+                            setAddToFavoritesLoading(false)
+                            if ("_id" in product) {
+                                dispatch(userActions.removeFromFavorites(product._id))
+                            }
                         }
-                    }
-                ).catch(e => console.log(e))
+                    ).catch(e => console.log(e))
 
-            }} else {
+                }
+            } else {
                 if ("_id" in product) {
-                axios.put("/api/add-to-favorites", {
-                    productId:product._id,
-                    userId: user.userId,
-                    token: user.token
-                }).then(_ => {
-                        setAddToFavoritesLoading(false)
-                        if ("_id" in product) {
-                            dispatch(userActions.addToFavorites(product._id))
+                    axios.put("/api/add-to-favorites", {
+                        productId: product._id,
+                        userId: user.userId,
+                        token: user.token
+                    }).then(_ => {
+                            setAddToFavoritesLoading(false)
+                            if ("_id" in product) {
+                                dispatch(userActions.addToFavorites(product._id))
+                            }
                         }
-                    }
-                ).catch(e => console.log(e))
-            }}
+                    ).catch(e => console.log(e))
+                }
+            }
         } else
             router.push("/auth")
 
@@ -176,7 +181,7 @@ const ProductDetails = () => {
         <>
             <Head>
                 <title>
-                    {`دیوال - ${ slug.split("_").join(" ") }`}
+                    {`دیوال - ${slug.split("_").join(" ")}`}
                 </title>
                 <meta name={"description"} content={title}/>
             </Head>
@@ -192,7 +197,8 @@ const ProductDetails = () => {
 
                                 <Image
                                     src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : ""}.jpg`}
-                                    alt={`${"title" in product ? product.title : ""}`} fill sizes={"500px"} className="cover" />
+                                    alt={`${"title" in product ? product.title : ""}`} fill sizes={"500px"}
+                                    className="cover"/>
 
                         }
                     </Grid>
@@ -222,7 +228,8 @@ const ProductDetails = () => {
                                             bgcolor={isLoading ? "transparent" : "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
                                     {
                                         isLoading ?
-                                            <Skeleton variant={"text"} animation={"wave"} width={100} sx={{fontSize: 16}}/> :
+                                            <Skeleton variant={"text"} animation={"wave"} width={100}
+                                                      sx={{fontSize: 16}}/> :
                                             "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "موجود" : "ناموجود"
                                     }
                                 </Typography>
@@ -333,7 +340,7 @@ const ProductDetails = () => {
                                 </Grid>
                                 <Grid container item justifyContent={"flex-end"} xs sm={"auto"}>
                                     <Button
-                                    
+
                                         aria-label="add to cart"
                                         onClick={addToCartHandler}
                                         variant={"contained"}
@@ -358,7 +365,8 @@ const ProductDetails = () => {
                 <Divider sx={{width: 1, mb: 30}}/>
                 <Features/>
                 <Divider sx={{width: 1, mt: 30}}/>
-                <Info isLoading={isLoading} products={relatedProducts} currentProductId={"_id" in product && product._id} />
+                <Info isLoading={isLoading} products={relatedProducts}
+                      currentProductTitle={title}/>
 
             </Grid>
         </>

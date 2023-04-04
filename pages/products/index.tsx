@@ -1,6 +1,6 @@
 import CircularProgress from "@mui/material/CircularProgress";
-import  Grid from "@mui/material/Grid";
-import  Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import SectionHeading from "../../components/Globals/SectionHeading";
 import axios from "axios";
 import React, {useEffect, useState} from "react";
@@ -11,40 +11,43 @@ import Pagination from "../../components/Globals/Pagination";
 
 interface PageInformation {
     lastPage?: number;
-    currentPage?:number;
-    productsCount?:number;
+    currentPage?: number;
+    productsCount?: number;
 
 }
 
-const Products : React.FC = () => {
+const Products: React.FC = () => {
 
 
     const [products, setProducts] = useState([])
-    const [pageInformation, setPageInformation] = useState< PageInformation | {} >({})
+    const [pageInformation, setPageInformation] = useState<PageInformation | {}>({})
     const [isLoading, setIsLoading] = useState(false)
 
 
     const router = useRouter()
-    const {search,page,sortBy,category} = router.query
+    const {isReady} = router;
+    const {search, page, sortBy, category} = router.query
 
     useEffect(() => {
-        setIsLoading(true)
-        axios.post("/api/products", {
-            search: search,
-            page: +page || 1,
-            sortBy: +sortBy || 1,
-            category: category
+        (async () => {
+            try {
+                setIsLoading(true)
+                if(isReady) {
 
-        }).then(res => {
-            setProducts(res.data.products)
-            setPageInformation(res.data)
-            setIsLoading(false)
-        }).catch(err => {
-            setIsLoading(false)
-            console.log(err)
+                    const res = await axios(`/api/products?page=${page}&sortBy=${sortBy}`)
+                    setProducts(res.data.products)
+                    setPageInformation(res.data)
+                    setIsLoading(false)
+                }
 
-        })
-    }, [search,page,sortBy])
+            } catch (err) {
+                setIsLoading(false)
+                console.log(err)
+            }
+
+        })()
+
+    }, [search, page, sortBy, category , isReady])
 
 
     return (
