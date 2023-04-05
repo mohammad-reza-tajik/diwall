@@ -9,8 +9,6 @@ import Product from "../Globals/Product";
 
 import "swiper/css";
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 import Link from "next/link";
 import SectionHeading from "../Globals/SectionHeading";
 import React from "react";

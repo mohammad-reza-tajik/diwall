@@ -7,8 +7,6 @@ import Product from "../Globals/Product";
 import React from "react";
 import "swiper/css";
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 import type {ProductType} from "../../db/productModel"
 
 interface Props {

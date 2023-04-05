@@ -21,7 +21,7 @@ const Products: React.FC = () => {
 
     const [products, setProducts] = useState([])
     const [pageInformation, setPageInformation] = useState<PageInformation | {}>({})
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
 
     const router = useRouter()
@@ -33,7 +33,6 @@ const Products: React.FC = () => {
             try {
                 setIsLoading(true)
                 if(isReady) {
-
                     const res = await axios(`/api/products?page=${page}&sortBy=${sortBy}`)
                     setProducts(res.data.products)
                     setPageInformation(res.data)
@@ -80,15 +79,16 @@ const Products: React.FC = () => {
 
             </Grid>
             <Grid container item xs spacing={10}>
-                {isLoading ?
+                {
+                isLoading ?
                     <Grid container item xs justifyContent={"center"}>
                         <CircularProgress color={"primary"} size={45}/>
-                    </Grid>
-                    :
+                    </Grid> :
                     products.length === 0 ?
                         <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
-                            <Typography fontSize={20} variant={"h2"} color={"#333"} fontFamily={"dana-bold"}>هیچ
-                                محصول مرتبطی موجود نیست !</Typography>
+                            <Typography fontSize={20} variant={"h2"} color={"#333"} fontFamily={"dana-bold"}>
+                            هیچ محصول مرتبطی موجود نیست !
+                            </Typography>
                         </Grid> :
                         products.map((product) =>
 

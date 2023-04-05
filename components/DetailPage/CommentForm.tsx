@@ -42,7 +42,7 @@ const CommentForm: React.FC<Props> = (props) => {
     const user = useAppSelector(state => state);
     const commentRef = useRef<HTMLTextAreaElement>();
     const [isLoading,setIsLoading] = useState<boolean>(false)
-    console.log(props.currentProductTitle)
+    // console.log(props.currentProductTitle)
 
     const insertCommentHandler = async (event : FormEvent) => {
         event.preventDefault();
