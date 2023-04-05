@@ -1,6 +1,6 @@
 # Block all crawlers for /accounts
 User-agent: *
-Disallow: /profile/
+Disallow: /dashboard/
 
 # Allow all crawlers
 User-agent: *

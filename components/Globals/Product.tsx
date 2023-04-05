@@ -14,9 +14,9 @@ import Link from "next/link"
 
 const styles = {
     product: {
-        borderRadius: 2,
+        borderRadius: 1,
         justifyContent:"center",
-        p: 10,
+        p: {xs:7,md:10},
         bgcolor: "#fff",
 
     },
@@ -93,7 +93,7 @@ const Product : React.FC<Product> = (props) => {
 
     return (
         <Grid container item sx={styles.product} xs={12}>
-            <Grid item xs={12} sx={{borderRadius:2,position:"relative",overflow:"hidden",cursor:"pointer"}}>
+            <Grid item xs={12} sx={{position:"relative",cursor:"pointer"}}>
                 <Grid item sx={styles.addToFavoritesButton}>
                     <IconButton onClick={addToFavoritesHandler} aria-label="add to wishlist">
                         {isLoading ? <CircularProgress size={matchesMD ? matchesSM ? 30 : 40 : 40} sx={{
