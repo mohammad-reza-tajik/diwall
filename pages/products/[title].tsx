@@ -181,7 +181,7 @@ const ProductDetails = () => {
         <>
             <Head>
                 <title>
-                    {`دیوال - ${slug.split("_").join(" ")}`}
+                    {`${slug.split("_").join(" ")} - دیوال`}
                 </title>
                 <meta name={"description"} content={title}/>
             </Head>

@@ -31,6 +31,7 @@ const styles = {
         top: 0,
         left: 0,
         zIndex: 50,
+        
     },
     form: {
         bgcolor: "white.main",
@@ -55,6 +56,7 @@ const styles = {
     },
     backgroundImage: {
         position: "fixed",
+        display:{xs:"none",md:"block"},
         top: 0,
         left: 0,
         width: "100vw",
@@ -99,7 +101,7 @@ const Auth: React.FC = () => {
         <Grid container alignItems={"center"} justifyContent={"center"} sx={styles.container}>
             <Head>
                 <title>
-                    دیوال - ورود/ثبت نام
+                ورود/ثبت نام - دیوال
                 </title>
             </Head>
             <Box sx={styles.backgroundImage}/>
@@ -194,7 +196,7 @@ const Auth: React.FC = () => {
             </Grid>
             <Snackbar
                 open={openSnackbar}
-                autoHideDuration={500000}
+                autoHideDuration={50000}
                 message={message}
                 onClose={closeSnackbarHandler}
                 action={action}

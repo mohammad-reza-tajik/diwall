@@ -39,7 +39,7 @@ const Dashboard : React.FC = () => {
     const [tab, setTab] = useState<number>(1);
 
 
-    const tabChangeHandler = (_, newTab) => {
+    const tabChangeHandler = ( _ , newTab : number) => {
         setTab(newTab);
     };
 
@@ -112,7 +112,7 @@ const Dashboard : React.FC = () => {
         <>
             <Head>
                 <title>
-                    داشبورد
+                    حساب کاربری - دیوال
                 </title>
             </Head>
 

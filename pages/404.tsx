@@ -24,7 +24,7 @@ const NotFound : React.FC = () => {
         <Fragment>
         <Head>
             <title>
-                صفحه مورد نظر پیدا نشد !
+            صفحه مورد نظر پیدا نشد - دیوال
             </title>
         </Head>
             <Grid container item xs={12} justifyContent={"center"} alignItems={"center"} px={10} sx={styles.container}>
@@ -44,12 +44,10 @@ const NotFound : React.FC = () => {
                     </Typography>
                 </Grid>
                 <Grid container justifyContent={"center"} item xs={12}>
-                    <Link href={"/"} passHref>
-                    <Button variant={"contained"} sx={{fontSize:{xs:16,md:20}}}>
+                    <Button component={Link} href={"/"} variant={"contained"} sx={{fontSize:{xs:16,md:20}}}>
                         بازگشت به صفحه اصلی
                     </Button>
-                    </Link>
-
+                
                 </Grid>
                 </Grid>
 

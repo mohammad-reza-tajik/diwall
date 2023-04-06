@@ -10,8 +10,8 @@ import 'swiper/css/navigation';
 import axios from "axios";
 import {useRouter} from "next/router";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Avatar, Divider } from "@mui/material";
-import { Person } from "@mui/icons-material";
+import  Divider  from "@mui/material/Divider";
+import  Person  from "@mui/icons-material/Person";
 
 
 interface Props {
