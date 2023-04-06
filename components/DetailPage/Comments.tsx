@@ -30,7 +30,7 @@ const Comments: React.FC<Props> = (props) => {
 
     const router = useRouter();
     
-    const [isLoading,setIsLoading] = useState<boolean>(false);
+    const [isLoading,setIsLoading] = useState<boolean>(true);
     const [comments, setComments] = useState<Comment[]>([]);
 
 
@@ -65,7 +65,6 @@ const Comments: React.FC<Props> = (props) => {
                                 slidesPerView={1}
                                 modules={[Navigation, A11y]}
                                 navigation
-                                centeredSlides={true}
                                 style={{width:"100%"}}
                         >
 

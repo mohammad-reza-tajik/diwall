@@ -7,8 +7,10 @@ const errorMessage1 = "این نام کاربری موجود نیست"
 const errorMessage2 = "نام کاربری یا رمز عبور نادرست است"
 const successMessage = "ورود با موفقیت انجام شد"
 
-export default async function handler(req, res) {
+import type {NextApiRequest , NextApiResponse} from "next"
 
+
+export default async function handler(req : NextApiRequest, res : NextApiResponse) {
     //*** ignore any method of request except post ***//
     if (req.method !== "POST")
         return

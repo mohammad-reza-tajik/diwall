@@ -2,7 +2,10 @@ import "../../db/database_connect"
 import User from "../../db/userModel";
 
 
-export default async function handler(req,res) {
+import type {NextApiRequest , NextApiResponse} from "next"
+
+
+export default async function handler(req : NextApiRequest, res : NextApiResponse) {    
     if (req.method === "PUT") {
 
 

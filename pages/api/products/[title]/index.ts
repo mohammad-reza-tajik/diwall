@@ -9,11 +9,10 @@ interface Response {
 }
 
 let regexp = new RegExp("", "g");
+export default async function handler(req : NextApiRequest, res : NextApiResponse<Response | null>) {
 
-const handler = async (req: NextApiRequest, res: NextApiResponse<Response | null>) => {
     if (req.method !== "GET")
         return
-
 
     const title = req.query.title && String(req.query.title);
 
@@ -31,7 +30,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Response | null
 
 
         //@ts-ignore
-        const relatedProducts = await Product.find({category: {$elemMatch: {$eq: product?.category[1]}}})
+        const relatedProducts : ProductType[] = await Product.find({category: {$elemMatch: {$eq: product?.category[1]}}})
         res.send({product, relatedProducts})
 
     } else {
@@ -39,4 +38,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Response | null
     }
 }
 
-export default handler
+

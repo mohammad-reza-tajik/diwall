@@ -1,7 +1,9 @@
 import "../../db/database_connect"
 import User from "../../db/userModel"
+import type {NextApiRequest , NextApiResponse} from "next"
 
-export default async function handler(req, res) {
+
+export default async function handler(req : NextApiRequest, res : NextApiResponse) {
     const userId = req.body.userId
     const productId = req.body.productId
     const token = req.body.token

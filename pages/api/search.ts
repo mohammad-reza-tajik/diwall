@@ -2,8 +2,11 @@ import "../../db/database_connect"
 import Product from "../../db/productModel"
 
 
-export default async function handler(req,res) {
-    if (req.method !== "POST")
+import type {NextApiRequest , NextApiResponse} from "next"
+
+
+export default async function handler(req : NextApiRequest, res : NextApiResponse) {   
+     if (req.method !== "POST")
         return
 
     // the only way to put a variable in a regex

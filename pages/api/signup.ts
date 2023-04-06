@@ -6,8 +6,10 @@ import generateToken from "../../utilities/generateToken";
 const errorMessage = "این نام کاربری یا ایمیل  قبلا استفاده شده است"
 const successMessage = "ثبت نام با موفقیت انجام شد."
 
-export default async function handler(req, res) {
+import type {NextApiRequest , NextApiResponse} from "next"
 
+
+export default async function handler(req : NextApiRequest, res : NextApiResponse) {
     //*** ignore any method of request except post ***//
     if (req.method !== "POST")
         return
