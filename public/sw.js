@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = "static-v34";
+const STATIC_CACHE_NAME = "static-v35";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
 
 self.addEventListener("install", function (event) {

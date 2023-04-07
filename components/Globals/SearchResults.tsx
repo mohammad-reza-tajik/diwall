@@ -1,10 +1,9 @@
-import React, {useCallback} from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import axios from "axios";
 import {useRouter} from "next/router";
 
 
@@ -111,7 +110,7 @@ const SearchResults: React.FC<Props> = (props) => {
 
 
                             })}
-                            {results.length === 0 && search.trim().length >= 3 && (
+                            {results.length === 0 && search.trim().length >= 3 && !isLoading &&  (
                                 <Grid container justifyContent={"center"} alignItems={"center"} p={10}>
                                     <Typography variant={"h5"} color={"#666"} fontSize={16}>
                                         نتیجه ای یافت نشد!

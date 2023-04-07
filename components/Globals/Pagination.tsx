@@ -12,7 +12,7 @@ interface Props {
 
 const Pagination : React.FC<Props> = (props) => {
 
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState<number>(1)
     const router = useRouter()
 
     useEffect(()=>{
@@ -22,7 +22,7 @@ const Pagination : React.FC<Props> = (props) => {
 
     },[])
 
-    const pageHandler = async ( _ , page) => {
+    const pageHandler = async ( _ , page : number) => {
 
         setPage(page);
         // to navigate to the same page with updated query parameters

@@ -58,33 +58,35 @@ const Dashboard : React.FC = () => {
 
     useEffect(() => {
 
-        if (typeof window !== 'undefined') {
-            const token = localStorage.getItem("token")
-            const userId = localStorage.getItem("userId")
-            if (userId && userId !== "undefined") {
+        (async () => {
 
-                axios.post("/api/get-user", {userId, token}).then(res => {
+            try {
+
+                if( !isAuthenticated ) {
+
+                    const token = localStorage.getItem("token")
+                    const userId = localStorage.getItem("userId")
+                    if (userId && userId !== "undefined") {
+                        const res = await axios.post("/api/get-user", {userId, token})
                         dispatch(userActions.login(res.data.user))
-
-
-                    }
-                ).catch(e => {
+                    } else {
                         localStorage.clear()
                         dispatch(userActions.logout())
-                        console.log(e)
-
+                        router.push("/auth")
+                        
                     }
-                )
-
-
-            } else {
-                localStorage.clear()
-                dispatch(userActions.logout())
-                router.push("/auth")
-
-            }
-        }
-    }, [dispatch])
+                }
+                } catch(err) {
+                    localStorage.clear()
+                    dispatch(userActions.logout())
+                    console.log(err)
+                }
+                
+                
+            
+        })()
+        
+    }, [dispatch , isAuthenticated])
 
 
     useEffect(() => {

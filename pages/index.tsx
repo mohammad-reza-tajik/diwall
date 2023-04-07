@@ -4,6 +4,7 @@ import Banner from "../components/HomePage/Banner";
 import React from "react";
 import {GetStaticProps} from "next";
 import axios from "axios";
+import ShowCase from "../components/HomePage/ShowCase";
 import type {ProductType} from "../db/productModel";
 import dynamic from "next/dynamic";
 
@@ -32,6 +33,7 @@ const Home : React.FC<Props> = (props) => {
             <MiddleSection/>
             <SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"/products?sortBy=2"} />
             <SwiperProducts products={props.bestSellingProducts} />
+            <ShowCase/>
         </Grid>
     )
 }

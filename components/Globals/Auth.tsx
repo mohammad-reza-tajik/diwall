@@ -16,21 +16,28 @@ const Auth: React.FC<Props> = ({children}) => {
 
     useEffect(() => {
 
-            if (typeof window !== 'undefined') {
+        /* useEffect always executes on client side */
+
+        (async () => {
+
+            try {
+
                 const token = localStorage.getItem("token")
                 const userId = localStorage.getItem("userId")
-                if (userId && userId !== "undefined" && !router.pathname.includes("profile") ) {
-                    axios.post("/api/get-user", {userId, token}).then(res => {
-                            dispatch(userActions.login(res.data.user))
-                        }
-                    ).catch(_ => {
-                            localStorage.clear()
-                            dispatch(userActions.logout())
-                        }
-                    )
-
+                if (userId && userId !== "undefined" && !router.pathname.includes("user") ) {
+                    const res = await axios.post("/api/get-user", {userId, token})
+                    dispatch(userActions.login(res.data.user))
                 }
-            }
+             } catch(err) {
+                    localStorage.clear()
+                    dispatch(userActions.logout())
+                    console.log(err)
+                }
+                
+                
+            
+        })()
+            
 
     }, [dispatch])
 

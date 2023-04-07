@@ -4,11 +4,11 @@ import {useTheme} from "@mui/material/styles";
 import Product from "../Globals/Product";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from "swiper";
+import React from "react";
+import type {ProductType} from "../../db/productModel"
 
 import "swiper/css";
 import 'swiper/css/navigation';
-import React from "react";
-import type {ProductType} from "../../db/productModel"
 
 interface Props {
     products:Array<ProductType>

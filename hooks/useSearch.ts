@@ -10,11 +10,11 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (boolean) => 
 
     const [search, setSearch] = useState<string>("")
     const [isWrong, setIsWrong] = useState<boolean>(false)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     const [results, setResults] = useState<Array<ProductType>>([])
 
-    const submitSearchHandler = (e) => {
-        e.preventDefault()
+    const submitSearchHandler = (event : FormDataEvent) => {
+        event.preventDefault()
         if (search.trim() === "") {
             setIsWrong(true)
             setTimeout(() => {
@@ -82,7 +82,7 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (boolean) => 
     };
 
 
-    const handleChange = async (search) => {
+    const handleChange = async (search : string) => {
         setIsLoading(true)
         const res = await axios(`/api/products?search=${search}`)
         setResults(res.data.products.slice(0, 4));
