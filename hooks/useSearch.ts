@@ -1,4 +1,4 @@
-import {useCallback, useState} from "react";
+import React, {useCallback, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import type {ProductType} from "../db/productModel";
@@ -13,7 +13,7 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (boolean) => 
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [results, setResults] = useState<Array<ProductType>>([])
 
-    const submitSearchHandler = (event : FormDataEvent) => {
+    const submitSearchHandler = (event) => {
         event.preventDefault()
         if (search.trim() === "") {
             setIsWrong(true)
