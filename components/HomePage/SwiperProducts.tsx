@@ -27,6 +27,8 @@ const SwiperProducts : React.FC<Props> = (props) => {
                         slidesPerView={matchesLG ? matchesMD ? 2 : 3 : 4}
                         modules={[Navigation, A11y]}
                         navigation
+                        style={{width:"100%"}}
+
 
                 >
                     {props.products.map((product) =>

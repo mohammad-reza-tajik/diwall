@@ -25,8 +25,9 @@ const Features: React.FC = () => {
 
 
                         <Typography variant={"body1"} fontFamily={"dana-bold"}
-                                    sx={{color: "#666", fontSize: {xs: 10, md: 12}}}>تضمین کیفیت و گارانتی
-                            محصولات</Typography>
+                                    sx={{color: "#666", fontSize: {xs: 10, md: 12}}}>
+                            ارسال رایگان به تمام نقاط ایران
+                        </Typography>
 
                 </Grid>
             </Grid>
@@ -43,8 +44,9 @@ const Features: React.FC = () => {
 
 
                         <Typography variant={"body1"} fontFamily={"dana-bold"}
-                                    sx={{color: "#666", fontSize: {xs: 10, md: 12}}}>تضمین کیفیت و گارانتی
-                            محصولات</Typography>
+                                    sx={{color: "#666", fontSize: {xs: 10, md: 12}}}>
+                            بسته بندی امن برای حفاظت فیزیکی
+                            </Typography>
 
                 </Grid>
             </Grid>
@@ -79,8 +81,9 @@ const Features: React.FC = () => {
 
 
                         <Typography variant={"body1"} fontFamily={"dana-bold"}
-                                    sx={{color: "#666", fontSize: {xs: 10, md: 12}}}>تضمین کیفیت و گارانتی
-                            محصولات</Typography>
+                                    sx={{color: "#666", fontSize: {xs: 10, md: 12}}}>
+                            پشتیبانی به صورت شبانه روزی
+                        </Typography>
 
                 </Grid>
             </Grid>

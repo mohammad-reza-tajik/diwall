@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {CSSProperties, useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {Swiper, SwiperSlide} from "swiper/react";
@@ -12,6 +12,42 @@ import {useRouter} from "next/router";
 import CircularProgress from "@mui/material/CircularProgress";
 import  Divider  from "@mui/material/Divider";
 import  Person  from "@mui/icons-material/Person";
+
+import useMediaQuery from "@mui/material/useMediaQuery";
+import {useTheme} from "@mui/material/styles";
+
+
+
+
+
+const styles = {
+    commentContainer:{
+        backgroundColor:"#fff",
+        
+
+    },
+    commentBody :  {
+        minHeight:300,
+         maxHeight:300,
+          overflow:"auto",
+          py:30,
+           px:50,
+
+        "&::-webkit-scrollbar" : {
+            width: 5
+        },
+        
+        "&::-webkit-scrollbar-thumb" : {
+            borderRadius: 8,
+            backgroundClip: "content-box",
+            bgcolor: (theme) => theme.palette.primary.main,
+        }
+    }
+    
+}
+
+
+
 
 
 interface Props {
@@ -33,6 +69,8 @@ const Comments: React.FC<Props> = (props) => {
     const [isLoading,setIsLoading] = useState<boolean>(true);
     const [comments, setComments] = useState<Comment[]>([]);
 
+    const theme = useTheme()
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
 
     const slug = router.isReady ? router.query.title as string : "_";
     const title = slug.split("_").join(" ");
@@ -62,7 +100,7 @@ const Comments: React.FC<Props> = (props) => {
                     </Grid> :
                     comments.length !== 0 ?
                         <Swiper spaceBetween={10}
-                                slidesPerView={1}
+                                slidesPerView={matchesMD ? 1 : 2}
                                 modules={[Navigation, A11y]}
                                 navigation
                                 style={{width:"100%"}}
@@ -72,7 +110,7 @@ const Comments: React.FC<Props> = (props) => {
                                 comments.map((comment, index) => {
 
                                     return (
-                                        <SwiperSlide key={index} style={{backgroundColor:"#fff"}}>
+                                        <SwiperSlide key={index} style={styles.commentContainer}>
                                             <Grid container item alignItems={"center"}>
                                                 <Grid item xs={"auto"} height={1}>
                                                     <Person color="primary" sx={{fontSize:{xs:35,md:40}}} />
@@ -91,7 +129,7 @@ const Comments: React.FC<Props> = (props) => {
                                             </Grid>
                                                       </Grid>
                                                       <Divider sx={{width:.9,mx:"auto"}} />
-                                            <Grid item xs={12} py={30} px={50} minHeight={200}>
+                                            <Grid item xs={12} sx={styles.commentBody}>
                                                 <Typography variant={"body1"} component={"p"} fontSize={14}
                                                             lineHeight={1.7}>
                                                     {comment.content}

@@ -79,11 +79,10 @@ input[type=number] {
 
 }
 
-
 // manipulating tooltip background color and fontsize
 .MuiTooltip-tooltip,.MuiTooltip-arrow::before{
   background-color: $grey-color !important;
-  font-size: 14px !important;
+  font-size: 1.4rem !important;
 }
 
 .MuiSnackbarContent-root , .css-1qe5cpw-MuiPaper-root-MuiSnackbarContent-root {
@@ -114,10 +113,6 @@ input[type=number] {
   object-fit: fill;
 }
 
-
-.css-1xk4vfn-MuiSnackbar-root .css-1qe5cpw-MuiPaper-root-MuiSnackbarContent-root{
-  //background-color: #e50909 !important;
-}
 
 .MuiSnackbarContent-message , .css-1exqwzz-MuiSnackbarContent-message{
   font-size: 15px !important;

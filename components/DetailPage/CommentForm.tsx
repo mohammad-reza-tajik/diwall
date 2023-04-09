@@ -4,33 +4,52 @@ import Typography from "@mui/material/Typography";
 import {useAppSelector} from "../../store";
 import Button from "@mui/material/Button";
 import Link from "next/link";
-import Box from "@mui/material/Box";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import Create from "@mui/icons-material/Create";
+import  TextField  from "@mui/material/TextField";
 
 
 const styles = {
     commentField: {
-        width: 1,
-        height: 250,
-        px: 20,
-        py: 12,
-        border: "1px solid #ccc",
-        borderRadius: 2,
-        backgroundColor: "white.main",
-        fontSize: 14,
-        resize: "none",
-        "&:focus": {
-            outline: "2px solid #069f69"
+
+       
+               
+        ".MuiInputBase-input" : {
+            fontSize: 13,
+            px:10,
+            lineHeight:1.8,
+            "&::-webkit-scrollbar" : {
+                width: 5
+            },
+            
+            "&::-webkit-scrollbar-thumb" : {
+                borderRadius: 8,
+                backgroundClip: "content-box",
+                bgcolor: (theme) => theme.palette.primary.main,
+            },
         },
+        
+        ".MuiInputBase-root":{
+            bgcolor:"white.main",
+
+        },
+
+        ".MuiFormHelperText-sizeMedium" : {
+            color:"primary.main",
+            mt:12,
+            ml:0,
+            fontSize: {xs:12,md:14}
+        }
+        
     },
     commentButton: {
         fontSize: {xs: 12, md: 15},
         width: {xs:1,md:200},
         gap:10,
         py: 15
-    }
+    },
+
 }
 
 interface Props {
@@ -39,9 +58,14 @@ interface Props {
 }
 
 const CommentForm: React.FC<Props> = (props) => {
+
     const user = useAppSelector(state => state);
+
     const commentRef = useRef<HTMLTextAreaElement>();
-    const [isLoading,setIsLoading] = useState<boolean>(false)
+
+    const [isLoading,setIsLoading] = useState<boolean>(false);
+
+    const [helperText,setHelperText] = useState<string>("")
     // console.log(props.currentProductTitle)
 
     const insertCommentHandler = async (event : FormEvent) => {
@@ -59,6 +83,8 @@ const CommentForm: React.FC<Props> = (props) => {
             })
             commentRef.current.value = ""
             setIsLoading(false);
+            setHelperText("دیدگاه شما با موفقیت ثبت شد !")
+            setTimeout(()=>setHelperText(""),3000)
             props.onAddComment()
 
         } catch (err) {
@@ -74,7 +100,7 @@ const CommentForm: React.FC<Props> = (props) => {
                 user.username ?
                     <Grid container item xs={12} md={7} direction={"column"} gap={10} component={"form"}
                           onSubmit={insertCommentHandler}>
-                        <Box component={"textarea"} sx={styles.commentField} ref={commentRef} required placeholder="دیدگاه شما ..."/>
+                        <TextField multiline minRows={7} sx={styles.commentField} helperText={helperText} maxRows={7} variant="outlined" inputRef={commentRef} required placeholder="دیدگاه شما ..."/>
                         <Button type={"submit"} variant={"contained"} color={"primary"} sx={styles.commentButton} startIcon={isLoading ?
                             <CircularProgress sx={{color: "#fff",position:"relative",top:-2}} size={25}/> :  <Create sx={{color: "#fff",position:"relative",top:-2}}/>  }
                                 aria-label={"add comment button"}>
