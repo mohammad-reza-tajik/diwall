@@ -63,20 +63,6 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
-  background-color: #069f69 !important;
-  border-radius: 50% !important;
-  width: 5rem !important;
-  height: 5rem !important;
-  color: #fff !important;
-  padding: 1rem !important;
-}
-.swiper-button-prev:after,
-.swiper-button-next:after {
-  font-size: 2rem !important;
-}
-
 .css-h4y409-MuiList-root {
   padding: 0 !important;
 }

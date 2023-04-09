@@ -7,9 +7,29 @@ import Product from "../Globals/Product";
 import React from "react";
 import "swiper/css";
 import 'swiper/css/navigation';
-import type {ProductType} from "../../db/productModel"
+import type {ProductType} from "../../db/productModel";
+
+const styles = {
+    swiper : {
+        width:"100%",
+        "& .swiper-button-prev , & .swiper-button-next" : {
+            backgroundColor: (theme)=> theme.palette.primary.main,
+            borderRadius: "50%" ,
+            width: "5rem" ,
+            height: "5rem" ,
+            color: "#fff" ,
+            padding: "1rem" ,
+            fontSize: "1rem",
+          
+            "&:after" : {
+              fontSize: "2rem",
+            }
+          }
+    },
+}
 
 interface Props {
+    mostPopular? : boolean;
     products : ProductType[];
 }
 const SwiperProducts : React.FC<Props> = (props) => {
@@ -23,11 +43,11 @@ const SwiperProducts : React.FC<Props> = (props) => {
     return (
         <Grid container item xs={12} alignItems={"center"}>
 
-                <Swiper spaceBetween={matchesSM ? 5 : 20}
+                <Grid component={Swiper} spaceBetween={matchesSM ? 5 : 20}
                         slidesPerView={matchesLG ? matchesMD ? 2 : 3 : 4}
                         modules={[Navigation, A11y]}
                         navigation
-                        style={{width:"100%"}}
+                        sx={styles.swiper}
 
 
                 >
@@ -35,7 +55,7 @@ const SwiperProducts : React.FC<Props> = (props) => {
                         <SwiperSlide key={product && product._id}>
                             <Product {...product} />
                         </SwiperSlide>)}
-                </Swiper>
+                </Grid>
 
         </Grid>
     )
