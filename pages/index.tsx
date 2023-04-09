@@ -11,8 +11,7 @@ import dynamic from "next/dynamic";
 const SectionHeading = dynamic(()=>import("../components/Globals/SectionHeading"))
 const Places = dynamic(()=>import("../components/HomePage/Places"))
 const MiddleSection = dynamic(()=>import("../components/HomePage/MiddleSection"))
-const MostPopularProducts = dynamic(()=>import("../components/HomePage/MostPopularProducts"))
-const SwiperProducts = dynamic(()=>import("../components/HomePage/SwiperProducts"))
+const SwiperProducts = dynamic(()=>import("../components/Globals/SwiperProducts"))
 
 
 interface Props {
@@ -27,7 +26,8 @@ const Home : React.FC<Props> = (props) => {
             <Banner />
             <Features />
             <Places/>
-            <MostPopularProducts products={props.mostPopularProducts} route={"/products?sortBy=3"} />
+            <SwiperProducts products={props.mostPopularProducts} route={"/products?sortBy=3"} mostPopular />
+            {/*<MostPopularProducts products={props.mostPopularProducts} route={"/products?sortBy=3"} />*/}
             <SectionHeading text={"محصولات جدید"} seeAll={true} route={"/products"}/>
             <SwiperProducts products={props.latestProducts} />
             <MiddleSection/>

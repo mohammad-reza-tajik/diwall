@@ -1,4 +1,4 @@
-import React, {CSSProperties, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {Swiper, SwiperSlide} from "swiper/react";

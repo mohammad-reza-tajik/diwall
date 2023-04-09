@@ -1,4 +1,4 @@
-import React, {FormEvent, useRef, useState} from "react"
+import React, {useRef, useState} from "react"
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {useAppSelector} from "../../store";
@@ -12,8 +12,6 @@ import  TextField  from "@mui/material/TextField";
 
 const styles = {
     commentField: {
-
-       
                
         ".MuiInputBase-input" : {
             fontSize: 13,
@@ -68,7 +66,7 @@ const CommentForm: React.FC<Props> = (props) => {
     const [helperText,setHelperText] = useState<string>("")
     // console.log(props.currentProductTitle)
 
-    const insertCommentHandler = async (event : FormEvent) => {
+    const insertCommentHandler = async (event) => {
         event.preventDefault();
         // console.log(commentRef.current.value)
         try {

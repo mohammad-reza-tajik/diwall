@@ -3,10 +3,10 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Grid from "@mui/material/Grid";
 import TabPanel from "../Globals/TabPanel";
-import RelatedProducts from "./RelatedProducts";
 import CircularProgress from "@mui/material/CircularProgress";
 import dynamic from "next/dynamic";
 import CommentForm from "./CommentForm";
+import SwiperProducts from "../Globals/SwiperProducts";
 
 const Comments = dynamic(()=>import("./Comments"))
 
@@ -56,7 +56,7 @@ const Info: React.FC<Props> = (props) => {
                         </Grid> :
                         <>
                             <TabPanel index={0} tab={tab}>
-                                <RelatedProducts products={props.products}/>
+                                <SwiperProducts products={props.products}/>
                             </TabPanel>
                             <TabPanel index={1} tab={tab}>
                                 <Comments addComment={addComment} />
