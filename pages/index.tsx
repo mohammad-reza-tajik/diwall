@@ -6,13 +6,10 @@ import {GetStaticProps} from "next";
 import axios from "axios";
 import ShowCase from "../components/HomePage/ShowCase";
 import type {ProductType} from "../db/productModel";
-import dynamic from "next/dynamic";
-
-const SectionHeading = dynamic(()=>import("../components/Globals/SectionHeading"))
-const Places = dynamic(()=>import("../components/HomePage/Places"))
-const MiddleSection = dynamic(()=>import("../components/HomePage/MiddleSection"))
-const SwiperProducts = dynamic(()=>import("../components/Globals/SwiperProducts"))
-
+import Places from "../components/HomePage/Places";
+import SwiperProducts from "../components/Globals/SwiperProducts";
+import SectionHeading from "../components/Globals/SectionHeading";
+import MiddleSection from "../components/HomePage/MiddleSection";
 
 interface Props {
     latestProducts:ProductType[];

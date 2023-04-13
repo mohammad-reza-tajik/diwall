@@ -33,7 +33,7 @@ const Products: React.FC = () => {
             try {
                 setIsLoading(true)
                 if(isReady) {
-                    const res = await axios(`/api/products?page=${page}&sortBy=${sortBy}`)
+                    const res = await axios(`/api/products?page=${page}&sortBy=${sortBy}&category=${category}`)
                     setProducts(res.data.products)
                     setPageInformation(res.data)
                     setIsLoading(false)

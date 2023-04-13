@@ -29,13 +29,16 @@ const styles = {
 
 
 const Dashboard : React.FC = () => {
+
     const router = useRouter()
+
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const user = useAppSelector(state => state)
 
     const [populatedFavoriteList, setPopulatedFavoriteList] = useState<any>([])
     const [populatedCart, setPopulatedCart] = useState<any>([])
+    
     const [tab, setTab] = useState<number>(1);
 
 

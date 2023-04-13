@@ -82,7 +82,7 @@ const SwiperProducts: React.FC<Props> = (props) => {
                     </Grid> : null
             }
 
-            <Grid component={Swiper} xs={12} lg={mostPopular ? 9 : 12} spaceBetween={matchesSM ? 5 : 20}
+            <Grid container item component={Swiper} xs={12} lg={mostPopular ? 9 : 12} spaceBetween={matchesSM ? 5 : 20}
                   slidesPerView={slidesPerView}
                   modules={[Navigation, A11y]}
                   navigation
