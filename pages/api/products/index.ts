@@ -14,7 +14,9 @@ interface Response {
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
 
 
-    if (req.method === "GET") {
+    if (req.method !== "GET") {
+        return 
+    }
 
 
         const ITEMS_PER_PAGE = 10
@@ -23,7 +25,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         const sortBy = Number(req.query.sortBy) || 1;
         const search =  req.query.search && String(req.query.search); // when the search is undefined it turns into string "undefined"
 
-        // console.log(req.query.sortBy)
+
+
+        // console.log("[category]",category)
         // console.log(" [from search] ",search)
         // console.log(req.query.sortBy)
         // console.log(sortBy)
@@ -32,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     
 
-        if (search && search.trim().length !== 0) {
+        if (search && search !=="undefined" && search.trim().length !== 0) {
             // console.log("from search")
 
             // the only way to put a variable in a regex
@@ -65,7 +69,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             })
 
 
-        } else if (!search && !category) {
+        } else if ((!search || search === "undefined") && (!category || category === "undefined")) {
             // console.log("from sortby")
 
             const productsCount = await Product.countDocuments().exec()
@@ -115,6 +119,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         
 
 
-    }
+    
 
 }

@@ -26,14 +26,15 @@ const Products: React.FC = () => {
 
     const router = useRouter()
     const {isReady} = router;
-    const {search, page, sortBy, category} = router.query
+    const {search, page, sortBy, category, } = router.query
 
     useEffect(() => {
         (async () => {
             try {
                 setIsLoading(true)
                 if(isReady) {
-                    const res = await axios(`/api/products?page=${page}&sortBy=${sortBy}&category=${category}`)
+                    const res = await axios(`/api/products?search=${search}&page=${page}&sortBy=${sortBy}&category=${category}`)
+                    // console.log(res)
                     setProducts(res.data.products)
                     setPageInformation(res.data)
                     setIsLoading(false)
@@ -78,7 +79,7 @@ const Products: React.FC = () => {
                 }
 
             </Grid>
-            <Grid container item xs spacing={10}>
+            <Grid container item xs spacing={10} alignItems={"center"}>
                 {
                 isLoading ?
                     <Grid container item xs justifyContent={"center"}>
@@ -97,7 +98,11 @@ const Products: React.FC = () => {
                             </Grid>
                         )}
 
-                {isLoading || products.length === 0 ? "" : <Pagination {...pageInformation} />}
+                {
+                    isLoading || products.length === 0 ?
+                        "" :
+                        <Pagination {...pageInformation} />
+                }
 
 
             </Grid>

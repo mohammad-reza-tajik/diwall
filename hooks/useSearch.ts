@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import {useCallback, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
 import type {ProductType} from "../db/productModel";
@@ -13,7 +13,7 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (boolean) => 
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [results, setResults] = useState<Array<ProductType>>([])
 
-    const submitSearchHandler = (event) => {
+    const submitSearchHandler = async (event) => {
         event.preventDefault()
         if (search.trim() === "") {
             setIsWrong(true)
@@ -23,23 +23,14 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (boolean) => 
             return
         }
         setIsWrong(false)
-        axios(`/api/products?search=${search}`).then(_ => {
-            router.push(
-                {
-                    pathname: `/products`,
-                    query: {
-                        search,
-                        page: 1
-                    }
-                })
-            if (device === "mobile") {
-                closeSearchHandlerMobile()
-            } else {
-                closeSearchHandlerDesktop()
-            }
-        }).catch(err => {
-            console.log(err)
-        })
+        // axios(`/api/products?search=${search}`).then(_ => {
+        router.push(`/products?search=${search}`)
+        if (device === "mobile") {
+            closeSearchHandlerMobile()
+        } else {
+            closeSearchHandlerDesktop()
+        }
+
     }
 
 
@@ -82,7 +73,7 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (boolean) => 
     };
 
 
-    const handleChange = async (search : string) => {
+    const handleChange = async (search: string) => {
         setIsLoading(true)
         const res = await axios(`/api/products?search=${search}`)
         setResults(res.data.products.slice(0, 4));

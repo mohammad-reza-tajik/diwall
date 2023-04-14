@@ -120,7 +120,7 @@ const HeaderDesktop: React.FC = () => {
 
     const goToFavorites = async (_) => {
         if (user.username) {
-            await router.push({pathname: `/account/${user?.userId}`, query: {tab: 2}})
+            await router.push(`/account/${user?.userId}?tab=2`)
 
         } else {
 
@@ -131,9 +131,8 @@ const HeaderDesktop: React.FC = () => {
 
     const goToCart = async (_) => {
         if (user.username) {
-            await router.push({pathname: `/account/${user?.userId}`, query: {tab: 3}})
+            await router.push(`/account/${user?.userId}?tab=3`)
         } else {
-
             await router.push("/auth")
         }
 
