@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import type {ProductType} from "../db/productModel";
 
 
-const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (boolean) => void }) => {
+const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boolean) => void }) => {
 
     const router = useRouter()
 

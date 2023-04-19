@@ -13,9 +13,9 @@ import {userActions} from "../../store";
 import {useDispatch} from "react-redux";
 import dynamic from "next/dynamic";
 
-const Profile = dynamic(()=>import("../../components/AccountPage/Profile"))
-const Wishlist = dynamic(()=>import("../../components/AccountPage/Wishlist"))
-const Cart = dynamic(()=>import("../../components/AccountPage/Cart"))
+const Profile = dynamic(() => import("../../components/AccountPage/Profile"))
+const Wishlist = dynamic(() => import("../../components/AccountPage/Wishlist"))
+const Cart = dynamic(() => import("../../components/AccountPage/Cart"))
 
 const styles = {
     tab: {
@@ -28,7 +28,7 @@ const styles = {
 }
 
 
-const Dashboard : React.FC = () => {
+const Dashboard: React.FC = () => {
 
     const router = useRouter()
 
@@ -38,11 +38,11 @@ const Dashboard : React.FC = () => {
 
     const [populatedFavoriteList, setPopulatedFavoriteList] = useState<any>([])
     const [populatedCart, setPopulatedCart] = useState<any>([])
-    
+
     const [tab, setTab] = useState<number>(1);
 
 
-    const tabChangeHandler = ( _ , newTab : number) => {
+    const tabChangeHandler = (_, newTab: number) => {
         setTab(newTab);
     };
 
@@ -65,7 +65,7 @@ const Dashboard : React.FC = () => {
 
             try {
 
-                if( !isAuthenticated ) {
+                if (!isAuthenticated) {
 
                     const token = localStorage.getItem("token")
                     const userId = localStorage.getItem("userId")
@@ -76,35 +76,33 @@ const Dashboard : React.FC = () => {
                         localStorage.clear()
                         dispatch(userActions.logout())
                         router.push("/auth")
-                        
+
                     }
                 }
-                } catch(err) {
-                    localStorage.clear()
-                    dispatch(userActions.logout())
-                    console.log(err)
-                }
-                
-                
-            
+            } catch (err) {
+                localStorage.clear()
+                dispatch(userActions.logout())
+                console.log(err)
+            }
+
+
         })()
-        
-    }, [dispatch , isAuthenticated])
+
+    }, [dispatch, isAuthenticated])
 
 
     useEffect(() => {
-        if (isAuthenticated) {
-            setIsLoading(true)
-
-            axios.post("/api/get-favorite-list-and-cart", {
-                userId: user?.userId, token: user?.token
-            }).then(res => {
+        (async () => {
+            if (isAuthenticated) {
+                setIsLoading(true)
+                const res = await axios.post("/api/get-favorite-list-and-cart", {
+                    userId: user?.userId, token: user?.token
+                })
                 setPopulatedFavoriteList(res.data.favoriteList)
                 setPopulatedCart(res.data.cart)
                 setIsLoading(false)
-
-            })
-        }
+            }
+        })()
     }, [user.cart, user.favoriteList])
 
 
@@ -143,15 +141,15 @@ const Dashboard : React.FC = () => {
                     {/*height 400 because tab indicator for third tab gets stuck at a wrong place*/}
 
                     <TabPanel tab={tab} index={1}>
-                       <Profile user={user} />
+                        <Profile user={user}/>
                     </TabPanel>
 
                     <TabPanel tab={tab} index={2}>
-                       <Wishlist isLoading={isLoading} populatedFavoriteList={populatedFavoriteList} user={user} />
+                        <Wishlist isLoading={isLoading} populatedFavoriteList={populatedFavoriteList} user={user}/>
                     </TabPanel>
 
                     <TabPanel tab={tab} index={3}>
-                        <Cart isLoading={isLoading} populatedCart={populatedCart} user={user} />
+                        <Cart isLoading={isLoading} populatedCart={populatedCart} user={user}/>
                     </TabPanel>
 
                 </Grid>

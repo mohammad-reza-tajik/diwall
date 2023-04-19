@@ -196,7 +196,7 @@ const Auth: React.FC = () => {
             </Grid>
             <Snackbar
                 open={openSnackbar}
-                autoHideDuration={50000}
+                autoHideDuration={50_000}
                 message={message}
                 onClose={closeSnackbarHandler}
                 action={action}

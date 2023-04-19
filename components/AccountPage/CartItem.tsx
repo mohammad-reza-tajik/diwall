@@ -34,15 +34,16 @@ const CartItem: React.FC<Props> = (props) => {
 
     }
 
-    const removeFromCart = () => {
+    const removeFromCart = async () => {
         if (user?.username) {
 
-            axios.put("/api/remove-from-cart", {
-                userId: user?.userId, token: user?.token, productId: props._id
-            }).then(_ => {
-                dispatch(userActions.removeFromCart(props._id))
-
+            await axios.put("/api/remove-from-cart", {
+                userId: user?.userId,
+                token: user?.token, productId: props._id
             })
+            dispatch(userActions.removeFromCart(props._id))
+
+
         }
 
     }

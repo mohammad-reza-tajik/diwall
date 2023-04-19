@@ -9,21 +9,21 @@ import {useRouter} from "next/router";
 import React, {useState} from "react";
 import axios from "axios";
 import {useTheme} from "@mui/material/styles"
-import {userActions , useAppSelector , useAppDispatch} from "../../store";
+import {userActions, useAppSelector, useAppDispatch} from "../../store";
 import Link from "next/link"
 
 const styles = {
     product: {
         borderRadius: 1,
-        justifyContent:"center",
-        p: {xs:7,md:10},
+        justifyContent: "center",
+        p: {xs: 7, md: 10},
         bgcolor: "#fff",
 
     },
     addToFavoritesButton: {
         position: "absolute",
-        left: {xs:1,sm:3},
-        top: {xs:1,sm:3},
+        left: {xs: 1, sm: 3},
+        top: {xs: 1, sm: 3},
         zIndex: 20,
 
     }
@@ -31,61 +31,64 @@ const styles = {
 
 
 interface Product {
-    _id:string;
-    title:string;
-    price:string
+    _id: string;
+    title: string;
+    price: string
 
 
 }
 
-const Product : React.FC<Product> = (props) => {
+const Product: React.FC<Product> = (props) => {
     const router = useRouter()
 
     const theme = useTheme()
-    const matchesMD : boolean = useMediaQuery(theme.breakpoints.down("md"))
-    const matchesSM : boolean = useMediaQuery(theme.breakpoints.down("sm"))
+    const matchesMD: boolean = useMediaQuery(theme.breakpoints.down("md"))
+    const matchesSM: boolean = useMediaQuery(theme.breakpoints.down("sm"))
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const user = useAppSelector(state =>state)
+    const user = useAppSelector(state => state)
     const dispatch = useAppDispatch()
 
     const isFavorite = user?.favoriteList.includes(props._id)
 
-    const { title } = props
+    const {title} = props
     const slug = title.split(" ").join("_");
 
 
-    const addToFavoritesHandler = () => {
-        if (user?.username) {
-            setIsLoading(true)
-            if (isFavorite){
-                axios.put("/api/remove-from-favorites", {
-                    productId: props._id,
-                    userId: user.userId,
-                    token: user.token
-                }).then( _ => {
-                        setIsLoading(false)
-                        dispatch(userActions.removeFromFavorites(props._id))
-                    }
-                ).catch(e => console.log(e))
+    const addToFavoritesHandler = async () => {
+        try {
+            if (user?.username) {
+                setIsLoading(true)
+                if (isFavorite) {
+                    await axios.put("/api/remove-from-favorites", {
+                        productId: props._id,
+                        userId: user.userId,
+                        token: user.token
+                    })
+                    setIsLoading(false)
+                    dispatch(userActions.removeFromFavorites(props._id))
 
+
+                } else {
+
+                    await axios.put("/api/add-to-favorites", {
+                        productId: props._id,
+                        userId: user.userId,
+                        token: user.token
+                    })
+                    setIsLoading(false)
+                    dispatch(userActions.addToFavorites(props._id))
+
+                }
+            } else {
+
+                router.push("/auth")
             }
-            else {
 
-                axios.put("/api/add-to-favorites", {
-                    productId: props._id,
-                    userId: user.userId,
-                    token: user.token
-                }).then( _ => {
-                        setIsLoading(false)
-                        dispatch(userActions.addToFavorites(props._id))
-                    }
-                ).catch(e => console.log(e))
-            }
-        } else {
+        } catch (err) {
+            console.log(err)
 
-            router.push("/auth")
         }
 
     }
@@ -93,25 +96,25 @@ const Product : React.FC<Product> = (props) => {
 
     return (
         <Grid container item sx={styles.product} xs={12}>
-            <Grid item xs={12} sx={{position:"relative",cursor:"pointer"}}>
+            <Grid item xs={12} sx={{position: "relative", cursor: "pointer"}}>
                 <Grid item sx={styles.addToFavoritesButton}>
                     <IconButton onClick={addToFavoritesHandler} aria-label="add to wishlist">
                         {isLoading ? <CircularProgress size={matchesMD ? matchesSM ? 30 : 40 : 40} sx={{
                             borderRadius: 20,
-                            p: {xs:4,md:5,},
+                            p: {xs: 4, md: 5,},
                             bgcolor: "rgba(50,50,50,0.3)",
                             color: "#fff"
                         }}/> : isFavorite ? <Favorite sx={{
-                            fontSize:{xs:30,sm:40},
+                                fontSize: {xs: 30, sm: 40},
                                 borderRadius: 20,
-                                p: {xs:4,md:5,},
+                                p: {xs: 4, md: 5,},
                                 bgcolor: "rgba(50,50,50,0.3)",
                                 color: "primary.main"
                             }}/> :
                             <Favorite sx={{
-                                fontSize:{xs:30,sm:40,},
+                                fontSize: {xs: 30, sm: 40,},
                                 borderRadius: 20,
-                                p: {xs:4,md:5,},
+                                p: {xs: 4, md: 5,},
                                 bgcolor: "rgba(50,50,50,0.3)",
                                 color: "#fff"
                             }}/>
@@ -120,20 +123,22 @@ const Product : React.FC<Product> = (props) => {
                 </Grid>
 
                 <Link href={`/products/${slug}`}>
-                <Image src={`/assets/pictures/products/${props.title ?.replaceAll(" ","-")}.jpg`} alt={`${props.title}`} width={400} height={400}
-                       className={"pointer"} />
-                       </Link>
+                    <Image src={`/assets/pictures/products/${props.title?.replaceAll(" ", "-")}.jpg`}
+                           alt={`${props.title}`} width={400} height={400}
+                           className={"pointer"}/>
+                </Link>
             </Grid>
             <Grid container item height={50} alignItems={"center"} xs={12}>
-                    <Typography variant={"h4"} component={Link} href={`/products/${slug}`} fontSize={{xs: 11, md :14,lg:15}} fontFamily={"dana-bold"}
-                                className={"pointer"} lineHeight={1.5}>{props.title}</Typography>
-                
+                <Typography variant={"h4"} component={Link} href={`/products/${slug}`}
+                            fontSize={{xs: 11, md: 14, lg: 15}} fontFamily={"dana-bold"}
+                            className={"pointer"} lineHeight={1.5}>{props.title}</Typography>
+
             </Grid>
-            <Grid container item  alignItems={"center"} height={50}>
-                    <Typography variant={"h4"} component={"span"} color={"#069f69"}
-                                sx={{fontSize: {xs: 11, md :14,lg:15}}}>
-                        {props.price}
-                    </Typography>
+            <Grid container item alignItems={"center"} height={50}>
+                <Typography variant={"h4"} component={"span"} color={"#069f69"}
+                            sx={{fontSize: {xs: 11, md: 14, lg: 15}}}>
+                    {props.price}
+                </Typography>
             </Grid>
         </Grid>
     )

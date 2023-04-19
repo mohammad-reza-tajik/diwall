@@ -44,7 +44,8 @@ const useAuth = () => {
     //********************************* form submission **********************************!//
 
 
-    const formHandler = (e) => {
+    const formHandler = async (e) => {
+        try {
         e.preventDefault()
         setIsLoading(true)
         setMessage("")
@@ -61,7 +62,8 @@ const useAuth = () => {
 
             }
 
-        axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`, user).then(res => {
+        const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`, user)
+
 
                 setMessage(res.data.message)
                 dispatch(userActions.login(res.data.user))
@@ -70,13 +72,16 @@ const useAuth = () => {
                 openSnackbarHandler()
                 router.push("/")
 
-            }
-        ).catch(e => {
-            console.log(e)
-            setMessage(e?.response.data.message)
+        } catch (err) {
+            console.log(err)
+            setMessage(err?.response.data.message)
             setIsLoading(false)
             openSnackbarHandler()
-        })
+
+        }
+
+
+
 
 
     }

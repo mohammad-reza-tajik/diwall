@@ -105,32 +105,31 @@ const ProductDetails = () => {
             setPresetSizes(presetSizes);
     }
 
-    const addToCartHandler = () => {
+    const addToCartHandler = async () => {
         if (user?.username) {
             setAddToCartLoading(true)
             // console.log(user)
 
             if (isInCart) {
                 if ("_id" in product) {
-                    axios.put("/api/remove-from-cart", {
+                    await axios.put("/api/remove-from-cart", {
                         userId: user?.userId, token: user?.token, productId: product._id
-                    }).then(_ => {
+                    })
                         setAddToCartLoading(false)
                         dispatch(userActions.removeFromCart(product._id))
-                    })
+
                 }
 
             } else {
                 if ("_id" in product) {
-                    axios.put("/api/add-to-cart", {
+                    await axios.put("/api/add-to-cart", {
                         productId: product._id,
                         userId: user.userId,
                         token: user.token
-                    }).then(_ => {
+                    })
                             setAddToCartLoading(false)
                             dispatch(userActions.addToCart(product._id))
-                        }
-                    ).catch(e => console.log(e))
+
                 }
             }
         } else
@@ -138,37 +137,34 @@ const ProductDetails = () => {
 
 
     }
-    const addToFavoritesHandler = () => {
+    const addToFavoritesHandler = async () => {
         if (user?.username) {
             setAddToFavoritesLoading(true)
             if (isFavorite) {
                 if ("_id" in product) {
-                    axios.put("/api/remove-from-favorites", {
+                   await axios.put("/api/remove-from-favorites", {
                         productId: product._id,
                         userId: user.userId,
                         token: user.token
-                    }).then(_ => {
+                    })
                             setAddToFavoritesLoading(false)
                             if ("_id" in product) {
                                 dispatch(userActions.removeFromFavorites(product._id))
                             }
-                        }
-                    ).catch(e => console.log(e))
 
                 }
             } else {
                 if ("_id" in product) {
-                    axios.put("/api/add-to-favorites", {
+                    await axios.put("/api/add-to-favorites", {
                         productId: product._id,
                         userId: user.userId,
                         token: user.token
-                    }).then(_ => {
+                    })
                             setAddToFavoritesLoading(false)
                             if ("_id" in product) {
                                 dispatch(userActions.addToFavorites(product._id))
                             }
-                        }
-                    ).catch(e => console.log(e))
+
                 }
             }
         } else
