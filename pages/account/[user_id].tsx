@@ -8,7 +8,7 @@ import React, {useEffect, useState} from "react";
 import TabPanel from "../../components/Globals/TabPanel";
 import axios from "axios";
 import Head from "next/head";
-import {useAppSelector} from "../../hooks/redux_hooks";
+import {useAppSelector} from "../../hooks/useStore";
 import {userActions} from "../../store";
 import {useDispatch} from "react-redux";
 import dynamic from "next/dynamic";

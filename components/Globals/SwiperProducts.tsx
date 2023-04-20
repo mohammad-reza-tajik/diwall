@@ -9,8 +9,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Product from "./Product";
 import React from "react";
-import "swiper/css";
-import 'swiper/css/navigation';
 import type {ProductType} from "../../db/productModel";
 
 let slidesPerView: number;

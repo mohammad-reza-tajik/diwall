@@ -3,7 +3,9 @@ import "../styles/Fonts.css";
 import Head from "next/head"
 import theme from "../styles/theme";
 import {ThemeProvider} from "@mui/material/styles";
-import Grid from "@mui/material/Grid"
+import Grid from "@mui/material/Grid";
+import "swiper/css";
+import 'swiper/css/navigation';
 // import Footer from "../components/Globals/Footer";
 import {useRouter} from "next/router";
 import Header from "../components/Globals/Header";
