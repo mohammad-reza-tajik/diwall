@@ -6,14 +6,6 @@ class MyDocument extends Document {
             <Html lang={"fa"} dir={"rtl"}>
                 <Head />
                 <body>
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-S4XDCXRSFV"></script>
-                <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-
-                    gtag('config', 'G-S4XDCXRSFV');
-                </script>
                 <Main />
                 <NextScript />
                 </body>
