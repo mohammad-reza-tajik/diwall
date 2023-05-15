@@ -13,7 +13,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 
 import Image from "next/image"
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useAppSelector, useAppDispatch, userActions} from "../../store";
 import Favorite from "@mui/icons-material/Favorite";
@@ -74,6 +74,7 @@ const ProductDetails = () => {
     const user = useAppSelector(state => state);
     const dispatch = useAppDispatch();
 
+    // console.log(router)
     const {isReady} = router;
     const isInCart = user?.cart.includes("_id" in product && product._id)
     const isFavorite = user?.favoriteList.includes("_id" in product && product._id)
@@ -180,6 +181,11 @@ const ProductDetails = () => {
                     {`${slug.split("_").join(" ")} - دیوال`}
                 </title>
                 <meta name={"description"} content={title}/>
+                <meta property="og:title" content={title} />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={router.pathname} />
+                <meta property="og:description" content={title} />
+                <meta property="og:image" content={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : ""}.jpg`} />
             </Head>
 
             <Grid container item xs={12}>

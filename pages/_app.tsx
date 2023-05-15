@@ -32,7 +32,7 @@ function MyApp({Component, pageProps}) {
     if (typeof window !== "undefined") { // to prevent errors in server side rendering
 
         const body = document.body
-        body.style.backgroundColor = "rgb(248,248,248)"
+        body.style.backgroundColor = "#f8f8f8"
         if (router.pathname === "/auth") {
             body.style.overflow = "hidden"
         } else {
@@ -55,10 +55,16 @@ function MyApp({Component, pageProps}) {
                     name="viewport"
                     content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
                 />
-                <link rel="manifest" href="/manifest.json"/>
                 <meta name="keywords"
                       content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری"/>
                 <meta name="description" content="خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"/>
+                <meta property="og:title" content="دیوال : فروشگاه پوستر و کاغذ دیواری" />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://online-shop-mrt93.vercel.app/" />
+                <meta property="og:description" content="از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید" />
+                <meta property="og:locale" content="fa-IR" />
+                <meta property="og:image" content="https://online-shop-mrt93.vercel.app/_next/image?url=%2Fassets%2Fpictures%2Fbanner-desktop.jpg&w=1080&q=75" />
+                <link rel="manifest" href="/manifest.json"/>
                 <link rel="icon" href="/favicon.ico"/>
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-144.png" sizes="144x144"/>
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-152.png" sizes="152x152"/>
