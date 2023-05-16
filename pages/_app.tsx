@@ -58,12 +58,17 @@ function MyApp({Component, pageProps}) {
                 <meta name="keywords"
                       content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری"/>
                 <meta name="description" content="خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"/>
-                <meta property="og:title" content="دیوال : فروشگاه پوستر و کاغذ دیواری" />
+
+                <meta property="og:title" content="فروشگاه پوستر و کاغذ دیواری" />
+                <meta property="og:site_name" content="دیوال" />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://online-shop-mrt93.vercel.app/" />
                 <meta property="og:description" content="از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید" />
                 <meta property="og:locale" content="fa-IR" />
-                <meta property="og:image" content="https://online-shop-mrt93.vercel.app/_next/image?url=%2Fassets%2Fpictures%2Fbanner-desktop.jpg&w=1080&q=75" />
+                <meta property="og:image" content="https://online-shop-mrt93.vercel.app/assets/pictures/banner/desktop.jpg" />
+                <meta property="og:image:alt" content="دیوال : فروشگاه پوستر و کاغذ دیواری" />
+
+
                 <link rel="manifest" href="/manifest.json"/>
                 <link rel="icon" href="/favicon.ico"/>
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-144.png" sizes="144x144"/>

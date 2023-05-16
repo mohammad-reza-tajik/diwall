@@ -6,7 +6,6 @@ import {GetStaticProps} from "next";
 import axios from "axios";
 import ShowCase from "../components/HomePage/ShowCase";
 import type {ProductType} from "../db/productModel";
-import Head from "next/head";
 import Places from "../components/HomePage/Places";
 import SwiperProducts from "../components/Globals/SwiperProducts";
 import SectionHeading from "../components/Globals/SectionHeading";
