@@ -1,5 +1,4 @@
 import '../styles/Globals.css';
-import "../styles/Fonts.css";
 import Head from "next/head"
 import theme from "../styles/theme";
 import {ThemeProvider} from "@mui/material/styles";
@@ -59,13 +58,22 @@ function MyApp({Component, pageProps}) {
                       content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری"/>
                 <meta name="description" content="خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"/>
 
-                <meta property="og:title" content="فروشگاه پوستر و کاغذ دیواری" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="دیوال : فروشگاه پوستر و کاغذ دیواری" />
+                <meta name="twitter:description" content="از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید" />
+                <meta name="twitter:site" content="@dival" />
+                <meta name="twitter:image:src" content="https://online-shop-mrt93.vercel.app/assets/pictures/og-banner.jpg" />
+                <meta name="twitter:image" content="https://online-shop-mrt93.vercel.app/assets/pictures/og-banner.jpg" />
+                <meta name="twitter:image:alt" content="دیوال : فروشگاه پوستر و کاغذ دیواری" />
+                <meta name="twitter:domain" content="https://online-shop-mrt93.vercel.app/" />
+
+                <meta property="og:title" content="دیوال : فروشگاه پوستر و کاغذ دیواری" />
                 <meta property="og:site_name" content="دیوال" />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://online-shop-mrt93.vercel.app/" />
                 <meta property="og:description" content="از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید" />
-                <meta property="og:locale" content="fa-IR" />
-                <meta property="og:image" content="https://online-shop-mrt93.vercel.app/assets/pictures/banner/desktop.jpg" />
+                <meta property="og:locale" content="fa" />
+                <meta property="og:image" content="https://online-shop-mrt93.vercel.app/assets/pictures/og-banner.jpg" />
                 <meta property="og:image:alt" content="دیوال : فروشگاه پوستر و کاغذ دیواری" />
 
 
