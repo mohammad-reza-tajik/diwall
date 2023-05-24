@@ -49,7 +49,6 @@ function MyApp({Component, pageProps}) {
                     دیوال : فروشگاه پوستر و کاغذ دیواری
                 </title>
                 <meta charSet="utf-8"/>
-                <meta httpEquiv="X-UA-Compatible" content="IE=edge"/>
                 <meta
                     name="viewport"
                     content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
@@ -81,8 +80,7 @@ function MyApp({Component, pageProps}) {
                 <link rel="icon" href="/favicon.ico"/>
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-144.png" sizes="144x144"/>
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-152.png" sizes="152x152"/>
-                <link rel="apple-touch-icon" href="/assets/pictures/logo-192.png" sizes="192x192"/>
-                <link rel="apple-touch-icon" href="/assets/pictures/logo-512.png" sizes="512x512"/>
+
                 <meta name="theme-color" content="#069f69"/>
 
             </Head>
