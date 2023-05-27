@@ -16,7 +16,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
         // this is for replacing product ids in cart and favoriteList with full product data
         // @ts-ignore
         const user = await User.findById(userId).populate("favoriteList").populate("cart").exec();
-        console.log(user)
+        // console.log(user)
         if (user) {
             res.send({
                 cart: user.cart,
