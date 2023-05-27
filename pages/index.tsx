@@ -20,11 +20,11 @@ const Home : React.FC<Props> = (props) => {
 
     return (
         <Grid container item xs={12} direction={"row"} justifyContent={"center"}>
+
             <Banner />
             <Features />
             <Places/>
             <SwiperProducts products={props.mostPopularProducts} route={"/products?sortBy=3"} mostPopular />
-            {/*<MostPopularProducts products={props.mostPopularProducts} route={"/products?sortBy=3"} />*/}
             <SectionHeading text={"محصولات جدید"} seeAll={true} route={"/products"}/>
             <SwiperProducts products={props.latestProducts} />
             <MiddleSection/>

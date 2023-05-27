@@ -41,7 +41,6 @@ interface Props {
 
 const SwiperProducts: React.FC<Props> = (props) => {
 
-
     const {products, mostPopular} = props;
 
     const theme = useTheme()
@@ -94,6 +93,8 @@ const SwiperProducts: React.FC<Props> = (props) => {
                         </SwiperSlide>)
                 }
             </Grid>
+
+
 
 
         </Grid>
