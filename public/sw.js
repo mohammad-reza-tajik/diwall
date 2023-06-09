@@ -1,68 +1,76 @@
-const STATIC_CACHE_NAME = "static-v51";
+// import { openDB, deleteDB, wrap, unwrap } from '../node_modules/idb/build/index.js';
+
+const STATIC_CACHE_NAME = "static-v67";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
 
-self.addEventListener("install", function (event) {
-    event.waitUntil((async () => {
+const addToStaticCache = async (resources) => {
+    const staticCache = await caches.open(STATIC_CACHE_NAME);
+    await staticCache.addAll(resources)
+}
 
-            const cache = await caches.open(STATIC_CACHE_NAME);
-            await cache.addAll([
-                // "/assets/pictures/banner-desktop.jpg",
-                // "/assets/pictures/logo.png",
-                // "/assets/pictures/banner-mobile.jpg",
+const addToDynamicCache = async (resources) => {
+    const dynamicCache = await caches.open(DYNAMIC_CACHE_NAME);
+    await dynamicCache.addAll(resources)
+}
+
+const cacheFirst = async (event) => {
+    try {
+        let res = await caches.match(event.request);
+        if (res) {
+            return res
+
+        } else {
+            if (event.request.destination === "image") { // check if the type of the asset we're requesting to be an image
+                await addToStaticCache([event.request.url])
+            }
+            return fetch(event.request);
+        }
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+
+self.addEventListener("install", event => {
+
+    console.log("-----[ service worker installed ]-----");
+
+    self.skipWaiting(); // returned promise can be ignored safely
+
+    event.waitUntil(
+        addToStaticCache(
+            [
                 "/favicon.ico",
                 "/offline.html",
-                // "/manifest.json",
                 "/",
                 "/assets/fonts/dana-fanum-bold.woff2",
                 "/assets/fonts/dana-fanum-medium.woff2",
                 "/assets/fonts/dana-black.woff2",
-            ])
+            ]))
 
-        }
-    )())
-    self.skipWaiting();
+});
+self.addEventListener("activate", event => {
 
+    console.log("-----[ service worker activated ]-----");
 
-})
-
-self.addEventListener("activate", (event) => {
     event.waitUntil((async () => {
+            self.clients.claim();
+
             const keys = await caches.keys();
             keys.forEach(key => {
                 if (key !== STATIC_CACHE_NAME)
                     caches.delete(key)
             })
 
-            await self.clients.claim();
 
         })()
     )
-})
+});
 
 self.addEventListener("fetch", (event) => {
-    event.respondWith((async () => {
-            let res = await caches.match(event.request)
-            if (res)
-                return res
-            else {
-
-                // try {
-                    res = await fetch(event.request)
-                    // const dynamicCache = await caches.open(DYNAMIC_CACHE_NAME);
-                    // dynamicCache.put(event.request.url,res)
-                    // console.log(event.request.url)
-                    return res
-            }
-               /* } catch {
-                    const cache = await caches.open(STATIC_CACHE_NAME)
-                    res = await cache.match("/offline.html")
-                    // console.log(res)
-                    if (event.request.url === "/")
-                        return res
-                }*/
-
-        })()
-    )
+    event.respondWith(cacheFirst(event))
 
 
 })
