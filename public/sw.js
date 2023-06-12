@@ -1,6 +1,9 @@
-// import { openDB, deleteDB, wrap, unwrap } from '../node_modules/idb/build/index.js';
+// import { openDB, deleteDB, wrap, unwrap } from "node_modules/idb/build/index.js";
+// import { openDB, deleteDB, wrap, unwrap } from 'https://cdn.jsdelivr.net/npm/idb@7/+esm';
+// import "./idb.js"
 
-const STATIC_CACHE_NAME = "static-v67";
+
+const STATIC_CACHE_NAME = "static-v69";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
 
 const addToStaticCache = async (resources) => {
@@ -21,7 +24,8 @@ const cacheFirst = async (event) => {
 
         } else {
             if (event.request.destination === "image") { // check if the type of the asset we're requesting to be an image
-                await addToStaticCache([event.request.url])
+                // console.log(event.request)
+                await addToDynamicCache([event.request])
             }
             return fetch(event.request);
         }
@@ -31,8 +35,9 @@ const cacheFirst = async (event) => {
     }
 }
 
-
-
+// async function doDatabaseStuff() {
+//     const db = await openDB();
+// }
 self.addEventListener("install", event => {
 
     console.log("-----[ service worker installed ]-----");
