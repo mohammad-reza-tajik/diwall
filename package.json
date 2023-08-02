@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
+    "bundle:sw": "esbuild ./sw-dev.js --bundle --outfile=public/sw.js --minify --watch",
     "start": "next start",
     "test": "vitest --reporter verbose",
     "lint": "next lint"
@@ -36,6 +37,7 @@
     "@types/validator": "^13.7.17",
     "@vitejs/plugin-react": "^4.0.0",
     "eslint": "^8.16.0",
+    "esbuild": "^0.18.17",
     "eslint-config-next": "^13.4.1",
     "file-loader": "^6.2.0",
     "jsdom": "^22.0.0",
