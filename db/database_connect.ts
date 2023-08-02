@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 (async () => {
     try {
-        await mongoose.connect(process.env.mongodb_url)
+        await mongoose.connect(process.env.MONGODB_URL)
     } catch (err) {
         console.log(err)
     }
