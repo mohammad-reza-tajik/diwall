@@ -22,6 +22,7 @@ import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import Head from "next/head";
 import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
+import {getFromIDB, saveToIDB} from "../../utilities/idb";
 
 const Info = dynamic(() => import("../../components/DetailPage/Info"))
 const Features = dynamic(() => import("../../components/Globals/Features"))
@@ -85,17 +86,31 @@ const ProductDetails = () => {
 
 
     useEffect(() => {
+        const url = `/api/products/${title}`;
         (async () => {
             try {
                 setIsLoading(true);
                 if (isReady) {
-                    const res = await axios(`/api/products/${title}`)
-                    setProduct(res.data.product)
-                    setRelatedProducts(res.data.relatedProducts)
-                    setIsLoading(false)
+                    const productInIDB  = await getFromIDB(url);
+                    if (productInIDB) {
+                        setProduct(productInIDB.product);
+                        setRelatedProducts(productInIDB.relatedProducts);
+                       /* console.log("we found it on idb")
+                        console.log(productInIDB)*/
+                        const res = await axios(url);
+                        await saveToIDB(url,{product : res.data.product ,relatedProducts : res.data.relatedProducts })
+
+                    } else {
+                        const res = await axios(url);
+                        setProduct(res.data.product);
+                        setRelatedProducts(res.data.relatedProducts);
+                        await saveToIDB(url, {product : res.data.product ,relatedProducts : res.data.relatedProducts });
+                    }
                 }
             } catch (err) {
                 console.log(err)
+            } finally {
+                setIsLoading(false);
             }
 
         })()
@@ -116,8 +131,8 @@ const ProductDetails = () => {
                     await axios.put("/api/remove-from-cart", {
                         userId: user?.userId, token: user?.token, productId: product._id
                     })
-                        setAddToCartLoading(false)
-                        dispatch(userActions.removeFromCart(product._id))
+                    setAddToCartLoading(false)
+                    dispatch(userActions.removeFromCart(product._id))
 
                 }
 
@@ -128,8 +143,8 @@ const ProductDetails = () => {
                         userId: user.userId,
                         token: user.token
                     })
-                            setAddToCartLoading(false)
-                            dispatch(userActions.addToCart(product._id))
+                    setAddToCartLoading(false)
+                    dispatch(userActions.addToCart(product._id))
 
                 }
             }
@@ -143,15 +158,15 @@ const ProductDetails = () => {
             setAddToFavoritesLoading(true)
             if (isFavorite) {
                 if ("_id" in product) {
-                   await axios.put("/api/remove-from-favorites", {
+                    await axios.put("/api/remove-from-favorites", {
                         productId: product._id,
                         userId: user.userId,
                         token: user.token
                     })
-                            setAddToFavoritesLoading(false)
-                            if ("_id" in product) {
-                                dispatch(userActions.removeFromFavorites(product._id))
-                            }
+                    setAddToFavoritesLoading(false)
+                    if ("_id" in product) {
+                        dispatch(userActions.removeFromFavorites(product._id))
+                    }
 
                 }
             } else {
@@ -161,10 +176,10 @@ const ProductDetails = () => {
                         userId: user.userId,
                         token: user.token
                     })
-                            setAddToFavoritesLoading(false)
-                            if ("_id" in product) {
-                                dispatch(userActions.addToFavorites(product._id))
-                            }
+                    setAddToFavoritesLoading(false)
+                    if ("_id" in product) {
+                        dispatch(userActions.addToFavorites(product._id))
+                    }
 
                 }
             }
@@ -181,11 +196,12 @@ const ProductDetails = () => {
                     {`${slug.split("_").join(" ")} - دیوال`}
                 </title>
                 <meta name={"description"} content={title}/>
-                <meta property="og:title" content={title} />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content={router.pathname} />
-                <meta property="og:description" content={title} />
-                <meta property="og:image" content={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : ""}.jpg`} />
+                <meta property="og:title" content={title}/>
+                <meta property="og:type" content="website"/>
+                <meta property="og:url" content={router.pathname}/>
+                <meta property="og:description" content={title}/>
+                <meta property="og:image"
+                      content={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : ""}.jpg`}/>
             </Head>
 
             <Grid container item xs={12}>

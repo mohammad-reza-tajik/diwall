@@ -15,6 +15,7 @@ import Person from "@mui/icons-material/Person";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
+import {getFromIDB, saveToIDB} from "../../utilities/idb";
 
 
 const styles = {
@@ -83,16 +84,32 @@ const Comments: React.FC<Props> = (props) => {
     const slug = router.isReady ? router.query.title as string : "_";
     const title = slug.split("_").join(" ");
 
+
     useEffect(() => {
+        const url = `/api/products/${title}`;
             (async () => {
                 try {
-                    setIsLoading(true)
-                    const res = await axios(`/api/products/${title}/comments`)
-                    setComments(res.data.comments)
-                    setIsLoading(false)
+                    setIsLoading(true);
+
+                    const productInIDB = await getFromIDB(url);
+                    if (productInIDB) {
+                        const comments = productInIDB.product.comments;
+                        setComments(comments);
+                        const res = await axios(url);
+                        // console.log("it means we found it on idb")
+                        await saveToIDB(url,{product : res.data.product ,relatedProducts : res.data.relatedProducts })
+                    } else {
+                        // console.log("it means we did not find it on idb")
+                        const res = await axios(url);
+                        setComments(res.data.comments);
+                        await saveToIDB(url,{product : res.data.product ,relatedProducts : res.data.relatedProducts })
+
+                    }
 
                 } catch (err) {
                     console.log(err)
+                } finally {
+                    setIsLoading(false)
                 }
             })()
         }

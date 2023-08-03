@@ -1,5 +1,5 @@
 import localforage from "localforage";
-import {ProductType} from "../db/productModel";
+import type {ProductType} from "../db/productModel";
 
 let objectStore : LocalForage;
 if (typeof window !== "undefined" && "indexedDB" in window) {
