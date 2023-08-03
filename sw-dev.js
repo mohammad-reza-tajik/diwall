@@ -1,6 +1,3 @@
-import { openDB, deleteDB, wrap, unwrap } from "idb"
-
-
 
 const STATIC_CACHE_NAME = "static-v69";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
@@ -20,13 +17,8 @@ const cacheFirst = async (event) => {
         let res = await caches.match(event.request);
         if (res) {
             return res
-
         } else {
-            if (event.request.destination === "image") { // check if the type of the asset we're requesting to be an image
-                // console.log(event.request)
-                await addToDynamicCache([event.request])
-            }
-            return fetch(event.request);
+           return fetch(event.request);
         }
 
     } catch (err) {
@@ -34,9 +26,6 @@ const cacheFirst = async (event) => {
     }
 }
 
-// async function doDatabaseStuff() {
-//     const db = await openDB();
-// }
 self.addEventListener("install", event => {
 
     console.log("-----[ service worker installed ]-----");
@@ -67,7 +56,6 @@ self.addEventListener("activate", event => {
                 if (key !== STATIC_CACHE_NAME)
                     caches.delete(key)
             })
-
 
         })()
     )

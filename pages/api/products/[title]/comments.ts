@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const { content , author , date , prodTitle } = req.body.comment;
         regexp = new RegExp(prodTitle, "g");
 
-        if (content !== ""){
+        if (content.trim() !== ""){
             // @ts-ignore
             const product = await Product.findOne({title:regexp}).exec()
             // console.log(product)
@@ -17,25 +17,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             await product.save()
             res.status(201).send({message:"successfully created"})
 
+        } else {
+            res.status(400).json({
+                message : "comment must have content"
+            })
         }
 
     }
 
-    if (req.method === "GET") {
-        // console.log(req.query)
-        const title = req.query.title && String(req.query.title);
-        if(title)  {
-            regexp = new RegExp(title, "g");
-            // @ts-ignore
-            const product = await Product.findOne({title: regexp}).exec();
-            if (product) {
-
-                res.status(200).send({comments : product.comments})
-            } else {
-                res.status(404).send({message:"not found" , ok: false , code : 404})
-            }
-
-        }
-
-    }
 }
