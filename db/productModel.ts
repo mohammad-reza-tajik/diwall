@@ -70,7 +70,7 @@ export interface ProductType {
     numbers_in_stock: number;
     comments : Array<{
         author:string;
-        data:string;
+        date:string;
         content:string;
     }>
 }
