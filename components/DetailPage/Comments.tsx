@@ -85,8 +85,9 @@ const Comments: React.FC<Props> = (props) => {
     const title = slug.split("_").join(" ");
 
 
+    // In this use case I needed to put a setIsLoading in the if block (in addition to the one in the finally block)
     useEffect(() => {
-        const url = `/api/products/${title}`;
+            const url = `/api/products/${title}`;
             (async () => {
                 try {
                     setIsLoading(true);
@@ -95,17 +96,14 @@ const Comments: React.FC<Props> = (props) => {
                     if (productInIDB) {
                         const comments = productInIDB.product.comments;
                         setComments(comments);
+                        setIsLoading(false);
                         const res = await axios(url);
-                        // console.log("it means we found it on idb")
-                        await saveToIDB(url,{product : res.data.product ,relatedProducts : res.data.relatedProducts })
+                        await saveToIDB(url, {product: res.data.product, relatedProducts: res.data.relatedProducts})
                     } else {
-                        // console.log("it means we did not find it on idb")
                         const res = await axios(url);
                         setComments(res.data.comments);
-                        await saveToIDB(url,{product : res.data.product ,relatedProducts : res.data.relatedProducts })
-
+                        await saveToIDB(url, {product: res.data.product, relatedProducts: res.data.relatedProducts});
                     }
-
                 } catch (err) {
                     console.log(err)
                 } finally {

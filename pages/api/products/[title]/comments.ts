@@ -10,8 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         regexp = new RegExp(prodTitle, "g");
 
         if (content.trim() !== ""){
-            // @ts-ignore
-            const product = await Product.findOne({title:regexp}).exec()
+            const product = await Product.findOne({title:regexp});
             // console.log(product)
             product.comments.push({content,author,date})
             await product.save()
