@@ -22,8 +22,7 @@ import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import Head from "next/head";
 import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
-import {getFromIDB, saveToIDB} from "../../utilities/idb";
-import {width} from "@mui/system";
+import ObjectStore from "../../utilities/idb";
 
 const Info = dynamic(() => import("../../components/DetailPage/Info"))
 const Features = dynamic(() => import("../../components/Globals/Features"))
@@ -85,6 +84,7 @@ const ProductDetails = () => {
     const title = slug.split("_").join(" ");
     // console.log(title)
 
+    const productStore = new ObjectStore("products");
 
     useEffect(() => {
         const url = `/api/products/${title}`;
@@ -92,19 +92,20 @@ const ProductDetails = () => {
             try {
                 setIsLoading(true);
                 if (isReady) {
-                    const productInIDB  = await getFromIDB(url);
+
+                    const productInIDB  = await productStore.getFromIDB(url);
                     if (productInIDB) {
                         setProduct(productInIDB.product);
                         setRelatedProducts(productInIDB.relatedProducts);
                         setIsLoading(false);
                         const res = await axios(url);
-                        await saveToIDB(url,{product : res.data.product ,relatedProducts : res.data.relatedProducts })
+                        await productStore.saveToIDB(url,{product : res.data.product ,relatedProducts : res.data.relatedProducts })
 
                     } else {
                         const res = await axios(url);
                         setProduct(res.data.product);
                         setRelatedProducts(res.data.relatedProducts);
-                        await saveToIDB(url, {product : res.data.product ,relatedProducts : res.data.relatedProducts });
+                        await productStore.saveToIDB(url, {product : res.data.product ,relatedProducts : res.data.relatedProducts });
                     }
                 }
             } catch (err) {

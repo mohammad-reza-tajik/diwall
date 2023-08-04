@@ -15,7 +15,7 @@ import Person from "@mui/icons-material/Person";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
-import {getFromIDB, saveToIDB} from "../../utilities/idb";
+import ObjectStore from "../../utilities/idb";
 
 
 const styles = {
@@ -84,6 +84,8 @@ const Comments: React.FC<Props> = (props) => {
     const slug = router.isReady ? router.query.title as string : "_";
     const title = slug.split("_").join(" ");
 
+    const productStore = new ObjectStore("products");
+
 
     // In this use case I needed to put a setIsLoading in the if block (in addition to the one in the finally block)
     useEffect(() => {
@@ -91,18 +93,17 @@ const Comments: React.FC<Props> = (props) => {
             (async () => {
                 try {
                     setIsLoading(true);
-
-                    const productInIDB = await getFromIDB(url);
+                    const productInIDB  = await productStore.getFromIDB(url);
                     if (productInIDB) {
                         const comments = productInIDB.product.comments;
                         setComments(comments);
                         setIsLoading(false);
                         const res = await axios(url);
-                        await saveToIDB(url, {product: res.data.product, relatedProducts: res.data.relatedProducts})
+                        await productStore.saveToIDB(url, {product: res.data.product, relatedProducts: res.data.relatedProducts})
                     } else {
                         const res = await axios(url);
                         setComments(res.data.comments);
-                        await saveToIDB(url, {product: res.data.product, relatedProducts: res.data.relatedProducts});
+                        await productStore.saveToIDB(url, {product: res.data.product, relatedProducts: res.data.relatedProducts});
                     }
                 } catch (err) {
                     console.log(err)
