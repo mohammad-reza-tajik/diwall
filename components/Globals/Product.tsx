@@ -77,7 +77,7 @@ const Product: React.FC<Product> = (props) => {
                         userId: user.userId,
                         token: user.token
                     })
-                    setIsLoading(false)
+
                     dispatch(userActions.addToFavorites(props._id))
 
                 }
@@ -89,6 +89,8 @@ const Product: React.FC<Product> = (props) => {
         } catch (err) {
             console.log(err)
 
+        } finally {
+            setIsLoading(false)
         }
 
     }

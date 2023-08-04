@@ -23,6 +23,7 @@ import Head from "next/head";
 import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
 import {getFromIDB, saveToIDB} from "../../utilities/idb";
+import {width} from "@mui/system";
 
 const Info = dynamic(() => import("../../components/DetailPage/Info"))
 const Features = dynamic(() => import("../../components/Globals/Features"))
@@ -95,8 +96,7 @@ const ProductDetails = () => {
                     if (productInIDB) {
                         setProduct(productInIDB.product);
                         setRelatedProducts(productInIDB.relatedProducts);
-                       /* console.log("we found it on idb")
-                        console.log(productInIDB)*/
+                        setIsLoading(false);
                         const res = await axios(url);
                         await saveToIDB(url,{product : res.data.product ,relatedProducts : res.data.relatedProducts })
 
@@ -206,17 +206,16 @@ const ProductDetails = () => {
 
             <Grid container item xs={12}>
                 <Grid container item xs={12} justifyContent={"center"}>
-                    <Grid container item xs={12} sm={7} md={5} justifyContent={"center"} maxHeight={500} minHeight={250}
-                          position={"relative"}>
+                    <Grid container item xs={12} sm={7} md={5} maxHeight={400} minHeight={250} justifyContent={"center"}>
                         {
                             isLoading ?
                                 <Skeleton variant="rectangular" animation={"wave"}
                                           sx={{height: 1, width: 1}}/> :
 
-                                <Image
+                                <Image style={{width:"100%",height:"auto"}}
                                     src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : ""}.jpg`}
-                                    alt={`${"title" in product ? product.title : ""}`} fill sizes={"500px"}
-                                    className="cover"/>
+                                    alt={`${"title" in product ? product.title : ""}`} width={400} height={400}
+                                    />
 
                         }
                     </Grid>
@@ -358,7 +357,6 @@ const ProductDetails = () => {
                                 </Grid>
                                 <Grid container item justifyContent={"flex-end"} xs sm={"auto"}>
                                     <Button
-
                                         aria-label="add to cart"
                                         onClick={addToCartHandler}
                                         variant={"contained"}

@@ -4,7 +4,8 @@ import type {ProductType} from "../db/productModel";
 let objectStore : LocalForage;
 if (typeof window !== "undefined" && "indexedDB" in window) {
     objectStore = localforage.createInstance({
-        name: "products",
+        name: "dival",
+        storeName:"products",
         driver: localforage.INDEXEDDB,
         size: 8000000,
     });
