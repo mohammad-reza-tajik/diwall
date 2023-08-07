@@ -1,5 +1,5 @@
 import localforage from "localforage";
-import type {ProductType} from "../db/productModel";
+// import type {ProductType} from "../db/productModel";
 
 type driverType = "INDEXEDDB" | "LOCALSTORAGE";
 
@@ -15,7 +15,7 @@ class ObjectStore {
         });
     }
 
-    async getFromIDB(key: string): Promise<{ product: ProductType, relatedProducts: ProductType[] } | null> {
+    async getFromIDB(key: string) {
         return await this.objectStore.getItem(key)
     }
 
