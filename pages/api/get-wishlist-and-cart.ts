@@ -10,12 +10,10 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     }
 
         const userId = req.body.userId
-        const token = req.body.token
-
 
         // this is for replacing product ids in cart and wishlist with full product data
-        // @ts-ignore
-        const user = await User.findById(userId).populate("wishlist").populate("cart").exec();
+
+        const user = await User.findById(userId).populate("wishlist").populate("cart");
         // console.log(user)
         if (user) {
             res.send({

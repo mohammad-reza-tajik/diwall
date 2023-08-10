@@ -81,7 +81,7 @@ const ProductDetails = () => {
 
     const {isReady} = router;
     const slug = isReady ? router.query.slug as string : " ";
-    const title = slug.split("-").join(" ");
+    const title = slug?.split("-").join(" ");
 
     const productStore = new ObjectStore("products");
 

@@ -1,6 +1,5 @@
 import "../../db/database_connect"
 import User from "../../db/userModel";
-import bcrypt from "bcryptjs";
 import generateToken from "../../utilities/generateToken";
 
 const errorMessage = "این نام کاربری یا ایمیل  قبلا استفاده شده است"
@@ -24,13 +23,13 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
 
     if (alreadyExists.length === 0) {
         // the second argument is called salt and determines how complex the hashing process should be , if you put a large number it will take much longer but the hashing is stronger and vice versa.
-        const hashedPassword = await bcrypt.hash(password, 8)
+
         //*** adding new user to data base ***//
         const user = new User(
             {
                 username,
                 email,
-                password: hashedPassword,
+                password,
                 wishlist: [],
                 cart: [],
                 tokens: []
