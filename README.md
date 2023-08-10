@@ -10,10 +10,6 @@
 |             |         |            |
 
 
-the backend source code for this project is here :  [backend source code](https://github.com/MRT93/dival_backend)
-
-
-
 to see the live result  please visit : 
                                      [https://dival-shop.vercel.app/](https://dival-shop.vercel.app/)
                                     
