@@ -44,7 +44,7 @@ const styles = {
 
 
     },
-    addToFavoritesButton: {
+    addToWishlistButton: {
         width: "6rem",
         height: "6rem",
         borderRadius: 2,
@@ -66,7 +66,7 @@ const ProductDetails = () => {
     const [product, setProduct] = useState<ProductType | {}>({})
     const [relatedProducts, setRelatedProducts] = useState<ProductType[]>([])
     const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false)
-    const [addToFavoritesLoading, setAddToFavoritesLoading] = useState<boolean>(false)
+    const [addToWishlistLoading, setAddToWishlistLoading] = useState<boolean>(false)
     const [presetSizes, setPresetSizes] = useState<number>(1)
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
@@ -78,7 +78,7 @@ const ProductDetails = () => {
     // console.log(router)
     const {isReady} = router;
     const isInCart = user?.cart.includes("_id" in product && product._id)
-    const isFavorite = user?.favoriteList.includes("_id" in product && product._id)
+    const isFavorite = user?.wishlist.includes("_id" in product && product._id)
 
     const slug = isReady ? router.query.title as string : "_";
     const title = slug.split("_").join(" ");
@@ -95,7 +95,9 @@ const ProductDetails = () => {
 
                     const productInIDB  = await productStore.getFromIDB(url);
                     if (productInIDB) {
+                         // @ts-ignore
                         setProduct(productInIDB.product);
+                         // @ts-ignore
                         setRelatedProducts(productInIDB.relatedProducts);
                         setIsLoading(false);
                         const res = await axios(url);
@@ -154,9 +156,9 @@ const ProductDetails = () => {
 
 
     }
-    const addToFavoritesHandler = async () => {
+    const addToWishlistHandler = async () => {
         if (user?.username) {
-            setAddToFavoritesLoading(true)
+            setAddToWishlistLoading(true)
             if (isFavorite) {
                 if ("_id" in product) {
                     await axios.put("/api/remove-from-favorites", {
@@ -164,9 +166,9 @@ const ProductDetails = () => {
                         userId: user.userId,
                         token: user.token
                     })
-                    setAddToFavoritesLoading(false)
+                    setAddToWishlistLoading(false)
                     if ("_id" in product) {
-                        dispatch(userActions.removeFromFavorites(product._id))
+                        dispatch(userActions.removeFromWishlist(product._id))
                     }
 
                 }
@@ -177,9 +179,9 @@ const ProductDetails = () => {
                         userId: user.userId,
                         token: user.token
                     })
-                    setAddToFavoritesLoading(false)
+                    setAddToWishlistLoading(false)
                     if ("_id" in product) {
-                        dispatch(userActions.addToFavorites(product._id))
+                        dispatch(userActions.addToWishlist(product._id))
                     }
 
                 }
@@ -202,7 +204,7 @@ const ProductDetails = () => {
                 <meta property="og:url" content={router.pathname}/>
                 <meta property="og:description" content={title}/>
                 <meta property="og:image"
-                      content={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : ""}.jpg`}/>
+                      content={`/assets/pictures/products/${"slug" in product ? product.slug : ""}.jpg`}/>
             </Head>
 
             <Grid container item xs={12}>
@@ -214,7 +216,7 @@ const ProductDetails = () => {
                                           sx={{height: 1, width: 1}}/> :
 
                                 <Image style={{width:"100%",height:"auto"}}
-                                    src={`/assets/pictures/products/${"title" in product ? product.title.replaceAll(" ", "-") : ""}.jpg`}
+                                    src={`/assets/pictures/products/${"slug" in product ? product.slug: ""}.jpg`}
                                     alt={`${"title" in product ? product.title : ""}`} width={400} height={400}
                                     />
 
@@ -243,12 +245,12 @@ const ProductDetails = () => {
                                             component={"span"}
                                             py={10}
                                             color={"white.main"}
-                                            bgcolor={isLoading ? "transparent" : "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "primary.main" : "error.main"}>
+                                            bgcolor={isLoading ? "transparent" : "quantity" in product && product.quantity > 0 ? "primary.main" : "error.main"}>
                                     {
                                         isLoading ?
                                             <Skeleton variant={"text"} animation={"wave"} width={100}
                                                       sx={{fontSize: 16}}/> :
-                                            "numbers_in_stock" in product && product.numbers_in_stock > 0 ? "موجود" : "ناموجود"
+                                            "quantity" in product && product.quantity > 0 ? "موجود" : "ناموجود"
                                     }
                                 </Typography>
                             </Grid>
@@ -285,7 +287,7 @@ const ProductDetails = () => {
                                     :
                                     <Typography variant={"caption"} component={"p"} fontSize={{xs: 14, md: 16}}
                                                 lineHeight={{xs: 1.8, md: 1.6}} color={"#555"}>
-                                        {"details" in product && product.details}
+                                        {"description" in product && product.description}
                                     </Typography>
                             }
                         </Grid>
@@ -331,12 +333,12 @@ const ProductDetails = () => {
                                 <Grid container justifyContent={"flex-end"} item xs={"auto"}>
 
                                     <Button
-                                        onClick={addToFavoritesHandler}
+                                        onClick={addToWishlistHandler}
                                         variant={"contained"}
                                         aria-label="add to wishlist"
-                                        sx={styles.addToFavoritesButton}
+                                        sx={styles.addToWishlistButton}
                                     >
-                                        {addToFavoritesLoading ?
+                                        {addToWishlistLoading ?
                                             <CircularProgress size={30} sx={{
                                                 borderRadius: 20,
                                                 p: {xs: 2, md: 3,},

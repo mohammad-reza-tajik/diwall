@@ -1,7 +1,9 @@
 import {useRef, useState} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
-import {userActions , useAppDispatch} from "../store";
+import {userActions, useAppDispatch} from "../store";
+// import ObjectStore from "../utilities/idb";
+// import useFetch from "./useFetch";
 
 const useAuth = () => {
 
@@ -46,42 +48,48 @@ const useAuth = () => {
 
     const formHandler = async (e) => {
         try {
-        e.preventDefault()
-        setIsLoading(true)
-        setMessage("")
-
-        const user = typeOfForm === "signup" ?
-            {
-                username: usernameRef.current?.value,
-                email: emailRef.current?.value,
-                password: passwordRef.current?.value
-            } :
-            {
-                usernameOrEmail: usernameOrEmailRef.current?.value,
-                password: passwordRef.current?.value
-
-            }
-
-        const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`, user)
+            e.preventDefault()
+            setIsLoading(true)
+            setMessage("");
 
 
+            const user = typeOfForm === "signup" ?
+                {
+                    username: usernameRef.current?.value,
+                    email: emailRef.current?.value,
+                    password: passwordRef.current?.value
+                } :
+                {
+                    usernameOrEmail: usernameOrEmailRef.current?.value,
+                    password: passwordRef.current?.value
+
+                }
+
+
+            /*if ("serviceWorker" in navigator) {
+                const sw = await navigator.serviceWorker.ready;
+                const authStore = new ObjectStore("sync-auth");
+                await authStore.saveToIDB("user", user);
+                await sw.sync.register("sync-auth");
+                console.log("this is after sending sync-auth in useAuth")
+            } else {*/
+                const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`, user)
                 setMessage(res.data.message)
                 dispatch(userActions.login(res.data.user))
-
-                setIsLoading(false)
                 openSnackbarHandler()
-                router.push("/")
+                router.push("/");
+
+            // }
+
 
         } catch (err) {
             console.log(err)
             setMessage(err?.response.data.message)
-            setIsLoading(false)
             openSnackbarHandler()
 
+        } finally {
+            setIsLoading(false)
         }
-
-
-
 
 
     }

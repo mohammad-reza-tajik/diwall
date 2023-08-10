@@ -15,22 +15,21 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
         return
 
     const title = req.query.title && String(req.query.title);
+    console.log(title)
 
         regexp = new RegExp(title, "g");
     
     // console.log(`[received title ] ${title}`)
 
     if (title) {
-        //@ts-ignore
-        const product = await Product.findOne({title: regexp}).exec()
-        // console.log(`[ found product ] ${product}`)
+        const product = await Product.findOne({title: regexp})
+        console.log(`[ found product ] ${product}`)
 
         // for reference about mongodb operators see https://www.bmc.com/blogs/mongodb-operators/
         // the bottom line returns all matches that are equal to second element in category
 
-
-        //@ts-ignore
-        const relatedProducts : ProductType[] = await Product.find({category: {$elemMatch: {$eq: product?.category[1]}}})
+        
+        const relatedProducts : ProductType[] = await Product.find({categories: {$elemMatch: {$eq: product?.categories[1]}}})
         res.send({product, relatedProducts})
 
     } else {

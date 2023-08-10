@@ -2,14 +2,16 @@ import Grid from "@mui/material/Grid";
 import Features from "../components/Globals/Features";
 import Banner from "../components/HomePage/Banner";
 import React from "react";
-import {GetStaticProps} from "next";
-import axios from "axios";
 import ShowCase from "../components/HomePage/ShowCase";
-import type {ProductType} from "../db/productModel";
 import Places from "../components/HomePage/Places";
 import SwiperProducts from "../components/Globals/SwiperProducts";
 import SectionHeading from "../components/Globals/SectionHeading";
 import MiddleSection from "../components/HomePage/MiddleSection";
+
+import type {ProductType} from "../db/productModel";
+import {GetStaticProps} from "next";
+import mongoose from "mongoose";
+import Product from "../db/productModel";
 
 interface Props {
     latestProducts:ProductType[];
@@ -36,15 +38,19 @@ const Home : React.FC<Props> = (props) => {
 }
 
 export const getStaticProps : GetStaticProps = async () => {
-    const latestProducts = await axios.post("https://zany-lime-toad-suit.cyclic.app",{sortBy:1});
-    const mostPopularProducts = await axios.post("https://zany-lime-toad-suit.cyclic.app", {sortBy: 3});
-    const bestSellingProducts = await axios.post("https://zany-lime-toad-suit.cyclic.app", {sortBy: 2});
+    await mongoose.connect(process.env.MONGODB_URL);
+    const latestProducts = await Product.find().sort({createdAt: "desc"}).skip((1 - 1) * 10).limit(10)
+    const mostPopularProducts = await Product.find().sort({likes: "desc"}).skip((1 - 1) * 10).limit(10);
+    const bestSellingProducts = await Product.find().sort({sells: "desc"}).skip((1 - 1) * 10).limit(10);
 
+
+
+    // to serialize the response from mongoose I had to stringify it and then to use it in component had to parse it
     return {
         props:{
-            latestProducts:latestProducts.data.products,
-            mostPopularProducts:mostPopularProducts.data.products,
-            bestSellingProducts:bestSellingProducts.data.products
+            latestProducts:JSON.parse(JSON.stringify(latestProducts)),
+            mostPopularProducts:JSON.parse(JSON.stringify(mostPopularProducts)),
+            bestSellingProducts:JSON.parse(JSON.stringify(bestSellingProducts))
 
         },
         revalidate :(86400 * 30)
