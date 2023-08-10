@@ -47,7 +47,23 @@ const productSchema = new mongoose.Schema<ProductType>({
         type: Number,
         default: 0
     },
-    categories: [String]
+    categories: [String],
+    comments: [{
+        content: {
+            type: String,
+            required: true
+        },
+        date: {
+            type: String,
+            required: true
+        },
+        author: {
+            type: String,
+            required: true
+
+        }
+
+    }]
 
 
 }, {timestamps: true})
