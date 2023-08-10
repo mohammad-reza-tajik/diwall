@@ -195,7 +195,7 @@ const HeaderDesktop: React.FC = () => {
 
                 <Grid container item md={"auto"} lg={true} xl={2} justifyContent={"flex-end"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
-                        <Badge showZero max={99} badgeContent={user?.favoriteList.length || 0} color="primary"
+                        <Badge showZero max={99} badgeContent={user?.wishlist.length || 0} color="primary"
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}
                          >

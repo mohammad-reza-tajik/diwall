@@ -4,8 +4,9 @@ interface User {
     username: string;
     password: string;
     email: string;
-    favoriteList: Types.ObjectId[];
-    cart: Types.ObjectId[]
+    wishlist: Types.ObjectId[];
+    cart: Types.ObjectId[];
+    role : string;
 
 }
 
@@ -23,7 +24,11 @@ const userSchema = new Schema<User>(
             type: String,
             required: true
         },
-        favoriteList: [
+        role : {
+          type : String,
+          default : "user"
+        },
+        wishlist: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Product",

@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 export interface ProductType {
     _id: string;
     title: string;
-    price: string;
-    image: string;
-    image_full: string;
-    details: string;
-    favorite_count : number;
-    purchase_count : number;
-    numbers_in_stock: number;
-    category:string[];
+    price: number;
+    description: string;
+    likes : number;
+    sells : number;
+    slug : string;
+    images : string[];
+    quantity: number;
+    categories:string[];
     comments : Array<{
         author:string;
         date:string;
@@ -21,56 +21,33 @@ const productSchema = new mongoose.Schema<ProductType>({
 
     title: {
         type: String,
-        required: true,
-        unique:true
+        trim: true,
+        unique : true,
+        required: [true, "Please provide the title of the product!"]
     },
     price: {
-        type: String,
-        required: true
-    },
-    image: {
-        type: String,
-        required: true
-    },
-    image_full: {
-        type: String,
-        required: true
-    },
-    details: {
-        type: String,
-        required: true
-    },
-    favorite_count: {
         type: Number,
-        required: true
+        required: [true, "Please provide the price of the product!"]
     },
-    purchase_count: {
+    description: {
+        type: String,
+        required: [true, "A product must have a description !"]
+    },
+    slug: String,
+    images: [String],
+    quantity: {
         type: Number,
-        required: true
+        required: [true, "Please provide the quantity of the product"]
     },
-    category: [String],
-    numbers_in_stock: {
+    likes: {
         type: Number,
-        required: true
+        default: 0
     },
-    comments: [{
-        content: {
-            type: String,
-            required: true
-        },
-        date: {
-            type: String,
-            required: true
-        },
-        author: {
-            type: String,
-            required: true
-
-
-
-        }
-
-    }]
+    sells: {
+        type: Number,
+        default: 0
+    },
+    categories: [String]
 
 
 }, {timestamps: true})

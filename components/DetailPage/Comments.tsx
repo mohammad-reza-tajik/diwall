@@ -95,6 +95,7 @@ const Comments: React.FC<Props> = (props) => {
                     setIsLoading(true);
                     const productInIDB  = await productStore.getFromIDB(url);
                     if (productInIDB) {
+                        // @ts-ignore
                         const comments = productInIDB.product.comments;
                         setComments(comments);
                         setIsLoading(false);

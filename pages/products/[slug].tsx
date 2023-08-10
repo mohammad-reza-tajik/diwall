@@ -76,18 +76,18 @@ const ProductDetails = () => {
     const dispatch = useAppDispatch();
 
     // console.log(router)
-    const {isReady} = router;
     const isInCart = user?.cart.includes("_id" in product && product._id)
     const isFavorite = user?.wishlist.includes("_id" in product && product._id)
 
-    const slug = isReady ? router.query.title as string : "_";
-    const title = slug.split("_").join(" ");
-    // console.log(title)
+    const {isReady} = router;
+    const slug = isReady ? router.query.slug as string : " ";
+    const title = slug.split("-").join(" ");
 
     const productStore = new ObjectStore("products");
 
     useEffect(() => {
-        const url = `/api/products/${title}`;
+        const url = `/api/products/${slug}`;
+
         (async () => {
             try {
                 setIsLoading(true);
@@ -105,6 +105,7 @@ const ProductDetails = () => {
 
                     } else {
                         const res = await axios(url);
+
                         setProduct(res.data.product);
                         setRelatedProducts(res.data.relatedProducts);
                         await productStore.saveToIDB(url, {product : res.data.product ,relatedProducts : res.data.relatedProducts });
@@ -161,7 +162,7 @@ const ProductDetails = () => {
             setAddToWishlistLoading(true)
             if (isFavorite) {
                 if ("_id" in product) {
-                    await axios.put("/api/remove-from-favorites", {
+                    await axios.put("/api/remove-from-wishlist", {
                         productId: product._id,
                         userId: user.userId,
                         token: user.token
@@ -174,7 +175,7 @@ const ProductDetails = () => {
                 }
             } else {
                 if ("_id" in product) {
-                    await axios.put("/api/add-to-favorites", {
+                    await axios.put("/api/add-to-wishlist", {
                         productId: product._id,
                         userId: user.userId,
                         token: user.token
@@ -196,7 +197,7 @@ const ProductDetails = () => {
         <>
             <Head>
                 <title>
-                    {`${slug.split("_").join(" ")} - دیوال`}
+                    {`${title}`}
                 </title>
                 <meta name={"description"} content={title}/>
                 <meta property="og:title" content={title}/>
@@ -204,7 +205,7 @@ const ProductDetails = () => {
                 <meta property="og:url" content={router.pathname}/>
                 <meta property="og:description" content={title}/>
                 <meta property="og:image"
-                      content={`/assets/pictures/products/${"slug" in product ? product.slug : ""}.jpg`}/>
+                      content={`/assets/pictures/products/${ "slug" in product ? product.slug : ""}.jpg`}/>
             </Head>
 
             <Grid container item xs={12}>
@@ -216,8 +217,8 @@ const ProductDetails = () => {
                                           sx={{height: 1, width: 1}}/> :
 
                                 <Image style={{width:"100%",height:"auto"}}
-                                    src={`/assets/pictures/products/${"slug" in product ? product.slug: ""}.jpg`}
-                                    alt={`${"title" in product ? product.title : ""}`} width={400} height={400}
+                                    src={`/assets/pictures/products/${ "slug" in product ? product.slug: ""}.jpg`}
+                                    alt={`${ "title" in product ? product.title : ""}`} width={400} height={400}
                                     />
 
                         }
@@ -235,7 +236,7 @@ const ProductDetails = () => {
                                                     fontFamily={"dana-bold"}
                                                     lineHeight={1.8}
                                                     color={"#555"}>
-                                            {"title" in product ? product.title : ""}
+                                            { "title" in product ? product.title : ""}
                                         </Typography>
                                 }
                             </Grid>
@@ -245,12 +246,12 @@ const ProductDetails = () => {
                                             component={"span"}
                                             py={10}
                                             color={"white.main"}
-                                            bgcolor={isLoading ? "transparent" : "quantity" in product && product.quantity > 0 ? "primary.main" : "error.main"}>
+                                            bgcolor={isLoading ? "transparent" :  "quantity" in product &&  product.quantity > 0 ? "primary.main" : "error.main"}>
                                     {
                                         isLoading ?
                                             <Skeleton variant={"text"} animation={"wave"} width={100}
                                                       sx={{fontSize: 16}}/> :
-                                            "quantity" in product && product.quantity > 0 ? "موجود" : "ناموجود"
+                                             "quantity" in product &&  product.quantity > 0 ? "موجود" : "ناموجود"
                                     }
                                 </Typography>
                             </Grid>
@@ -265,7 +266,7 @@ const ProductDetails = () => {
                                     <Typography variant={"h1"} component={"span"} fontSize={{xs: 16, md: 20}}
                                                 sx={{textAlign: "justify", flexGrow: 1}} fontFamily={"dana-bold"}
                                                 color={"primary"}>
-                                        {"price" in product && product.price}
+                                        { "price" in product &&  product.price + " تومان هر متر مربع"}
                                     </Typography>
                             }
                         </Grid>
@@ -287,7 +288,7 @@ const ProductDetails = () => {
                                     :
                                     <Typography variant={"caption"} component={"p"} fontSize={{xs: 14, md: 16}}
                                                 lineHeight={{xs: 1.8, md: 1.6}} color={"#555"}>
-                                        {"description" in product && product.description}
+                                        { "description" in product &&  product.description}
                                     </Typography>
                             }
                         </Grid>
