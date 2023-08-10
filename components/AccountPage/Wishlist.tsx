@@ -7,11 +7,11 @@ import Product from "../Globals/Product";
 
 interface Props {
     isLoading:boolean;
-    populatedFavoriteList:any;
+    populatedWishlist:any;
     user:any;
 }
 const Wishlist : React.FC<Props> = (props) => {
-    const {isLoading , user ,populatedFavoriteList } = props;
+    const {isLoading , user ,populatedWishlist } = props;
 
     return(
         <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10}>
@@ -21,7 +21,7 @@ const Wishlist : React.FC<Props> = (props) => {
                       alignItems={"center"}>
                     <CircularProgress color={"primary"} size={45}/>
                 </Grid> :
-                user?.username === null || populatedFavoriteList.length === 0 ?
+                user?.username === null || populatedWishlist.length === 0 ?
                     <Grid container item xs minHeight={300} justifyContent={"center"}
                           alignItems={"center"}>
                         <Typography fontSize={16} variant={"body1"} color={"#333"}
@@ -30,7 +30,7 @@ const Wishlist : React.FC<Props> = (props) => {
                         </Typography>
                     </Grid> :
 
-                    populatedFavoriteList.map(item =>
+                    populatedWishlist.map(item =>
                         <Grid item xs={6} sm={4} key={item._id}>
                             <Product  {...item} />
                         </Grid>)}

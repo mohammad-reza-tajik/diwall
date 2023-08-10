@@ -47,19 +47,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             it returns thenable it means you can use then/catch , but you can't
             use async/await to use async/await you should use exec method at the end of the expression
             */
-            const productsCount = await Product.countDocuments({title: regexp}).exec()
+            const productsCount = await Product.countDocuments({title: regexp})
 
             let products;
 
             if (sortBy === 2) { // best-selling products
                 // @ts-ignore
-                products = await Product.find({title: regexp}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find({title: regexp}).sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else if (sortBy === 3) { // most popular products
                 // @ts-ignore
-                products = await Product.find({title: regexp}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find({title: regexp}).sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else { // latest products
                 // @ts-ignore
-                products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             }
             res.send({
                 products,
@@ -72,18 +72,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         } else if ((!search || search === "undefined") && (!category || category === "undefined")) {
             // console.log("from sortby")
 
-            const productsCount = await Product.countDocuments().exec()
+            const productsCount = await Product.countDocuments()
             let products;
 
             if (sortBy === 2) { // best-selling products
                 // @ts-ignore
-                products = await Product.find().sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find().sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else if (sortBy === 3) { // most popular products
                 // @ts-ignore
-                products = await Product.find().sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find().sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else { // latest products
                 // @ts-ignore
-                products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             }
 
             res.send({
@@ -95,18 +95,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         } else if (category) {
             // console.log("from category")
 
-            const productsCount = await Product.countDocuments({category: {$in: [category]}}).exec()
+            const productsCount = await Product.countDocuments({categories: {$in: [category]}})
             let products;
 
             if (sortBy === 2) { // best-selling products
                 // @ts-ignore
-                products = await Product.find({category: {$in: [category]}}).sort({purchase_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find({categories: {$in: [category]}}).sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else if (sortBy === 3) { // most popular products
                 // @ts-ignore
-                products = await Product.find({category: {$in: [category]}}).sort({favorite_count: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find({categories: {$in: [category]}}).sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else { // latest products
                 // @ts-ignore
-                products = await Product.find({category: {$in: [category]}}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE).exec()
+                products = await Product.find({categories: {$in: [category]}}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             }
 
             res.send({

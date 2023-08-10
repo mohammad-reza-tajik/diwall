@@ -36,7 +36,7 @@ const Dashboard: React.FC = () => {
 
     const user = useAppSelector(state => state)
 
-    const [populatedFavoriteList, setPopulatedFavoriteList] = useState<any>([])
+    const [populatedWishlist, setPopulatedWishlist] = useState<any>([])
     const [populatedCart, setPopulatedCart] = useState<any>([])
 
     const [tab, setTab] = useState<number>(1);
@@ -95,15 +95,15 @@ const Dashboard: React.FC = () => {
         (async () => {
             if (isAuthenticated) {
                 setIsLoading(true)
-                const res = await axios.post("/api/get-favorite-list-and-cart", {
+                const res = await axios.post("/api/get-wishlist-and-cart", {
                     userId: user?.userId, token: user?.token
                 })
-                setPopulatedFavoriteList(res.data.favoriteList)
+                setPopulatedWishlist(res.data.wishlist)
                 setPopulatedCart(res.data.cart)
                 setIsLoading(false)
             }
         })()
-    }, [user.cart, user.favoriteList])
+    }, [user.cart, user.wishlist])
 
 
     const theme = useTheme()
@@ -145,7 +145,7 @@ const Dashboard: React.FC = () => {
                     </TabPanel>
 
                     <TabPanel tab={tab} index={2}>
-                        <Wishlist isLoading={isLoading} populatedFavoriteList={populatedFavoriteList} user={user}/>
+                        <Wishlist isLoading={isLoading} populatedWishlist={populatedWishlist} user={user}/>
                     </TabPanel>
 
                     <TabPanel tab={tab} index={3}>

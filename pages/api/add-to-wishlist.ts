@@ -12,7 +12,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     const user = await User.findById(userId).exec()
 
 
-        user.favoriteList.push(productId)
+        user.wishlist.push(productId)
         await user.save()
 
     res.send({
@@ -22,7 +22,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
             email:user.email,
             token,
             cart: user.cart,
-            favoriteList: user.favoriteList
+            wishlist: user.wishlist
         }
     })
 

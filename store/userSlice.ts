@@ -9,7 +9,7 @@ interface User {
     userId: null | string,
     token: null | string,
     cart: string[],
-    favoriteList: string[]
+    wishlist: string[]
 
 }
 
@@ -20,7 +20,7 @@ const initialState : User = {
     userId: null,
     token: null,
     cart: [],
-    favoriteList: []
+    wishlist: []
 
 
 }
@@ -32,12 +32,12 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         login(state, action : PayloadAction<User>) {
-            const { username, email, userId, cart, favoriteList, token } = action.payload
+            const { username, email, userId, cart, wishlist, token } = action.payload
             state.username = username;
             state.email = email;
             state.userId = userId;
             state.cart = cart;
-            state.favoriteList = favoriteList;
+            state.wishlist = wishlist;
             state.token = token;
             storeTokenAndUser(state)
         },
@@ -46,24 +46,24 @@ const userSlice = createSlice({
             state.email = null;
             state.userId = null;
             state.cart = [];
-            state.favoriteList = [];
+            state.wishlist = [];
             state.token = null;
             localStorage.clear()
 
         },
-        addToFavorites(state, action : PayloadAction<string>) {
+        addToWishlist(state, action : PayloadAction<string>) {
             const productId = action.payload;
-            if (!state.favoriteList.includes(productId)) {
-                state.favoriteList = [...state.favoriteList, productId]
+            if (!state.wishlist.includes(productId)) {
+                state.wishlist = [...state.wishlist, productId]
 
             }
 
 
         },
-        removeFromFavorites(state, action : PayloadAction<string>) {
+        removeFromWishlist(state, action : PayloadAction<string>) {
             const productId = action.payload;
-            if (state.favoriteList.includes(productId)) {
-                state.favoriteList = state.favoriteList.filter((id) => id !== productId)
+            if (state.wishlist.includes(productId)) {
+                state.wishlist = state.wishlist.filter((id) => id !== productId)
             }
 
         },

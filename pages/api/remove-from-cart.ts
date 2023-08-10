@@ -25,7 +25,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
             email:user.email,
             token,
             cart: user.cart,
-            favoriteList: user.favoriteList
+            wishlist: user.wishlist
         }
     })
     }

@@ -31,7 +31,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
                 username,
                 email,
                 password: hashedPassword,
-                favoriteList: [],
+                wishlist: [],
                 cart: [],
                 tokens: []
             }
@@ -44,7 +44,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
             status: 201,
             user: {
                 username: user.username, userId: user._id, email: user.email,
-                token: generateToken(user), cart: user.cart, favoriteList: user.favoriteList
+                token: generateToken(user), cart: user.cart, wishlist: user.wishlist
             },
             message: successMessage,
         })

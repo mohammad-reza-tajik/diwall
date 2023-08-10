@@ -1,4 +1,5 @@
 import CircularProgress from "@mui/material/CircularProgress";
+import type {ProductType} from "../../db/productModel";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -20,7 +21,7 @@ const styles = {
         bgcolor: "#fff",
 
     },
-    addToFavoritesButton: {
+    addToWishlistButton: {
         position: "absolute",
         left: {xs: 1, sm: 3},
         top: {xs: 1, sm: 3},
@@ -30,55 +31,45 @@ const styles = {
 }
 
 
-interface Product {
-    _id: string;
-    title: string;
-    price: string
 
 
-}
-
-const Product: React.FC<Product> = (props) => {
+const Product: React.FC<ProductType> = (props) => {
     const router = useRouter()
 
     const theme = useTheme()
     const matchesMD: boolean = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM: boolean = useMediaQuery(theme.breakpoints.down("sm"))
 
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const user = useAppSelector(state => state)
     const dispatch = useAppDispatch()
 
-    const isFavorite = user?.favoriteList.includes(props._id)
+    const isFavorite = user?.wishlist.includes(props._id)
 
-    const {title} = props
-    const slug = title.split(" ").join("_");
-
-
-    const addToFavoritesHandler = async () => {
+    const addToWishlistHandler = async () => {
         try {
             if (user?.username) {
                 setIsLoading(true)
                 if (isFavorite) {
-                    await axios.put("/api/remove-from-favorites", {
+                    await axios.put("/api/remove-from-wishlist", {
                         productId: props._id,
                         userId: user.userId,
                         token: user.token
                     })
                     setIsLoading(false)
-                    dispatch(userActions.removeFromFavorites(props._id))
+                    dispatch(userActions.removeFromWishlist(props._id))
 
 
                 } else {
 
-                    await axios.put("/api/add-to-favorites", {
+                    await axios.put("/api/add-to-wishlist", {
                         productId: props._id,
                         userId: user.userId,
                         token: user.token
                     })
 
-                    dispatch(userActions.addToFavorites(props._id))
+                    dispatch(userActions.addToWishlist(props._id))
 
                 }
             } else {
@@ -99,8 +90,8 @@ const Product: React.FC<Product> = (props) => {
     return (
         <Grid container item sx={styles.product} xs={12}>
             <Grid item xs={12} sx={{position: "relative", cursor: "pointer"}}>
-                <Grid item sx={styles.addToFavoritesButton}>
-                    <IconButton onClick={addToFavoritesHandler} aria-label="add to wishlist">
+                <Grid item sx={styles.addToWishlistButton}>
+                    <IconButton onClick={addToWishlistHandler} aria-label="add to wishlist">
                         {isLoading ? <CircularProgress size={matchesMD ? matchesSM ? 30 : 40 : 40} sx={{
                             borderRadius: 20,
                             p: {xs: 4, md: 5,},
@@ -124,14 +115,14 @@ const Product: React.FC<Product> = (props) => {
                     </IconButton>
                 </Grid>
 
-                <Link href={`/products/${slug}`}>
-                    <Image src={`/assets/pictures/products/${props.title?.replaceAll(" ", "-")}.jpg`}
+                <Link href={`/products/${props.slug}`}>
+                    <Image src={`/assets/pictures/products/${props.slug}.jpg`}
                            alt={`${props.title}`} width={400} height={400}
                            className={"pointer"}/>
                 </Link>
             </Grid>
             <Grid container item height={50} alignItems={"center"} xs={12}>
-                <Typography variant={"h4"} component={Link} href={`/products/${slug}`}
+                <Typography variant={"h4"} component={Link} href={`/products/${props.slug}`}
                             fontSize={{xs: 11, md: 14, lg: 15}} fontFamily={"dana-bold"}
                             className={"pointer"} lineHeight={1.5}>{props.title}</Typography>
 
@@ -139,7 +130,7 @@ const Product: React.FC<Product> = (props) => {
             <Grid container item alignItems={"center"} height={50}>
                 <Typography variant={"h4"} component={"span"} color={"#069f69"}
                             sx={{fontSize: {xs: 11, md: 14, lg: 15}}}>
-                    {props.price}
+                    {props.price + " تومان هر متر مربع"}
                 </Typography>
             </Grid>
         </Grid>

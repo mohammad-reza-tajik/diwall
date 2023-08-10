@@ -15,12 +15,14 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     if (req.method !== "POST")
         return
 
-    const {usernameOrEmail, password} = req.body
+    const {usernameOrEmail, password} = req.body;
+    // console.log(usernameOrEmail)
 
     //*** check if the user exists ***//
     const regexp = new RegExp(`^${usernameOrEmail}$`, "i")
-    // @ts-ignore
-    const user = await User.find({$or: [{username: regexp}, {email: regexp}]}).exec() // this syntax is for matching either username or email
+
+
+    const user = await User.find({$or: [{username: regexp}, {email: regexp}]}) // this syntax is for matching either username or email
 
 
     if (user.length !== 0) {
@@ -35,7 +37,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
                     userId: user[0]._id,
                     token: generateToken(user),
                     cart: user[0].cart,
-                    favoriteList: user[0].favoriteList
+                    wishlist: user[0].wishlist
                 },
 
             })
