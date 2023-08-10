@@ -30,7 +30,7 @@ interface Props {
 
 const Cart : React.FC<Props> = (props) => {
     const {isLoading , populatedCart , user} = props;
-    console.log(populatedCart);
+    // console.log(populatedCart);
   return (
           <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10} direction={"column"}>
               {isLoading ?

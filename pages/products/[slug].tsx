@@ -73,7 +73,7 @@ const ProductDetails = () => {
 
 
     const router = useRouter()
-    const user = useAppSelector(state => state);
+    const user = useAppSelector(state => state.userReducer);
     const dispatch = useAppDispatch();
 
     // console.log(router)

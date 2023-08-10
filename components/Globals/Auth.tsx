@@ -1,6 +1,5 @@
 import React, {Fragment, useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {userActions} from "../../store"
+import {userActions , useAppDispatch} from "../../store"
 import axios from "axios"
 import {useRouter} from "next/router";
 
@@ -11,7 +10,7 @@ interface Props {
 const Auth: React.FC<Props> = ({children}) => {
 
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const router = useRouter();
 
     useEffect(() => {

@@ -37,7 +37,7 @@ const styles = {
 const HeaderMobile: React.FC = () => {
 
     const router = useRouter()
-    const user = useAppSelector(state => state)
+    const user = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
     const [openMenuDrawer, setOpenMenuDrawer] = useState(false)
     const [openSearchDrawer, setOpenSearchDrawer] = useState(false)

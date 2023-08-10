@@ -57,7 +57,7 @@ interface Props {
 
 const CommentForm: React.FC<Props> = (props) => {
 
-    const user = useAppSelector(state => state);
+    const user = useAppSelector(state => state.userReducer);
 
     const router = useRouter();
 

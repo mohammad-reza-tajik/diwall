@@ -12,7 +12,7 @@ import {Provider} from "react-redux";
 import {store} from "../store";
 import Auth from "../components/Globals/Auth";
 import React from "react";
-
+import Snackbar from "../components/Globals/Snackbar";
 //**************** this is because in useAuth I was getting a type error for sw.sync . because ts doesn't fully support sw types ***************//
 interface SyncManager {
     getTags(): Promise<string[]>;
@@ -129,6 +129,7 @@ function MyApp({Component, pageProps}) {
                         {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Footer/>}
                     </Grid>
                 </Grid>
+                <Snackbar />
             </Provider>
         </ThemeProvider>
     )

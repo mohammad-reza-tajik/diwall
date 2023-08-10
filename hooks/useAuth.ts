@@ -1,34 +1,20 @@
 import {useRef, useState} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
-import {userActions, useAppDispatch} from "../store";
+import {userActions, useAppDispatch, snackbarActions} from "../store";
 // import ObjectStore from "../utilities/idb";
 // import useFetch from "./useFetch";
 
 const useAuth = () => {
 
-    const [message, setMessage] = useState("")
-    const [openSnackbar, setOpenSnackbar] = useState(false)
     const [typeOfForm, setTypeOfForm] = useState("login");
     const [isLoading, setIsLoading] = useState(false)
-
 
 
     const router = useRouter()
 
 
-
-
     const dispatch = useAppDispatch()
-
-    const openSnackbarHandler = () => {
-        setOpenSnackbar(true)
-
-    }
-
-    const closeSnackbarHandler = () => {
-        setOpenSnackbar(false)
-    }
 
     const typeOfFormHandler = (_, typeOfForm) => {
         // the bottom line is written like this so that only one tab can be active or disabled at a time
@@ -44,8 +30,6 @@ const useAuth = () => {
     const usernameOrEmailRef = useRef<HTMLInputElement>()
 
 
-
-
     //********************************* form submission **********************************!//
 
 
@@ -53,7 +37,6 @@ const useAuth = () => {
         try {
             e.preventDefault()
             setIsLoading(true)
-            setMessage("");
 
 
             const user = typeOfForm === "signup" ?
@@ -76,19 +59,19 @@ const useAuth = () => {
                 await sw.sync.register("sync-auth");
                 console.log("this is after sending sync-auth in useAuth")
             } else {*/
-                const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "login"}`, user)
-                setMessage(res.data.message)
-                dispatch(userActions.login(res.data.user))
-                openSnackbarHandler()
-                router.push("/");
+            const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "login"}`, user)
+            dispatch(userActions.login(res.data.user))
+            dispatch(snackbarActions.openSnackbar({message: res.data.message, status: "success"}))
+
+            router.push("/");
 
             // }
 
 
         } catch (err) {
             console.log(err)
-            setMessage(err?.response.data.message)
-            openSnackbarHandler()
+            dispatch(snackbarActions.openSnackbar({message: err?.response.data.message, status: "error"}))
+
 
         } finally {
             setIsLoading(false)
@@ -104,10 +87,7 @@ const useAuth = () => {
         usernameRef,
         formHandler,
         typeOfFormHandler,
-        closeSnackbarHandler,
         passwordRef,
-        message,
-        openSnackbar,
         typeOfForm
     }
 

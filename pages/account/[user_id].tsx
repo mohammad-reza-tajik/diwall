@@ -8,9 +8,7 @@ import React, {useEffect, useState} from "react";
 import TabPanel from "../../components/Globals/TabPanel";
 import axios from "axios";
 import Head from "next/head";
-import {useAppSelector} from "../../hooks/useStore";
-import {userActions} from "../../store";
-import {useDispatch} from "react-redux";
+import {userActions , useAppSelector , useAppDispatch} from "../../store";
 import dynamic from "next/dynamic";
 
 const Profile = dynamic(() => import("../../components/AccountPage/Profile"))
@@ -34,7 +32,7 @@ const Dashboard: React.FC = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const user = useAppSelector(state => state)
+    const user = useAppSelector(state => state.userReducer)
 
     const [populatedWishlist, setPopulatedWishlist] = useState<any>([])
     const [populatedCart, setPopulatedCart] = useState<any>([])
@@ -49,7 +47,7 @@ const Dashboard: React.FC = () => {
     const isAuthenticated = user?.username;
     const queryTab = router.query.tab;
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (queryTab) {

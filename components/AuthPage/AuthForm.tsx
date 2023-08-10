@@ -15,10 +15,6 @@ import Create from "@mui/icons-material/Create";
 import Login from "@mui/icons-material/Login";
 import Grid from "@mui/material/Grid";
 import useAuth from "../../hooks/useAuth";
-import Snackbar from "@mui/material/Snackbar";
-import IconButton from "@mui/material/IconButton";
-import Close from "@mui/icons-material/Close";
-
 
 const styles = {
     backgroundImage: {
@@ -60,27 +56,16 @@ const styles = {
 const AuthForm: React.FC = () => {
 
     const {
-        closeSnackbarHandler,
         typeOfForm,
-        openSnackbar,
         typeOfFormHandler,
         formHandler,
         isLoading,
-        message,
         usernameOrEmailRef,
         usernameRef,
         emailRef,
         passwordRef
     } = useAuth()
 
-    const action = (
-        <IconButton
-            size="medium"
-            sx={{color: "#fff"}}
-            onClick={closeSnackbarHandler}>
-            <Close fontSize={"large"}/>
-        </IconButton>
-    )
 
     return (
         <>
@@ -175,14 +160,6 @@ const AuthForm: React.FC = () => {
             </Grid>
             <Box sx={styles.backgroundImage}/>
 
-            <Snackbar
-                open={openSnackbar}
-                autoHideDuration={50_000}
-                message={message}
-                onClose={closeSnackbarHandler}
-                action={action}
-                anchorOrigin={{vertical: "bottom", horizontal: "left"}}
-            />
         </>
     )
 }
