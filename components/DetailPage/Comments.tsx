@@ -75,21 +75,20 @@ const Comments: React.FC<Props> = (props) => {
 
     const router = useRouter();
 
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [comments, setComments] = useState<Comment[]>([]);
 
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
 
-    const slug = router.isReady ? router.query.title as string : "_";
-    const title = slug.split("_").join(" ");
+    const slug = router.isReady &&  router.query.slug;
 
     const productStore = new ObjectStore("products");
 
 
     // In this use case I needed to put a setIsLoading in the if block (in addition to the one in the finally block)
     useEffect(() => {
-            const url = `/api/products/${title}`;
+            const url = `/api/products/${slug}`;
             (async () => {
                 try {
                     setIsLoading(true);
@@ -113,7 +112,7 @@ const Comments: React.FC<Props> = (props) => {
                 }
             })()
         }
-        , [addComment, title])
+        , [addComment, slug])
 
 
     return (

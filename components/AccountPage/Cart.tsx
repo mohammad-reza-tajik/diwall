@@ -4,6 +4,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import CartItem from "./CartItem";
 
+import type {ProductType} from "../../db/productModel";
+
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 15},
@@ -21,13 +23,14 @@ const styles = {
 
 interface Props {
     isLoading:boolean;
-    populatedCart:any;
+    populatedCart:ProductType[];
     user:any;
 
 }
 
 const Cart : React.FC<Props> = (props) => {
     const {isLoading , populatedCart , user} = props;
+    console.log(populatedCart);
   return (
           <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10} direction={"column"}>
               {isLoading ?

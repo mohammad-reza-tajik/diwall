@@ -8,7 +8,7 @@ import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import Create from "@mui/icons-material/Create";
 import  TextField  from "@mui/material/TextField";
-
+import {useRouter} from "next/router";
 
 const styles = {
     commentField: {
@@ -59,11 +59,16 @@ const CommentForm: React.FC<Props> = (props) => {
 
     const user = useAppSelector(state => state);
 
+    const router = useRouter();
+
     const commentRef = useRef<HTMLTextAreaElement>();
 
     const [isLoading,setIsLoading] = useState<boolean>(false);
 
-    const [helperText,setHelperText] = useState<string>("")
+    const [helperText,setHelperText] = useState<string>("");
+
+    const slug = router.isReady && router.query.slug;
+
     // console.log(props.currentProductTitle)
 
     const insertCommentHandler = async (event) => {
@@ -71,22 +76,23 @@ const CommentForm: React.FC<Props> = (props) => {
         // console.log(commentRef.current.value)
         try {
             setIsLoading(true)
-            await axios.post(`/api/products/${props.currentProductTitle}/comments`,{
+            await axios.post(`/api/products/${slug}/comments`,{
                 comment:{
                     content:commentRef.current.value,
                     author:user.username,
                     date: new Date().toLocaleDateString("fa"),
-                    prodTitle : props.currentProductTitle
+                    slug
                 }
             })
             commentRef.current.value = ""
-            setIsLoading(false);
             setHelperText("دیدگاه شما با موفقیت ثبت شد !")
             setTimeout(()=>setHelperText(""),3000)
             props.onAddComment()
 
         } catch (err) {
             console.log(err)
+        } finally {
+            setIsLoading(false);
         }
 
     }

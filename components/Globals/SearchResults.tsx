@@ -5,6 +5,7 @@ import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useRouter} from "next/router";
+import type {ProductType} from "../../db/productModel";
 
 
 const styles = {
@@ -47,7 +48,7 @@ const styles = {
 
 interface Props {
     isLoading: boolean;
-    results: any;
+    results: ProductType[];
     search: string;
     submitSearchHandler: (event?) => void
     onOpen?: (a: boolean) => void;
@@ -61,13 +62,13 @@ const SearchResults: React.FC<Props> = (props) => {
     const router = useRouter();
 
 
-    const goToProductHandler = (title) => {
+    const goToProductHandler = (slug :string) => {
         if (onClose) {
             onClose()
         } else {
             onOpen(false)
         }
-        router.push(`/products/${title.split(" ").join("_")}`)
+        router.push(`/products/${slug}`)
 
     }
 
@@ -87,12 +88,12 @@ const SearchResults: React.FC<Props> = (props) => {
 
                                     return (
                                         <Grid container item alignItems={"center"} xs={12} key={result._id}
-                                              onClick={() => goToProductHandler(result.title)}
+                                              onClick={() => goToProductHandler(result.slug)}
                                               sx={styles.searchResultsItem}>
 
                                             <Grid item xs={"auto"}>
                                                 <Image
-                                                    src={`/assets/pictures/products/${result.title?.replaceAll(" ", "-")}.jpg`}
+                                                    src={`/assets/pictures/products/${result.slug}.jpg`}
                                                     alt={result.title}
                                                     width={50}
                                                     height={50}

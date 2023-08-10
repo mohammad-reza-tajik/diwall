@@ -1,6 +1,3 @@
-// import ObjectStore from "./utilities/idb";
-// import axios from "axios";
-
 const STATIC_CACHE_NAME = "static-v81";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
 

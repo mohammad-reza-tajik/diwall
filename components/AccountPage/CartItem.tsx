@@ -14,14 +14,10 @@ import {useRouter} from "next/router";
 import {useAppDispatch, useAppSelector, userActions} from "../../store";
 import Image from "next/image";
 
-interface Props {
-    _id: string;
-    title: string;
-    image: string;
+import type {ProductType} from "../../db/productModel";
 
-}
 
-const CartItem: React.FC<Props> = (props) => {
+const CartItem: React.FC<ProductType> = (props) => {
 
     const router = useRouter()
 
@@ -59,7 +55,7 @@ const CartItem: React.FC<Props> = (props) => {
                 <Grid className={"pointer"} container item xs={12} md={true} lg={6} alignItems={"center"}
                       gap={matchesMD ? 10 : 20} onClick={() => router.push("/products/" + title)}>
                     <Grid item xs={"auto"}>
-                        <Image src={`/assets/pictures/products/${props.title?.replaceAll(" ", "-")}.jpg`} width={50} height={50}
+                        <Image src={`/assets/pictures/products/${props.slug}.jpg`} width={50} height={50}
                                 alt={props.title}/>
                     </Grid>
                     <Grid item xs>
