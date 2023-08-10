@@ -52,7 +52,7 @@ declare global {
 
 function MyApp({Component, pageProps}) {
 
-    //****************** to hide the scrollbar in sign-in page *****************//
+    //****************** to hide the scrollbar in login page *****************//
 
     const router = useRouter()
 

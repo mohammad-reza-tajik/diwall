@@ -11,6 +11,7 @@ import Skeleton from "@mui/material/Skeleton";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
+import _ from "lodash";
 
 import Image from "next/image"
 import React, {useEffect, useState} from "react";
@@ -93,22 +94,32 @@ const ProductDetails = () => {
                 setIsLoading(true);
                 if (isReady) {
 
-                    const productInIDB  = await productStore.getFromIDB(url);
+                    const productInIDB = await productStore.getFromIDB(url);
                     if (productInIDB) {
-                         // @ts-ignore
+                        // @ts-ignore
                         setProduct(productInIDB.product);
-                         // @ts-ignore
+                        // @ts-ignore
                         setRelatedProducts(productInIDB.relatedProducts);
                         setIsLoading(false);
                         const res = await axios(url);
-                        await productStore.saveToIDB(url,{product : res.data.product ,relatedProducts : res.data.relatedProducts })
+                        // @ts-ignore
+                        if (!_.isEqual(res.data.product, productInIDB.product) || !_.isEqual(res.data.relatedProducts, productInIDB.relatedProducts)) {
+                            setProduct(res.data.product);
+                            setRelatedProducts(res.data.relatedProducts);
+                        }
+                        await productStore.saveToIDB(url, {
+                            product: res.data.product,
+                            relatedProducts: res.data.relatedProducts
+                        })
 
                     } else {
                         const res = await axios(url);
-
                         setProduct(res.data.product);
                         setRelatedProducts(res.data.relatedProducts);
-                        await productStore.saveToIDB(url, {product : res.data.product ,relatedProducts : res.data.relatedProducts });
+                        await productStore.saveToIDB(url, {
+                            product: res.data.product,
+                            relatedProducts: res.data.relatedProducts
+                        });
                     }
                 }
             } catch (err) {
@@ -205,21 +216,22 @@ const ProductDetails = () => {
                 <meta property="og:url" content={router.pathname}/>
                 <meta property="og:description" content={title}/>
                 <meta property="og:image"
-                      content={`/assets/pictures/products/${ "slug" in product ? product.slug : ""}.jpg`}/>
+                      content={`/assets/pictures/products/${"slug" in product ? product.slug : ""}.jpg`}/>
             </Head>
 
             <Grid container item xs={12}>
                 <Grid container item xs={12} justifyContent={"center"}>
-                    <Grid container item xs={12} sm={7} md={5} maxHeight={400} minHeight={250} justifyContent={"center"}>
+                    <Grid container item xs={12} sm={7} md={5} maxHeight={400} minHeight={250}
+                          justifyContent={"center"}>
                         {
                             isLoading ?
                                 <Skeleton variant="rectangular" animation={"wave"}
                                           sx={{height: 1, width: 1}}/> :
 
-                                <Image style={{width:"100%",height:"auto"}}
-                                    src={`/assets/pictures/products/${ "slug" in product ? product.slug: ""}.jpg`}
-                                    alt={`${ "title" in product ? product.title : ""}`} width={400} height={400}
-                                    />
+                                <Image style={{width: "100%", height: "auto"}}
+                                       src={`/assets/pictures/products/${"slug" in product ? product.slug : ""}.jpg`}
+                                       alt={`${"title" in product ? product.title : ""}`} width={400} height={400}
+                                />
 
                         }
                     </Grid>
@@ -236,7 +248,7 @@ const ProductDetails = () => {
                                                     fontFamily={"dana-bold"}
                                                     lineHeight={1.8}
                                                     color={"#555"}>
-                                            { "title" in product ? product.title : ""}
+                                            {"title" in product ? product.title : ""}
                                         </Typography>
                                 }
                             </Grid>
@@ -246,12 +258,12 @@ const ProductDetails = () => {
                                             component={"span"}
                                             py={10}
                                             color={"white.main"}
-                                            bgcolor={isLoading ? "transparent" :  "quantity" in product &&  product.quantity > 0 ? "primary.main" : "error.main"}>
+                                            bgcolor={isLoading ? "transparent" : "quantity" in product && product.quantity > 0 ? "primary.main" : "error.main"}>
                                     {
                                         isLoading ?
                                             <Skeleton variant={"text"} animation={"wave"} width={100}
                                                       sx={{fontSize: 16}}/> :
-                                             "quantity" in product &&  product.quantity > 0 ? "موجود" : "ناموجود"
+                                            "quantity" in product && product.quantity > 0 ? "موجود" : "ناموجود"
                                     }
                                 </Typography>
                             </Grid>
@@ -266,7 +278,7 @@ const ProductDetails = () => {
                                     <Typography variant={"h1"} component={"span"} fontSize={{xs: 16, md: 20}}
                                                 sx={{textAlign: "justify", flexGrow: 1}} fontFamily={"dana-bold"}
                                                 color={"primary"}>
-                                        { "price" in product &&  product.price + " تومان هر متر مربع"}
+                                        {"price" in product && product.price + " تومان هر متر مربع"}
                                     </Typography>
                             }
                         </Grid>
@@ -288,7 +300,7 @@ const ProductDetails = () => {
                                     :
                                     <Typography variant={"caption"} component={"p"} fontSize={{xs: 14, md: 16}}
                                                 lineHeight={{xs: 1.8, md: 1.6}} color={"#555"}>
-                                        { "description" in product &&  product.description}
+                                        {"description" in product && product.description}
                                     </Typography>
                             }
                         </Grid>
