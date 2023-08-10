@@ -1,6 +1,6 @@
 import "../../db/database_connect"
 import User from "../../db/userModel";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import generateToken from "../../utilities/generateToken";
 
 const errorMessage1 = "این نام کاربری موجود نیست"
@@ -22,22 +22,22 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     const regexp = new RegExp(`^${usernameOrEmail}$`, "i")
 
 
-    const user = await User.find({$or: [{username: regexp}, {email: regexp}]}) // this syntax is for matching either username or email
+    const user = await User.findOne({$or: [{username: regexp}, {email: regexp}]}) // this syntax is for matching either username or email
 
 
-    if (user.length !== 0) {
-        if (await bcrypt.compare(password, user[0].password))
+    if (user) {
+        if (await bcrypt.compare(password, user.password))
             res.status(200).send({
                 ok: true,
                 status: 200,
                 message: successMessage,
                 user: {
-                    username: user[0].username,
-                    email: user[0].email,
-                    userId: user[0]._id,
+                    username: user.username,
+                    email: user.email,
+                    userId: user._id,
                     token: generateToken(user),
-                    cart: user[0].cart,
-                    wishlist: user[0].wishlist
+                    cart: user.cart,
+                    wishlist: user.wishlist
                 },
 
             })

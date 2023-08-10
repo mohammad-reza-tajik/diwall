@@ -7,9 +7,16 @@ import {userActions, useAppDispatch} from "../store";
 
 const useAuth = () => {
 
-    const [message, setMessage] = useState<string>("")
-    const [openSnackbar, setOpenSnackbar] = useState<boolean>(false)
-    const [typeOfForm, setTypeOfForm] = useState<string>("signIn")
+    const [message, setMessage] = useState("")
+    const [openSnackbar, setOpenSnackbar] = useState(false)
+    const [typeOfForm, setTypeOfForm] = useState("login");
+    const [isLoading, setIsLoading] = useState(false)
+
+
+
+    const router = useRouter()
+
+
 
 
     const dispatch = useAppDispatch()
@@ -37,10 +44,6 @@ const useAuth = () => {
     const usernameOrEmailRef = useRef<HTMLInputElement>()
 
 
-    const router = useRouter()
-
-
-    const [isLoading, setIsLoading] = useState<boolean>(false)
 
 
     //********************************* form submission **********************************!//
@@ -73,7 +76,7 @@ const useAuth = () => {
                 await sw.sync.register("sync-auth");
                 console.log("this is after sending sync-auth in useAuth")
             } else {*/
-                const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "sign-in"}`, user)
+                const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "login"}`, user)
                 setMessage(res.data.message)
                 dispatch(userActions.login(res.data.user))
                 openSnackbarHandler()

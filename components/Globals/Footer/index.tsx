@@ -26,7 +26,7 @@ const styles = {
             color: "primary.main"
         }
     },
-    signInField: {
+    loginField: {
         width: 1,
         bgcolor: "#fff",
     },
@@ -220,7 +220,7 @@ const Footer: React.FC = () => {
                     </Grid>
                     <Grid item container alignItems={"center"} gap={5} mt={15} xs={12}>
                         <Grid item xs sm={6} md>
-                            <TextField sx={styles.signInField} type={"email"} placeholder={"ایمیل خود را وارد کنید"}/>
+                            <TextField sx={styles.loginField} type={"email"} placeholder={"ایمیل خود را وارد کنید"}/>
                         </Grid>
                         <Grid item xs={"auto"}>
                             <Button variant={"contained"} sx={{height: 55, fontSize: 16}}>عضویت</Button>

@@ -77,7 +77,7 @@ self.addEventListener("fetch", (event) => {
        event.waitUntil(( async () => {
            const user = await authStore.getFromIDB("user");
            console.log("this is from sw sync")
-           // const res = await axios.post(`/api/${user.username ? "signup" : "sign-in"}`, user)
+           // const res = await axios.post(`/api/${user.username ? "signup" : "login"}`, user)
 
            // console.log(res)
            // console.log(userData);

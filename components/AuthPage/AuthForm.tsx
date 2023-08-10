@@ -90,7 +90,7 @@ const AuthForm: React.FC = () => {
 
                 <ToggleButtonGroup fullWidth size={"large"} color={"primary"} value={typeOfForm} exclusive
                                    onChange={typeOfFormHandler}>
-                    <ToggleButton sx={{width: .5, fontSize: "1.6rem"}} value={"signIn"}>ورود</ToggleButton>
+                    <ToggleButton sx={{width: .5, fontSize: "1.6rem"}} value={"login"}>ورود</ToggleButton>
                     <ToggleButton sx={{width: .5, fontSize: "1.6rem"}} value={"signup"}>ثبت نام</ToggleButton>
                 </ToggleButtonGroup>
 

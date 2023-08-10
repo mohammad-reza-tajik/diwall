@@ -80,7 +80,7 @@ const styles = {
     }
     ,
 
-    signInButton: {
+    loginButton: {
 
         width: {xs: 160, lg: 200},
         height: "4rem",
@@ -238,7 +238,7 @@ const HeaderDesktop: React.FC = () => {
                                 startIcon={
                                     <Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
                                 }
-                                sx={styles.signInButton}
+                                sx={styles.loginButton}
                             > ورود / ثبت نام </Button>
 
                         :
@@ -251,7 +251,7 @@ const HeaderDesktop: React.FC = () => {
                                 }}
                                 color={"primary"}
                                 startIcon={""}
-                                sx={styles.signInButton}> {user?.username} </Button>
+                                sx={styles.loginButton}> {user?.username} </Button>
 
                             <Menu
                                 anchorEl={anchorEl}
