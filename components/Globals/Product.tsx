@@ -42,7 +42,7 @@ const Product: React.FC<ProductType> = (props) => {
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const user = useAppSelector(state => state)
+    const user = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
 
     const isFavorite = user?.wishlist.includes(props._id)
