@@ -1,5 +1,5 @@
 import {useRouter} from "next/router";
-import type {ProductType} from "../../db/productModel"
+import type {ProductType} from "@/db/productModel"
 
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -23,7 +23,7 @@ import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import Head from "next/head";
 import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
-import ObjectStore from "../../utilities/idb";
+import ObjectStore from "@/utilities/idb";
 
 const Info = dynamic(() => import("../../components/DetailPage/Info"))
 const Features = dynamic(() => import("../../components/Globals/Features"))
@@ -229,7 +229,7 @@ const ProductDetails = () => {
                                           sx={{height: 1, width: 1}}/> :
 
                                 <Image style={{width: "100%", height: "auto"}}
-                                       src={`/assets/pictures/products/${"slug" in product ? product.slug : ""}.jpg`}
+                                       src={`/assets/pictures/products/${"slug" in product ? product.slug : "placeholder"}.jpg`}
                                        alt={`${"title" in product ? product.title : ""}`} width={400} height={400}
                                 />
 
