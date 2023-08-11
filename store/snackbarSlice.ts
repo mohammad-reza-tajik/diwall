@@ -4,7 +4,7 @@ import type {PayloadAction} from "@reduxjs/toolkit"
 interface Snackbar {
     isOpen : boolean;
     message : string;
-    status : "success" | "error";
+    status : "success" | "error"  | "warning" | "info";
 }
 
 const initialState : Snackbar = {
@@ -17,7 +17,7 @@ const snackbarSlice = createSlice({
     name:"snackbar",
     initialState,
     reducers : {
-        openSnackbar: (state, action : PayloadAction<{ message : string , status : "success" | "error" }>) => {
+        openSnackbar: (state, action : PayloadAction<{ message : string , status : "success" | "error" | "warning" | "info" }>) => {
            state.isOpen = true;
            state.message = action.payload.message;
            state.status = action.payload.status;

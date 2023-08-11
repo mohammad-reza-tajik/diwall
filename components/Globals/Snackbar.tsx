@@ -4,6 +4,7 @@ import {useAppSelector , snackbarActions , useAppDispatch} from "../../store";
 import React from "react";
 import IconButton from "@mui/material/IconButton";
 import Close from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
 
 
 const styles = {
@@ -38,6 +39,7 @@ const Snackbar : React.FC = () => {
             open={snackbar.isOpen}
             autoHideDuration={6_000}
             onClose={closeHandler}
+            TransitionComponent={Slide}
             // action={action}
             anchorOrigin={{vertical: "bottom", horizontal: "left"}}>
             <Alert action={action} variant="filled" onClose={closeHandler} severity={snackbar.status} sx={styles}>
