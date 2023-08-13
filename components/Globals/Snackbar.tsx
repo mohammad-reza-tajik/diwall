@@ -1,6 +1,6 @@
 import  MUISnackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import {useAppSelector , snackbarActions , useAppDispatch} from "../../store";
+import {useAppSelector , snackbarActions , useAppDispatch} from "@/store";
 import React from "react";
 import IconButton from "@mui/material/IconButton";
 import Close from "@mui/icons-material/Close";
@@ -12,8 +12,9 @@ const styles = {
     display : "flex",
     alignItems : "center",
     gap : "2rem",
+    position : "relative",
     width: 1,
-    fontSize : "1.6rem"
+    fontSize : {xs : "1.3rem" , md: "1.6rem"}
 
 }
 const Snackbar : React.FC = () => {
@@ -28,7 +29,7 @@ const Snackbar : React.FC = () => {
     const action = (
         <IconButton
             size="large"
-            sx={{color: "#fff" , position : "relative" , top : "-0.4rem"}}
+            sx={{color: "#fff" , position : "absolute", top : 0 , left : 0 }}
             onClick={closeHandler}>
             <Close fontSize={"large"}/>
         </IconButton>
