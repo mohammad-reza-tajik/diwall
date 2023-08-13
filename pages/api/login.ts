@@ -3,8 +3,7 @@ import User from "@/db/userModel";
 import bcrypt from "bcrypt";
 import generateToken from "@/utilities/generateToken";
 
-const errorMessage1 = "این نام کاربری موجود نیست"
-const errorMessage2 = "نام کاربری یا رمز عبور نادرست است"
+const errorMessage = "اطلاعات وارد شده صحیح نمیباشد"
 const successMessage = "ورود با موفقیت انجام شد"
 
 import type {NextApiRequest , NextApiResponse} from "next"
@@ -45,13 +44,13 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
             res.status(401).send({
                 ok: false,
                 status: 401,
-                message: errorMessage2
+                message: errorMessage
             })
     } else {
         res.status(401).send({
             ok: false,
             status: 401,
-            message: errorMessage1
+            message: errorMessage
         })
     }
 }

@@ -14,7 +14,7 @@ const styles = {
     gap : "2rem",
     position : "relative",
     width: 1,
-    fontSize : {xs : "1.3rem" , md: "1.6rem"}
+    fontSize : {xs : "1.1rem" , md: "1.6rem"}
 
 }
 const Snackbar : React.FC = () => {
