@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import type {PayloadAction} from "@reduxjs/toolkit"
-import storeTokenAndUser from "../utilities/storeToken";
+import storeTokenAndUser from "@/utilities/storeToken";
 
 
 interface User {

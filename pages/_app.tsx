@@ -1,18 +1,19 @@
-import '../styles/Globals.css';
+import '@/styles/Globals.css';
 import Head from "next/head"
-import theme from "../styles/theme";
+import theme from "@/styles/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import "swiper/css";
 import 'swiper/css/navigation';
-import Footer from "../components/Globals/Footer";
+import Footer from "@/components/Globals/Footer";
 import {useRouter} from "next/router";
-import Header from "../components/Globals/Header";
+import Header from "@/components/Globals/Header";
 import {Provider} from "react-redux";
-import {store} from "../store";
-import Auth from "../components/Globals/Auth";
+import {store} from "@/store";
+import Auth from "@/components/Globals/Auth";
 import React from "react";
-import Snackbar from "../components/Globals/Snackbar";
+import Snackbar from "@/components/Globals/Snackbar";
+
 //**************** this is because in useAuth I was getting a type error for sw.sync . because ts doesn't fully support sw types ***************//
 interface SyncManager {
     getTags(): Promise<string[]>;
@@ -41,13 +42,26 @@ declare global {
     try {
 
         if (typeof window !== "undefined" && "serviceWorker" in navigator){
-            await navigator.serviceWorker.register("/sw.js", {type: "module"})
+            await navigator.serviceWorker.register("/sw.js", {type: "module"});
         }
+
+        if (typeof window !== "undefined" && "Notification" in window) {
+            setTimeout(async () => await Notification.requestPermission(),7_000)
+        }
+
+       /* if (typeof window !== "undefined" && "serviceWorker" in navigator){
+            const sw = await navigator.serviceWorker.ready;
+            const sub = await sw.pushManager.subscribe({
+                userVisibleOnly : true,
+                applicationServerKey : "MTI0NWRmZHM1NGZkZjJkZjU0"
+            });
+            console.log(sub)
+        }*/
 
     } catch (err) {
         console.log(err)
     }
-})()
+})();
 
 
 function MyApp({Component, pageProps}) {

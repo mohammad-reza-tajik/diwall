@@ -1,13 +1,13 @@
 import {useRef, useState} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
-import {userActions, useAppDispatch, snackbarActions} from "../store";
+import {userActions, useAppDispatch, snackbarActions} from "@/store";
 // import ObjectStore from "../utilities/idb";
 // import useFetch from "./useFetch";
 
 const useAuth = () => {
 
-    const [typeOfForm, setTypeOfForm] = useState("login");
+    const [typeOfForm, setTypeOfForm] = useState<"login" | "signup">("login");
     const [isLoading, setIsLoading] = useState(false)
 
 
@@ -61,7 +61,17 @@ const useAuth = () => {
             } else {*/
             const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "login"}`, user)
             dispatch(userActions.login(res.data.user))
-            dispatch(snackbarActions.openSnackbar({message: res.data.message, status: "success"}))
+            dispatch(snackbarActions.openSnackbar({message: res.data.message, status: "success"}));
+
+            if(Notification.permission === "granted" && typeOfForm === "signup") {
+                new Notification(`${res.data.user.username}`, {
+                    body : "شما با موفقیت عضو سایت شدید !",
+                    dir:"rtl",
+                    lang : "fa-IR",
+                    icon : "/assets/pictures/logo-192.png",
+
+                });
+            }
 
             router.push("/");
 

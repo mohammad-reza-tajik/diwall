@@ -1,6 +1,6 @@
 import {userActions} from "./userSlice";
 import {snackbarActions} from "./snackbarSlice";
-import {useAppDispatch,useAppSelector} from "../hooks/useStore";
+import {useAppDispatch,useAppSelector} from "@/hooks/useStore";
 import store from "./store"
 
 /*
