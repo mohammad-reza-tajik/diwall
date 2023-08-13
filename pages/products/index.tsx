@@ -1,12 +1,12 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import SectionHeading from "../../components/Globals/SectionHeading";
+import SectionHeading from "@/components/Globals/SectionHeading";
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import Product from "../../components/Globals/Product";
-import Pagination from "../../components/Globals/Pagination";
+import Product from "@/components/Globals/Product";
+import Pagination from "@/components/Globals/Pagination";
 
 
 interface PageInformation {

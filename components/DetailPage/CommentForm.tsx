@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react"
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import {useAppSelector} from "../../store";
+import {useAppSelector} from "@/store";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import axios from "axios";

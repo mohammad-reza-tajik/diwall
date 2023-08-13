@@ -11,10 +11,10 @@ import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
 import React, {useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
-import {useAppDispatch, useAppSelector, userActions} from "../../store";
+import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import Image from "next/image";
 
-import type {ProductType} from "../../db/productModel";
+import type {ProductType} from "@/db/productModel";
 
 
 const CartItem: React.FC<ProductType> = (props) => {

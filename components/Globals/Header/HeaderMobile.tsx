@@ -15,7 +15,7 @@ import ShoppingBag from "@mui/icons-material/ShoppingBag";
 import React, {useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
-import {useAppDispatch, useAppSelector, userActions} from "../../../store";
+import {snackbarActions, useAppDispatch, useAppSelector, userActions} from "@/store";
 import BackDrop from "./BackDrop";
 import SearchDrawer from "./SearchDrawer";
 
@@ -157,6 +157,7 @@ const HeaderMobile: React.FC = () => {
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     dispatch(userActions.logout());
+                                    dispatch(snackbarActions.openSnackbar({message :"با موفقیت از حساب خود خارج شدید" , status : "info"}));
                                 }}>
                                     <ListItemIcon>
                                         <Logout sx={{fontSize: 25}} color={"primary"}/>

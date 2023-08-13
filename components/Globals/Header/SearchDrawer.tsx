@@ -8,7 +8,7 @@ import Close from "@mui/icons-material/Close";
 import React from "react";
 
 import SearchResults from "../SearchResults";
-import useSearch from "../../../hooks/useSearch";
+import useSearch from "@/hooks/useSearch";
 
 
 const styles = {

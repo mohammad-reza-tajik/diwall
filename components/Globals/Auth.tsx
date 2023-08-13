@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from "react";
-import {userActions , useAppDispatch} from "../../store"
+import {userActions , useAppDispatch} from "@/store"
 import axios from "axios"
 import {useRouter} from "next/router";
 

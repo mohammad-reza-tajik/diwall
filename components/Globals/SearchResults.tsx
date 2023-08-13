@@ -5,7 +5,7 @@ import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useRouter} from "next/router";
-import type {ProductType} from "../../db/productModel";
+import type {ProductType} from "@/db/productModel";
 
 
 const styles = {

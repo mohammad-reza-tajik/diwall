@@ -16,7 +16,7 @@ import _ from "lodash";
 import Image from "next/image"
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {useAppSelector, useAppDispatch, userActions} from "../../store";
+import {useAppSelector, useAppDispatch, userActions} from "@/store";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
@@ -25,8 +25,8 @@ import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
 import ObjectStore from "@/utilities/idb";
 
-const Info = dynamic(() => import("../../components/DetailPage/Info"))
-const Features = dynamic(() => import("../../components/Globals/Features"))
+const Info = dynamic(() => import("@/components/DetailPage/Info"))
+const Features = dynamic(() => import("@/components/Globals/Features"))
 
 
 const styles = {

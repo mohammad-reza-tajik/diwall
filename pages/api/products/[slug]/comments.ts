@@ -1,5 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import Product from "../../../../db/productModel";
+import Product from "@/db/productModel";
 
 
 

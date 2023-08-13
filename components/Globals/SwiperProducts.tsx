@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Product from "./Product";
 import React from "react";
-import type {ProductType} from "../../db/productModel";
+import type {ProductType} from "@/db/productModel";
 
 let slidesPerView: number;
 

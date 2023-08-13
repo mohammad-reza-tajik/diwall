@@ -1,5 +1,5 @@
-import "../../db/database_connect"
-import User from "../../db/userModel"
+import "@/db/database_connect"
+import User from "@/db/userModel"
 import type {NextApiRequest , NextApiResponse} from "next"
 
 export default async function handler(req : NextApiRequest, res : NextApiResponse) {

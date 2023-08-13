@@ -4,7 +4,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import CartItem from "./CartItem";
 
-import type {ProductType} from "../../db/productModel";
+import type {ProductType} from "@/db/productModel";
 
 const styles = {
     tab: {

@@ -14,7 +14,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Create from "@mui/icons-material/Create";
 import Login from "@mui/icons-material/Login";
 import Grid from "@mui/material/Grid";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 
 const styles = {
     backgroundImage: {

@@ -1,7 +1,7 @@
-import "../../db/database_connect"
-import User from "../../db/userModel"
-import tokenGenerator from "../../utilities/generateToken";
-import tokenValidator from "../../utilities/validateToken";
+import "@/db/database_connect"
+import User from "@/db/userModel"
+import tokenGenerator from "@/utilities/generateToken";
+import tokenValidator from "@/utilities/validateToken";
 
 import type {NextApiRequest , NextApiResponse} from "next"
 

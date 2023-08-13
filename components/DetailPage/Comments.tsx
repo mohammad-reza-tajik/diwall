@@ -15,7 +15,7 @@ import Person from "@mui/icons-material/Person";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
-import ObjectStore from "../../utilities/idb";
+import ObjectStore from "@/utilities/idb";
 import _ from "lodash";
 
 

@@ -1,5 +1,5 @@
 import CircularProgress from "@mui/material/CircularProgress";
-import type {ProductType} from "../../db/productModel";
+import type {ProductType} from "@/db/productModel";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -10,7 +10,7 @@ import {useRouter} from "next/router";
 import React, {useState} from "react";
 import axios from "axios";
 import {useTheme} from "@mui/material/styles"
-import {userActions, useAppSelector, useAppDispatch} from "../../store";
+import {userActions, useAppSelector, useAppDispatch} from "@/store";
 import Link from "next/link"
 
 const styles = {

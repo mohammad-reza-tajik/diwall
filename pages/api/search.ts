@@ -1,5 +1,5 @@
-import "../../db/database_connect"
-import Product from "../../db/productModel"
+import "@/db/database_connect"
+import Product from "@/db/productModel"
 
 
 import type {NextApiRequest , NextApiResponse} from "next"

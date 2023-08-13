@@ -26,9 +26,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React, {useState} from "react";
 
-import {useAppDispatch, useAppSelector, userActions} from "../../../store";
+import {useAppDispatch, useAppSelector, userActions , snackbarActions} from "@/store";
 import SearchResults from "../SearchResults";
-import useSearch from "../../../hooks/useSearch";
+import useSearch from "@/hooks/useSearch";
 
 
 const styles = {
@@ -138,9 +138,6 @@ const HeaderDesktop: React.FC = () => {
 
     }
 
-
-
-    /*** end of debouncing ***/
 
 
     return (
@@ -281,7 +278,9 @@ const HeaderDesktop: React.FC = () => {
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
-                                    dispatch(userActions.logout())
+                                    dispatch(userActions.logout());
+                                    dispatch(snackbarActions.openSnackbar({message :"با موفقیت از حساب خود خارج شدید" , status : "info"}))
+
                                 }}>
                                     <ListItemIcon>
                                         <Logout sx={{fontSize: 25}} color={"primary"}/>

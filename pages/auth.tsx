@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import Head from "next/head";
 import React from "react";
-import AuthForm from "../components/AuthPage/AuthForm";
+import AuthForm from "@/components/AuthPage/AuthForm";
 
 
 const styles = {

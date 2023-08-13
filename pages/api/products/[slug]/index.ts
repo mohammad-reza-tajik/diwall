@@ -1,6 +1,6 @@
-import "../../../../db/database_connect"
-import Product from "../../../../db/productModel";
-import type {ProductType} from "../../../../db/productModel";
+import "@/db/database_connect"
+import Product from "@/db/productModel";
+import type {ProductType} from "@/db/productModel";
 import {NextApiResponse, NextApiRequest} from "next";
 
 interface Response {

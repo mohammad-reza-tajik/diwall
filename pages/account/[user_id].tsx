@@ -5,15 +5,15 @@ import Tabs from "@mui/material/Tabs";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import React, {useEffect, useState} from "react";
-import TabPanel from "../../components/Globals/TabPanel";
+import TabPanel from "@/components/Globals/TabPanel";
 import axios from "axios";
 import Head from "next/head";
-import {userActions , useAppSelector , useAppDispatch} from "../../store";
+import {userActions , useAppSelector , useAppDispatch} from "@/store";
 import dynamic from "next/dynamic";
 
-const Profile = dynamic(() => import("../../components/AccountPage/Profile"))
-const Wishlist = dynamic(() => import("../../components/AccountPage/Wishlist"))
-const Cart = dynamic(() => import("../../components/AccountPage/Cart"))
+const Profile = dynamic(() => import("@/components/AccountPage/Profile"))
+const Wishlist = dynamic(() => import("@/components/AccountPage/Wishlist"))
+const Cart = dynamic(() => import("@/components/AccountPage/Cart"))
 
 const styles = {
     tab: {
