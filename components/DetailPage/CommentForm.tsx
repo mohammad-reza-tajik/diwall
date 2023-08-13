@@ -1,7 +1,7 @@
-import React, {useRef, useState} from "react"
+import React, {FormEvent, useRef, useState} from "react"
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import {useAppSelector} from "@/store";
+import {useAppSelector , snackbarActions , useAppDispatch} from "@/store";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import axios from "axios";
@@ -14,7 +14,7 @@ const styles = {
     commentField: {
                
         ".MuiInputBase-input" : {
-            fontSize: 13,
+            fontSize: {xs:13 , md : 16},
             px:10,
             lineHeight:1.8,
             "&::-webkit-scrollbar" : {
@@ -61,17 +61,16 @@ const CommentForm: React.FC<Props> = (props) => {
 
     const router = useRouter();
 
+    const dispatch = useAppDispatch();
     const commentRef = useRef<HTMLTextAreaElement>();
 
     const [isLoading,setIsLoading] = useState<boolean>(false);
-
-    const [helperText,setHelperText] = useState<string>("");
 
     const slug = router.isReady && router.query.slug;
 
     // console.log(props.currentProductTitle)
 
-    const insertCommentHandler = async (event) => {
+    const insertCommentHandler = async (event : FormEvent) => {
         event.preventDefault();
         // console.log(commentRef.current.value)
         try {
@@ -85,12 +84,15 @@ const CommentForm: React.FC<Props> = (props) => {
                 }
             })
             commentRef.current.value = ""
-            setHelperText("دیدگاه شما با موفقیت ثبت شد !")
-            setTimeout(()=>setHelperText(""),3000)
+            dispatch(snackbarActions.openSnackbar({message : "دیدگاه شما با موفقیت ثبت شد" , status : "success"}))
             props.onAddComment()
 
         } catch (err) {
+
             console.log(err)
+            dispatch(snackbarActions.openSnackbar({message : "متاسفانه عملیات با خطا مواجه شد" , status : "error"}))
+
+
         } finally {
             setIsLoading(false);
         }
@@ -104,7 +106,7 @@ const CommentForm: React.FC<Props> = (props) => {
                 user.username ?
                     <Grid container item xs={12} md={7} direction={"column"} gap={10} component={"form"}
                           onSubmit={insertCommentHandler}>
-                        <TextField multiline minRows={7} sx={styles.commentField} helperText={helperText} maxRows={7} variant="outlined" inputRef={commentRef} required placeholder="دیدگاه شما ..."/>
+                        <TextField multiline minRows={7} sx={styles.commentField}  maxRows={7} variant="outlined" inputRef={commentRef} required placeholder="دیدگاه شما ..."/>
                         <Button type={"submit"} variant={"contained"} color={"primary"} sx={styles.commentButton} startIcon={isLoading ?
                             <CircularProgress sx={{color: "#fff",position:"relative",top:-2}} size={25}/> :  <Create sx={{color: "#fff",position:"relative",top:-2}}/>  }
                                 aria-label={"add comment button"}>
