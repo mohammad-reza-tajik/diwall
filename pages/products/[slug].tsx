@@ -16,7 +16,7 @@ import _ from "lodash";
 import Image from "next/image"
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {useAppSelector, useAppDispatch, userActions} from "@/store";
+import {useAppSelector, useAppDispatch, userActions, snackbarActions} from "@/store";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
@@ -137,69 +137,94 @@ const ProductDetails = () => {
     }
 
     const addToCartHandler = async () => {
-        if (user?.username) {
-            setAddToCartLoading(true)
-            // console.log(user)
+        try {
+            if (user?.username) {
+                setAddToCartLoading(true)
 
-            if (isInCart) {
-                if ("_id" in product) {
-                    await axios.put("/api/remove-from-cart", {
-                        userId: user?.userId, token: user?.token, productId: product._id
-                    })
-                    setAddToCartLoading(false)
-                    dispatch(userActions.removeFromCart(product._id))
+                if (isInCart) {
+                    if ("_id" in product) {
+                        await axios.put("/api/remove-from-cart", {
+                            userId: user?.userId, token: user?.token, productId: product._id
+                        })
+                        dispatch(userActions.removeFromCart(product._id))
+                        dispatch(snackbarActions.openSnackbar({message : "محصول از سبد خرید شما حذف شد" , status : "info"}))
 
+
+                    }
+
+                } else {
+                    if ("_id" in product) {
+                        await axios.put("/api/add-to-cart", {
+                            productId: product._id,
+                            userId: user.userId,
+                            token: user.token
+                        })
+
+                        dispatch(userActions.addToCart(product._id))
+                        dispatch(snackbarActions.openSnackbar({message : "محصول به سبد خرید شما اضافه شد" , status : "success"}))
+
+
+                    }
                 }
-
             } else {
-                if ("_id" in product) {
-                    await axios.put("/api/add-to-cart", {
-                        productId: product._id,
-                        userId: user.userId,
-                        token: user.token
-                    })
-                    setAddToCartLoading(false)
-                    dispatch(userActions.addToCart(product._id))
+                router.push("/auth")
 
-                }
             }
-        } else
-            router.push("/auth")
+        } catch (err) {
+            console.log(err)
+            dispatch(snackbarActions.openSnackbar({message : "متاسفانه عملیات با خطا مواجه شد" , status : "error"}))
+
+        } finally {
+            setAddToCartLoading(false)
+        }
 
 
     }
     const addToWishlistHandler = async () => {
-        if (user?.username) {
-            setAddToWishlistLoading(true)
-            if (isFavorite) {
-                if ("_id" in product) {
-                    await axios.put("/api/remove-from-wishlist", {
-                        productId: product._id,
-                        userId: user.userId,
-                        token: user.token
-                    })
-                    setAddToWishlistLoading(false)
+        try {
+            if (user?.username) {
+                setAddToWishlistLoading(true)
+                if (isFavorite) {
                     if ("_id" in product) {
-                        dispatch(userActions.removeFromWishlist(product._id))
-                    }
+                        await axios.put("/api/remove-from-wishlist", {
+                            productId: product._id,
+                            userId: user.userId,
+                            token: user.token
+                        })
+                        if ("_id" in product) {
+                            dispatch(userActions.removeFromWishlist(product._id))
+                            dispatch(snackbarActions.openSnackbar({message : "محصول از لیست علاقمندی شما حذف شد" , status : "info"}))
+                        }
 
+                    }
+                } else {
+                    if ("_id" in product) {
+                        await axios.put("/api/add-to-wishlist", {
+                            productId: product._id,
+                            userId: user.userId,
+                            token: user.token
+                        })
+
+                        if ("_id" in product) {
+                            dispatch(userActions.addToWishlist(product._id))
+                            dispatch(snackbarActions.openSnackbar({message : "محصول به لیست علاقمندی شما افزوده شد" , status : "success"}))
+
+                        }
+
+                    }
                 }
             } else {
-                if ("_id" in product) {
-                    await axios.put("/api/add-to-wishlist", {
-                        productId: product._id,
-                        userId: user.userId,
-                        token: user.token
-                    })
-                    setAddToWishlistLoading(false)
-                    if ("_id" in product) {
-                        dispatch(userActions.addToWishlist(product._id))
-                    }
 
-                }
+                router.push("/auth")
             }
-        } else
-            router.push("/auth")
+        } catch (err) {
+            console.log(err)
+            dispatch(snackbarActions.openSnackbar({message : "متاسفانه عملیات با خطا مواجه شد" , status : "error"}))
+
+        }
+        finally {
+            setAddToWishlistLoading(false)
+        }
 
     }
 

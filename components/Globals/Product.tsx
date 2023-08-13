@@ -10,7 +10,7 @@ import {useRouter} from "next/router";
 import React, {useState} from "react";
 import axios from "axios";
 import {useTheme} from "@mui/material/styles"
-import {userActions, useAppSelector, useAppDispatch} from "@/store";
+import {userActions, useAppSelector, useAppDispatch, snackbarActions} from "@/store";
 import Link from "next/link"
 
 const styles = {
@@ -57,8 +57,8 @@ const Product: React.FC<ProductType> = (props) => {
                         userId: user.userId,
                         token: user.token
                     })
-                    setIsLoading(false)
                     dispatch(userActions.removeFromWishlist(props._id))
+                    dispatch(snackbarActions.openSnackbar({message : "محصول از لیست علاقمندی شما حذف شد" , status : "info"}))
 
 
                 } else {
@@ -70,6 +70,8 @@ const Product: React.FC<ProductType> = (props) => {
                     })
 
                     dispatch(userActions.addToWishlist(props._id))
+                    dispatch(snackbarActions.openSnackbar({message : "محصول به لیست علاقمندی شما افزوده شد" , status : "success"}))
+
 
                 }
             } else {
@@ -79,6 +81,8 @@ const Product: React.FC<ProductType> = (props) => {
 
         } catch (err) {
             console.log(err)
+            dispatch(snackbarActions.openSnackbar({message : "متاسفانه عملیات با خطا مواجه شد" , status : "error"}))
+
 
         } finally {
             setIsLoading(false)
