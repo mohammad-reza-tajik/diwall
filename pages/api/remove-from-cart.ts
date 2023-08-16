@@ -5,29 +5,24 @@ import User from "@/db/userModel";
 import type {NextApiRequest , NextApiResponse} from "next"
 
 
-export default async function handler(req : NextApiRequest, res : NextApiResponse) {    
-    if (req.method === "PUT") {
-
-
-    const userId = req.body.userId
-    const productId = req.body.productId
-    const token = req.body.token
-
-        // @ts-ignore
-        const user = await User.findById(userId).exec()
-    user.cart = user.cart.filter((element)=> element != productId)
-    await user.save()
-
-    res.send({
-        user:{
-            username: user.username,
-            userId: user._id,
-            email:user.email,
-            token,
-            cart: user.cart,
-            wishlist: user.wishlist
-        }
-    })
+export default async function handler(req : NextApiRequest, res : NextApiResponse) {
+    if (req.method !== "PUT") {
+        return
     }
+
+
+        const _id = req.body._id
+        const productId = req.body.productId
+        const token = req.body.token
+
+        const user = await User.findByIdAndUpdate(_id, {$pull: {cart: productId}}, {new: true})
+
+        res.send({
+            user,
+            token
+
+        })
+
+
 
 }

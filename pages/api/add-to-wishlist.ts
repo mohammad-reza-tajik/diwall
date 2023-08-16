@@ -4,26 +4,17 @@ import type {NextApiRequest , NextApiResponse} from "next"
 
 
 export default async function handler(req : NextApiRequest, res : NextApiResponse) {
-    const userId = req.body.userId
+    const _id = req.body._id
     const productId = req.body.productId
     const token = req.body.token
 
-    // @ts-ignore
-    const user = await User.findById(userId).exec()
+    const user = await User.findByIdAndUpdate(_id , {$push : {wishlist : productId}} , {new : true});
+    console.log("from add to wishlist",user)
 
-
-        user.wishlist.push(productId)
-        await user.save()
 
     res.send({
-        user: {
-            username: user.username,
-            userId: user._id,
-            email:user.email,
-            token,
-            cart: user.cart,
-            wishlist: user.wishlist
-        }
+        user,
+        token
     })
 
 }
