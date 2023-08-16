@@ -1,7 +1,7 @@
 import "@/db/database_connect"
 import User from "@/db/userModel"
 import tokenGenerator from "@/utilities/generateToken";
-import tokenValidator from "@/utilities/validateToken";
+import validateToken from "@/utilities/validateToken";
 
 import type {NextApiRequest , NextApiResponse} from "next"
 
@@ -11,35 +11,32 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
 
 
 
-        const userId = req.body.userId
+        const _id = req.body._id
         let token = req.body.token
 
+         // console.log(_id,token)
 
-        if (userId && token) {
-            const tokenIsValid = await tokenValidator(token)
+
+        if (_id && token) {
+            const tokenIsValid =  validateToken(token);
             if (!tokenIsValid) {
-                res.status(401).send({
+                return res.status(401).send({
                     ok:false,
                     message:"your token has been expired !"
                 })
-                return
+
             }
 
-            // @ts-ignore
-            const user = await User.findById(userId).exec()
+
+            const user = await User.findById(_id);
 
 
-            token = tokenGenerator(user)
+            token = tokenGenerator(user);
+            // console.log("from get user .ts",user)
 
             res.send({
-                user: {
-                    username: user.username,
-                    userId: user._id,
-                    email: user.email,
-                    token,
-                    cart: user.cart,
-                    wishlist: user.wishlist
-                }
+                user,
+                token
             })
 
         } else {

@@ -9,11 +9,10 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
         return 
     }
 
-        const userId = req.body.userId
+        const _id = req.body._id;
 
         // this is for replacing product ids in cart and wishlist with full product data
-
-        const user = await User.findById(userId).populate("wishlist").populate("cart");
+        const user = await User.findById(_id).populate("wishlist").populate("cart");
         // console.log(user)
         if (user) {
             res.send({
