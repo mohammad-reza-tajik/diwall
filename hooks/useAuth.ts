@@ -60,7 +60,7 @@ const useAuth = () => {
                 console.log("this is after sending sync-auth in useAuth")
             } else {*/
             const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "login"}`, user)
-            dispatch(userActions.login(res.data.user))
+            dispatch(userActions.login({user : res.data.user , token : res.data.token}))
             dispatch(snackbarActions.openSnackbar({message: res.data.message, status: "success"}));
 
             if(Notification.permission === "granted" && typeOfForm === "signup") {

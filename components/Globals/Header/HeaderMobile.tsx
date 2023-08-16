@@ -130,7 +130,7 @@ const HeaderMobile: React.FC = () => {
                                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
-                                <MenuItem onClick={() => router.push("/account/" + user?.userId)}>
+                                <MenuItem onClick={() => router.push("/account/" + user?._id)}>
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
@@ -138,7 +138,7 @@ const HeaderMobile: React.FC = () => {
                                         پروفایل
                                     </Typography>
                                 </MenuItem>
-                                <MenuItem onClick={() => router.push("/account/" + user?.userId + "?tab=2")}>
+                                <MenuItem onClick={() => router.push("/account/" + user?._id + "?tab=2")}>
                                     <ListItemIcon>
                                         <Favorite sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
@@ -147,7 +147,7 @@ const HeaderMobile: React.FC = () => {
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem
-                                    onClick={() => router.push("/account/" + user?.userId + "?tab=3")}>
+                                    onClick={() => router.push("/account/" + user?._id + "?tab=3")}>
                                     <ListItemIcon>
                                         <ShoppingBag sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>

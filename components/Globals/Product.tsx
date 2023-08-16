@@ -54,7 +54,7 @@ const Product: React.FC<ProductType> = (props) => {
                 if (isFavorite) {
                     await axios.put("/api/remove-from-wishlist", {
                         productId: props._id,
-                        userId: user.userId,
+                        _id: user._id,
                         token: user.token
                     })
                     dispatch(userActions.removeFromWishlist(props._id))
@@ -65,7 +65,7 @@ const Product: React.FC<ProductType> = (props) => {
 
                     await axios.put("/api/add-to-wishlist", {
                         productId: props._id,
-                        userId: user.userId,
+                        _id: user._id,
                         token: user.token
                     })
 

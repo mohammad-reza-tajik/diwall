@@ -8,10 +8,10 @@ import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
 import Delete from "@mui/icons-material/Delete";
 import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
 
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import axios from "axios";
 import {useRouter} from "next/router";
-import {useAppDispatch, useAppSelector, userActions} from "@/store";
+import {snackbarActions, useAppDispatch, useAppSelector, userActions} from "@/store";
 import Image from "next/image";
 
 import type {ProductType} from "@/db/productModel";
@@ -25,8 +25,8 @@ const CartItem: React.FC<ProductType> = (props) => {
     const dispatch = useAppDispatch()
 
     const [numberInCart, setNumberInCart] = useState(1)
-    const numbersInCartChangeHandler = (e) => {
-        setNumberInCart(e.target.value)
+    const numbersInCartChangeHandler = (event : ChangeEvent) => {
+        setNumberInCart(Number((event.target as HTMLInputElement).value))
 
     }
 
@@ -34,10 +34,12 @@ const CartItem: React.FC<ProductType> = (props) => {
         if (user?.username) {
 
             await axios.put("/api/remove-from-cart", {
-                userId: user?.userId,
+                _id: user?._id,
                 token: user?.token, productId: props._id
             })
-            dispatch(userActions.removeFromCart(props._id))
+            dispatch(userActions.removeFromCart(props._id));
+            dispatch(snackbarActions.openSnackbar({message : "محصول از سبد خرید شما حذف شد" , status : "info"}))
+
 
 
         }

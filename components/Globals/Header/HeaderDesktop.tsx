@@ -120,7 +120,7 @@ const HeaderDesktop: React.FC = () => {
 
     const goToFavorites = async (_) => {
         if (user.username) {
-            await router.push(`/account/${user?.userId}?tab=2`)
+            await router.push(`/account/${user?._id}?tab=2`)
 
         } else {
 
@@ -131,7 +131,7 @@ const HeaderDesktop: React.FC = () => {
 
     const goToCart = async (_) => {
         if (user.username) {
-            await router.push(`/account/${user?.userId}?tab=3`)
+            await router.push(`/account/${user?._id}?tab=3`)
         } else {
             await router.push("/auth")
         }
@@ -269,7 +269,7 @@ const HeaderDesktop: React.FC = () => {
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
 
-                                <MenuItem onClick={() => router.push("/account/" + user?.userId)}>
+                                <MenuItem onClick={() => router.push("/account/" + user?._id)}>
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>

@@ -144,7 +144,7 @@ const ProductDetails = () => {
                 if (isInCart) {
                     if ("_id" in product) {
                         await axios.put("/api/remove-from-cart", {
-                            userId: user?.userId, token: user?.token, productId: product._id
+                            _id: user?._id, token: user?.token, productId: product._id
                         })
                         dispatch(userActions.removeFromCart(product._id))
                         dispatch(snackbarActions.openSnackbar({message : "محصول از سبد خرید شما حذف شد" , status : "info"}))
@@ -156,7 +156,7 @@ const ProductDetails = () => {
                     if ("_id" in product) {
                         await axios.put("/api/add-to-cart", {
                             productId: product._id,
-                            userId: user.userId,
+                            _id: user._id,
                             token: user.token
                         })
 
@@ -188,7 +188,7 @@ const ProductDetails = () => {
                     if ("_id" in product) {
                         await axios.put("/api/remove-from-wishlist", {
                             productId: product._id,
-                            userId: user.userId,
+                            _id: user._id,
                             token: user.token
                         })
                         if ("_id" in product) {
@@ -201,7 +201,7 @@ const ProductDetails = () => {
                     if ("_id" in product) {
                         await axios.put("/api/add-to-wishlist", {
                             productId: product._id,
-                            userId: user.userId,
+                            _id: user._id,
                             token: user.token
                         })
 
@@ -255,13 +255,13 @@ const ProductDetails = () => {
 
                                 <Image style={{width: "100%", height: "auto"}}
                                        src={`/assets/pictures/products/${"slug" in product ? product.slug : "placeholder"}.jpg`}
-                                       alt={`${"title" in product ? product.title : ""}`} width={400} height={400}
+                                       alt={`${"title" in product ? product.title : ""}`} width={510} height={385}
                                 />
 
                         }
                     </Grid>
 
-                    <Grid container item gap={30} xs={12} md={7} pr={{xs: 5, md: 30}} mt={{xs: 20, md: 0}}>
+                    <Grid container item spacing={30} xs={12} md={7} pr={{xs: 5, md: 30}} mt={{xs: 20, md: 0}}>
                         <Grid container item>
                             <Grid item xs={12} md={8}>
                                 {
