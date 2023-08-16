@@ -1,12 +1,11 @@
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 
 
-const validateToken = async (token) => {
+const validateToken =  (token : string) => {
     try {
-        await jwt.verify(token, "thisIsPrivate")
+        jwt.verify(token, "TheLanternIsTooBright")
         return true
     } catch (e) {
-        console.error("your token has been expired !")
         return false
     }
 }
