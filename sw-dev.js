@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = "static-v85";
+const STATIC_CACHE_NAME = "static-v86";
 const DYNAMIC_CACHE_NAME = "dynamic-v1";
 
 const addToStaticCache = async (resources) => {
