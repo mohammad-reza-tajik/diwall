@@ -4,11 +4,12 @@ import storeTokenAndUser from "@/utilities/storeToken";
 
 
 interface User {
-    username : null |string ,
-    email: null | string,
-    userId: null | string,
-    token: null | string,
+    username : string ,
+    email:  string,
+    _id: string,
+    token: string,
     cart: string[],
+    role:string;
     wishlist: string[]
 
 }
@@ -17,7 +18,8 @@ const initialState : User = {
 
     username: null,
     email: null,
-    userId: null,
+    _id: null,
+    role:null,
     token: null,
     cart: [],
     wishlist: []
@@ -31,21 +33,23 @@ const userSlice = createSlice({
     name:"user",
     initialState,
     reducers: {
-        login(state, action : PayloadAction<User>) {
-            const { username, email, userId, cart, wishlist, token } = action.payload
+        login(state, action : PayloadAction<{  user : User , token : string }>) {
+            const { username, email, _id, cart, wishlist,role } = action.payload.user
             state.username = username;
             state.email = email;
-            state.userId = userId;
+            state._id = _id;
             state.cart = cart;
+            state.role = role
             state.wishlist = wishlist;
-            state.token = token;
+            state.token = action.payload.token;
             storeTokenAndUser(state)
         },
         logout(state) {
             state.username = null;
             state.email = null;
-            state.userId = null;
+            state._id = null;
             state.cart = [];
+            state.role = null
             state.wishlist = [];
             state.token = null;
             localStorage.clear()

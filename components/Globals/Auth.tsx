@@ -22,10 +22,11 @@ const Auth: React.FC<Props> = ({children}) => {
             try {
 
                 const token = localStorage.getItem("token")
-                const userId = localStorage.getItem("userId")
-                if (userId && userId !== "undefined" && !router.pathname.includes("user") ) {
-                    const res = await axios.post("/api/get-user", {userId, token})
-                    dispatch(userActions.login(res.data.user))
+                const _id = localStorage.getItem("_id")
+                if (_id && _id !== "undefined") {
+                    const res = await axios.post("/api/get-user", {_id, token});
+                    // console.log(res.data)
+                    dispatch(userActions.login({user : res.data.user , token : res.data.token}))
                 }
              } catch(err) {
                     localStorage.clear()
