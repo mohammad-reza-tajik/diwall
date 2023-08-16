@@ -8,17 +8,18 @@ import React, {useEffect, useState} from "react";
 import TabPanel from "@/components/Globals/TabPanel";
 import axios from "axios";
 import Head from "next/head";
-import {userActions , useAppSelector , useAppDispatch} from "@/store";
+import {userActions, useAppSelector, useAppDispatch} from "@/store";
 import dynamic from "next/dynamic";
 
 const Profile = dynamic(() => import("@/components/AccountPage/Profile"))
+const AddProduct = dynamic(() => import("@/components/AccountPage/AddProduct"))
 const Wishlist = dynamic(() => import("@/components/AccountPage/Wishlist"))
 const Cart = dynamic(() => import("@/components/AccountPage/Cart"))
 
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 15},
-        color: "#333",
+        color: "#666",
         fontFamily: "dana-bold",
 
     },
@@ -32,7 +33,7 @@ const Dashboard: React.FC = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const user = useAppSelector(state => state.userReducer)
+    const user = useAppSelector(state => state.userReducer);
 
     const [populatedWishlist, setPopulatedWishlist] = useState<any>([])
     const [populatedCart, setPopulatedCart] = useState<any>([])
@@ -58,43 +59,11 @@ const Dashboard: React.FC = () => {
 
 
     useEffect(() => {
-
-        (async () => {
-
-            try {
-
-                if (!isAuthenticated) {
-
-                    const token = localStorage.getItem("token")
-                    const userId = localStorage.getItem("userId")
-                    if (userId && userId !== "undefined") {
-                        const res = await axios.post("/api/get-user", {userId, token})
-                        dispatch(userActions.login(res.data.user))
-                    } else {
-                        localStorage.clear()
-                        dispatch(userActions.logout())
-                        router.push("/auth")
-
-                    }
-                }
-            } catch (err) {
-                localStorage.clear()
-                dispatch(userActions.logout())
-                console.log(err)
-            }
-
-
-        })()
-
-    }, [dispatch, isAuthenticated])
-
-
-    useEffect(() => {
         (async () => {
             if (isAuthenticated) {
                 setIsLoading(true)
                 const res = await axios.post("/api/get-wishlist-and-cart", {
-                    userId: user?.userId, token: user?.token
+                    _id: user?._id, token: user?.token
                 })
                 setPopulatedWishlist(res.data.wishlist)
                 setPopulatedCart(res.data.cart)
@@ -132,6 +101,7 @@ const Dashboard: React.FC = () => {
                         <Tab label="اطلاعات کاربر" value={1} sx={styles.tab}/>
                         <Tab label="لیست علاقمندی ها" value={2} sx={styles.tab}/>
                         <Tab label="سبد خرید" value={3} sx={styles.tab}/>
+                        {user.role === "admin" && <Tab label="افزودن محصول" value={4} sx={styles.tab}/>}
                     </Tabs>
 
                 </Grid>
@@ -149,6 +119,11 @@ const Dashboard: React.FC = () => {
                     <TabPanel tab={tab} index={3}>
                         <Cart isLoading={isLoading} populatedCart={populatedCart} user={user}/>
                     </TabPanel>
+
+                    {user.role === "admin" && <TabPanel tab={tab} index={4}>
+                        <AddProduct/>
+                    </TabPanel>
+                    }
 
                 </Grid>
 
