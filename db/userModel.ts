@@ -7,7 +7,6 @@ interface User {
     wishlist: Types.ObjectId[];
     cart: Types.ObjectId[];
     role : string;
-
 }
 
 const userSchema = new Schema<User>(
@@ -18,6 +17,7 @@ const userSchema = new Schema<User>(
         },
         password: {
             type: String,
+            select : false,
             required: true
         },
         email: {
@@ -47,9 +47,6 @@ const userSchema = new Schema<User>(
 
 userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, 12);
-
-    // @ts-ignore Delete passwordConfirm field from the response
-    this.passwordConfirm = undefined;
     next()
 })
 
