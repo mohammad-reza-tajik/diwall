@@ -8,7 +8,7 @@ class ObjectStore {
 
     constructor(storeName: string, driver: driverType = "INDEXEDDB", size: number = 8000000) {
         this.objectStore = localforage.createInstance({
-            name: "dival",
+            name: "diwall",
             storeName,
             driver: localforage[driver],
             size,
@@ -29,7 +29,7 @@ export default ObjectStore;
 /*let objectStore : LocalForage;
 if (typeof window !== "undefined" && "indexedDB" in window) {
     objectStore = localforage.createInstance({
-        name: "dival",
+        name: "diwall",
         storeName:"products",
         driver: localforage.INDEXEDDB,
         size: 8000000,
