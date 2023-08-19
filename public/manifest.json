@@ -1,9 +1,9 @@
 {
-  "name": "dival",
-  "short_name": "dival",
+  "name": "diwall",
+  "short_name": "diwall",
   "description": "خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب",
   "theme_color": "#069f69",
-  "background_color": "#f8f8f8",
+  "background_color": "#069f69",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
@@ -25,6 +25,12 @@
       "src": "/assets/pictures/logo-192.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "/assets/pictures/logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
     },
     {
       "src": "/assets/pictures/logo-384.png",

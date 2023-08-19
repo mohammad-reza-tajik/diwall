@@ -42,11 +42,11 @@ declare global {
     try {
 
         if (typeof window !== "undefined" && "serviceWorker" in navigator){
-            await navigator.serviceWorker.register("/sw.js", {type: "module"});
+            await navigator.serviceWorker.register("/sw.js");
         }
 
         if (typeof window !== "undefined" && "Notification" in window) {
-            setTimeout(async () => await Notification.requestPermission(),7_000)
+            setTimeout(async () => await Notification.requestPermission(),10_000)
         }
 
        /* if (typeof window !== "undefined" && "serviceWorker" in navigator){
@@ -99,11 +99,18 @@ function MyApp({Component, pageProps}) {
                       content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری"/>
                 <meta name="description" content="خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"/>
 
+                <meta name="application-name" content="دیوال" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+                <meta name="apple-mobile-web-app-title" content="دیوال" />
+                <meta name="format-detection" content="telephone=no" />
+                <meta name="mobile-web-app-capable" content="yes" />
+
                 <meta name="twitter:card" content="summary_large_image"/>
                 <meta name="twitter:title" content="دیوال : فروشگاه پوستر و کاغذ دیواری"/>
                 <meta name="twitter:description"
                       content="از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید"/>
-                <meta name="twitter:site" content="@dival"/>
+                <meta name="twitter:site" content="@diwall"/>
                 <meta name="twitter:image:src"
                       content="https://online-shop-mrt93.vercel.app/assets/pictures/og-banner.jpg"/>
                 <meta name="twitter:image"

@@ -8,7 +8,7 @@ import SwiperProducts from "../components/Globals/SwiperProducts";
 import SectionHeading from "../components/Globals/SectionHeading";
 import MiddleSection from "../components/HomePage/MiddleSection";
 
-import type {ProductType} from "../db/productModel";
+import type {ProductType} from "@/db/productModel";
 import {GetStaticProps} from "next";
 import mongoose from "mongoose";
 import Product from "../db/productModel";

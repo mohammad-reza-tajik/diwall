@@ -79,7 +79,7 @@ const HeaderMobile: React.FC = () => {
                     <Link href={"/"} passHref>
                         <Typography className={"pointer"} variant={"caption"} fontFamily={"dana-black"}
                                     color={"primary"} fontSize={25}>
-                            Dival
+                            Diwall
                         </Typography>
                     </Link>
                 </Grid>

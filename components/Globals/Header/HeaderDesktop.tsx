@@ -145,7 +145,7 @@ const HeaderDesktop: React.FC = () => {
             <Grid container item direction={"row"} justifyContent={"center"} alignItems={"center"} xs={12}
                   py={20}>
                 <Box minHeight={100} maxWidth={100} component={Link} href={"/"}>
-                        <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={100} height={100}
+                        <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100}
                         />
                 </Box>
                 <Grid position={"relative"} container direction={"column"} item

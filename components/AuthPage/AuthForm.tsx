@@ -80,7 +80,7 @@ const AuthForm: React.FC = () => {
                 </ToggleButtonGroup>
 
                 <Box my={5} component={Link} href={"/"}>
-                    <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"} width={150} height={150}/>
+                    <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={150} height={150}/>
                 </Box>
 
                 {

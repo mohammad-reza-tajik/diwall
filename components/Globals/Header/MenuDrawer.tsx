@@ -50,7 +50,7 @@ const MenuDrawer: React.FC<Props> = (props) => {
                 <List sx={{width: 1}}>
                     <ListItem sx={{mb: 20}} onClick={() => menuItemsHandler("/")}>
                         <ListItemIcon sx={{fontSize: 20, cursor: "pointer"}}>
-                            <Image src={"/assets/pictures/logo.png"} alt={"dival-logo"}
+                            <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"}
                                    width={100}
                                    height={100}/>
                         </ListItemIcon>
