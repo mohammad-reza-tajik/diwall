@@ -11,7 +11,7 @@
 
 
 to see the live result  please visit : 
-                                     [https://diwall-shop.vercel.app/](https://diwall-shop.vercel.app/)
+                                     [https://diwall.vercel.app/](https://diwall.vercel.app/)
                                     
 
 
