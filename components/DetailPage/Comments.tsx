@@ -15,8 +15,6 @@ import Person from "@mui/icons-material/Person";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
-import ObjectStore from "@/utilities/idb";
-import _ from "lodash";
 
 
 const styles = {
@@ -84,8 +82,6 @@ const Comments: React.FC<Props> = (props) => {
 
     const slug = router.isReady && router.query.slug;
 
-    const productStore = new ObjectStore("products");
-
 
     // In this use case I needed to put a setIsLoading in the if block (in addition to the one in the finally block)
     useEffect(() => {
@@ -93,29 +89,8 @@ const Comments: React.FC<Props> = (props) => {
             (async () => {
                 try {
                     setIsLoading(true);
-                    const productInIDB = await productStore.getFromIDB(url);
-                    if (productInIDB) {
-                        // @ts-ignore
-                        const comments = productInIDB.product.comments;
-                        setComments(comments);
-                        setIsLoading(false);
-                        const res = await axios(url);
-                        // @ts-ignore
-                        if (!_.isEqual(res.data.product, productInIDB.product)) {
-                            setComments(res.data.product.comments)
-                        }
-                        await productStore.saveToIDB(url, {
-                            product: res.data.product,
-                            relatedProducts: res.data.relatedProducts
-                        })
-                    } else {
-                        const res = await axios(url);
-                        setComments(res.data.comments);
-                        await productStore.saveToIDB(url, {
-                            product: res.data.product,
-                            relatedProducts: res.data.relatedProducts
-                        });
-                    }
+                    const res = await axios(url);
+                    setComments(res.data.comments);
                 } catch (err) {
                     console.log(err)
                 } finally {

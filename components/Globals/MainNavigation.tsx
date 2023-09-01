@@ -10,13 +10,13 @@ import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
 
 const styles = {
 
-    main_nav: {
+    mainNav: {
         fontSize: 16,
         fontFamily: "dana-medium",
         gap: 20
 
     },
-    main_nav_link: {
+    mainNavLink: {
         color: "#888",
         transition: "color .4s",
 
@@ -40,15 +40,15 @@ const MainNavigation: React.FC = () => {
             {
                 !matchesMD &&
                 <>
-                    <Grid container alignItems={"center"} component={"nav"} item xs={9} sx={styles.main_nav}>
-                        <Box component={Link} href={"/"} sx={styles.main_nav_link}>صفحه نخست</Box>
-                        <Box component={Link} href={"/products"} sx={styles.main_nav_link}>جدیدترین ها</Box>
-                        <Box component={Link} href={"/products?sortBy=2"} sx={styles.main_nav_link}>پرفروش ترین
+                    <Grid container alignItems={"center"} component={"nav"} item xs={9} sx={styles.mainNav}>
+                        <Box component={Link} href={"/"} sx={styles.mainNavLink}>صفحه نخست</Box>
+                        <Box component={Link} href={"/products"} sx={styles.mainNavLink}>جدیدترین ها</Box>
+                        <Box component={Link} href={"/products?sortBy=2"} sx={styles.mainNavLink}>پرفروش ترین
                             ها</Box>
-                        <Box component={Link} href={"/products?sortBy=3"} sx={styles.main_nav_link}>محبوب ترین
+                        <Box component={Link} href={"/products?sortBy=3"} sx={styles.mainNavLink}>محبوب ترین
                             ها</Box>
-                        <Box component={Link} href={"/about"} sx={styles.main_nav_link}>درباره ما</Box>
-                        <Box component={Link} href={"/collaboration"} sx={styles.main_nav_link}>همکاری با ما</Box>
+                        <Box component={Link} href={"/about"} sx={styles.mainNavLink}>درباره ما</Box>
+                        <Box component={Link} href={"/collaboration"} sx={styles.mainNavLink}>همکاری با ما</Box>
                     </Grid>
                     <Grid container item direction={"row"} xs={2} justifyContent={"flex-end"}
                           display={matches1277 && "none"}>

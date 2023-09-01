@@ -2,8 +2,6 @@ import {useRef, useState} from "react";
 import {useRouter} from "next/router";
 import axios from "axios";
 import {userActions, useAppDispatch, snackbarActions} from "@/store";
-// import ObjectStore from "../utilities/idb";
-// import useFetch from "./useFetch";
 
 const useAuth = () => {
 
@@ -51,31 +49,12 @@ const useAuth = () => {
 
                 }
 
-
-            /*if ("serviceWorker" in navigator) {
-                const sw = await navigator.serviceWorker.ready;
-                const authStore = new ObjectStore("sync-auth");
-                await authStore.saveToIDB("user", user);
-                await sw.sync.register("sync-auth");
-                console.log("this is after sending sync-auth in useAuth")
-            } else {*/
             const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "login"}`, user)
             dispatch(userActions.login({user : res.data.user , token : res.data.token}))
             dispatch(snackbarActions.openSnackbar({message: res.data.message, status: "success"}));
 
-            if(Notification.permission === "granted" && typeOfForm === "signup") {
-                new Notification(`${res.data.user.username}`, {
-                    body : "شما با موفقیت عضو سایت شدید !",
-                    dir:"rtl",
-                    lang : "fa-IR",
-                    icon : "/assets/pictures/logo-192.png",
-
-                });
-            }
-
             router.push("/");
 
-            // }
 
 
         } catch (err) {

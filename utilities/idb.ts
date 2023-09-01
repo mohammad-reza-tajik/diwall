@@ -1,5 +1,4 @@
 import localforage from "localforage";
-// import type {ProductType} from "../db/productModel";
 
 type driverType = "INDEXEDDB" | "LOCALSTORAGE";
 

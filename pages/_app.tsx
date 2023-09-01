@@ -49,15 +49,6 @@ declare global {
             setTimeout(async () => await Notification.requestPermission(),10_000)
         }
 
-       /* if (typeof window !== "undefined" && "serviceWorker" in navigator){
-            const sw = await navigator.serviceWorker.ready;
-            const sub = await sw.pushManager.subscribe({
-                userVisibleOnly : true,
-                applicationServerKey : "MTI0NWRmZHM1NGZkZjJkZjU0"
-            });
-            console.log(sub)
-        }*/
-
     } catch (err) {
         console.log(err)
     }

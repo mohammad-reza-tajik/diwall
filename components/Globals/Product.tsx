@@ -8,7 +8,6 @@ import Image from "next/legacy/image"
 import {Favorite} from "@mui/icons-material";
 import {useRouter} from "next/router";
 import React, {useState} from "react";
-import axios from "axios";
 import {useTheme} from "@mui/material/styles"
 import {userActions, useAppSelector, useAppDispatch, snackbarActions} from "@/store";
 import Link from "next/link"
@@ -31,8 +30,6 @@ const styles = {
 }
 
 
-
-
 const Product: React.FC<ProductType> = (props) => {
     const router = useRouter()
 
@@ -45,45 +42,18 @@ const Product: React.FC<ProductType> = (props) => {
     const user = useAppSelector(state => state.userReducer)
     const dispatch = useAppDispatch()
 
-    const isFavorite = user?.wishlist.includes(props._id)
+    const isInWishlist = user?.wishlist.includes(props._id)
 
     const addToWishlistHandler = async () => {
         try {
             if (user?.username) {
                 setIsLoading(true)
-                if (isFavorite) {
-                    await axios.put("/api/remove-from-wishlist", {
-                        productId: props._id,
-                        _id: user._id,
-                        token: user.token
-                    })
-                    dispatch(userActions.removeFromWishlist(props._id))
-                    dispatch(snackbarActions.openSnackbar({message : "محصول از لیست علاقمندی شما حذف شد" , status : "info"}))
-
-
-                } else {
-
-                    await axios.put("/api/add-to-wishlist", {
-                        productId: props._id,
-                        _id: user._id,
-                        token: user.token
-                    })
-
-                    dispatch(userActions.addToWishlist(props._id))
-                    dispatch(snackbarActions.openSnackbar({message : "محصول به لیست علاقمندی شما افزوده شد" , status : "success"}))
-
-
-                }
+                dispatch(userActions.handleWishlist({product: props, isInWishlist, user}))
             } else {
-
                 router.push("/auth")
             }
-
         } catch (err) {
-            console.log(err)
-            dispatch(snackbarActions.openSnackbar({message : "متاسفانه عملیات با خطا مواجه شد" , status : "error"}))
-
-
+            dispatch(snackbarActions.openSnackbar({message: "متاسفانه عملیات با خطا مواجه شد", status: "error"}))
         } finally {
             setIsLoading(false)
         }
@@ -101,7 +71,7 @@ const Product: React.FC<ProductType> = (props) => {
                             p: {xs: 4, md: 5,},
                             bgcolor: "rgba(50,50,50,0.3)",
                             color: "#fff"
-                        }}/> : isFavorite ? <Favorite sx={{
+                        }}/> : isInWishlist ? <Favorite sx={{
                                 fontSize: {xs: 30, sm: 40},
                                 borderRadius: 20,
                                 p: {xs: 4, md: 5,},

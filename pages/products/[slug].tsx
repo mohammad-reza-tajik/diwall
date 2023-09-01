@@ -10,9 +10,6 @@ import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-
-import _ from "lodash";
-
 import Image from "next/image"
 import React, {useEffect, useState} from "react";
 import axios from "axios";
@@ -23,7 +20,6 @@ import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import Head from "next/head";
 import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
-import ObjectStore from "@/utilities/idb";
 
 const Info = dynamic(() => import("@/components/DetailPage/Info"))
 const Features = dynamic(() => import("@/components/Globals/Features"))
@@ -64,7 +60,7 @@ const styles = {
 
 const ProductDetails = () => {
 
-    const [product, setProduct] = useState<ProductType | {}>({})
+    const [product, setProduct] = useState<ProductType>()
     const [relatedProducts, setRelatedProducts] = useState<ProductType[]>([])
     const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false)
     const [addToWishlistLoading, setAddToWishlistLoading] = useState<boolean>(false)
@@ -77,14 +73,12 @@ const ProductDetails = () => {
     const dispatch = useAppDispatch();
 
     // console.log(router)
-    const isInCart = user?.cart.includes("_id" in product && product._id)
-    const isFavorite = user?.wishlist.includes("_id" in product && product._id)
+    const isInCart = user?.cart.includes(product && product._id)
+    const isInWishlist = user?.wishlist.includes(product && product._id)
 
     const {isReady} = router;
     const slug = isReady ? router.query.slug as string : " ";
     const title = slug?.split("-").join(" ");
-
-    const productStore = new ObjectStore("products");
 
     useEffect(() => {
         const url = `/api/products/${slug}`;
@@ -93,34 +87,9 @@ const ProductDetails = () => {
             try {
                 setIsLoading(true);
                 if (isReady) {
-
-                    const productInIDB = await productStore.getFromIDB(url);
-                    if (productInIDB) {
-                        // @ts-ignore
-                        setProduct(productInIDB.product);
-                        // @ts-ignore
-                        setRelatedProducts(productInIDB.relatedProducts);
-                        setIsLoading(false);
-                        const res = await axios(url);
-                        // @ts-ignore
-                        if (!_.isEqual(res.data.product, productInIDB.product) || !_.isEqual(res.data.relatedProducts, productInIDB.relatedProducts)) {
-                            setProduct(res.data.product);
-                            setRelatedProducts(res.data.relatedProducts);
-                        }
-                        await productStore.saveToIDB(url, {
-                            product: res.data.product,
-                            relatedProducts: res.data.relatedProducts
-                        })
-
-                    } else {
-                        const res = await axios(url);
-                        setProduct(res.data.product);
-                        setRelatedProducts(res.data.relatedProducts);
-                        await productStore.saveToIDB(url, {
-                            product: res.data.product,
-                            relatedProducts: res.data.relatedProducts
-                        });
-                    }
+                    const res = await axios(url);
+                    setProduct(res.data.product);
+                    setRelatedProducts(res.data.relatedProducts);
                 }
             } catch (err) {
                 console.log(err)
@@ -139,41 +108,15 @@ const ProductDetails = () => {
     const addToCartHandler = async () => {
         try {
             if (user?.username) {
-                setAddToCartLoading(true)
+                setAddToCartLoading(true);
+                dispatch(userActions.handleCart({product, isInCart, user}));
 
-                if (isInCart) {
-                    if ("_id" in product) {
-                        await axios.put("/api/remove-from-cart", {
-                            _id: user?._id, token: user?.token, productId: product._id
-                        })
-                        dispatch(userActions.removeFromCart(product._id))
-                        dispatch(snackbarActions.openSnackbar({message : "محصول از سبد خرید شما حذف شد" , status : "info"}))
-
-
-                    }
-
-                } else {
-                    if ("_id" in product) {
-                        await axios.put("/api/add-to-cart", {
-                            productId: product._id,
-                            _id: user._id,
-                            token: user.token
-                        })
-
-                        dispatch(userActions.addToCart(product._id))
-                        dispatch(snackbarActions.openSnackbar({message : "محصول به سبد خرید شما اضافه شد" , status : "success"}))
-
-
-                    }
-                }
             } else {
                 router.push("/auth")
 
             }
         } catch (err) {
-            console.log(err)
-            dispatch(snackbarActions.openSnackbar({message : "متاسفانه عملیات با خطا مواجه شد" , status : "error"}))
-
+            dispatch(snackbarActions.openSnackbar({message: "متاسفانه عملیات با خطا مواجه شد", status: "error"}))
         } finally {
             setAddToCartLoading(false)
         }
@@ -184,45 +127,13 @@ const ProductDetails = () => {
         try {
             if (user?.username) {
                 setAddToWishlistLoading(true)
-                if (isFavorite) {
-                    if ("_id" in product) {
-                        await axios.put("/api/remove-from-wishlist", {
-                            productId: product._id,
-                            _id: user._id,
-                            token: user.token
-                        })
-                        if ("_id" in product) {
-                            dispatch(userActions.removeFromWishlist(product._id))
-                            dispatch(snackbarActions.openSnackbar({message : "محصول از لیست علاقمندی شما حذف شد" , status : "info"}))
-                        }
-
-                    }
-                } else {
-                    if ("_id" in product) {
-                        await axios.put("/api/add-to-wishlist", {
-                            productId: product._id,
-                            _id: user._id,
-                            token: user.token
-                        })
-
-                        if ("_id" in product) {
-                            dispatch(userActions.addToWishlist(product._id))
-                            dispatch(snackbarActions.openSnackbar({message : "محصول به لیست علاقمندی شما افزوده شد" , status : "success"}))
-
-                        }
-
-                    }
-                }
+                dispatch(userActions.handleWishlist({product, isInWishlist, user}))
             } else {
-
                 router.push("/auth")
             }
         } catch (err) {
-            console.log(err)
-            dispatch(snackbarActions.openSnackbar({message : "متاسفانه عملیات با خطا مواجه شد" , status : "error"}))
-
-        }
-        finally {
+            dispatch(snackbarActions.openSnackbar({message: "متاسفانه عملیات با خطا مواجه شد", status: "error"}))
+        } finally {
             setAddToWishlistLoading(false)
         }
 
@@ -241,7 +152,7 @@ const ProductDetails = () => {
                 <meta property="og:url" content={router.pathname}/>
                 <meta property="og:description" content={title}/>
                 <meta property="og:image"
-                      content={`/assets/pictures/products/${"slug" in product ? product.slug : ""}.jpg`}/>
+                      content={`/assets/pictures/products/${product ? product.slug : ""}.jpg`}/>
             </Head>
 
             <Grid container item xs={12}>
@@ -254,8 +165,8 @@ const ProductDetails = () => {
                                           sx={{height: 1, width: 1}}/> :
 
                                 <Image style={{width: "100%", height: "auto"}}
-                                       src={`/assets/pictures/products/${"slug" in product ? product.slug : "placeholder"}.jpg`}
-                                       alt={`${"title" in product ? product.title : ""}`} width={510} height={385}
+                                       src={`/assets/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
+                                       alt={`${product ? product.title : ""}`} width={510} height={385}
                                 />
 
                         }
@@ -273,7 +184,7 @@ const ProductDetails = () => {
                                                     fontFamily={"dana-bold"}
                                                     lineHeight={1.8}
                                                     color={"#555"}>
-                                            {"title" in product ? product.title : ""}
+                                            {product ? product.title : ""}
                                         </Typography>
                                 }
                             </Grid>
@@ -283,12 +194,12 @@ const ProductDetails = () => {
                                             component={"span"}
                                             py={10}
                                             color={"white.main"}
-                                            bgcolor={isLoading ? "transparent" : "quantity" in product && product.quantity > 0 ? "primary.main" : "error.main"}>
+                                            bgcolor={isLoading ? "transparent" : product && product.quantity > 0 ? "primary.main" : "error.main"}>
                                     {
                                         isLoading ?
                                             <Skeleton variant={"text"} animation={"wave"} width={100}
                                                       sx={{fontSize: 16}}/> :
-                                            "quantity" in product && product.quantity > 0 ? "موجود" : "ناموجود"
+                                            product && product.quantity > 0 ? "موجود" : "ناموجود"
                                     }
                                 </Typography>
                             </Grid>
@@ -303,7 +214,7 @@ const ProductDetails = () => {
                                     <Typography variant={"h1"} component={"span"} fontSize={{xs: 16, md: 20}}
                                                 sx={{textAlign: "justify", flexGrow: 1}} fontFamily={"dana-bold"}
                                                 color={"primary"}>
-                                        {"price" in product && product.price + " تومان هر متر مربع"}
+                                        {product && product.price + " تومان هر متر مربع"}
                                     </Typography>
                             }
                         </Grid>
@@ -325,7 +236,7 @@ const ProductDetails = () => {
                                     :
                                     <Typography variant={"caption"} component={"p"} fontSize={{xs: 14, md: 16}}
                                                 lineHeight={{xs: 1.8, md: 1.6}} color={"#555"}>
-                                        {"description" in product && product.description}
+                                        {product && product.description}
                                     </Typography>
                             }
                         </Grid>
@@ -381,7 +292,7 @@ const ProductDetails = () => {
                                                 borderRadius: 20,
                                                 p: {xs: 2, md: 3,},
                                                 color: "#fff"
-                                            }}/> : isFavorite ? <Favorite sx={{
+                                            }}/> : isInWishlist ? <Favorite sx={{
                                                     fontSize: {xs: 30, sm: 40},
                                                     borderRadius: 20,
                                                     p: {xs: 2, md: 3,},

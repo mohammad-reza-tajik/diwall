@@ -3,7 +3,9 @@
 # service worker stuff
 /public/fallback-*.js
 /public/sw.js
+/public/sw.js.map
 /public/workbox-*.js
+/public/workbox-*.js.map
 
 # dependencies
 /node_modules

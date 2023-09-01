@@ -9,8 +9,6 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
     const token = req.body.token
 
     const user = await User.findByIdAndUpdate(_id , {$push : {wishlist : productId}} , {new : true});
-    console.log("from add to wishlist",user)
-
 
     res.send({
         user,

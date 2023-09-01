@@ -38,7 +38,7 @@ const CartItem: React.FC<ProductType> = (props) => {
                 token: user?.token, productId: props._id
             })
             dispatch(userActions.removeFromCart(props._id));
-            dispatch(snackbarActions.openSnackbar({message : "محصول از سبد خرید شما حذف شد" , status : "info"}))
+            dispatch(snackbarActions.openSnackbar({message : "از سبد خرید شما حذف شد" , status : "info"}))
 
 
 
