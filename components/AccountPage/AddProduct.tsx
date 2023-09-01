@@ -8,7 +8,7 @@ import {Add, Upload} from "@mui/icons-material";
 import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import Close from "@mui/icons-material/Close";
-import axios from "axios";
+import useFetch from "@/hooks/useFetch";
 
 
 const styles = {
@@ -54,11 +54,7 @@ const AddProduct: React.FC = () => {
             formData.append("description", descriptionRef.current.value);
             formData.append("images", imagesRef.current.files);
 
-            const res = await axios.post("http://127.0.0.1:3000/api/products" , {formData} , {
-                headers : {
-                    authorization : `Bearer ${user?.token}`
-                }
-            });
+            const res = await useFetch.post("http://127.0.0.1:3000/api/products" , {formData});
 
 
             console.log("it works")

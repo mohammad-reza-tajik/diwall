@@ -7,7 +7,7 @@ import {A11y, Navigation} from "swiper";
 import "swiper/css";
 import 'swiper/css/navigation';
 
-import axios from "axios";
+import useFetch from "@/hooks/useFetch";
 import {useRouter} from "next/router";
 import CircularProgress from "@mui/material/CircularProgress";
 import Divider from "@mui/material/Divider";
@@ -90,8 +90,8 @@ const Comments: React.FC<Props> = (props) => {
             (async () => {
                 try {
                     setIsLoading(true);
-                    const res = await axios(url);
-                    setComments(res.data.product.comments);
+                    const res = await useFetch.get(url);
+                    setComments(res.product.comments);
                 } catch (err) {
                     console.log(err)
                 } finally {

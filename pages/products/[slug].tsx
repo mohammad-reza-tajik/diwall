@@ -1,6 +1,5 @@
 import {useRouter} from "next/router";
 import type {ProductType} from "@/db/productModel"
-
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -12,7 +11,6 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Image from "next/image"
 import React, {useEffect, useState} from "react";
-import axios from "axios";
 import {useAppSelector, useAppDispatch, userActions, snackbarActions} from "@/store";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
@@ -20,6 +18,7 @@ import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import Head from "next/head";
 import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
+import useFetch from "@/hooks/useFetch";
 
 const Info = dynamic(() => import("@/components/DetailPage/Info"))
 const Features = dynamic(() => import("@/components/Globals/Features"))
@@ -72,7 +71,6 @@ const ProductDetails = () => {
     const user = useAppSelector(state => state.userReducer);
     const dispatch = useAppDispatch();
 
-    // console.log(router)
     const isInCart = user?.cart.includes(product && product._id)
     const isInWishlist = user?.wishlist.includes(product && product._id)
 
@@ -87,9 +85,9 @@ const ProductDetails = () => {
             try {
                 setIsLoading(true);
                 if (isReady) {
-                    const res = await axios(url);
-                    setProduct(res.data.product);
-                    setRelatedProducts(res.data.relatedProducts);
+                    const res = await useFetch.get(url);
+                    setProduct(res.product);
+                    setRelatedProducts(res.relatedProducts);
                 }
             } catch (err) {
                 console.log(err)

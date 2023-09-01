@@ -9,12 +9,12 @@ import Delete from "@mui/icons-material/Delete";
 import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
 
 import React, {ChangeEvent, useState} from "react";
-import axios from "axios";
 import {useRouter} from "next/router";
 import {snackbarActions, useAppDispatch, useAppSelector, userActions} from "@/store";
 import Image from "next/image";
 
 import type {ProductType} from "@/db/productModel";
+import useFetch from "@/hooks/useFetch";
 
 
 const CartItem: React.FC<ProductType> = (props) => {
@@ -33,7 +33,7 @@ const CartItem: React.FC<ProductType> = (props) => {
     const removeFromCart = async () => {
         if (user?.username) {
 
-            await axios.put("/api/remove-from-cart", {
+            await useFetch.put("/api/remove-from-cart", {
                 _id: user?._id,
                 token: user?.token, productId: props._id
             })

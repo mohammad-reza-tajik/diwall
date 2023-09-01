@@ -6,10 +6,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import React, {useEffect, useState} from "react";
 import TabPanel from "@/components/Globals/TabPanel";
-import axios from "axios";
 import Head from "next/head";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
+import useFetch from "@/hooks/useFetch";
 
 const Profile = dynamic(() => import("@/components/AccountPage/Profile"))
 const AddProduct = dynamic(() => import("@/components/AccountPage/AddProduct"))
@@ -60,11 +60,11 @@ const Dashboard: React.FC = () => {
         (async () => {
             if (isAuthenticated) {
                 setIsLoading(true)
-                const res = await axios.post("/api/get-wishlist-and-cart", {
+                const res = await useFetch.post("/api/get-wishlist-and-cart", {
                     _id: user?._id, token: user?.token
                 })
-                setPopulatedWishlist(res.data.wishlist)
-                setPopulatedCart(res.data.cart)
+                setPopulatedWishlist(res.wishlist)
+                setPopulatedCart(res.cart)
                 setIsLoading(false)
             }
         })()

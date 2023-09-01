@@ -2,11 +2,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import SectionHeading from "@/components/Globals/SectionHeading";
-import axios from "axios";
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Product from "@/components/Globals/Product";
 import Pagination from "@/components/Globals/Pagination";
+import useFetch from "@/hooks/useFetch";
 
 
 interface PageInformation {
@@ -33,10 +33,10 @@ const Products: React.FC = () => {
             try {
                 setIsLoading(true)
                 if(isReady) {
-                    const res = await axios(`/api/products?search=${search}&page=${page}&sortBy=${sortBy}&category=${category}`)
+                    const res = await useFetch.get(`/api/products?search=${search}&page=${page}&sortBy=${sortBy}&category=${category}`)
                     // console.log(res)
-                    setProducts(res.data.products)
-                    setPageInformation(res.data)
+                    setProducts(res.products)
+                    setPageInformation(res)
                     setIsLoading(false)
                 }
 

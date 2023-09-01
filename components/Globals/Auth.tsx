@@ -25,8 +25,8 @@ const Auth: React.FC<Props> = ({children}) => {
                 const _id = localStorage.getItem("_id")
                 if (_id && _id !== "undefined") {
                     const res = await axios.post("/api/get-user", {_id, token});
-                    // console.log(res.data)
-                    dispatch(userActions.login({user : res.data.user , token : res.data.token}))
+                    // console.log(res)
+                    dispatch(userActions.login({user : res.user , token : res.token}))
                 }
              } catch(err) {
                     localStorage.clear()

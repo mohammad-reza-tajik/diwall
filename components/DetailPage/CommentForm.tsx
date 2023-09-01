@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import {useAppSelector , snackbarActions , useAppDispatch} from "@/store";
 import Button from "@mui/material/Button";
 import Link from "next/link";
-import axios from "axios";
+import useFetch from "@/hooks/useFetch";
 import CircularProgress from "@mui/material/CircularProgress";
 import Create from "@mui/icons-material/Create";
 import  TextField  from "@mui/material/TextField";
@@ -68,14 +68,12 @@ const CommentForm: React.FC<Props> = (props) => {
 
     const slug = router.isReady && router.query.slug;
 
-    // console.log(props.currentProductTitle)
 
     const insertCommentHandler = async (event : FormEvent) => {
         event.preventDefault();
-        // console.log(commentRef.current.value)
         try {
             setIsLoading(true)
-            await axios.post(`/api/products/${slug}/comments`,{
+            await useFetch.post(`/api/products/${slug}/comments`,{
                 comment:{
                     content:commentRef.current.value,
                     author:user.username,
@@ -86,12 +84,9 @@ const CommentForm: React.FC<Props> = (props) => {
             commentRef.current.value = ""
             dispatch(snackbarActions.openSnackbar({message : "دیدگاه شما با موفقیت ثبت شد" , status : "success"}))
             props.onAddComment()
-
         } catch (err) {
-
             console.log(err)
             dispatch(snackbarActions.openSnackbar({message : "متاسفانه عملیات با خطا مواجه شد" , status : "error"}))
-
 
         } finally {
             setIsLoading(false);

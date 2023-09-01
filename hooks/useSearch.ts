@@ -1,7 +1,7 @@
 import {useCallback, useState} from "react";
-import axios from "axios";
 import {useRouter} from "next/router";
-import type {ProductType} from "../db/productModel";
+import type {ProductType} from "@/db/productModel";
+import useFetch from "@/hooks/useFetch";
 
 
 const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boolean) => void }) => {
@@ -23,7 +23,6 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boole
             return
         }
         setIsWrong(false)
-        // axios(`/api/products?search=${search}`).then(_ => {
         router.push(`/products?search=${search}`)
         if (device === "mobile") {
             closeSearchHandlerMobile()
@@ -75,10 +74,9 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boole
 
     const handleChange = async (search: string) => {
         setIsLoading(true)
-        const res = await axios(`/api/products?search=${search}`)
-        setResults(res.data.products.slice(0, 4));
+        const res = await useFetch.get(`/api/products?search=${search}`)
+        setResults(res.products.slice(0, 4));
         setIsLoading(false)
-        // console.log(res.data)
 
     };
     const optimizedFn = useCallback(debounce(handleChange), []);

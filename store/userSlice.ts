@@ -4,7 +4,7 @@ import storeTokenAndUser from "@/utilities/storeToken";
 import {snackbarActions} from "@/store";
 import {Dispatch} from "react";
 import type {ProductType} from "@/db/productModel";
-import axios from "axios";
+import useFetch from "@/hooks/useFetch";
 
 
 interface User {
@@ -99,7 +99,7 @@ export const handleWishlist = ({product, isInWishlist, user}: {
     return async (dispatch: Dispatch<AnyAction>) => {
 
         if (isInWishlist) {
-            await axios.put("/api/remove-from-wishlist", {
+            await useFetch.put("/api/remove-from-wishlist", {
                 productId: product._id,
                 _id: user._id,
                 token: user.token
@@ -110,7 +110,7 @@ export const handleWishlist = ({product, isInWishlist, user}: {
 
         } else {
 
-            await axios.put("/api/add-to-wishlist", {
+            await useFetch.put("/api/add-to-wishlist", {
                 productId: product._id,
                 _id: user._id,
                 token: user.token
@@ -133,7 +133,7 @@ export const handleCart = ({product, isInCart, user}: {
 
         if (isInCart) {
             if ("_id" in product) {
-                await axios.put("/api/remove-from-cart", {
+                await useFetch.put("/api/remove-from-cart", {
                     _id: user?._id, token: user?.token, productId: product._id
                 })
                 dispatch(userActions.removeFromCart(product._id))
@@ -144,7 +144,7 @@ export const handleCart = ({product, isInCart, user}: {
 
         } else {
             if ("_id" in product) {
-                await axios.put("/api/add-to-cart", {
+                await useFetch.put("/api/add-to-cart", {
                     productId: product._id,
                     _id: user._id,
                     token: user.token

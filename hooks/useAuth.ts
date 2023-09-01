@@ -1,7 +1,7 @@
 import {useRef, useState} from "react";
 import {useRouter} from "next/router";
-import axios from "axios";
 import {userActions, useAppDispatch, snackbarActions} from "@/store";
+import useFetch from "@/hooks/useFetch";
 
 const useAuth = () => {
 
@@ -49,9 +49,9 @@ const useAuth = () => {
 
                 }
 
-            const res = await axios.post(`/api/${typeOfForm === "signup" ? "signup" : "login"}`, user)
-            dispatch(userActions.login({user : res.data.user , token : res.data.token}))
-            dispatch(snackbarActions.openSnackbar({message: res.data.message, status: "success"}));
+            const res = await useFetch.post(`/api/${typeOfForm === "signup" ? "signup" : "login"}`, user)
+            dispatch(userActions.login({user : res.user , token : res.token}))
+            dispatch(snackbarActions.openSnackbar({message: res.message, status: "success"}));
 
             router.push("/");
 
