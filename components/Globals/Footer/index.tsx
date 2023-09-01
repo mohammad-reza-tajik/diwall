@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>درباره ما</Box>
+                            <Box component={Link} href={"/about"} sx={styles.footer_link}>درباره ما</Box>
 
                     </Grid>
                 </Grid>
@@ -257,9 +257,7 @@ const Footer: React.FC = () => {
 
                         </Grid>
                         <Grid item container alignItems={"center"} xs={"auto"}>
-                            
                                 <LocalPhoneOutlined sx={{fontSize: 35}} color={"primary"}/>
-                            
                         </Grid>
                     </Grid>
                 </Grid>
@@ -317,7 +315,7 @@ const Footer: React.FC = () => {
                 <Grid container item xs={12} my={40} alignItems={"center"} justifyContent={"space-between"}>
                     <Grid container item gap={20} xs={12} md={"auto"} display={{xs: "none", lg: "flex"}}>
 
-                        <Box component={Link} href={"/"} sx={styles.footer_link}>
+                        <Box component={Link} href={"/collaboration"} sx={styles.footer_link}>
                             همکاری با ما
                         </Box>
 

@@ -37,7 +37,7 @@ const BannerDesktop: React.FC = () => {
                     از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                     آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
                 </Typography>
-                <Button component={Link} href={"/products"} variant={"outlined"} color={"white"} aria-label="visit products"
+                <Button component={Link} href={"/products"} variant={"outlined"} color={"white"} aria-label="مشاهده محصولات"
                         size={"medium"} sx={styles.heroButton}>
                     مشاهده محصولات
                 </Button>

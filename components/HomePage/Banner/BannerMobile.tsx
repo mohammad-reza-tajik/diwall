@@ -41,9 +41,8 @@ const BannerMobile: React.FC = () => {
                     از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                     آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
                 </Typography>
-                <Button variant={"contained"} color={"primary"} size={"medium"} sx={styles.bannerButton} aria-label="visit products"
-                        component={Link} href={"/products"}>مشاهده
-                    محصولات</Button>
+                <Button variant={"contained"} color={"primary"} size={"medium"} sx={styles.bannerButton} aria-label="مشاهده محصولات"
+                        component={Link} href={"/products"}>مشاهده محصولات</Button>
 
             </Grid>
             <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} fill priority  sizes={"360px"} className={"cover"}/>

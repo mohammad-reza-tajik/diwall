@@ -3,7 +3,6 @@ import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
-
 import Circle from "@mui/icons-material/Circle";
 import Link from "next/link";
 import React, {useEffect, useState} from "react";
@@ -22,8 +21,6 @@ const SectionHeading : React.FC<Props> = (props) => {
 
     const [sortBy, setSortBy] = useState(1);
     const router = useRouter()
-
-
 
     useEffect(() => {
     if (props.sortBy){
@@ -52,7 +49,7 @@ const SectionHeading : React.FC<Props> = (props) => {
             {
             props.seeAll ? 
             <Grid container item justifyContent={"flex-end"} xs={"auto"} md={2}>
-                    <Button variant={"outlined"} color={!props.white ? "primary" : "white"}  sx={{fontSize:{xs:12,md:16}}} component={Link} href={props.route} aria-label="visit all product">مشاهده همه</Button>
+                    <Button variant={"outlined"} color={!props.white ? "primary" : "white"}  sx={{fontSize:{xs:12,md:16}}} component={Link} href={props.route} aria-label="مشاهده همه">مشاهده همه</Button>
             </Grid> : ""
             }
 
