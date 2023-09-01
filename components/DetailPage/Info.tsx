@@ -23,17 +23,17 @@ const styles = {
 interface Props {
     products: any;
     isLoading: boolean;
-
     currentProductTitle:string;
 }
 
 const Info: React.FC<Props> = (props) => {
     const [tab, setTab] = useState(0);
-    const [addComment,setAddComment] = useState<boolean>(false)
+    const [addComment,setAddComment] = useState(false)
     const changeTabHandler = ( _ , newValue: number) => {
         setTab(newValue);
     };
     const addCommentHandler = () =>{
+        // we are changing this to re-run the useEffect in Comments component to fetch new comments
         setAddComment((prevState)=>!prevState)
     }
 
@@ -66,7 +66,6 @@ const Info: React.FC<Props> = (props) => {
                             </TabPanel>
                         </>
                 }
-
             </Grid>
         </Grid>
     )

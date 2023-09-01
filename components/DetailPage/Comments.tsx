@@ -70,6 +70,7 @@ interface Comment {
 
 const Comments: React.FC<Props> = (props) => {
 
+    // this is used to re-fetch comments anytime a new comment was submitted
     const {addComment} = props;
 
     const router = useRouter();
@@ -90,7 +91,7 @@ const Comments: React.FC<Props> = (props) => {
                 try {
                     setIsLoading(true);
                     const res = await axios(url);
-                    setComments(res.data.comments);
+                    setComments(res.data.product.comments);
                 } catch (err) {
                     console.log(err)
                 } finally {
@@ -108,7 +109,7 @@ const Comments: React.FC<Props> = (props) => {
                     <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
                         <CircularProgress color={"primary"} size={45}/>
                     </Grid> :
-                    comments.length !== 0 ?
+                    comments && comments.length !== 0 ?
                         <Grid component={Swiper}
                               spaceBetween={10}
                               slidesPerView={matchesMD ? 1 : 2}
