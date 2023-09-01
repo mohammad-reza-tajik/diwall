@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
-    "bundle:sw": "esbuild ./sw-dev.js --bundle --outfile=public/sw.js --minify --watch",
     "start": "next start",
     "test": "vitest --globals --reporter verbose",
     "lint": "next lint"
@@ -34,13 +33,11 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/bcrypt": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.2",
-    "@types/lodash-es": "^4.17.8",
     "@types/next-pwa": "^5.6.4",
     "@types/node": "^18.16.13",
     "@types/react": "^18.2.6",
     "@types/validator": "^13.7.17",
     "@vitejs/plugin-react": "^4.0.0",
-    "esbuild": "^0.18.17",
     "eslint": "^8.16.0",
     "eslint-config-next": "^13.4.1",
     "file-loader": "^6.2.0",
