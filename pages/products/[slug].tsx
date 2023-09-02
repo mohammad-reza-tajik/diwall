@@ -11,7 +11,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Image from "next/image"
 import React, {useEffect, useState} from "react";
-import {useAppSelector, useAppDispatch, userActions, snackbarActions} from "@/store";
+import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
@@ -66,13 +66,12 @@ const ProductDetails = () => {
     const [presetSizes, setPresetSizes] = useState<number>(1)
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
-
     const router = useRouter()
-    const user = useAppSelector(state => state.userReducer);
     const dispatch = useAppDispatch();
 
-    const isInCart = user?.cart.includes(product && product._id)
-    const isInWishlist = user?.wishlist.includes(product && product._id)
+    const  user = useAppSelector(state => state.userReducer);
+    const isInWishlist = user?.wishlist.includes( product && product._id );
+    const isInCart = user?.cart.includes( product && product._id );
 
     const {isReady} = router;
     const slug = isReady ? router.query.slug as string : " ";
@@ -103,38 +102,12 @@ const ProductDetails = () => {
             setPresetSizes(presetSizes);
     }
 
-    const addToCartHandler = async () => {
-        try {
-            if (user?.username) {
-                setAddToCartLoading(true);
-                dispatch(userActions.handleCart({product, isInCart, user}));
-
-            } else {
-                router.push("/auth")
-
-            }
-        } catch (err) {
-            dispatch(snackbarActions.openSnackbar({message: "متاسفانه عملیات با خطا مواجه شد", status: "error"}))
-        } finally {
-            setAddToCartLoading(false)
-        }
-
-
+    const addToCartHandler = () => {
+        dispatch(userActions.handleCart({product , setAddToCartLoading , router}));
     }
-    const addToWishlistHandler = async () => {
-        try {
-            if (user?.username) {
-                setAddToWishlistLoading(true)
-                dispatch(userActions.handleWishlist({product, isInWishlist, user}))
-            } else {
-                router.push("/auth")
-            }
-        } catch (err) {
-            dispatch(snackbarActions.openSnackbar({message: "متاسفانه عملیات با خطا مواجه شد", status: "error"}))
-        } finally {
-            setAddToWishlistLoading(false)
-        }
 
+    const addToWishlistHandler = () => {
+        dispatch(userActions.handleWishlist({product, setAddToWishlistLoading , router}))
     }
 
 

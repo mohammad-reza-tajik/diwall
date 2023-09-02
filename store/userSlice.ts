@@ -1,13 +1,8 @@
-import {AnyAction, createSlice} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import type {PayloadAction} from "@reduxjs/toolkit"
 import storeTokenAndUser from "@/utilities/storeToken";
-import {snackbarActions} from "@/store";
-import {Dispatch} from "react";
-import type {ProductType} from "@/db/productModel";
-import useFetch from "@/hooks/useFetch";
 
-
-interface User {
+export interface User {
     username: string,
     email: string,
     _id: string,
@@ -15,11 +10,9 @@ interface User {
     cart: string[],
     role: string;
     wishlist: string[]
-
 }
 
 const initialState: User = {
-
     username: null,
     email: null,
     _id: null,
@@ -27,10 +20,7 @@ const initialState: User = {
     token: null,
     cart: [],
     wishlist: []
-
-
 }
-
 
 const userSlice = createSlice({
     name: "user",
@@ -88,77 +78,8 @@ const userSlice = createSlice({
             }
         }
     }
-})
+});
 
-
-export const handleWishlist = ({product, isInWishlist, user}: {
-    product: ProductType,
-    isInWishlist: boolean,
-    user: User
-}) => {
-    return async (dispatch: Dispatch<AnyAction>) => {
-
-        if (isInWishlist) {
-            await useFetch.put("/api/remove-from-wishlist", {
-                productId: product._id,
-                _id: user._id,
-                token: user.token
-            })
-            dispatch(userActions.removeFromWishlist(product._id))
-            dispatch(snackbarActions.openSnackbar({message: "از لیست علاقمندی شما حذف شد", status: "info"}))
-
-
-        } else {
-
-            await useFetch.put("/api/add-to-wishlist", {
-                productId: product._id,
-                _id: user._id,
-                token: user.token
-            })
-
-            dispatch(userActions.addToWishlist(product._id))
-            dispatch(snackbarActions.openSnackbar({message: "به لیست علاقمندی شما افزوده شد", status: "success"}))
-
-
-        }
-    }
-}
-
-export const handleCart = ({product, isInCart, user}: {
-    product: ProductType,
-    isInCart: boolean,
-    user: User
-}) => {
-    return async (dispatch:Dispatch<AnyAction>) => {
-
-        if (isInCart) {
-            if ("_id" in product) {
-                await useFetch.put("/api/remove-from-cart", {
-                    _id: user?._id, token: user?.token, productId: product._id
-                })
-                dispatch(userActions.removeFromCart(product._id))
-                dispatch(snackbarActions.openSnackbar({message : "از سبد خرید شما حذف شد" , status : "info"}))
-
-
-            }
-
-        } else {
-            if ("_id" in product) {
-                await useFetch.put("/api/add-to-cart", {
-                    productId: product._id,
-                    _id: user._id,
-                    token: user.token
-                })
-
-                dispatch(userActions.addToCart(product._id))
-                dispatch(snackbarActions.openSnackbar({message : "به سبد خرید شما اضافه شد" , status : "success"}))
-
-
-            }
-        }
-    }
-}
-export const userActions = {...userSlice.actions, handleWishlist , handleCart};
-
+export const userActions = userSlice.actions;
 
 export default userSlice.reducer

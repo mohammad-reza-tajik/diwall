@@ -5,11 +5,11 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery"
 import Image from "next/legacy/image"
-import {Favorite} from "@mui/icons-material";
+import Favorite from "@mui/icons-material/Favorite";
 import {useRouter} from "next/router";
 import React, {useState} from "react";
 import {useTheme} from "@mui/material/styles"
-import {userActions, useAppSelector, useAppDispatch, snackbarActions} from "@/store";
+import {userActions, useAppDispatch, useAppSelector} from "@/store";
 import Link from "next/link"
 
 const styles = {
@@ -37,27 +37,14 @@ const Product: React.FC<ProductType> = (props) => {
     const matchesMD: boolean = useMediaQuery(theme.breakpoints.down("md"))
     const matchesSM: boolean = useMediaQuery(theme.breakpoints.down("sm"))
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [addToWishlistLoading, setAddToWishlistLoading] = useState(false)
 
-    const user = useAppSelector(state => state.userReducer)
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
-    const isInWishlist = user?.wishlist.includes(props._id)
-
-    const addToWishlistHandler = async () => {
-        try {
-            if (user?.username) {
-                setIsLoading(true)
-                dispatch(userActions.handleWishlist({product: props, isInWishlist, user}))
-            } else {
-                router.push("/auth")
-            }
-        } catch (err) {
-            dispatch(snackbarActions.openSnackbar({message: "متاسفانه عملیات با خطا مواجه شد", status: "error"}))
-        } finally {
-            setIsLoading(false)
-        }
-
+    const  user = useAppSelector(state => state.userReducer);
+    const isInWishlist = user?.wishlist.includes( props._id );
+    const addToWishlistHandler = () => {
+        dispatch(userActions.handleWishlist({product : props , router , setAddToWishlistLoading }))
     }
 
 
@@ -66,7 +53,7 @@ const Product: React.FC<ProductType> = (props) => {
             <Grid item xs={12} sx={{position: "relative", cursor: "pointer"}}>
                 <Grid item sx={styles.addToWishlistButton}>
                     <IconButton onClick={addToWishlistHandler} aria-label="add to wishlist">
-                        {isLoading ? <CircularProgress size={matchesMD ? matchesSM ? 30 : 40 : 40} sx={{
+                        {addToWishlistLoading ? <CircularProgress size={matchesMD ? matchesSM ? 30 : 40 : 40} sx={{
                             borderRadius: 20,
                             p: {xs: 4, md: 5,},
                             bgcolor: "rgba(50,50,50,0.3)",
@@ -102,8 +89,8 @@ const Product: React.FC<ProductType> = (props) => {
 
             </Grid>
             <Grid container item alignItems={"center"} height={50}>
-                <Typography variant={"h4"} component={"span"} color={"#069f69"}
-                            sx={{fontSize: {xs: 11, md: 14, lg: 15}}}>
+                <Typography variant={"h4"} component={"span"}
+                            sx={{fontSize: {xs: 11, md: 14, lg: 15} , color : "primary.main"}}>
                     {props.price + " تومان هر متر مربع"}
                 </Typography>
             </Grid>

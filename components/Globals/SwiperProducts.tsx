@@ -74,7 +74,7 @@ const SwiperProducts: React.FC<Props> = (props) => {
                             <br/>
                             دیوال
                         </Typography>
-                        <Button component={Link} aria-label="visit all products" href={`${props.route}`}
+                        <Button component={Link} aria-label="مشاهده همه" href={`${props.route}`}
                                 variant={"outlined"} color={"white"} sx={{fontSize: 16}}>مشاهده همه</Button>
                     </Grid> : null
             }
