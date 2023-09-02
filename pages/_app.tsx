@@ -45,10 +45,6 @@ declare global {
             await navigator.serviceWorker.register("/sw.js");
         }
 
-        if (typeof window !== "undefined" && "Notification" in window) {
-            setTimeout(async () => await Notification.requestPermission(),10_000)
-        }
-
     } catch (err) {
         console.log(err)
     }

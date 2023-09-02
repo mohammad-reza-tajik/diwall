@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>همکاری با ما</Box>
+                            <Box component={Link} href={"/collaboration"} sx={styles.footer_link}>همکاری با ما</Box>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
