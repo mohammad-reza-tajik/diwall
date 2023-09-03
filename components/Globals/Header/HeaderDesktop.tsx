@@ -254,7 +254,6 @@ const HeaderDesktop: React.FC = () => {
                             <Menu
                                 anchorEl={anchorEl}
                                 open={openMenu}
-                                // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
                                 onClose={closeMenu}
                                 onClick={closeMenu}
                                 transformOrigin={{horizontal: 'right', vertical: 'top'}}

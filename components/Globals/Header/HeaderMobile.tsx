@@ -116,13 +116,12 @@ const HeaderMobile: React.FC = () => {
                             <Menu
                                 anchorEl={anchorEl}
                                 open={openMenu}
-                                // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
                                 onClose={closeMenu}
                                 onClick={closeMenu}
                                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
-                                <MenuItem onClick={() => router.push("/account/" + user?._id)}>
+                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=1`)}>
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
@@ -130,7 +129,7 @@ const HeaderMobile: React.FC = () => {
                                         پروفایل
                                     </Typography>
                                 </MenuItem>
-                                <MenuItem onClick={() => router.push("/account/" + user?._id + "?tab=2")}>
+                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=2`)}>
                                     <ListItemIcon>
                                         <Favorite sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
@@ -139,7 +138,7 @@ const HeaderMobile: React.FC = () => {
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem
-                                    onClick={() => router.push("/account/" + user?._id + "?tab=3")}>
+                                    onClick={() => router.push(`/account/${user?._id}?tab=3`)}>
                                     <ListItemIcon>
                                         <ShoppingBag sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>

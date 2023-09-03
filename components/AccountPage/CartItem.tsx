@@ -25,8 +25,8 @@ const CartItem: React.FC<ProductType> = (props) => {
     const dispatch = useAppDispatch()
 
     const [numberInCart, setNumberInCart] = useState(1)
-    const numbersInCartChangeHandler = (event : ChangeEvent) => {
-        setNumberInCart(Number((event.target as HTMLInputElement).value))
+    const numbersInCartChangeHandler = (event : ChangeEvent<HTMLInputElement>) => {
+        setNumberInCart(Number(event.target .value))
 
     }
 

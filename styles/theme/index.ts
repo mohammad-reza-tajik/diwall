@@ -91,7 +91,7 @@ const theme  = createTheme({
         },
         MuiMenu:{
             defaultProps:{
-                disableScrollLock:true
+                disableScrollLock:true  // to prevent adding padding to the body on opening the menu
             }
 
         },
