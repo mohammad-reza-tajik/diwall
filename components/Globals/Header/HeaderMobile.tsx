@@ -119,15 +119,6 @@ const HeaderMobile: React.FC = () => {
                                 // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
                                 onClose={closeMenu}
                                 onClick={closeMenu}
-                                PaperProps={{
-                                    elevation: 0,
-                                    sx: {
-                                        overflow: 'visible',
-                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                        mt: 1.5,
-
-                                    },
-                                }}
                                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >

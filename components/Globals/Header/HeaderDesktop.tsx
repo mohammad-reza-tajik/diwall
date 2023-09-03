@@ -257,20 +257,11 @@ const HeaderDesktop: React.FC = () => {
                                 // disableScrollLock={true}     // to prevent adding padding to the body on opening the menu
                                 onClose={closeMenu}
                                 onClick={closeMenu}
-                                PaperProps={{
-                                    elevation: 0,
-                                    sx: {
-                                        overflow: 'visible',
-                                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                        mt: 1.5,
-
-                                    },
-                                }}
                                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
 
-                                <MenuItem onClick={() => router.push("/account/" + user?._id)}>
+                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=1`)}>
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
