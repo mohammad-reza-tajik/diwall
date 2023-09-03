@@ -9,8 +9,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Create from "@mui/icons-material/Create";
 import  TextField  from "@mui/material/TextField";
 import {useRouter} from "next/router";
+import type {SxProps , Theme} from "@mui/system";
 
-const styles = {
+const styles : Record<string, SxProps> = {
     commentField: {
                
         ".MuiInputBase-input" : {
@@ -24,7 +25,7 @@ const styles = {
             "&::-webkit-scrollbar-thumb" : {
                 borderRadius: 8,
                 backgroundClip: "content-box",
-                bgcolor: (theme) => theme.palette.primary.main,
+                bgcolor: (theme : Theme) => theme.palette.primary.main,
             },
         },
         
@@ -85,7 +86,6 @@ const CommentForm: React.FC<Props> = (props) => {
             dispatch(snackbarActions.openSnackbar({message : "دیدگاه شما با موفقیت ثبت شد" , status : "success"}))
             props.onAddComment()
         } catch (err) {
-            console.log(err)
             dispatch(snackbarActions.openSnackbar({message : "متاسفانه عملیات با خطا مواجه شد" , status : "error"}))
 
         } finally {

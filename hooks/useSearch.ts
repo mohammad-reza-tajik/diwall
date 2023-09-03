@@ -1,4 +1,4 @@
-import {useCallback, useState} from "react";
+import {ChangeEvent, FormEvent, useCallback, useState} from "react";
 import {useRouter} from "next/router";
 import type {ProductType} from "@/db/productModel";
 import useFetch from "@/hooks/useFetch";
@@ -13,7 +13,7 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boole
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [results, setResults] = useState<Array<ProductType>>([])
 
-    const submitSearchHandler = async (event) => {
+    const submitSearchHandler = async (event : FormEvent) => {
         event.preventDefault()
         if (search.trim() === "") {
             setIsWrong(true)
@@ -44,7 +44,7 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boole
 
     }, [])
 
-    const searchChangeHandler = (e) => {
+    const searchChangeHandler = (e : ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value)
         optimizedFn(e.target.value)
         if (e.target.value.trim() === "") {

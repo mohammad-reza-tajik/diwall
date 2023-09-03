@@ -9,9 +9,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import Close from "@mui/icons-material/Close";
 import useFetch from "@/hooks/useFetch";
+import type { SxProps } from '@mui/system';
 
 
-const styles = {
+
+const styles : Record<string, SxProps> = {
     fields: {
         width: 1
     },
@@ -68,9 +70,8 @@ const AddProduct: React.FC = () => {
 
     }
 
-    const uploadImageChangeHandler = (event: ChangeEvent) => {
-        setUploadedFileName((event.target as HTMLInputElement).value)
-        console.log((event.target as HTMLInputElement).value)
+    const uploadImageChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setUploadedFileName(event.target .value)
     }
 
 

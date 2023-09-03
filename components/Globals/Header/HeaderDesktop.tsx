@@ -29,9 +29,10 @@ import React, {useState} from "react";
 import {useAppDispatch, useAppSelector, userActions , snackbarActions} from "@/store";
 import SearchResults from "../SearchResults";
 import useSearch from "@/hooks/useSearch";
+import type {SxProps} from "@mui/system";
 
 
-const styles = {
+const styles : Record<string, SxProps>   = {
     searchField: {
         width: {md: 350, lg: 400},
         height: 1,
@@ -118,7 +119,7 @@ const HeaderDesktop: React.FC = () => {
     }
 
 
-    const goToFavorites = async (_) => {
+    const goToFavorites = async () => {
         if (user.username) {
             await router.push(`/account/${user?._id}?tab=2`)
 
@@ -129,7 +130,7 @@ const HeaderDesktop: React.FC = () => {
     }
 
 
-    const goToCart = async (_) => {
+    const goToCart = async () => {
         if (user.username) {
             await router.push(`/account/${user?._id}?tab=3`)
         } else {

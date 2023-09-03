@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {CSSProperties, useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {Swiper, SwiperSlide} from "swiper/react";
@@ -15,14 +15,15 @@ import Person from "@mui/icons-material/Person";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
+import type {SxProps , Theme} from "@mui/system";
 
 
-const styles = {
+const styles: Record<string, SxProps & CSSProperties> = {
 
     swiper: {
         width: "100%",
         "& .swiper-button-prev , & .swiper-button-next": {
-            bgcolor: (theme) => theme.palette.primary.main,
+            bgcolor: (theme : Theme) => theme.palette.primary.main,
             borderRadius: "50%",
             width: "5rem",
             height: "5rem",
@@ -51,7 +52,7 @@ const styles = {
         "&::-webkit-scrollbar-thumb": {
             borderRadius: 8,
             backgroundClip: "content-box",
-            bgcolor: (theme) => theme.palette.primary.main,
+            bgcolor: (theme : Theme) => theme.palette.primary.main,
         }
     }
 

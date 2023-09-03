@@ -5,9 +5,10 @@ import React from "react";
 import IconButton from "@mui/material/IconButton";
 import Close from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
+import type {SxProps} from "@mui/system";
 
 
-const styles = {
+const styles : SxProps = {
 
     display : "flex",
     alignItems : "center",

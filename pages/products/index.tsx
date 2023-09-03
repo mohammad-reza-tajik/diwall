@@ -37,12 +37,12 @@ const Products: React.FC = () => {
                     // console.log(res)
                     setProducts(res.products)
                     setPageInformation(res)
-                    setIsLoading(false)
                 }
-
             } catch (err) {
-                setIsLoading(false)
                 console.log(err)
+            } finally {
+                setIsLoading(false)
+
             }
 
         })()

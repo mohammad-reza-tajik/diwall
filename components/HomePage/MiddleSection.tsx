@@ -3,8 +3,9 @@ import Image from "next/image"
 import React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
+import type {SxProps} from "@mui/system";
 
-const styles = {
+const styles : Record<string, SxProps>   = {
     pictures:{
         display:{xs:"none",md:"flex"}
     }

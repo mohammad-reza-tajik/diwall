@@ -6,9 +6,10 @@ import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
+import type {SxProps} from "@mui/system";
 
 
-const styles = {
+const styles: Record<string, SxProps> = {
 
     mainNav: {
         fontSize: 16,

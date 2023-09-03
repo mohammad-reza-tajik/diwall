@@ -2,10 +2,11 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import type {User} from "@/store/userSlice";
 
 
 interface Props {
-    user:any;
+    user:User;
 }
 const Profile : React.FC<Props> = (props) => {
     const {user} =props;

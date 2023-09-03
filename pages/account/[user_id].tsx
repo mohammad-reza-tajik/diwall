@@ -10,13 +10,14 @@ import Head from "next/head";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
 import useFetch from "@/hooks/useFetch";
+import type {SxProps} from "@mui/system";
 
 const Profile = dynamic(() => import("@/components/AccountPage/Profile"))
 const AddProduct = dynamic(() => import("@/components/AccountPage/AddProduct"))
 const Wishlist = dynamic(() => import("@/components/AccountPage/Wishlist"))
 const Cart = dynamic(() => import("@/components/AccountPage/Cart"))
 
-const styles = {
+const styles : Record<string, SxProps> = {
     tab: {
         fontSize: {xs: 12, md: 15},
         color: "#666",

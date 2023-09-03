@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-    children?: any;
+    children?: React.ReactNode;
     index: number;
     tab: number;
 }

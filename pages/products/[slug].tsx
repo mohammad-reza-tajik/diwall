@@ -19,12 +19,13 @@ import Head from "next/head";
 import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
 import useFetch from "@/hooks/useFetch";
+import type {SxProps} from "@mui/system";
 
 const Info = dynamic(() => import("@/components/DetailPage/Info"))
 const Features = dynamic(() => import("@/components/Globals/Features"))
 
 
-const styles = {
+const styles : Record<string, SxProps> = {
     addToCartButton: {
 
         width: {xs: "100%", md: 200},

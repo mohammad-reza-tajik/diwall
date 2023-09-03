@@ -1,15 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 import type {PayloadAction} from "@reduxjs/toolkit"
 import storeTokenAndUser from "@/utilities/storeToken";
+import type {UserType} from "@/db/userModel";
 
-export interface User {
-    username: string,
-    email: string,
-    _id: string,
+export interface User extends Omit<UserType, "password">{
     token: string,
-    cart: string[],
-    role: string;
-    wishlist: string[]
 }
 
 const initialState: User = {

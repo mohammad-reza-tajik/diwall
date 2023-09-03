@@ -10,14 +10,15 @@ import Typography from "@mui/material/Typography";
 import Product from "./Product";
 import React from "react";
 import type {ProductType} from "@/db/productModel";
+import type {SxProps , Theme} from "@mui/system";
 
 let slidesPerView: number;
 
-const styles = {
+const styles : Record<string, SxProps> = {
     swiper: {
         width: "100%",
         "& .swiper-button-prev , & .swiper-button-next": {
-            bgcolor: (theme) => theme.palette.primary.main,
+            bgcolor: (theme : Theme) => theme.palette.primary.main,
             borderRadius: "50%",
             width: "5rem",
             height: "5rem",

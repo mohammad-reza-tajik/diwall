@@ -7,10 +7,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import dynamic from "next/dynamic";
 import CommentForm from "./CommentForm";
 import SwiperProducts from "../Globals/SwiperProducts";
+import {ProductType} from "@/db/productModel";
+import {SxProps} from "@mui/system";
 
 const Comments = dynamic(()=>import("./Comments"))
 
-const styles = {
+const styles : Record<string, SxProps> = {
     tab: {
         fontSize: {xs: 12, md: 16},
         color: "#333",
@@ -21,7 +23,7 @@ const styles = {
 }
 
 interface Props {
-    products: any;
+    products: ProductType[];
     isLoading: boolean;
     currentProductTitle:string;
 }

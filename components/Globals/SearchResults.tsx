@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FormEvent} from "react";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Image from "next/image";
@@ -6,9 +6,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useRouter} from "next/router";
 import type {ProductType} from "@/db/productModel";
+import type {SxProps} from "@mui/system";
 
 
-const styles = {
+const styles: Record<string, SxProps> = {
     searchResultsContainer: {
         position: "absolute",
         top: {xs: 120, md: "100%"},
@@ -16,11 +17,9 @@ const styles = {
         width: {xs: 1, md: 400},
         zIndex: 1001,
         p: "1rem",
-        // maxHeight:300,
         border: {xs: "none", md: "1px solid #ccc"},
         borderTop: "none",
         bgcolor: "white.main",
-        // bgcolor: "coral",
         justifyContent: "center",
         alignItems: "center",
 
@@ -50,8 +49,8 @@ interface Props {
     isLoading: boolean;
     results: ProductType[];
     search: string;
-    submitSearchHandler: (event?) => void
-    onOpen?: (a: boolean) => void;
+    submitSearchHandler: (event : FormEvent) => void
+    onOpen?: (open: boolean) => void;
     onClose?: () => void;
 
 }

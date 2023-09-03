@@ -3,12 +3,14 @@ import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Product from "../Globals/Product";
+import type {User} from "@/store/userSlice";
+import type {ProductType} from "@/db/productModel";
 
 
 interface Props {
     isLoading:boolean;
-    populatedWishlist:any;
-    user:any;
+    populatedWishlist:ProductType[];
+    user:User;
 }
 const Wishlist : React.FC<Props> = (props) => {
     const {isLoading , user ,populatedWishlist } = props;

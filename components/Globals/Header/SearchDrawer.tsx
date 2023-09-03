@@ -9,9 +9,10 @@ import React from "react";
 
 import SearchResults from "../SearchResults";
 import useSearch from "@/hooks/useSearch";
+import type {SxProps} from "@mui/system";
 
 
-const styles = {
+const styles : Record<string, SxProps>  = {
     searchField: {
         width: {xs: 1, sm: 1, md: .6},
         fontSize: {xs: 4, sm: "2rem"},
@@ -41,8 +42,6 @@ const styles = {
         width: "100vw",
         px: 20,
         pt: 30,
-        // justifyContent: "center",
-        // alignItems: "center",
         transition: "all .6s",
         zIndex: 1000
 
@@ -53,7 +52,7 @@ const styles = {
 }
 
 interface Props {
-    onOpen: any;
+    onOpen: (open: boolean) => void;
     open: boolean;
 }
 

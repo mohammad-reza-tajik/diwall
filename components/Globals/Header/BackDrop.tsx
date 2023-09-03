@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 
 interface Props {
-    onOpen:any;
+    onOpen:(open : boolean)=>void;
     open:boolean;
 }
 const BackDrop : React.FC<Props> = (props) => {

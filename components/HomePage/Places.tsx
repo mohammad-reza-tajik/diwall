@@ -4,11 +4,11 @@ import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import Circle from "@mui/icons-material/Circle";
-// import Image from "next/image"
 import {useRouter} from "next/router";
 import React from "react";
+import type {SxProps} from "@mui/system";
 
-const styles = {
+const styles : Record<string, SxProps>  = {
     place: {
         transition: "all .4s",
         cursor: "pointer",

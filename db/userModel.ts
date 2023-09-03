@@ -1,15 +1,16 @@
-import {Schema, Types, models, model} from "mongoose";
+import {Schema, models, model} from "mongoose";
 import bcrypt from "bcrypt";
-interface User {
+export interface UserType {
     username: string;
     password: string;
     email: string;
-    wishlist: Types.ObjectId[];
-    cart: Types.ObjectId[];
+    _id : string;
+    wishlist: string[];
+    cart: string[];
     role : string;
 }
 
-const userSchema = new Schema<User>(
+const userSchema = new Schema<UserType>(
     {
         username: {
             type: String,
@@ -50,4 +51,4 @@ userSchema.pre("save", async function (next) {
     next()
 })
 
-export default models.User || model<User>('User', userSchema);
+export default models.User || model<UserType>('User', userSchema);

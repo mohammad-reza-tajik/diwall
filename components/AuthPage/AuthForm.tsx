@@ -15,8 +15,9 @@ import Create from "@mui/icons-material/Create";
 import Login from "@mui/icons-material/Login";
 import Grid from "@mui/material/Grid";
 import useAuth from "@/hooks/useAuth";
+import type {SxProps} from "@mui/system";
 
-const styles = {
+const styles: Record<string, SxProps> = {
     backgroundImage: {
         position: "fixed",
         display: {xs: "none", md: "block"},

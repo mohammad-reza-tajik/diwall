@@ -11,8 +11,9 @@ import React, {useState} from "react";
 import {useTheme} from "@mui/material/styles"
 import {userActions, useAppDispatch, useAppSelector} from "@/store";
 import Link from "next/link"
+import type {SxProps} from "@mui/system";
 
-const styles = {
+const styles : Record<string, SxProps> = {
     product: {
         borderRadius: 1,
         justifyContent: "center",

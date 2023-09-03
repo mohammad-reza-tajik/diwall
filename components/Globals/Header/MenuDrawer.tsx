@@ -9,9 +9,10 @@ import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import {useRouter} from "next/router";
+import type {SxProps} from "@mui/system";
 
 
-const styles = {
+const styles : Record<string, SxProps>  = {
     drawer: {
         p: 20,
         height: "100vh",
@@ -25,7 +26,7 @@ const styles = {
 }
 
 interface Props {
-    onOpen:any;
+    onOpen: (open: boolean) => void;
     open:boolean;
 }
 

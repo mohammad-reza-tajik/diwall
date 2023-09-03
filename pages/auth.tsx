@@ -2,9 +2,10 @@ import Grid from "@mui/material/Grid";
 import Head from "next/head";
 import React from "react";
 import AuthForm from "@/components/AuthPage/AuthForm";
+import type {SxProps} from "@mui/system";
 
 
-const styles = {
+const styles: Record<string, SxProps>  = {
     container: {
         minWidth: "100vw",
         minHeight: "100vh",

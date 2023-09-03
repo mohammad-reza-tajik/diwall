@@ -60,13 +60,3 @@ export const getStaticProps : GetStaticProps = async () => {
 }
 
 export default Home
-
-/*await fetch("/api/products", {
-        method:"POST",
-        headers: {
-            "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body:JSON.stringify({sortBy: 2}),
-
-    });*/

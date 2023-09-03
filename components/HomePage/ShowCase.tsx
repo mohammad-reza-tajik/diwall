@@ -1,21 +1,14 @@
 import Grid from "@mui/material/Grid";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import {useTheme} from "@mui/material/styles";
-import Divider from "@mui/material/Divider";
-
 import Image from "next/legacy/image"
 import React from "react";
+import type {SxProps} from "@mui/system";
 
-const styles = {
+const styles : Record<string, SxProps>  = {
     images:{
         p:{xs:15,md:0}
     }
 }
 const ShowCase: React.FC = () => {
-
-    const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-
 
     return (
         <Grid container item component={"section"} alignItems={"center"} overflow={"hidden"} xs={12} my={50} border={"1px solid #ddd"} borderRadius={2}>
@@ -43,7 +36,6 @@ const ShowCase: React.FC = () => {
                     <Image src={"/assets/pictures/showcase/magnet.svg"} alt={"مگنت"}
                            width={100} height={100}/>
                 </Grid>
-            {/*<Divider sx={{width: 1, bgcolor: "#ddd"}}/>*/}
         </Grid>
     )
 }

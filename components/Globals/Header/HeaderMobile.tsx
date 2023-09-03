@@ -18,9 +18,10 @@ import Link from "next/link";
 import {snackbarActions, useAppDispatch, useAppSelector, userActions} from "@/store";
 import BackDrop from "./BackDrop";
 import SearchDrawer from "./SearchDrawer";
+import type {SxProps} from "@mui/system";
 
 
-const styles = {
+const styles : Record<string, SxProps>  = {
 
     headerIcon: {
         fontSize: {xs: 35, md: 50},

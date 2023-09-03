@@ -5,9 +5,10 @@ import Image from "next/image"
 import React, {Fragment} from "react";
 import Link from "next/link";
 import Head from "next/head";
+import type {SxProps} from "@mui/system";
 
 
-const styles = {
+const styles : Record<string, SxProps> = {
     container: {
 
         overflow: "hidden",

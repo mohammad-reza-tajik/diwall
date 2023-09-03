@@ -4,8 +4,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import CartItem from "./CartItem";
 import type {ProductType} from "@/db/productModel";
+import type {SxProps} from "@mui/system";
+import type {User} from "@/store/userSlice";
 
-const styles = {
+const styles : Record<string, SxProps> = {
     tab: {
         fontSize: {xs: 12, md: 15},
         color: "#333",
@@ -23,7 +25,7 @@ const styles = {
 interface Props {
     isLoading:boolean;
     populatedCart:ProductType[];
-    user:any;
+    user:User;
 
 }
 
