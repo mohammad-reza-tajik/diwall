@@ -162,11 +162,12 @@ const ProductDetails = () => {
                             </Grid>
                             <Grid container item xs={4} justifyContent={"flex-end"} alignItems={"center"}
                                   sx={{display: {xs: "none", md: "flex"}}}>
-                                <Typography sx={{fontSize: {xs: 14, md: 16}}} borderRadius={20} px={20}
-                                            component={"span"}
-                                            py={10}
-                                            color={"white.main"}
-                                            bgcolor={isLoading ? "transparent" : product && product.quantity > 0 ? "primary.main" : "error.main"}>
+                                <Typography component={"span"} sx={
+                                    {
+                                        fontSize: 14 , borderRadius:1 , px:10,py:5,color : "white.main",
+                                        bgcolor : isLoading ? "transparent" : product && product.quantity > 0 ? "primary.main" : "error.main"
+                                    }
+                                }>
                                     {
                                         isLoading ?
                                             <Skeleton variant={"text"} animation={"wave"} width={100}

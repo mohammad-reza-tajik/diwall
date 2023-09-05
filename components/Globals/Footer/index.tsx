@@ -163,7 +163,7 @@ const Footer: React.FC = () => {
                                           sx={{
                                               fontSize: {xs: 30, md: 50},
                                               border: {xs: "none", md: "2px solid #11AE77"},
-                                              borderRadius: "50px",
+                                              borderRadius: 2,
                                               p: {xs: 1, md: 7}
                                           }}/>
 
@@ -176,7 +176,7 @@ const Footer: React.FC = () => {
                                          sx={{
                                              fontSize: {xs: 30, md: 50},
                                              border: {xs: "none", md: "2px solid #11AE77"},
-                                             borderRadius: "50px",
+                                             borderRadius: 2,
                                              p: {xs: 1, md: 7}
                                          }}/>
 
@@ -187,7 +187,7 @@ const Footer: React.FC = () => {
                                            sx={{
                                                fontSize: {xs: 30, md: 50},
                                                border: {xs: "none", md: "2px solid #11AE77"},
-                                               borderRadius: "50px",
+                                               borderRadius: 2,
                                                p: {xs: 1, md: 7}
                                            }}/>
 
@@ -200,7 +200,7 @@ const Footer: React.FC = () => {
                                           sx={{
                                               fontSize: {xs: 30, md: 50},
                                               border: {xs: "none", md: "2px solid #11AE77"},
-                                              borderRadius: "50px",
+                                              borderRadius: 2,
                                               p: {xs: 1, md: 7}
                                           }}/>
                             </IconButton>

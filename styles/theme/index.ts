@@ -119,4 +119,10 @@ declare module '@mui/material/Button' {
     }
 }
 
+declare module '@mui/material/CircularProgress' {
+    interface CircularProgressPropsColorOverrides {
+        white: true;
+    }
+}
+
 export default theme
