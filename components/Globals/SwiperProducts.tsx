@@ -2,7 +2,7 @@ import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {A11y, Navigation} from 'swiper';
+import {A11y, Navigation} from 'swiper/modules';
 import Link from "next/link";
 import SectionHeading from "./SectionHeading";
 import Button from "@mui/material/Button";
@@ -18,16 +18,13 @@ const styles : Record<string, SxProps> = {
     swiper: {
         width: "100%",
         "& .swiper-button-prev , & .swiper-button-next": {
-            bgcolor: (theme : Theme) => theme.palette.primary.main,
-            borderRadius: "50%",
-            width: "5rem",
-            height: "5rem",
+            bgcolor: "primary.main",
+            borderRadius: 2,
+            width: 50,
+            height: 50,
             color: "#fff",
-            padding: "1rem",
-            fontSize: "1rem",
-
             "&:after": {
-                fontSize: "2rem",
+                fontSize: 20,
             }
         }
     },

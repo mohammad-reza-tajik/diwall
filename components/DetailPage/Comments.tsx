@@ -2,10 +2,7 @@ import React, {CSSProperties, useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {Swiper, SwiperSlide} from "swiper/react";
-import {A11y, Navigation} from "swiper";
-
-import "swiper/css";
-import 'swiper/css/navigation';
+import {A11y, Navigation} from "swiper/modules";
 
 import useFetch from "@/hooks/useFetch";
 import {useRouter} from "next/router";
@@ -15,7 +12,7 @@ import Person from "@mui/icons-material/Person";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
-import type {SxProps , Theme} from "@mui/system";
+import type {SxProps} from "@mui/system";
 
 
 const styles: Record<string, SxProps & CSSProperties> = {
@@ -23,15 +20,13 @@ const styles: Record<string, SxProps & CSSProperties> = {
     swiper: {
         width: "100%",
         "& .swiper-button-prev , & .swiper-button-next": {
-            bgcolor: (theme : Theme) => theme.palette.primary.main,
-            borderRadius: "50%",
-            width: "5rem",
-            height: "5rem",
+            bgcolor: "primary.main",
+            borderRadius: 2,
+            width: 50,
+            height: 50,
             color: "#fff",
-            padding: "1rem",
-            fontSize: "1rem",
             "&:after": {
-                fontSize: "2rem",
+                fontSize: 20,
             }
         }
     },
@@ -52,7 +47,7 @@ const styles: Record<string, SxProps & CSSProperties> = {
         "&::-webkit-scrollbar-thumb": {
             borderRadius: 8,
             backgroundClip: "content-box",
-            bgcolor: (theme : Theme) => theme.palette.primary.main,
+            bgcolor: "primary.main",
         }
     }
 
