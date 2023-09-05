@@ -106,10 +106,6 @@ const HeaderDesktop: React.FC = () => {
 
     const {router , search , submitSearchHandler , searchChangeHandler , isWrong , results , isLoading , closeSearchHandlerDesktop} = useSearch("desktop")
 
-
-
-
-
     //*** menu logic ***//
 
     const [anchorEl, setAnchorEl] = useState(null)
@@ -171,7 +167,7 @@ const HeaderDesktop: React.FC = () => {
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <IconButton type={"submit"} aria-label="search button">
-                                                <Search sx={{...styles.searchIcon}}/>
+                                                <Search sx={styles.searchIcon}/>
                                             </IconButton>
                                         </InputAdornment>
                                     ),
@@ -195,13 +191,13 @@ const HeaderDesktop: React.FC = () => {
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
                         <Badge showZero max={99} badgeContent={user?.wishlist.length || 0} color="primary"
                                overlap="circular"
-                               sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}
+                               sx={{"& .MuiBadge-badge": {fontSize: 16, height: 25, minWidth: 25, borderRadius: 30}}}
                          >
                             <IconButton color={"primary"} onClick={goToFavorites} aria-label="go to wishlist">
                                 <FavoriteBorder sx={{
-                                    fontSize: {xs: 40, sm: 50},
+                                    fontSize: {xs: 40, sm: 45},
                                     border: "2px solid #11AE77",
-                                    borderRadius: "50px",
+                                    borderRadius: 3,
                                     p: ".7rem",
                                     bgcolor: "#fff"
                                 }}/>
@@ -211,12 +207,12 @@ const HeaderDesktop: React.FC = () => {
                     <Tooltip title={"سبد خرید شما"} arrow enterDelay={1000}>
                         <Badge showZero max={99} badgeContent={user?.cart.length || 0} color="primary"
                                overlap="circular"
-                               sx={{"& .MuiBadge-badge": {fontSize: 16, height: 30, minWidth: 30, borderRadius: 30}}}>
+                               sx={{"& .MuiBadge-badge": {fontSize: 16, height: 25, minWidth: 25, borderRadius: 30}}}>
                             <IconButton color={"primary"} onClick={goToCart} aria-label="go to cart">
                                 <ShoppingBagOutlined sx={{
-                                    fontSize: {xs: 40, sm: 50},
+                                    fontSize: {xs: 40, sm: 45},
                                     border: "2px solid #11AE77",
-                                    borderRadius: "50px",
+                                    borderRadius: 3,
                                     p: ".7rem",
                                     bgcolor: "#fff"
                                 }}/>
