@@ -10,16 +10,12 @@ const styles = {
     bannerButton: {
         fontSize: 16,
     },
-
-
     bannerTextBox: {
         backgroundImage: "linear-gradient(rgba(44, 44, 44,.6),rgba(44, 44, 44,.6))",
         py: 100,
         px: {xs: 50, sm: 90},
         gap: 60,
         zIndex: 50
-
-
     },
 
 
@@ -51,33 +47,3 @@ const BannerMobile: React.FC = () => {
 };
 
 export default BannerMobile;
-
-
-/*
-
-  placeholder: {
-        width: "100vw",
-        height: "100vh",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        zIndex: 55,
-        bgcolor:"background.paper",
-        display:"flex",
-        flexDirection:"column",
-        justifyContent:"center",
-        alignItems:"center",
-        gap: 30
-
-    }
-{
-                !loaded &&
-                <Grid sx={styles.placeholder}>
-
-                <CircularProgress color={"primary"} size={50}/>
-                <Typography component={"p"} fontSize={20} fontFamily={"dana-black"}>دیوال</Typography>
-
-
-            </Grid>
-            }
- */

@@ -12,13 +12,11 @@ interface CartAndWishListArgs {
     product: ProductType;
     router: NextRouter;
     setAddToWishlistLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-    setIsInWishlist?: React.Dispatch<React.SetStateAction<boolean>>;
     setAddToCartLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-    setIsInCart?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const handleWishlist = (args: CartAndWishListArgs) => {
-    const {product, router, setAddToWishlistLoading, setIsInWishlist} = args;
+    const {product, router, setAddToWishlistLoading} = args;
     return async (dispatch: ThunkDispatch<{  userReducer: User
     }, undefined, AnyAction> & React.Dispatch<AnyAction>, getState: () => { userReducer: User }) => {
         const user = getState().userReducer;
@@ -68,7 +66,7 @@ export const handleWishlist = (args: CartAndWishListArgs) => {
 
 export const handleCart = (args: CartAndWishListArgs) => {
 
-    const {product, router, setAddToCartLoading, setIsInCart} = args;
+    const {product, router, setAddToCartLoading} = args;
 
     return async (dispatch: ThunkDispatch<{
         userReducer: User

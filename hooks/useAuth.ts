@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {FormEvent, useRef, useState} from "react";
 import {useRouter} from "next/router";
 import {userActions, useAppDispatch, snackbarActions} from "@/store";
 import useFetch from "@/hooks/useFetch";
@@ -31,9 +31,9 @@ const useAuth = () => {
     //********************************* form submission **********************************!//
 
 
-    const formHandler = async (e) => {
+    const formHandler = async (event : FormEvent) => {
         try {
-            e.preventDefault()
+            event.preventDefault()
             setIsLoading(true)
 
 
@@ -58,7 +58,6 @@ const useAuth = () => {
 
 
         } catch (err) {
-            console.log(err)
             dispatch(snackbarActions.openSnackbar({message: err?.response.data.message, status: "error"}))
 
 

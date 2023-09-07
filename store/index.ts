@@ -3,7 +3,7 @@ import {snackbarActions} from "./snackbarSlice";
 import {useAppDispatch,useAppSelector} from "@/hooks/useStore";
 import store from "./store"
 
-/*
+/**
 * we create an index file so to import everything related to redux
 * from a single place.
 * this makes our life as a developer much easier .
