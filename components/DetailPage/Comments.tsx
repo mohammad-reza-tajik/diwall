@@ -18,12 +18,12 @@ import type {SxProps} from "@mui/system";
 const styles: Record<string, SxProps & CSSProperties> = {
 
     swiper: {
-        width: "100%",
+        width: 1,
         "& .swiper-button-prev , & .swiper-button-next": {
             bgcolor: "primary.main",
             borderRadius: 2,
-            width: 50,
-            height: 50,
+            width: {xs:40,md:50},
+            height: {xs:40,md:50},
             color: "#fff",
             "&:after": {
                 fontSize: 20,
