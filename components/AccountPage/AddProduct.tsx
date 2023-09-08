@@ -13,7 +13,7 @@ import type { SxProps } from '@mui/system';
 
 
 
-const styles : Record<string, SxProps> = {
+const styles = {
     fields: {
         width: 1
     },
@@ -28,7 +28,7 @@ const styles : Record<string, SxProps> = {
         p : "1rem",
         fontSize: {xs: 30, sm: 40},
     }
-}
+} satisfies Record<string, SxProps>
 
 const AddProduct: React.FC = () => {
 
@@ -109,7 +109,7 @@ const AddProduct: React.FC = () => {
                         uploadedFileName === "" ?
                             <Button variant={"contained"} sx={styles.buttons} color={"primary"} component={"label"}
                                     htmlFor={"images"}
-                                    startIcon={<Upload/>}>آپلود</Button> :
+                                    startIcon={<Upload/>}>آپلود عکس ها</Button> :
                             <Grid container item xs={12} alignItems={"center"} gap={5} sx={{px: 10, py : 5 ,border : (theme) => `1px solid ${theme.palette.primary.main} `}}>
                                 <Grid item xs>
                                     <Typography variant={"h6"}>{uploadedFileName.replace(/[A-Za-z]+:\\[A-Za-z]+\\/ , "")}</Typography>

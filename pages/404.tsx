@@ -8,16 +8,15 @@ import Head from "next/head";
 import type {SxProps} from "@mui/system";
 
 
-const styles : Record<string, SxProps> = {
+const styles  = {
     container: {
-
         overflow: "hidden",
         width: "100%",
         height: "100vh"
 
     }
 
-}
+} satisfies Record<string, SxProps>
 
 const NotFound: React.FC = () => {
 

@@ -11,7 +11,7 @@ import {userActions, useAppDispatch, useAppSelector} from "@/store";
 import Link from "next/link"
 import type {SxProps} from "@mui/system";
 
-const styles: Record<string, SxProps> = {
+const styles = {
     product: {
         borderRadius: 1,
         justifyContent: "center",
@@ -28,7 +28,7 @@ const styles: Record<string, SxProps> = {
         borderRadius: 2,
 
     }
-}
+} satisfies Record<string, SxProps>
 
 
 const Product: React.FC<ProductType> = (props) => {

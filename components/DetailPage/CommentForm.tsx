@@ -11,7 +11,7 @@ import  TextField  from "@mui/material/TextField";
 import {useRouter} from "next/router";
 import type {SxProps , Theme} from "@mui/system";
 
-const styles : Record<string, SxProps> = {
+const styles = {
     commentField: {
                
         ".MuiInputBase-input" : {
@@ -49,7 +49,7 @@ const styles : Record<string, SxProps> = {
         py: 15
     },
 
-}
+} satisfies Record<string, SxProps>
 
 interface Props {
     currentProductTitle:string;

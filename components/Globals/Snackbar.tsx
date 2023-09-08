@@ -8,8 +8,7 @@ import Slide from "@mui/material/Slide";
 import type {SxProps} from "@mui/system";
 
 
-const styles: Record<string, SxProps> = {
-
+const styles = {
     alert: {
         display: "flex",
         alignItems: "center",
@@ -18,8 +17,7 @@ const styles: Record<string, SxProps> = {
         width: 1,
         fontSize: {xs: 13, md: 16},
     }
-
-}
+} satisfies Record<string, SxProps>
 const Snackbar: React.FC = () => {
 
     const snackbar = useAppSelector((state) => state.snackbarReducer);

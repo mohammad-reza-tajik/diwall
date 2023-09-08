@@ -1,21 +1,16 @@
 import Grid from "@mui/material/Grid";
 import Image from "next/image"
 import React from "react";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import {useTheme} from "@mui/material/styles";
 import type {SxProps} from "@mui/system";
 
-const styles : Record<string, SxProps>   = {
+const styles  = {
     pictures:{
         display:{xs:"none",md:"flex"}
     }
-}
+} satisfies Record<string, SxProps>
 
 const MiddleSection : React.FC = () => {
-    const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
     return(
-
     <Grid container component={"section"} item xs={12} my={30}>
         <Grid container item xs={12} md={6} height={300} position={"relative"} overflow={"hidden"}  sx={styles.pictures}>
             <Image src={"/assets/pictures/3D-posters.png"} fill sizes={"500px"}  alt={"3D-posters"} className="contain" />

@@ -12,15 +12,14 @@ import {SxProps} from "@mui/system";
 
 const Comments = dynamic(()=>import("./Comments"))
 
-const styles : Record<string, SxProps> = {
+const styles = {
     tab: {
         fontSize: {xs: 12, md: 16},
         color: "#333",
         fontFamily: "dana-bold",
 
     },
-
-}
+} satisfies Record<string, SxProps>
 
 interface Props {
     products: ProductType[];

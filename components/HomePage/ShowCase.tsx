@@ -3,11 +3,11 @@ import Image from "next/legacy/image"
 import React from "react";
 import type {SxProps} from "@mui/system";
 
-const styles : Record<string, SxProps>  = {
+const styles = {
     images:{
         p:{xs:15,md:0}
     }
-}
+} satisfies Record<string, SxProps>
 const ShowCase: React.FC = () => {
 
     return (

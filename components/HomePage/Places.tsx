@@ -8,7 +8,7 @@ import {useRouter} from "next/router";
 import React from "react";
 import type {SxProps} from "@mui/system";
 
-const styles : Record<string, SxProps>  = {
+const styles    = {
     place: {
         transition: "all .4s",
         cursor: "pointer",
@@ -23,7 +23,7 @@ const styles : Record<string, SxProps>  = {
         fontSize: 16
 
     }
-}
+} satisfies Record<string, SxProps>
 
 
 const Places: React.FC = () => {

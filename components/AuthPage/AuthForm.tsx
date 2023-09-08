@@ -17,7 +17,7 @@ import Grid from "@mui/material/Grid";
 import useAuth from "@/hooks/useAuth";
 import type {SxProps} from "@mui/system";
 
-const styles: Record<string, SxProps> = {
+const styles = {
     backgroundImage: {
         position: "fixed",
         display: {xs: "none", md: "block"},
@@ -51,7 +51,7 @@ const styles: Record<string, SxProps> = {
         fontSize: "2rem",
         color: "primary.main"
     },
-}
+} satisfies Record<string, SxProps>
 
 
 const AuthForm: React.FC = () => {

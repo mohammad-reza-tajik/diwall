@@ -14,7 +14,7 @@ import type {SxProps} from "@mui/system";
 
 let slidesPerView: number;
 
-const styles : Record<string, SxProps> = {
+const styles = {
     swiper: {
         width: "100%",
         "& .swiper-button-prev , & .swiper-button-next": {
@@ -28,7 +28,7 @@ const styles : Record<string, SxProps> = {
             }
         }
     },
-}
+} satisfies Record<string, SxProps>
 
 interface Props {
     mostPopular?: boolean;

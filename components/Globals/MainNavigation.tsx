@@ -9,7 +9,7 @@ import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
 import type {SxProps} from "@mui/system";
 
 
-const styles: Record<string, SxProps> = {
+const styles = {
 
     mainNav: {
         fontSize: 16,
@@ -26,7 +26,7 @@ const styles: Record<string, SxProps> = {
         }
 
     }
-}
+} satisfies Record<string, SxProps>
 
 const MainNavigation: React.FC = () => {
 

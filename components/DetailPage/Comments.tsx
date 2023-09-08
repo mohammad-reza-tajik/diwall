@@ -15,7 +15,7 @@ import {useTheme} from "@mui/material/styles";
 import type {SxProps} from "@mui/system";
 
 
-const styles: Record<string, SxProps & CSSProperties> = {
+const styles = {
 
     swiper: {
         width: 1,
@@ -51,7 +51,7 @@ const styles: Record<string, SxProps & CSSProperties> = {
         }
     }
 
-}
+} satisfies Record<string, SxProps>
 
 
 interface Props {

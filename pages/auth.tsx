@@ -5,7 +5,7 @@ import AuthForm from "@/components/AuthPage/AuthForm";
 import type {SxProps} from "@mui/system";
 
 
-const styles: Record<string, SxProps>  = {
+const styles  = {
     container: {
         minWidth: "100vw",
         minHeight: "100vh",
@@ -15,7 +15,7 @@ const styles: Record<string, SxProps>  = {
         zIndex: 50,
     },
 
-}
+} satisfies Record<string, SxProps>
 
 const Auth: React.FC = () => {
 

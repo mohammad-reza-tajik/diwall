@@ -25,7 +25,7 @@ const Info = dynamic(() => import("@/components/DetailPage/Info"))
 const Features = dynamic(() => import("@/components/Globals/Features"))
 
 
-const styles : Record<string, SxProps> = {
+const styles  = {
     addToCartButton: {
 
         width: {xs: "100%", md: 200},
@@ -55,7 +55,7 @@ const styles : Record<string, SxProps> = {
         fontSize: {xs: 14, md: 16}
     }
 
-}
+} satisfies Record<string, SxProps>
 
 
 const ProductDetails = () => {

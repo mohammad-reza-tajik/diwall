@@ -7,7 +7,7 @@ import type {ProductType} from "@/db/productModel";
 import type {SxProps} from "@mui/system";
 import type {User} from "@/store/userSlice";
 
-const styles : Record<string, SxProps> = {
+const styles = {
     tab: {
         fontSize: {xs: 12, md: 15},
         color: "#333",
@@ -20,7 +20,7 @@ const styles : Record<string, SxProps> = {
 
 
     }
-}
+} satisfies Record<string, SxProps>
 
 interface Props {
     isLoading:boolean;

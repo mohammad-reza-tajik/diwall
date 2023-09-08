@@ -9,7 +9,7 @@ import type {ProductType} from "@/db/productModel";
 import type {SxProps} from "@mui/system";
 
 
-const styles: Record<string, SxProps> = {
+const styles = {
     searchResultsContainer: {
         position: "absolute",
         top: {xs: 120, md: "100%"},
@@ -41,9 +41,7 @@ const styles: Record<string, SxProps> = {
             bgcolor:"background.paper"
         }
     }
-
-
-}
+} satisfies Record<string, SxProps>
 
 interface Props {
     isLoading: boolean;
