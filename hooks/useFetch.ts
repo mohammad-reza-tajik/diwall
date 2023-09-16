@@ -1,4 +1,4 @@
-const handleResponse = async (response) => {
+const handleResponse = async (response : any) => {
     return await response.json();
 }
 const get = async (url: string) => {
@@ -9,7 +9,7 @@ const get = async (url: string) => {
     return handleResponse(response);
 }
 
-const post = async (url: string, body) => {
+const post = async (url: string, body : any) => {
     const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -19,7 +19,7 @@ const post = async (url: string, body) => {
     return handleResponse(response);
 }
 
-const put = async (url: string, body) => {
+const put = async (url: string, body : any) => {
     const requestOptions = {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},

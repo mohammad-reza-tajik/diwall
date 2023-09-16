@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import {SxProps} from "@mui/system";
 
 
 const styles = {
@@ -18,8 +19,7 @@ const styles = {
         zIndex: 50
     },
 
-
-}
+} satisfies Record<string, SxProps>
 
 const BannerMobile: React.FC = () => {
 

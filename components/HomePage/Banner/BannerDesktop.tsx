@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Image from "next/image"
 import Link from "next/link"
 import React from "react";
+import {SxProps} from "@mui/system";
 
 const styles = {
 
@@ -20,7 +21,7 @@ const styles = {
 
 
     }
-}
+} satisfies Record<string, SxProps>
 
 const BannerDesktop: React.FC = () => {
 

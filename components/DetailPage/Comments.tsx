@@ -1,4 +1,4 @@
-import React, {CSSProperties, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {Swiper, SwiperSlide} from "swiper/react";
@@ -80,7 +80,6 @@ const Comments: React.FC<Props> = (props) => {
     const slug = router.isReady && router.query.slug;
 
 
-    // In this use case I needed to put a setIsLoading in the if block (in addition to the one in the finally block)
     useEffect(() => {
             const url = `/api/products/${slug}`;
             (async () => {
