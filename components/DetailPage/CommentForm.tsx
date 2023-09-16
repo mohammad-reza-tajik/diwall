@@ -74,7 +74,7 @@ const CommentForm: React.FC<Props> = (props) => {
         event.preventDefault();
         try {
             setIsLoading(true)
-            await useFetch.post(`/api/products/${slug}/comments`,{
+            const res = await useFetch.post(`/api/products/${slug}/comments`,{
                 comment:{
                     content:commentRef.current.value,
                     author:user.username,
@@ -82,11 +82,16 @@ const CommentForm: React.FC<Props> = (props) => {
                     slug
                 }
             })
+
+            if (!res.ok) {
+                throw new Error(res.message);
+            }
+
             commentRef.current.value = ""
-            dispatch(snackbarActions.openSnackbar({message : "دیدگاه شما با موفقیت ثبت شد" , status : "success"}))
+            dispatch(snackbarActions.openSnackbar({message : res.message , status : "success"}))
             props.onAddComment()
         } catch (err) {
-            dispatch(snackbarActions.openSnackbar({message : "متاسفانه عملیات با خطا مواجه شد" , status : "error"}))
+            dispatch(snackbarActions.openSnackbar({message : err.message , status : "error"}))
 
         } finally {
             setIsLoading(false);
