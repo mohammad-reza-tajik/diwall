@@ -1,4 +1,4 @@
-import "@/db/database_connect"
+import "@/db/connect"
 import User from "@/db/userModel";
 import generateToken from "@/utilities/generateToken";
 

@@ -11,7 +11,7 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boole
     const [search, setSearch] = useState<string>("")
     const [isWrong, setIsWrong] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [results, setResults] = useState<Array<ProductType>>([])
+    const [results, setResults] = useState<ProductType[]>([])
 
     const submitSearchHandler = async (event : FormEvent) => {
         event.preventDefault()
