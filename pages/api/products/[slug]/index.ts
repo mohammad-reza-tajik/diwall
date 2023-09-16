@@ -1,4 +1,4 @@
-import "@/db/database_connect"
+import "@/db/connect"
 import Product from "@/db/productModel";
 import type {ProductType} from "@/db/productModel";
 import {NextApiResponse, NextApiRequest} from "next";

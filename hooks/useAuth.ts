@@ -49,17 +49,19 @@ const useAuth = () => {
 
                 }
 
-            const res = await useFetch.post(`/api/${typeOfForm === "signup" ? "signup" : "login"}`, user)
+            const res = await useFetch.post(`/api/user/${typeOfForm === "signup" ? "signup" : "login"}`, user);
+
+            if ( !res.ok) {
+                throw new Error(res.message)
+            }
+
             dispatch(userActions.login({user : res.user , token : res.token}))
             dispatch(snackbarActions.openSnackbar({message: res.message, status: "success"}));
 
             router.push("/");
 
-
-
         } catch (err) {
-            dispatch(snackbarActions.openSnackbar({message: err?.response.data.message, status: "error"}))
-
+            dispatch(snackbarActions.openSnackbar({message: err.message, status: "error"}))
 
         } finally {
             setIsLoading(false)

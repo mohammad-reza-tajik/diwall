@@ -1,23 +1,15 @@
-import "@/db/database_connect"
+import connect from "@/db/connect"
 import Product from "@/db/productModel";
 import {NextApiRequest, NextApiResponse} from "next";
-import type {ProductType} from "@/db/productModel";
-
-interface Response {
-    products: ProductType[];
-    productsCount: number;
-    lastPage: number;
-    currentPage: number;
-
-}
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Response>) {
 
 
-    if (req.method !== "GET") {
-        return 
-    }
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    try {
+        if (req.method !== "GET") {
+            return
+        }
 
+        await connect();
 
         const ITEMS_PER_PAGE = 10
         const category= req.query.category && String(req.query.category);
@@ -26,39 +18,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         const search =  req.query.search && String(req.query.search); // when the search is undefined it turns into string "undefined"
 
 
-
-        // console.log("[category]",category)
-        // console.log(" [from search] ",search)
-        // console.log(req.query.sortBy)
-        // console.log(sortBy)
-
-        // console.log(`[from api rout ] ${Number("3")}`)
-
-    
-
         if (search && search !=="undefined" && search.trim().length !== 0) {
-            // console.log("from search")
 
             // the only way to put a variable in a regex
             const regexp = new RegExp(search, "g") // output => /req.body.search/g
 
-            /*
-            mongoose queries don't return a promise.
-            it returns thenable it means you can use then/catch , but you can't
-            use async/await to use async/await you should use exec method at the end of the expression
-            */
             const productsCount = await Product.countDocuments({title: regexp})
 
             let products;
 
             if (sortBy === 2) { // best-selling products
-                // @ts-ignore
                 products = await Product.find({title: regexp}).sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else if (sortBy === 3) { // most popular products
-                // @ts-ignore
                 products = await Product.find({title: regexp}).sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else { // latest products
-                // @ts-ignore
                 products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             }
             res.send({
@@ -76,13 +49,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             let products;
 
             if (sortBy === 2) { // best-selling products
-                // @ts-ignore
                 products = await Product.find().sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else if (sortBy === 3) { // most popular products
-                // @ts-ignore
                 products = await Product.find().sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else { // latest products
-                // @ts-ignore
                 products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             }
 
@@ -99,13 +69,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             let products;
 
             if (sortBy === 2) { // best-selling products
-                // @ts-ignore
                 products = await Product.find({categories: {$in: [category]}}).sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else if (sortBy === 3) { // most popular products
-                // @ts-ignore
                 products = await Product.find({categories: {$in: [category]}}).sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else { // latest products
-                // @ts-ignore
                 products = await Product.find({categories: {$in: [category]}}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             }
 
@@ -116,8 +83,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
             })
         }
-        
-
+    } catch (err) {
+        console.log(err)
+    }
 
     
 

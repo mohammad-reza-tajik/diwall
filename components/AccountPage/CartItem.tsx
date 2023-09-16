@@ -33,10 +33,7 @@ const CartItem: React.FC<ProductType> = (props) => {
     const removeFromCart = async () => {
         if (user?.username) {
 
-            await useFetch.put("/api/remove-from-cart", {
-                _id: user?._id,
-                token: user?.token, productId: props._id
-            })
+            await useFetch.delete(`/api/user/cart?productId=${props._id}&_id=${user._id}&token=${user.token}`)
             dispatch(userActions.removeFromCart(props._id));
             dispatch(snackbarActions.openSnackbar({message : "از سبد خرید شما حذف شد" , status : "info"}))
 

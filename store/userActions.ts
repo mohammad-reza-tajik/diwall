@@ -15,7 +15,7 @@ interface CartAndWishListArgs {
     setAddToCartLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const handleWishlist = (args: CartAndWishListArgs) => {
+const handleWishlist = (args: CartAndWishListArgs) => {
     const {product, router, setAddToWishlistLoading} = args;
     return async (dispatch: ThunkDispatch<{  userReducer: User
     }, undefined, AnyAction> & React.Dispatch<AnyAction>, getState: () => { userReducer: User }) => {
@@ -27,17 +27,13 @@ export const handleWishlist = (args: CartAndWishListArgs) => {
                 setAddToWishlistLoading(true)
 
                 if (isInWishlist) {
-                    await useFetch.put("/api/remove-from-wishlist", {
-                        productId: product._id,
-                        _id: user._id,
-                        token: user.token
-                    })
+                    await useFetch.delete(`/api/user/wishlist?productId=${product._id}&_id=${user._id}&token=${user.token}`)
                     dispatch(userActions.removeFromWishlist(product._id))
                     dispatch(snackbarActions.openSnackbar({message: "از لیست علاقمندی شما حذف شد", status: "info"}));
 
                 } else {
 
-                    await useFetch.put("/api/add-to-wishlist", {
+                    await useFetch.put("/api/user/wishlist", {
                         productId: product._id,
                         _id: user._id,
                         token: user.token
@@ -64,7 +60,7 @@ export const handleWishlist = (args: CartAndWishListArgs) => {
     }
 }
 
-export const handleCart = (args: CartAndWishListArgs) => {
+const handleCart = (args: CartAndWishListArgs) => {
 
     const {product, router, setAddToCartLoading} = args;
 
@@ -79,15 +75,13 @@ export const handleCart = (args: CartAndWishListArgs) => {
                 setAddToCartLoading(true);
                 if (isInCart) {
                     if ("_id" in product) {
-                        await useFetch.put("/api/remove-from-cart", {
-                            _id: user?._id, token: user?.token, productId: product._id
-                        })
+                        await useFetch.delete(`/api/user/cart?productId=${product._id}&_id=${user._id}&token=${user.token}`)
                         dispatch(userActions.removeFromCart(product._id))
                         dispatch(snackbarActions.openSnackbar({message: "از سبد خرید شما حذف شد", status: "info"}))
                     }
                 } else {
                     if ("_id" in product) {
-                        await useFetch.put("/api/add-to-cart", {
+                        await useFetch.put("/api/user/cart", {
                             productId: product._id,
                             _id: user._id,
                             token: user.token

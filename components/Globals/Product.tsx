@@ -40,7 +40,7 @@ const Product: React.FC<ProductType> = (props) => {
 
     const user = useAppSelector(state => state.userReducer);
     const isInWishlist = user?.wishlist.includes(props._id);
-    const addToWishlistHandler = () => {
+    const wishlistHandler = () => {
         dispatch(userActions.handleWishlist({product: props, router, setAddToWishlistLoading}))
     }
 
@@ -49,7 +49,7 @@ const Product: React.FC<ProductType> = (props) => {
         <Grid container item sx={styles.product} xs={12}>
             <Grid item xs={12} sx={{position: "relative", cursor: "pointer"}}>
                 <Grid item sx={styles.addToWishlistButton}>
-                    <IconButton onClick={addToWishlistHandler} aria-label="add to wishlist">
+                    <IconButton onClick={wishlistHandler} aria-label="add to wishlist">
                         {
                             addToWishlistLoading ?
                                 <CircularProgress color={"white"} sx={{

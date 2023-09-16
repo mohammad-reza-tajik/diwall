@@ -11,13 +11,14 @@ import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
 import useFetch from "@/hooks/useFetch";
 import type {SxProps} from "@mui/system";
+// import Moderation from "@/components/AccountPage/Moderation";
 
 const Profile = dynamic(() => import("@/components/AccountPage/Profile"))
 const AddProduct = dynamic(() => import("@/components/AccountPage/AddProduct"))
 const Wishlist = dynamic(() => import("@/components/AccountPage/Wishlist"))
 const Cart = dynamic(() => import("@/components/AccountPage/Cart"))
 
-const styles : Record<string, SxProps> = {
+const styles = {
     tab: {
         fontSize: {xs: 12, md: 15},
         color: "#666",
@@ -25,7 +26,7 @@ const styles : Record<string, SxProps> = {
 
     },
 
-}
+} satisfies Record<string, SxProps>
 
 
 const Dashboard: React.FC = () => {
@@ -41,13 +42,13 @@ const Dashboard: React.FC = () => {
 
     const [tab, setTab] = useState<number>(1);
 
+    const queryTab = router.query.tab;
+
 
     const tabChangeHandler = (_, newTab: number) => {
         setTab(newTab);
     };
 
-    const isAuthenticated = user?.username;
-    const queryTab = router.query.tab;
 
     useEffect(() => {
         if (queryTab) {
@@ -59,17 +60,15 @@ const Dashboard: React.FC = () => {
 
     useEffect(() => {
         (async () => {
-            if (isAuthenticated) {
+            if (user?.username) {
                 setIsLoading(true)
-                const res = await useFetch.post("/api/get-wishlist-and-cart", {
-                    _id: user?._id, token: user?.token
-                })
+                const res = await useFetch.get(`/api/user?_id=${user?._id}&token=${user?.token}&populated=true`)
                 setPopulatedWishlist(res.wishlist)
                 setPopulatedCart(res.cart)
                 setIsLoading(false)
             }
         })()
-    }, [user.cart, user.wishlist])
+    }, [user])
 
 
     const theme = useTheme()
@@ -89,7 +88,7 @@ const Dashboard: React.FC = () => {
                 <Grid container item xs={12} md={matches1040 ? 3 : 2} mt={10}
                       borderLeft={{xs: "none", md: "5px solid #069f69"}}>
                     <Tabs
-                        // the following lines are for solving strange behavior in tabs indicator in phone for cart tab
+                        // the following lines are for solving strange behavior in tabs indicator in phone for wishlist tab
                         TabIndicatorProps={{
                             sx: {
                                 top: "85%",
@@ -101,6 +100,7 @@ const Dashboard: React.FC = () => {
                         <Tab label="لیست علاقمندی ها" value={2} sx={styles.tab}/>
                         <Tab label="سبد خرید" value={3} sx={styles.tab}/>
                         {user.role === "admin" && <Tab label="افزودن محصول" value={4} sx={styles.tab}/>}
+                        {/*{user.role === "admin" && <Tab label="بررسی دیدگاه ها" value={5} sx={styles.tab}/>}*/}
                     </Tabs>
 
                 </Grid>
@@ -119,10 +119,17 @@ const Dashboard: React.FC = () => {
                         <Cart isLoading={isLoading} populatedCart={populatedCart} user={user}/>
                     </TabPanel>
 
-                    {user.role === "admin" && <TabPanel tab={tab} index={4}>
-                        <AddProduct/>
-                    </TabPanel>
+                    {user.role === "admin" &&
+                        <>
+                            <TabPanel tab={tab} index={4}>
+                                <AddProduct/>
+                            </TabPanel>
+                            {/*<TabPanel tab={tab} index={5}>
+                                <Moderation/>
+                            </TabPanel>*/}
+                        </>
                     }
+
 
                 </Grid>
 

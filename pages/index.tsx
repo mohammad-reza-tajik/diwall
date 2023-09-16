@@ -1,17 +1,17 @@
 import Grid from "@mui/material/Grid";
-import Features from "../components/Globals/Features";
-import Banner from "../components/HomePage/Banner";
+import Features from "@/components/Globals/Features";
+import Banner from "@/components/HomePage/Banner";
 import React from "react";
-import ShowCase from "../components/HomePage/ShowCase";
-import Places from "../components/HomePage/Places";
-import SwiperProducts from "../components/Globals/SwiperProducts";
-import SectionHeading from "../components/Globals/SectionHeading";
-import MiddleSection from "../components/HomePage/MiddleSection";
+import ShowCase from "@/components/HomePage/ShowCase";
+import Places from "@/components/HomePage/Places";
+import SwiperProducts from "@/components/Globals/SwiperProducts";
+import SectionHeading from "@/components/Globals/SectionHeading";
+import MiddleSection from "@/components/HomePage/MiddleSection";
 
 import type {ProductType} from "@/db/productModel";
 import {GetStaticProps} from "next";
-import mongoose from "mongoose";
-import Product from "../db/productModel";
+import connect from "@/db/connect";
+import Product from "@/db/productModel";
 
 interface Props {
     latestProducts:ProductType[];
@@ -38,7 +38,7 @@ const Home : React.FC<Props> = (props) => {
 }
 
 export const getStaticProps : GetStaticProps = async () => {
-    await mongoose.connect(process.env.MONGODB_URL);
+    await connect();
     const latestProducts = await Product.find().sort({createdAt: "desc"}).skip((1 - 1) * 10).limit(10)
     const mostPopularProducts = await Product.find().sort({likes: "desc"}).skip((1 - 1) * 10).limit(10);
     const bestSellingProducts = await Product.find().sort({sells: "desc"}).skip((1 - 1) * 10).limit(10);
