@@ -1,6 +1,4 @@
-@import "Vars";
 @import "Fonts";
-
 
 ::placeholder {
   color: #666;
@@ -67,7 +65,7 @@ input[type=number] {
 
 // manipulating tooltip background color and fontsize
 .MuiTooltip-tooltip,.MuiTooltip-arrow::before{
-  background-color: $grey-color !important;
+  //background-color: $grey-color !important;
   font-size: 1.4rem !important;
 }
 

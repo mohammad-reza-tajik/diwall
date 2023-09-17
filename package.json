@@ -42,6 +42,7 @@
     "eslint-config-next": "^13.4.19",
     "file-loader": "^6.2.0",
     "jsdom": "^22.1.0",
+    "sass": "^1.67.0",
     "sharp": "^0.32.5",
     "typescript": "^5.2.2",
     "vitest": "^0.34.3"

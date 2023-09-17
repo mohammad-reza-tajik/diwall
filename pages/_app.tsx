@@ -1,10 +1,10 @@
-import '@/styles/Globals.css';
+import '@/styles/Globals.scss';
 import Head from "next/head"
 import theme from "@/styles/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import "swiper/css";
-import 'swiper/css/navigation';
+import "swiper/scss";
+import 'swiper/scss/navigation';
 import Footer from "@/components/Globals/Footer";
 import {useRouter} from "next/router";
 import Header from "@/components/Globals/Header";
@@ -134,7 +134,6 @@ function MyApp({Component, pageProps}) {
                 </IconButton>)}
                 >
                     <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
-
                         <Grid item xs={11}>
                             {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Header/>}
                             <Auth>
