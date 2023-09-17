@@ -25,18 +25,24 @@ const globalStyles = {
         backgroundColor: `${theme.palette.primary.main} !important`,
         borderRadius: 5,
         [theme.breakpoints.up('xs')]: {
-            width: `${40} !important`,
-            height: `${40} !important`
+            width: "40px !important",
+            height: "40px !important"
         },
         [theme.breakpoints.up('md')]: {
-            width: `${50} !important`,
-            height: `${50} !important`
+            width: "50px !important",
+            height: "50px !important"
         },
          // @ts-ignore
         "&:after": {
-            fontSize: 10,
+            fontSize: "15px !important",
             color: "#fff",
         }
+    },
+    "&.go703367398" : {
+        marginLeft : "0 !important",
+        marginRight : "auto !important",
+        padding : "0 !important"
+
     },
     "&.notistack-MuiContent-success": {
         backgroundColor: `${theme.palette.primary.main} !important`,
@@ -126,9 +132,9 @@ function MyApp({Component, pageProps}) {
             </Head>
             {applyGlobalStyles}
             <Provider store={store}>
-                <SnackbarProvider style={{fontSize: 14}} action={(key) => (<IconButton
+                <SnackbarProvider style={{fontSize: 14 }} action={(key) => (<IconButton
                     size="large"
-                    sx={{color: "#fff", position: "absolute", top: 0, left: 0}}
+                    sx={{color: "#fff" , padding : 0}}
                     onClick={() => closeSnackbar(key)}>
                     <Close fontSize={"large"}/>
                 </IconButton>)}
