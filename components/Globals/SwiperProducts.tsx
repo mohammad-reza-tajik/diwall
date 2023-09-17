@@ -10,25 +10,8 @@ import Typography from "@mui/material/Typography";
 import Product from "./Product";
 import React from "react";
 import type {ProductType} from "@/db/productModel";
-import type {SxProps} from "@mui/system";
 
 let slidesPerView: number;
-
-const styles = {
-    swiper: {
-        width: "100%",
-        "& .swiper-button-prev , & .swiper-button-next": {
-            bgcolor: "primary.main",
-            borderRadius: 2,
-            width: {xs:40,md:50},
-            height: {xs:40,md:50},
-            color: "#fff",
-            "&:after": {
-                fontSize: 20,
-            }
-        }
-    },
-} satisfies Record<string, SxProps>
 
 interface Props {
     mostPopular?: boolean;
@@ -79,7 +62,6 @@ const SwiperProducts: React.FC<Props> = (props) => {
                   slidesPerView={slidesPerView}
                   modules={[Navigation, A11y]}
                   navigation
-                  sx={styles.swiper}
 
             >
                 {

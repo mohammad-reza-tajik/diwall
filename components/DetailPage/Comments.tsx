@@ -17,19 +17,6 @@ import type {SxProps} from "@mui/system";
 
 const styles = {
 
-    swiper: {
-        width: 1,
-        "& .swiper-button-prev , & .swiper-button-next": {
-            bgcolor: "primary.main",
-            borderRadius: 2,
-            width: {xs:40,md:50},
-            height: {xs:40,md:50},
-            color: "#fff",
-            "&:after": {
-                fontSize: 20,
-            }
-        }
-    },
     commentContainer: {
         backgroundColor: "#fff",
     },
@@ -110,7 +97,6 @@ const Comments: React.FC<Props> = (props) => {
                               slidesPerView={matchesMD ? 1 : 2}
                               modules={[Navigation, A11y]}
                               navigation
-                              sx={styles.swiper}
                         >
 
                             {

@@ -11,44 +11,44 @@ import Header from "@/components/Globals/Header";
 import {Provider} from "react-redux";
 import {store} from "@/store";
 import Auth from "@/components/Globals/Auth";
-import React from "react";
+import React , {CSSProperties} from "react";
 import Snackbar from "@/components/Globals/Snackbar";
+import GlobalStyles from '@mui/material/GlobalStyles';
 
-//**************** this is because in useAuth I was getting a type error for sw.sync . because ts doesn't fully support sw types ***************//
-interface SyncManager {
-    getTags(): Promise<string[]>;
-    register(tag: string): Promise<void>;
-}
 
-declare global {
-    interface ServiceWorkerRegistration {
-        readonly sync: SyncManager;
-    }
-
-    interface SyncEvent extends ExtendableEvent {
-        readonly lastChance: boolean;
-        readonly tag: string;
-    }
-
-    interface ServiceWorkerGlobalScopeEventMap {
-        sync: SyncEvent;
-    }
-}
-
-//*************************************************************************************//
-
-(async () => {
-
-    try {
-
-        if (typeof window !== "undefined" && "serviceWorker" in navigator){
-            await navigator.serviceWorker.register("/sw.js");
+const globalStyles = {
+    ".swiper" : {
+      width : 1
+    },
+    ".swiper-button-prev , .swiper-button-next": {
+        backgroundColor: `${theme.palette.primary.main} !important`,
+        borderRadius: 2,
+        [theme.breakpoints.up('xs')]: {
+            width: 40,
+            height: 40
+        },
+        [theme.breakpoints.up('md')]: {
+            width: 50,
+            height: 50
+        },
+        color: "#fff",
+         // @ts-ignore
+        "&:after": {
+            fontSize: 20,
         }
+    },
+    "&.notistack-MuiContent-success": {
+        backgroundColor: `${theme.palette.primary.main} !important`,
+    },
+    "&.notistack-MuiContent-error": {
+        backgroundColor: `${theme.palette.error.main} !important`,
+    },
+    "&.notistack-MuiContent-info": {
+        backgroundColor: `${theme.palette.info.main} !important`,
+    },
+} satisfies Record<string, CSSProperties>
 
-    } catch (err) {
-        console.log(err)
-    }
-})();
+const applyGlobalStyles = <GlobalStyles styles={globalStyles}/>
 
 
 function MyApp({Component, pageProps}) {
@@ -60,7 +60,6 @@ function MyApp({Component, pageProps}) {
     if (typeof window !== "undefined") { // to prevent errors in server side rendering
 
         const body = document.body
-        body.style.backgroundColor = "#f8f8f8"
         if (router.pathname === "/auth") {
             body.style.overflow = "hidden"
         } else {
@@ -86,12 +85,12 @@ function MyApp({Component, pageProps}) {
                       content="خرید پوستر دیواری ، خرید کاغذ دیواری ، کاغذ دیواری ، پوستر دیواری"/>
                 <meta name="description" content="خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب"/>
 
-                <meta name="application-name" content="دیوال" />
-                <meta name="apple-mobile-web-app-capable" content="yes" />
-                <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-                <meta name="apple-mobile-web-app-title" content="دیوال" />
-                <meta name="format-detection" content="telephone=no" />
-                <meta name="mobile-web-app-capable" content="yes" />
+                <meta name="application-name" content="دیوال"/>
+                <meta name="apple-mobile-web-app-capable" content="yes"/>
+                <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+                <meta name="apple-mobile-web-app-title" content="دیوال"/>
+                <meta name="format-detection" content="telephone=no"/>
+                <meta name="mobile-web-app-capable" content="yes"/>
 
                 <meta name="twitter:card" content="summary_large_image"/>
                 <meta name="twitter:title" content="دیوال : فروشگاه پوستر و کاغذ دیواری"/>
@@ -124,20 +123,22 @@ function MyApp({Component, pageProps}) {
                 <meta name="theme-color" content="#069f69"/>
 
             </Head>
+            {applyGlobalStyles}
             <Provider store={store}>
-                <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
 
-                    <Grid item xs={11}>
-                        {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Header/>}
-                        <Auth>
-                            <main>
-                                <Component {...pageProps} />
-                            </main>
-                        </Auth>
-                        {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Footer/>}
+                    <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
+
+                        <Grid item xs={11}>
+                            {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Header/>}
+                            <Auth>
+                                <main>
+                                    <Component {...pageProps} />
+                                </main>
+                            </Auth>
+                            {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Footer/>}
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Snackbar />
+                    <Snackbar/>
             </Provider>
         </ThemeProvider>
     )

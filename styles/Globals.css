@@ -40,6 +40,7 @@ html {
 body {
   overflow-x: hidden !important;
   position: relative;
+  background-color: #f8f8f8;
 }
 
 a,
