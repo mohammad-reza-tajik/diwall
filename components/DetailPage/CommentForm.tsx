@@ -1,7 +1,7 @@
 import React, {FormEvent, useRef, useState} from "react"
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import {useAppSelector , snackbarActions , useAppDispatch} from "@/store";
+import {useAppSelector} from "@/store";
 import Button from "@mui/material/Button";
 import Link from "next/link";
 import useFetch from "@/hooks/useFetch";
@@ -10,6 +10,7 @@ import Create from "@mui/icons-material/Create";
 import  TextField  from "@mui/material/TextField";
 import {useRouter} from "next/router";
 import type {SxProps , Theme} from "@mui/system";
+import {enqueueSnackbar} from "notistack";
 
 const styles = {
     commentField: {
@@ -60,9 +61,9 @@ const CommentForm: React.FC<Props> = (props) => {
 
     const user = useAppSelector(state => state.userReducer);
 
+
     const router = useRouter();
 
-    const dispatch = useAppDispatch();
     const commentRef = useRef<HTMLTextAreaElement>();
 
     const [isLoading,setIsLoading] = useState<boolean>(false);
@@ -88,10 +89,15 @@ const CommentForm: React.FC<Props> = (props) => {
             }
 
             commentRef.current.value = ""
-            dispatch(snackbarActions.openSnackbar({message : res.message , status : "success"}))
+            enqueueSnackbar(res.message , {
+                variant : "success",
+            })
+
             props.onAddComment()
         } catch (err) {
-            dispatch(snackbarActions.openSnackbar({message : err.message , status : "error"}))
+            enqueueSnackbar(err.message , {
+                variant : "error",
+            })
 
         } finally {
             setIsLoading(false);

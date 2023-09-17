@@ -15,13 +15,14 @@ import ShoppingBag from "@mui/icons-material/ShoppingBag";
 import React, {useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
-import {snackbarActions, useAppDispatch, useAppSelector, userActions} from "@/store";
+import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import BackDrop from "./BackDrop";
 import SearchDrawer from "./SearchDrawer";
 import type {SxProps} from "@mui/system";
+import {enqueueSnackbar} from "notistack";
 
 
-const styles : Record<string, SxProps>  = {
+const styles  = {
 
     headerIcon: {
         fontSize: {xs: 35, md: 50},
@@ -32,7 +33,7 @@ const styles : Record<string, SxProps>  = {
         justifyContent: "center"
     },
 
-}
+} satisfies Record<string, SxProps>
 
 
 const HeaderMobile: React.FC = () => {
@@ -148,7 +149,9 @@ const HeaderMobile: React.FC = () => {
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     dispatch(userActions.logout());
-                                    dispatch(snackbarActions.openSnackbar({message :"با موفقیت از حساب خود خارج شدید" , status : "info"}));
+                                    enqueueSnackbar("با موفقیت از حساب خود خارج شدید" , {
+                                        variant : "info",
+                                    });
                                 }}>
                                     <ListItemIcon>
                                         <Logout sx={{fontSize: 25}} color={"primary"}/>

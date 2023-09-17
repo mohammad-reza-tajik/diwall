@@ -1,5 +1,4 @@
 import userActions from "@/store/userActions";
-import {snackbarActions} from "./snackbarSlice";
 import {useAppDispatch,useAppSelector} from "@/hooks/useStore";
 import store from "./store"
 
@@ -12,4 +11,4 @@ import store from "./store"
 * */
 
 
-export { store, userActions , useAppDispatch , useAppSelector , snackbarActions }
+export { store, userActions , useAppDispatch , useAppSelector  }

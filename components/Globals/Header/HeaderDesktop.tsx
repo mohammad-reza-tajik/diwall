@@ -26,13 +26,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React, {useState} from "react";
 
-import {useAppDispatch, useAppSelector, userActions , snackbarActions} from "@/store";
+import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import SearchResults from "../SearchResults";
 import useSearch from "@/hooks/useSearch";
 import type {SxProps} from "@mui/system";
+import {enqueueSnackbar} from "notistack";
 
 
-const styles : Record<string, SxProps>   = {
+const styles  = {
     searchField: {
         width: {md: 350, lg: 400},
         height: 1,
@@ -97,7 +98,7 @@ const styles : Record<string, SxProps>   = {
     },
 
 
-}
+} satisfies Record<string, SxProps>
 
 const HeaderDesktop: React.FC = () => {
 
@@ -266,7 +267,9 @@ const HeaderDesktop: React.FC = () => {
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     dispatch(userActions.logout());
-                                    dispatch(snackbarActions.openSnackbar({message :"با موفقیت از حساب خود خارج شدید" , status : "info"}))
+                                    enqueueSnackbar("با موفقیت از حساب خود خارج شدید" , {
+                                        variant : "info",
+                                    });
 
                                 }}>
                                     <ListItemIcon>

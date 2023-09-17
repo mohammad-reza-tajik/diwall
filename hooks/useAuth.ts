@@ -1,7 +1,8 @@
 import {FormEvent, useRef, useState} from "react";
 import {useRouter} from "next/router";
-import {userActions, useAppDispatch, snackbarActions} from "@/store";
+import {userActions, useAppDispatch} from "@/store";
 import useFetch from "@/hooks/useFetch";
+import {enqueueSnackbar} from "notistack";
 
 const useAuth = () => {
 
@@ -56,12 +57,16 @@ const useAuth = () => {
             }
 
             dispatch(userActions.login({user : res.user , token : res.token}))
-            dispatch(snackbarActions.openSnackbar({message: res.message, status: "success"}));
+            enqueueSnackbar(res.message , {
+                variant : "success",
+            });
 
             router.push("/");
 
         } catch (err) {
-            dispatch(snackbarActions.openSnackbar({message: err.message, status: "error"}))
+            enqueueSnackbar(err.message , {
+                variant : "error",
+            })
 
         } finally {
             setIsLoading(false)

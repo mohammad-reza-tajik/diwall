@@ -59,6 +59,13 @@ const theme  = createTheme({
                 }
             }
         },
+        MuiTypography:{
+            styleOverrides:{
+                root:{
+                    color:"#333"
+                }
+            }
+        },
         MuiPagination:{
             styleOverrides:{
                 root:{

@@ -1,11 +1,11 @@
 import {userActions} from "./userSlice";
 import React from "react";
 import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
-import {snackbarActions} from "@/store/snackbarSlice";
 import useFetch from "@/hooks/useFetch";
 import {ProductType} from "@/db/productModel";
 import {NextRouter} from "next/router";
 import {User} from "./userSlice";
+import {enqueueSnackbar} from "notistack";
 
 
 interface CartAndWishListArgs {
@@ -29,7 +29,9 @@ const handleWishlist = (args: CartAndWishListArgs) => {
                 if (isInWishlist) {
                     await useFetch.delete(`/api/user/wishlist?productId=${product._id}&_id=${user._id}&token=${user.token}`)
                     dispatch(userActions.removeFromWishlist(product._id))
-                    dispatch(snackbarActions.openSnackbar({message: "از لیست علاقمندی شما حذف شد", status: "info"}));
+                    enqueueSnackbar("از لیست علاقمندی شما حذف شد" , {
+                        variant : "info",
+                    })
 
                 } else {
 
@@ -40,18 +42,18 @@ const handleWishlist = (args: CartAndWishListArgs) => {
                     })
 
                     dispatch(userActions.addToWishlist(product._id))
-                    dispatch(snackbarActions.openSnackbar({
-                        message: "به لیست علاقمندی شما افزوده شد",
-                        status: "success"
-                    }))
-
+                    enqueueSnackbar("به لیست علاقمندی شما افزوده شد" , {
+                        variant : "success",
+                    })
 
                 }
             } else {
                 router.push("/auth")
             }
         } catch (err) {
-            dispatch(snackbarActions.openSnackbar({message: "متاسفانه عملیات با خطا مواجه شد", status: "error"}))
+            enqueueSnackbar("متاسفانه عملیات با خطا مواجه شد" , {
+                variant : "error",
+            })
         } finally {
             setAddToWishlistLoading(false)
         }
@@ -77,7 +79,9 @@ const handleCart = (args: CartAndWishListArgs) => {
                     if ("_id" in product) {
                         await useFetch.delete(`/api/user/cart?productId=${product._id}&_id=${user._id}&token=${user.token}`)
                         dispatch(userActions.removeFromCart(product._id))
-                        dispatch(snackbarActions.openSnackbar({message: "از سبد خرید شما حذف شد", status: "info"}))
+                        enqueueSnackbar("از سبد خرید شما حذف شد" , {
+                            variant : "info",
+                        })
                     }
                 } else {
                     if ("_id" in product) {
@@ -87,7 +91,9 @@ const handleCart = (args: CartAndWishListArgs) => {
                             token: user.token
                         })
                         dispatch(userActions.addToCart(product._id))
-                        dispatch(snackbarActions.openSnackbar({message: "به سبد خرید شما اضافه شد", status: "success"}))
+                        enqueueSnackbar("به سبد خرید شما اضافه شد" , {
+                            variant : "success",
+                        })
                     }
                 }
 
@@ -96,7 +102,9 @@ const handleCart = (args: CartAndWishListArgs) => {
 
             }
         } catch (err) {
-            dispatch(snackbarActions.openSnackbar({message: "متاسفانه عملیات با خطا مواجه شد", status: "error"}))
+            enqueueSnackbar("متاسفانه عملیات با خطا مواجه شد" , {
+                variant : "error",
+            })
         } finally {
             setAddToCartLoading(false)
         }

@@ -10,11 +10,12 @@ import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
 
 import React, {ChangeEvent, useState} from "react";
 import {useRouter} from "next/router";
-import {snackbarActions, useAppDispatch, useAppSelector, userActions} from "@/store";
+import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import Image from "next/image";
 
 import type {ProductType} from "@/db/productModel";
 import useFetch from "@/hooks/useFetch";
+import {enqueueSnackbar} from "notistack";
 
 
 const CartItem: React.FC<ProductType> = (props) => {
@@ -35,7 +36,9 @@ const CartItem: React.FC<ProductType> = (props) => {
 
             await useFetch.delete(`/api/user/cart?productId=${props._id}&_id=${user._id}&token=${user.token}`)
             dispatch(userActions.removeFromCart(props._id));
-            dispatch(snackbarActions.openSnackbar({message : "از سبد خرید شما حذف شد" , status : "info"}))
+            enqueueSnackbar("از سبد خرید شما حذف شد" , {
+                variant : "info",
+            });
 
 
 

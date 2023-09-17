@@ -12,29 +12,30 @@ import {Provider} from "react-redux";
 import {store} from "@/store";
 import Auth from "@/components/Globals/Auth";
 import React , {CSSProperties} from "react";
-import Snackbar from "@/components/Globals/Snackbar";
 import GlobalStyles from '@mui/material/GlobalStyles';
-
+import {SnackbarProvider, closeSnackbar} from 'notistack';
+import IconButton from "@mui/material/IconButton";
+import Close from "@mui/icons-material/Close";
 
 const globalStyles = {
     ".swiper" : {
-      width : 1
+      width : "100%"
     },
     ".swiper-button-prev , .swiper-button-next": {
         backgroundColor: `${theme.palette.primary.main} !important`,
-        borderRadius: 2,
+        borderRadius: 5,
         [theme.breakpoints.up('xs')]: {
-            width: 40,
-            height: 40
+            width: `${40} !important`,
+            height: `${40} !important`
         },
         [theme.breakpoints.up('md')]: {
-            width: 50,
-            height: 50
+            width: `${50} !important`,
+            height: `${50} !important`
         },
-        color: "#fff",
          // @ts-ignore
         "&:after": {
-            fontSize: 20,
+            fontSize: 10,
+            color: "#fff",
         }
     },
     "&.notistack-MuiContent-success": {
@@ -125,7 +126,13 @@ function MyApp({Component, pageProps}) {
             </Head>
             {applyGlobalStyles}
             <Provider store={store}>
-
+                <SnackbarProvider style={{fontSize: 14}} action={(key) => (<IconButton
+                    size="large"
+                    sx={{color: "#fff", position: "absolute", top: 0, left: 0}}
+                    onClick={() => closeSnackbar(key)}>
+                    <Close fontSize={"large"}/>
+                </IconButton>)}
+                >
                     <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
 
                         <Grid item xs={11}>
@@ -138,7 +145,7 @@ function MyApp({Component, pageProps}) {
                             {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Footer/>}
                         </Grid>
                     </Grid>
-                    <Snackbar/>
+                </SnackbarProvider>
             </Provider>
         </ThemeProvider>
     )

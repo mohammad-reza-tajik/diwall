@@ -30,7 +30,8 @@ const userSlice = createSlice({
             state.role = role
             state.wishlist = wishlist;
             state.token = action.payload.token;
-            storeTokenAndUser(state)
+            storeTokenAndUser(state);
+
         },
         logout(state) {
             state.username = null;
