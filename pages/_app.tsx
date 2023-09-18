@@ -38,10 +38,13 @@ const globalStyles = {
             color: "#fff",
         }
     },
+    "&.notistack-MuiContent" : {
+        gap : 10
+    },
     "&.go703367398" : {
         marginLeft : "0 !important",
         marginRight : "auto !important",
-        padding : "0 !important"
+        padding : "0 !important" ,
 
     },
     "&.notistack-MuiContent-success": {
