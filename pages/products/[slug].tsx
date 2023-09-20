@@ -3,7 +3,6 @@ import type {ProductType} from "@/db/productModel"
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
@@ -238,12 +237,12 @@ const ProductDetails = () => {
                             </Grid>
                             <Grid container item xs={12} alignItems={"center"}>
                                 <Grid container item xs={6} alignItems={"center"} gap={10}>
-                                    <Box component={"span"} sx={{fontSize: {xs: 14, md: 16}}}>طول : </Box>
+                                    <Grid component={"span"} sx={{fontSize: {xs: 14, md: 16}}}>طول : </Grid>
                                     <TextField type={"number"} variant={"standard"}
                                                sx={{width: 100, height: 40, fontSize: 14}}/>
                                 </Grid>
                                 <Grid container item xs={6} alignItems={"center"} gap={10}>
-                                    <Box component={"span"} sx={{fontSize: {xs: 14, md: 16}}}>عرض : </Box>
+                                    <Grid component={"span"} sx={{fontSize: {xs: 14, md: 16}}}>عرض : </Grid>
                                     <TextField type={"number"} variant={"standard"}
                                                sx={{width: 100, height: 40, fontSize: 14}}/>
                                 </Grid>

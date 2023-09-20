@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -37,7 +36,7 @@ const Places: React.FC = () => {
             <Grid container item alignItems={"center"} justifyContent={"center"} gap={10} xs={12}>
                 <Circle color={"primary"} sx={{fontSize: {xs: 20, md: 30}}}/>
                 <Typography variant={"h2"} color={"#555"} fontFamily={"dana-black"} sx={{fontSize: {xs: 20, md: 30}}}>
-                    <Box component={"span"} sx={{color: "primary.main"}}>برای کجا</Box> می خواهید ؟
+                    <Grid component={"span"} sx={{color: "primary.main"}}>برای کجا</Grid> می خواهید ؟
                 </Typography>
             </Grid>
             <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"} bgcolor={"#fff"}>

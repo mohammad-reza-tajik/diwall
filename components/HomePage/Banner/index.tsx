@@ -1,19 +1,19 @@
 import BannerMobile from "./BannerMobile";
 import BannerDesktop from "./BannerDesktop";
 import React from "react";
-import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
 
 const Banner: React.FC = () => {
 
     return (
         <>
-            <Box component={"section"} display={{xs:"block",md:"none"}}>
+            <Grid component={"section"} display={{xs:"block",md:"none"}}>
                 <BannerMobile/>
-            </Box>
-            <Box component={"section"} width={1} display={{xs:"none",md:"block"}}>
+            </Grid>
+            <Grid component={"section"} width={1} display={{xs:"none",md:"block"}}>
                 <BannerDesktop/>
-            </Box>
+            </Grid>
         </>
 
     );

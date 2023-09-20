@@ -1,7 +1,6 @@
 import React from "react";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
-import Box from "@mui/material/Box";
 import Link from "next/link";
 import Image from "next/legacy/image";
 import TextField from "@mui/material/TextField";
@@ -16,6 +15,7 @@ import Login from "@mui/icons-material/Login";
 import Grid from "@mui/material/Grid";
 import useAuth from "@/hooks/useAuth";
 import type {SxProps} from "@mui/system";
+import Typography from "@mui/material/Typography";
 
 const styles = {
     backgroundImage: {
@@ -80,9 +80,9 @@ const AuthForm: React.FC = () => {
                     <ToggleButton sx={{width: .5, fontSize: "1.6rem"}} value={"signup"}>ثبت نام</ToggleButton>
                 </ToggleButtonGroup>
 
-                <Box my={5} component={Link} href={"/"}>
+                <Grid my={5} component={Link} href={"/"}>
                     <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={150} height={150}/>
-                </Box>
+                </Grid>
 
                 {
                     typeOfForm === "signup" ?
@@ -153,13 +153,13 @@ const AuthForm: React.FC = () => {
                 {
                     typeOfForm === "signup" ?
                         "" :
-                        <Box fontSize={13} mt={20} component={Link} href={"/forgot-password"}>
+                        <Typography sx={{fontSize : 13 ,  mt :20 , color : "primary.main"}}  component={Link} href={"/forgot-password"}>
                             رمز عبور خود را فراموش کرده ام ؟
-                        </Box>
+                        </Typography>
 
                 }
             </Grid>
-            <Box sx={styles.backgroundImage}/>
+            <Grid sx={styles.backgroundImage}/>
 
         </>
     )

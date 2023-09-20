@@ -1,6 +1,5 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type {User} from "@/store/userSlice";
 
@@ -15,8 +14,8 @@ const Profile : React.FC<Props> = (props) => {
         <Grid container item xs={12} py={20} px={{xs: 5, md: 40}} gap={40}>
 
             <Grid container item xs={12} alignItems={"center"} gap={10}>
-                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام و نام خانوادگی
-                    : </Box>
+                <Grid component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام و نام خانوادگی
+                    : </Grid>
                 <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                             fontSize={{xs: 14, md: 16}}>
                     مشخص نشده !
@@ -24,14 +23,14 @@ const Profile : React.FC<Props> = (props) => {
 
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={20}>
-                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام کاربری : </Box>
+                <Grid component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>نام کاربری : </Grid>
                 <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                             fontSize={{xs: 14, md: 16}}>
                     {user?.username}
                 </Typography>
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={20}>
-                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>ایمیل : </Box>
+                <Grid component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>ایمیل : </Grid>
                 <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                             fontSize={{xs: 14, md: 16}}>
                     {user?.email}
@@ -39,7 +38,7 @@ const Profile : React.FC<Props> = (props) => {
 
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={10}>
-                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>شماره موبایل : </Box>
+                <Grid component={"span"} sx={{fontSize: {xs: 14, md: 20}}}>شماره موبایل : </Grid>
                 <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                             fontSize={{xs: 14, md: 16}}>
                     مشخص نشده !
@@ -47,7 +46,7 @@ const Profile : React.FC<Props> = (props) => {
 
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={10}>
-                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}> تاریخ تولد : </Box>
+                <Grid component={"span"} sx={{fontSize: {xs: 14, md: 20}}}> تاریخ تولد : </Grid>
                 <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                             fontSize={{xs: 14, md: 16}}>
                     مشخص نشده !
@@ -55,7 +54,7 @@ const Profile : React.FC<Props> = (props) => {
 
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={10}>
-                <Box component={"span"} sx={{fontSize: {xs: 14, md: 20}}}> شغل : </Box>
+                <Grid component={"span"} sx={{fontSize: {xs: 14, md: 20}}}> شغل : </Grid>
                 <Typography variant={"subtitle1"} fontFamily={"dana-bold"}
                             fontSize={{xs: 14, md: 16}}>
                     مشخص نشده !

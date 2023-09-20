@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -62,25 +61,25 @@ const Footer: React.FC = () => {
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>پوستر سفارشی</Box>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>پوستر سفارشی</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/collaboration"} sx={styles.footer_link}>همکاری با ما</Box>
+                            <Grid component={Link} href={"/collaboration"} sx={styles.footer_link}>همکاری با ما</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>تماس با ما</Box>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>تماس با ما</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/about"} sx={styles.footer_link}>درباره ما</Box>
+                            <Grid component={Link} href={"/about"} sx={styles.footer_link}>درباره ما</Grid>
 
                     </Grid>
                 </Grid>
@@ -92,25 +91,25 @@ const Footer: React.FC = () => {
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>مشاوره رایگان</Box>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>مشاوره رایگان</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>دیدن آلبوم ها در منزل</Box>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>دیدن آلبوم ها در منزل</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}> برآورد هزینه</Box>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}> برآورد هزینه</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10} xs={"auto"}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>اجرای کار توسط متخصصین</Box>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>اجرای کار توسط متخصصین</Grid>
 
                     </Grid>
                 </Grid>
@@ -123,25 +122,25 @@ const Footer: React.FC = () => {
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>پرسش های متداول</Box>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>پرسش های متداول</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>تحویل و ارسال کالا</Box>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>تحویل و ارسال کالا</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>سیاست حفظ حریم خصوصی</Box>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>سیاست حفظ حریم خصوصی</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Box component={Link} href={"/cloths"} sx={styles.footer_link}>شرایط و قوانین</Box>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>شرایط و قوانین</Grid>
 
                     </Grid>
                 </Grid>
@@ -210,11 +209,11 @@ const Footer: React.FC = () => {
                     </Grid>
                     <Grid item container  mt={30} xs={12}>
                         <Typography variant={"h4"} fontSize={{xs: 16, md: 18}} color={"#555"}>
-                            از جدیدترین تخفیفات <Box component={"span"}
+                            از جدیدترین تخفیفات <Grid component={"span"}
                                                      sx={{
                                                          fontFamily: "dana-black",
                                                          color: "primary.main"
-                                                     }}>دیوال</Box> با
+                                                     }}>دیوال</Grid> با
                             خبر شوید!
                         </Typography>
                     </Grid>
@@ -232,11 +231,11 @@ const Footer: React.FC = () => {
                       display={{xs: "none", md: "flex"}}>
                     <Grid container item direction={"column"} xs={"auto"} gap={10}>
                         
-                            <Typography variant={"h4"} color={"#555"} fontFamily={"dana-black"}>الو <Box
+                            <Typography variant={"h4"} color={"#555"} fontFamily={"dana-black"}>الو <Grid
                                 component={"span"}
                                 sx={{
                                     color: "primary.main"
-                                }}>دیوال</Box></Typography>
+                                }}>دیوال</Grid></Typography>
                         
                             <Typography variant={"h5"} component={"p"} color={"#555"}>24 ساعت در هفت روز هفته آماده خدمت
                                 رسانی به مشتریان
@@ -266,10 +265,10 @@ const Footer: React.FC = () => {
                 <Grid container item justifyContent={"space-between"} alignItems={"center"} spacing={{xs: 0, lg: 50}}>
                     <Grid container item gap={10} xs={12} lg>
                         <Typography variant={"h4"} color={"#555"} fontFamily={"dana-black"} fontSize={{xs: 16, md: 20}}>فروشگاه
-                            اینترنتی <Box
+                            اینترنتی <Grid
                                 component={"span"} sx={{
                                 color: "primary.main"
-                            }}>دیوال</Box></Typography>
+                            }}>دیوال</Grid></Typography>
                         <Typography variant={"h5"} component={"p"} lineHeight={1.5} textAlign={"justify"}
                                     display={"block"} color={"#555"}
                                     fontSize={{xs: 14, md: 16}}>
@@ -315,24 +314,24 @@ const Footer: React.FC = () => {
                 <Grid container item xs={12} my={40} alignItems={"center"} justifyContent={"space-between"}>
                     <Grid container item gap={20} xs={12} md={"auto"} display={{xs: "none", lg: "flex"}}>
 
-                        <Box component={Link} href={"/collaboration"} sx={styles.footer_link}>
+                        <Grid component={Link} href={"/collaboration"} sx={styles.footer_link}>
                             همکاری با ما
-                        </Box>
+                        </Grid>
 
 
-                        <Box component={Link} href={"/"} sx={styles.footer_link}>
+                        <Grid component={Link} href={"/"} sx={styles.footer_link}>
                             سفارش پوستر اختصاصی
-                        </Box>
+                        </Grid>
 
 
-                        <Box component={Link} href={"/"} sx={styles.footer_link}>
+                        <Grid component={Link} href={"/"} sx={styles.footer_link}>
                             نمونه کارها
-                        </Box>
+                        </Grid>
 
 
-                        <Box component={Link} href={"/"} sx={styles.footer_link}>
+                        <Grid component={Link} href={"/"} sx={styles.footer_link}>
                             راهنمای استفاده
-                        </Box>
+                        </Grid>
 
                     </Grid>
 
@@ -354,10 +353,10 @@ const Footer: React.FC = () => {
                                         <path
                                             d="M20.331 14.644l-13.794-13.831 17.55 10.075zM2.938 0c-0.813 0.425-1.356 1.2-1.356 2.206v27.581c0 1.006 0.544 1.781 1.356 2.206l16.038-16zM29.512 14.1l-3.681-2.131-4.106 4.031 4.106 4.031 3.756-2.131c1.125-0.893 1.125-2.906-0.075-3.8zM6.538 31.188l17.55-10.075-3.756-3.756z"/>
                                     </svg>}>
-                                <Box component={"span"} position={"relative"} top={2}>
+                                <Grid component={"span"} position={"relative"} top={2}>
 
                                     google play
-                                </Box>
+                                </Grid>
                             </Button>
                             <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"}
                                     endIcon={<svg width={15} height={15} version="1.1" id="Layer_1"
@@ -409,10 +408,10 @@ const Footer: React.FC = () => {
                                         </g>
                                     </svg>
                                     }>
-                                <Box component={"span"} position={"relative"} top={2}>
+                                <Grid component={"span"} position={"relative"} top={2}>
 
                                     apple store
-                                </Box>
+                                </Grid>
                             </Button>
 
                         </Grid>

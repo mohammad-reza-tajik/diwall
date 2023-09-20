@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -42,22 +41,20 @@ const MainNavigation: React.FC = () => {
                 !matchesMD &&
                 <>
                     <Grid container alignItems={"center"} component={"nav"} item xs={9} sx={styles.mainNav}>
-                        <Box component={Link} href={"/"} sx={styles.mainNavLink}>صفحه نخست</Box>
-                        <Box component={Link} href={"/products"} sx={styles.mainNavLink}>جدیدترین ها</Box>
-                        <Box component={Link} href={"/products?sortBy=2"} sx={styles.mainNavLink}>پرفروش ترین
-                            ها</Box>
-                        <Box component={Link} href={"/products?sortBy=3"} sx={styles.mainNavLink}>محبوب ترین
-                            ها</Box>
-                        <Box component={Link} href={"/about"} sx={styles.mainNavLink}>درباره ما</Box>
-                        <Box component={Link} href={"/collaboration"} sx={styles.mainNavLink}>همکاری با ما</Box>
+                        <Grid component={Link} href={"/"} sx={styles.mainNavLink}>صفحه نخست</Grid>
+                        <Grid component={Link} href={"/products"} sx={styles.mainNavLink}>جدیدترین ها</Grid>
+                        <Grid component={Link} href={"/products?sortBy=2"} sx={styles.mainNavLink}>پرفروش ترین
+                            ها</Grid>
+                        <Grid component={Link} href={"/products?sortBy=3"} sx={styles.mainNavLink}>محبوب ترین
+                            ها</Grid>
+                        <Grid component={Link} href={"/about"} sx={styles.mainNavLink}>درباره ما</Grid>
+                        <Grid component={Link} href={"/collaboration"} sx={styles.mainNavLink}>همکاری با ما</Grid>
                     </Grid>
                     <Grid container item direction={"row"} xs={2} justifyContent={"flex-end"}
                           display={matches1277 && "none"}>
                         <Grid container item direction={"column"} xs={6}>
-
                                 <Typography fontWeight={700} color={"#666"} fontSize={18}
                                             variant={"caption"}>021464879</Typography>
-
 
                                 <Typography color={"#666"} fontSize={12} variant={"caption"}>پشتیبانی
                                     مشتریان</Typography>

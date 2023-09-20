@@ -1,19 +1,19 @@
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
 import React from "react";
-import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
 
 const Header: React.FC = () => {
 
     return (
         <>
-            <Box display={{xs: "block", md: "none"}}>
+            <Grid display={{xs: "block", md: "none"}}>
                 <HeaderMobile/>
-            </Box>
-            <Box display={{xs: "none", md: "block"}}>
+            </Grid>
+            <Grid display={{xs: "none", md: "block"}}>
                 <HeaderDesktop/>
-            </Box>
+            </Grid>
         </>
 
     )

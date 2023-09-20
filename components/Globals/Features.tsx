@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import HeadsetMicOutlined from "@mui/icons-material/HeadsetMicOutlined";
@@ -20,8 +19,8 @@ const Features: React.FC = () => {
                 <Grid container item xs gap={5} direction={"column"}>
 
                         <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
-                                    fontFamily={"dana-black"}>ارسال <Box component={"span"}
-                                                                         sx={{color: "primary.main"}}>رایگان</Box></Typography>
+                                    fontFamily={"dana-black"}>ارسال <Grid component={"span"}
+                                                                         sx={{color: "primary.main"}}>رایگان</Grid></Typography>
 
 
                         <Typography variant={"body1"} fontFamily={"dana-bold"}
@@ -39,8 +38,8 @@ const Features: React.FC = () => {
                 <Grid container item xs gap={5} direction={"column"}>
 
                         <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
-                                    fontFamily={"dana-black"}>بسته بندی <Box component={"span"}
-                                                                             sx={{color: "primary.main"}}>رایگان</Box></Typography>
+                                    fontFamily={"dana-black"}>بسته بندی <Grid component={"span"}
+                                                                             sx={{color: "primary.main"}}>رایگان</Grid></Typography>
 
 
                         <Typography variant={"body1"} fontFamily={"dana-bold"}
@@ -58,8 +57,8 @@ const Features: React.FC = () => {
                 <Grid container item xs gap={5} direction={"column"} justifyContent={"flex-end"}>
 
                         <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
-                                    fontFamily={"dana-black"}>تضمین <Box component={"span"}
-                                                                         sx={{color: "primary.main"}}>کیفیت</Box></Typography>
+                                    fontFamily={"dana-black"}>تضمین <Grid component={"span"}
+                                                                         sx={{color: "primary.main"}}>کیفیت</Grid></Typography>
 
 
                         <Typography variant={"body1"} fontFamily={"dana-bold"}
@@ -76,8 +75,8 @@ const Features: React.FC = () => {
                 <Grid container item xs gap={5} direction={"column"}>
 
                         <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
-                                    fontFamily={"dana-black"}>پشتیبانی <Box component={"span"}
-                                                                            sx={{color: "primary.main"}}>آنلاین</Box></Typography>
+                                    fontFamily={"dana-black"}>پشتیبانی <Grid component={"span"}
+                                                                            sx={{color: "primary.main"}}>آنلاین</Grid></Typography>
 
 
                         <Typography variant={"body1"} fontFamily={"dana-bold"}
