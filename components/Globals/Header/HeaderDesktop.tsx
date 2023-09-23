@@ -102,7 +102,7 @@ const styles  = {
 
 const HeaderDesktop: React.FC = () => {
 
-    const user = useAppSelector(state => state.userReducer)
+    const user = useAppSelector(state => state.user)
     const dispatch = useAppDispatch()
 
     const {router , search , submitSearchHandler , searchChangeHandler , isWrong , results , isLoading , closeSearchHandlerDesktop} = useSearch("desktop")

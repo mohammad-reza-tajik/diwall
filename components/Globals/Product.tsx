@@ -38,7 +38,7 @@ const Product: React.FC<ProductType> = (props) => {
 
     const dispatch = useAppDispatch();
 
-    const user = useAppSelector(state => state.userReducer);
+    const user = useAppSelector(state => state.user);
     const isInWishlist = user?.wishlist.includes(props._id);
     const wishlistHandler = () => {
         dispatch(userActions.handleWishlist({product: props, router, setAddToWishlistLoading}))

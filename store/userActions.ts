@@ -17,9 +17,9 @@ interface CartAndWishListArgs {
 
 const handleWishlist = (args: CartAndWishListArgs) => {
     const {product, router, setAddToWishlistLoading} = args;
-    return async (dispatch: ThunkDispatch<{  userReducer: User
-    }, undefined, AnyAction> & React.Dispatch<AnyAction>, getState: () => { userReducer: User }) => {
-        const user = getState().userReducer;
+    return async (dispatch: ThunkDispatch<{  user: User
+    }, undefined, AnyAction> & React.Dispatch<AnyAction>, getState: () => { user: User }) => {
+        const user = getState().user;
         const isInWishlist = user?.wishlist.includes( product && product._id );
 
         try {
@@ -68,8 +68,8 @@ const handleCart = (args: CartAndWishListArgs) => {
 
     return async (dispatch: ThunkDispatch<{
         userReducer: User
-    }, undefined, AnyAction> & React.Dispatch<AnyAction>, getState: () => { userReducer: User }) => {
-        const user = getState().userReducer;
+    }, undefined, AnyAction> & React.Dispatch<AnyAction>, getState: () => { user: User }) => {
+        const user = getState().user;
         const isInCart = user?.cart.includes( product && product._id );
 
         try {

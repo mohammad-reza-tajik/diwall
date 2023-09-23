@@ -12,7 +12,7 @@ import {useRouter} from "next/router";
 import type {SxProps} from "@mui/system";
 
 
-const styles : Record<string, SxProps>  = {
+const styles  = {
     drawer: {
         p: 20,
         height: "100vh",
@@ -23,7 +23,7 @@ const styles : Record<string, SxProps>  = {
         backgroundColor: "#F8F8F8",
     }
 
-}
+} satisfies Record<string, SxProps>
 
 interface Props {
     onOpen: (open: boolean) => void;

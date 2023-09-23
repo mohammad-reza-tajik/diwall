@@ -35,7 +35,7 @@ const Dashboard: React.FC = () => {
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const user = useAppSelector(state => state.userReducer);
+    const user = useAppSelector(state => state.user);
 
     const [populatedWishlist, setPopulatedWishlist] = useState<any>([])
     const [populatedCart, setPopulatedCart] = useState<any>([])

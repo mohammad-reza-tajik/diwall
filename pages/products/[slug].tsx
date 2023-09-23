@@ -69,7 +69,7 @@ const ProductDetails = () => {
     const router = useRouter()
     const dispatch = useAppDispatch();
 
-    const  user = useAppSelector(state => state.userReducer);
+    const  user = useAppSelector(state => state.user);
     const isInWishlist = user?.wishlist.includes( product && product._id );
     const isInCart = user?.cart.includes( product && product._id );
 
@@ -137,7 +137,7 @@ const ProductDetails = () => {
 
                                 <Image style={{width: "100%", height: "auto"}}
                                        src={`/assets/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
-                                       alt={`${product ? product.title : ""}`} width={510} height={385}
+                                       alt={`${product ? product.title : "product placeholder"}`} width={510} height={385}
                                 />
 
                         }

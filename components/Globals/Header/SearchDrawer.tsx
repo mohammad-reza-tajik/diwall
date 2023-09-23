@@ -12,7 +12,7 @@ import useSearch from "@/hooks/useSearch";
 import type {SxProps} from "@mui/system";
 
 
-const styles : Record<string, SxProps>  = {
+const styles = {
     searchField: {
         width: {xs: 1, sm: 1, md: .6},
         fontSize: {xs: 4, sm: "2rem"},
@@ -49,7 +49,7 @@ const styles : Record<string, SxProps>  = {
     }
 
 
-}
+} satisfies Record<string, SxProps>
 
 interface Props {
     onOpen: (open: boolean) => void;

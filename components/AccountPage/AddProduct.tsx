@@ -35,7 +35,7 @@ const AddProduct: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [uploadedFileName, setUploadedFileName] = useState("");
 
-    const user = useAppSelector((state)=> state.userReducer);
+    const user = useAppSelector((state)=> state.user);
 
     const titleRef = useRef<HTMLInputElement>(null);
     const priceRef = useRef<HTMLInputElement>(null);
