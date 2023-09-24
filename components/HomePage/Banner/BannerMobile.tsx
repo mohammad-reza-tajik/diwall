@@ -8,15 +8,17 @@ import {SxProps} from "@mui/system";
 
 
 const styles = {
-    bannerButton: {
-        fontSize: 16,
-    },
     bannerTextBox: {
         backgroundImage: "linear-gradient(rgba(44, 44, 44,.6),rgba(44, 44, 44,.6))",
         py: 100,
         px: {xs: 50, sm: 90},
         gap: 60,
         zIndex: 50
+    },
+    bannerButton: {
+        fontSize: 16,
+        width : {xs : 200 , sm : 300},
+        mx : "auto"
     },
 
 } satisfies Record<string, SxProps>
@@ -41,7 +43,7 @@ const BannerMobile: React.FC = () => {
                         component={Link} href={"/products"}>مشاهده محصولات</Button>
 
             </Grid>
-            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} fill priority  sizes={"360px"} className={"cover"}/>
+            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} fill priority className={"cover"}/>
         </Grid>
     );
 };

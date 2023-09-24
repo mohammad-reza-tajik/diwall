@@ -1,8 +1,6 @@
 import {createTheme} from "@mui/material/styles";
 
 const theme  = createTheme({
-
-
     spacing: 1,
     direction: "rtl",
 
@@ -10,9 +8,7 @@ const theme  = createTheme({
         mode: "light",
 
         primary: {
-            light:"#01faa2",
             main: "#069f69",
-            // main: "#000",
         },
         secondary: {
             main: "#f1c800"
@@ -38,7 +34,6 @@ const theme  = createTheme({
     ,
     components: {
         MuiButton: {
-
             defaultProps: {
                 disableElevation: true
             }
@@ -72,9 +67,7 @@ const theme  = createTheme({
                     direction:"rtl"
                 }
             }
-
-        }
-        ,
+        },
         MuiPaginationItem:{
             defaultProps:{
                 dir:"rtl"
@@ -85,7 +78,6 @@ const theme  = createTheme({
                     padding:10,
                     color:"#333",
                     direction:"rtl"
-
                 }
             }
         },
@@ -93,12 +85,8 @@ const theme  = createTheme({
             defaultProps:{
                 disableScrollLock:true  // to prevent adding padding to the body on opening the menu
             }
-
         },
-
-
     }
-
 })
 
 declare module '@mui/material/styles' {

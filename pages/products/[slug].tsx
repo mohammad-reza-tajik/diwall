@@ -26,7 +26,6 @@ const Features = dynamic(() => import("@/components/Globals/Features"))
 
 const styles  = {
     addToCartButton: {
-
         width: {xs: "100%", md: 200},
         height: "6rem",
         borderRadius: 2,
@@ -37,8 +36,6 @@ const styles  = {
         "&> *": {
             color: "white"
         },
-
-
     },
     addToWishlistButton: {
         width: "6rem",
