@@ -5,6 +5,8 @@ import {ThemeProvider} from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import "swiper/scss";
 import 'swiper/scss/navigation';
+import 'swiper/scss/free-mode';
+import "swiper/scss/thumbs"
 import Footer from "@/components/Globals/Footer";
 import {useRouter} from "next/router";
 import Header from "@/components/Globals/Header";

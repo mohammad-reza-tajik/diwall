@@ -19,6 +19,8 @@ import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
 import useFetch from "@/hooks/useFetch";
 import type {SxProps} from "@mui/system";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {A11y, FreeMode, Navigation, Thumbs} from "swiper/modules";
 
 const Info = dynamic(() => import("@/components/DetailPage/Info"))
 const Features = dynamic(() => import("@/components/Globals/Features"))
@@ -41,7 +43,7 @@ const styles = {
 
     },
     toggleButton: {
-        fontSize: {xs: 13, md: 15},
+        fontSize: {xs: 12, md: 14},
     },
     addToCartButton: {
         width: {xs: "100%", md: 200},
@@ -74,7 +76,9 @@ const ProductDetails = () => {
     const [addToCartLoading, setAddToCartLoading] = useState<boolean>(false)
     const [addToWishlistLoading, setAddToWishlistLoading] = useState<boolean>(false)
     const [presetSizes, setPresetSizes] = useState<number>(1)
-    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
 
     const router = useRouter()
     const dispatch = useAppDispatch();
@@ -137,24 +141,61 @@ const ProductDetails = () => {
             </Head>
 
                 <Grid container item xs={12}>
-                    <Grid container item direction={"column"} xs={12} md={6}>
+                    <Grid container item direction={"column"} xs={12} sm={10} md={6} mx={"auto"}>
                         {
-                            isLoading ?
-                                <Skeleton variant="rectangular" animation={"wave"}
-                                          sx={{height: 1, width: 1}}/> :
-
-                                <Image style={{width: "100%" , height : "auto"}}
-                                       src={`/assets/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
-                                       alt={`${product ? product.title : "product placeholder"}`} width={510}
-                                       height={385}
-                                />
 
                         }
+                        <Grid container item component={Swiper}
+                              spaceBetween={10}
+                              slidesPerView={1}
+                              thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+                              modules={[Navigation, A11y, FreeMode , Thumbs]}
+                              navigation
+
+                        >
+                            {
+                                Array.from({length : 7} , (_,index) => {
+                                    return (
+                                        <SwiperSlide key={index}>
+                                            <Image style={{width: "100%" , height : "auto"}}
+                                                   src={`/assets/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
+                                                   alt={`${product ? product.title : "product placeholder"}`} width={510}
+                                                   height={385}
+                                            />
+                                        </SwiperSlide>
+                                    )
+                                })
+                            }
+
+
+                        </Grid>
+                        <Grid container item component={Swiper}
+                            onSwiper={setThumbsSwiper}
+                            spaceBetween={10}
+                            slidesPerView={4}
+                            freeMode={true}
+                            watchSlidesProgress={true}
+                            modules={[FreeMode, Navigation, Thumbs]}
+                        >
+                            {
+                                Array.from({length : 7} , (_,index) => {
+                                    return (
+                                        <SwiperSlide key={index}>
+                                            <Image style={{width: "100%" , height : "auto"}}
+                                                   src={`/assets/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
+                                                   alt={`${product ? product.title : "product placeholder"}`} width={510}
+                                                   height={385}
+                                            />
+                                        </SwiperSlide>
+                                    )
+                                })
+                            }
+                        </Grid>
                     </Grid>
 
                     <Grid container item spacing={30} xs={12} md={6} pr={{xs: 5, md: 30}} mt={{xs: 20, md: 0}}>
                         <Grid container item>
-                            <Grid item xs={12} md={8}>
+                            <Grid item xs>
                                 {
                                     isLoading ?
 
@@ -165,11 +206,10 @@ const ProductDetails = () => {
                                         </Typography>
                                 }
                             </Grid>
-                            <Grid container item xs={4} justifyContent={"flex-end"} alignItems={"center"}
-                                  sx={{display: {xs: "none", md: "flex"}}}>
+                            <Grid container item xs={"auto"} alignItems={"center"}>
                                 <Typography component={"span"} sx={
                                     {
-                                        fontSize: 14, borderRadius: 1, px: 10, py: 5, color: "white.main",
+                                        fontSize: 14, borderRadius: 1, px: 5, py: 2, color: "white.main",
                                         bgcolor: isLoading ? "transparent" : product && product.quantity > 0 ? "primary.main" : "error.main"
                                     }
                                 }>
@@ -318,3 +358,17 @@ const ProductDetails = () => {
 
 }
 export default ProductDetails
+
+
+/*{
+                            isLoading ?
+                                <Skeleton variant="rectangular" animation={"wave"}
+                                          sx={{height: 1, width: 1}}/> :
+
+                                <Image style={{width: "100%" , height : "auto"}}
+                                       src={`/assets/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
+                                       alt={`${product ? product.title : "product placeholder"}`} width={510}
+                                       height={385}
+                                />
+
+                        }*/
