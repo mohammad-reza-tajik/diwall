@@ -29,7 +29,7 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 
-const Dashboard: React.FC = () => {
+const DashboardPage: React.FC = () => {
 
     const router = useRouter()
 
@@ -139,4 +139,4 @@ const Dashboard: React.FC = () => {
     )
 }
 
-export default Dashboard
+export default DashboardPage

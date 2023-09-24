@@ -17,7 +17,7 @@ const styles  = {
 
 } satisfies Record<string, SxProps>
 
-const Auth: React.FC = () => {
+const AuthPage: React.FC = () => {
 
     return (
         <Grid container alignItems={"center"} justifyContent={"center"} sx={styles.container}>
@@ -30,4 +30,4 @@ const Auth: React.FC = () => {
         </Grid>
     )
 }
-export default Auth
+export default AuthPage

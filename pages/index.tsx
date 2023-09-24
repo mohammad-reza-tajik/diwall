@@ -18,7 +18,7 @@ interface Props {
     mostPopularProducts:ProductType[];
     bestSellingProducts:ProductType[];
 }
-const Home : React.FC<Props> = (props) => {
+const HomePage : React.FC<Props> = (props) => {
 
     return (
         <Grid container item xs={12} direction={"row"} justifyContent={"center"}>
@@ -59,4 +59,4 @@ export const getStaticProps : GetStaticProps = async () => {
     }
 }
 
-export default Home
+export default HomePage
