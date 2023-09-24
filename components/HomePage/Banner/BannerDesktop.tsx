@@ -9,13 +9,15 @@ import {SxProps} from "@mui/system";
 const styles = {
     bannerTextBox: {
         bgcolor: "primary.main",
+        flexDirection : "column",
         py: 100,
         px: 50,
         gap: "4rem",
     },
     bannerHeading : {
         fontSize : {md : 18 ,lg:25},
-        color : "white.main"
+        color : "white.main",
+        fontFamily : "dana-black",
     },
     bannerText : {
         textAlign : "justify",
@@ -33,9 +35,9 @@ const BannerDesktop: React.FC = () => {
 
     return (
 
-        <Grid container item minHeight={510} mb={40} bgcolor={"red"}>
-            <Grid container item direction={"column"}  md={4} sx={styles.bannerTextBox}>
-                <Typography  fontFamily={"dana-black"} component={"h1"} sx={styles.bannerHeading}>
+        <Grid container item minHeight={510} mb={40}>
+            <Grid container item md={4} sx={styles.bannerTextBox}>
+                <Typography  component={"h1"} sx={styles.bannerHeading}>
                     خانه رویایی خود را به واقعیت تبدیل کنید
                 </Typography>
                 <Typography component={"p"} sx={styles.bannerText}>

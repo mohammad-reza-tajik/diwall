@@ -24,7 +24,25 @@ const Info = dynamic(() => import("@/components/DetailPage/Info"))
 const Features = dynamic(() => import("@/components/Globals/Features"))
 
 
-const styles  = {
+const styles = {
+    title: {
+        fontSize: {xs: 18, sm: 20, lg: 22},
+        lineHeight: 1.8 ,
+        fontFamily : "dana-bold"
+    },
+    price: {
+        fontSize: {xs: 16, md: 18},
+        color: "primary.main",
+        fontFamily : "dana-bold"
+    },
+    description: {
+        fontSize: {xs: 13, md: 15},
+        lineHeight: {xs: 1.8, md: 1.6}
+
+    },
+    toggleButton: {
+        fontSize: {xs: 13, md: 15},
+    },
     addToCartButton: {
         width: {xs: "100%", md: 200},
         height: "6rem",
@@ -45,11 +63,6 @@ const styles  = {
         border: "1px solid rgba(25,25,25,.1)"
 
     },
-    toggleButton: {
-        width: .4,
-        height: 40,
-        fontSize: {xs: 14, md: 16}
-    }
 
 } satisfies Record<string, SxProps>
 
@@ -66,9 +79,9 @@ const ProductDetails = () => {
     const router = useRouter()
     const dispatch = useAppDispatch();
 
-    const  user = useAppSelector(state => state.user);
-    const isInWishlist = user?.wishlist.includes( product && product._id );
-    const isInCart = user?.cart.includes( product && product._id );
+    const user = useAppSelector(state => state.user);
+    const isInWishlist = user?.wishlist.includes(product && product._id);
+    const isInCart = user?.cart.includes(product && product._id);
 
     const {isReady} = router;
     const slug = isReady ? router.query.slug as string : " ";
@@ -100,11 +113,11 @@ const ProductDetails = () => {
     }
 
     const addToCartHandler = () => {
-        dispatch(userActions.handleCart({product , setAddToCartLoading , router}));
+        dispatch(userActions.handleCart({product, setAddToCartLoading, router}));
     }
 
     const addToWishlistHandler = () => {
-        dispatch(userActions.handleWishlist({product, setAddToWishlistLoading , router}))
+        dispatch(userActions.handleWishlist({product, setAddToWishlistLoading, router}))
     }
 
 
@@ -123,24 +136,23 @@ const ProductDetails = () => {
                       content={`/assets/pictures/products/${product ? product.slug : ""}.jpg`}/>
             </Head>
 
-            <Grid container item xs={12}>
-                <Grid container item xs={12} justifyContent={"center"}>
-                    <Grid container item xs={12} sm={7} md={5} maxHeight={400} minHeight={250}
-                          justifyContent={"center"}>
+                <Grid container item xs={12}>
+                    <Grid container item direction={"column"} xs={12} md={6}>
                         {
                             isLoading ?
                                 <Skeleton variant="rectangular" animation={"wave"}
                                           sx={{height: 1, width: 1}}/> :
 
-                                <Image style={{width: "100%", height: "auto"}}
+                                <Image style={{width: "100%" , height : "auto"}}
                                        src={`/assets/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
-                                       alt={`${product ? product.title : "product placeholder"}`} width={510} height={385}
+                                       alt={`${product ? product.title : "product placeholder"}`} width={510}
+                                       height={385}
                                 />
 
                         }
                     </Grid>
 
-                    <Grid container item spacing={30} xs={12} md={7} pr={{xs: 5, md: 30}} mt={{xs: 20, md: 0}}>
+                    <Grid container item spacing={30} xs={12} md={6} pr={{xs: 5, md: 30}} mt={{xs: 20, md: 0}}>
                         <Grid container item>
                             <Grid item xs={12} md={8}>
                                 {
@@ -148,10 +160,7 @@ const ProductDetails = () => {
 
                                         <Skeleton variant="text" animation={"wave"}
                                                   sx={{fontSize: {xs: 18, md: 25}}}/> :
-                                        <Typography variant={"h1"} sx={{fontSize: {xs: 18, md: 25}}}
-                                                    fontFamily={"dana-bold"}
-                                                    lineHeight={1.8}
-                                                    color={"#555"}>
+                                        <Typography variant={"h1"} sx={styles.title}>
                                             {product ? product.title : ""}
                                         </Typography>
                                 }
@@ -160,8 +169,8 @@ const ProductDetails = () => {
                                   sx={{display: {xs: "none", md: "flex"}}}>
                                 <Typography component={"span"} sx={
                                     {
-                                        fontSize: 14 , borderRadius:1 , px:10,py:5,color : "white.main",
-                                        bgcolor : isLoading ? "transparent" : product && product.quantity > 0 ? "primary.main" : "error.main"
+                                        fontSize: 14, borderRadius: 1, px: 10, py: 5, color: "white.main",
+                                        bgcolor: isLoading ? "transparent" : product && product.quantity > 0 ? "primary.main" : "error.main"
                                     }
                                 }>
                                     {
@@ -180,9 +189,7 @@ const ProductDetails = () => {
                                     <Skeleton variant="text" animation={"wave"} width={300} sx={{fontSize: 20}}/>
                                     :
 
-                                    <Typography variant={"h1"} component={"span"} fontSize={{xs: 16, md: 20}}
-                                                sx={{textAlign: "justify", flexGrow: 1}} fontFamily={"dana-bold"}
-                                                color={"primary"}>
+                                    <Typography variant={"h1"} component={"span"} sx={styles.price}>
                                         {product && product.price + " تومان هر متر مربع"}
                                     </Typography>
                             }
@@ -203,21 +210,21 @@ const ProductDetails = () => {
                                                   sx={{fontSize: {xs: 14, md: 16}}}/>
                                     </Grid>
                                     :
-                                    <Typography variant={"caption"} component={"p"} fontSize={{xs: 14, md: 16}}
-                                                lineHeight={{xs: 1.8, md: 1.6}} color={"#555"}>
+
+                                    <Typography variant={"caption"} component={"p"} sx={styles.description}>
                                         {product && product.description}
                                     </Typography>
                             }
                         </Grid>
                         <Grid item container gap={10}>
                             <Grid item xs={12}>
-                                <Typography component={"span"} fontSize={{xs: 14, md: 16}}>
+                                <Typography component={"span"} fontSize={{xs: 13, md: 15}}>
                                     سایز های آماده :
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
 
-                                <ToggleButtonGroup sx={{gap: {xs: 5}}} fullWidth color={"primary"} value={presetSizes}
+                                <ToggleButtonGroup sx={{direction : "ltr"}} fullWidth color={"primary"} value={presetSizes}
                                                    exclusive
                                                    onChange={presetSizesHandler}>
                                     <ToggleButton sx={styles.toggleButton} value={1}>10mx3m</ToggleButton>
@@ -228,20 +235,20 @@ const ProductDetails = () => {
                         </Grid>
                         <Grid item container xs={12} gap={30} mb={30}>
                             <Grid item xs={12}>
-                                <Typography component={"span"} fontSize={{xs: 14, md: 16}}>
+                                <Typography component={"span"} fontSize={{xs: 13, md: 15}}>
                                     سایز دلخواه (واحد متر) :
                                 </Typography>
                             </Grid>
                             <Grid container item xs={12} alignItems={"center"}>
                                 <Grid container item xs={6} alignItems={"center"} gap={10}>
-                                    <Grid component={"span"} sx={{fontSize: {xs: 14, md: 16}}}>طول : </Grid>
+                                    <Grid component={"span"} sx={{fontSize: {xs: 13, md: 15}}}>طول : </Grid>
                                     <TextField type={"number"} variant={"standard"}
                                                sx={{width: 100, height: 40, fontSize: 14}}/>
                                 </Grid>
                                 <Grid container item xs={6} alignItems={"center"} gap={10}>
-                                    <Grid component={"span"} sx={{fontSize: {xs: 14, md: 16}}}>عرض : </Grid>
+                                    <Grid component={"span"} sx={{fontSize: {xs: 13, md: 15}}}>عرض : </Grid>
                                     <TextField type={"number"} variant={"standard"}
-                                               sx={{width: 100, height: 40, fontSize: 14}}/>
+                                               sx={{width: 100, height: 40, fontSize: 13}}/>
                                 </Grid>
                             </Grid>
 
@@ -305,7 +312,6 @@ const ProductDetails = () => {
                 <Info isLoading={isLoading} products={relatedProducts}
                       currentProductTitle={title}/>
 
-            </Grid>
         </>
     )
 
