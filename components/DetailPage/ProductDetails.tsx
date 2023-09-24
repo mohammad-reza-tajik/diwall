@@ -21,7 +21,6 @@ import type {SxProps} from "@mui/system";
 const styles = {
     title: {
         fontSize: {xs: 18, sm: 20, lg: 22},
-        lineHeight: 1.8 ,
         fontFamily : "dana-bold"
     },
     price: {
@@ -30,8 +29,8 @@ const styles = {
         fontFamily : "dana-bold"
     },
     description: {
-        fontSize: {xs: 13, md: 15},
-        lineHeight: {xs: 1.8, md: 1.6}
+        fontSize: 15,
+        lineHeight: 1.8
 
     },
     toggleButton: {
@@ -42,7 +41,7 @@ const styles = {
         height: "6rem",
         borderRadius: 2,
         fontFamily: "dana-bold",
-        fontSize: "1.5rem",
+        fontSize: "1.4rem",
         gap: 10,
         color: "white",
         "&> *": {
@@ -125,9 +124,7 @@ const ProductDetails : React.FC<Props> = ({product , isLoading}) => {
             <Grid item mb={20}>
                 {
                     isLoading ?
-                        <Skeleton variant="text" animation={"wave"} width={300} sx={{fontSize: 20}}/>
-                        :
-
+                        <Skeleton variant="text" animation={"wave"} width={300} sx={{fontSize: 20}}/> :
                         <Typography variant={"h1"} component={"span"} sx={styles.price}>
                             {product && product.price + " تومان هر متر مربع"}
                         </Typography>
@@ -157,7 +154,7 @@ const ProductDetails : React.FC<Props> = ({product , isLoading}) => {
             </Grid>
             <Grid item container gap={10}>
                 <Grid item xs={12}>
-                    <Typography component={"span"} fontSize={{xs: 13, md: 15}}>
+                    <Typography component={"span"} fontSize={15}>
                         سایز های آماده :
                     </Typography>
                 </Grid>
@@ -174,28 +171,25 @@ const ProductDetails : React.FC<Props> = ({product , isLoading}) => {
             </Grid>
             <Grid item container xs={12} gap={30} mb={30}>
                 <Grid item xs={12}>
-                    <Typography component={"span"} fontSize={{xs: 13, md: 15}}>
+                    <Typography component={"span"} fontSize={15}>
                         سایز دلخواه (واحد متر) :
                     </Typography>
                 </Grid>
                 <Grid container item xs={12} alignItems={"center"}>
                     <Grid container item xs={6} alignItems={"center"} gap={10}>
-                        <Grid component={"span"} sx={{fontSize: {xs: 13, md: 15}}}>طول : </Grid>
+                        <Grid component={"span"} sx={{fontSize: 15}}>طول : </Grid>
                         <TextField type={"number"} variant={"standard"}
-                                   sx={{width: 100, height: 40, fontSize: 14}}/>
+                                   sx={{width: 100, height: 40, fontSize: 15}}/>
                     </Grid>
                     <Grid container item xs={6} alignItems={"center"} gap={10}>
-                        <Grid component={"span"} sx={{fontSize: {xs: 13, md: 15}}}>عرض : </Grid>
+                        <Grid component={"span"} sx={{fontSize: 15}}>عرض : </Grid>
                         <TextField type={"number"} variant={"standard"}
-                                   sx={{width: 100, height: 40, fontSize: 13}}/>
+                                   sx={{width: 100, height: 40, fontSize: 15}}/>
                     </Grid>
                 </Grid>
 
                 <Grid xs={12} container item justifyContent={"flex-end"} alignItems={"center"} gap={5}>
-
-
                     <Grid container justifyContent={"flex-end"} item xs={"auto"}>
-
                         <Button
                             onClick={addToWishlistHandler}
                             variant={"contained"}

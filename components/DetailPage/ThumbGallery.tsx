@@ -20,7 +20,7 @@ const ThumbGallery : React.FC<Props> = ({product , isLoading}) => {
             {
                 isLoading ?
                     <Skeleton variant="rectangular" animation={"wave"}
-                              sx={{height: 1, width: 1}}/> :
+                              sx={{minHeight: 385 , width: 1}}/> :
                     <>
                         <Grid container item component={Swiper}
                              spaceBetween={10}
