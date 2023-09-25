@@ -12,56 +12,22 @@ import {useRouter} from "next/router";
 import Header from "@/components/Globals/Header";
 import {Provider} from "react-redux";
 import {store} from "@/store";
-import Auth from "@/components/Globals/Auth";
-import React , {CSSProperties} from "react";
-import GlobalStyles from '@mui/material/GlobalStyles';
+import React from "react";
 import {SnackbarProvider, closeSnackbar} from 'notistack';
 import IconButton from "@mui/material/IconButton";
 import Close from "@mui/icons-material/Close";
+import GlobalStyles from "@/components/Globals/GlobalStyles";
+import AutoLogin from "@/components/Globals/AutoLogin";
 
-const globalStyles = {
-    ".swiper" : {
-      width : "100%"
-    },
-    ".swiper-button-prev , .swiper-button-next": {
-        backgroundColor: `${theme.palette.primary.main} !important`,
-        borderRadius: 5,
-        [theme.breakpoints.up('xs')]: {
-            width: "40px !important",
-            height: "40px !important"
-        },
-        [theme.breakpoints.up('md')]: {
-            width: "50px !important",
-            height: "50px !important"
-        },
-         // @ts-ignore
-        "&:after": {
-            fontSize: "15px !important",
-            color: "#fff",
-        }
-    },
-    "&.notistack-MuiContent" : {
-        gap : 10
-    },
-    "&.go703367398" : {
-        marginLeft : "0 !important",
-        marginRight : "auto !important",
-        padding : "0 !important" ,
 
-    },
-    "&.notistack-MuiContent-success": {
-        backgroundColor: `${theme.palette.primary.main} !important`,
-    },
-    "&.notistack-MuiContent-error": {
-        backgroundColor: `${theme.palette.error.main} !important`,
-    },
-    "&.notistack-MuiContent-info": {
-        backgroundColor: `${theme.palette.info.main} !important`,
-    },
-} satisfies Record<string, CSSProperties>
-
-const applyGlobalStyles = <GlobalStyles styles={globalStyles}/>
-
+const snackbarAction = (key: string) => (
+    <IconButton
+        size="large"
+        sx={{color: "#fff", padding: 0}}
+        onClick={() => closeSnackbar(key)}>
+        <Close fontSize={"large"}/>
+    </IconButton>
+)
 
 function MyApp({Component, pageProps}) {
 
@@ -135,26 +101,18 @@ function MyApp({Component, pageProps}) {
                 <meta name="theme-color" content="#069f69"/>
 
             </Head>
-            {applyGlobalStyles}
+            <GlobalStyles/>
             <Provider store={store}>
-                <SnackbarProvider style={{fontSize: 14 }} action={(key) => (<IconButton
-                    size="large"
-                    sx={{color: "#fff" , padding : 0}}
-                    onClick={() => closeSnackbar(key)}>
-                    <Close fontSize={"large"}/>
-                </IconButton>)}
-                >
-                    <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
-                        <Grid item xs={11}>
-                            {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Header/>}
-                            <Auth>
-                                <main>
+                <SnackbarProvider style={{fontSize: 14}} action={snackbarAction}>
+                    <AutoLogin>
+                        <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
+                            <Grid item xs={11} component={"main"}>
+                                {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Header/>}
                                     <Component {...pageProps} />
-                                </main>
-                            </Auth>
-                            {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Footer/>}
+                                {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Footer/>}
+                            </Grid>
                         </Grid>
-                    </Grid>
+                    </AutoLogin>
                 </SnackbarProvider>
             </Provider>
         </ThemeProvider>
