@@ -60,7 +60,7 @@ const DetailsPage = () => {
             </Head>
 
                 <Grid container item xs={12}>
-                    <Grid container item direction={"column"} xs={12} sm={10} md={6} mx={"auto"}>
+                    <Grid container item  xs={12} sm={10} md={6} mx={"auto"}>
                         <ThumbGallery product={product} isLoading={isLoading} />
                     </Grid>
                     <Grid container item spacing={24} xs={12} md={6} pr={{xs: 5, md: 30}} mt={{xs: 20, md: 0}}>

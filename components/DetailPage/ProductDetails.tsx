@@ -16,17 +16,15 @@ import type {ProductType} from "@/db/productModel";
 import type {SxProps} from "@mui/system";
 
 
-
-
 const styles = {
     title: {
         fontSize: {xs: 18, sm: 20, lg: 22},
-        fontFamily : "dana-bold"
+        fontFamily: "dana-bold"
     },
     price: {
         fontSize: {xs: 16, md: 18},
         color: "primary.main",
-        fontFamily : "dana-bold"
+        fontFamily: "dana-bold"
     },
     description: {
         fontSize: 15,
@@ -57,14 +55,23 @@ const styles = {
 
     },
 
+    wishlistIcons: {
+        fontSize: {xs: 30, sm: 40},
+        borderRadius: 20,
+        p: {xs: 2, md: 3,},
+        color: "fff"
+
+    },
+
+
 } satisfies Record<string, SxProps>
 
 interface Props {
-    product : ProductType ,
-    isLoading : boolean
+    product: ProductType,
+    isLoading: boolean
 }
 
-const ProductDetails : React.FC<Props> = ({product , isLoading}) => {
+const ProductDetails: React.FC<Props> = ({product, isLoading}) => {
 
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToWishlistLoading, setAddToWishlistLoading] = useState(false)
@@ -90,41 +97,39 @@ const ProductDetails : React.FC<Props> = ({product , isLoading}) => {
         dispatch(userActions.handleWishlist({product, setAddToWishlistLoading, router}))
     }
 
- return (
+    return (
         <>
             <Grid container item>
                 <Grid item xs>
                     {
                         isLoading ?
-
-                            <Skeleton variant="text" animation={"wave"}
-                                      sx={{fontSize: {xs: 18, md: 25}}}/> :
+                            <Skeleton variant="text" animation={"wave"} width={"70%"}/> :
                             <Typography variant={"h1"} sx={styles.title}>
                                 {product ? product.title : ""}
                             </Typography>
                     }
                 </Grid>
                 <Grid container item xs={"auto"} alignItems={"center"}>
-                    <Typography component={"span"} sx={
-                        {
-                            fontSize: 14, borderRadius: 1, px: 5, py: 2, color: "white.main",
-                            bgcolor: isLoading ? "transparent" : product && product.quantity > 0 ? "primary.main" : "error.main"
-                        }
-                    }>
-                        {
-                            isLoading ?
-                                <Skeleton variant={"text"} animation={"wave"} width={100}
-                                          sx={{fontSize: 16}}/> :
-                                product && product.quantity > 0 ? "موجود" : "ناموجود"
-                        }
-                    </Typography>
+
+                    {
+                        isLoading ?
+                            <Skeleton variant={"text"} animation={"wave"} width={50}/> :
+                            <Typography component={"span"} sx={
+                                {
+                                    fontSize: 14, borderRadius: 1, px: 5, py: 2, color: "white.main",
+                                    bgcolor: isLoading ? "transparent" : product && product.quantity > 0 ? "primary.main" : "error.main"
+                                }
+                            }>
+                                {product && product.quantity > 0 ? "موجود" : "ناموجود"}
+                            </Typography>
+                    }
                 </Grid>
             </Grid>
 
             <Grid item mb={20}>
                 {
                     isLoading ?
-                        <Skeleton variant="text" animation={"wave"} width={300} sx={{fontSize: 20}}/> :
+                        <Skeleton variant="text" animation={"wave"} width={300}/> :
                         <Typography variant={"h1"} component={"span"} sx={styles.price}>
                             {product && product.price + " تومان هر متر مربع"}
                         </Typography>
@@ -134,16 +139,11 @@ const ProductDetails : React.FC<Props> = ({product , isLoading}) => {
                 {
                     isLoading ?
                         <Grid item>
-                            <Skeleton variant="text" width={300} animation={"wave"}
-                                      sx={{fontSize: {xs: 14, md: 16}}}/>
-                            <Skeleton variant="text" width={300} animation={"wave"}
-                                      sx={{fontSize: {xs: 14, md: 16}}}/>
-                            <Skeleton variant="text" width={300} animation={"wave"}
-                                      sx={{fontSize: {xs: 14, md: 16}}}/>
-                            <Skeleton variant="text" width={300} animation={"wave"}
-                                      sx={{fontSize: {xs: 14, md: 16}}}/>
-                            <Skeleton variant="text" width={300} animation={"wave"}
-                                      sx={{fontSize: {xs: 14, md: 16}}}/>
+                            <Skeleton variant="text" width={"100%"} animation={"wave"}/>
+                            <Skeleton variant="text" width={"100%"} animation={"wave"}/>
+                            <Skeleton variant="text" width={"100%"} animation={"wave"}/>
+                            <Skeleton variant="text" width={"100%"} animation={"wave"}/>
+                            <Skeleton variant="text" width={"100%"} animation={"wave"}/>
                         </Grid>
                         :
 
@@ -160,7 +160,7 @@ const ProductDetails : React.FC<Props> = ({product , isLoading}) => {
                 </Grid>
                 <Grid item xs={12}>
 
-                    <ToggleButtonGroup sx={{direction : "ltr"}} fullWidth color={"primary"} value={presetSizes}
+                    <ToggleButtonGroup sx={{direction: "ltr" , height : 35}} fullWidth color={"primary"} value={presetSizes}
                                        exclusive
                                        onChange={presetSizesHandler}>
                         <ToggleButton sx={styles.toggleButton} value={1}>10mx3m</ToggleButton>
@@ -177,12 +177,12 @@ const ProductDetails : React.FC<Props> = ({product , isLoading}) => {
                 </Grid>
                 <Grid container item xs={12} alignItems={"center"}>
                     <Grid container item xs={6} alignItems={"center"} gap={10}>
-                        <Grid component={"span"} sx={{fontSize: 15}}>طول : </Grid>
+                        <Grid component={"span"} sx={{fontSize: {xs:12,md:14}}}>طول : </Grid>
                         <TextField type={"number"} variant={"standard"}
                                    sx={{width: 100, height: 40, fontSize: 15}}/>
                     </Grid>
                     <Grid container item xs={6} alignItems={"center"} gap={10}>
-                        <Grid component={"span"} sx={{fontSize: 15}}>عرض : </Grid>
+                        <Grid component={"span"} sx={{fontSize: {xs:12,md:14}}}>عرض : </Grid>
                         <TextField type={"number"} variant={"standard"}
                                    sx={{width: 100, height: 40, fontSize: 15}}/>
                     </Grid>
@@ -196,23 +196,11 @@ const ProductDetails : React.FC<Props> = ({product , isLoading}) => {
                             aria-label="add to wishlist"
                             sx={styles.addToWishlistButton}
                         >
-                            {addToWishlistLoading ?
-                                <CircularProgress size={30} sx={{
-                                    borderRadius: 20,
-                                    p: {xs: 2, md: 3,},
-                                    color: "#fff"
-                                }}/> : isInWishlist ? <Favorite sx={{
-                                        fontSize: {xs: 30, sm: 40},
-                                        borderRadius: 20,
-                                        p: {xs: 2, md: 3,},
-                                        color: "fff"
-                                    }}/> :
-                                    <FavoriteBorder sx={{
-                                        fontSize: {xs: 30, sm: 40,},
-                                        borderRadius: 20,
-                                        p: {xs: 2, md: 3,},
-                                        color: "#fff"
-                                    }}/>
+                            {
+                                addToWishlistLoading ?
+                                    <CircularProgress size={30} sx={styles.wishlistIcons}/> :
+                                    isInWishlist ? <Favorite sx={styles.wishlistIcons}/> :
+                                        <FavoriteBorder sx={styles.wishlistIcons}/>
                             }
                         </Button>
                     </Grid>
