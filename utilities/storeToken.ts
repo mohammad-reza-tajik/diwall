@@ -1,4 +1,4 @@
-import {User} from "@/store/userSlice";
+import type {User} from "@/store/userSlice";
 
 const storeTokenAndUser = (user : User) => {
     if (typeof window !== 'undefined') {
