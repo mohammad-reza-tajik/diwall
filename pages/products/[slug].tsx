@@ -71,8 +71,7 @@ const DetailsPage = () => {
                 <Divider sx={{width: 1, mb: 30}}/>
                 <Features/>
                 <Divider sx={{width: 1, mt: 30}}/>
-                <Info isLoading={isLoading} products={relatedProducts}
-                      currentProductTitle={title}/>
+                <Info isLoading={isLoading} products={relatedProducts}/>
 
         </>
     )

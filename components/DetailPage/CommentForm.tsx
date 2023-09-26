@@ -53,11 +53,10 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 interface Props {
-    currentProductTitle:string;
     onAddComment:()=>void
 }
 
-const CommentForm: React.FC<Props> = (props) => {
+const CommentForm: React.FC<Props> = ({onAddComment}) => {
 
     const user = useAppSelector(state => state.user);
 
@@ -93,7 +92,7 @@ const CommentForm: React.FC<Props> = (props) => {
                 variant : "success",
             })
 
-            props.onAddComment()
+            onAddComment()
         } catch (err) {
             enqueueSnackbar(err.message , {
                 variant : "error",

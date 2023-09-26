@@ -24,10 +24,9 @@ const styles = {
 interface Props {
     products: ProductType[];
     isLoading: boolean;
-    currentProductTitle:string;
 }
 
-const Info: React.FC<Props> = (props) => {
+const Info: React.FC<Props> = ({products , isLoading }) => {
     const [tab, setTab] = useState(0);
     const [addComment,setAddComment] = useState(false)
     const changeTabHandler = ( _ , newValue: number) => {
@@ -51,19 +50,19 @@ const Info: React.FC<Props> = (props) => {
             </Grid>
             <Grid item xs={12} py={30}>
                 {
-                    props.isLoading ?
+                    isLoading ?
                         <Grid container item xs justifyContent={"center"}>
                             <CircularProgress color={"primary"} size={45}/>
                         </Grid> :
                         <>
                             <TabPanel index={0} tab={tab}>
-                                <SwiperProducts products={props.products}/>
+                                <SwiperProducts products={products}/>
                             </TabPanel>
                             <TabPanel index={1} tab={tab}>
                                 <Comments addComment={addComment} />
                             </TabPanel>
                             <TabPanel index={2} tab={tab}>
-                                <CommentForm currentProductTitle={props.currentProductTitle} onAddComment={addCommentHandler} />
+                                <CommentForm onAddComment={addCommentHandler} />
                             </TabPanel>
                         </>
                 }
