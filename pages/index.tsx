@@ -18,7 +18,7 @@ interface Props {
     mostPopularProducts:ProductType[];
     bestSellingProducts:ProductType[];
 }
-const HomePage : React.FC<Props> = (props) => {
+const HomePage : React.FC<Props> = ({latestProducts,mostPopularProducts,bestSellingProducts}) => {
 
     return (
         <Grid container item xs={12} direction={"row"} justifyContent={"center"}>
@@ -26,12 +26,12 @@ const HomePage : React.FC<Props> = (props) => {
             <Banner />
             <Features />
             <Places/>
-            <SwiperProducts products={props.mostPopularProducts} route={"/products?sortBy=3"} mostPopular />
+            <SwiperProducts products={mostPopularProducts} route={"/products?sortBy=3"} mostPopular />
             <SectionHeading text={"محصولات جدید"} seeAll={true} route={"/products"}/>
-            <SwiperProducts products={props.latestProducts} />
+            <SwiperProducts products={latestProducts} />
             <MiddleSection/>
             <SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"/products?sortBy=2"} />
-            <SwiperProducts products={props.bestSellingProducts} />
+            <SwiperProducts products={bestSellingProducts} />
             <ShowCase/>
         </Grid>
     )
