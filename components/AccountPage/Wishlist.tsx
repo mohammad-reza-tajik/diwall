@@ -12,19 +12,18 @@ interface Props {
     populatedWishlist:ProductType[];
     user:User;
 }
-const Wishlist : React.FC<Props> = (props) => {
-    const {isLoading , user ,populatedWishlist } = props;
+const Wishlist : React.FC<Props> = ({isLoading , user ,populatedWishlist }) => {
 
     return(
-        <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10}>
+        <Grid container item xs={12} py={20} pr={{xs: 0, md: 10}} spacing={10}>
 
             {isLoading ?
-                <Grid container item xs minHeight={300} justifyContent={"center"}
+                <Grid container item xs={12} justifyContent={"center"}
                       alignItems={"center"}>
                     <CircularProgress color={"primary"} size={45}/>
                 </Grid> :
                 user?.username === null || populatedWishlist.length === 0 ?
-                    <Grid container item xs minHeight={300} justifyContent={"center"}
+                    <Grid container item xs={12} justifyContent={"center"}
                           alignItems={"center"}>
                         <Typography fontSize={16} variant={"body1"} color={"#333"}
                                     fontFamily={"dana-bold"}>
