@@ -2,8 +2,6 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import {useTheme} from "@mui/material/styles"
 import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
 import Delete from "@mui/icons-material/Delete";
 import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
@@ -18,7 +16,7 @@ import useFetch from "@/hooks/useFetch";
 import {enqueueSnackbar} from "notistack";
 
 
-const CartItem: React.FC<ProductType> = (props) => {
+const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
 
     const router = useRouter()
 
@@ -33,37 +31,27 @@ const CartItem: React.FC<ProductType> = (props) => {
 
     const removeFromCart = async () => {
         if (user?.username) {
-
-            await useFetch.delete(`/api/user/cart?productId=${props._id}&_id=${user._id}&token=${user.token}`)
-            dispatch(userActions.removeFromCart(props._id));
+            await useFetch.delete(`/api/user/cart?productId=${_id}&_id=${user._id}&token=${user.token}`)
+            dispatch(userActions.removeFromCart(_id));
             enqueueSnackbar("از سبد خرید شما حذف شد" , {
                 variant : "info",
             });
-
-
-
         }
 
     }
 
 
-    const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-
-    const title = props.title.split(" ").join("_")
-
     return (
             <Grid container item xs={12}>
-                <Grid className={"pointer"} container item xs={12} md={true} lg={6} alignItems={"center"}
-                      gap={matchesMD ? 10 : 20} onClick={() => router.push("/products/" + title)}>
+                <Grid className={"pointer"} container item xs={12} md lg={6}
+                      sx={{alignItems : "center" , gap : {xs:10 , md:20}}}
+                      onClick={() => router.push("/products/" + slug)}>
                     <Grid item xs={"auto"}>
-                        <Image src={`/assets/pictures/products/${props.slug}.jpg`} width={50} height={50}
-                                alt={props.title}/>
+                        <Image src={`/assets/pictures/products/${slug}.jpg`} width={50} height={50}
+                                alt={title}/>
                     </Grid>
-                    <Grid item xs>
-                        <Typography variant={"h4"} fontSize={{xs: 14, lg: 16}} color={"#666"}>
-                            {props.title}
-                        </Typography>
+                    <Grid item xs component={Typography} variant={"h4"} fontSize={{xs: 14, lg: 16}}>
+                            {title}
                     </Grid>
                 </Grid>
                 <Grid container item xs={12} md={"auto"} lg={6} alignItems={"center"}
