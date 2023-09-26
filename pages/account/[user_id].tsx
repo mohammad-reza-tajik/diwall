@@ -10,7 +10,7 @@ import Head from "next/head";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
 import useFetch from "@/hooks/useFetch";
-import type {SxProps} from "@mui/system";
+import type {SxProps , Theme} from "@mui/system";
 // import Moderation from "@/components/AccountPage/Moderation";
 
 const Profile = dynamic(() => import("@/components/AccountPage/Profile"))
@@ -21,11 +21,10 @@ const Cart = dynamic(() => import("@/components/AccountPage/Cart"))
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 15},
-        color: "#666",
-        fontFamily: "dana-bold",
-
     },
-
+    tabsContainer : {
+        borderLeft : (theme : Theme)=>({xs:"none" , md : `2px solid ${theme.palette.primary.main}`})
+    }
 } satisfies Record<string, SxProps>
 
 
@@ -72,9 +71,7 @@ const DashboardPage: React.FC = () => {
 
 
     const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-    const matches1040 = useMediaQuery('(max-width:1040px)')
-
+    const matchesMD = useMediaQuery(theme.breakpoints.up("md"))
 
     return (
         <>
@@ -84,18 +81,10 @@ const DashboardPage: React.FC = () => {
                 </title>
             </Head>
 
-            <Grid container item xs={12} minHeight={400}>
-                <Grid container item xs={12} md={matches1040 ? 3 : 2} mt={10}
-                      borderLeft={{xs: "none", md: "5px solid #069f69"}}>
-                    <Tabs
-                        // the following lines are for solving strange behavior in tabs indicator in phone for wishlist tab
-                        TabIndicatorProps={{
-                            sx: {
-                                top: "85%",
-                                left: 0
-                            }
-                        }} onChange={tabChangeHandler} value={tab}
-                        orientation={matchesMD ? "horizontal" : "vertical"}>
+            <Grid container columns={14}>
+                <Grid item xs={14} md={3} mt={10} sx={styles.tabsContainer}>
+                    <Tabs onChange={tabChangeHandler} value={tab}
+                        orientation={matchesMD ? "vertical" : "horizontal"}>
                         <Tab label="اطلاعات کاربر" value={1} sx={styles.tab}/>
                         <Tab label="لیست علاقمندی ها" value={2} sx={styles.tab}/>
                         <Tab label="سبد خرید" value={3} sx={styles.tab}/>
@@ -104,8 +93,7 @@ const DashboardPage: React.FC = () => {
                     </Tabs>
 
                 </Grid>
-                <Grid container item xs={12} md={9} lg={10} minHeight={400}>
-                    {/*height 400 because tab indicator for third tab gets stuck at a wrong place*/}
+                <Grid item xs={14} md={11} minHeight={300}>
 
                     <TabPanel tab={tab} index={1}>
                         <Profile user={user}/>

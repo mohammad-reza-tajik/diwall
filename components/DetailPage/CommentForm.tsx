@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Create from "@mui/icons-material/Create";
 import  TextField  from "@mui/material/TextField";
 import {useRouter} from "next/router";
-import type {SxProps , Theme} from "@mui/system";
+import type {SxProps} from "@mui/system";
 import {enqueueSnackbar} from "notistack";
 
 const styles = {
@@ -26,7 +26,7 @@ const styles = {
             "&::-webkit-scrollbar-thumb" : {
                 borderRadius: 8,
                 backgroundClip: "content-box",
-                bgcolor: (theme : Theme) => theme.palette.primary.main,
+                bgcolor: "primary.main",
             },
         },
         
