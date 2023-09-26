@@ -4,23 +4,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import CartItem from "./CartItem";
 import type {ProductType} from "@/db/productModel";
-import type {SxProps} from "@mui/system";
 import type {User} from "@/store/userSlice";
 
-const styles = {
-    tab: {
-        fontSize: {xs: 12, md: 15},
-        color: "#333",
-        fontFamily: "dana-bold",
-
-    },
-    list: {
-        width: 1,
-        height: "auto",
-
-
-    }
-} satisfies Record<string, SxProps>
 
 interface Props {
     isLoading:boolean;
@@ -29,16 +14,14 @@ interface Props {
 
 }
 
-const Cart : React.FC<Props> = (props) => {
-    const {isLoading , populatedCart , user} = props;
-    // console.log(populatedCart);
+const Cart : React.FC<Props> = ({isLoading , populatedCart , user}) => {
   return (
-          <Grid container item xs={12} py={20} px={{xs: 0, md: 10}} spacing={10} direction={"column"}>
+          <Grid container item xs={12} py={20} pr={{xs: 0, md: 10}} spacing={10}>
               {isLoading ?
-                  <Grid container item xs justifyContent={"center"} alignItems={"center"}>
+                  <Grid container item xs={12} justifyContent={"center"} alignItems={"center"}>
                       <CircularProgress color={"primary"} size={45}/>
                   </Grid> :
-                  <Grid container item sx={styles.list} gap={10}>
+                  <Grid container item gap={10}>
                       {
                           user?.username === null || populatedCart.length === 0 ?
                               <Grid container item xs minHeight={300} justifyContent={"center"}
