@@ -51,10 +51,9 @@ interface Comment {
     date: string;
 }
 
-const Comments: React.FC<Props> = (props) => {
+const Comments: React.FC<Props> = ({addComment}) => {
 
-    // this is used to re-fetch comments anytime a new comment was submitted
-    const {addComment} = props;
+    // addComment is used to re-fetch comments anytime a new comment was submitted
 
     const router = useRouter();
 
@@ -136,10 +135,8 @@ const Comments: React.FC<Props> = (props) => {
                             }
                         </Grid>
                         :
-                        <Grid container item xs minHeight={200} justifyContent={"center"} alignItems={"center"}>
-                            <Typography variant={"h4"} component={"span"} fontSize={{xs: 14, md: 16}}>
+                        <Grid container item xs minHeight={200} component={Typography} variant={"body1"} fontSize={{xs: 14, md: 16}} justifyContent={"center"} alignItems={"center"}>
                                 برای این محصول دیدگاهی وجود ندارد !
-                            </Typography>
                         </Grid>
                 }
             </>

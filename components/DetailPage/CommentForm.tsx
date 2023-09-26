@@ -60,15 +60,13 @@ const CommentForm: React.FC<Props> = ({onAddComment}) => {
 
     const user = useAppSelector(state => state.user);
 
-
     const router = useRouter();
 
     const commentRef = useRef<HTMLTextAreaElement>();
 
-    const [isLoading,setIsLoading] = useState<boolean>(false);
+    const [isLoading,setIsLoading] = useState(false);
 
     const slug = router.isReady && router.query.slug;
-
 
     const insertCommentHandler = async (event : FormEvent) => {
         event.preventDefault();
