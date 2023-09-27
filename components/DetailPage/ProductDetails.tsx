@@ -35,32 +35,27 @@ const styles = {
         fontSize: {xs: 12, md: 14},
     },
     addToCartButton: {
-        width: {xs: "100%", md: 200},
-        height: "6rem",
+        width: {xs: "100%", md: "20rem"},
+        height: "5.5rem",
         borderRadius: 2,
-        fontFamily: "dana-bold",
         fontSize: "1.4rem",
-        gap: 10,
-        color: "white",
-        "&> *": {
-            color: "white"
-        },
+        gap: "1.4rem",
+        alignItems : "center",
+        color: "white.main",
     },
     addToWishlistButton: {
-        width: "6rem",
-        height: "6rem",
+        width: "5.5rem",
+        height: "5.5rem",
         borderRadius: 2,
-        color: "white",
-        border: "1px solid rgba(25,25,25,.1)"
+        color: "white.main",
 
     },
 
     wishlistIcons: {
-        fontSize: {xs: 30, sm: 40},
-        borderRadius: 20,
-        p: {xs: 2, md: 3,},
-        color: "fff"
-
+        fontSize: 25,
+    },
+   cartIcon: {
+        fontSize: 25,
     },
 
 
@@ -110,7 +105,6 @@ const ProductDetails: React.FC<Props> = ({product, isLoading}) => {
                     }
                 </Grid>
                 <Grid container item xs={"auto"} alignItems={"center"}>
-
                     {
                         isLoading ?
                             <Skeleton variant={"text"} animation={"wave"} width={50}/> :
@@ -177,13 +171,13 @@ const ProductDetails: React.FC<Props> = ({product, isLoading}) => {
                 </Grid>
                 <Grid container item xs={12} alignItems={"center"}>
                     <Grid container item xs={6} alignItems={"center"} gap={10}>
-                        <Grid component={"span"} sx={{fontSize: {xs:12,md:14}}}>طول : </Grid>
-                        <TextField type={"number"} variant={"standard"}
+                        <Grid component={"label"} htmlFor={"width"} sx={{fontSize: {xs:12,md:14}}}>طول : </Grid>
+                        <TextField type={"number"} variant={"standard"} id={"width"}
                                    sx={{width: 100, height: 40, fontSize: 15}}/>
                     </Grid>
                     <Grid container item xs={6} alignItems={"center"} gap={10}>
-                        <Grid component={"span"} sx={{fontSize: {xs:12,md:14}}}>عرض : </Grid>
-                        <TextField type={"number"} variant={"standard"}
+                        <Grid component={"label"} htmlFor={"height"} sx={{fontSize: {xs:12,md:14}}}>عرض : </Grid>
+                        <TextField type={"number"} variant={"standard"} id={"height"}
                                    sx={{width: 100, height: 40, fontSize: 15}}/>
                     </Grid>
                 </Grid>
@@ -198,8 +192,9 @@ const ProductDetails: React.FC<Props> = ({product, isLoading}) => {
                         >
                             {
                                 addToWishlistLoading ?
-                                    <CircularProgress size={30} sx={styles.wishlistIcons}/> :
-                                    isInWishlist ? <Favorite sx={styles.wishlistIcons}/> :
+                                    <CircularProgress size={25} sx={{color: "white.main"}}/> :
+                                    isInWishlist ?
+                                        <Favorite sx={styles.wishlistIcons}/> :
                                         <FavoriteBorder sx={styles.wishlistIcons}/>
                             }
                         </Button>
@@ -211,8 +206,8 @@ const ProductDetails: React.FC<Props> = ({product, isLoading}) => {
                             variant={"contained"}
                             color={isInCart ? "error" : "primary"}
                             startIcon={addToCartLoading ?
-                                <CircularProgress sx={{color: "#fff"}} size={25}/> :
-                                <ShoppingBagOutlined sx={{fontSize: 15, ml: 5,}}/>
+                                <CircularProgress sx={{color: "white.main"}} size={25}/> :
+                                <ShoppingBagOutlined sx={styles.cartIcon}/>
                             }
                             sx={styles.addToCartButton}
                         >
