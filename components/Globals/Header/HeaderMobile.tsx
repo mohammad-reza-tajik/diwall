@@ -20,16 +20,14 @@ import BackDrop from "./BackDrop";
 import SearchDrawer from "./SearchDrawer";
 import type {SxProps} from "@mui/system";
 import {enqueueSnackbar} from "notistack";
-import {ListItemText} from "@mui/material";
-
 
 const styles = {
 
     headerIcon: {
         fontSize: 35,
-    } ,
-    headerButton : {
-        p : 0
+    },
+    headerButton: {
+        p: 0
     }
 
 
@@ -69,36 +67,42 @@ const HeaderMobile: React.FC = () => {
 
             <BackDrop onOpen={setOpenMenuDrawer} open={openMenuDrawer}/>
             <MenuDrawer open={openMenuDrawer} onOpen={setOpenMenuDrawer}/>
+            <BackDrop onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
+            <SearchDrawer onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
+
             <Grid container item xs alignItems={"center"} gap={5}>
-                    <IconButton onClick={() => setOpenMenuDrawer(!openMenuDrawer)} color={"primary"} sx={styles.headerButton}
-                                aria-label="open menu drawer">
-                        <Hamburger sx={styles.headerIcon}/>
-                    </IconButton>
-                    <Typography component={Link} href={"/"} className={"pointer"} variant={"caption"} position={"relative"} top={3}
-                                fontFamily={"dana-black"}
-                                color={"primary"} fontSize={25}>
-                        Diwall
-                    </Typography>
+                <IconButton onClick={() => setOpenMenuDrawer(!openMenuDrawer)} color={"primary"}
+                            sx={styles.headerButton}
+                            aria-label="open menu drawer">
+                    <Hamburger sx={styles.headerIcon}/>
+                </IconButton>
+                <Typography component={Link} href={"/"} className={"pointer"} variant={"caption"} position={"relative"}
+                            top={3}
+                            fontFamily={"dana-black"}
+                            color={"primary"} fontSize={25}>
+                    Diwall
+                </Typography>
             </Grid>
 
-                <BackDrop onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
-                <SearchDrawer onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
 
             <Grid container item xs={"auto"}>
-                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(!openSearchDrawer)} sx={styles.headerButton}
+                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(!openSearchDrawer)}
+                            sx={styles.headerButton}
                             aria-label="open search drawer">
-                    <Search sx={styles.headerIcon}/>
+                    <Search sx={styles.headerIcon} />
                 </IconButton>
 
                 {
                     user.username === null ?
-                        <IconButton component={Link} href={"/auth"} color={"primary"} aria-label="login"  sx={styles.headerButton}>
+                        <IconButton component={Link} href={"/auth"} color={"primary"} aria-label="login"
+                                    sx={styles.headerButton}>
                             <Login sx={styles.headerIcon}/>
                         </IconButton> :
                         <>
-                            <IconButton aria-label="open user menu" color={"primary"}  sx={styles.headerButton} onClick={(e) => {
-                                setAnchorEl(anchorEl ? null : e.currentTarget)
-                            }}>
+                            <IconButton aria-label="open user menu" color={"primary"} sx={styles.headerButton}
+                                        onClick={(e) => {
+                                            setAnchorEl(anchorEl ? null : e.currentTarget)
+                                        }}>
                                 <Person sx={styles.headerIcon}/>
                             </IconButton>
                             <Menu
