@@ -15,7 +15,7 @@ const styles = {
         borderRadius: 2,
         justifyContent: "center",
         p: {xs: 7, md: 10},
-        bgcolor: "#fff",
+        bgcolor: "white.main",
     },
     title : {
         fontSize: {xs: 11, md: 14},

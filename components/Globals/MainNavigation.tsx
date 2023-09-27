@@ -23,7 +23,7 @@ const styles = {
 const MainNavigation: React.FC = () => {
 
     return (
-        <Grid container item alignItems={"center"} justifyContent={"space-between"} display = {{xs: "none", md: "flex"}}>
+        <Grid container item alignItems={"center"} display = {{xs: "none", md: "flex"}}>
                     <Grid container alignItems={"center"} component={"nav"} item xs sx={styles.mainNav}>
                         <Grid component={Link} href={"/"} sx={styles.link}>صفحه نخست</Grid>
                         <Grid component={Link} href={"/products"} sx={styles.link}>جدیدترین ها</Grid>

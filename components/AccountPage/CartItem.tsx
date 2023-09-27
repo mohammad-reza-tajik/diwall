@@ -42,9 +42,8 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
 
 
     return (
-            <Grid container item xs={12}>
-                <Grid className={"pointer"} container item xs={12} md lg={6}
-                      sx={{alignItems : "center" , gap : {xs:10 , md:20}}}
+            <Grid container item xs={12} bgcolor={"white.main"} p={"1rem"} borderRadius={"1rem"}>
+                <Grid className={"pointer"} container item xs={12} md alignItems={"center"} gap={10}
                       onClick={() => router.push("/products/" + slug)}>
                     <Grid item xs={"auto"}>
                         <Image src={`/assets/pictures/products/${slug}.jpg`} width={50} height={50} style={{borderRadius:"50%"}}
@@ -54,7 +53,7 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
                             {title}
                     </Grid>
                 </Grid>
-                <Grid container item xs={12} md={"auto"} lg={6} alignItems={"center"}
+                <Grid container item xs={12} md={"auto"}  alignItems={"center"}
                       justifyContent={"flex-end"}>
 
                     <IconButton onClick={() => {

@@ -15,7 +15,7 @@ interface Props {
 const Wishlist : React.FC<Props> = ({isLoading , user ,populatedWishlist }) => {
 
     return(
-        <Grid container item xs={12} py={20} pr={{xs: 0, md: 10}} spacing={10} height={1}>
+        <Grid container item xs={12} spacing={10} height={1}>
 
             {isLoading ?
                 <Grid container item xs={12} justifyContent={"center"}

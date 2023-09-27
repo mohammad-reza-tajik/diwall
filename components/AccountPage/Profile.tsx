@@ -5,58 +5,61 @@ import type {User} from "@/store/userSlice";
 import {SxProps} from "@mui/system";
 
 const styles = {
-   entry : {
-       fontSize: {xs: 12, md: 16},
-       color : "#333"
-   }
+    keys: {
+        fontSize: {xs: 12, md: 16},
+    },
+    values: {
+        fontSize: {xs: 12, md: 16},
+        color: "#666"
+    }
 } satisfies Record<string, SxProps>
 
 interface Props {
-    user:User;
+    user: User;
 }
-const Profile : React.FC<Props> = ({user}) => {
+
+const Profile: React.FC<Props> = ({user}) => {
 
     return (
-        <Grid container item xs={12} py={20} pr={{xs: 0, md: 40}} spacing={40}>
+        <Grid container item xs={12} gap={40} bgcolor={"white.main"} p={20}>
 
             <Grid container item xs={12} alignItems={"center"} gap={10}>
-                <Grid component={"span"} sx={styles.entry}>نام و نام خانوادگی
-                    : </Grid>
-                <Typography variant={"subtitle1"} sx={styles.entry}>
+                <Typography sx={styles.keys}>نام و نام خانوادگی: </Typography>
+                <Typography variant={"subtitle1"} sx={styles.values}>
                     مشخص نشده !
                 </Typography>
 
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={20}>
-                <Grid component={"span"} sx={styles.entry}>نام کاربری : </Grid>
-                <Typography variant={"subtitle1"} sx={styles.entry}>
+                <Typography sx={styles.keys}>نام کاربری : </Typography>
+                <Typography variant={"subtitle1"} sx={styles.values}>
                     {user?.username}
                 </Typography>
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={20}>
-                <Grid component={"span"} sx={styles.entry}>ایمیل : </Grid>
-                <Typography variant={"subtitle1"} sx={styles.entry}>
+                <Typography sx={styles.keys}>ایمیل : </Typography>
+                <Typography variant={"subtitle1"} sx={styles.values}>
                     {user?.email}
                 </Typography>
 
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={10}>
-                <Grid component={"span"} sx={styles.entry}>شماره موبایل : </Grid>
-                <Typography variant={"subtitle1"} sx={styles.entry}>
+                <Typography sx={styles.keys}>شماره موبایل : </Typography>
+                <Typography variant={"subtitle1"} sx={styles.values}>
                     مشخص نشده !
                 </Typography>
 
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={10}>
-                <Grid component={"span"} sx={styles.entry}> تاریخ تولد : </Grid>
-                <Typography variant={"subtitle1"} sx={styles.entry}>
+                <Typography sx={styles.keys}> تاریخ تولد : </Typography>
+                <Typography variant={"subtitle1"} sx={styles.values}>
                     مشخص نشده !
                 </Typography>
 
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={10}>
-                <Grid component={"span"} sx={styles.entry}> شغل : </Grid>
-                <Typography variant={"subtitle1"} sx={styles.entry}>
+                <Typography sx={styles.keys}> شغل : </Typography>
+                <Typography variant={"subtitle1"} sx={styles.values}>
                     مشخص نشده !
                 </Typography>
 

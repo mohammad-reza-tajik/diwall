@@ -10,8 +10,14 @@ import Head from "next/head";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
 import useFetch from "@/hooks/useFetch";
-import type {SxProps , Theme} from "@mui/system";
+import type {SxProps } from "@mui/system";
 import type {ProductType} from "@/db/productModel";
+
+import Favorite from "@mui/icons-material/Favorite";
+import Person from "@mui/icons-material/Person";
+import ShoppingBag from "@mui/icons-material/ShoppingBag";
+
+
 // import Moderation from "@/components/AccountPage/Moderation";
 
 const Profile = dynamic(() => import("@/components/AccountPage/Profile"))
@@ -22,10 +28,13 @@ const Cart = dynamic(() => import("@/components/AccountPage/Cart"))
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 15},
-        color : "#333"
+        color : "#333",
+        alignItems : "center",
+        gap : "1rem"
     },
     tabsContainer : {
-        borderLeft : (theme : Theme)=>({xs:"none" , md : `2px solid ${theme.palette.primary.main}`})
+        bgcolor : "white.main",
+        borderRadius : "1rem"
     }
 } satisfies Record<string, SxProps>
 
@@ -83,19 +92,19 @@ const DashboardPage: React.FC = () => {
                 </title>
             </Head>
 
-            <Grid container columns={14}>
-                <Grid item xs={14} md={3} mt={10} sx={styles.tabsContainer}>
+            <Grid container columns={14} gap={10}>
+                <Grid item xs={14} md={3} sx={styles.tabsContainer}>
                     <Tabs onChange={tabChangeHandler} value={tab}
                         orientation={matchesMD ? "vertical" : "horizontal"}>
-                        <Tab label="اطلاعات کاربر" sx={styles.tab}/>
-                        <Tab label="لیست علاقمندی ها" sx={styles.tab}/>
-                        <Tab label="سبد خرید" sx={styles.tab}/>
+                        <Tab icon={<Person />} iconPosition="start" label="اطلاعات کاربر" sx={styles.tab}/>
+                        <Tab icon={<Favorite />} iconPosition="start" label="لیست علاقمندی ها" sx={styles.tab}/>
+                        <Tab icon={<ShoppingBag />} iconPosition="start" label="سبد خرید" sx={styles.tab}/>
                         {user.role === "admin" && <Tab label="افزودن محصول" sx={styles.tab}/>}
                         {/*{user.role === "admin" && <Tab label="بررسی دیدگاه ها" value={5} sx={styles.tab}/>}*/}
                     </Tabs>
 
                 </Grid>
-                <Grid item xs={14} md={11} minHeight={300}>
+                <Grid item xs={14} md minHeight={300} borderRadius={"1rem"}>
 
                     <TabPanel tab={tab} index={0}>
                         <Profile user={user}/>
