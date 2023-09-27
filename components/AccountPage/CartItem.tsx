@@ -47,10 +47,10 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
                       sx={{alignItems : "center" , gap : {xs:10 , md:20}}}
                       onClick={() => router.push("/products/" + slug)}>
                     <Grid item xs={"auto"}>
-                        <Image src={`/assets/pictures/products/${slug}.jpg`} width={50} height={50}
+                        <Image src={`/assets/pictures/products/${slug}.jpg`} width={50} height={50} style={{borderRadius:"50%"}}
                                 alt={title}/>
                     </Grid>
-                    <Grid item xs component={Typography} variant={"h4"} fontSize={{xs: 14, lg: 16}}>
+                    <Grid item xs component={Typography} variant={"h4"} fontSize={{xs: 12, md: 16}}>
                             {title}
                     </Grid>
                 </Grid>
@@ -60,7 +60,7 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
                     <IconButton onClick={() => {
                         setNumberInCart((prevState) => Number(prevState) + 1)
                     }}>
-                        <AddCircleOutline color={"primary"} sx={{fontSize: {xs: 30, md: 30}}}/>
+                        <AddCircleOutline color={"primary"} sx={{fontSize: 25}}/>
                     </IconButton>
                     <TextField onChange={numbersInCartChangeHandler} value={numberInCart} sx={{width: {xs: 40, md: 80}}}
                                color={"primary"} type={"number"} size={"small"} variant={"standard"}/>
@@ -70,11 +70,11 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
                         <IconButton onClick={() => {
                             setNumberInCart((prevState) => Number(prevState) - 1)
                         }}>
-                            <RemoveCircleOutline color={"primary"} sx={{fontSize: {xs: 30, md: 30}}}/>
+                            <RemoveCircleOutline color={"primary"} sx={{fontSize: 25}}/>
                         </IconButton> :
 
                         <IconButton onClick={removeFromCart}>
-                            <Delete color={"primary"} sx={{fontSize: {xs: 30, md: 30}}}/>
+                            <Delete color={"primary"} sx={{fontSize: 25}}/>
                         </IconButton>
 
                     }

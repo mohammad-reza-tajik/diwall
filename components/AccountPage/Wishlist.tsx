@@ -15,7 +15,7 @@ interface Props {
 const Wishlist : React.FC<Props> = ({isLoading , user ,populatedWishlist }) => {
 
     return(
-        <Grid container item xs={12} py={20} pr={{xs: 0, md: 10}} spacing={10}>
+        <Grid container item xs={12} py={20} pr={{xs: 0, md: 10}} spacing={10} height={1}>
 
             {isLoading ?
                 <Grid container item xs={12} justifyContent={"center"}
@@ -25,8 +25,7 @@ const Wishlist : React.FC<Props> = ({isLoading , user ,populatedWishlist }) => {
                 user?.username === null || populatedWishlist.length === 0 ?
                     <Grid container item xs={12} justifyContent={"center"}
                           alignItems={"center"}>
-                        <Typography fontSize={16} variant={"body1"} color={"#333"}
-                                    fontFamily={"dana-bold"}>
+                        <Typography fontSize={16} component={"p"}>
                             لیست علاقمندی های شما خالی است!
                         </Typography>
                     </Grid> :

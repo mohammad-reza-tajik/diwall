@@ -11,6 +11,7 @@ import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
 import useFetch from "@/hooks/useFetch";
 import type {SxProps , Theme} from "@mui/system";
+import type {ProductType} from "@/db/productModel";
 // import Moderation from "@/components/AccountPage/Moderation";
 
 const Profile = dynamic(() => import("@/components/AccountPage/Profile"))
@@ -32,14 +33,14 @@ const DashboardPage: React.FC = () => {
 
     const router = useRouter()
 
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const user = useAppSelector(state => state.user);
 
-    const [populatedWishlist, setPopulatedWishlist] = useState<any>([])
-    const [populatedCart, setPopulatedCart] = useState<any>([])
+    const [populatedWishlist, setPopulatedWishlist] = useState<ProductType[]>([])
+    const [populatedCart, setPopulatedCart] = useState<ProductType[]>([])
 
-    const [tab, setTab] = useState<number>(1);
+    const [tab, setTab] = useState(1);
 
     const queryTab = router.query.tab;
 

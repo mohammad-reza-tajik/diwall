@@ -16,7 +16,7 @@ interface Props {
 
 const Cart : React.FC<Props> = ({isLoading , populatedCart , user}) => {
   return (
-          <Grid container item xs={12} py={20} pr={{xs: 0, md: 10}} spacing={10}>
+          <Grid container item xs={12} py={20} pr={{xs: 0, md: 10}} spacing={10} height={1}>
               {isLoading ?
                   <Grid container item xs={12} justifyContent={"center"} alignItems={"center"}>
                       <CircularProgress color={"primary"} size={45}/>
@@ -24,10 +24,9 @@ const Cart : React.FC<Props> = ({isLoading , populatedCart , user}) => {
                   <Grid container item gap={10}>
                       {
                           user?.username === null || populatedCart.length === 0 ?
-                              <Grid container item xs minHeight={300} justifyContent={"center"}
+                              <Grid container item xs justifyContent={"center"}
                                     alignItems={"center"}>
-                                  <Typography fontSize={16} variant={"body1"} component={"p"}
-                                              color={"#333"} fontFamily={"dana-bold"}>
+                                  <Typography fontSize={16} component={"p"}>
                                       سبد خرید شما خالی است !
                                   </Typography>
                               </Grid> :
