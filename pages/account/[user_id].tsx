@@ -22,6 +22,7 @@ const Cart = dynamic(() => import("@/components/AccountPage/Cart"))
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 15},
+        color : "#333"
     },
     tabsContainer : {
         borderLeft : (theme : Theme)=>({xs:"none" , md : `2px solid ${theme.palette.primary.main}`})
@@ -86,31 +87,31 @@ const DashboardPage: React.FC = () => {
                 <Grid item xs={14} md={3} mt={10} sx={styles.tabsContainer}>
                     <Tabs onChange={tabChangeHandler} value={tab}
                         orientation={matchesMD ? "vertical" : "horizontal"}>
-                        <Tab label="اطلاعات کاربر" value={1} sx={styles.tab}/>
-                        <Tab label="لیست علاقمندی ها" value={2} sx={styles.tab}/>
-                        <Tab label="سبد خرید" value={3} sx={styles.tab}/>
-                        {user.role === "admin" && <Tab label="افزودن محصول" value={4} sx={styles.tab}/>}
+                        <Tab label="اطلاعات کاربر" sx={styles.tab}/>
+                        <Tab label="لیست علاقمندی ها" sx={styles.tab}/>
+                        <Tab label="سبد خرید" sx={styles.tab}/>
+                        {user.role === "admin" && <Tab label="افزودن محصول" sx={styles.tab}/>}
                         {/*{user.role === "admin" && <Tab label="بررسی دیدگاه ها" value={5} sx={styles.tab}/>}*/}
                     </Tabs>
 
                 </Grid>
                 <Grid item xs={14} md={11} minHeight={300}>
 
-                    <TabPanel tab={tab} index={1}>
+                    <TabPanel tab={tab} index={0}>
                         <Profile user={user}/>
                     </TabPanel>
 
-                    <TabPanel tab={tab} index={2}>
+                    <TabPanel tab={tab} index={1}>
                         <Wishlist isLoading={isLoading} populatedWishlist={populatedWishlist} user={user}/>
                     </TabPanel>
 
-                    <TabPanel tab={tab} index={3}>
+                    <TabPanel tab={tab} index={2}>
                         <Cart isLoading={isLoading} populatedCart={populatedCart} user={user}/>
                     </TabPanel>
 
                     {user.role === "admin" &&
                         <>
-                            <TabPanel tab={tab} index={4}>
+                            <TabPanel tab={tab} index={3}>
                                 <AddProduct/>
                             </TabPanel>
                             {/*<TabPanel tab={tab} index={5}>

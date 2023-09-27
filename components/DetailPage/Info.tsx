@@ -7,16 +7,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 import dynamic from "next/dynamic";
 import CommentForm from "./CommentForm";
 import SwiperProducts from "../Globals/SwiperProducts";
-import {ProductType} from "@/db/productModel";
-import {SxProps} from "@mui/system";
+import type {ProductType} from "@/db/productModel";
+import type {SxProps} from "@mui/system";
 
 const Comments = dynamic(()=>import("./Comments"))
 
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 16},
-        color: "#333",
-        fontFamily: "dana-bold",
+        color : "#555"
 
     },
 } satisfies Record<string, SxProps>
@@ -45,7 +44,6 @@ const Info: React.FC<Props> = ({products , isLoading }) => {
                     <Tab label={"محصولات مشابه"} sx={styles.tab}/>
                     <Tab label={"دیدگاه ها"} sx={styles.tab}/>
                     <Tab label={"درج دیدگاه"} sx={styles.tab}/>
-
                 </Tabs>
             </Grid>
             <Grid item xs={12} py={30}>

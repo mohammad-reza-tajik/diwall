@@ -6,8 +6,7 @@ interface Props {
     tab: number;
 }
 
-const TabPanel: React.FC<Props> = (props) => {
-    const {children, tab, index} = props;
+const TabPanel: React.FC<Props> = ({children, tab, index}) => {
 
     return (
         <>
