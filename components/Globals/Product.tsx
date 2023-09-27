@@ -17,6 +17,27 @@ const styles = {
         p: {xs: 7, md: 10},
         bgcolor: "#fff",
     },
+    title : {
+        fontSize: {xs: 11, md: 14},
+        color: "#555",
+        fontFamily: "dana-bold",
+        lineHeight: 1.5,
+        justifyContent: "start",
+        alignItems : "start",
+        height : "6rem",
+        pt: "1rem" ,
+        "&:active" : {
+            justifyContent: "start",
+            alignItems : "start",
+        }
+
+
+    },
+    price : {
+        fontSize: {xs: 11, md: 14},
+        color: "primary.main",
+        justifyContent: "start",
+    } ,
     addToWishlistButton: {
         position: "absolute",
         left: 5,
@@ -40,7 +61,6 @@ const Product: React.FC<ProductType> = (props) => {
     const wishlistHandler = () => {
         dispatch(userActions.handleWishlist({product: props, router, setAddToWishlistLoading}))
     }
-
 
     return (
         <Grid container item sx={styles.product} xs={12}>
@@ -74,24 +94,13 @@ const Product: React.FC<ProductType> = (props) => {
             </Grid>
 
             <Grid container item xs={12} component={Link} href={`/products/${props.slug}`}
-                  sx={{
-                      fontSize: {xs: 11, md: 14},
-                      color: "#555",
-                      fontFamily: "dana-bold",
-                      lineHeight: 1.5,
-                      justifyContent: "start",
-                      py: 20
-                  }}>
+                  sx={styles.title}>
                 {props.title}
             </Grid>
 
 
             <Grid container item xs={12} component={"span"}
-                  sx={{
-                      fontSize: {xs: 11, md: 14},
-                      color: "primary.main",
-                      justifyContent: "start",
-                  }}>
+                  sx={styles.price}>
                 {props.price + " تومان هر متر مربع"}
             </Grid>
 
