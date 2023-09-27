@@ -20,6 +20,7 @@ import BackDrop from "./BackDrop";
 import SearchDrawer from "./SearchDrawer";
 import type {SxProps} from "@mui/system";
 import {enqueueSnackbar} from "notistack";
+import {ListItemText} from "@mui/material";
 
 
 const styles  = {
@@ -122,28 +123,30 @@ const HeaderMobile: React.FC = () => {
                                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
-                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=1`)}>
+                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=0`)}>
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}> مشاهده
-                                        پروفایل
-                                    </Typography>
+                                    <ListItemText>
+
+                                     مشاهده پروفایل
+                                    </ListItemText>
+
                                 </MenuItem>
-                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=2`)}>
+                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=1`)}>
                                     <ListItemIcon>
                                         <Favorite sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                    <Typography variant={"caption"} fontSize={15}>
                                         علاقمندی ها
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem
-                                    onClick={() => router.push(`/account/${user?._id}?tab=3`)}>
+                                    onClick={() => router.push(`/account/${user?._id}?tab=2`)}>
                                     <ListItemIcon>
                                         <ShoppingBag sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                    <Typography variant={"caption"} fontSize={15}>
                                         سبد خرید
                                     </Typography>
                                 </MenuItem>
@@ -156,7 +159,7 @@ const HeaderMobile: React.FC = () => {
                                     <ListItemIcon>
                                         <Logout sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                    <Typography variant={"caption"} fontSize={15}>
                                         خروج از حساب کاربری
                                     </Typography>
                                 </MenuItem>

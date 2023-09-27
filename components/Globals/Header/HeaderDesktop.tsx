@@ -1,9 +1,6 @@
 import MainNavigation from "../MainNavigation";
-
-
 import Badge from "@mui/material/Badge";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -29,8 +26,9 @@ import React, {useState} from "react";
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import SearchResults from "../SearchResults";
 import useSearch from "@/hooks/useSearch";
-import type {SxProps} from "@mui/system";
+import type {SxProps , Theme} from "@mui/system";
 import {enqueueSnackbar} from "notistack";
+
 
 
 const styles  = {
@@ -39,14 +37,6 @@ const styles  = {
         height: 1,
         fontSize: {xs: 4, sm: "2rem"},
         bgcolor: "#fff",
-        '& .MuiInput-input': {
-            borderRadius: 30
-
-        },
-        "& .MuiInput-inputMultiline": {
-            borderRadius: 30
-
-        }
 
     },
     searchIcon: {
@@ -96,6 +86,13 @@ const styles  = {
             color: "white"
         }
     },
+    iconButtons : {
+        fontSize: {xs: 40, sm: 45},
+        border: (theme : Theme) => `2px solid ${theme.palette.primary.main}`,
+        borderRadius: 3,
+        p: ".7rem",
+        bgcolor: "white.main"
+    }
 
 
 } satisfies Record<string, SxProps>
@@ -118,7 +115,7 @@ const HeaderDesktop: React.FC = () => {
 
     const goToFavorites = async () => {
         if (user.username) {
-            await router.push(`/account/${user?._id}?tab=2`)
+            await router.push(`/account/${user?._id}?tab=1`)
 
         } else {
 
@@ -129,23 +126,21 @@ const HeaderDesktop: React.FC = () => {
 
     const goToCart = async () => {
         if (user.username) {
-            await router.push(`/account/${user?._id}?tab=3`)
+            await router.push(`/account/${user?._id}?tab=2`)
         } else {
             await router.push("/auth")
         }
 
     }
 
-
-
     return (
-        <Grid container item direction={"row"} component={"header"} justifyContent={"center"} mb={30} xs={12}>
-            <Grid container item direction={"row"} justifyContent={"center"} alignItems={"center"} xs={12}
+        <Grid container item component={"header"} justifyContent={"center"} mb={30} xs={12}>
+            <Grid container item  justifyContent={"center"} alignItems={"center"} xs={12}
                   py={20}>
-                <Box minHeight={100} maxWidth={100} component={Link} href={"/"}>
+                <Grid minHeight={100} maxWidth={100} component={Link} href={"/"}>
                         <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100}
                         />
-                </Box>
+                </Grid>
                 <Grid position={"relative"} container direction={"column"} item
                       justifyContent={"center"}
                       alignItems={"flex-start"} md={true} lg={6} xl={7} pr={20} component={"form"}
@@ -195,13 +190,7 @@ const HeaderDesktop: React.FC = () => {
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 25, minWidth: 25, borderRadius: 30}}}
                          >
                             <IconButton color={"primary"} onClick={goToFavorites} aria-label="go to wishlist">
-                                <FavoriteBorder sx={{
-                                    fontSize: {xs: 40, sm: 45},
-                                    border: "2px solid #11AE77",
-                                    borderRadius: 3,
-                                    p: ".7rem",
-                                    bgcolor: "#fff"
-                                }}/>
+                                <FavoriteBorder sx={styles.iconButtons}/>
                             </IconButton>
                         </Badge>
                     </Tooltip>
@@ -210,13 +199,7 @@ const HeaderDesktop: React.FC = () => {
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 25, minWidth: 25, borderRadius: 30}}}>
                             <IconButton color={"primary"} onClick={goToCart} aria-label="go to cart">
-                                <ShoppingBagOutlined sx={{
-                                    fontSize: {xs: 40, sm: 45},
-                                    border: "2px solid #11AE77",
-                                    borderRadius: 3,
-                                    p: ".7rem",
-                                    bgcolor: "#fff"
-                                }}/>
+                                <ShoppingBagOutlined sx={styles.iconButtons}/>
                             </IconButton>
                         </Badge>
                     </Tooltip>
@@ -257,7 +240,7 @@ const HeaderDesktop: React.FC = () => {
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
 
-                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=1`)}>
+                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=0`)}>
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
