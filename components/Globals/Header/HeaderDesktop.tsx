@@ -138,8 +138,7 @@ const HeaderDesktop: React.FC = () => {
             <Grid container item  justifyContent={"center"} alignItems={"center"} xs={12}
                   py={20}>
                 <Grid minHeight={100} maxWidth={100} component={Link} href={"/"}>
-                        <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100}
-                        />
+                        <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100} />
                 </Grid>
                 <Grid position={"relative"} container direction={"column"} item
                       justifyContent={"center"}
@@ -244,8 +243,8 @@ const HeaderDesktop: React.FC = () => {
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}> مشاهده
-                                        پروفایل
+                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                        حساب کاربری
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {

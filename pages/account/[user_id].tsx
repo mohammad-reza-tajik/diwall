@@ -80,7 +80,6 @@ const DashboardPage: React.FC = () => {
         })()
     }, [user])
 
-
     const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.up("md"))
 
@@ -96,9 +95,9 @@ const DashboardPage: React.FC = () => {
                 <Grid item xs={14} md={3} sx={styles.tabsContainer}>
                     <Tabs onChange={tabChangeHandler} value={tab}
                         orientation={matchesMD ? "vertical" : "horizontal"}>
-                        <Tab icon={<Person />} iconPosition="start" label="اطلاعات کاربر" sx={styles.tab}/>
-                        <Tab icon={<Favorite />} iconPosition="start" label="لیست علاقمندی ها" sx={styles.tab}/>
-                        <Tab icon={<ShoppingBag />} iconPosition="start" label="سبد خرید" sx={styles.tab}/>
+                        <Tab icon={<Person />} iconPosition={matchesMD ? "start" : "top"} label="اطلاعات کاربر" sx={styles.tab}/>
+                        <Tab icon={<Favorite />} iconPosition={matchesMD ? "start" : "top"} label="لیست علاقمندی ها" sx={styles.tab}/>
+                        <Tab icon={<ShoppingBag />} iconPosition={matchesMD ? "start" : "top"} label="سبد خرید" sx={styles.tab}/>
                         {user.role === "admin" && <Tab label="افزودن محصول" sx={styles.tab}/>}
                         {/*{user.role === "admin" && <Tab label="بررسی دیدگاه ها" value={5} sx={styles.tab}/>}*/}
                     </Tabs>

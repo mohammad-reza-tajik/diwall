@@ -123,10 +123,9 @@ const HeaderMobile: React.FC = () => {
                                     <ListItemIcon>
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
-                                    <ListItemText>
-
-                                     مشاهده پروفایل
-                                    </ListItemText>
+                                    <Typography variant={"caption"} fontSize={15}>
+                                         حساب کاربری
+                                    </Typography>
 
                                 </MenuItem>
                                 <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=1`)}>
