@@ -85,7 +85,7 @@ const HeaderMobile: React.FC = () => {
             </Grid>
 
 
-            <Grid container item xs={"auto"}>
+            <Grid container item xs={"auto"} gap={10}>
                 <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(!openSearchDrawer)}
                             sx={styles.headerButton}
                             aria-label="open search drawer">
