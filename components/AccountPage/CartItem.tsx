@@ -72,7 +72,6 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
                         }}>
                             <RemoveCircleOutline color={"primary"} sx={{fontSize: 25}}/>
                         </IconButton> :
-
                         <IconButton onClick={removeFromCart}>
                             <Delete color={"primary"} sx={{fontSize: 25}}/>
                         </IconButton>

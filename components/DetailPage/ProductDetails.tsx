@@ -94,7 +94,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
 
     return (
         <>
-            <Grid container item>
+            <Grid container item xs={12} spacing={10} alignItems={"center"}>
                 <Grid item xs>
                     {
                         isLoading ?
@@ -104,7 +104,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                             </Typography>
                     }
                 </Grid>
-                <Grid container item xs={"auto"} alignItems={"center"}>
+                <Grid item xs={"auto"}>
                     {
                         isLoading ?
                             <Skeleton variant={"text"} animation={"wave"} width={50}/> :
@@ -132,15 +132,13 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
             <Grid item xs={12}>
                 {
                     isLoading ?
-                        <Grid item>
+                        <>
                             <Skeleton variant="text" width={"100%"} animation={"wave"}/>
                             <Skeleton variant="text" width={"100%"} animation={"wave"}/>
                             <Skeleton variant="text" width={"100%"} animation={"wave"}/>
                             <Skeleton variant="text" width={"100%"} animation={"wave"}/>
                             <Skeleton variant="text" width={"100%"} animation={"wave"}/>
-                        </Grid>
-                        :
-
+                        </> :
                         <Typography variant={"caption"} component={"p"} sx={styles.description}>
                             {product && product.description}
                         </Typography>
