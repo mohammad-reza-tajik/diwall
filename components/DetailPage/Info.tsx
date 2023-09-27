@@ -15,9 +15,15 @@ const Comments = dynamic(()=>import("./Comments"))
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 16},
-        color : "#555"
+        color : "#666",
 
     },
+    tabsContainer : {
+        bgcolor : "white.main",
+        borderRadius : "1rem",
+        fontFamily : "dana-bold",
+        p : "2rem"
+    }
 } satisfies Record<string, SxProps>
 
 interface Props {
@@ -40,7 +46,7 @@ const Info: React.FC<Props> = ({products , isLoading }) => {
     return (
         <Grid container my={30}>
             <Grid item xs={12}>
-                <Tabs value={tab} onChange={changeTabHandler}>
+                <Tabs value={tab} onChange={changeTabHandler} sx={styles.tabsContainer}>
                     <Tab label={"محصولات مشابه"} sx={styles.tab}/>
                     <Tab label={"دیدگاه ها"} sx={styles.tab}/>
                     <Tab label={"درج دیدگاه"} sx={styles.tab}/>

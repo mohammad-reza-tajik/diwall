@@ -28,13 +28,14 @@ const Cart = dynamic(() => import("@/components/AccountPage/Cart"))
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 15},
-        color : "#333",
+        color : "#666",
         alignItems : "center",
         gap : "1rem"
     },
     tabsContainer : {
         bgcolor : "white.main",
-        borderRadius : "1rem"
+        borderRadius : "1rem",
+        fontFamily : "dana-bold",
     }
 } satisfies Record<string, SxProps>
 
@@ -127,12 +128,8 @@ const DashboardPage: React.FC = () => {
                             </TabPanel>*/}
                         </>
                     }
-
-
                 </Grid>
-
             </Grid>
-
         </>
     )
 }
