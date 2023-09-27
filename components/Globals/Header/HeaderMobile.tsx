@@ -23,12 +23,15 @@ import {enqueueSnackbar} from "notistack";
 import {ListItemText} from "@mui/material";
 
 
-const styles  = {
+const styles = {
 
     headerIcon: {
-        fontSize: {xs: 35, md: 50},
-        ml: -10,
+        fontSize: 35,
+    } ,
+    headerButton : {
+        p : 0
     }
+
 
 } satisfies Record<string, SxProps>
 
@@ -62,51 +65,38 @@ const HeaderMobile: React.FC = () => {
 
 
     return (
-        <Grid container item xs={12}>
+        <Grid container item xs={12} py={".5rem"}>
 
-            <Grid container item xs={7} alignItems={"center"} spacing={10}>
-                <Grid container item xs={"auto"}>
-
-                    <BackDrop onOpen={setOpenMenuDrawer} open={openMenuDrawer}/>
-                    <MenuDrawer open={openMenuDrawer} onOpen={setOpenMenuDrawer}/>
-                    <IconButton onClick={() => setOpenMenuDrawer(!openMenuDrawer)} color={"primary"} sx={{mr: -10}} aria-label="open menu drawer">
+            <BackDrop onOpen={setOpenMenuDrawer} open={openMenuDrawer}/>
+            <MenuDrawer open={openMenuDrawer} onOpen={setOpenMenuDrawer}/>
+            <Grid container item xs alignItems={"center"} gap={5}>
+                    <IconButton onClick={() => setOpenMenuDrawer(!openMenuDrawer)} color={"primary"} sx={styles.headerButton}
+                                aria-label="open menu drawer">
                         <Hamburger sx={styles.headerIcon}/>
                     </IconButton>
-                </Grid>
-
-                <Grid container item xs={"auto"} position={"relative"} top={3}>
-                    <Link href={"/"} passHref>
-                        <Typography className={"pointer"} variant={"caption"} fontFamily={"dana-black"}
-                                    color={"primary"} fontSize={25}>
-                            Diwall
-                        </Typography>
-                    </Link>
-                </Grid>
+                    <Typography component={Link} href={"/"} className={"pointer"} variant={"caption"} position={"relative"} top={3}
+                                fontFamily={"dana-black"}
+                                color={"primary"} fontSize={25}>
+                        Diwall
+                    </Typography>
             </Grid>
 
+                <BackDrop onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
+                <SearchDrawer onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
 
-            <Grid container item xs={5} justifyContent={"flex-end"}>
-                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(!openSearchDrawer)} aria-label="open search drawer">
+            <Grid container item xs={"auto"}>
+                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(!openSearchDrawer)} sx={styles.headerButton}
+                            aria-label="open search drawer">
                     <Search sx={styles.headerIcon}/>
                 </IconButton>
-                <BackDrop onOpen={setOpenSearchDrawer} open={openSearchDrawer} />
-                <SearchDrawer  onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
 
                 {
                     user.username === null ?
-
-                        <Link href={"/auth"} passHref>
-                            <IconButton color={"primary"} aria-label="login">
-                                <Login sx={styles.headerIcon}/>
-                            </IconButton>
-                        </Link>
-
-
-                        :
+                        <IconButton component={Link} href={"/auth"} color={"primary"} aria-label="login"  sx={styles.headerButton}>
+                            <Login sx={styles.headerIcon}/>
+                        </IconButton> :
                         <>
-
-
-                            <IconButton aria-label="open user menu" color={"primary"} onClick={(e) => {
+                            <IconButton aria-label="open user menu" color={"primary"}  sx={styles.headerButton} onClick={(e) => {
                                 setAnchorEl(anchorEl ? null : e.currentTarget)
                             }}>
                                 <Person sx={styles.headerIcon}/>
@@ -124,7 +114,7 @@ const HeaderMobile: React.FC = () => {
                                         <Person sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
                                     <Typography variant={"caption"} fontSize={15}>
-                                         حساب کاربری
+                                        حساب کاربری
                                     </Typography>
 
                                 </MenuItem>
@@ -147,8 +137,8 @@ const HeaderMobile: React.FC = () => {
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     dispatch(userActions.logout());
-                                    enqueueSnackbar("با موفقیت از حساب خود خارج شدید" , {
-                                        variant : "info",
+                                    enqueueSnackbar("با موفقیت از حساب خود خارج شدید", {
+                                        variant: "info",
                                     });
                                 }}>
                                     <ListItemIcon>
