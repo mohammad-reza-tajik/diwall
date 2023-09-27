@@ -66,7 +66,7 @@ interface Props {
     isLoading: boolean
 }
 
-const ProductDetails: React.FC<Props> = ({product, isLoading}) => {
+const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
 
     const [addToCartLoading, setAddToCartLoading] = useState(false)
     const [addToWishlistLoading, setAddToWishlistLoading] = useState(false)
@@ -85,11 +85,11 @@ const ProductDetails: React.FC<Props> = ({product, isLoading}) => {
     }
 
     const addToCartHandler = () => {
-        dispatch(userActions.handleCart({product, setAddToCartLoading, router}));
+        dispatch(userActions.handleCart({productId : product._id, setAddToCartLoading, router}));
     }
 
     const addToWishlistHandler = () => {
-        dispatch(userActions.handleWishlist({product, setAddToWishlistLoading, router}))
+        dispatch(userActions.handleWishlist({productId : product._id, setAddToWishlistLoading, router}))
     }
 
     return (

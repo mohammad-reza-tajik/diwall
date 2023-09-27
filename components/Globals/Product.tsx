@@ -49,7 +49,7 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 
-const Product: React.FC<ProductType> = (props) => {
+const Product: React.FC<ProductType> = ({price , _id , title , slug}) => {
     const router = useRouter()
 
     const [addToWishlistLoading, setAddToWishlistLoading] = useState(false)
@@ -57,9 +57,9 @@ const Product: React.FC<ProductType> = (props) => {
     const dispatch = useAppDispatch();
 
     const user = useAppSelector(state => state.user);
-    const isInWishlist = user?.wishlist.includes(props._id);
+    const isInWishlist = user?.wishlist.includes(_id);
     const wishlistHandler = () => {
-        dispatch(userActions.handleWishlist({product: props, router, setAddToWishlistLoading}))
+        dispatch(userActions.handleWishlist({productId: _id, router, setAddToWishlistLoading}))
     }
 
     return (
@@ -86,22 +86,22 @@ const Product: React.FC<ProductType> = (props) => {
                     </IconButton>
                 </Grid>
 
-                <Link href={`/products/${props.slug}`}>
-                    <Image src={`/assets/pictures/products/${props.slug}.jpg`}
-                           alt={`${props.title}`} width={400} height={400}
+                <Link href={`/products/${slug}`}>
+                    <Image src={`/assets/pictures/products/${slug}.jpg`}
+                           alt={`${title}`} width={400} height={400}
                            className={"pointer"}/>
                 </Link>
             </Grid>
 
-            <Grid container item xs={12} component={Link} href={`/products/${props.slug}`}
+            <Grid container item xs={12} component={Link} href={`/products/${slug}`}
                   sx={styles.title}>
-                {props.title}
+                {title}
             </Grid>
 
 
             <Grid container item xs={12} component={"span"}
                   sx={styles.price}>
-                {props.price + " تومان هر متر مربع"}
+                {price + " تومان هر متر مربع"}
             </Grid>
 
         </Grid>
