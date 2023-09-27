@@ -93,7 +93,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
     }
 
     return (
-        <>
+        <Grid container item xs={12} spacing={35} direction={"column"} mx={"auto"} >
             <Grid container item xs={12} spacing={10} alignItems={"center"}>
                 <Grid item xs>
                     {
@@ -215,7 +215,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
 
                 </Grid>
             </Grid>
-        </>
+        </Grid>
     )
 
 }

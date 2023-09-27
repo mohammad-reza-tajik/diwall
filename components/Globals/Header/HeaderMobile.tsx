@@ -28,11 +28,7 @@ const styles  = {
     headerIcon: {
         fontSize: {xs: 35, md: 50},
         ml: -10,
-    },
-    seeAllButton: {
-        w: 1,
-        justifyContent: "center"
-    },
+    }
 
 } satisfies Record<string, SxProps>
 

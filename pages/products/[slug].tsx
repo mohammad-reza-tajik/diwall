@@ -42,7 +42,7 @@ const DetailsPage = () => {
             }
 
         })()
-    }, [title, isReady])
+    }, [slug, isReady])
 
     return (
         <>
@@ -59,11 +59,11 @@ const DetailsPage = () => {
                       content={`/assets/pictures/products/${product ? product.slug : ""}.jpg`}/>
             </Head>
 
-                <Grid container item xs={12}>
-                    <Grid container item  xs={12} sm={10} md={6} mx={"auto"}>
+                <Grid container columns={13}>
+                    <Grid item xs={13} sm={10} md={6} mx={"auto"}>
                         <ThumbGallery product={product} isLoading={isLoading} />
                     </Grid>
-                    <Grid container item spacing={24} xs={12} md={6} pr={{xs: 5, md: 30}} mt={{xs: 20, md: 0}}>
+                    <Grid item xs={13} md={7} pr={{xs: 5, md: 30}} mt={{xs: 20, md: 0}}>
                        <ProductDetails product={product} isLoading={isLoading}  />
                     </Grid>
                 </Grid>
