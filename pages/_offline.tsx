@@ -8,12 +8,6 @@ const fallbackPage : React.FC = () => {
          <Head>
              <>
                  <meta charSet="UTF-8" />
-                 <link rel="preconnect" href="https://fonts.googleapis.com" />
-                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-                 <link
-                     href="https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap"
-                     rel="stylesheet"
-                 />
                  <meta
                      name="viewport"
                      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
@@ -23,7 +17,7 @@ const fallbackPage : React.FC = () => {
                  <style
                      dangerouslySetInnerHTML={{
                          __html:
-                             "\n        body {\n            background-color: #f5f5f5;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            font-family: Signika, sans-serif;\n            font-weight: 700;\n            min-width: 100vw;\n            min-height: 100vh;\n            overflow: hidden;\n        }\n\n        @media (max-width: 900px) {\n            body {\n                align-items: start;\n            }\n        }\n\n        body main {\n            width: 700px;\n            height: 700px;\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n        }\n\n        body main div {\n            width: 500px;\n            height: auto;\n        }\n\n        @media (max-width: 900px) {\n            body main div {\n                width: 80%;\n            }\n        }\n\n        body main p {\n            font-size: 3rem;\n            color: #444;\n        }\n\n        @media (max-width: 900px) {\n            body main p {\n                font-size: 1.6rem;\n            }\n        }\n\n        body main a {\n            border-radius: 50%;\n            display: block;\n            padding: 0.5rem;\n            box-shadow: 1px 1px 5px #888;\n        }\n\n        @media (max-width: 900px) {\n            body main a {\n                padding: 0.2rem;\n            }\n        }\n    "
+                             "\n        body {\n            background-color: #f5f5f5;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            font-family: sans-serif;\n            font-weight: 700;\n            min-width: 100vw;\n            min-height: 100vh;\n            overflow: hidden;\n        }\n\n        @media (max-width: 900px) {\n            body {\n                align-items: start;\n            }\n        }\n\n        body main {\n            width: 700px;\n            height: 700px;\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n        }\n\n        body main div {\n            width: 500px;\n            height: auto;\n        }\n\n        @media (max-width: 900px) {\n            body main div {\n                width: 80%;\n            }\n        }\n\n        body main p {\n            font-size: 3rem;\n            color: #444;\n        }\n\n        @media (max-width: 900px) {\n            body main p {\n                font-size: 1.6rem;\n            }\n        }\n\n        body main a {\n            border-radius: 50%;\n            display: block;\n            padding: 0.5rem;\n            box-shadow: 1px 1px 5px #888;\n        }\n\n        @media (max-width: 900px) {\n            body main a {\n                padding: 0.2rem;\n            }\n        }\n    "
                      }}
                  />
                  <title>No Connection</title>

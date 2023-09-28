@@ -2,7 +2,6 @@ import {userActions} from "./userSlice";
 import React from "react";
 import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 import useFetch from "@/hooks/useFetch";
-import {ProductType} from "@/db/productModel";
 import {NextRouter} from "next/router";
 import {User} from "./userSlice";
 import {enqueueSnackbar} from "notistack";
@@ -17,7 +16,8 @@ interface CartAndWishListArgs {
 
 const handleWishlist = (args: CartAndWishListArgs) => {
     const {productId, router, setAddToWishlistLoading} = args;
-    return async (dispatch: ThunkDispatch<{  user: User
+    return async (dispatch: ThunkDispatch<{
+        user: User
     }, undefined, AnyAction> & React.Dispatch<AnyAction>, getState: () => { user: User }) => {
         const user = getState().user;
         const isInWishlist = user?.wishlist.includes(productId);
@@ -28,8 +28,8 @@ const handleWishlist = (args: CartAndWishListArgs) => {
                 if (isInWishlist) {
                     await useFetch.delete(`/api/user/wishlist?productId=${productId}&_id=${user._id}&token=${user.token}`)
                     dispatch(userActions.removeFromWishlist(productId))
-                    enqueueSnackbar("از لیست علاقمندی شما حذف شد" , {
-                        variant : "info",
+                    enqueueSnackbar("از لیست علاقمندی شما حذف شد", {
+                        variant: "info",
                     })
                 } else {
                     await useFetch.put("/api/user/wishlist", {
@@ -39,17 +39,16 @@ const handleWishlist = (args: CartAndWishListArgs) => {
                     })
 
                     dispatch(userActions.addToWishlist(productId))
-                    enqueueSnackbar("به لیست علاقمندی شما افزوده شد" , {
-                        variant : "success",
+                    enqueueSnackbar("به لیست علاقمندی شما افزوده شد", {
+                        variant: "success",
                     })
-
                 }
             } else {
                 router.push("/auth")
             }
         } catch (err) {
-            enqueueSnackbar("متاسفانه عملیات با خطا مواجه شد" , {
-                variant : "error",
+            enqueueSnackbar("متاسفانه عملیات با خطا مواجه شد", {
+                variant: "error",
             })
         } finally {
             setAddToWishlistLoading(false)
@@ -73,28 +72,28 @@ const handleCart = (args: CartAndWishListArgs) => {
             if (user?.username) {
                 setAddToCartLoading(true);
                 if (isInCart) {
-                        await useFetch.delete(`/api/user/cart?productId=${productId}&_id=${user._id}&token=${user.token}`)
-                        dispatch(userActions.removeFromCart(productId))
-                        enqueueSnackbar("از سبد خرید شما حذف شد" , {
-                            variant : "info",
-                        })
+                    await useFetch.delete(`/api/user/cart?productId=${productId}&_id=${user._id}&token=${user.token}`)
+                    dispatch(userActions.removeFromCart(productId))
+                    enqueueSnackbar("از سبد خرید شما حذف شد", {
+                        variant: "info",
+                    })
                 } else {
-                        await useFetch.put("/api/user/cart", {
-                            productId,
-                            _id: user._id,
-                            token: user.token
-                        })
-                        dispatch(userActions.addToCart(productId))
-                        enqueueSnackbar("به سبد خرید شما اضافه شد" , {
-                            variant : "success",
-                        })
+                    await useFetch.put("/api/user/cart", {
+                        productId,
+                        _id: user._id,
+                        token: user.token
+                    })
+                    dispatch(userActions.addToCart(productId))
+                    enqueueSnackbar("به سبد خرید شما اضافه شد", {
+                        variant: "success",
+                    })
                 }
             } else {
                 router.push("/auth")
             }
         } catch (err) {
-            enqueueSnackbar("متاسفانه عملیات با خطا مواجه شد" , {
-                variant : "error",
+            enqueueSnackbar("متاسفانه عملیات با خطا مواجه شد", {
+                variant: "error",
             })
         } finally {
             setAddToCartLoading(false)

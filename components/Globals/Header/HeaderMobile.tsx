@@ -18,16 +18,18 @@ import Link from "next/link";
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import BackDrop from "./BackDrop";
 import SearchDrawer from "./SearchDrawer";
-import type {SxProps} from "@mui/system";
+import type {SxProps , Theme} from "@mui/system";
 import {enqueueSnackbar} from "notistack";
 
 const styles = {
 
     headerIcon: {
-        fontSize: 35,
+        fontSize: 30,
     },
     headerButton: {
-        p: 0
+        p: 5,
+        borderRadius : 2 ,
+        border : (theme : Theme) => `1px solid ${theme.palette.primary.main}`
     }
 
 

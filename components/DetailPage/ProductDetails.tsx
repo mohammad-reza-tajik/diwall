@@ -89,7 +89,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
     }
 
     const addToWishlistHandler = () => {
-        dispatch(userActions.handleWishlist({productId : product._id, setAddToWishlistLoading, router}))
+        dispatch(userActions.handleWishlist({productId : product._id, setAddToWishlistLoading, router}));
     }
 
     return (
