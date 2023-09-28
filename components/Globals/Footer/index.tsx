@@ -13,10 +13,11 @@ import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
 import Telegram from "@mui/icons-material/Telegram";
 import Twitter from "@mui/icons-material/Twitter";
 import React from "react";
+import type {SxProps , Theme} from "@mui/system";
 
 
 const styles = {
-    footer_link: {
+    footerLink: {
         fontSize: 14,
         color: "#555",
         transition: "color .4s",
@@ -29,7 +30,13 @@ const styles = {
         width: 1,
         bgcolor: "#fff",
     },
-    footer_download_button: {
+    socialMediaIcons : {
+        fontSize: {xs: 30, md: 50},
+        border: (theme : Theme) =>`2px solid ${theme.palette.primary.main}`,
+        borderRadius: 2,
+        p: {xs: 1, md: 7}
+    },
+    downloadButton: {
         fontSize: 12,
         fontWeight: 700,
         gap: 10,
@@ -44,7 +51,7 @@ const styles = {
 
 
     }
-}
+} satisfies Record<string, SxProps>
 
 const Footer: React.FC = () => {
 
@@ -55,92 +62,92 @@ const Footer: React.FC = () => {
                   mt={30}>
                 <Grid container item direction={"column"} xs={6} md={2} spacing={10}>
                     <Grid item mb={10}>
-                        <Typography variant={"h5"} color={"#555"} fontSize={18} fontFamily={"dana-bold"}>فروشگاه
+                        <Typography variant={"h5"} fontSize={18} fontFamily={"dana-bold"}>فروشگاه
                             دیوال</Typography>
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>پوستر سفارشی</Grid>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footerLink}>پوستر سفارشی</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/collaboration"} sx={styles.footer_link}>همکاری با ما</Grid>
+                            <Grid component={Link} href={"/collaboration"} sx={styles.footerLink}>همکاری با ما</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>تماس با ما</Grid>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footerLink}>تماس با ما</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/about"} sx={styles.footer_link}>درباره ما</Grid>
+                            <Grid component={Link} href={"/about"} sx={styles.footerLink}>درباره ما</Grid>
 
                     </Grid>
                 </Grid>
                 <Grid container item direction={"column"} xs={6} md={3} lg={2} spacing={10}>
                     <Grid item mb={10}>
-                        <Typography variant={"h5"} color={"#555"} fontSize={18} fontFamily={"dana-bold"}>خدمات
+                        <Typography variant={"h5"} fontSize={18} fontFamily={"dana-bold"}>خدمات
                             دیوال</Typography>
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>مشاوره رایگان</Grid>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footerLink}>مشاوره رایگان</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>دیدن آلبوم ها در منزل</Grid>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footerLink}>دیدن آلبوم ها در منزل</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}> برآورد هزینه</Grid>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footerLink}> برآورد هزینه</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10} xs={"auto"}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>اجرای کار توسط متخصصین</Grid>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footerLink}>اجرای کار توسط متخصصین</Grid>
 
                     </Grid>
                 </Grid>
                 <Grid container item xs={2} direction={"column"} display={{xs: "none", lg: "flex"}} spacing={10}>
                     <Grid item mb={10}>
-                        <Typography variant={"h5"} color={"#555"} fontSize={18} fontFamily={"dana-bold"}>
+                        <Typography variant={"h5"} fontSize={18} fontFamily={"dana-bold"}>
                             خدمات مشتریان
                         </Typography>
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>پرسش های متداول</Grid>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footerLink}>پرسش های متداول</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>تحویل و ارسال کالا</Grid>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footerLink}>تحویل و ارسال کالا</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>سیاست حفظ حریم خصوصی</Grid>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footerLink}>سیاست حفظ حریم خصوصی</Grid>
 
                     </Grid>
                     <Grid item container alignItems={"center"} gap={10}>
                         <Circle sx={{fontSize: 5, color: "#666"}}/>
 
-                            <Grid component={Link} href={"/cloths"} sx={styles.footer_link}>شرایط و قوانین</Grid>
+                            <Grid component={Link} href={"/cloths"} sx={styles.footerLink}>شرایط و قوانین</Grid>
 
                     </Grid>
                 </Grid>
@@ -149,7 +156,7 @@ const Footer: React.FC = () => {
 
                 <Grid container item xs={12} md={5} lg={4} alignItems={"center"} my={{xs: 30, md: 0}}>
                     
-                        <Typography variant={"h5"} color={"#555"} fontSize={{xs: 14, md: 18}} fontFamily={"dana-bold"}>
+                        <Typography variant={"h5"} fontSize={{xs: 14, md: 18}} fontFamily={"dana-bold"}>
                             دیوال
                             را دنبال
                             کنید</Typography>
@@ -159,12 +166,7 @@ const Footer: React.FC = () => {
                         
                             <IconButton component={"a"} href={"https://telegram.org/"} aria-label="telegram">
                                 <Telegram color={"primary"}
-                                          sx={{
-                                              fontSize: {xs: 30, md: 50},
-                                              border: {xs: "none", md: "2px solid #11AE77"},
-                                              borderRadius: 2,
-                                              p: {xs: 1, md: 7}
-                                          }}/>
+                                          sx={styles.socialMediaIcons}/>
 
                             </IconButton>
                        
@@ -172,23 +174,13 @@ const Footer: React.FC = () => {
                         
                             <IconButton component={"a"} href={"https://twitter.com/?lang=en"} aria-label="twitter">
                                 <Twitter color={"primary"}
-                                         sx={{
-                                             fontSize: {xs: 30, md: 50},
-                                             border: {xs: "none", md: "2px solid #11AE77"},
-                                             borderRadius: 2,
-                                             p: {xs: 1, md: 7}
-                                         }}/>
+                                         sx={styles.socialMediaIcons}/>
 
                             </IconButton>
                         
                             <IconButton component={"a"} href={"https://www.instagram.com/"} aria-label="instagram">
                                 <Instagram color={"primary"}
-                                           sx={{
-                                               fontSize: {xs: 30, md: 50},
-                                               border: {xs: "none", md: "2px solid #11AE77"},
-                                               borderRadius: 2,
-                                               p: {xs: 1, md: 7}
-                                           }}/>
+                                           sx={styles.socialMediaIcons}/>
 
                             </IconButton>
                      
@@ -196,19 +188,14 @@ const Footer: React.FC = () => {
                         
                             <IconButton component={"a"} href={"https://www.linkedin.com/"} aria-label="linkedin">
                                 <LinkedIn color={"primary"}
-                                          sx={{
-                                              fontSize: {xs: 30, md: 50},
-                                              border: {xs: "none", md: "2px solid #11AE77"},
-                                              borderRadius: 2,
-                                              p: {xs: 1, md: 7}
-                                          }}/>
+                                          sx={styles.socialMediaIcons}/>
                             </IconButton>
                       
 
 
                     </Grid>
                     <Grid item container  mt={30} xs={12}>
-                        <Typography variant={"h4"} fontSize={{xs: 16, md: 18}} color={"#555"}>
+                        <Typography variant={"h4"} fontSize={{xs: 16, md: 18}}>
                             از جدیدترین تخفیفات <Grid component={"span"}
                                                      sx={{
                                                          fontFamily: "dana-black",
@@ -231,13 +218,13 @@ const Footer: React.FC = () => {
                       display={{xs: "none", md: "flex"}}>
                     <Grid container item direction={"column"} xs={"auto"} gap={10}>
                         
-                            <Typography variant={"h4"} color={"#555"} fontFamily={"dana-black"}>الو <Grid
+                            <Typography variant={"h4"}  fontFamily={"dana-black"}>الو <Grid
                                 component={"span"}
                                 sx={{
                                     color: "primary.main"
                                 }}>دیوال</Grid></Typography>
                         
-                            <Typography variant={"h5"} component={"p"} color={"#555"}>24 ساعت در هفت روز هفته آماده خدمت
+                            <Typography variant={"h5"} component={"p"}>24 ساعت در هفت روز هفته آماده خدمت
                                 رسانی به مشتریان
                                 هستیم</Typography>
                        
@@ -264,13 +251,13 @@ const Footer: React.FC = () => {
 
                 <Grid container item justifyContent={"space-between"} alignItems={"center"} spacing={{xs: 0, lg: 50}}>
                     <Grid container item gap={10} xs={12} lg>
-                        <Typography variant={"h4"} color={"#555"} fontFamily={"dana-black"} fontSize={{xs: 16, md: 20}}>فروشگاه
+                        <Typography variant={"h4"} fontFamily={"dana-black"} fontSize={{xs: 16, md: 20}}>فروشگاه
                             اینترنتی <Grid
                                 component={"span"} sx={{
                                 color: "primary.main"
                             }}>دیوال</Grid></Typography>
                         <Typography variant={"h5"} component={"p"} lineHeight={1.5} textAlign={"justify"}
-                                    display={"block"} color={"#555"}
+                                    display={"block"}
                                     fontSize={{xs: 14, md: 16}}>
                             پوستر دیواری الگوی بسیار مناسبی از یک متریال ایده آل و
                             پرکاربرد در
@@ -314,22 +301,22 @@ const Footer: React.FC = () => {
                 <Grid container item xs={12} my={40} alignItems={"center"} justifyContent={"space-between"}>
                     <Grid container item gap={20} xs={12} md={"auto"} display={{xs: "none", lg: "flex"}}>
 
-                        <Grid component={Link} href={"/collaboration"} sx={styles.footer_link}>
+                        <Grid component={Link} href={"/collaboration"} sx={styles.footerLink}>
                             همکاری با ما
                         </Grid>
 
 
-                        <Grid component={Link} href={"/"} sx={styles.footer_link}>
+                        <Grid component={Link} href={"/"} sx={styles.footerLink}>
                             سفارش پوستر اختصاصی
                         </Grid>
 
 
-                        <Grid component={Link} href={"/"} sx={styles.footer_link}>
+                        <Grid component={Link} href={"/"} sx={styles.footerLink}>
                             نمونه کارها
                         </Grid>
 
 
-                        <Grid component={Link} href={"/"} sx={styles.footer_link}>
+                        <Grid component={Link} href={"/"} sx={styles.footerLink}>
                             راهنمای استفاده
                         </Grid>
 
@@ -339,7 +326,7 @@ const Footer: React.FC = () => {
                           alignItems={"center"}>
                         <Grid item xs={12} md={"auto"}>
 
-                            <Typography variant={"h5"} color={"#555"}>
+                            <Typography variant={"h5"}>
                                 دانلود اپلیکیشن دیوال :
                             </Typography>
                         </Grid>
@@ -347,7 +334,7 @@ const Footer: React.FC = () => {
                               justifyContent={{xs: "center", md: "flex-start"}}>
 
 
-                            <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"}
+                            <Button size={"large"} sx={styles.downloadButton} variant={"outlined"}
                                     endIcon={<svg width={15} height={15} viewBox="0 0 32 32"
                                                   xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -358,7 +345,7 @@ const Footer: React.FC = () => {
                                     google play
                                 </Grid>
                             </Button>
-                            <Button size={"large"} sx={styles.footer_download_button} variant={"outlined"}
+                            <Button size={"large"} sx={styles.downloadButton} variant={"outlined"}
                                     endIcon={<svg width={15} height={15} version="1.1" id="Layer_1"
                                                   xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                                                   viewBox="0 0 305 305">
@@ -420,12 +407,10 @@ const Footer: React.FC = () => {
                 
                     <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
                 
-                <Grid container item justifyContent={"center"} alignItems={"center"} my={20}>
-                    <Typography variant={"h6"} fontSize={{xs: 12, md: 14}} color={"#555"} textAlign={"center"}>
+                <Grid container item justifyContent={"center"} alignItems={"center"} my={20} component={Typography} variant={"h6"} fontSize={{xs: 12, md: 14}}>
                         تمامی حقوق مادی و معنوی این سایت متعلق به دیوال می باشد و هر گونه کپی برداری پیگرد قانونی خواهد
                         داشت
                         .
-                    </Typography>
                 </Grid>
 
 

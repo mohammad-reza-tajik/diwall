@@ -36,14 +36,16 @@ const SwiperProducts: React.FC<Props> = (props) => {
     }
 
     return (
-        <Grid container item xs={12} component={"section"} justifyContent={"center"} alignItems={"center"}  bgcolor={ mostPopular ? "primary.main" : ""} px={mostPopular ? {xs: 5, lg: 50} : 0} py={mostPopular ? 20 : 0}>
+        <Grid container component={"section"} minWidth={mostPopular && {xs :"100vw" , sm : "auto"}} justifyContent={"center"} alignItems={"center"} gap={30} bgcolor={ mostPopular ? "primary.main" : ""} px={mostPopular ? {xs: 5, lg: 50} : 0} py={mostPopular ? 20 : 0}>
 
 
             {
-                mostPopular ? matchesLG ?
-                    <SectionHeading text={"محبوب ترین محصولات"} seeAll={true} route={"/products?sortBy=3"}
-                                    white/> :
-                    <Grid container item md={2} direction={"column"} alignItems={"flex-start"} gap={50}>
+                mostPopular &&
+                <>
+                <Grid item xs={12} display={{xs:"flex" , lg : "none"}}>
+                    <SectionHeading text={"محبوب ترین محصولات"} seeAll route={"/products?sortBy=3"} white/>
+                </Grid>
+                    <Grid container item md={"auto"} direction={"column"} alignItems={"flex-start"} gap={50} display={{xs:"none" , lg : "flex"}}>
                         <Typography variant={"h3"} lineHeight={1.4} color={"white.main"}
                                     fontFamily={"dana-black"}
                                     >
@@ -55,10 +57,11 @@ const SwiperProducts: React.FC<Props> = (props) => {
                         </Typography>
                         <Button component={Link} aria-label="مشاهده همه" href={`${props.route}`}
                                 variant={"outlined"} color={"white"} sx={{fontSize: 16}}>مشاهده همه</Button>
-                    </Grid> : null
+                    </Grid>
+                </>
             }
 
-            <Grid container item component={Swiper} xs={12} lg={mostPopular ? 9 : 12} spaceBetween={matchesSM ? 5 : 20}
+            <Grid container item component={Swiper} xs={12} lg spaceBetween={matchesSM ? 5 : 20}
                   slidesPerView={slidesPerView}
                   modules={[Navigation, A11y]}
                   navigation
