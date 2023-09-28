@@ -5,7 +5,7 @@ import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import Circle from "@mui/icons-material/Circle";
 import Link from "next/link";
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 
 interface Props {
@@ -19,23 +19,19 @@ interface Props {
 
 const SectionHeading : React.FC<Props> = (props) => {
 
-    const [sortBy, setSortBy] = useState(1);
+    const [sort, setSort] = useState(1);
     const router = useRouter()
 
     useEffect(() => {
-    if (props.sortBy){
-        if (router.query.sortBy)
-            setSortBy(+router.query.sortBy)
-
+    if (props.sortBy && router.query.sortBy){
+            setSort(Number(router.query.sortBy))
     }
     }, [])
 
 
-    const sortChangeHandler = async (e) => {
-        setSortBy(e.target.value);
-
-        // I've encountered a major bug and that happens when you try to console.log sortBy right after setSortBy . the value of sort isn't updated.
-        await router.push({pathname: router.pathname, query: {...router.query, sortBy:e.target.value}})
+    const sortChangeHandler = (event : ChangeEvent<HTMLInputElement>) => {
+        setSort(Number(event.target.value));
+        router.push({pathname: router.pathname, query: {...router.query, sortBy:event.target.value}})
     }
 
     return (
@@ -63,7 +59,7 @@ const SectionHeading : React.FC<Props> = (props) => {
                         </Grid>
 
                         <Grid container item justifyContent={"flex-end"} alignItems={"center"} xs={"auto"}>
-                            <Select value={sortBy} onChange={sortChangeHandler} autoWidth sx={{height:35}}>
+                            <Select value={sort} onChange={sortChangeHandler} autoWidth sx={{height:35}}>
                                 <MenuItem value={1}>
                                     <Typography variant={"caption"} sx={{fontSize:{xs:12,md:15}}} fontFamily={"dana-medium"}>جدید
                                         ترین</Typography>

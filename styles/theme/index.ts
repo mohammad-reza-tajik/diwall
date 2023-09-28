@@ -113,10 +113,5 @@ declare module '@mui/material/CircularProgress' {
     }
 }
 
-declare module "@mui/material/IconButton" {
-    interface IconButtonPropsColorOverrides {
-        white: true;
-    }
-}
 
 export default theme
