@@ -78,12 +78,6 @@ const HeaderMobile: React.FC = () => {
                             aria-label="open menu drawer">
                     <Hamburger sx={styles.headerIcon}/>
                 </IconButton>
-                <Typography component={Link} href={"/"} className={"pointer"} variant={"caption"} position={"relative"}
-                            top={3}
-                            fontFamily={"dana-black"}
-                            color={"primary"} fontSize={25}>
-                    Diwall
-                </Typography>
             </Grid>
 
 
