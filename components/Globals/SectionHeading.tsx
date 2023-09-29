@@ -17,13 +17,13 @@ interface Props {
 
 }
 
-const SectionHeading : React.FC<Props> = (props) => {
+const SectionHeading : React.FC<Props> = ({sortBy, route , text , seeAll ,white}) => {
 
     const [sort, setSort] = useState(1);
     const router = useRouter()
 
     useEffect(() => {
-    if (props.sortBy && router.query.sortBy){
+    if (sortBy && router.query.sortBy){
             setSort(Number(router.query.sortBy))
     }
     }, [])
@@ -35,25 +35,25 @@ const SectionHeading : React.FC<Props> = (props) => {
     }
 
     return (
-        <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"} my={30}>
+        <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"} my={20}>
             <Grid container item xs={"auto"}  md={8} gap={10} alignItems={"center"}>
-                <Circle fontSize={"large"}  sx={{fontSize:{xs:16,md:20},color:!props.white ? "primary.main" : "white.main"}}/>
-                <Typography fontFamily={"dana-black"} variant={"h4"} color={!props.white ? "#555" : "white.main"} sx={{fontSize: {xs:14,md:20}}} >
-                    {props.text}
+                <Circle fontSize={"large"}  sx={{fontSize:{xs:16,md:20},color:!white ? "primary.main" : "white.main"}}/>
+                <Typography fontFamily={"dana-black"} variant={"h4"} color={!white ? "#555" : "white.main"} sx={{fontSize: {xs:14,md:20}}} >
+                    {text}
                 </Typography>
             </Grid>
             {
-            props.seeAll ? 
+            seeAll ?
             <Grid container item justifyContent={"flex-end"} xs={"auto"} md={2}>
-                    <Button variant={"outlined"} color={!props.white ? "primary" : "white"}  sx={{fontSize:{xs:12,md:16}}} component={Link} href={props.route} aria-label="مشاهده همه">مشاهده همه</Button>
+                    <Button variant={"outlined"} color={!white ? "primary" : "white"}  sx={{fontSize:{xs:12,md:16}}} component={Link} href={route} aria-label="مشاهده همه">مشاهده همه</Button>
             </Grid> : ""
             }
 
             {
-                props.sortBy  ?
+                sortBy  ?
                     <Grid container item justifyContent={"flex-end"} xs={"auto"}>
                         <Grid container item justifyContent={"flex-end"}  p={5} alignItems={"center"} xs={"auto"} sx={{display:{xs:"none",sm:"block"}} }>
-                            <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                            <Typography variant={"caption"} fontSize={15}>
                                 مرتب سازی بر اساس :
                             </Typography>
                         </Grid>
@@ -61,15 +61,15 @@ const SectionHeading : React.FC<Props> = (props) => {
                         <Grid container item justifyContent={"flex-end"} alignItems={"center"} xs={"auto"}>
                             <Select value={sort} onChange={sortChangeHandler} autoWidth sx={{height:35}}>
                                 <MenuItem value={1}>
-                                    <Typography variant={"caption"} sx={{fontSize:{xs:12,md:15}}} fontFamily={"dana-medium"}>جدید
+                                    <Typography variant={"caption"} sx={{fontSize:{xs:12,md:15}}}>جدید
                                         ترین</Typography>
                                 </MenuItem>
                                 <MenuItem value={2}>
-                                    <Typography variant={"caption"} sx={{fontSize:{xs:12,md:15}}} fontFamily={"dana-medium"}>پرفروش
+                                    <Typography variant={"caption"} sx={{fontSize:{xs:12,md:15}}}>پرفروش
                                         ترین</Typography>
                                 </MenuItem>
                                 <MenuItem value={3}>
-                                    <Typography variant={"caption"} sx={{fontSize:{xs:12,md:15}}} fontFamily={"dana-medium"}>محبوب
+                                    <Typography variant={"caption"} sx={{fontSize:{xs:12,md:15}}}>محبوب
                                         ترین</Typography>
                                 </MenuItem>
                             </Select>
