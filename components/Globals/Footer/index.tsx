@@ -13,7 +13,7 @@ import LocalPhoneOutlined from "@mui/icons-material/LocalPhoneOutlined";
 import Telegram from "@mui/icons-material/Telegram";
 import Twitter from "@mui/icons-material/Twitter";
 import React from "react";
-import type {SxProps , Theme} from "@mui/system";
+import type {SxProps} from "@mui/system";
 
 
 const styles = {
@@ -32,9 +32,6 @@ const styles = {
     },
     socialMediaIcons : {
         fontSize: {xs: 30, md: 50},
-        border: (theme : Theme) =>`2px solid ${theme.palette.primary.main}`,
-        borderRadius: 2,
-        p: {xs: 1, md: 7}
     },
     downloadButton: {
         fontSize: 12,
@@ -406,8 +403,8 @@ const Footer: React.FC = () => {
                 </Grid>
                 
                     <Divider sx={{width: 1, bgcolor: "#ddd"}}/>
-                
-                <Grid container item justifyContent={"center"} alignItems={"center"} my={20} component={Typography} variant={"h6"} fontSize={{xs: 12, md: 14}}>
+
+                <Grid container item justifyContent={"center"} alignItems={"center"} my={20} component={Typography} variant={"h6"} textAlign={"center"} fontSize={{xs: 12, md: 14}}>
                         تمامی حقوق مادی و معنوی این سایت متعلق به دیوال می باشد و هر گونه کپی برداری پیگرد قانونی خواهد
                         داشت
                         .
