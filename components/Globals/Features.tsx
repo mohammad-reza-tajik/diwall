@@ -10,79 +10,63 @@ import React from "react"
 const Features: React.FC = () => {
 
     return (
-        <Grid container item xs={12} md={11} component={"section"} justifyContent={"center"} spacing={10} mx={"auto"}>
-            <Grid container item xs={6} md={3} gap={{xs: 10, md: 5}}
-                  justifyContent={{xs: "flex-start", md: "center"}} alignItems={"center"}>
-                <Grid item xs={3}>
-                    <LocalShippingOutlined color={"primary"} sx={{fontSize: {xs: 35, sm: 40, md: 50}}}/>
+        <Grid container component={"section"} spacing={20}>
+            <Grid container item xs={6} lg={3} gap={10} justifyContent={"space-evenly"} alignItems={"center"}>
+                <Grid container item xs={12} md={"auto"} justifyContent={{xs:"center" , md : "flex-start"}}>
+                    <LocalShippingOutlined color={"primary"} sx={{fontSize: {xs: 35, sm: 40, md: 45}}}/>
                 </Grid>
-                <Grid container item xs gap={5} direction={"column"}>
+                <Grid container item xs={12} md={"auto"} direction={"column"} alignItems={"center"}>
+                    <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}}
+                                fontFamily={"dana-black"}>ارسال <Grid component={"span"}
+                                                                      sx={{color: "primary.main"}}>رایگان</Grid></Typography>
 
-                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
-                                    fontFamily={"dana-black"}>ارسال <Grid component={"span"}
-                                                                         sx={{color: "primary.main"}}>رایگان</Grid></Typography>
-
-
-                        <Typography variant={"body1"} fontFamily={"dana-bold"}
-                                    sx={{color: "#666", fontSize: {xs: 10, md: 12}}}>
-                            ارسال رایگان به تمام نقاط ایران
-                        </Typography>
+                    <Typography variant={"body1"} textAlign={"center"} fontFamily={"dana-bold"}
+                                sx={{fontSize: {xs: 10, md: 12}}}>
+                        ارسال رایگان به تمام نقاط ایران
+                    </Typography>
 
                 </Grid>
             </Grid>
-            <Grid container item xs={6} md={3} gap={{xs: 10, md: 5}}
-                  justifyContent={{xs: "flex-start", md: "center"}} alignItems={"center"}>
-                <Grid item xs={3}>
-                    <Inventory2Outlined color={"primary"} sx={{fontSize: {xs: 35, sm: 40, md: 50}}}/>
+            <Grid container item xs={6} lg={3} gap={10} justifyContent={"space-evenly"} alignItems={"center"}>
+                <Grid container item xs={12} md={"auto"} justifyContent={{xs:"center" , md : "flex-start"}}>
+                    <Inventory2Outlined color={"primary"} sx={{fontSize: {xs: 35, sm: 40, md: 45}}}/>
                 </Grid>
-                <Grid container item xs gap={5} direction={"column"}>
-
-                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
-                                    fontFamily={"dana-black"}>بسته بندی <Grid component={"span"}
-                                                                             sx={{color: "primary.main"}}>رایگان</Grid></Typography>
-
-
-                        <Typography variant={"body1"} fontFamily={"dana-bold"}
-                                    sx={{color: "#666", fontSize: {xs: 10, md: 12}}}>
-                            بسته بندی امن برای حفاظت فیزیکی
-                            </Typography>
+                <Grid container item xs={12} md={"auto"} direction={"column"} alignItems={"center"}>
+                    <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}}
+                                fontFamily={"dana-black"}>بسته بندی <Grid component={"span"}
+                                                                          sx={{color: "primary.main"}}>رایگان</Grid></Typography>
+                    <Typography variant={"body1"} textAlign={"center"} fontFamily={"dana-bold"}
+                                sx={{fontSize: {xs: 10, md: 12}}}>
+                        بسته بندی امن برای حفاظت فیزیکی
+                    </Typography>
+                </Grid>
+            </Grid>
+            <Grid container item xs={6} lg={3} gap={10} justifyContent={"space-evenly"} alignItems={"center"}>
+                <Grid container item xs={12} md={"auto"} justifyContent={{xs:"center" , md : "flex-start"}}>
+                    <WorkspacePremiumOutlined color={"primary"} sx={{fontSize: {xs: 35, sm: 40, md: 45}}}/>
+                </Grid>
+                <Grid container item xs={12} md={"auto"} direction={"column"} alignItems={"center"}>
+                    <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}}
+                                fontFamily={"dana-black"}>تضمین <Grid component={"span"}
+                                                                      sx={{color: "primary.main"}}>کیفیت</Grid></Typography>
+                    <Typography variant={"body1"} textAlign={"center"} fontFamily={"dana-bold"}
+                                sx={{fontSize: {xs: 10, md: 12}}}>تضمین کیفیت و گارانتی
+                        محصولات</Typography>
 
                 </Grid>
             </Grid>
-            <Grid container item xs={6} md={3} gap={{xs: 10, md: 5}} alignItems={"center"}
-                  justifyContent={{xs: "flex-start", md: "center"}}>
-                <Grid item xs={3}>
-                    <WorkspacePremiumOutlined color={"primary"} sx={{fontSize: {xs: 35, sm: 40, md: 50}}}/>
+            <Grid container item xs={6} lg={3} gap={10} justifyContent={"space-evenly"} alignItems={"center"}>
+                <Grid container item xs={12} md={"auto"} justifyContent={{xs:"center" , md : "flex-start"}}>
+                    <HeadsetMicOutlined color={"primary"} sx={{fontSize: {xs: 35, sm: 40, md: 45}}}/>
                 </Grid>
-                <Grid container item xs gap={5} direction={"column"} justifyContent={"flex-end"}>
-
-                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
-                                    fontFamily={"dana-black"}>تضمین <Grid component={"span"}
-                                                                         sx={{color: "primary.main"}}>کیفیت</Grid></Typography>
-
-
-                        <Typography variant={"body1"} fontFamily={"dana-bold"}
-                                    sx={{color: "#666", fontSize: {xs: 10, md: 12}}}>تضمین کیفیت و گارانتی
-                            محصولات</Typography>
-
-                </Grid>
-            </Grid>
-            <Grid container item xs={6} md={3} gap={{xs: 10, md: 5}}
-                  justifyContent={{xs: "flex-start", md: "center"}} alignItems={"center"}>
-                <Grid item xs={3}>
-                    <HeadsetMicOutlined color={"primary"} sx={{fontSize: {xs: 35, sm: 40, md: 50}}}/>
-                </Grid>
-                <Grid container item xs gap={5} direction={"column"}>
-
-                        <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}} color={"#555"}
-                                    fontFamily={"dana-black"}>پشتیبانی <Grid component={"span"}
-                                                                            sx={{color: "primary.main"}}>آنلاین</Grid></Typography>
-
-
-                        <Typography variant={"body1"} fontFamily={"dana-bold"}
-                                    sx={{color: "#666", fontSize: {xs: 10, md: 12}}}>
-                            پشتیبانی به صورت شبانه روزی
-                        </Typography>
+                <Grid container item xs={12} md={"auto"} direction={"column"} alignItems={"center"}>
+                    <Typography variant={"caption"} sx={{fontSize: {xs: 12, sm: 14, lg: 18}}}
+                                fontFamily={"dana-black"}>پشتیبانی <Grid component={"span"}
+                                                                         sx={{color: "primary.main"}}>آنلاین</Grid></Typography>
+                    <Typography variant={"body1"} textAlign={"center"} fontFamily={"dana-bold"}
+                                sx={{fontSize: {xs: 10, md: 12}}}>
+                        پشتیبانی به صورت شبانه روزی
+                    </Typography>
 
                 </Grid>
             </Grid>
