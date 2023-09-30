@@ -186,6 +186,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                             onClick={addToWishlistHandler}
                             variant={"contained"}
                             aria-label="add to wishlist"
+                            disabled={addToWishlistLoading}
                             sx={styles.addToWishlistButton}
                         >
                             {
@@ -200,6 +201,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                     <Grid container item justifyContent={"flex-end"} xs sm={"auto"}>
                         <Button
                             aria-label="add to cart"
+                            disabled={addToCartLoading}
                             onClick={addToCartHandler}
                             variant={"contained"}
                             color={isInCart ? "error" : "primary"}
