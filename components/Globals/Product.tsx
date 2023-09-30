@@ -7,7 +7,7 @@ import Favorite from "@mui/icons-material/Favorite";
 import {useRouter} from "next/router";
 import React, {useState} from "react";
 import {userActions, useAppDispatch, useAppSelector} from "@/store";
-import Link from "next/link"
+import Link from "next/link";
 import type {SxProps} from "@mui/system";
 
 const styles = {
@@ -66,7 +66,7 @@ const Product: React.FC<ProductType> = ({price , _id , title , slug}) => {
         <Grid container item sx={styles.product} xs={12}>
             <Grid item xs={12} position={"relative"}>
                 <Grid item sx={styles.addToWishlistButton}>
-                    <IconButton onClick={wishlistHandler} aria-label="add to wishlist">
+                    <IconButton onClick={wishlistHandler} aria-label="add to wishlist" disabled={addToWishlistLoading}>
                         {
                             addToWishlistLoading ?
                                 <CircularProgress color={"white"} sx={{
