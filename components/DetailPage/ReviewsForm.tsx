@@ -110,7 +110,7 @@ const ReviewsForm: React.FC<Props> = ({onAddComment}) => {
                     <Grid container item xs={12} md={7} direction={"column"} gap={10} component={"form"}
                           onSubmit={insertCommentHandler}>
                         <TextField multiline minRows={7} sx={styles.commentField}  maxRows={7} variant="outlined" inputRef={commentRef} required placeholder="دیدگاه شما ..."/>
-                        <Button type={"submit"} variant={"contained"} color={"primary"} sx={styles.commentButton} startIcon={isLoading ?
+                        <Button disabled={isLoading} type={"submit"} variant={"contained"} color={"primary"} sx={styles.commentButton} startIcon={isLoading ?
                             <CircularProgress sx={{color: "#fff",position:"relative",top:-2}} size={25}/> :  <Create sx={{color: "#fff",position:"relative",top:-2}}/>  }
                                 aria-label={"add comment button"}>
                             درج دیدگاه
