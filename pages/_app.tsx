@@ -76,20 +76,20 @@ function MyApp({Component, pageProps}) {
                       content="از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید"/>
                 <meta name="twitter:site" content="@diwall"/>
                 <meta name="twitter:image:src"
-                      content="https://online-shop-mrt93.vercel.app/assets/pictures/og-banner.jpg"/>
+                      content="https://diwall.vercel.app/assets/pictures/og-banner.jpg"/>
                 <meta name="twitter:image"
-                      content="https://online-shop-mrt93.vercel.app/assets/pictures/og-banner.jpg"/>
+                      content="https://diwall.vercel.app/assets/pictures/og-banner.jpg"/>
                 <meta name="twitter:image:alt" content="دیوال : فروشگاه پوستر و کاغذ دیواری"/>
-                <meta name="twitter:domain" content="https://online-shop-mrt93.vercel.app/"/>
+                <meta name="twitter:domain" content="https://diwall.vercel.app/"/>
 
                 <meta property="og:title" content="دیوال : فروشگاه پوستر و کاغذ دیواری"/>
                 <meta property="og:site_name" content="دیوال"/>
                 <meta property="og:type" content="website"/>
-                <meta property="og:url" content="https://online-shop-mrt93.vercel.app/"/>
+                <meta property="og:url" content="https://diwall.vercel.app/"/>
                 <meta property="og:description"
                       content="از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید"/>
-                <meta property="og:locale" content="fa"/>
-                <meta property="og:image" content="https://online-shop-mrt93.vercel.app/assets/pictures/og-banner.jpg"/>
+                <meta property="og:locale" content="fa_IR"/>
+                <meta property="og:image" content="https://diwall.vercel.app/assets/pictures/og-banner.jpg"/>
                 <meta property="og:image:alt" content="دیوال : فروشگاه پوستر و کاغذ دیواری"/>
 
 
@@ -103,7 +103,7 @@ function MyApp({Component, pageProps}) {
             </Head>
             <GlobalStyles/>
             <Provider store={store}>
-                <SnackbarProvider style={{fontSize: 12}} action={snackbarAction}>
+                <SnackbarProvider action={snackbarAction}>
                     <AutoLogin>
                         <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
                             <Grid item xs={11} component={"main"}>

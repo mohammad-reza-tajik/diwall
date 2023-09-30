@@ -3,8 +3,8 @@ import MUIGlobalStyles from "@mui/material/GlobalStyles";
 import theme from "@/styles/theme";
 
 const globalStyles = {
-    ".swiper" : {
-        width : "100%"
+    ".swiper": {
+        width: "100%"
     },
     ".swiper-button-prev , .swiper-button-next": {
         backgroundColor: `${theme.palette.primary.main} !important`,
@@ -23,13 +23,18 @@ const globalStyles = {
             color: "#fff",
         }
     },
-    "&.notistack-MuiContent" : {
-        gap : 10
+    "&.notistack-MuiContent": {
+        gap: 10,
+        fontSize :"12px !important",
+        [theme.breakpoints.up('md')]: {
+            fontSize: "15px !important"
+        }
+
     },
-    "&.go703367398" : {
-        marginLeft : "0 !important",
-        marginRight : "auto !important",
-        padding : "0 !important" ,
+    "&.go703367398": {
+        marginLeft: "0 !important",
+        marginRight: "auto !important",
+        padding: "0 !important",
 
     },
     "&.notistack-MuiContent-success": {
@@ -44,6 +49,6 @@ const globalStyles = {
 } satisfies Record<string, CSSProperties>
 
 
-const GlobalStyles : React.FC = () => <MUIGlobalStyles styles={globalStyles}/>
+const GlobalStyles: React.FC = () => <MUIGlobalStyles styles={globalStyles}/>
 
 export default GlobalStyles
