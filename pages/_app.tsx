@@ -103,7 +103,7 @@ function MyApp({Component, pageProps}) {
             </Head>
             <GlobalStyles/>
             <Provider store={store}>
-                <SnackbarProvider style={{fontSize: 14}} action={snackbarAction}>
+                <SnackbarProvider style={{fontSize: 12}} action={snackbarAction}>
                     <AutoLogin>
                         <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
                             <Grid item xs={11} component={"main"}>
