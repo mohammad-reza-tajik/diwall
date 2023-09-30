@@ -61,8 +61,8 @@ const ThumbGallery : React.FC<Props> = ({product , isLoading}) => {
                                             <Image style={{width: "100%", height: "auto"}}
                                                    src={`/assets/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
                                                    alt={`${product ? product.title : "product placeholder"}`}
-                                                   width={510}
-                                                   height={385}
+                                                   width={141}
+                                                   height={123}
                                             />
                                         </SwiperSlide>
                                     )
