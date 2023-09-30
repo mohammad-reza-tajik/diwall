@@ -191,7 +191,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                         >
                             {
                                 addToWishlistLoading ?
-                                    <CircularProgress size={25} sx={{color: "white.main"}}/> :
+                                    <CircularProgress size={25} color={"inherit"}/> :
                                     isInWishlist ?
                                         <Favorite sx={styles.wishlistIcons}/> :
                                         <FavoriteBorder sx={styles.wishlistIcons}/>
@@ -206,7 +206,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                             variant={"contained"}
                             color={isInCart ? "error" : "primary"}
                             startIcon={addToCartLoading ?
-                                <CircularProgress sx={{color: "white.main"}} size={25}/> :
+                                <CircularProgress color={"inherit"} size={25}/> :
                                 <ShoppingBagOutlined sx={styles.cartIcon}/>
                             }
                             sx={styles.addToCartButton}
