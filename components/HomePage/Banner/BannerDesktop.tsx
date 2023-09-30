@@ -10,12 +10,12 @@ const styles = {
     bannerTextBox: {
         bgcolor: "primary.main",
         flexDirection : "column",
-        py: 100,
-        px: 50,
+        py: "10rem",
+        px: "5rem",
         gap: "4rem",
     },
     bannerHeading : {
-        fontSize : {md : 18 ,lg:25},
+        fontSize : {md : 20 ,lg:22},
         color : "white.main",
         fontFamily : "dana-black",
     },
@@ -23,7 +23,7 @@ const styles = {
         textAlign : "justify",
         color : "white.main",
         lineHeight : 1.8 ,
-        fontSize : {md : 14 , lg : 17}
+        fontSize : {md : 14 , lg : 16}
     },
     bannerButton: {
         fontSize: {md : 14 , lg : 16},
@@ -35,7 +35,7 @@ const BannerDesktop: React.FC = () => {
 
     return (
 
-        <Grid container item minHeight={510} mb={40}>
+        <Grid container item mb={40}>
             <Grid container item md={4} sx={styles.bannerTextBox}>
                 <Typography  component={"h1"} sx={styles.bannerHeading}>
                     خانه رویایی خود را به واقعیت تبدیل کنید
@@ -44,13 +44,12 @@ const BannerDesktop: React.FC = () => {
                     از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                     آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
                 </Typography>
-                <Button component={Link} href={"/products"} variant={"outlined"} color={"white"} aria-label="مشاهده محصولات"
-                        size={"medium"} sx={styles.bannerButton}>
+                <Button component={Link} href={"/products"} variant={"outlined"} color={"white"} aria-label="مشاهده محصولات" sx={styles.bannerButton}>
                     مشاهده محصولات
                 </Button>
             </Grid>
-            <Grid item md={8} position={"relative"}>
-                    <Image fill src={"/assets/pictures/banner-desktop.jpg"} className={"cover"} priority alt={"banner-mobile"}/>
+            <Grid item md>
+                    <Image src={"/assets/pictures/banner-desktop.jpg"} width={750} height={500} style={{width:"100%" , height : "100%"}} className={"cover"} priority alt={"banner-image"}/>
             </Grid>
         </Grid>
     )
