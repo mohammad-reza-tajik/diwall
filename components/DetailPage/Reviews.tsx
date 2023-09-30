@@ -51,7 +51,7 @@ interface Comment {
     date: string;
 }
 
-const Comments: React.FC<Props> = ({addComment}) => {
+const Reviews: React.FC<Props> = ({addComment}) => {
 
     // addComment is used to re-fetch comments anytime a new comment was submitted
 
@@ -146,4 +146,4 @@ const Comments: React.FC<Props> = ({addComment}) => {
     )
 
 }
-export default Comments
+export default Reviews

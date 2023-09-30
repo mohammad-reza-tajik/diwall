@@ -5,12 +5,12 @@ import Grid from "@mui/material/Grid";
 import TabPanel from "../Globals/TabPanel";
 import CircularProgress from "@mui/material/CircularProgress";
 import dynamic from "next/dynamic";
-import CommentForm from "./CommentForm";
+import ReviewsForm from "./ReviewsForm";
 import SwiperProducts from "../Globals/SwiperProducts";
 import type {ProductType} from "@/db/productModel";
 import type {SxProps} from "@mui/system";
 
-const Comments = dynamic(()=>import("./Comments"))
+const Comments = dynamic(()=>import("./Reviews"))
 
 const styles = {
     tab: {
@@ -38,7 +38,7 @@ const Info: React.FC<Props> = ({products , isLoading }) => {
         setTab(newValue);
     };
     const addCommentHandler = () =>{
-        // we are changing this to re-run the useEffect in Comments component to fetch new comments
+        // we are changing this to re-run the useEffect in Reviews component to fetch new comments
         setAddComment((prevState)=>!prevState)
     }
 
@@ -66,7 +66,7 @@ const Info: React.FC<Props> = ({products , isLoading }) => {
                                 <Comments addComment={addComment} />
                             </TabPanel>
                             <TabPanel index={2} tab={tab}>
-                                <CommentForm onAddComment={addCommentHandler} />
+                                <ReviewsForm onAddComment={addCommentHandler} />
                             </TabPanel>
                         </>
                 }

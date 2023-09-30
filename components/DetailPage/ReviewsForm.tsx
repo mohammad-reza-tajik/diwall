@@ -56,7 +56,7 @@ interface Props {
     onAddComment:()=>void
 }
 
-const CommentForm: React.FC<Props> = ({onAddComment}) => {
+const ReviewsForm: React.FC<Props> = ({onAddComment}) => {
 
     const user = useAppSelector(state => state.user);
 
@@ -133,4 +133,4 @@ const CommentForm: React.FC<Props> = ({onAddComment}) => {
     )
 }
 
-export default CommentForm
+export default ReviewsForm
