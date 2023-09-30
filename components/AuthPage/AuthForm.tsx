@@ -136,6 +136,7 @@ const AuthForm: React.FC = () => {
                     sx={styles.inputField} required type={"password"}
                     placeholder={"رمز ورود"}/>
                 <Button type={"submit"} variant={"contained"}
+                        disabled={isLoading}
                         startIcon={isLoading ?
                             <CircularProgress sx={{color: "#fff"}} size={25}/> : typeOfForm === "signup" ?
                                 <Create/> :
