@@ -81,7 +81,7 @@ const styles  = {
         mr: "auto",
         fontSize: "1.4rem",
         gap: 10,
-        color: "white",
+        color: "white.main",
         "&> *": {
             color: "white"
         }
