@@ -31,7 +31,7 @@ const styles = {
         bgcolor: "#fff",
     },
     socialMediaIcons : {
-        fontSize: {xs: 30, md: 50},
+        fontSize: {xs: 30, md: 40},
     },
     downloadButton: {
         fontSize: 12,
