@@ -5,7 +5,7 @@
 |-------------|---------|------------|------------|
 | ReactJs     | NextJs  | PWA        | Typescript |
 | Material UI | NodeJs  | Open Graph | Vitest     |
-| Redux       | MongoDB | Webpack    | axios      |
+| Redux       | MongoDB | Webpack    | sass       |
 |             |         |            |
 
 
