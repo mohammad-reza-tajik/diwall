@@ -11,11 +11,11 @@ const styles = {
         bgcolor: "primary.main",
         flexDirection : "column",
         py: "10rem",
-        px: "5rem",
+        px: "4rem",
         gap: "4rem",
     },
     bannerHeading : {
-        fontSize : {md : 20 ,lg:22},
+        fontSize : {md : 20 ,lg:24},
         color : "white.main",
         fontFamily : "dana-black",
     },
