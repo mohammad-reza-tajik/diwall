@@ -21,16 +21,16 @@ interface Props {
 const HomePage : React.FC<Props> = ({latestProducts,mostPopularProducts,bestSellingProducts}) => {
 
     return (
-        <Grid container item xs={12} direction={"row"} justifyContent={"center"}>
+        <Grid container  justifyContent={"center"}>
 
             <Banner />
             <Features />
             <Places/>
             <SwiperProducts products={mostPopularProducts} route={"/products?sortBy=3"} mostPopular />
-            <SectionHeading text={"محصولات جدید"} seeAll={true} route={"/products"}/>
+            <SectionHeading text={"محصولات جدید"} seeAll route={"/products"}/>
             <SwiperProducts products={latestProducts} />
             <MiddleSection/>
-            <SectionHeading text={"پر فروش ترین محصولات"} seeAll={true} route={"/products?sortBy=2"} />
+            <SectionHeading text={"پر فروش ترین محصولات"} seeAll route={"/products?sortBy=2"} />
             <SwiperProducts products={bestSellingProducts} />
             <ShowCase/>
         </Grid>
@@ -39,9 +39,9 @@ const HomePage : React.FC<Props> = ({latestProducts,mostPopularProducts,bestSell
 
 export const getStaticProps : GetStaticProps = async () => {
     await connect();
-    const latestProducts = await Product.find().sort({createdAt: "desc"}).skip((1 - 1) * 10).limit(10)
-    const mostPopularProducts = await Product.find().sort({likes: "desc"}).skip((1 - 1) * 10).limit(10);
-    const bestSellingProducts = await Product.find().sort({sells: "desc"}).skip((1 - 1) * 10).limit(10);
+    const latestProducts = await Product.find().sort({createdAt: "desc"}).limit(10)
+    const mostPopularProducts = await Product.find().sort({likes: "desc"}).limit(10);
+    const bestSellingProducts = await Product.find().sort({sells: "desc"}).limit(10);
 
 
 
