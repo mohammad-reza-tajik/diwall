@@ -88,14 +88,14 @@ const styles  = {
     },
     iconButtons : {
         fontSize: {xs: 40, sm: 45},
-        border: (theme : Theme) => `2px solid ${theme.palette.primary.main}`,
+        border: (theme) => `2px solid ${theme.palette.primary.main}`,
         borderRadius: 3,
         p: ".7rem",
         bgcolor: "white.main"
     }
 
 
-} satisfies Record<string, SxProps>
+} satisfies Record<string, SxProps<Theme>>
 
 const HeaderDesktop: React.FC = () => {
 
@@ -115,11 +115,9 @@ const HeaderDesktop: React.FC = () => {
 
     const goToFavorites = async () => {
         if (user.username) {
-            await router.push(`/account/${user?._id}?tab=1`)
-
+            router.push(`/account/${user?._id}?tab=1`)
         } else {
-
-            await router.push("/auth")
+            router.push("/auth")
         }
     }
 
@@ -183,7 +181,7 @@ const HeaderDesktop: React.FC = () => {
 
 
                 <Grid container item md={"auto"} lg={true} xl={2} justifyContent={"flex-end"}>
-                    <Tooltip title={"کالاهای مورد علاقه شما"} arrow enterDelay={1000} leaveDelay={0}>
+                    <Tooltip title={"کالاهای مورد علاقه شما"} arrow>
                         <Badge showZero max={99} badgeContent={user?.wishlist.length || 0} color="primary"
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 25, minWidth: 25, borderRadius: 30}}}
@@ -193,7 +191,7 @@ const HeaderDesktop: React.FC = () => {
                             </IconButton>
                         </Badge>
                     </Tooltip>
-                    <Tooltip title={"سبد خرید شما"} arrow enterDelay={1000}>
+                    <Tooltip title={"سبد خرید شما"} arrow>
                         <Badge showZero max={99} badgeContent={user?.cart.length || 0} color="primary"
                                overlap="circular"
                                sx={{"& .MuiBadge-badge": {fontSize: 16, height: 25, minWidth: 25, borderRadius: 30}}}>

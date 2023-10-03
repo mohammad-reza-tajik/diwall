@@ -39,12 +39,10 @@ a:active,
 a:checked {
   text-decoration: none;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
 }
 
+/**** hide arrows in input[type=number] ****/
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -52,22 +50,12 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
 }
 
-// manipulating list component padding
-.css-h4y409-MuiList-root{
-  padding: 0 !important;
+/*************************/
 
-}
-
-// manipulating tooltip background color and fontsize
-.MuiTooltip-tooltip,.MuiTooltip-arrow::before{
-  //background-color: $grey-color !important;
-  font-size: 1.4rem !important;
-}
 
 
 .pointer {

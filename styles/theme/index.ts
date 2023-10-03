@@ -3,10 +3,8 @@ import {createTheme} from "@mui/material/styles";
 const theme  = createTheme({
     spacing: 1,
     direction: "rtl",
-
     palette: {
         mode: "light",
-
         primary: {
             main: "#069f69",
         },
@@ -27,11 +25,9 @@ const theme  = createTheme({
             paper:"#f5f5f5"
         }
     },
-
     typography: {
         fontFamily: "inherit",
-    }
-    ,
+    },
     components: {
         MuiButton: {
             defaultProps: {
@@ -68,6 +64,20 @@ const theme  = createTheme({
                 }
             }
         },
+        MuiTooltip : {
+          styleOverrides : {
+              tooltipArrow : {
+                  backgroundColor : "#222",
+                  fontSize: "1.2rem"
+              },
+              arrow : {
+                  "&:before" : {
+                  backgroundColor : "#222"
+
+                  }
+              }
+          }
+        },
         MuiPaginationItem:{
             defaultProps:{
                 dir:"rtl"
@@ -83,6 +93,7 @@ const theme  = createTheme({
         },
         MuiMenu:{
             defaultProps:{
+
                 disableScrollLock:true  // to prevent adding padding to the body on opening the menu
             }
         },
