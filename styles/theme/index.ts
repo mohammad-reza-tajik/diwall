@@ -39,9 +39,7 @@ const theme  = createTheme({
                 root: {
                     fontSize: "1.6rem",
                 },
-
             }
-
         },
         MuiButtonBase: {
             styleOverrides: {
@@ -67,12 +65,12 @@ const theme  = createTheme({
         MuiTooltip : {
           styleOverrides : {
               tooltipArrow : {
-                  backgroundColor : "#222",
+                  backgroundColor : "#333",
                   fontSize: "1.2rem"
               },
               arrow : {
                   "&:before" : {
-                  backgroundColor : "#222"
+                  backgroundColor : "#333"
 
                   }
               }
@@ -86,17 +84,30 @@ const theme  = createTheme({
                 root:{
                     fontSize:14,
                     padding:10,
-                    color:"#333",
+                    color:"#555",
                     direction:"rtl"
                 }
             }
         },
         MuiMenu:{
             defaultProps:{
-
                 disableScrollLock:true  // to prevent adding padding to the body on opening the menu
             }
         },
+        MuiBadge : {
+
+            styleOverrides : {
+                badge : {
+                    fontSize : 16,
+                    width : 25,
+                    height : 25,
+                    borderRadius : "50%"
+
+                }
+
+
+            }
+        }
     }
 })
 

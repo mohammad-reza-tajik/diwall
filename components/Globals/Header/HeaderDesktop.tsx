@@ -183,9 +183,7 @@ const HeaderDesktop: React.FC = () => {
                 <Grid container item md={"auto"} lg={true} xl={2} justifyContent={"flex-end"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow>
                         <Badge showZero max={99} badgeContent={user?.wishlist.length || 0} color="primary"
-                               overlap="circular"
-                               sx={{"& .MuiBadge-badge": {fontSize: 16, height: 25, minWidth: 25, borderRadius: 30}}}
-                         >
+                               overlap="circular">
                             <IconButton color={"primary"} onClick={goToFavorites} aria-label="go to wishlist">
                                 <FavoriteBorder sx={styles.iconButtons}/>
                             </IconButton>
@@ -193,8 +191,7 @@ const HeaderDesktop: React.FC = () => {
                     </Tooltip>
                     <Tooltip title={"سبد خرید شما"} arrow>
                         <Badge showZero max={99} badgeContent={user?.cart.length || 0} color="primary"
-                               overlap="circular"
-                               sx={{"& .MuiBadge-badge": {fontSize: 16, height: 25, minWidth: 25, borderRadius: 30}}}>
+                               overlap="circular">
                             <IconButton color={"primary"} onClick={goToCart} aria-label="go to cart">
                                 <ShoppingBagOutlined sx={styles.iconButtons}/>
                             </IconButton>
