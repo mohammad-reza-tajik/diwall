@@ -26,12 +26,11 @@ import React, {useState} from "react";
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import SearchResults from "../SearchResults";
 import useSearch from "@/hooks/useSearch";
-import type {SxProps , Theme} from "@mui/system";
+import type {SxProps, Theme} from "@mui/system";
 import {enqueueSnackbar} from "notistack";
 
 
-
-const styles  = {
+const styles = {
     searchField: {
         width: {md: 350, lg: 400},
         height: 1,
@@ -86,7 +85,7 @@ const styles  = {
             color: "white"
         }
     },
-    iconButtons : {
+    iconButtons: {
         fontSize: {xs: 40, sm: 45},
         border: (theme) => `2px solid ${theme.palette.primary.main}`,
         borderRadius: 3,
@@ -97,12 +96,29 @@ const styles  = {
 
 } satisfies Record<string, SxProps<Theme>>
 
+const searchInputAdornment = (
+    <InputAdornment position="start">
+        <IconButton type={"submit"} aria-label="search button">
+            <Search sx={styles.searchIcon}/>
+        </IconButton>
+    </InputAdornment>
+)
+
 const HeaderDesktop: React.FC = () => {
 
     const user = useAppSelector(state => state.user)
     const dispatch = useAppDispatch()
 
-    const {router , search , submitSearchHandler , searchChangeHandler , isWrong , results , isLoading , closeSearchHandlerDesktop} = useSearch("desktop")
+    const {
+        router,
+        search,
+        submitSearchHandler,
+        searchChangeHandler,
+        isWrong,
+        results,
+        isLoading,
+        closeSearchHandlerDesktop
+    } = useSearch("desktop")
 
     //*** menu logic ***//
 
@@ -133,10 +149,10 @@ const HeaderDesktop: React.FC = () => {
 
     return (
         <Grid container item component={"header"} justifyContent={"center"} mb={30} xs={12}>
-            <Grid container item  justifyContent={"center"} alignItems={"center"} xs={12}
+            <Grid container item justifyContent={"center"} alignItems={"center"} xs={12}
                   py={20}>
                 <Grid minHeight={100} maxWidth={100} component={Link} href={"/"}>
-                        <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100} />
+                    <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100}/>
                 </Grid>
                 <Grid position={"relative"} container direction={"column"} item
                       justifyContent={"center"}
@@ -157,24 +173,21 @@ const HeaderDesktop: React.FC = () => {
                                 variant="outlined"
                                 size={"medium"}
                                 InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <IconButton type={"submit"} aria-label="search button">
-                                                <Search sx={styles.searchIcon}/>
-                                            </IconButton>
-                                        </InputAdornment>
-                                    ),
+                                    startAdornment: searchInputAdornment,
                                 }}
                             />
                         </Tooltip>
-                        <IconButton aria-label="clear search field" sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}
+                        <IconButton aria-label="clear search field"
+                                    sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}
                                     onClick={closeSearchHandlerDesktop}>
                             <Close color={"primary"} fontSize={"large"}/>
                         </IconButton>
 
                         {
                             search.trim().length >= 3 &&
-                                <SearchResults isLoading={isLoading} results={results} search={search} submitSearchHandler={submitSearchHandler} onClose={closeSearchHandlerDesktop} />
+                            <SearchResults isLoading={isLoading} results={results} search={search}
+                                           submitSearchHandler={submitSearchHandler}
+                                           onClose={closeSearchHandlerDesktop}/>
                         }
                     </Grid>
                 </Grid>
@@ -213,51 +226,51 @@ const HeaderDesktop: React.FC = () => {
                                 sx={styles.loginButton}
                             > ورود / ثبت نام </Button>
 
-                        :
-                        <>
-                            <Button
-                                variant={"contained"}
-                                aria-label="show menu"
-                                onClick={(e) => {
-                                    setAnchorEl(anchorEl ? null : e.currentTarget)
-                                }}
-                                color={"primary"}
-                                startIcon={""}
-                                sx={styles.loginButton}> {user?.username} </Button>
+                            :
+                            <>
+                                <Button
+                                    variant={"contained"}
+                                    aria-label="show menu"
+                                    onClick={(e) => {
+                                        setAnchorEl(anchorEl ? null : e.currentTarget)
+                                    }}
+                                    color={"primary"}
+                                    startIcon={""}
+                                    sx={styles.loginButton}> {user?.username} </Button>
 
-                            <Menu
-                                anchorEl={anchorEl}
-                                open={openMenu}
-                                onClose={closeMenu}
-                                onClick={closeMenu}
-                                transformOrigin={{horizontal: 'right', vertical: 'top'}}
-                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-                            >
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={openMenu}
+                                    onClose={closeMenu}
+                                    onClick={closeMenu}
+                                    transformOrigin={{horizontal: 'right', vertical: 'top'}}
+                                    anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+                                >
 
-                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=0`)}>
-                                    <ListItemIcon>
-                                        <Person sx={{fontSize: 25}} color={"primary"}/>
-                                    </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
-                                        حساب کاربری
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem onClick={() => {
-                                    dispatch(userActions.logout());
-                                    enqueueSnackbar("با موفقیت از حساب خود خارج شدید" , {
-                                        variant : "info",
-                                    });
+                                    <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=0`)}>
+                                        <ListItemIcon>
+                                            <Person sx={{fontSize: 25}} color={"primary"}/>
+                                        </ListItemIcon>
+                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                            حساب کاربری
+                                        </Typography>
+                                    </MenuItem>
+                                    <MenuItem onClick={() => {
+                                        dispatch(userActions.logout());
+                                        enqueueSnackbar("با موفقیت از حساب خود خارج شدید", {
+                                            variant: "info",
+                                        });
 
-                                }}>
-                                    <ListItemIcon>
-                                        <Logout sx={{fontSize: 25}} color={"primary"}/>
-                                    </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
-                                        خروج از حساب کاربری
-                                    </Typography>
-                                </MenuItem>
-                            </Menu>
-                        </>
+                                    }}>
+                                        <ListItemIcon>
+                                            <Logout sx={{fontSize: 25}} color={"primary"}/>
+                                        </ListItemIcon>
+                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                            خروج از حساب کاربری
+                                        </Typography>
+                                    </MenuItem>
+                                </Menu>
+                            </>
 
                     }
                 </Grid>
