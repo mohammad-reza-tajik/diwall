@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Image from "next/image"
-import React, {Fragment} from "react";
+import React from "react";
 import Link from "next/link";
 import Head from "next/head";
 import type {SxProps} from "@mui/system";
@@ -21,7 +21,7 @@ const styles  = {
 const NotFound: React.FC = () => {
 
     return (
-        <Fragment>
+        <>
             <Head>
                 <title>
                     صفحه مورد نظر پیدا نشد - دیوال
@@ -56,7 +56,7 @@ const NotFound: React.FC = () => {
 
 
             </Grid>
-        </Fragment>
+        </>
     )
 }
 

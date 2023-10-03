@@ -1,32 +1,56 @@
 import React from "react";
 import Link from "next/link";
 import Head from "next/head";
+import Grid from "@mui/material/Grid";
+import Replay from "@mui/icons-material/Replay";
+import {Theme , SxProps} from "@mui/system";
+
+const styles  = {
+    container : {
+        bgcolor : "#f8f8f8",
+      width : "100vw",
+      height : "100vh",
+      position : "fixed",
+      top : 0,
+      left : 0,
+        flexDirection : "column",
+        zIndex : 400,
+        justifyContent : "center",
+        alignItems : "center",
+        gap : 20
+
+    },
+    text : {
+        fontSize : "2rem",
+        fontFamily : "dana-bold",
+        justifyContent : "center",
+        alignItems : "center"
+    },
+    backToHomeButton : {
+        width : "6rem",
+        height : "6rem",
+        padding : "1rem",
+        borderRadius : "50%",
+        border : (theme) => `1px solid ${theme.palette.primary.main}`,
+        bgcolor : "white.main"
+    }
+} satisfies Record<string, SxProps<Theme>>
 const fallbackPage : React.FC = () => {
 
  return (
      <>
          <Head>
-             <>
                  <meta charSet="UTF-8" />
                  <meta
                      name="viewport"
                      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
                  />
-                 <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
                  <link rel="manifest" href="/manifest.json" />
-                 <style
-                     dangerouslySetInnerHTML={{
-                         __html:
-                             "\n        body {\n            background-color: #f5f5f5;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            font-family: sans-serif;\n            font-weight: 700;\n            min-width: 100vw;\n            min-height: 100vh;\n            overflow: hidden;\n        }\n\n        @media (max-width: 900px) {\n            body {\n                align-items: start;\n            }\n        }\n\n        body main {\n            width: 700px;\n            height: 700px;\n            display: flex;\n            flex-direction: column;\n            justify-content: center;\n            align-items: center;\n        }\n\n        body main div {\n            width: 500px;\n            height: auto;\n        }\n\n        @media (max-width: 900px) {\n            body main div {\n                width: 80%;\n            }\n        }\n\n        body main p {\n            font-size: 3rem;\n            color: #444;\n        }\n\n        @media (max-width: 900px) {\n            body main p {\n                font-size: 1.6rem;\n            }\n        }\n\n        body main a {\n            border-radius: 50%;\n            display: block;\n            padding: 0.5rem;\n            box-shadow: 1px 1px 5px #888;\n        }\n\n        @media (max-width: 900px) {\n            body main a {\n                padding: 0.2rem;\n            }\n        }\n    "
-                     }}
-                 />
-                 <title>No Connection</title>
-             </>
-
+                 <title>خطا در اتصال !</title>
          </Head>
-     <main>
-         <div>
-             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+     <Grid container component={"main"} sx={styles.container}>
+         <Grid container justifyContent={"center"}>
+             <svg width={400} height={400} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
                  <g id="freepik--background-simple--inject-2">
                      <path
                          d="M464.5,113.47q-2.38-4-5-7.9C436.33,71.22,396.44,47.73,357.2,37.11a231.87,231.87,0,0,0-52.71-7.69c-116.62-4-163.07,88-201.61,111.67S5,205.33,9,290.32s65.22,165,183.81,170,126.5-48.42,192.71-68.19c43.82-13.08,75-57.26,90.2-98.09C496.5,238.38,495.52,166.11,464.5,113.47Z"
@@ -449,22 +473,12 @@ const fallbackPage : React.FC = () => {
                      />
                  </g>
              </svg>
-         </div>
-         <p>No Connection !</p>
-         <Link href="/">
-             <svg
-                 xmlns="http://www.w3.org/2000/svg"
-                 width={32}
-                 height={32}
-                 viewBox="0 0 24 24"
-             >
-                 <path
-                     fill="#00C27D"
-                     d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6s-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8s-3.58-8-8-8z"
-                 />
-             </svg>
-         </Link>
-     </main>
+         </Grid>
+         <Grid container component={"p"} sx={styles.text}>خطا در اتصال !</Grid>
+         <Grid container justifyContent={"center"} alignItems={"center"} component={Link} href="/" >
+            <Replay sx={styles.backToHomeButton} color={"primary"} />
+         </Grid>
+     </Grid>
      </>
 
  )
