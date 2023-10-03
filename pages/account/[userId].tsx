@@ -27,9 +27,8 @@ const Cart = dynamic(() => import("@/components/AccountPage/Cart"))
 
 const styles = {
     tab: {
-        fontSize: {xs: 12, md: 15},
+        fontSize: {xs: 12, md: 14},
         color : "#666",
-        alignItems : "center",
         gap : "1rem"
     },
     tabsContainer : {
