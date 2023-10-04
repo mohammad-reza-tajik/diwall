@@ -28,13 +28,12 @@ const styles = {
     description: {
         fontSize: {xs:14,md:16},
         lineHeight: 1.8
-
     },
     toggleButton: {
         fontSize: {xs: 12, md: 14},
     },
     addToCartButton: {
-        width: {xs: "100%", md: "20rem"},
+        width: {xs: "100%", sm: "20rem"},
         height: "5.5rem",
         borderRadius: 2,
         fontSize: "1.4rem",
@@ -167,21 +166,20 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                     </Typography>
                 </Grid>
                 <Grid container item xs={12} alignItems={"center"}>
-                    <Grid container item xs={6} alignItems={"center"} gap={10}>
+                    <Grid container item xs={6} alignItems={"baseline"} gap={10}>
                         <Grid component={"label"} htmlFor={"width"} sx={{fontSize: {xs:12,md:14}}}>طول : </Grid>
-                        <TextField type={"number"} variant={"standard"} id={"width"}
-                                   sx={{width: 100, height: 40, fontSize: 15}}/>
+                        <TextField type={"number"} id={"width"}
+                                   sx={{width: 100, height: 40}}/>
                     </Grid>
-                    <Grid container item xs={6} alignItems={"center"} gap={10}>
+                    <Grid container item xs={6} alignItems={"baseline"} gap={10}>
                         <Grid component={"label"} htmlFor={"height"} sx={{fontSize: {xs:12,md:14}}}>عرض : </Grid>
-                        <TextField type={"number"} variant={"standard"} id={"height"}
-                                   sx={{width: 100, height: 40, fontSize: 15}}/>
+                        <TextField type={"number"} id={"height"}
+                                   sx={{width: 100, height: 40}}/>
                     </Grid>
                 </Grid>
 
                 <Grid xs={12} container item justifyContent={"flex-end"} alignItems={"center"} gap={5}>
-                    <Grid container justifyContent={"flex-end"} item xs={"auto"}>
-                        <Button
+                        <Grid item xs={"auto"} component={Button}
                             onClick={addToWishlistHandler}
                             variant={"contained"}
                             aria-label="add to wishlist"
@@ -195,10 +193,8 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                                         <Favorite sx={styles.wishlistIcons}/> :
                                         <FavoriteBorder sx={styles.wishlistIcons}/>
                             }
-                        </Button>
                     </Grid>
-                    <Grid container item justifyContent={"flex-end"} xs sm={"auto"}>
-                        <Button
+                        <Grid item xs sm={"auto"} component={Button}
                             aria-label="add to cart"
                             disabled={addToCartLoading}
                             onClick={addToCartHandler}
@@ -211,9 +207,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                             sx={styles.addToCartButton}
                         >
                             {isInCart ? "حذف از سبد خرید" : "افزودن به سبد خرید"}
-                        </Button>
-                    </Grid>
-
+                        </Grid>
                 </Grid>
             </Grid>
         </Grid>
