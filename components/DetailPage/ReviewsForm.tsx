@@ -29,19 +29,6 @@ const styles = {
                 bgcolor: "primary.main",
             },
         },
-        
-        ".MuiInputBase-root":{
-            bgcolor:"white.main",
-
-        },
-
-        ".MuiFormHelperText-sizeMedium" : {
-            color:"primary.main",
-            mt:12,
-            ml:0,
-            fontSize: {xs:12,md:14}
-        }
-        
     },
     commentButton: {
         fontSize: {xs: 12, md: 15},
@@ -111,7 +98,7 @@ const ReviewsForm: React.FC<Props> = ({onAddComment}) => {
                           onSubmit={insertCommentHandler}>
                         <TextField multiline minRows={7} sx={styles.commentField}  maxRows={7} variant="outlined" inputRef={commentRef} required placeholder="دیدگاه شما ..."/>
                         <Button disabled={isLoading} type={"submit"} variant={"contained"} color={"primary"} sx={styles.commentButton} startIcon={isLoading ?
-                            <CircularProgress color={"inherit"} size={25}/> :  <Create sx={{color: "#fff",position:"relative",top:-2}}/>  }
+                            <CircularProgress color={"inherit"} size={25}/> :  <Create sx={{color: "#fff"}}/>  }
                                 aria-label={"add comment button"}>
                             درج دیدگاه
                         </Button>

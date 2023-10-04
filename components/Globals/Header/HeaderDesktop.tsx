@@ -33,15 +33,10 @@ import {enqueueSnackbar} from "notistack";
 const styles = {
     searchField: {
         width: {md: 350, lg: 400},
-        height: 1,
-        fontSize: {xs: 4, sm: "2rem"},
-        bgcolor: "#fff",
-
     },
     searchIcon: {
         fontSize: "2.5rem",
         color: "primary.main",
-
     },
     closeIcon: {
         color: "primary.main",
@@ -50,7 +45,6 @@ const styles = {
         left: 10,
         zIndex: 50,
     },
-
     searchResultsContainer: {
         position: "absolute",
         top: "100%",
@@ -62,17 +56,12 @@ const styles = {
         bgcolor: "white.main",
         justifyContent: "center",
         alignItems: "center",
-
-
     },
     titleInResults: {
         color: "#444",
         fontSize: "1.2rem"
-    }
-    ,
-
+    },
     loginButton: {
-
         width: {xs: 160, lg: 200},
         height: "4rem",
         borderRadius: 2,
@@ -81,9 +70,6 @@ const styles = {
         fontSize: "1.4rem",
         gap: 10,
         color: "white.main",
-        "&> *": {
-            color: "white"
-        }
     },
     iconButtons: {
         fontSize: {xs: 40, sm: 45},

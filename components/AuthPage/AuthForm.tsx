@@ -43,11 +43,8 @@ const styles = {
     inputField: {
         width: {xs: .8, sm: .7},
         mb: 15,
-
-
     },
     fieldIcon: {
-
         fontSize: "2rem",
         color: "primary.main"
     },
