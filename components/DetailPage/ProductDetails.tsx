@@ -18,16 +18,15 @@ import type {SxProps} from "@mui/system";
 
 const styles = {
     title: {
-        fontSize: {xs: 18, sm: 20, lg: 22},
+        fontSize: {xs: 16, sm: 18, lg: 20},
         fontFamily: "dana-bold"
     },
     price: {
         fontSize: {xs: 16, md: 18},
         color: "primary.main",
-        fontFamily: "dana-bold"
     },
     description: {
-        fontSize: 15,
+        fontSize: {xs:14,md:16},
         lineHeight: 1.8
 
     },
@@ -110,7 +109,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                             <Skeleton variant={"text"} animation={"wave"} width={50}/> :
                             <Typography component={"span"} sx={
                                 {
-                                    fontSize: 14, borderRadius: 1, px: 5, py: 2, color: "white.main",
+                                    fontSize: {xs:12,md:14}, borderRadius: 1, px: 5, py: 2, color: "white.main",
                                     bgcolor: isLoading ? "transparent" : product && product.quantity > 0 ? "primary.main" : "error.main"
                                 }
                             }>
