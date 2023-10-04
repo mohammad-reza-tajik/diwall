@@ -70,14 +70,14 @@ const HeaderMobile: React.FC = () => {
 
 
     return (
-        <Grid container item xs={12} py={".5rem"}>
+        <Grid container py={"1rem"}>
 
             <BackDrop onOpen={setOpenMenuDrawer} open={openMenuDrawer}/>
             <MenuDrawer open={openMenuDrawer} onOpen={setOpenMenuDrawer}/>
             <BackDrop onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
             <SearchDrawer onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
 
-            <Grid container item xs alignItems={"center"} gap={"1rem"}>
+            <Grid container item xs alignItems={"baseline"} gap={"1rem"}>
                 <IconButton onClick={() => setOpenMenuDrawer(!openMenuDrawer)} color={"primary"}
                             sx={styles.headerButton}
                             aria-label="open menu drawer">
