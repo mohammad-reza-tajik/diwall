@@ -195,8 +195,8 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                                 addToWishlistLoading ?
                                     <CircularProgress size={25} color={"inherit"}/> :
                                     isInWishlist ?
-                                        <FavoriteIcon sx={styles.wishlistIcons}/> :
-                                        <FavoriteBorderIcon sx={styles.wishlistIcons}/>
+                                    <FavoriteIcon sx={styles.wishlistIcons}/> :
+                                    <FavoriteBorderIcon sx={styles.wishlistIcons}/>
                             }
                     </Grid>
                         <Grid item xs sm={"auto"} component={Button}
@@ -204,7 +204,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                             disabled={addToCartLoading}
                             onClick={addToCartHandler}
                             variant={"contained"}
-                            color={isInCart ? "error" : "primary"}
+                            bgcolor={isInCart ? "error.main" : "primary.main"}
                             startIcon={addToCartLoading ?
                                 <CircularProgress color={"inherit"} size={25}/> :
                                 <ShoppingBagIcon sx={styles.cartIcon}/>
