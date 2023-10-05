@@ -39,14 +39,13 @@ const theme  = createTheme({
                 root: {
                     fontSize: "1.6rem",
                     backgroundColor : "#fff"
-
                 },
             }
         },
         MuiButtonBase: {
             styleOverrides: {
                 root: {
-                    color: "white"
+                    color: "#fff"
                 }
             }
         },
@@ -73,7 +72,6 @@ const theme  = createTheme({
               arrow : {
                   "&:before" : {
                   backgroundColor : "#333"
-
                   }
               }
           }
@@ -97,17 +95,13 @@ const theme  = createTheme({
             }
         },
         MuiBadge : {
-
             styleOverrides : {
                 badge : {
                     fontSize : 16,
                     width : 25,
                     height : 25,
                     borderRadius : "50%"
-
                 }
-
-
             }
         }
     }
