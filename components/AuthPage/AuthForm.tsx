@@ -5,13 +5,13 @@ import Link from "next/link";
 import Image from "next/legacy/image";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import Person from "@mui/icons-material/Person";
-import Email from "@mui/icons-material/Email";
-import Password from "@mui/icons-material/Password";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import PasswordIcon from "@mui/icons-material/Password";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-import Create from "@mui/icons-material/Create";
-import Login from "@mui/icons-material/Login";
+import CreateIcon from "@mui/icons-material/Create";
+import LoginIcon from "@mui/icons-material/Login";
 import Grid from "@mui/material/Grid";
 import useAuth from "@/hooks/useAuth";
 import type {SxProps} from "@mui/system";
@@ -89,7 +89,7 @@ const AuthForm: React.FC = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <Person sx={styles.fieldIcon}/>
+                                            <PersonIcon sx={styles.fieldIcon}/>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -100,7 +100,7 @@ const AuthForm: React.FC = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <Email sx={styles.fieldIcon}/>
+                                            <EmailIcon sx={styles.fieldIcon}/>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -112,7 +112,7 @@ const AuthForm: React.FC = () => {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <Person sx={styles.fieldIcon}/>
+                                        <PersonIcon sx={styles.fieldIcon}/>
                                     </InputAdornment>
                                 ),
                             }}
@@ -124,7 +124,7 @@ const AuthForm: React.FC = () => {
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
-                                <Password sx={styles.fieldIcon}/>
+                                <PasswordIcon sx={styles.fieldIcon}/>
                             </InputAdornment>
                         ),
                     }}
@@ -134,8 +134,8 @@ const AuthForm: React.FC = () => {
                         disabled={isLoading}
                         startIcon={isLoading ?
                             <CircularProgress color={"inherit"} size={25}/> : formType === "signup" ?
-                                <Create/> :
-                                <Login/>}
+                                <CreateIcon/> :
+                                <LoginIcon/>}
                         sx={{
                             width: {xs: .8, sm: .7},
                             height: 55,
