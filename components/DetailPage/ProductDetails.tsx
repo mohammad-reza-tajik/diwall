@@ -7,11 +7,11 @@ import ToggleButton from "@mui/material/ToggleButton";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-import Favorite from "@mui/icons-material/Favorite";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import {useRouter} from "next/router";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBagOutlined";
 import type {ProductType} from "@/db/productModel";
 import type {SxProps} from "@mui/system";
 
@@ -32,6 +32,13 @@ const styles = {
     toggleButton: {
         fontSize: {xs: 12, md: 14},
     },
+    sizeFields : {
+        width: 100,
+        height: 40,
+        "& .MuiInputBase-input" : {
+            bgcolor: "background.paper"
+        }
+    },
     addToCartButton: {
         width: {xs: "100%", sm: "20rem"},
         height: "5.5rem",
@@ -46,9 +53,7 @@ const styles = {
         height: "5.5rem",
         borderRadius: 2,
         color: "white.main",
-
     },
-
     wishlistIcons: {
         fontSize: 25,
     },
@@ -168,13 +173,13 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                 <Grid container item xs={12} alignItems={"center"}>
                     <Grid container item xs={6} alignItems={"baseline"} gap={10}>
                         <Grid component={"label"} htmlFor={"width"} sx={{fontSize: {xs:12,md:14}}}>طول : </Grid>
-                        <TextField type={"number"} id={"width"}
-                                   sx={{width: 100, height: 40}}/>
+                        <TextField type={"number"} id={"width"} variant={"standard"}
+                                   sx={styles.sizeFields}/>
                     </Grid>
                     <Grid container item xs={6} alignItems={"baseline"} gap={10}>
                         <Grid component={"label"} htmlFor={"height"} sx={{fontSize: {xs:12,md:14}}}>عرض : </Grid>
-                        <TextField type={"number"} id={"height"}
-                                   sx={{width: 100, height: 40}}/>
+                        <TextField type={"number"} id={"height"} variant={"standard"}
+                                   sx={styles.sizeFields}/>
                     </Grid>
                 </Grid>
 
@@ -190,8 +195,8 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                                 addToWishlistLoading ?
                                     <CircularProgress size={25} color={"inherit"}/> :
                                     isInWishlist ?
-                                        <Favorite sx={styles.wishlistIcons}/> :
-                                        <FavoriteBorder sx={styles.wishlistIcons}/>
+                                        <FavoriteIcon sx={styles.wishlistIcons}/> :
+                                        <FavoriteBorderIcon sx={styles.wishlistIcons}/>
                             }
                     </Grid>
                         <Grid item xs sm={"auto"} component={Button}
@@ -202,7 +207,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                             color={isInCart ? "error" : "primary"}
                             startIcon={addToCartLoading ?
                                 <CircularProgress color={"inherit"} size={25}/> :
-                                <ShoppingBagOutlined sx={styles.cartIcon}/>
+                                <ShoppingBagIcon sx={styles.cartIcon}/>
                             }
                             sx={styles.addToCartButton}
                         >
