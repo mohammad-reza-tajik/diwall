@@ -23,9 +23,9 @@ const styles = {
     },
     closeIcon: {
         color: "white.main",
-        fontSize: 35,
         bgcolor: "primary.main",
         borderRadius: 1,
+        p:"1rem",
         height: 54,
         width: 54
     },
