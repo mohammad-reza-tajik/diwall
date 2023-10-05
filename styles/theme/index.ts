@@ -22,7 +22,7 @@ const theme  = createTheme({
             primary: "#1d1d1e"
         },
         background:{
-            paper:"#f5f5f5"
+            paper:"#f8f8f8"
         }
     },
     typography: {
