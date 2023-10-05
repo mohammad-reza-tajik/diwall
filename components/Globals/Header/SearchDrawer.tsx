@@ -33,11 +33,11 @@ const styles = {
         minHeight: "100vh",
         width: "100vw",
         flexDirection: "column",
+        gap: "1rem",
         px: {xs: ".5rem", sm: "1rem"},
         py: "5rem",
 
     }
-
 
 } satisfies Record<string, SxProps>
 
@@ -49,11 +49,11 @@ interface Props {
 
 const SearchDrawer: React.FC<Props> = ({setOpenSearchDrawer , openSearchDrawer , iOS}) => {
 
-    const {search, isWrong, submitSearchHandler, searchChangeHandler, results, isLoading} = useSearch("mobile", setOpenSearchDrawer);
+    const {search, isWrong, submitSearchHandler, searchChangeHandler, results, isLoading , closeSearchHandlerMobile} = useSearch("mobile", setOpenSearchDrawer);
 
 
     return (
-        <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} anchor={"top"} open={openSearchDrawer} onClose={() => setOpenSearchDrawer(false)} onOpen={() => setOpenSearchDrawer(true)}>
+        <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} anchor={"top"} open={openSearchDrawer} onClose={closeSearchHandlerMobile} onOpen={() => setOpenSearchDrawer(true)}>
         <Grid container component={"form"} onSubmit={submitSearchHandler} sx={styles.searchDrawer}>
             <Grid container item xs={12} justifyContent={"center"} alignItems={"center"}>
                 <Grid item xs sm={9}>
@@ -81,7 +81,7 @@ const SearchDrawer: React.FC<Props> = ({setOpenSearchDrawer , openSearchDrawer ,
                     </Tooltip>
                 </Grid>
                 <Grid item xs={"auto"}>
-                    <IconButton onClick={() => setOpenSearchDrawer(false)} aria-label="close search drawer">
+                    <IconButton onClick={closeSearchHandlerMobile} aria-label="close search drawer">
                         <CloseIcon sx={styles.closeIcon}/>
                     </IconButton>
                 </Grid>
@@ -90,7 +90,7 @@ const SearchDrawer: React.FC<Props> = ({setOpenSearchDrawer , openSearchDrawer ,
             {
                 search.trim().length >= 3 &&
                 <SearchResults isLoading={isLoading} results={results} search={search}
-                               submitSearchHandler={submitSearchHandler} setOpenSearchDrawer={setOpenSearchDrawer}/>
+                               submitSearchHandler={submitSearchHandler} closeSearch={closeSearchHandlerMobile}/>
             }
 
 

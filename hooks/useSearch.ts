@@ -4,7 +4,7 @@ import type {ProductType} from "@/db/productModel";
 import useFetch from "@/hooks/useFetch";
 
 
-const useSearch = (device: "desktop" | "mobile", setOpen?: (open:boolean) => void ) => {
+const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: (open:boolean) => void ) => {
 
     const router = useRouter()
 
@@ -29,20 +29,19 @@ const useSearch = (device: "desktop" | "mobile", setOpen?: (open:boolean) => voi
         } else {
             closeSearchHandlerDesktop()
         }
-
     }
 
 
     const closeSearchHandlerDesktop = useCallback(() => {
         setIsWrong(false);
-        setSearch("")
+        setSearch("");
 
     }, [])
 
     const closeSearchHandlerMobile = useCallback(() => {
-        setIsWrong(false)
-        setSearch("")
-        setOpen(false)
+        setIsWrong(false);
+        setSearch("");
+        setOpenSearchDrawer(false);
 
     }, [])
 

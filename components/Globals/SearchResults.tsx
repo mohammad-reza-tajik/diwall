@@ -21,11 +21,9 @@ const styles = {
         gap: 10,
         p: 5,
         cursor: "pointer",
-        opacity :.8,
+        opacity :1,
         transition : "all .5s",
-        "&:hover": {
-           opacity : 1
-        }
+
     }
 } satisfies Record<string, SxProps>
 
@@ -34,21 +32,16 @@ interface Props {
     results: ProductType[];
     search: string;
     submitSearchHandler: (event: FormEvent) => void
-    setOpenSearchDrawer?: (open: boolean) => void;
-    onClose?: () => void;
+    closeSearch: () => void;
 
 }
 
-const SearchResults: React.FC<Props> = ({isLoading, results, search, submitSearchHandler, setOpenSearchDrawer, onClose}) => {
+const SearchResults: React.FC<Props> = ({isLoading, results, search, submitSearchHandler, closeSearch}) => {
 
     const router = useRouter();
 
     const goToProductHandler = (slug: string) => {
-        if (onClose) {
-            onClose()
-        } else {
-            setOpenSearchDrawer(false)
-        }
+        closeSearch()
         router.push(`/products/${slug}`)
 
     }

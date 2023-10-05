@@ -172,8 +172,7 @@ const HeaderDesktop: React.FC = () => {
                         {
                             search.trim().length >= 3 &&
                             <SearchResults isLoading={isLoading} results={results} search={search}
-                                           submitSearchHandler={submitSearchHandler}
-                                           onClose={closeSearchHandlerDesktop}/>
+                                           submitSearchHandler={submitSearchHandler} closeSearch={closeSearchHandlerDesktop}/>
                         }
                     </Grid>
                 </Grid>
