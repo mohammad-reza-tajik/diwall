@@ -91,8 +91,7 @@ const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: (open:boo
             searchChangeHandler,
             submitSearchHandler,
             results,
-            closeSearchHandlerDesktop,
-            router
+            closeSearchHandlerDesktop
         }
     } else {
         return {search, isWrong, isLoading, searchChangeHandler, submitSearchHandler, results, closeSearchHandlerMobile}
