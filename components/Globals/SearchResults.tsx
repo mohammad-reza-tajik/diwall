@@ -11,34 +11,20 @@ import type {SxProps} from "@mui/system";
 
 const styles = {
     searchResultsContainer: {
-        position: "absolute",
-        top: {xs: 120, md: "100%"},
-        right: 0,
-        width: {xs: 1, md: 400},
-        zIndex: 1001,
-        p: "1rem",
+        width: 1,
         border: {xs: "none", md: "1px solid #ccc"},
         borderTop: "none",
         bgcolor: "white.main",
         justifyContent: "center",
         alignItems: "center",
-
-
     },
-    titleInResults: {
-        color: "#444",
-        fontSize: "1.2rem",
-        "&:hover": {
-            bgcolor: "rgba(#000000,.2)"
-        }
-    },
-    searchResultsItem : {
+    item: {
         bgcolor: "white.main",
         gap: 10,
         p: 5,
-        cursor:"pointer",
-        "&:hover" : {
-            bgcolor:"background.paper"
+        cursor: "pointer",
+        "&:hover": {
+            bgcolor: "background.paper"
         }
     }
 } satisfies Record<string, SxProps>
@@ -47,19 +33,17 @@ interface Props {
     isLoading: boolean;
     results: ProductType[];
     search: string;
-    submitSearchHandler: (event : FormEvent) => void
+    submitSearchHandler: (event: FormEvent) => void
     onOpen?: (open: boolean) => void;
     onClose?: () => void;
 
 }
 
-const SearchResults: React.FC<Props> = (props) => {
+const SearchResults: React.FC<Props> = ({isLoading, results, search, submitSearchHandler, onOpen, onClose}) => {
 
-    const {isLoading, results, search, submitSearchHandler, onOpen, onClose} = props;
     const router = useRouter();
 
-
-    const goToProductHandler = (slug :string) => {
+    const goToProductHandler = (slug: string) => {
         if (onClose) {
             onClose()
         } else {
@@ -72,21 +56,19 @@ const SearchResults: React.FC<Props> = (props) => {
 
     return (
         <Grid container item xs={12} sx={styles.searchResultsContainer}>
-
             {
                 isLoading ?
                     <Grid container justifyContent={"center"} alignItems={"center"}>
                         <CircularProgress color={"primary"} size={45}/>
                     </Grid> :
                     <>
-                        <Grid component={"ul"} container item xs={12}>
+                        <Grid component={"ul"} container item xs={12} sm={10}>
                             {results.map((result) => {
                                 if (search.trim().length >= 3 && results.length !== 0) {
-
                                     return (
                                         <Grid container item alignItems={"center"} xs={12} key={result._id}
                                               onClick={() => goToProductHandler(result.slug)}
-                                              sx={styles.searchResultsItem}>
+                                              sx={styles.item}>
 
                                             <Grid item xs={"auto"}>
                                                 <Image
@@ -97,7 +79,7 @@ const SearchResults: React.FC<Props> = (props) => {
                                                 />
                                             </Grid>
                                             <Grid item xs={true}>
-                                                <Typography variant={"h4"} sx={styles.titleInResults}>
+                                                <Typography variant={"h5"} fontSize={"1.2rem"}>
                                                     {result.title}
                                                 </Typography>
 
@@ -105,12 +87,10 @@ const SearchResults: React.FC<Props> = (props) => {
                                         </Grid>
                                     )
                                 }
-
-
                             })}
-                            {results.length === 0 && search.trim().length >= 3 && !isLoading &&  (
+                            {results.length === 0 && search.trim().length >= 3 && !isLoading && (
                                 <Grid container justifyContent={"center"} alignItems={"center"} p={10}>
-                                    <Typography variant={"h5"} color={"#666"} fontSize={16}>
+                                    <Typography variant={"h5"} fontSize={16}>
                                         نتیجه ای یافت نشد!
                                     </Typography>
                                 </Grid>
@@ -124,10 +104,7 @@ const SearchResults: React.FC<Props> = (props) => {
                             }
                         </Grid>
                     </>
-
             }
-
-
         </Grid>
     )
 }

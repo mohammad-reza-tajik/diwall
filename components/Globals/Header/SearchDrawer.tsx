@@ -3,8 +3,8 @@ import Tooltip from "@mui/material/Tooltip";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import Search from "@mui/icons-material/Search";
-import Close from "@mui/icons-material/Close";
+import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
 
 import SearchResults from "../SearchResults";
@@ -14,10 +14,7 @@ import type {SxProps} from "@mui/system";
 
 const styles = {
     searchField: {
-        width: {xs: 1, sm: 1, md: .6},
-        fontSize: {xs: 4, sm: "2rem"},
-        bgcolor: "#fff",
-
+        width: 1,
     },
     searchIcon: {
         fontSize: 25,
@@ -27,24 +24,25 @@ const styles = {
         color: "white.main",
         fontSize: 35,
         bgcolor: "primary.main",
-        borderRadius: 20,
+        borderRadius: 1,
+        height: 54,
+        width: 54
 
     },
 
     searchDrawer: {
         minHeight: "100vh",
+        width: "100vw",
         backgroundColor: "white.main",
-        // backgroundColor: "green",
-
+        flexDirection: "column",
         position: "fixed",
         top: 0,
         right: 0,
-        width: "100vw",
-        px: 20,
-        pt: 30,
         transition: "all .6s",
-        zIndex: 1000
-
+        zIndex: 1000,
+        px: {xs: ".5rem", sm: "1rem"},
+        py: "5rem",
+        // justifyContent: "center"
 
     }
 
@@ -58,46 +56,44 @@ interface Props {
 
 const SearchDrawer: React.FC<Props> = (props) => {
 
-    const {search , isWrong , submitSearchHandler , searchChangeHandler , results , isLoading } = useSearch("mobile" , props);
+    const {search, isWrong, submitSearchHandler, searchChangeHandler, results, isLoading} = useSearch("mobile", props);
 
     return (
-        <Grid container item xs={12} component={"form"} onSubmit={submitSearchHandler} sx={{
+        <Grid container component={"form"} onSubmit={submitSearchHandler} sx={{
             ...styles.searchDrawer,
             transform: props.open ? "translateY(0)" : "translateY(-100%)"
         }}>
-            <Grid item xs={true} maxHeight={80} overflow={"hidden"} position={"absolute"} top={30} right={15}>
-                <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom"}
-                         arrow>
-                    <TextField
-                        error={isWrong}
-                        fullWidth
-                        placeholder={"جستجو ..."}
-                        value={search}
-                        onChange={searchChangeHandler}
-                        sx={styles.searchField}
-                        variant="outlined"
-                        size={"medium"}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <IconButton type={"submit"} aria-label="search">
-                                        <Search sx={styles.searchIcon}/>
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-
-                        }}
-                    />
-                </Tooltip>
+            <Grid container item xs={12} justifyContent={"center"} alignItems={"center"}>
+                <Grid item xs sm={9}>
+                    <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom"}
+                             arrow>
+                        <TextField
+                            error={isWrong}
+                            fullWidth
+                            placeholder={"جستجو ..."}
+                            value={search}
+                            onChange={searchChangeHandler}
+                            sx={styles.searchField}
+                            variant="outlined"
+                            size={"medium"}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <IconButton type={"submit"} aria-label="search">
+                                            <SearchIcon sx={styles.searchIcon}/>
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Tooltip>
+                </Grid>
+                <Grid item xs={"auto"}>
+                    <IconButton onClick={() => props.onOpen(false)} aria-label="close search drawer">
+                        <CloseIcon sx={styles.closeIcon}/>
+                    </IconButton>
+                </Grid>
             </Grid>
-            <Grid item xs={"auto"} maxHeight={80} position={"absolute"} top={30} left={10}>
-                <IconButton onClick={() => props.onOpen(false)} aria-label="close search drawer">
-                    <Close sx={styles.closeIcon}/>
-                </IconButton>
-
-            </Grid>
-
-
 
             {
                 search.trim().length >= 3 &&
