@@ -12,7 +12,11 @@ const styles  = {
     container: {
         overflow: "hidden",
         width: "100%",
-        height: "100vh"
+        height: "100vh",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        zIndex: 50,
 
     }
 
@@ -27,27 +31,26 @@ const NotFound: React.FC = () => {
                     صفحه مورد نظر پیدا نشد - دیوال
                 </title>
             </Head>
-            <Grid container item xs={12} justifyContent={"center"} alignItems={"center"} px={10} sx={styles.container}>
-                <Grid container item xs={12} gap={30}>
-
-                    <Grid container justifyContent={"center"} item xs={12}>
+            <Grid container justifyContent={"center"} alignItems={"center"} sx={styles.container}>
+                <Grid container item xs={12} gap={30} direction={"column"}>
+                    <Grid container justifyContent={"center"} item >
                         <Image src={"/assets/pictures/not-found.svg"} width={400} height={400}
                                alt={"صفحه مورد نظر شما یافت نشد !"}/>
                     </Grid>
-                    <Grid container justifyContent={"center"} item xs={12}>
+                    <Grid container justifyContent={"center"} item>
                         <Typography variant={"h1"} fontFamily={"dana-black"}
                                     sx={{color: "#333", fontSize: {xs: 25, md: 40}}}>
                             صفحه مورد نظر پیدا نشد
                         </Typography>
                     </Grid>
-                    <Grid container justifyContent={"center"} item xs={12} textAlign={"center"}>
+                    <Grid container justifyContent={"center"} item textAlign={"center"} px={"1rem"}>
                         <Typography variant={"h4"} fontFamily={"dana-medium"}
                                     sx={{color: "#333", fontSize: {xs: 16, md: 20}}}>
                             آدرس صفحه اشتباه است یا سایت با مشکل مواجه شده است
                         </Typography>
                     </Grid>
-                    <Grid container justifyContent={"center"} item xs={12}>
-                        <Button component={Link} href={"/"} variant={"contained"} sx={{fontSize: {xs: 16, md: 20}}}>
+                    <Grid container justifyContent={"center"} item>
+                        <Button component={Link} href={"/"} variant={"contained"} sx={{fontSize: {xs: 14, md: 16}}}>
                             بازگشت به صفحه اصلی
                         </Button>
 
