@@ -1,5 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Tooltip from "@mui/material/Tooltip";
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -27,22 +28,13 @@ const styles = {
         borderRadius: 1,
         height: 54,
         width: 54
-
     },
-
     searchDrawer: {
         minHeight: "100vh",
         width: "100vw",
-        backgroundColor: "white.main",
         flexDirection: "column",
-        position: "fixed",
-        top: 0,
-        right: 0,
-        transition: "all .6s",
-        zIndex: 1000,
         px: {xs: ".5rem", sm: "1rem"},
         py: "5rem",
-        // justifyContent: "center"
 
     }
 
@@ -50,19 +42,19 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 interface Props {
-    onOpen: (open: boolean) => void;
-    open: boolean;
+    setOpenSearchDrawer: (open: boolean) => void;
+    openSearchDrawer: boolean;
+    iOS : boolean;
 }
 
-const SearchDrawer: React.FC<Props> = (props) => {
+const SearchDrawer: React.FC<Props> = ({setOpenSearchDrawer , openSearchDrawer , iOS}) => {
 
-    const {search, isWrong, submitSearchHandler, searchChangeHandler, results, isLoading} = useSearch("mobile", props);
+    const {search, isWrong, submitSearchHandler, searchChangeHandler, results, isLoading} = useSearch("mobile", setOpenSearchDrawer);
+
 
     return (
-        <Grid container component={"form"} onSubmit={submitSearchHandler} sx={{
-            ...styles.searchDrawer,
-            transform: props.open ? "translateY(0)" : "translateY(-100%)"
-        }}>
+        <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} anchor={"top"} open={openSearchDrawer} onClose={() => setOpenSearchDrawer(false)} onOpen={() => setOpenSearchDrawer(true)}>
+        <Grid container component={"form"} onSubmit={submitSearchHandler} sx={styles.searchDrawer}>
             <Grid container item xs={12} justifyContent={"center"} alignItems={"center"}>
                 <Grid item xs sm={9}>
                     <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom"}
@@ -89,7 +81,7 @@ const SearchDrawer: React.FC<Props> = (props) => {
                     </Tooltip>
                 </Grid>
                 <Grid item xs={"auto"}>
-                    <IconButton onClick={() => props.onOpen(false)} aria-label="close search drawer">
+                    <IconButton onClick={() => setOpenSearchDrawer(false)} aria-label="close search drawer">
                         <CloseIcon sx={styles.closeIcon}/>
                     </IconButton>
                 </Grid>
@@ -98,12 +90,13 @@ const SearchDrawer: React.FC<Props> = (props) => {
             {
                 search.trim().length >= 3 &&
                 <SearchResults isLoading={isLoading} results={results} search={search}
-                               submitSearchHandler={submitSearchHandler} onOpen={props.onOpen}/>
+                               submitSearchHandler={submitSearchHandler} setOpenSearchDrawer={setOpenSearchDrawer}/>
             }
 
 
         </Grid>
 
+        </SwipeableDrawer>
 
     )
 }

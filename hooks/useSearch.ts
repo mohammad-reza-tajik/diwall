@@ -4,7 +4,7 @@ import type {ProductType} from "@/db/productModel";
 import useFetch from "@/hooks/useFetch";
 
 
-const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boolean) => void }) => {
+const useSearch = (device: "desktop" | "mobile", setOpen?: (open:boolean) => void ) => {
 
     const router = useRouter()
 
@@ -42,7 +42,7 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boole
     const closeSearchHandlerMobile = useCallback(() => {
         setIsWrong(false)
         setSearch("")
-        props.onOpen(false)
+        setOpen(false)
 
     }, [])
 

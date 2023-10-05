@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import {useRouter} from "next/router";
 import type {SxProps} from "@mui/system";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
@@ -18,18 +19,12 @@ import Divider from "@mui/material/Divider";
 const styles = {
     drawer: {
         p: 20,
-        height: "100vh",
-        position: "fixed",
-        top: 0,
-        zIndex: 1000,
-        right: 0,
         backgroundColor: "white.main",
-        transition: "all .4s",
-        width : {xs:"75vw" , sm :"50vw"}
+        width: {xs: "75vw", sm: "50vw"}
     },
     item: {
         py: "1rem",
-        px : 0,
+        px: 0,
         "&:hover": {
             ".MuiSvgIcon-root": {
                 color: "primary.main"
@@ -45,73 +40,83 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 interface Props {
-    onOpen: (open: boolean) => void;
-    open: boolean;
+    setOpenMenuDrawer: (open: boolean) => void;
+    openMenuDrawer: boolean;
+    iOS: boolean
 }
 
-const MenuDrawer: React.FC<Props> = ({open, onOpen}) => {
+const MenuDrawer: React.FC<Props> = ({openMenuDrawer, setOpenMenuDrawer , iOS}) => {
 
     const router = useRouter();
 
     const menuItemsHandler = (url: string) => {
-        onOpen(false)
+        setOpenMenuDrawer(false)
         router.push(url)
     }
 
     return (
-        <Grid container direction={"column"} sx={{
-            ...styles.drawer,
-            transform: open ? "translateX(0)" : "translateX(100%)"
-        }}>
-            <Grid item onClick={() => menuItemsHandler("/")} className={"pointer"}>
-                <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"}
-                       width={100}
-                       height={100}/>
+        <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS}
+                         anchor={"left"} open={openMenuDrawer} onClose={() => setOpenMenuDrawer(false)}
+                         onOpen={() => setOpenMenuDrawer(true)}
+                         PaperProps={{
+                             sx: {
+                                 left: 'unset !important',
+                                 right: '0 !important'
+                             }
+                         }}
+        >
+
+            <Grid container direction={"column"} sx={styles.drawer}>
+                <Grid item onClick={() => menuItemsHandler("/")} className={"pointer"}>
+                    <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"}
+                           width={100}
+                           height={100}/>
+                </Grid>
+                <MenuList sx={{width: 1}}>
+                    <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/")}>
+                        <ListItemIcon>
+                            <HomeIcon sx={styles.icon}/>
+                        </ListItemIcon>
+                        <Typography fontSize={12}>صفحه نخست</Typography>
+                    </MenuItem>
+                    <Divider/>
+                    <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/products")}>
+                        <ListItemIcon>
+                            <WhatshotIcon sx={styles.icon}/>
+                        </ListItemIcon>
+                        <Typography fontSize={12}> جدیدترین محصولات</Typography>
+                    </MenuItem>
+                    <Divider/>
+                    <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/products?sortBy=2")}>
+                        <ListItemIcon>
+                            <SellIcon sx={styles.icon}/>
+                        </ListItemIcon>
+                        <Typography fontSize={12}> پرفروش ترین محصولات</Typography>
+                    </MenuItem>
+                    <Divider/>
+                    <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/products?sortBy=3")}>
+                        <ListItemIcon>
+                            <FavoriteIcon sx={styles.icon}/>
+                        </ListItemIcon>
+                        <Typography fontSize={12}>محبوب ترین محصولات</Typography>
+                    </MenuItem>
+                    <Divider/>
+                    <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/about")}>
+                        <ListItemIcon>
+                            <InfoIcon sx={styles.icon}/>
+                        </ListItemIcon>
+                        <Typography fontSize={12}>درباره ما</Typography>
+                    </MenuItem>
+                    <Divider/>
+                    <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/collaboration")}>
+                        <ListItemIcon>
+                            <HandshakeIcon sx={styles.icon}/>
+                        </ListItemIcon>
+                        <Typography fontSize={12}>همکاری با ما</Typography>
+                    </MenuItem>
+                </MenuList>
             </Grid>
-            <MenuList sx={{width: 1}}>
-                <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/")}>
-                    <ListItemIcon>
-                        <HomeIcon sx={styles.icon}/>
-                    </ListItemIcon>
-                    <Typography fontSize={12}>صفحه نخست</Typography>
-                </MenuItem>
-                <Divider />
-                <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/products")}>
-                    <ListItemIcon>
-                        <WhatshotIcon sx={styles.icon}/>
-                    </ListItemIcon>
-                    <Typography fontSize={12}> جدیدترین محصولات</Typography>
-                </MenuItem>
-                <Divider />
-                <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/products?sortBy=2")}>
-                    <ListItemIcon>
-                        <SellIcon sx={styles.icon}/>
-                    </ListItemIcon>
-                    <Typography fontSize={12}> پرفروش ترین محصولات</Typography>
-                </MenuItem>
-                <Divider />
-                <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/products?sortBy=3")}>
-                    <ListItemIcon>
-                        <FavoriteIcon sx={styles.icon}/>
-                    </ListItemIcon>
-                    <Typography fontSize={12}>محبوب ترین محصولات</Typography>
-                </MenuItem>
-                <Divider />
-                <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/about")}>
-                    <ListItemIcon>
-                        <InfoIcon sx={styles.icon}/>
-                    </ListItemIcon>
-                    <Typography fontSize={12}>درباره ما</Typography>
-                </MenuItem>
-                <Divider />
-                <MenuItem sx={styles.item} onClick={() => menuItemsHandler("/collaboration")}>
-                    <ListItemIcon>
-                        <HandshakeIcon sx={styles.icon}/>
-                    </ListItemIcon>
-                    <Typography fontSize={12}>همکاری با ما</Typography>
-                </MenuItem>
-            </MenuList>
-        </Grid>
+        </SwipeableDrawer>
 
     )
 
