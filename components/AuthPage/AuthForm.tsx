@@ -54,8 +54,8 @@ const styles = {
 const AuthForm: React.FC = () => {
 
     const {
-        typeOfForm,
-        typeOfFormHandler,
+        formType,
+        formTypeHandler,
         formHandler,
         isLoading,
         usernameOrEmailRef,
@@ -71,8 +71,8 @@ const AuthForm: React.FC = () => {
                   onSubmit={formHandler}
                   sx={styles.form}>
 
-                <ToggleButtonGroup fullWidth size={"large"} color={"primary"} value={typeOfForm} exclusive
-                                   onChange={typeOfFormHandler}>
+                <ToggleButtonGroup fullWidth size={"large"} color={"primary"} value={formType} exclusive
+                                   onChange={formTypeHandler}>
                     <ToggleButton sx={{width: .5, fontSize: "1.6rem"}} value={"login"}>ورود</ToggleButton>
                     <ToggleButton sx={{width: .5, fontSize: "1.6rem"}} value={"signup"}>ثبت نام</ToggleButton>
                 </ToggleButtonGroup>
@@ -82,7 +82,7 @@ const AuthForm: React.FC = () => {
                 </Grid>
 
                 {
-                    typeOfForm === "signup" ?
+                    formType === "signup" ?
                         <>
                             <TextField
                                 inputRef={usernameRef} // to use refs on textField components
@@ -109,7 +109,6 @@ const AuthForm: React.FC = () => {
                         </> :
                         <TextField
                             inputRef={usernameOrEmailRef}
-
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -122,7 +121,6 @@ const AuthForm: React.FC = () => {
                 }
                 <TextField
                     inputRef={passwordRef}
-
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
@@ -135,7 +133,7 @@ const AuthForm: React.FC = () => {
                 <Button type={"submit"} variant={"contained"}
                         disabled={isLoading}
                         startIcon={isLoading ?
-                            <CircularProgress color={"inherit"} size={25}/> : typeOfForm === "signup" ?
+                            <CircularProgress color={"inherit"} size={25}/> : formType === "signup" ?
                                 <Create/> :
                                 <Login/>}
                         sx={{
@@ -145,15 +143,15 @@ const AuthForm: React.FC = () => {
                             gap: 10,
                             alignItems: "center"
 
-                        }}>{typeOfForm === "signup" ? "ثبت نام" : "ورود"}</Button>
+                        }}>{formType === "signup" ? "ثبت نام" : "ورود"}</Button>
 
 
                 {
-                    typeOfForm === "signup" ?
-                        "" :
+                    formType === "login" ?
                         <Typography sx={{fontSize : 13 ,  mt :20 , color : "primary.main"}}  component={Link} href={"/forgot-password"}>
                             رمز عبور خود را فراموش کرده ام ؟
                         </Typography>
+                        : ""
 
                 }
             </Grid>

@@ -6,19 +6,17 @@ import {enqueueSnackbar} from "notistack";
 
 const useAuth = () => {
 
-    const [typeOfForm, setTypeOfForm] = useState<"login" | "signup">("login");
+    const [formType, setFormType] = useState<"login" | "signup">("login");
     const [isLoading, setIsLoading] = useState(false)
-
 
     const router = useRouter()
 
-
     const dispatch = useAppDispatch()
 
-    const typeOfFormHandler = (_, typeOfForm) => {
+    const formTypeHandler = (_, formType) => {
         // the bottom line is written like this so that only one tab can be active or disabled at a time
-        if (typeOfForm !== null)
-            setTypeOfForm(typeOfForm);
+        if (formType !== null)
+            setFormType(formType);
     }
 
     //********************************** form field refs **********************************//
@@ -38,7 +36,7 @@ const useAuth = () => {
             setIsLoading(true)
 
 
-            const user = typeOfForm === "signup" ?
+            const user = formType === "signup" ?
                 {
                     username: usernameRef.current?.value,
                     email: emailRef.current?.value,
@@ -50,11 +48,20 @@ const useAuth = () => {
 
                 }
 
-            const res = await useFetch.post(`/api/user/${typeOfForm === "signup" ? "signup" : "login"}`, user);
+            const res = await useFetch.post(`/api/user/${formType === "signup" ? "signup" : "login"}`, user);
 
             if ( !res.ok) {
                 throw new Error(res.message)
             }
+
+            /** clearing fields **/
+            if (formType === "login") {
+                usernameOrEmailRef.current.value = "";
+            } else {
+                usernameRef.current.value="";
+                emailRef.current.value="";
+            }
+            passwordRef.current.value="";
 
             dispatch(userActions.login({user : res.user , token : res.token}))
             enqueueSnackbar(res.message , {
@@ -81,9 +88,9 @@ const useAuth = () => {
         usernameOrEmailRef,
         usernameRef,
         formHandler,
-        typeOfFormHandler,
+        formTypeHandler,
         passwordRef,
-        typeOfForm
+        formType
     }
 
 }
