@@ -43,28 +43,14 @@ const styles = {
         left: 10,
         zIndex: 50,
     },
-    searchResultsContainer: {
-        position: "absolute",
-        top: "100%",
-        width: 400,
-        zIndex: 50,
-        p: "1rem",
-        border: "1px solid #ccc",
-        borderTop: "none",
-        bgcolor: "white.main",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    titleInResults: {
-        color: "#444",
-        fontSize: "1.2rem"
-    },
     loginButton: {
-        width: {xs: 160, lg: 200},
+        width: 180,
         height: "4rem",
         borderRadius: 2,
         fontFamily: "dana-bold",
-        mr: "auto",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        textOverflow: "ellipsis",
         fontSize: "1.4rem",
         gap: 10,
         color: "white.main",
@@ -89,8 +75,8 @@ const searchInputAdornment = (
 
 const HeaderDesktop: React.FC = () => {
 
-    const user = useAppSelector(state => state.user)
-    const dispatch = useAppDispatch()
+    const user = useAppSelector(state => state.user);
+    const dispatch = useAppDispatch();
 
     const {
         search,
@@ -100,26 +86,24 @@ const HeaderDesktop: React.FC = () => {
         results,
         isLoading,
         closeSearchHandlerDesktop
-    } = useSearch("desktop")
+    } = useSearch("desktop");
 
     //*** menu logic ***//
 
-    const [anchorEl, setAnchorEl] = useState(null)
-    const openMenu = Boolean(anchorEl)
+    const [anchorEl, setAnchorEl] = useState(null);
+    const openMenu = Boolean(anchorEl);
     const closeMenu = () => {
         setAnchorEl(null);
     }
 
     return (
-        <Grid container component={"header"} justifyContent={"center"} mb={30}>
-            <Grid container item justifyContent={"center"} alignItems={"center"} xs={12}
-                  py={20}>
+        <Grid container component={"header"} py={"3rem"} gap={"1rem"}>
+            <Grid container item xs alignItems={"center"}>
                 <Grid width={100} height={100} component={Link} href={"/"}>
                     <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100}/>
                 </Grid>
-                <Grid position={"relative"} container direction={"column"} item
-                      justifyContent={"center"}
-                      alignItems={"flex-start"} md lg={6} xl={7} pr={20} component={"form"}
+                <Grid container item md lg={6} xl={7}
+                      pr={20} component={"form"}
                       onSubmit={submitSearchHandler}
                 >
                     <Grid item xs={12} position={"relative"}>
@@ -133,7 +117,6 @@ const HeaderDesktop: React.FC = () => {
                                 onChange={searchChangeHandler}
                                 sx={styles.searchField}
                                 variant="outlined"
-                                size={"medium"}
                                 InputProps={{
                                     startAdornment: searchInputAdornment,
                                 }}
@@ -148,17 +131,22 @@ const HeaderDesktop: React.FC = () => {
                         {
                             search.trim().length >= 3 &&
                             <SearchResults isLoading={isLoading} results={results} search={search}
-                                           submitSearchHandler={submitSearchHandler} closeSearch={closeSearchHandlerDesktop}/>
+                                           submitSearchHandler={submitSearchHandler}
+                                           closeSearch={closeSearchHandlerDesktop}/>
                         }
                     </Grid>
                 </Grid>
 
+            </Grid>
 
-                <Grid container item md={"auto"} lg xl={2} justifyContent={"flex-end"}>
+            <Grid container item xs={"auto"} alignItems={"center"} gap={"1rem"}>
+                <Grid item md={"auto"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow>
                         <Badge showZero max={99} badgeContent={user?.wishlist.length || 0} color="primary"
                                overlap="circular">
-                            <IconButton color={"primary"} component={Link} href={user.username ? `/account/${user?._id}?tab=1` : "/auth"} aria-label="go to wishlist">
+                            <IconButton color={"primary"} component={Link}
+                                        href={user.username ? `/account/${user?._id}?tab=1` : "/auth"}
+                                        aria-label="go to wishlist">
                                 <FavoriteBorderIcon sx={styles.iconButtons}/>
                             </IconButton>
                         </Badge>
@@ -166,13 +154,15 @@ const HeaderDesktop: React.FC = () => {
                     <Tooltip title={"سبد خرید شما"} arrow>
                         <Badge showZero max={99} badgeContent={user?.cart.length || 0} color="primary"
                                overlap="circular">
-                            <IconButton color={"primary"} component={Link} href={user.username ? `/account/${user?._id}?tab=2` : "/auth"} aria-label="go to cart">
+                            <IconButton color={"primary"} component={Link}
+                                        href={user.username ? `/account/${user?._id}?tab=2` : "/auth"}
+                                        aria-label="go to cart">
                                 <ShoppingBagOutlinedIcon sx={styles.iconButtons}/>
                             </IconButton>
                         </Badge>
                     </Tooltip>
                 </Grid>
-                <Grid item container md={"auto"} lg={"auto"} xl={2} justifyContent={"flex-end"}>
+                <Grid item md={"auto"}>
                     {
                         user?.username === null ?
                             <Button
@@ -194,7 +184,6 @@ const HeaderDesktop: React.FC = () => {
                                         setAnchorEl(anchorEl ? null : e.currentTarget)
                                     }}
                                     color={"primary"}
-                                    startIcon={""}
                                     sx={styles.loginButton}>{user?.username}</Button>
 
                                 <Menu
@@ -232,8 +221,8 @@ const HeaderDesktop: React.FC = () => {
 
                     }
                 </Grid>
-
             </Grid>
+
             <MainNavigation/>
         </Grid>
     )
