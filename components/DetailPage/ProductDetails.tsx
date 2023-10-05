@@ -11,7 +11,7 @@ import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import {useRouter} from "next/router";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBagOutlined";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import type {ProductType} from "@/db/productModel";
 import type {SxProps} from "@mui/system";
 
@@ -207,7 +207,7 @@ const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
                             bgcolor={isInCart ? "error.main" : "primary.main"}
                             startIcon={addToCartLoading ?
                                 <CircularProgress color={"inherit"} size={25}/> :
-                                <ShoppingBagIcon sx={styles.cartIcon}/>
+                                <ShoppingBagOutlinedIcon sx={styles.cartIcon}/>
                             }
                             sx={styles.addToCartButton}
                         >

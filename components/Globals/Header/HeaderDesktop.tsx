@@ -10,25 +10,23 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
+import {enqueueSnackbar} from "notistack";
 
-import Close from "@mui/icons-material/Close";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Login from "@mui/icons-material/Login";
-import Logout from "@mui/icons-material/Logout";
-import Person from "@mui/icons-material/Person";
-import Search from "@mui/icons-material/Search";
-import ShoppingBagOutlined from "@mui/icons-material/ShoppingBagOutlined";
+import CloseIcon from "@mui/icons-material/Close";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from "@mui/icons-material/Person";
+import SearchIcon from "@mui/icons-material/Search";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 import Image from "next/image";
 import Link from "next/link";
 import React, {useState} from "react";
-
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import SearchResults from "../SearchResults";
 import useSearch from "@/hooks/useSearch";
 import type {SxProps, Theme} from "@mui/system";
-import {enqueueSnackbar} from "notistack";
-
 
 const styles = {
     searchField: {
@@ -79,13 +77,12 @@ const styles = {
         bgcolor: "white.main"
     }
 
-
 } satisfies Record<string, SxProps<Theme>>
 
 const searchInputAdornment = (
     <InputAdornment position="start">
         <IconButton type={"submit"} aria-label="search button">
-            <Search sx={styles.searchIcon}/>
+            <SearchIcon sx={styles.searchIcon}/>
         </IconButton>
     </InputAdornment>
 )
@@ -96,7 +93,6 @@ const HeaderDesktop: React.FC = () => {
     const dispatch = useAppDispatch()
 
     const {
-        router,
         search,
         submitSearchHandler,
         searchChangeHandler,
@@ -114,37 +110,17 @@ const HeaderDesktop: React.FC = () => {
         setAnchorEl(null);
     }
 
-
-    const goToFavorites = async () => {
-        if (user.username) {
-            router.push(`/account/${user?._id}?tab=1`)
-        } else {
-            router.push("/auth")
-        }
-    }
-
-
-    const goToCart = async () => {
-        if (user.username) {
-            await router.push(`/account/${user?._id}?tab=2`)
-        } else {
-            await router.push("/auth")
-        }
-
-    }
-
     return (
-        <Grid container item component={"header"} justifyContent={"center"} mb={30} xs={12}>
+        <Grid container component={"header"} justifyContent={"center"} mb={30}>
             <Grid container item justifyContent={"center"} alignItems={"center"} xs={12}
                   py={20}>
-                <Grid minHeight={100} maxWidth={100} component={Link} href={"/"}>
+                <Grid width={100} height={100} component={Link} href={"/"}>
                     <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100}/>
                 </Grid>
                 <Grid position={"relative"} container direction={"column"} item
                       justifyContent={"center"}
-                      alignItems={"flex-start"} md={true} lg={6} xl={7} pr={20} component={"form"}
+                      alignItems={"flex-start"} md lg={6} xl={7} pr={20} component={"form"}
                       onSubmit={submitSearchHandler}
-
                 >
                     <Grid item xs={12} position={"relative"}>
                         <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom-end"}
@@ -166,7 +142,7 @@ const HeaderDesktop: React.FC = () => {
                         <IconButton aria-label="clear search field"
                                     sx={{...styles.closeIcon, opacity: search.trim() === "" ? 0 : 1}}
                                     onClick={closeSearchHandlerDesktop}>
-                            <Close color={"primary"} fontSize={"large"}/>
+                            <CloseIcon color={"primary"} fontSize={"large"}/>
                         </IconButton>
 
                         {
@@ -178,20 +154,20 @@ const HeaderDesktop: React.FC = () => {
                 </Grid>
 
 
-                <Grid container item md={"auto"} lg={true} xl={2} justifyContent={"flex-end"}>
+                <Grid container item md={"auto"} lg xl={2} justifyContent={"flex-end"}>
                     <Tooltip title={"کالاهای مورد علاقه شما"} arrow>
                         <Badge showZero max={99} badgeContent={user?.wishlist.length || 0} color="primary"
                                overlap="circular">
-                            <IconButton color={"primary"} onClick={goToFavorites} aria-label="go to wishlist">
-                                <FavoriteBorder sx={styles.iconButtons}/>
+                            <IconButton color={"primary"} component={Link} href={user.username ? `/account/${user?._id}?tab=1` : "/auth"} aria-label="go to wishlist">
+                                <FavoriteBorderIcon sx={styles.iconButtons}/>
                             </IconButton>
                         </Badge>
                     </Tooltip>
                     <Tooltip title={"سبد خرید شما"} arrow>
                         <Badge showZero max={99} badgeContent={user?.cart.length || 0} color="primary"
                                overlap="circular">
-                            <IconButton color={"primary"} onClick={goToCart} aria-label="go to cart">
-                                <ShoppingBagOutlined sx={styles.iconButtons}/>
+                            <IconButton color={"primary"} component={Link} href={user.username ? `/account/${user?._id}?tab=2` : "/auth"} aria-label="go to cart">
+                                <ShoppingBagOutlinedIcon sx={styles.iconButtons}/>
                             </IconButton>
                         </Badge>
                     </Tooltip>
@@ -206,12 +182,10 @@ const HeaderDesktop: React.FC = () => {
                                 color={"primary"}
                                 aria-label="login/signup"
                                 startIcon={
-                                    <Login sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
+                                    <LoginIcon sx={{fontSize: 10, ml: 5, transform: "rotateZ(180deg)"}}/>
                                 }
                                 sx={styles.loginButton}
-                            > ورود / ثبت نام </Button>
-
-                            :
+                            > ورود / ثبت نام </Button> :
                             <>
                                 <Button
                                     variant={"contained"}
@@ -221,7 +195,7 @@ const HeaderDesktop: React.FC = () => {
                                     }}
                                     color={"primary"}
                                     startIcon={""}
-                                    sx={styles.loginButton}> {user?.username} </Button>
+                                    sx={styles.loginButton}>{user?.username}</Button>
 
                                 <Menu
                                     anchorEl={anchorEl}
@@ -231,12 +205,11 @@ const HeaderDesktop: React.FC = () => {
                                     transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                     anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                                 >
-
-                                    <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=0`)}>
+                                    <MenuItem component={Link} href={`/account/${user?._id}?tab=0`}>
                                         <ListItemIcon>
-                                            <Person sx={{fontSize: 25}} color={"primary"}/>
+                                            <PersonIcon sx={{fontSize: 25}} color={"primary"}/>
                                         </ListItemIcon>
-                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                        <Typography variant={"caption"} fontSize={15}>
                                             حساب کاربری
                                         </Typography>
                                     </MenuItem>
@@ -248,9 +221,9 @@ const HeaderDesktop: React.FC = () => {
 
                                     }}>
                                         <ListItemIcon>
-                                            <Logout sx={{fontSize: 25}} color={"primary"}/>
+                                            <LogoutIcon sx={{fontSize: 25}} color={"primary"}/>
                                         </ListItemIcon>
-                                        <Typography variant={"caption"} fontSize={15} fontFamily={"dana-medium"}>
+                                        <Typography variant={"caption"} fontSize={15}>
                                             خروج از حساب کاربری
                                         </Typography>
                                     </MenuItem>
