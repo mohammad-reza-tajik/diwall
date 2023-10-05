@@ -8,9 +8,9 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boole
 
     const router = useRouter()
 
-    const [search, setSearch] = useState<string>("")
-    const [isWrong, setIsWrong] = useState<boolean>(false)
-    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [search, setSearch] = useState("")
+    const [isWrong, setIsWrong] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [results, setResults] = useState<ProductType[]>([])
 
     const submitSearchHandler = async (event : FormEvent) => {
@@ -34,20 +34,22 @@ const useSearch = (device: "desktop" | "mobile", props?: { onOpen: (open : boole
 
 
     const closeSearchHandlerDesktop = useCallback(() => {
+        setIsWrong(false);
         setSearch("")
 
     }, [])
 
     const closeSearchHandlerMobile = useCallback(() => {
+        setIsWrong(false)
         setSearch("")
         props.onOpen(false)
 
     }, [])
 
-    const searchChangeHandler = (e : ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value)
-        optimizedFn(e.target.value)
-        if (e.target.value.trim() === "") {
+    const searchChangeHandler = (event : ChangeEvent<HTMLInputElement>) => {
+        setSearch(event.target.value)
+        optimizedFn(event.target.value)
+        if (event.target.value.trim() === "") {
             setIsWrong(true)
             setTimeout(() => {
                 setIsWrong(false)
