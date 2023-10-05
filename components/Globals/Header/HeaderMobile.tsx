@@ -5,21 +5,21 @@ import MenuDrawer from "./MenuDrawer";
 import Typography from "@mui/material/Typography";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuItem from "@mui/material/MenuItem";
-import Favorite from "@mui/icons-material/Favorite";
-import Login from "@mui/icons-material/Login";
-import Logout from "@mui/icons-material/Logout";
-import Hamburger from "@mui/icons-material/Menu";
-import Person from "@mui/icons-material/Person";
-import Search from "@mui/icons-material/Search";
-import ShoppingBag from "@mui/icons-material/ShoppingBag";
 import React, {useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
+import {enqueueSnackbar} from "notistack";
 import BackDrop from "./BackDrop";
 import SearchDrawer from "./SearchDrawer";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import HamburgerIcon from "@mui/icons-material/Menu";
+import PersonIcon from "@mui/icons-material/Person";
+import SearchIcon from "@mui/icons-material/Search";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import type {SxProps, Theme} from "@mui/system";
-import {enqueueSnackbar} from "notistack";
 
 const styles = {
 
@@ -50,7 +50,6 @@ const HeaderMobile: React.FC = () => {
     const [openSearchDrawer, setOpenSearchDrawer] = useState(false)
 
     if (typeof window !== "undefined") { // to prevent errors in server side rendering
-
         const body = document.body
         if (openSearchDrawer || openMenuDrawer) {
             body.style.overflow = "hidden"
@@ -78,10 +77,10 @@ const HeaderMobile: React.FC = () => {
             <SearchDrawer onOpen={setOpenSearchDrawer} open={openSearchDrawer}/>
 
             <Grid container item xs alignItems={"baseline"} gap={"1rem"}>
-                <IconButton onClick={() => setOpenMenuDrawer(!openMenuDrawer)} color={"primary"}
+                <IconButton onClick={() => setOpenMenuDrawer((prevState)=>!prevState)} color={"primary"}
                             sx={styles.headerButton}
                             aria-label="open menu drawer">
-                    <Hamburger sx={styles.headerIcon}/>
+                    <HamburgerIcon sx={styles.headerIcon}/>
                 </IconButton>
 
                 <Link href={"/"}>
@@ -105,24 +104,24 @@ const HeaderMobile: React.FC = () => {
 
 
             <Grid container item xs={"auto"} gap={10}>
-                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(!openSearchDrawer)}
+                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer((prevState)=>!prevState)}
                             sx={styles.headerButton}
                             aria-label="open search drawer">
-                    <Search sx={styles.headerIcon}/>
+                    <SearchIcon sx={styles.headerIcon}/>
                 </IconButton>
 
                 {
                     user.username === null ?
                         <IconButton component={Link} href={"/auth"} color={"primary"} aria-label="login"
                                     sx={styles.headerButton}>
-                            <Login sx={styles.headerIcon}/>
+                            <LoginIcon sx={styles.headerIcon}/>
                         </IconButton> :
                         <>
                             <IconButton aria-label="open user menu" color={"primary"} sx={styles.headerButton}
                                         onClick={(e) => {
                                             setAnchorEl(anchorEl ? null : e.currentTarget)
                                         }}>
-                                <Person sx={styles.headerIcon}/>
+                                <PersonIcon sx={styles.headerIcon}/>
                             </IconButton>
                             <Menu
                                 anchorEl={anchorEl}
@@ -134,7 +133,7 @@ const HeaderMobile: React.FC = () => {
                             >
                                 <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=0`)}>
                                     <ListItemIcon>
-                                        <Person sx={{fontSize: 25}} color={"primary"}/>
+                                        <PersonIcon sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
                                     <Typography variant={"caption"} fontSize={15}>
                                         حساب کاربری
@@ -143,7 +142,7 @@ const HeaderMobile: React.FC = () => {
                                 </MenuItem>
                                 <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=1`)}>
                                     <ListItemIcon>
-                                        <Favorite sx={{fontSize: 25}} color={"primary"}/>
+                                        <FavoriteIcon sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
                                     <Typography variant={"caption"} fontSize={15}>
                                         علاقمندی ها
@@ -152,7 +151,7 @@ const HeaderMobile: React.FC = () => {
                                 <MenuItem
                                     onClick={() => router.push(`/account/${user?._id}?tab=2`)}>
                                     <ListItemIcon>
-                                        <ShoppingBag sx={{fontSize: 25}} color={"primary"}/>
+                                        <ShoppingBagIcon sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
                                     <Typography variant={"caption"} fontSize={15}>
                                         سبد خرید
@@ -165,7 +164,7 @@ const HeaderMobile: React.FC = () => {
                                     });
                                 }}>
                                     <ListItemIcon>
-                                        <Logout sx={{fontSize: 25}} color={"primary"}/>
+                                        <LogoutIcon sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
                                     <Typography variant={"caption"} fontSize={15}>
                                         خروج از حساب کاربری
