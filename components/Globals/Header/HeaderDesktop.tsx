@@ -59,7 +59,7 @@ const styles = {
         fontSize: {xs: 40, sm: 45},
         border: (theme) => `2px solid ${theme.palette.primary.main}`,
         borderRadius: 3,
-        p: ".7rem",
+        p: ".5rem",
         bgcolor: "white.main"
     }
 
@@ -98,12 +98,11 @@ const HeaderDesktop: React.FC = () => {
 
     return (
         <Grid container component={"header"} py={"3rem"} gap={"1rem"}>
-            <Grid container item xs alignItems={"center"}>
+            <Grid container item xs alignItems={"center"} gap={"1rem"}>
                 <Grid width={100} height={100} component={Link} href={"/"}>
                     <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100}/>
                 </Grid>
-                <Grid container item md lg={6} xl={7}
-                      pr={20} component={"form"}
+                <Grid container item md={"auto"} component={"form"}
                       onSubmit={submitSearchHandler}
                 >
                     <Grid item xs={12} position={"relative"}>
@@ -128,12 +127,14 @@ const HeaderDesktop: React.FC = () => {
                             <CloseIcon color={"primary"} fontSize={"large"}/>
                         </IconButton>
 
+                        <Grid container item xs={12} position={"absolute"} right={0} top={"100%"} zIndex={50}>
                         {
                             search.trim().length >= 3 &&
                             <SearchResults isLoading={isLoading} results={results} search={search}
                                            submitSearchHandler={submitSearchHandler}
                                            closeSearch={closeSearchHandlerDesktop}/>
                         }
+                        </Grid>
                     </Grid>
                 </Grid>
 

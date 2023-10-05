@@ -11,19 +11,15 @@ import type {SxProps} from "@mui/system";
 
 const styles = {
     searchResultsContainer: {
-        width: 1,
+        bgcolor: "background.paper",
         border: {xs: "none", md: "1px solid #ccc"},
         borderTop: "none",
-        justifyContent: "center",
-        alignItems: "center",
+        flexDirection:"column",
+        p:".5rem"
     },
     item: {
         gap: 10,
         p: 5,
-        cursor: "pointer",
-        opacity :1,
-        transition : "all .5s",
-
     }
 } satisfies Record<string, SxProps>
 
@@ -46,7 +42,6 @@ const SearchResults: React.FC<Props> = ({isLoading, results, search, submitSearc
 
     }
 
-
     return (
         <Grid container item xs={12} sx={styles.searchResultsContainer}>
             {
@@ -55,13 +50,13 @@ const SearchResults: React.FC<Props> = ({isLoading, results, search, submitSearc
                         <CircularProgress color={"primary"} size={45}/>
                     </Grid> :
                     <>
-                        <Grid component={"ul"} container item xs={12} sm={10}>
+                        <Grid component={"ul"} container item xs={12}>
                             {results.map((result) => {
                                 if (search.trim().length >= 3 && results.length !== 0) {
                                     return (
                                         <Grid container item alignItems={"center"} xs={12} key={result._id}
                                               onClick={() => goToProductHandler(result.slug)}
-                                              sx={styles.item}>
+                                              sx={styles.item} className={"pointer"}>
 
                                             <Grid item xs={"auto"}>
                                                 <Image
