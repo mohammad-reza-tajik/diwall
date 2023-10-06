@@ -97,7 +97,7 @@ const HeaderDesktop: React.FC = () => {
     }
 
     return (
-        <Grid container component={"header"} py={"3rem"} gap={"1rem"}>
+        <Grid container py={"3rem"} gap={"1rem"}>
             <Grid container item xs alignItems={"center"} gap={"1rem"}>
                 <Grid width={100} height={100} component={Link} href={"/"}>
                     <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100}/>

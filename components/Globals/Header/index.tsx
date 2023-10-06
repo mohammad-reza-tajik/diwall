@@ -8,10 +8,10 @@ const Header: React.FC = () => {
 
     return (
         <>
-            <Grid display={{xs: "block", md: "none"}}>
+            <Grid component={"header"} display={{xs: "block", md: "none"}}>
                 <HeaderMobile/>
             </Grid>
-            <Grid display={{xs: "none", md: "block"}}>
+            <Grid component={"header"} display={{xs: "none", md: "block"}}>
                 <HeaderDesktop/>
             </Grid>
         </>
