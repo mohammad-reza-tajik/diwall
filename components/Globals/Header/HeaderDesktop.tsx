@@ -46,7 +46,7 @@ const styles = {
     loginButton: {
         width: 180,
         height: "4rem",
-        borderRadius: 2,
+        borderRadius: 1,
         fontFamily: "dana-bold",
         overflow: "hidden",
         whiteSpace: "nowrap",
@@ -58,7 +58,7 @@ const styles = {
     iconButtons: {
         fontSize: {xs: 40, sm: 45},
         border: (theme) => `2px solid ${theme.palette.primary.main}`,
-        borderRadius: 3,
+        borderRadius: 1,
         p: ".5rem",
         bgcolor: "white.main"
     }

@@ -23,11 +23,9 @@ const Wishlist : React.FC<Props> = ({isLoading , user ,populatedWishlist }) => {
                     <CircularProgress color={"primary"} size={45}/>
                 </Grid> :
                 user?.username === null || populatedWishlist.length === 0 ?
-                    <Grid container item xs={12} justifyContent={"center"}
+                    <Grid container item xs={12} component={Typography} justifyContent={"center"} fontSize={16}
                           alignItems={"center"}>
-                        <Typography fontSize={16} component={"p"}>
-                            لیست علاقمندی های شما خالی است!
-                        </Typography>
+                        لیست علاقمندی های شما خالی است!
                     </Grid> :
 
                     populatedWishlist.map(item =>

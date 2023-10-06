@@ -4,6 +4,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import CartItem from "./CartItem";
 import type {ProductType} from "@/db/productModel";
 import type {User} from "@/store/userSlice";
+import Typography from "@mui/material/Typography";
 
 
 interface Props {
@@ -24,8 +25,8 @@ const Cart : React.FC<Props> = ({isLoading , populatedCart , user}) => {
                   <Grid container item xs={12} height={1} direction={"column"} gap={10}>
                       {
                           user?.username === null || populatedCart.length === 0 ?
-                              <Grid container item xs={12} component={"p"} fontSize={16} justifyContent={"center"}
-                                    alignItems={"center"} height={1}>
+                              <Grid container item xs={12} component={Typography} justifyContent={"center"} fontSize={16}
+                                    alignItems={"center"}>
                                       سبد خرید شما خالی است !
                               </Grid> :
                               populatedCart.map((item) => <CartItem {...item} key={item._id} />

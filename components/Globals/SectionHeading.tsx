@@ -45,7 +45,7 @@ const SectionHeading : React.FC<Props> = ({sortBy, route , text , seeAll ,white}
             {
             seeAll ?
             <Grid container item justifyContent={"flex-end"} xs={"auto"} md={2}>
-                    <Button variant={"outlined"} color={!white ? "primary" : "white"}  sx={{fontSize:{xs:12,md:16}}} component={Link} href={route} aria-label="مشاهده همه">مشاهده همه</Button>
+                    <Button variant={"outlined"} color={!white ? "primary" : "white"}  sx={{fontSize:{xs:12,md:16},borderRadius:1}} component={Link} href={route} aria-label="مشاهده همه">مشاهده همه</Button>
             </Grid> : ""
             }
 

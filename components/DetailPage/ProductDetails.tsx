@@ -31,6 +31,7 @@ const styles = {
     },
     toggleButton: {
         fontSize: {xs: 12, md: 14},
+        borderRadius: 1
     },
     sizeFields : {
         width: 100,
@@ -42,7 +43,7 @@ const styles = {
     addToCartButton: {
         width: {xs: "100%", sm: "20rem"},
         height: "5.5rem",
-        borderRadius: 2,
+        borderRadius: 1,
         fontSize: "1.4rem",
         gap: "1.4rem",
         alignItems : "center",
@@ -51,7 +52,7 @@ const styles = {
     addToWishlistButton: {
         width: "5.5rem",
         height: "5.5rem",
-        borderRadius: 2,
+        borderRadius: 1,
         color: "white.main",
     },
     wishlistIcons: {

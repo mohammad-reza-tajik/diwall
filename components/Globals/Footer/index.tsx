@@ -206,7 +206,7 @@ const Footer: React.FC = () => {
                             <TextField sx={styles.loginField} type={"email"} placeholder={"ایمیل خود را وارد کنید"}/>
                         </Grid>
                         <Grid item xs={"auto"}>
-                            <Button variant={"contained"} sx={{height: 55, fontSize: 16}}>عضویت</Button>
+                            <Button variant={"contained"} sx={{height: 55, fontSize: 16, borderRadius:1}}>عضویت</Button>
                         </Grid>
                     </Grid>
                 </Grid>

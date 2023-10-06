@@ -12,13 +12,13 @@ import type {SxProps} from "@mui/system";
 
 const styles = {
     product: {
-        borderRadius: 2,
+        borderRadius: 1,
         justifyContent: "center",
         p: {xs: 7, md: 10},
         bgcolor: "white.main",
     },
     title : {
-        fontSize: {xs: 11, md: 14},
+        fontSize: {xs: 10, md: 14},
         color: "#555",
         fontFamily: "dana-bold",
         lineHeight: 1.5,
@@ -30,11 +30,9 @@ const styles = {
             justifyContent: "start",
             alignItems : "start",
         }
-
-
     },
     price : {
-        fontSize: {xs: 11, md: 14},
+        fontSize: {xs: 10, md: 14},
         color: "primary.main",
         justifyContent: "start",
     } ,
@@ -44,7 +42,7 @@ const styles = {
         top: 5,
         zIndex: 20,
         bgcolor: "rgba(50,50,50,0.3)",
-        borderRadius: 2,
+        borderRadius: 1,
     }
 } satisfies Record<string, SxProps>
 
