@@ -17,7 +17,8 @@ const styles  = {
         top: 0,
         left: 0,
         zIndex: 50,
-
+        flexDirection:"column",
+        gap: "2rem",
     }
 
 } satisfies Record<string, SxProps>
@@ -31,10 +32,9 @@ const NotFound: React.FC = () => {
                     صفحه مورد نظر پیدا نشد - دیوال
                 </title>
             </Head>
-            <Grid container justifyContent={"center"} alignItems={"center"} sx={styles.container}>
-                <Grid container item xs={12} gap={30} direction={"column"}>
-                    <Grid container justifyContent={"center"} item >
-                        <Image src={"/assets/pictures/not-found.svg"} width={400} height={400}
+            <Grid container justifyContent={{xs:"start", md: "center"}} alignItems={"center"} sx={styles.container}>
+                    <Grid container justifyContent={"center"} item>
+                        <Image src={"/assets/pictures/not-found.svg"} width={400} height={400} style={{width:"100" , height:400}}
                                alt={"صفحه مورد نظر شما یافت نشد !"}/>
                     </Grid>
                     <Grid container justifyContent={"center"} item>
@@ -53,8 +53,6 @@ const NotFound: React.FC = () => {
                         <Button component={Link} href={"/"} variant={"contained"} sx={{fontSize: {xs: 14, md: 16}}}>
                             بازگشت به صفحه اصلی
                         </Button>
-
-                    </Grid>
                 </Grid>
 
 
