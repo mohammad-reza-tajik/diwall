@@ -8,9 +8,8 @@ import MenuItem from "@mui/material/MenuItem";
 import React, {useState} from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
-import {useAppDispatch, useAppSelector, userActions} from "@/store";
+import 'react-modern-drawer/dist/index.css'
 import {enqueueSnackbar} from "notistack";
-import SearchDrawer from "./SearchDrawer";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -18,6 +17,8 @@ import HamburgerIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import SearchDrawer from "./SearchDrawer";
+import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import type {SxProps, Theme} from "@mui/system";
 
 const styles = {
@@ -26,7 +27,7 @@ const styles = {
     },
     headerButton: {
         p: 5,
-        borderRadius: 2,
+        borderRadius: 1,
         border: (theme) => `1px solid ${theme.palette.primary.main}`
     },
     logo: {
@@ -34,11 +35,7 @@ const styles = {
         height: "3rem",
         fill: "#555"
     },
-
-
 } satisfies Record<string, SxProps<Theme>>
-
-const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 const HeaderMobile: React.FC = () => {
 
@@ -51,7 +48,6 @@ const HeaderMobile: React.FC = () => {
     const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
     const [openSearchDrawer, setOpenSearchDrawer] = useState(false);
 
-
     if (typeof window !== "undefined") { // to prevent errors in server side rendering
         const body = document.body
         if (openSearchDrawer || openMenuDrawer) {
@@ -61,7 +57,6 @@ const HeaderMobile: React.FC = () => {
         }
     }
 
-
     /*** menu logic ***/
 
     const [anchorEl, setAnchorEl] = useState(null)
@@ -70,11 +65,10 @@ const HeaderMobile: React.FC = () => {
         setAnchorEl(null);
     }
 
-
     return (
         <Grid container py={"1rem"}>
             <Grid container item xs alignItems={"baseline"} gap={"1rem"}>
-                <IconButton onClick={() => setOpenMenuDrawer((prevState) => !prevState)} color={"primary"}
+                <IconButton onClick={() => setOpenMenuDrawer(true)} color={"primary"}
                             sx={styles.headerButton}
                             aria-label="open menu drawer">
                     <HamburgerIcon sx={styles.headerIcon}/>
@@ -99,15 +93,15 @@ const HeaderMobile: React.FC = () => {
                 </Link>
             </Grid>
 
-            <Grid container item xs={"auto"} gap={10}>
+            <Grid container item xs={"auto"} gap={".2rem"}>
                 <IconButton color={"primary"} onClick={() => setOpenSearchDrawer((prevState) => !prevState)}
                             sx={styles.headerButton}
                             aria-label="open search drawer">
                     <SearchIcon sx={styles.headerIcon}/>
                 </IconButton>
 
-                <MenuDrawer setOpenMenuDrawer={setOpenMenuDrawer} openMenuDrawer={openMenuDrawer} iOS={iOS}/>
-                <SearchDrawer setOpenSearchDrawer={setOpenSearchDrawer} openSearchDrawer={openSearchDrawer} iOS={iOS}/>
+                <MenuDrawer setOpenMenuDrawer={setOpenMenuDrawer} openMenuDrawer={openMenuDrawer}/>
+                <SearchDrawer setOpenSearchDrawer={setOpenSearchDrawer} openSearchDrawer={openSearchDrawer}/>
 
                 {
                     user.username === null ?
@@ -117,8 +111,8 @@ const HeaderMobile: React.FC = () => {
                         </IconButton> :
                         <>
                             <IconButton aria-label="open user menu" color={"primary"} sx={styles.headerButton}
-                                        onClick={(e) => {
-                                            setAnchorEl(anchorEl ? null : e.currentTarget)
+                                        onClick={(event) => {
+                                            setAnchorEl(anchorEl ? null : event.currentTarget)
                                         }}>
                                 <PersonIcon sx={styles.headerIcon}/>
                             </IconButton>
@@ -137,7 +131,6 @@ const HeaderMobile: React.FC = () => {
                                     <Typography variant={"caption"} fontSize={15}>
                                         حساب کاربری
                                     </Typography>
-
                                 </MenuItem>
                                 <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=1`)}>
                                     <ListItemIcon>
@@ -171,14 +164,10 @@ const HeaderMobile: React.FC = () => {
                                 </MenuItem>
                             </Menu>
                         </>
-
                 }
             </Grid>
-
-
         </Grid>
     )
-
 }
 
 export default HeaderMobile

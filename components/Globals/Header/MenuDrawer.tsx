@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import {useRouter} from "next/router";
 import type {SxProps} from "@mui/system";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
@@ -15,11 +14,12 @@ import SellIcon from '@mui/icons-material/Sell';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
+import Drawer from "react-modern-drawer";
 
 const styles = {
     drawer: {
         p: 20,
-        backgroundColor: "white.main",
+        bgcolor: "background.paper",
         width: {xs: "75vw", sm: "50vw"}
     },
     item: {
@@ -40,12 +40,12 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 interface Props {
-    setOpenMenuDrawer: (open: boolean) => void;
+    setOpenMenuDrawer: React.Dispatch<React.SetStateAction<boolean>>;
     openMenuDrawer: boolean;
-    iOS: boolean
+
 }
 
-const MenuDrawer: React.FC<Props> = ({openMenuDrawer, setOpenMenuDrawer , iOS}) => {
+const MenuDrawer: React.FC<Props> = ({openMenuDrawer, setOpenMenuDrawer }) => {
 
     const router = useRouter();
 
@@ -55,17 +55,7 @@ const MenuDrawer: React.FC<Props> = ({openMenuDrawer, setOpenMenuDrawer , iOS}) 
     }
 
     return (
-        <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS}
-                         anchor={"left"} open={openMenuDrawer} onClose={() => setOpenMenuDrawer(false)}
-                         onOpen={() => setOpenMenuDrawer(true)}
-                         PaperProps={{
-                             sx: {
-                                 left: 'unset !important',
-                                 right: '0 !important'
-                             }
-                         }}
-        >
-
+     <Drawer open={openMenuDrawer} direction={"right"} onClose={()=>setOpenMenuDrawer(false)} size={"auto"}>
             <Grid container direction={"column"} sx={styles.drawer}>
                 <Grid item onClick={() => menuItemsHandler("/")} className={"pointer"}>
                     <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"}
@@ -116,7 +106,7 @@ const MenuDrawer: React.FC<Props> = ({openMenuDrawer, setOpenMenuDrawer , iOS}) 
                     </MenuItem>
                 </MenuList>
             </Grid>
-        </SwipeableDrawer>
+     </Drawer>
 
     )
 
