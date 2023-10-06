@@ -15,7 +15,6 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import type {ProductType} from "@/db/productModel";
 import type {SxProps} from "@mui/system";
 
-
 const styles = {
     title: {
         fontSize: {xs: 16, sm: 18, lg: 20},
@@ -61,8 +60,6 @@ const styles = {
    cartIcon: {
         fontSize: 25,
     },
-
-
 } satisfies Record<string, SxProps>
 
 interface Props {
@@ -72,13 +69,13 @@ interface Props {
 
 const ProductDetails: React.FC<Props> = ({product , isLoading}) => {
 
-    const [addToCartLoading, setAddToCartLoading] = useState(false)
-    const [addToWishlistLoading, setAddToWishlistLoading] = useState(false)
+    const [addToCartLoading, setAddToCartLoading] = useState(false);
+    const [addToWishlistLoading, setAddToWishlistLoading] = useState(false);
     const [presetSizes, setPresetSizes] = useState(1);
 
     const user = useAppSelector(state => state.user);
 
-    const router = useRouter()
+    const router = useRouter();
     const dispatch = useAppDispatch();
     const isInWishlist = user?.wishlist.includes(product && product._id);
     const isInCart = user?.cart.includes(product && product._id);

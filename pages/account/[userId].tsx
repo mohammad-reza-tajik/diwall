@@ -33,7 +33,7 @@ const styles = {
     },
     tabsContainer : {
         bgcolor : "white.main",
-        borderRadius : "1rem",
+        borderRadius : 1,
         fontFamily : "dana-bold",
     }
 } satisfies Record<string, SxProps>
@@ -41,24 +41,22 @@ const styles = {
 
 const DashboardPage: React.FC = () => {
 
-    const router = useRouter()
+    const router = useRouter();
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
     const user = useAppSelector(state => state.user);
 
-    const [populatedWishlist, setPopulatedWishlist] = useState<ProductType[]>([])
-    const [populatedCart, setPopulatedCart] = useState<ProductType[]>([])
+    const [populatedWishlist, setPopulatedWishlist] = useState<ProductType[]>([]);
+    const [populatedCart, setPopulatedCart] = useState<ProductType[]>([]);
 
     const [tab, setTab] = useState(1);
 
     const queryTab = router.query.tab;
 
-
     const tabChangeHandler = (_, newTab: number) => {
         setTab(newTab);
-    };
-
+    }
 
     useEffect(() => {
         if (queryTab) {
@@ -80,8 +78,8 @@ const DashboardPage: React.FC = () => {
         })()
     }, [user])
 
-    const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.up("md"))
+    const theme = useTheme();
+    const matchesMD = useMediaQuery(theme.breakpoints.up("md"));
 
     return (
         <>
@@ -103,7 +101,7 @@ const DashboardPage: React.FC = () => {
                     </Tabs>
 
                 </Grid>
-                <Grid item xs={14} md minHeight={300} borderRadius={"1rem"}>
+                <Grid item xs={14} md minHeight={300} borderRadius={1} bgcolor={"white.main"}>
 
                     <TabPanel tab={tab} index={0}>
                         <Profile user={user}/>
@@ -122,7 +120,7 @@ const DashboardPage: React.FC = () => {
                             <TabPanel tab={tab} index={3}>
                                 <AddProduct/>
                             </TabPanel>
-                            {/*<TabPanel tab={tab} index={5}>
+                            {/*<TabPanel tab={tab} index={4}>
                                 <Moderation/>
                             </TabPanel>*/}
                         </>
