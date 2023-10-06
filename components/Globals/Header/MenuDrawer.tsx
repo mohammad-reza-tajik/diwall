@@ -56,7 +56,7 @@ const MenuDrawer: React.FC<Props> = ({openMenuDrawer, setOpenMenuDrawer }) => {
     }
 
     return (
-     <Drawer open={openMenuDrawer} direction={"right"} onClose={()=>setOpenMenuDrawer(false)} size={"auto"}>
+     <Drawer open={openMenuDrawer} direction={"right"} lockBackgroundScroll onClose={()=>setOpenMenuDrawer(false)} size={"auto"}>
             <Grid container direction={"column"} sx={styles.drawer}>
                 <Grid item onClick={() => menuItemsHandler("/")} className={"pointer"}>
                     <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"}

@@ -57,7 +57,7 @@ const SearchDrawer: React.FC<Props> = ({setOpenSearchDrawer, openSearchDrawer}) 
     } = useSearch("mobile", setOpenSearchDrawer);
 
     return (
-        <Drawer open={openSearchDrawer} direction={"top"} size={"auto"}>
+        <Drawer open={openSearchDrawer} direction={"top"} size={"auto"} lockBackgroundScroll>
             <Grid container component={"form"} onSubmit={submitSearchHandler} sx={styles.searchDrawer}>
                 <Grid container item xs={12} sm={10} justifyContent={"space-between"} alignItems={"center"}
                       gap={"1rem"}>

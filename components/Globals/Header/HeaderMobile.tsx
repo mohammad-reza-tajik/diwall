@@ -48,14 +48,6 @@ const HeaderMobile: React.FC = () => {
     const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
     const [openSearchDrawer, setOpenSearchDrawer] = useState(false);
 
-    if (typeof window !== "undefined") { // to prevent errors in server side rendering
-        const body = document.body
-        if (openSearchDrawer || openMenuDrawer) {
-            body.style.overflow = "hidden"
-        } else {
-            body.style.overflow = "scroll"
-        }
-    }
 
     /*** menu logic ***/
 
@@ -94,7 +86,7 @@ const HeaderMobile: React.FC = () => {
             </Grid>
 
             <Grid container item xs={"auto"} gap={".2rem"}>
-                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer((prevState) => !prevState)}
+                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(true)}
                             sx={styles.headerButton}
                             aria-label="open search drawer">
                     <SearchIcon sx={styles.headerIcon}/>
