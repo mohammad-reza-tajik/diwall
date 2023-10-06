@@ -20,7 +20,8 @@ const styles = {
     drawer: {
         p: 20,
         bgcolor: "background.paper",
-        width: {xs: "75vw", sm: "50vw"}
+        width: {xs: "75vw", sm: "50vw"},
+        height:"100vh"
     },
     item: {
         py: "1rem",
