@@ -59,7 +59,7 @@ const styles = {
         fontSize: {xs: 40, sm: 45},
         border: (theme) => `2px solid ${theme.palette.primary.main}`,
         borderRadius: 1,
-        p: ".5rem",
+        p: ".7rem",
         bgcolor: "white.main"
     }
 
