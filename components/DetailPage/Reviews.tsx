@@ -11,13 +11,13 @@ import Divider from "@mui/material/Divider";
 import Person from "@mui/icons-material/Person";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {useTheme} from "@mui/material/styles";
-import type {SxProps} from "@mui/system";
+import type {SxProps , Theme} from "@mui/system";
+import theme from "@/styles/theme";
 
 const styles = {
 
     commentContainer: {
-        backgroundColor: "white.main",
+        backgroundColor:  theme.palette.white.main,
     },
     commentBody: {
         minHeight: 300,
@@ -37,7 +37,7 @@ const styles = {
         }
     }
 
-} satisfies Record<string, SxProps>
+} satisfies Record<string, SxProps<Theme>>
 
 interface Props {
     addComment: boolean
@@ -58,7 +58,6 @@ const Reviews: React.FC<Props> = ({addComment}) => {
     const [isLoading, setIsLoading] = useState(true);
     const [comments, setComments] = useState<Comment[]>([]);
 
-    const theme = useTheme()
     const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
 
     const slug = router.isReady && router.query.slug;
