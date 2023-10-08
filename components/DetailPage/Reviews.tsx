@@ -14,11 +14,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import type {SxProps} from "@mui/system";
 
-
 const styles = {
 
     commentContainer: {
-        backgroundColor: "#fff",
+        backgroundColor: "white.main",
     },
     commentBody: {
         minHeight: 300,
@@ -39,7 +38,6 @@ const styles = {
     }
 
 } satisfies Record<string, SxProps>
-
 
 interface Props {
     addComment: boolean
@@ -65,7 +63,6 @@ const Reviews: React.FC<Props> = ({addComment}) => {
 
     const slug = router.isReady && router.query.slug;
 
-
     useEffect(() => {
             const url = `/api/products/${slug}`;
             (async () => {
@@ -81,7 +78,6 @@ const Reviews: React.FC<Props> = ({addComment}) => {
             })()
         }
         , [addComment, slug])
-
 
     return (
         <Grid container item xs={12} alignItems={"center"}>
@@ -135,15 +131,13 @@ const Reviews: React.FC<Props> = ({addComment}) => {
                             }
                         </Grid>
                         :
-                        <Grid container item xs minHeight={200} component={Typography} variant={"body1"} fontSize={{xs: 14, md: 16}} justifyContent={"center"} alignItems={"center"}>
-                                برای این محصول دیدگاهی وجود ندارد !
+                        <Grid container item xs minHeight={200} component={Typography} variant={"body1"}
+                              fontSize={{xs: 14, md: 16}} justifyContent={"center"} alignItems={"center"}>
+                            برای این محصول دیدگاهی وجود ندارد !
                         </Grid>
                 }
             </>
         </Grid>
-
-
     )
-
 }
 export default Reviews
