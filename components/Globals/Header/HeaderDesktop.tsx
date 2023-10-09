@@ -44,7 +44,7 @@ const styles = {
         zIndex: 50,
     },
     loginButton: {
-        width: 180,
+        width: {md: 180, lg: 200},
         height: "4rem",
         borderRadius: 1,
         fontFamily: "dana-bold",
@@ -58,7 +58,7 @@ const styles = {
     iconButtons: {
         fontSize: {xs: 40, sm: 45},
         border: (theme) => `2px solid ${theme.palette.primary.main}`,
-        borderRadius: 1,
+        borderRadius: 2,
         p: ".7rem",
         bgcolor: "white.main"
     }
