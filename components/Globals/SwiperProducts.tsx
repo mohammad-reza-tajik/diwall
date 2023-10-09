@@ -45,7 +45,7 @@ const SwiperProducts: React.FC<Props> = (props) => {
                 <Grid item xs={12} display={{xs:"flex" , lg : "none"}}>
                     <SectionHeading text={"محبوب ترین محصولات"} seeAll route={"/products?sortBy=3"} white/>
                 </Grid>
-                    <Grid container item md={"auto"} direction={"column"} alignItems={"flex-start"} gap={50} display={{xs:"none" , lg : "flex"}}>
+                    <Grid container item md={"auto"} direction={"column"} alignItems={"flex-start"} gap={50} display={{xs:"none" , lg : "flex"}} px={"1rem"}>
                         <Typography variant={"h3"} lineHeight={1.4} color={"white.main"}
                                     fontFamily={"dana-black"}
                                     >
