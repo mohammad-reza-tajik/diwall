@@ -1,22 +1,31 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
+import type {SxProps} from "@mui/system";
+
+const styles = {
+    backDrop : {
+        width : "100vw",
+        height : "100vh",
+        bgcolor: "#000",
+        opacity : .8,
+        position : "fixed",
+        top: 0,
+        right : 0,
+        zIndex: 900
+    }
+} satisfies Record<string, SxProps>
 
 interface Props {
     // eslint-disable-next-line no-unused-vars
-    onOpen:(open : boolean)=>void;
+    setOpen:(open : boolean)=>void;
     open:boolean;
 }
-const BackDrop : React.FC<Props> = (props) => {
 
-    const openHandler = () => {
-      props.onOpen(false)
-    }
+const BackDrop : React.FC<Props> = ({open, setOpen}) => {
 
     return(
-        <Grid width={"100vw"} height={"100vh"} bgcolor={"rgba(0,0,0,.2)"} position={"fixed"} top={0} right={0} onClick={openHandler} display={props.open ? "block" : "none"} zIndex={900} />
-
+        <Grid sx={styles.backDrop} onClick={()=>setOpen(false)} display={open ? "block" : "none"}  />
     )
-
 }
 
 export default BackDrop;
