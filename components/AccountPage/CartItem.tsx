@@ -8,7 +8,6 @@ import Delete from "@mui/icons-material/Delete";
 import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
 
 import React, {ChangeEvent, useState} from "react";
-import {useRouter} from "next/router";
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import Image from "next/image";
 
@@ -20,7 +19,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
 
-    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     const user = useAppSelector(state => state.user)
@@ -49,9 +47,7 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
                 setIsLoading(true)
             }
         }
-
     }
-
 
     return (
         <Grid container bgcolor={"white.main"} p={"1rem"} borderRadius={"1rem"}>
@@ -90,14 +86,10 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
                                     <Delete color={"primary"} sx={{fontSize: 22}}/>
                             }
                         </IconButton>
-
                 }
-
             </Grid>
         </Grid>
-
     )
-
 }
 
 export default CartItem

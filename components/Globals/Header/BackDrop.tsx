@@ -2,6 +2,7 @@ import React from "react";
 import Grid from "@mui/material/Grid";
 
 interface Props {
+    // eslint-disable-next-line no-unused-vars
     onOpen:(open : boolean)=>void;
     open:boolean;
 }

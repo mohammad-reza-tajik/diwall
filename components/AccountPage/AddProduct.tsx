@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent, useRef, useState} from "react";
-import {useAppSelector} from "@/hooks/useStore";
+// import {useAppSelector} from "@/hooks/useStore";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -8,7 +8,7 @@ import {Add, Upload} from "@mui/icons-material";
 import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import Close from "@mui/icons-material/Close";
-import useFetch from "@/hooks/useFetch";
+// import useFetch from "@/hooks/useFetch";
 import type { SxProps } from '@mui/system';
 
 
@@ -35,7 +35,7 @@ const AddProduct: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [uploadedFileName, setUploadedFileName] = useState("");
 
-    const user = useAppSelector((state)=> state.user);
+    // const user = useAppSelector((state)=> state.user);
 
     const titleRef = useRef<HTMLInputElement>(null);
     const priceRef = useRef<HTMLInputElement>(null);
@@ -56,7 +56,7 @@ const AddProduct: React.FC = () => {
             formData.append("description", descriptionRef.current.value);
             formData.append("images", imagesRef.current.files);
 
-            const res = await useFetch.post("http://127.0.0.1:3000/api/products" , {formData});
+            // const res = await useFetch.post("http://127.0.0.1:3000/api/products" , {formData});
 
 
             console.log("it works")

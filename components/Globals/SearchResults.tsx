@@ -27,6 +27,7 @@ interface Props {
     isLoading: boolean;
     results: ProductType[];
     search: string;
+    // eslint-disable-next-line no-unused-vars
     submitSearchHandler: (event: FormEvent) => void
     closeSearch: () => void;
 
