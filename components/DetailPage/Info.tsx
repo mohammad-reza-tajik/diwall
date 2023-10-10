@@ -3,7 +3,6 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Grid from "@mui/material/Grid";
 import TabPanel from "../Globals/TabPanel";
-import CircularProgress from "@mui/material/CircularProgress";
 import dynamic from "next/dynamic";
 import ReviewsForm from "./ReviewsForm";
 import SwiperProducts from "../Globals/SwiperProducts";
@@ -33,10 +32,9 @@ const styles = {
 
 interface Props {
     products: ProductType[];
-    isLoading: boolean;
 }
 
-const Info: React.FC<Props> = ({products, isLoading}) => {
+const Info: React.FC<Props> = ({products}) => {
     const [tab, setTab] = useState(0);
     const [addComment, setAddComment] = useState(false)
     const changeTabHandler = (_, newValue: number) => {
@@ -59,23 +57,15 @@ const Info: React.FC<Props> = ({products, isLoading}) => {
                 </Tabs>
             </Grid>
             <Grid item xs={12} py={30}>
-                {
-                    isLoading ?
-                        <Grid container item xs justifyContent={"center"}>
-                            <CircularProgress color={"primary"} size={45}/>
-                        </Grid> :
-                        <>
-                            <TabPanel index={0} tab={tab}>
-                                <SwiperProducts products={products}/>
-                            </TabPanel>
-                            <TabPanel index={1} tab={tab}>
-                                <Comments addComment={addComment}/>
-                            </TabPanel>
-                            <TabPanel index={2} tab={tab}>
-                                <ReviewsForm setAddComment={setAddComment}/>
-                            </TabPanel>
-                        </>
-                }
+                <TabPanel index={0} tab={tab}>
+                    <SwiperProducts products={products}/>
+                </TabPanel>
+                <TabPanel index={1} tab={tab}>
+                    <Comments addComment={addComment}/>
+                </TabPanel>
+                <TabPanel index={2} tab={tab}>
+                    <ReviewsForm setAddComment={setAddComment}/>
+                </TabPanel>
             </Grid>
         </Grid>
     )
