@@ -18,6 +18,7 @@ import IconButton from "@mui/material/IconButton";
 import Close from "@mui/icons-material/Close";
 import GlobalStyles from "@/components/Globals/GlobalStyles";
 import AutoLogin from "@/components/Globals/AutoLogin";
+import LoadingBar from "@/components/Globals/LoadingBar";
 
 
 const snackbarAction = (key: string) => (
@@ -105,10 +106,11 @@ function MyApp({Component, pageProps}) {
             <Provider store={store}>
                 <SnackbarProvider action={snackbarAction}>
                     <AutoLogin>
+                        <LoadingBar/>
                         <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
                             <Grid item xs={11} component={"main"}>
                                 {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Header/>}
-                                    <Component {...pageProps} />
+                                <Component {...pageProps} />
                                 {router.pathname === "/auth" || router.pathname === "/404" ? "" : <Footer/>}
                             </Grid>
                         </Grid>
