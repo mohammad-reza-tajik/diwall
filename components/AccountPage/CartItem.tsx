@@ -50,7 +50,7 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
     }
 
     return (
-        <Grid container bgcolor={"white.main"} p={"1rem"} borderRadius={"1rem"}>
+        <Grid container bgcolor={"white.main"} p={"1rem"} borderRadius={1}>
             <Grid container item xs={12} md alignItems={"center"} gap={10} component={Link} href={`/products/${slug}`}>
                 <Grid item xs={"auto"}>
                     <Image src={`/assets/pictures/products/${slug}.jpg`} width={50} height={50}
