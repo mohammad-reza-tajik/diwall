@@ -8,21 +8,16 @@ import Product from "@/components/Globals/Product";
 import Pagination from "@/components/Globals/Pagination";
 import useFetch from "@/hooks/useFetch";
 
-
 interface PageInformation {
     lastPage?: number;
     currentPage?: number;
-    productsCount?: number;
-
 }
 
 const Products: React.FC = () => {
 
-
     const [products, setProducts] = useState([])
-    const [pageInformation, setPageInformation] = useState<PageInformation | {}>({})
+    const [pageInformation, setPageInformation] = useState<PageInformation>({})
     const [isLoading, setIsLoading] = useState(true)
-
 
     const router = useRouter()
     const {isReady} = router;

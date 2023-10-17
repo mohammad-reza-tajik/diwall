@@ -6,13 +6,12 @@ import React, {useEffect, useState} from "react";
 interface Props {
     lastPage? : number;
     currentPage? : number;
-    productsCount? : number;
 
 }
 
-const Pagination : React.FC<Props> = (props) => {
+const Pagination : React.FC<Props> = ({lastPage,currentPage}) => {
 
-    const [page, setPage] = useState<number>(1)
+    const [page, setPage] = useState(1)
     const router = useRouter()
 
     useEffect(()=>{
@@ -31,7 +30,7 @@ const Pagination : React.FC<Props> = (props) => {
 
     return (
         <Grid component={"section"}  container item xs={12} my={20} justifyContent={"center"} alignItems={"center"}>
-            <MUIPagination size={"large"} color={"primary"} variant={"outlined"} shape={"rounded"} count={props.lastPage}  page={page} hideNextButton={props.lastPage == 1 } hidePrevButton={props.lastPage == 1 } defaultPage={props.currentPage} onChange={pageHandler} />
+            <MUIPagination size={"large"} color={"primary"} variant={"outlined"} shape={"rounded"} count={lastPage}  page={page} hideNextButton={lastPage == 1 } hidePrevButton={lastPage == 1 } defaultPage={currentPage} onChange={pageHandler} />
         </Grid>
     )
 
