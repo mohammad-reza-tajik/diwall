@@ -20,7 +20,6 @@ const styles = {
     tab: {
         fontSize: {xs: 12, md: 15},
         color: "#666",
-        gap: "1rem"
     },
     tabsContainer: {
         bgcolor: "white.main",
