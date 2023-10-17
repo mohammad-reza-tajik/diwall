@@ -18,13 +18,13 @@ const styles = {
         bgcolor: "white.main",
     },
     title: {
-        fontSize: {xs: 10, md: 14},
+        fontSize: {xs: 10, md: 12, lg: 14},
         fontFamily: "dana-bold",
         height: "6rem",
         pt: "1rem",
     },
     price: {
-        fontSize: {xs: 10, md: 14},
+        fontSize: {xs: 10, md: 12, lg: 14},
         color: "primary.main",
     },
     addToWishlistButton: {
