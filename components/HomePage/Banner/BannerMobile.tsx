@@ -43,7 +43,7 @@ const BannerMobile: React.FC = () => {
                         component={Link} href={"/products"}>مشاهده محصولات</Button>
 
             </Grid>
-            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner-mobile"} fill priority className={"cover"}/>
+            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner"} fill priority className={"cover"}/>
         </Grid>
     );
 };
