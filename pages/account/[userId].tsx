@@ -101,7 +101,7 @@ const DashboardPage: React.FC = () => {
                     </Tabs>
 
                 </Grid>
-                <Grid item xs={14} md minHeight={300} borderRadius={1} bgcolor={"white.main"}>
+                <Grid item xs={14} md minHeight={300}>
 
                     <TabPanel tab={tab} index={0}>
                         <Profile user={user}/>

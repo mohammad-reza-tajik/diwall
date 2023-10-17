@@ -21,7 +21,7 @@ interface Props {
 const Profile: React.FC<Props> = ({user}) => {
 
     return (
-        <Grid container item xs={12} gap={40} p={20}>
+        <Grid container item xs={12} gap={40} p={20} bgcolor={"white.main"} borderRadius={1}>
 
             <Grid container item xs={12} alignItems={"center"} gap={10}>
                 <Typography sx={styles.keys}>نام و نام خانوادگی: </Typography>
