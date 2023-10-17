@@ -8,11 +8,11 @@ import ReviewsForm from "./ReviewsForm";
 import SwiperProducts from "../Globals/SwiperProducts";
 import type {ProductType} from "@/db/productModel";
 import type {SxProps} from "@mui/system";
-import Reviews from "@mui/icons-material/Reviews";
-import Create from "@mui/icons-material/Create";
+import ReviewsIcon from "@mui/icons-material/Reviews";
+import CreateIcon from "@mui/icons-material/Create";
+import InventoryIcon from '@mui/icons-material/Inventory';
 import {useTheme} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Inventory from '@mui/icons-material/Inventory';
 
 const Comments = dynamic(() => import("./Reviews"))
 
@@ -24,7 +24,7 @@ const styles = {
     },
     tabsContainer: {
         bgcolor: "white.main",
-        borderRadius: "1rem",
+        borderRadius: 1,
         fontFamily: "dana-bold",
         p: "1rem"
     }
@@ -48,11 +48,11 @@ const Info: React.FC<Props> = ({products}) => {
         <Grid container my={30}>
             <Grid item xs={12}>
                 <Tabs value={tab} onChange={changeTabHandler} sx={styles.tabsContainer}>
-                    <Tab icon={<Inventory/>} label={"محصولات مشابه"} iconPosition={matchesMD ? "start" : "top"}
+                    <Tab icon={<InventoryIcon/>} label={"محصولات مشابه"} iconPosition={matchesMD ? "start" : "top"}
                          sx={styles.tab}/>
-                    <Tab icon={<Reviews/>} iconPosition={matchesMD ? "start" : "top"} label={"دیدگاه ها"}
+                    <Tab icon={<ReviewsIcon/>} iconPosition={matchesMD ? "start" : "top"} label={"دیدگاه ها"}
                          sx={styles.tab}/>
-                    <Tab icon={<Create/>} label={"درج دیدگاه"} iconPosition={matchesMD ? "start" : "top"}
+                    <Tab icon={<CreateIcon/>} label={"درج دیدگاه"} iconPosition={matchesMD ? "start" : "top"}
                          sx={styles.tab}/>
                 </Tabs>
             </Grid>
