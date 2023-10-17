@@ -1,14 +1,14 @@
-import CircularProgress from "@mui/material/CircularProgress";
-import type {ProductType} from "@/db/productModel";
-import IconButton from "@mui/material/IconButton";
-import Grid from "@mui/material/Grid";
-import Image from "next/legacy/image"
-import Favorite from "@mui/icons-material/Favorite";
-import {useRouter} from "next/router";
 import React, {useState} from "react";
-import {userActions, useAppDispatch, useAppSelector} from "@/store";
 import Link from "next/link";
+import Image from "next/legacy/image"
+import {useRouter} from "next/router";
+import Grid from "@mui/material/Grid";
+import {userActions, useAppDispatch, useAppSelector} from "@/store";
+import CircularProgress from "@mui/material/CircularProgress";
+import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import type {SxProps} from "@mui/system";
+import type {ProductType} from "@/db/productModel";
 
 const styles = {
     product: {
@@ -17,25 +17,16 @@ const styles = {
         p: {xs: 7, md: 10},
         bgcolor: "white.main",
     },
-    title : {
+    title: {
         fontSize: {xs: 10, md: 14},
-        color: "#555",
         fontFamily: "dana-bold",
-        lineHeight: 1.5,
-        justifyContent: "start",
-        alignItems : "start",
-        height : "6rem",
-        pt: "1rem" ,
-        "&:active" : {
-            justifyContent: "start",
-            alignItems : "start",
-        }
+        height: "6rem",
+        pt: "1rem",
     },
-    price : {
+    price: {
         fontSize: {xs: 10, md: 14},
         color: "primary.main",
-        justifyContent: "start",
-    } ,
+    },
     addToWishlistButton: {
         position: "absolute",
         left: 5,
@@ -47,7 +38,7 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 
-const Product: React.FC<ProductType> = ({price , _id , title , slug}) => {
+const Product: React.FC<ProductType> = ({price, _id, title, slug}) => {
     const router = useRouter()
 
     const [addToWishlistLoading, setAddToWishlistLoading] = useState(false)
@@ -72,13 +63,13 @@ const Product: React.FC<ProductType> = ({price , _id , title , slug}) => {
                                     maxHeight: {xs: 20, sm: 25}
                                 }}/> :
                                 isInWishlist ?
-                                    <Favorite sx={{
+                                    <FavoriteIcon sx={{
                                         fontSize: {xs: 20, sm: 25},
                                         color: "primary.main"
                                     }}/> :
-                                    <Favorite sx={{
+                                    <FavoriteIcon sx={{
                                         fontSize: {xs: 20, sm: 25,},
-                                        color: "#fff"
+                                        color: "white.main"
                                     }}/>
                         }
                     </IconButton>
@@ -86,8 +77,7 @@ const Product: React.FC<ProductType> = ({price , _id , title , slug}) => {
 
                 <Link href={`/products/${slug}`}>
                     <Image src={`/assets/pictures/products/${slug}.jpg`}
-                           alt={`${title}`} width={400} height={400}
-                           className={"pointer"}/>
+                           alt={`${title}`} width={400} height={400}/>
                 </Link>
             </Grid>
 
