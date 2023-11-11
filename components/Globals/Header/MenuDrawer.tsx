@@ -25,17 +25,9 @@ const styles = {
     },
     item: {
         py: "1rem",
-        px: 0,
-        "&:hover": {
-            ".MuiSvgIcon-root": {
-                color: "primary.main"
-            }
-        }
     },
     icon: {
         fontSize: 20,
-        transition: "all .5s"
-
     }
 
 } satisfies Record<string, SxProps>
