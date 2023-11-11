@@ -22,19 +22,8 @@ const styles = {
     commentBody: {
         minHeight: 300,
         maxHeight: 300,
-        overflow: "auto",
         py: 30,
         px: 50,
-
-        "&::-webkit-scrollbar": {
-            width: 5
-        },
-
-        "&::-webkit-scrollbar-thumb": {
-            borderRadius: 8,
-            backgroundClip: "content-box",
-            bgcolor: "primary.main",
-        }
     }
 
 } satisfies Record<string, SxProps<Theme>>
