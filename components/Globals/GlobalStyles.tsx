@@ -6,6 +6,20 @@ const globalStyles = {
     ".swiper": {
         width: "100%"
     },
+
+    "::-webkit-scrollbar": {
+        width: 12
+    },
+
+    "::-webkit-scrollbar-track": {
+        backgroundColor: "#fff",
+
+    },
+
+    "::-webkit-scrollbar-thumb": {
+        backgroundColor: `${theme.palette.primary.main}`,
+        borderRadius: 1
+    },
     ".swiper-button-prev , .swiper-button-next": {
         backgroundColor: `${theme.palette.primary.main} !important`,
         borderRadius: 5,
@@ -25,7 +39,7 @@ const globalStyles = {
     },
     "&.notistack-MuiContent": {
         gap: 10,
-        fontSize :"12px !important",
+        fontSize: "12px !important",
         [theme.breakpoints.up('md')]: {
             fontSize: "15px !important"
         }
