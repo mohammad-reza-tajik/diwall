@@ -8,7 +8,7 @@ const globalStyles = {
     },
 
     "::-webkit-scrollbar": {
-        width: 12
+        width: 10
     },
 
     "::-webkit-scrollbar-track": {
