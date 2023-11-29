@@ -95,7 +95,7 @@ function MyApp({Component, pageProps}) {
 
 
                 <link rel="manifest" href="/manifest.json"/>
-                <link rel="icon" href="/favicon.ico"/>
+                <link rel="icon" href="/assets/pictures/logo-144.png"/>
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-144.png" sizes="144x144"/>
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-152.png" sizes="152x152"/>
 
