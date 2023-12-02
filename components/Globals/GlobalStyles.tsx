@@ -6,13 +6,12 @@ const globalStyles = {
     ".swiper": {
         width: "100%"
     },
-
     "::-webkit-scrollbar": {
         width: 10
     },
 
     "::-webkit-scrollbar-track": {
-        backgroundColor: "#fff",
+        backgroundColor: `${theme.palette.white.main}`,
 
     },
 
@@ -34,7 +33,7 @@ const globalStyles = {
         // @ts-ignore
         "&:after": {
             fontSize: "15px !important",
-            color: "#fff",
+            color: `${theme.palette.white.main}`,
         }
     },
     "&.notistack-MuiContent": {

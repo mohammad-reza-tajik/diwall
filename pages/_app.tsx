@@ -24,7 +24,7 @@ import LoadingBar from "@/components/Globals/LoadingBar";
 const snackbarAction = (key: string) => (
     <IconButton
         size="large"
-        sx={{color: "#fff", padding: 0}}
+        sx={{color:theme.palette.white.main, padding: 0}}
         onClick={() => closeSnackbar(key)}>
         <Close fontSize={"large"}/>
     </IconButton>
@@ -42,7 +42,7 @@ function MyApp({Component, pageProps}) {
         if (router.pathname === "/auth") {
             body.style.overflow = "hidden"
         } else {
-            body.style.overflow = "scroll"
+            body.style.overflow = "auto"
         }
     }
 
@@ -99,7 +99,7 @@ function MyApp({Component, pageProps}) {
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-144.png" sizes="144x144"/>
                 <link rel="apple-touch-icon" href="/assets/pictures/logo-152.png" sizes="152x152"/>
 
-                <meta name="theme-color" content="#069f69"/>
+                <meta name="theme-color" content={theme.palette.primary.main}/>
 
             </Head>
             <GlobalStyles/>
