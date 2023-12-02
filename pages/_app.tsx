@@ -1,25 +1,23 @@
-import '@/styles/Globals.scss';
-import Head from "next/head"
+import "@/styles/Globals.scss";
+import Head from "next/head";
 import theme from "@/styles/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import "swiper/scss";
-import 'swiper/scss/navigation';
-import 'swiper/scss/free-mode';
-import "swiper/scss/thumbs"
+import "swiper/scss/navigation";
+import "swiper/scss/free-mode";
+import "swiper/scss/thumbs";
 import Footer from "@/components/Globals/Footer";
 import {useRouter} from "next/router";
 import Header from "@/components/Globals/Header";
 import {Provider} from "react-redux";
 import {store} from "@/store";
-import React from "react";
 import {SnackbarProvider, closeSnackbar} from 'notistack';
 import IconButton from "@mui/material/IconButton";
 import Close from "@mui/icons-material/Close";
 import GlobalStyles from "@/components/Globals/GlobalStyles";
 import AutoLogin from "@/components/Globals/AutoLogin";
 import LoadingBar from "@/components/Globals/LoadingBar";
-
 
 const snackbarAction = (key: string) => (
     <IconButton
@@ -33,21 +31,17 @@ const snackbarAction = (key: string) => (
 function MyApp({Component, pageProps}) {
 
     //****************** to hide the scrollbar in login page *****************//
-
-    const router = useRouter()
+    const router = useRouter();
 
     if (typeof window !== "undefined") { // to prevent errors in server side rendering
-
-        const body = document.body
+        const body = document.body;
         if (router.pathname === "/auth") {
-            body.style.overflow = "hidden"
+            body.style.overflow = "hidden";
         } else {
-            body.style.overflow = "auto"
+            body.style.overflow = "auto";
         }
     }
-
     //**************************************************************************//
-
 
     return (
         <ThemeProvider theme={theme}>
