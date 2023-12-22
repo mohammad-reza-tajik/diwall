@@ -1,7 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Image from "next/image"
-import React from "react";
-import type {SxProps} from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 
 const styles = {
     picture: {
@@ -10,7 +9,7 @@ const styles = {
     }
 } satisfies Record<string, SxProps>
 
-const MiddleSection: React.FC = () => {
+function MiddleSection () {
     return (
         <Grid container component={"section"} my={30}>
             <Grid container item xs={12} md={6} display={{xs: "none", md: "flex"}}>

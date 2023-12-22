@@ -4,13 +4,13 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import TabPanel from "@/components/Globals/TabPanel";
 import Head from "next/head";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
 import useFetch from "@/hooks/useFetch";
-import type {SxProps } from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 import type {ProductType} from "@/db/productModel";
 
 import Favorite from "@mui/icons-material/Favorite";
@@ -20,26 +20,26 @@ import ShoppingBag from "@mui/icons-material/ShoppingBag";
 
 // import Moderation from "@/components/AccountPage/Moderation";
 
-const Profile = dynamic(() => import("@/components/AccountPage/Profile"))
-const AddProduct = dynamic(() => import("@/components/AccountPage/AddProduct"))
-const Wishlist = dynamic(() => import("@/components/AccountPage/Wishlist"))
-const Cart = dynamic(() => import("@/components/AccountPage/Cart"))
+const Profile = dynamic(() => import("@/components/AccountPage/Profile"));
+const AddProduct = dynamic(() => import("@/components/AccountPage/AddProduct"));
+const Wishlist = dynamic(() => import("@/components/AccountPage/Wishlist"));
+const Cart = dynamic(() => import("@/components/AccountPage/Cart"));
 
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 14},
-        color : "#666",
-        gap : "1rem"
+        color: "#555",
+        gap: "1rem"
     },
-    tabsContainer : {
-        bgcolor : "white.main",
-        borderRadius : 1,
-        fontFamily : "dana-bold",
+    tabsContainer: {
+        bgcolor: "white.main",
+        borderRadius: 1,
+        fontFamily: "dana-bold",
     }
 } satisfies Record<string, SxProps>
 
 
-const DashboardPage: React.FC = () => {
+function DashboardPage() {
 
     const router = useRouter();
 
@@ -60,7 +60,7 @@ const DashboardPage: React.FC = () => {
 
     useEffect(() => {
         if (queryTab) {
-            setTab(Number(queryTab))
+            setTab(Number(queryTab));
         }
 
     }, [queryTab])
@@ -69,11 +69,11 @@ const DashboardPage: React.FC = () => {
     useEffect(() => {
         (async () => {
             if (user?.username) {
-                setIsLoading(true)
-                const res = await useFetch.get(`/api/user?_id=${user?._id}&token=${user?.token}&populated=true`)
-                setPopulatedWishlist(res.wishlist)
-                setPopulatedCart(res.cart)
-                setIsLoading(false)
+                setIsLoading(true);
+                const res = await useFetch.get(`/api/user?_id=${user?._id}&token=${user?.token}&populated=true`);
+                setPopulatedWishlist(res.wishlist);
+                setPopulatedCart(res.cart);
+                setIsLoading(false);
             }
         })()
     }, [user])
@@ -92,10 +92,13 @@ const DashboardPage: React.FC = () => {
             <Grid container columns={14} gap={10}>
                 <Grid item xs={14} md={3} sx={styles.tabsContainer}>
                     <Tabs onChange={tabChangeHandler} value={tab}
-                        orientation={matchesMD ? "vertical" : "horizontal"}>
-                        <Tab icon={<Person />} iconPosition={matchesMD ? "start" : "top"} label="اطلاعات کاربر" sx={styles.tab}/>
-                        <Tab icon={<Favorite />} iconPosition={matchesMD ? "start" : "top"} label="لیست علاقمندی ها" sx={styles.tab}/>
-                        <Tab icon={<ShoppingBag />} iconPosition={matchesMD ? "start" : "top"} label="سبد خرید" sx={styles.tab}/>
+                          orientation={matchesMD ? "vertical" : "horizontal"}>
+                        <Tab icon={<Person/>} iconPosition={matchesMD ? "start" : "top"} label="اطلاعات کاربر"
+                             sx={styles.tab}/>
+                        <Tab icon={<Favorite/>} iconPosition={matchesMD ? "start" : "top"} label="لیست علاقمندی ها"
+                             sx={styles.tab}/>
+                        <Tab icon={<ShoppingBag/>} iconPosition={matchesMD ? "start" : "top"} label="سبد خرید"
+                             sx={styles.tab}/>
                         {user.role === "admin" && <Tab label="افزودن محصول" sx={styles.tab}/>}
                         {/*{user.role === "admin" && <Tab label="بررسی دیدگاه ها" value={5} sx={styles.tab}/>}*/}
                     </Tabs>

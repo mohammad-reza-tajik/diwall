@@ -1,4 +1,4 @@
-import React, {FormEvent, useRef, useState} from "react"
+import {FormEvent, useRef, useState, Dispatch, SetStateAction} from "react"
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {useAppSelector} from "@/store";
@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Create from "@mui/icons-material/Create";
 import TextField from "@mui/material/TextField";
 import {useRouter} from "next/router";
-import type {SxProps} from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 import {enqueueSnackbar} from "notistack";
 
 const styles = {
@@ -38,10 +38,10 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 interface Props {
-    setAddComment: React.Dispatch<React.SetStateAction<boolean>>
+    setAddComment: Dispatch<SetStateAction<boolean>>
 }
 
-const ReviewsForm: React.FC<Props> = ({setAddComment}) => {
+function ReviewsForm({setAddComment}: Props) {
 
     const user = useAppSelector(state => state.user);
 

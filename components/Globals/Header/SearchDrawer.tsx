@@ -9,7 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Drawer from 'react-modern-drawer'
 import SearchResults from "../SearchResults";
 import useSearch from "@/hooks/useSearch";
-import type {SxProps} from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 
 const styles = {
     searchField: {
@@ -44,7 +44,7 @@ interface Props {
     openSearchDrawer: boolean;
 }
 
-const SearchDrawer: React.FC<Props> = ({setOpenSearchDrawer, openSearchDrawer}) => {
+function SearchDrawer ({setOpenSearchDrawer, openSearchDrawer} : Props) {
 
     const {
         search,

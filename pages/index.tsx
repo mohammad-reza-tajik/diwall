@@ -18,7 +18,7 @@ interface Props {
     mostPopularProducts:ProductType[];
     bestSellingProducts:ProductType[];
 }
-const HomePage : React.FC<Props> = ({latestProducts,mostPopularProducts,bestSellingProducts}) => {
+function HomePage ({latestProducts,mostPopularProducts,bestSellingProducts} : Props) {
 
     return (
         <Grid container  justifyContent={"center"}>

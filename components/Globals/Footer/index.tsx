@@ -12,8 +12,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import React from "react";
-import type {SxProps} from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 
 const styles = {
     linkBullets : {
@@ -53,7 +52,7 @@ const styles = {
     }
 } satisfies Record<string, SxProps>
 
-const Footer: React.FC = () => {
+function Footer () {
 
     return (
         <Grid container component={"footer"} justifyContent={{xs: "center", md: "space-between"}}

@@ -12,8 +12,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import type {ProductType} from "@/db/productModel";
-import type {SxProps} from "@mui/system";
-
+import type {SxProps} from "@mui/material/styles";
 const styles = {
     title: {
         fontSize: {xs: 16, sm: 18, lg: 20},

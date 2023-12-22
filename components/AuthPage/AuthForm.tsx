@@ -1,4 +1,3 @@
-import React from "react";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import Link from "next/link";
@@ -14,7 +13,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import LoginIcon from "@mui/icons-material/Login";
 import Grid from "@mui/material/Grid";
 import useAuth from "@/hooks/useAuth";
-import type {SxProps} from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
 const styles = {
@@ -51,7 +50,7 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 
-const AuthForm: React.FC = () => {
+function AuthForm ()  {
 
     const {
         formType,

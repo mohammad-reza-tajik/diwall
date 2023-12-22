@@ -1,4 +1,4 @@
-import React, {FormEvent} from "react";
+import {FormEvent} from "react";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Image from "next/image";
@@ -6,16 +6,15 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useRouter} from "next/router";
 import type {ProductType} from "@/db/productModel";
-import type {SxProps} from "@mui/system";
-
+import type {SxProps} from "@mui/material/styles";
 
 const styles = {
     searchResultsContainer: {
         bgcolor: "background.paper",
         border: {xs: "none", md: "1px solid #ccc"},
         borderTop: "none",
-        flexDirection:"column",
-        p:".5rem"
+        flexDirection: "column",
+        p: ".5rem"
     },
     item: {
         gap: 10,
@@ -33,13 +32,13 @@ interface Props {
 
 }
 
-const SearchResults: React.FC<Props> = ({isLoading, results, search, submitSearchHandler, closeSearch}) => {
+function SearchResults({isLoading, results, search, submitSearchHandler, closeSearch}: Props) {
 
     const router = useRouter();
 
     const goToProductHandler = (slug: string) => {
-        closeSearch()
-        router.push(`/products/${slug}`)
+        closeSearch();
+        router.push(`/products/${slug}`);
 
     }
 

@@ -7,7 +7,7 @@ import {userActions, useAppDispatch, useAppSelector} from "@/store";
 import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import type {SxProps} from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 import type {ProductType} from "@/db/productModel";
 
 const styles = {
@@ -38,17 +38,18 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 
-const Product: React.FC<ProductType> = ({price, _id, title, slug}) => {
-    const router = useRouter()
+function Product({price, _id, title, slug}: ProductType) {
+    const router = useRouter();
 
-    const [addToWishlistLoading, setAddToWishlistLoading] = useState(false)
+    const [addToWishlistLoading, setAddToWishlistLoading] = useState(false);
 
     const dispatch = useAppDispatch();
+
 
     const user = useAppSelector(state => state.user);
     const isInWishlist = user?.wishlist.includes(_id);
     const wishlistHandler = () => {
-        dispatch(userActions.handleWishlist({productId: _id, router, setAddToWishlistLoading}))
+        dispatch(userActions.handleWishlist({productId: _id, router, setAddToWishlistLoading}));
     }
 
     return (

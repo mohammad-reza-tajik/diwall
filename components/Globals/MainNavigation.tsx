@@ -1,9 +1,6 @@
-
 import Link from "next/link";
-import React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-
 import PhoneIcon from '@mui/icons-material/Phone';
 import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -11,8 +8,7 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import InfoIcon from '@mui/icons-material/Info';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import SellIcon from '@mui/icons-material/Sell';
-
-import type {SxProps} from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 
 const styles = {
     mainNav: {
@@ -21,7 +17,7 @@ const styles = {
     },
     link: {
         alignItems: "center",
-        color: "#777",
+        color: "#555",
         gap: ".5rem",
         transition: "color .5s",
         "&:hover": {
@@ -30,7 +26,7 @@ const styles = {
     }
 } satisfies Record<string, SxProps>
 
-const MainNavigation: React.FC = () => {
+function MainNavigation ()  {
 
     return (
         <Grid container display={{xs: "none", md: "flex"}}>

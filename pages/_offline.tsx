@@ -3,7 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 import Grid from "@mui/material/Grid";
 import ReplayIcon from "@mui/icons-material/Replay";
-import {Theme, SxProps} from "@mui/system";
+import {Theme, SxProps} from "@mui/material/styles";
 
 const styles = {
     container: {
@@ -35,7 +35,8 @@ const styles = {
         bgcolor: "white.main"
     }
 } satisfies Record<string, SxProps<Theme>>
-const fallbackPage: React.FC = () => {
+
+function fallbackPage ()  {
 
     return (
         <>

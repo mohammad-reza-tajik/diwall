@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import {useRouter} from "next/router";
-import type {SxProps} from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -38,13 +38,13 @@ interface Props {
 
 }
 
-const MenuDrawer: React.FC<Props> = ({openMenuDrawer, setOpenMenuDrawer }) => {
+function MenuDrawer ({openMenuDrawer, setOpenMenuDrawer } : Props) {
 
     const router = useRouter();
 
     const menuItemsHandler = (url: string) => {
-        setOpenMenuDrawer(false)
-        router.push(url)
+        setOpenMenuDrawer(false);
+        router.push(url);
     }
 
     return (

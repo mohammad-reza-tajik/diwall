@@ -1,9 +1,8 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Circle from "@mui/icons-material/Circle";
-import React from "react";
 import Link from "next/link";
-import type {SxProps} from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 
 const styles    = {
     place: {
@@ -21,7 +20,7 @@ const styles    = {
 } satisfies Record<string, SxProps>
 
 
-const Places: React.FC = () => {
+function Places ()  {
 
     return (
         <Grid container item component={"section"} my={80} gap={{xs: 50, md: 80}} xs={12}>
@@ -284,4 +283,4 @@ const Places: React.FC = () => {
     )
 }
 
-export default React.memo(Places)
+export default Places

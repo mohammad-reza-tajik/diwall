@@ -1,7 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
-import type {SxProps} from "@mui/system";
-
+import type {SxProps} from "@mui/material/styles";
 const styles = {
     backDrop : {
         width : "100vw",
@@ -21,7 +20,7 @@ interface Props {
     open:boolean;
 }
 
-const BackDrop : React.FC<Props> = ({open, setOpen}) => {
+function BackDrop ({open, setOpen} : Props)  {
 
     return(
         <Grid sx={styles.backDrop} onClick={()=>setOpen(false)} display={open ? "block" : "none"}  />

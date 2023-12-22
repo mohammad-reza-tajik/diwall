@@ -1,11 +1,9 @@
 import Grid from "@mui/material/Grid";
 import Head from "next/head";
-import React from "react";
 import AuthForm from "@/components/AuthPage/AuthForm";
-import type {SxProps} from "@mui/system";
+import type {SxProps} from "@mui/material/styles";
 
-
-const styles  = {
+const styles = {
     container: {
         minWidth: "100vw",
         minHeight: "100vh",
@@ -17,7 +15,7 @@ const styles  = {
 
 } satisfies Record<string, SxProps>
 
-const AuthPage: React.FC = () => {
+function AuthPage() {
 
     return (
         <Grid container alignItems={"center"} justifyContent={"center"} sx={styles.container}>
@@ -30,4 +28,5 @@ const AuthPage: React.FC = () => {
         </Grid>
     )
 }
+
 export default AuthPage
