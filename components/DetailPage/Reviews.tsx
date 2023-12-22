@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {Swiper, SwiperSlide} from "swiper/react";
@@ -11,13 +11,13 @@ import Divider from "@mui/material/Divider";
 import Person from "@mui/icons-material/Person";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
-import type {SxProps , Theme} from "@mui/system";
+import type {SxProps, Theme} from "@mui/material/styles";
 import theme from "@/styles/theme";
 
 const styles = {
 
     commentContainer: {
-        backgroundColor:  theme.palette.white.main,
+        backgroundColor: theme.palette.white.main,
     },
     commentBody: {
         minHeight: 300,
@@ -38,7 +38,7 @@ interface Comment {
     date: string;
 }
 
-const Reviews: React.FC<Props> = ({addComment}) => {
+function Reviews({addComment}: Props) {
 
     // addComment is used to re-fetch comments anytime a new comment was submitted
 
@@ -128,4 +128,5 @@ const Reviews: React.FC<Props> = ({addComment}) => {
         </Grid>
     )
 }
+
 export default Reviews

@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import {SxProps} from "@mui/system";
+import {SxProps} from "@mui/material/styles";
 
 
 const styles = {
@@ -23,7 +23,7 @@ const styles = {
 
 } satisfies Record<string, SxProps>
 
-const BannerMobile: React.FC = () => {
+function BannerMobile ()  {
 
     return (
         <Grid container item justifyContent={"center"}  mb={40} minWidth={"100vw"}

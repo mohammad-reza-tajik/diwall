@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import {Schema, models, model , Model} from "mongoose";
 export interface ProductType {
     _id: string;
     title: string;
@@ -17,7 +17,7 @@ export interface ProductType {
     }>
 }
 
-const productSchema = new mongoose.Schema<ProductType>({
+const productSchema = new Schema<ProductType>({
 
     title: {
         type: String,
@@ -72,7 +72,7 @@ const productSchema = new mongoose.Schema<ProductType>({
 
 
 // I was getting an error which was saying that you're re-creating model, so I find below solution from stack overflow
-export default mongoose.models.Product || mongoose.model<ProductType>('Product', productSchema);
+export default models.Product as Model<ProductType> || model<ProductType>('Product', productSchema);
 
 
 

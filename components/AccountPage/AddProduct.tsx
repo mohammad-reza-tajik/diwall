@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEvent, useRef, useState} from "react";
+import {ChangeEvent, FormEvent, useRef, useState} from "react";
 // import {useAppSelector} from "@/hooks/useStore";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import Close from "@mui/icons-material/Close";
 // import useFetch from "@/hooks/useFetch";
-import type { SxProps } from '@mui/system';
+import type { SxProps } from '@mui/material/styles';
 
 
 
@@ -30,7 +30,7 @@ const styles = {
     }
 } satisfies Record<string, SxProps>
 
-const AddProduct: React.FC = () => {
+function AddProduct () {
 
     const [isLoading, setIsLoading] = useState(false);
     const [uploadedFileName, setUploadedFileName] = useState("");

@@ -1,4 +1,4 @@
-import {Schema, models, model} from "mongoose";
+import {Schema, models, model , Model} from "mongoose";
 import bcrypt from "bcrypt";
 export interface UserType {
     username: string;
@@ -51,4 +51,4 @@ userSchema.pre("save", async function (next) {
     next()
 })
 
-export default models.User || model<UserType>('User', userSchema);
+export default models.User as Model<UserType> || model<UserType>('User', userSchema);

@@ -22,11 +22,11 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 
 import Image from "next/image";
 import Link from "next/link";
-import React, {useState} from "react";
+import {useState} from "react";
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import SearchResults from "../SearchResults";
 import useSearch from "@/hooks/useSearch";
-import type {SxProps, Theme} from "@mui/system";
+import type {SxProps, Theme} from "@mui/material/styles";
 
 const styles = {
     searchField: {
@@ -73,7 +73,7 @@ const searchInputAdornment = (
     </InputAdornment>
 )
 
-const HeaderDesktop: React.FC = () => {
+function HeaderDesktop() {
 
     const user = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
@@ -128,12 +128,12 @@ const HeaderDesktop: React.FC = () => {
                         </IconButton>
 
                         <Grid container item xs={12} position={"absolute"} right={0} top={"100%"} zIndex={50}>
-                        {
-                            search.trim().length >= 3 &&
-                            <SearchResults isLoading={isLoading} results={results} search={search}
-                                           submitSearchHandler={submitSearchHandler}
-                                           closeSearch={closeSearchHandlerDesktop}/>
-                        }
+                            {
+                                search.trim().length >= 3 &&
+                                <SearchResults isLoading={isLoading} results={results} search={search}
+                                               submitSearchHandler={submitSearchHandler}
+                                               closeSearch={closeSearchHandlerDesktop}/>
+                            }
                         </Grid>
                     </Grid>
                 </Grid>
@@ -228,4 +228,5 @@ const HeaderDesktop: React.FC = () => {
         </Grid>
     )
 }
+
 export default HeaderDesktop

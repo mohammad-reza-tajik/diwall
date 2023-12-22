@@ -19,7 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import SearchDrawer from "./SearchDrawer";
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
-import type {SxProps, Theme} from "@mui/system";
+import type {SxProps, Theme} from "@mui/material/styles";
 
 const styles = {
     headerIcon: {
@@ -37,7 +37,7 @@ const styles = {
     },
 } satisfies Record<string, SxProps<Theme>>
 
-const HeaderMobile: React.FC = () => {
+function HeaderMobile ()  {
 
     const router = useRouter();
 

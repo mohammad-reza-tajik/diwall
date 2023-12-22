@@ -1,8 +1,7 @@
-import React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import type {User} from "@/store/userSlice";
-import {SxProps} from "@mui/system";
+import {SxProps} from "@mui/material/styles";
 
 const styles = {
     keys: {
@@ -18,7 +17,7 @@ interface Props {
     user: User;
 }
 
-const Profile: React.FC<Props> = ({user}) => {
+function Profile ({user} : Props)  {
 
     return (
         <Grid container item xs={12} gap={40} p={20} bgcolor={"white.main"} borderRadius={1}>

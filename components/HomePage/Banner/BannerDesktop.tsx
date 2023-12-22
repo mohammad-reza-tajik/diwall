@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Image from "next/image"
 import Link from "next/link"
 import React from "react";
-import {SxProps} from "@mui/system";
+import {SxProps} from "@mui/material/styles";
 
 const styles = {
     bannerTextBox: {
@@ -31,7 +31,7 @@ const styles = {
     }
 } satisfies Record<string, SxProps>
 
-const BannerDesktop: React.FC = () => {
+function BannerDesktop () {
 
     return (
 
