@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Grid from "@mui/material/Grid";
@@ -14,18 +14,18 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import {useTheme} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const Comments = dynamic(() => import("./Reviews"))
+const Comments = dynamic(() => import("./Reviews"));
 
 const styles = {
     tab: {
         fontSize: {xs: 12, md: 15},
-        color: "#666",
+        color: "#555",
+        gap: "1rem"
     },
     tabsContainer: {
         bgcolor: "white.main",
         borderRadius: 1,
         fontFamily: "dana-bold",
-        p: "1rem"
     }
 } satisfies Record<string, SxProps>
 
@@ -33,14 +33,15 @@ interface Props {
     products: ProductType[];
 }
 
-const Info: React.FC<Props> = ({products}) => {
+function Info({products}: Props) {
+
     const [tab, setTab] = useState(0);
-    const [addComment, setAddComment] = useState(false)
+    const [addComment, setAddComment] = useState(false);
     const changeTabHandler = (_, newValue: number) => {
         setTab(newValue);
     };
 
-    const theme = useTheme()
+    const theme = useTheme();
     const matchesMD = useMediaQuery(theme.breakpoints.up("md"));
 
     return (
