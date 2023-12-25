@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import type {PayloadAction} from "@reduxjs/toolkit"
-import storeTokenAndUser from "@/utilities/storeToken";
 import type {UserType} from "@/db/userModel";
+import Cookies from "js-cookie";
 
 export interface User extends Omit<UserType, "password">{
     token: string,
@@ -30,7 +30,7 @@ const userSlice = createSlice({
             state.role = role
             state.wishlist = wishlist;
             state.token = action.payload.token;
-            storeTokenAndUser(state);
+            Cookies.set("token",state.token);
 
         },
         logout(state) {
@@ -41,7 +41,8 @@ const userSlice = createSlice({
             state.role = null
             state.wishlist = [];
             state.token = null;
-            localStorage.clear()
+            Cookies.remove("token");
+
 
         },
         addToWishlist(state, action: PayloadAction<string>) {
