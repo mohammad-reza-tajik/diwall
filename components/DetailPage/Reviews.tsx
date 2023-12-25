@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from "swiper/modules";
 
-import useFetch from "@/hooks/useFetch";
+import fetcher from "@/utils/fetcher";
 import {useRouter} from "next/router";
 import CircularProgress from "@mui/material/CircularProgress";
 import Divider from "@mui/material/Divider";
@@ -56,7 +56,7 @@ function Reviews({addComment}: Props) {
             (async () => {
                 try {
                     setIsLoading(true);
-                    const res = await useFetch.get(url);
+                    const res = await fetcher.get(url);
                     setComments(res.product.comments);
                 } catch (err) {
                     console.log(err)

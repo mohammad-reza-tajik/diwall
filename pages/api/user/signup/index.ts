@@ -1,6 +1,6 @@
 import connect from "@/db/connect"
 import User from "@/db/userModel";
-import generateToken from "@/utilities/generateToken";
+import generateToken from "@/utils/generateToken";
 
 const errorMessage = "این نام کاربری یا ایمیل  قبلا استفاده شده است"
 const successMessage = "ثبت نام با موفقیت انجام شد."

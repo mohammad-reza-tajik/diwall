@@ -12,7 +12,7 @@ import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import Image from "next/image";
 
 import type {ProductType} from "@/db/productModel";
-import useFetch from "@/hooks/useFetch";
+import fetcher from "@/utils/fetcher";
 import {enqueueSnackbar} from "notistack";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -34,7 +34,7 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
         if (user?.username) {
             try {
                 setIsLoading(true)
-                await useFetch.delete(`/api/user/cart?productId=${_id}&_id=${user._id}&token=${user.token}`)
+                await fetcher.delete(`/api/user/cart?productId=${_id}&_id=${user._id}&token=${user.token}`)
                 dispatch(userActions.removeFromCart(_id));
                 enqueueSnackbar("از سبد خرید شما حذف شد", {
                     variant: "info",

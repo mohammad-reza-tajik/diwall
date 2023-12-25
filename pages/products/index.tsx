@@ -6,7 +6,7 @@ import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import Product from "@/components/Globals/Product";
 import Pagination from "@/components/Globals/Pagination";
-import useFetch from "@/hooks/useFetch";
+import fetcher from "@/utils/fetcher";
 
 interface PageInformation {
     lastPage?: number;
@@ -28,7 +28,7 @@ const Products: React.FC = () => {
             try {
                 setIsLoading(true)
                 if(isReady) {
-                    const res = await useFetch.get(`/api/products?search=${search}&page=${page}&sortBy=${sortBy}&category=${category}`)
+                    const res = await fetcher.get(`/api/products?search=${search}&page=${page}&sortBy=${sortBy}&category=${category}`)
                     // console.log(res)
                     setProducts(res.products)
                     setPageInformation(res)

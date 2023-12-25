@@ -1,10 +1,9 @@
 import connect from "@/db/connect"
-import User,{type UserType} from "@/db/userModel"
-import tokenGenerator from "@/utilities/generateToken";
-import validateToken from "@/utilities/validateToken";
+import User, {type UserType} from "@/db/userModel"
+import tokenGenerator from "@/utils/generateToken";
+import validateToken from "@/utils/validateToken";
 
 import type {NextApiRequest, NextApiResponse} from "next"
-
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
@@ -14,21 +13,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         await connect();
 
-        let {_id , token , populated} = req.query as Record<string, string>;
+        let {token, populated} = req.query as Record<string, string>;
 
-
-        if (_id && token) {
-            const tokenIsValid = validateToken(token);
-            if (!tokenIsValid) {
+        if (token && token !== "null") {
+            const {_id: id} = await validateToken(token);
+            if (!id) {
                 return res.status(401).send({
                     ok: false,
-                    message: "your token has been expired !"
+                    message: "your token isn't valid !"
                 })
 
             }
 
-            if (!populated){
-                const user : UserType = await User.findById(_id);
+            if (!populated) {
+                const user: UserType = await User.findById(id);
 
                 token = tokenGenerator(user._id);
 
@@ -38,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 })
             }
 
-            const user = await User.findById(_id).populate("wishlist").populate("cart");
+            const user = await User.findById(id).populate("wishlist").populate("cart");
 
             res.send({
                 cart: user.cart,

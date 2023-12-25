@@ -1,7 +1,7 @@
 import connect from "@/db/connect"
 import User from "@/db/userModel";
 import bcrypt from "bcrypt";
-import generateToken from "@/utilities/generateToken";
+import generateToken from "@/utils/generateToken";
 
 const errorMessage = "اطلاعات وارد شده صحیح نمیباشد"
 const successMessage = "ورود با موفقیت انجام شد"

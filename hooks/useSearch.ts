@@ -1,7 +1,7 @@
 import {ChangeEvent, FormEvent, useCallback, useState} from "react";
 import {useRouter} from "next/router";
 import type {ProductType} from "@/db/productModel";
-import useFetch from "@/hooks/useFetch";
+import fetcher from "@/utils/fetcher";
 
 
 const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: (open:boolean) => void ) => {
@@ -75,7 +75,7 @@ const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: (open:boo
 
     const handleChange = async (search: string) => {
         setIsLoading(true)
-        const res = await useFetch.get(`/api/products?search=${search}`)
+        const res = await fetcher.get(`/api/products?search=${search}`)
         setResults(res.products.slice(0, 4));
         setIsLoading(false)
 

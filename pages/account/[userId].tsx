@@ -9,7 +9,7 @@ import TabPanel from "@/components/Globals/TabPanel";
 import Head from "next/head";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
-import useFetch from "@/hooks/useFetch";
+import fetcher from "@/utils/fetcher";
 import type {SxProps} from "@mui/material/styles";
 import type {ProductType} from "@/db/productModel";
 
@@ -70,7 +70,7 @@ function DashboardPage() {
         (async () => {
             if (user?.username) {
                 setIsLoading(true);
-                const res = await useFetch.get(`/api/user?_id=${user?._id}&token=${user?.token}&populated=true`);
+                const res = await fetcher.get(`/api/user?_id=${user?._id}&token=${user?.token}&populated=true`);
                 setPopulatedWishlist(res.wishlist);
                 setPopulatedCart(res.cart);
                 setIsLoading(false);

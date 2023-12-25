@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import {useAppSelector} from "@/store";
 import Button from "@mui/material/Button";
 import Link from "next/link";
-import useFetch from "@/hooks/useFetch";
+import fetcher from "@/utils/fetcher";
 import CircularProgress from "@mui/material/CircularProgress";
 import Create from "@mui/icons-material/Create";
 import TextField from "@mui/material/TextField";
@@ -57,7 +57,7 @@ function ReviewsForm({setAddComment}: Props) {
         event.preventDefault();
         try {
             setIsLoading(true)
-            const res = await useFetch.post(`/api/products/${slug}/comments`, {
+            const res = await fetcher.post(`/api/products/${slug}/comments`, {
                 comment: {
                     content: commentRef.current.value,
                     author: user.username,

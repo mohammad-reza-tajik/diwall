@@ -1,7 +1,7 @@
 import {userActions} from "./userSlice";
 import React from "react";
 import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
-import useFetch from "@/hooks/useFetch";
+import fetcher from "@/utils/fetcher";
 import {NextRouter} from "next/router";
 import {User} from "./userSlice";
 import {enqueueSnackbar} from "notistack";
@@ -26,13 +26,13 @@ const handleWishlist = (args: CartAndWishListArgs) => {
             if (user?.username) {
                 setAddToWishlistLoading(true)
                 if (isInWishlist) {
-                    await useFetch.delete(`/api/user/wishlist?productId=${productId}&_id=${user._id}&token=${user.token}`)
+                    await fetcher.delete(`/api/user/wishlist?productId=${productId}&_id=${user._id}&token=${user.token}`)
                     dispatch(userActions.removeFromWishlist(productId))
                     enqueueSnackbar("از لیست علاقمندی شما حذف شد", {
                         variant: "info",
                     })
                 } else {
-                    await useFetch.put("/api/user/wishlist", {
+                    await fetcher.put("/api/user/wishlist", {
                         productId,
                         _id: user._id,
                         token: user.token
@@ -72,13 +72,13 @@ const handleCart = (args: CartAndWishListArgs) => {
             if (user?.username) {
                 setAddToCartLoading(true);
                 if (isInCart) {
-                    await useFetch.delete(`/api/user/cart?productId=${productId}&_id=${user._id}&token=${user.token}`)
+                    await fetcher.delete(`/api/user/cart?productId=${productId}&_id=${user._id}&token=${user.token}`)
                     dispatch(userActions.removeFromCart(productId))
                     enqueueSnackbar("از سبد خرید شما حذف شد", {
                         variant: "info",
                     })
                 } else {
-                    await useFetch.put("/api/user/cart", {
+                    await fetcher.put("/api/user/cart", {
                         productId,
                         _id: user._id,
                         token: user.token
