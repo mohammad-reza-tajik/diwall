@@ -89,9 +89,9 @@ function MyApp({Component, pageProps}) {
 
 
                 <link rel="manifest" href="/manifest.json"/>
-                <link rel="icon" href="/assets/pictures/logo-144.png"/>
-                <link rel="apple-touch-icon" href="/assets/pictures/logo-144.png" sizes="144x144"/>
-                <link rel="apple-touch-icon" href="/assets/pictures/logo-152.png" sizes="152x152"/>
+                <link rel="icon" href="/icons/logo-144.png"/>
+                <link rel="apple-touch-icon" href="/icons/logo-144.png" sizes="144x144"/>
+                <link rel="apple-touch-icon" href="/icons/logo-152.png" sizes="152x152"/>
 
                 <meta name="theme-color" content={theme.palette.primary.main}/>
 
