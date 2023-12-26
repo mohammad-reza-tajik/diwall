@@ -1,5 +1,5 @@
 import {FormEvent, useRef, useState} from "react";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 import {userActions, useAppDispatch} from "@/store";
 import fetcher from "@/utils/fetcher";
 import {enqueueSnackbar} from "notistack";
