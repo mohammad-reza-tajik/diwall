@@ -1,3 +1,4 @@
+"use client"
 import React, {CSSProperties} from "react";
 import MUIGlobalStyles from "@mui/material/GlobalStyles";
 import theme from "@/styles/theme";

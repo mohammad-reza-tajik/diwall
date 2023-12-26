@@ -1,3 +1,4 @@
+"use client"
 import fetcher from "@/utils/fetcher";
 import {userActions, useAppDispatch} from "@/store";
 import Cookies from "js-cookie";
