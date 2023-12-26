@@ -1,31 +1,32 @@
-import React, {useEffect} from "react";
-import useFetch from "@/hooks/useFetch";
-import {userActions , useAppDispatch} from "@/store";
+import fetcher from "@/utils/fetcher";
+import {userActions, useAppDispatch} from "@/store";
+import Cookies from "js-cookie";
+import {useEffect} from "react";
 
 interface Props {
-    children : React.ReactNode
+    children: React.ReactNode
 }
 
-const AutoLogin : React.FC<Props> = ({children}) => {
+function AutoLogin({children}: Props) {
 
     const dispatch = useAppDispatch();
+    const token = Cookies.get("token");
+
     useEffect(() => {
         (async () => {
             try {
-                const token = localStorage.getItem("token");
-                const _id = localStorage.getItem("_id");
-                if (_id && token) {
-                    const res = await useFetch.get(`/api/user?_id=${_id}&token=${token}`);
+                if (token) {
+                    const res = await fetcher.get(`/api/user`);
                     dispatch(userActions.login({user: res.user, token: res.token}));
                 }
+
             } catch (err) {
-                localStorage.clear();
                 dispatch(userActions.logout());
                 console.log(err);
             }
 
         })();
-    }, [dispatch]);
+    }, [dispatch,token]);
 
  return (
         <>
