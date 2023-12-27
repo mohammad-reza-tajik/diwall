@@ -1,5 +1,20 @@
 import mongoose from "mongoose";
 
-const connect = async () => await mongoose.connect(process.env.MONGODB_URL)
+let isConnected = false;
+
+const connect = async () => {
+
+    if (isConnected) {
+        return
+    }
+
+    try {
+        await mongoose.connect(process.env.MONGODB_URL)
+        isConnected = true;
+    } catch (err) {
+        isConnected = false;
+        console.log(err)
+    }
+}
 
 export default connect
