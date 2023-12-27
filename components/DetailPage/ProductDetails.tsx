@@ -1,3 +1,4 @@
+"use client"
 import React, {useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -7,7 +8,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
@@ -71,7 +72,7 @@ interface Props {
     product: ProductType,
 }
 
-const ProductDetails: React.FC<Props> = ({product}) => {
+function ProductDetails ({product} : Props)  {
     const [addToCartLoading, setAddToCartLoading] = useState(false);
     const [addToWishlistLoading, setAddToWishlistLoading] = useState(false);
     const [presetSizes, setPresetSizes] = useState(1);
