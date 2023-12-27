@@ -1,9 +1,10 @@
+"use client"
 import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import SectionHeading from "@/components/Globals/SectionHeading";
 import React, {useEffect, useState} from "react";
-import {useRouter} from "next/router";
+import {useSearchParams} from "next/navigation";
 import Product from "@/components/Globals/Product";
 import Pagination from "@/components/Globals/Pagination";
 import fetcher from "@/utils/fetcher";
@@ -19,20 +20,17 @@ const Products: React.FC = () => {
     const [pageInformation, setPageInformation] = useState<PageInformation>({})
     const [isLoading, setIsLoading] = useState(true)
 
-    const router = useRouter()
-    const {isReady} = router;
-    const {search, page, sortBy, category, } = router.query
+    const searchParams = useSearchParams();
 
     useEffect(() => {
         (async () => {
             try {
                 setIsLoading(true)
-                if(isReady) {
-                    const res = await fetcher.get(`/api/products?search=${search}&page=${page}&sortBy=${sortBy}&category=${category}`)
+                    const res = await fetcher.get(`/api/products?${searchParams.toString()}`)
                     // console.log(res)
                     setProducts(res.products)
                     setPageInformation(res)
-                }
+
             } catch (err) {
                 console.log(err)
             } finally {
@@ -42,15 +40,16 @@ const Products: React.FC = () => {
 
         })()
 
-    }, [search, page, sortBy, category , isReady])
+    }, [searchParams])
 
 
     return (
         <Grid container item xs={12} direction={"column"}>
             <Grid item xs>
-                {router.query.search && !router.query.category &&
-                    <SectionHeading text={`محصولات مرتبط با "${router.query.search}"`} sortBy={true}/>
+                {searchParams.get("search") && !searchParams.get("category") &&
+                    <SectionHeading text={`محصولات مرتبط با ${searchParams.get("search")}`} sortBy={true}/>
                 }
+            {/*
                 {!router.query.search && +router.query.sortBy === 2 && !router.query.category &&
                     <SectionHeading text={"پرفروش ترین محصولات"} sortBy={true}/>
                 }
@@ -71,27 +70,27 @@ const Products: React.FC = () => {
                 }
                 {!router.query.search && router.query.category && router.query.category === "office_poster" &&
                     <SectionHeading text={"پوستر برای اداره و محل کار"} sortBy={true}/>
-                }
+                }*/}
 
             </Grid>
             <Grid container item xs spacing={10} alignItems={"center"}>
                 {
-                isLoading ?
-                    <Grid container item xs justifyContent={"center"}>
-                        <CircularProgress color={"primary"} size={45}/>
-                    </Grid> :
-                    products.length === 0 ?
-                        <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
-                            <Typography fontSize={20} variant={"h2"} color={"#333"} fontFamily={"dana-bold"}>
-                            هیچ محصول مرتبطی موجود نیست !
-                            </Typography>
+                    isLoading ?
+                        <Grid container item xs justifyContent={"center"}>
+                            <CircularProgress color={"primary"} size={45}/>
                         </Grid> :
-                        products.map((product) =>
+                        products.length === 0 ?
+                            <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
+                                <Typography fontSize={20} variant={"h2"} color={"#333"} fontFamily={"dana-bold"}>
+                                    هیچ محصول مرتبطی موجود نیست !
+                                </Typography>
+                            </Grid> :
+                            products.map((product) =>
 
-                            <Grid item xs={6} sm={4} md={3} key={product._id}>
-                                <Product {...product} />
-                            </Grid>
-                        )}
+                                <Grid item xs={6} sm={4} md={3} key={product._id}>
+                                    <Product {...product} />
+                                </Grid>
+                            )}
 
                 {
                     isLoading || products.length === 0 ?

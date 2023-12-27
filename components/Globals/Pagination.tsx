@@ -1,7 +1,8 @@
 import Grid from "@mui/material/Grid";
 import MUIPagination  from "@mui/material/Pagination";
-import {useRouter} from "next/router";
-import React, {useEffect, useState} from "react";
+import {useRouter, useSearchParams} from "next/navigation";
+import {useEffect, useState} from "react";
+import formUrlQuery from "@/utils/formUrlQuery";
 
 interface Props {
     lastPage? : number;
@@ -9,23 +10,27 @@ interface Props {
 
 }
 
-const Pagination : React.FC<Props> = ({lastPage,currentPage}) => {
+function Pagination  ({lastPage,currentPage} : Props)  {
 
     const [page, setPage] = useState(1)
     const router = useRouter()
+    const searchParams = useSearchParams();
 
     useEffect(()=>{
-        if (router.query.page)
-            setPage(+router.query.page)
+        if (searchParams.get("page"))
+            setPage(+searchParams.get("page"))
 
 
-    },[])
+    },[searchParams])
 
-    const pageHandler = async ( _ , page : number) => {
-
+    const pageHandler = ( _ , page : number) => {
         setPage(page);
         // to navigate to the same page with updated query parameters
-        await router.push({pathname:router.pathname,query:{...router.query,page}})
+        router.push(formUrlQuery(searchParams.toString(),{
+            params : {
+                page
+            }
+        }),{scroll : true})
     }
 
     return (
@@ -37,4 +42,4 @@ const Pagination : React.FC<Props> = ({lastPage,currentPage}) => {
 
 }
 
-export default React.memo(Pagination)
+export default Pagination
