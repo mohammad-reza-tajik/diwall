@@ -2,14 +2,14 @@ import {userActions} from "./userSlice";
 import React from "react";
 import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
 import fetcher from "@/utils/fetcher";
-import {NextRouter} from "next/router";
 import {User} from "./userSlice";
 import {enqueueSnackbar} from "notistack";
+import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 
 interface CartAndWishListArgs {
     productId: string;
-    router: NextRouter;
+    router: AppRouterInstance;
     setAddToWishlistLoading?: React.Dispatch<React.SetStateAction<boolean>>;
     setAddToCartLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }

@@ -9,6 +9,7 @@ import {Metadata} from "next";
 const styles  = {
     container: {
         overflow: "hidden",
+        bgcolor:"white.main",
         width: "100%",
         height: "100vh",
         position: "fixed",
