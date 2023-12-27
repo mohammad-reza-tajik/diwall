@@ -1,16 +1,15 @@
 "use client"
 import HeaderMobile from "./HeaderMobile";
 import HeaderDesktop from "./HeaderDesktop";
-import React from "react";
 import Grid from "@mui/material/Grid";
 import { usePathname } from "next/navigation";
+import routes from "@/constants/routes";
 
-
-const Header: React.FC = () => {
+function Header ()  {
 
     const pathname = usePathname();
 
-    if (pathname.includes("auth")) return null;
+    if (pathname === "auth" || !routes.some(route => route.test(pathname))) return null;
 
     return (
         <>

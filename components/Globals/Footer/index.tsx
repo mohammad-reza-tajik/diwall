@@ -1,3 +1,4 @@
+"use client"
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -13,6 +14,8 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import type {SxProps} from "@mui/material/styles";
+import {usePathname} from "next/navigation";
+import routes from "@/constants/routes";
 
 const styles = {
     linkBullets : {
@@ -53,6 +56,10 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 function Footer () {
+
+    const pathname = usePathname();
+
+    if (pathname === "auth" || !routes.some(route => route.test(pathname))) return null;
 
     return (
         <Grid container component={"footer"} justifyContent={{xs: "center", md: "space-between"}}
