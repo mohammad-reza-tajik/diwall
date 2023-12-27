@@ -58,7 +58,7 @@ function AuthForm ()  {
         formTypeHandler,
         formHandler,
         isLoading,
-        usernameOrEmailRef,
+        identifierRef,
         usernameRef,
         emailRef,
         passwordRef
@@ -108,7 +108,7 @@ function AuthForm ()  {
                                 placeholder={"ایمیل"}/>
                         </> :
                         <TextField
-                            inputRef={usernameOrEmailRef}
+                            inputRef={identifierRef}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">

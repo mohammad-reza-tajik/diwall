@@ -1,7 +1,7 @@
 import {FormEvent, useRef, useState} from "react";
 import {useRouter} from "next/navigation";
 import {userActions, useAppDispatch} from "@/store";
-import fetcher from "@/utils/fetcher";
+import {login, signup} from "@/actions/user/auth";
 import {enqueueSnackbar} from "notistack";
 
 const useAuth = () => {
@@ -13,7 +13,7 @@ const useAuth = () => {
 
     const dispatch = useAppDispatch();
 
-    const formTypeHandler = (_, formType : "login" | "signup") => {
+    const formTypeHandler = (_, formType: "login" | "signup") => {
         // the bottom line is written like this so that only one tab can be active or disabled at a time
         if (formType !== null)
             setFormType(formType);
@@ -24,54 +24,55 @@ const useAuth = () => {
     const usernameRef = useRef<HTMLInputElement>();
     const emailRef = useRef<HTMLInputElement>();
     const passwordRef = useRef<HTMLInputElement>();
-    const usernameOrEmailRef = useRef<HTMLInputElement>();
+    const identifierRef = useRef<HTMLInputElement>();
 
 
     //********************************* form submission **********************************!//
 
 
-    const formHandler = async (event : FormEvent) => {
+    const formHandler = async (event: FormEvent) => {
         try {
             event.preventDefault();
             setIsLoading(true);
 
-            const user = formType === "signup" ?
-                {
+            let res: any;
+
+            if (formType === "signup") {
+                res = await signup({
                     username: usernameRef.current?.value,
                     email: emailRef.current?.value,
                     password: passwordRef.current?.value
-                } :
-                {
-                    usernameOrEmail: usernameOrEmailRef.current?.value,
+                })
+            } else {
+                res = await login({
+                    identifier: identifierRef.current?.value,
                     password: passwordRef.current?.value
+                })
+            }
 
-                }
-
-            const res = await fetcher.post(`/api/user/${formType === "signup" ? "signup" : "login"}`, user);
-
-            if ( !res.ok) {
+            if (!res.ok) {
                 throw new Error(res.message);
             }
 
             /** clearing fields **/
             if (formType === "login") {
-                usernameOrEmailRef.current.value = "";
+                identifierRef.current.value = "";
             } else {
-                usernameRef.current.value="";
-                emailRef.current.value="";
+                usernameRef.current.value = "";
+                emailRef.current.value = "";
             }
-            passwordRef.current.value="";
+            passwordRef.current.value = "";
 
-            dispatch(userActions.login({user : res.user , token : res.token}));
-            enqueueSnackbar(res.message , {
-                variant : "success",
+            dispatch(userActions.login({user: res.user, token: res.token}));
+            enqueueSnackbar(res.message, {
+                variant: "success",
             });
 
             router.push("/");
 
         } catch (err) {
-            enqueueSnackbar(err.message , {
-                variant : "error",
+            enqueueSnackbar(err.message, {
+                variant: "error",
             })
 
         } finally {
@@ -82,7 +83,7 @@ const useAuth = () => {
     return {
         isLoading,
         emailRef,
-        usernameOrEmailRef,
+        identifierRef,
         usernameRef,
         formHandler,
         formTypeHandler,
