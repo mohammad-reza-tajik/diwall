@@ -117,7 +117,7 @@ function HeaderMobile ()  {
                                 transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                 anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                             >
-                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=0`)}>
+                                <MenuItem onClick={() => router.push(`/accounts/${user?._id}?tab=0`)}>
                                     <ListItemIcon>
                                         <PersonIcon sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
@@ -125,7 +125,7 @@ function HeaderMobile ()  {
                                         حساب کاربری
                                     </Typography>
                                 </MenuItem>
-                                <MenuItem onClick={() => router.push(`/account/${user?._id}?tab=1`)}>
+                                <MenuItem onClick={() => router.push(`/accounts/${user?._id}?tab=1`)}>
                                     <ListItemIcon>
                                         <FavoriteIcon sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>
@@ -134,7 +134,7 @@ function HeaderMobile ()  {
                                     </Typography>
                                 </MenuItem>
                                 <MenuItem
-                                    onClick={() => router.push(`/account/${user?._id}?tab=2`)}>
+                                    onClick={() => router.push(`/accounts/${user?._id}?tab=2`)}>
                                     <ListItemIcon>
                                         <ShoppingBagIcon sx={{fontSize: 25}} color={"primary"}/>
                                     </ListItemIcon>

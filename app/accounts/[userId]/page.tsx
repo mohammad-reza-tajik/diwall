@@ -1,4 +1,5 @@
-import {useRouter} from "next/router";
+"use client"
+import {useSearchParams} from "next/navigation";
 import Grid from "@mui/material/Grid";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -6,13 +7,11 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
 import {useEffect, useState} from "react";
 import TabPanel from "@/components/Globals/TabPanel";
-import Head from "next/head";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
 import fetcher from "@/utils/fetcher";
 import type {SxProps} from "@mui/material/styles";
 import type {ProductType} from "@/db/productModel";
-
 import Favorite from "@mui/icons-material/Favorite";
 import Person from "@mui/icons-material/Person";
 import ShoppingBag from "@mui/icons-material/ShoppingBag";
@@ -39,9 +38,9 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 
-function DashboardPage() {
+function AccountPage() {
 
-    const router = useRouter();
+    const query = useSearchParams();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -52,7 +51,7 @@ function DashboardPage() {
 
     const [tab, setTab] = useState(1);
 
-    const queryTab = router.query.tab;
+    const queryTab = query.get("tab");
 
     const tabChangeHandler = (_, newTab: number) => {
         setTab(newTab);
@@ -70,7 +69,7 @@ function DashboardPage() {
         (async () => {
             if (user?.username) {
                 setIsLoading(true);
-                const res = await fetcher.get(`/api/user?_id=${user?._id}&token=${user?.token}&populated=true`);
+                const res = await fetcher.get(`/api/user?populated=true`);
                 setPopulatedWishlist(res.wishlist);
                 setPopulatedCart(res.cart);
                 setIsLoading(false);
@@ -83,12 +82,6 @@ function DashboardPage() {
 
     return (
         <>
-            <Head>
-                <title>
-                    حساب کاربری - دیوال
-                </title>
-            </Head>
-
             <Grid container columns={14} gap={10}>
                 <Grid item xs={14} md={3} sx={styles.tabsContainer}>
                     <Tabs onChange={tabChangeHandler} value={tab}
@@ -134,4 +127,4 @@ function DashboardPage() {
     )
 }
 
-export default DashboardPage
+export default AccountPage

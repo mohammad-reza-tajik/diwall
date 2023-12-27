@@ -147,7 +147,7 @@ function HeaderDesktop() {
                         <Badge showZero max={99} badgeContent={user?.wishlist.length || 0} color="primary"
                                overlap="circular">
                             <IconButton color={"primary"} component={Link}
-                                        href={user.username ? `/account/${user?._id}?tab=1` : "/auth"}
+                                        href={user.username ? `/accounts/${user?._id}?tab=1` : "/auth"}
                                         aria-label="go to wishlist">
                                 <FavoriteBorderIcon sx={styles.iconButtons}/>
                             </IconButton>
@@ -157,7 +157,7 @@ function HeaderDesktop() {
                         <Badge showZero max={99} badgeContent={user?.cart.length || 0} color="primary"
                                overlap="circular">
                             <IconButton color={"primary"} component={Link}
-                                        href={user.username ? `/account/${user?._id}?tab=2` : "/auth"}
+                                        href={user.username ? `/accounts/${user?._id}?tab=2` : "/auth"}
                                         aria-label="go to cart">
                                 <ShoppingBagOutlinedIcon sx={styles.iconButtons}/>
                             </IconButton>
@@ -196,7 +196,7 @@ function HeaderDesktop() {
                                     transformOrigin={{horizontal: 'right', vertical: 'top'}}
                                     anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
                                 >
-                                    <MenuItem component={Link} href={`/account/${user?._id}?tab=0`}>
+                                    <MenuItem component={Link} href={`/accounts/${user?._id}?tab=0`}>
                                         <ListItemIcon>
                                             <PersonIcon sx={{fontSize: 25}} color={"primary"}/>
                                         </ListItemIcon>
