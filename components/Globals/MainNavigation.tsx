@@ -2,13 +2,8 @@ import Link from "next/link";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import PhoneIcon from '@mui/icons-material/Phone';
-import HomeIcon from '@mui/icons-material/Home';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import InfoIcon from '@mui/icons-material/Info';
-import HandshakeIcon from '@mui/icons-material/Handshake';
-import SellIcon from '@mui/icons-material/Sell';
 import type {SxProps} from "@mui/material/styles";
+import navLinks from "@/constants/navLinks";
 
 const styles = {
     mainNav: {
@@ -26,35 +21,20 @@ const styles = {
     }
 } satisfies Record<string, SxProps>
 
-function MainNavigation ()  {
+function MainNavigation() {
 
     return (
         <Grid container display={{xs: "none", md: "flex"}}>
             <Grid container alignItems={"center"} component={"nav"} item xs sx={styles.mainNav}>
-                <Grid container item xs={"auto"} component={Link} href={"/"} sx={styles.link}>
-                    <HomeIcon/>
-                    صفحه نخست
-                </Grid>
-                <Grid container item xs={"auto"} component={Link} href={"/products"} sx={styles.link}>
-                    <WhatshotIcon/>
-                    جدیدترین ها
-                </Grid>
-                <Grid container item xs={"auto"} component={Link} href={"/products?sortBy=2"} sx={styles.link}>
-                    <SellIcon/>
-                    پرفروش ترین ها
-                </Grid>
-                <Grid container item xs={"auto"} component={Link} href={"/products?sortBy=3"} sx={styles.link}>
-                    <FavoriteIcon/>
-                    محبوب ترین ها
-                </Grid>
-                <Grid container item xs={"auto"} component={Link} href={"/about"} sx={styles.link}>
-                    <InfoIcon/>
-                    درباره ما
-                </Grid>
-                <Grid container item xs={"auto"} component={Link} href={"/collaboration"} sx={styles.link}>
-                    <HandshakeIcon/>
-                    همکاری با ما
-                </Grid>
+                {
+                    navLinks.map((link , index) => (
+                        <Grid key={index} container item xs={"auto"} component={Link} href={link.href} sx={styles.link}>
+                            <link.icon />
+                            {link.label}
+                        </Grid>
+                        )
+                    )
+                }
             </Grid>
             <Grid container item xs={"auto"}>
                 <Grid container item direction={"column"} xs>
@@ -68,4 +48,5 @@ function MainNavigation ()  {
         </Grid>
     )
 }
+
 export default MainNavigation
