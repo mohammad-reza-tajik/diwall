@@ -78,7 +78,7 @@ function AuthForm ()  {
                 </ToggleButtonGroup>
 
                 <Grid my={5} component={Link} href={"/"}>
-                    <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={150} height={150}/>
+                    <Image src={"/icons/logo.png"} alt={"diwall-logo"} width={150} height={150}/>
                 </Grid>
 
                 {

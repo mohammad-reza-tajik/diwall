@@ -52,7 +52,7 @@ function MenuDrawer ({openMenuDrawer, setOpenMenuDrawer } : Props) {
      <Drawer open={openMenuDrawer} direction={"right"} lockBackgroundScroll onClose={()=>setOpenMenuDrawer(false)} size={"auto"}>
             <Grid container direction={"column"} sx={styles.drawer}>
                 <Grid item onClick={() => menuItemsHandler("/")} className={"pointer"}>
-                    <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"}
+                    <Image src={"/icons/logo.png"} alt={"diwall-logo"}
                            width={100}
                            height={100}/>
                 </Grid>

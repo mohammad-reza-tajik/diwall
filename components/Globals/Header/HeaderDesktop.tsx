@@ -101,7 +101,7 @@ function HeaderDesktop() {
         <Grid container py={"3rem"} gap={"1rem"}>
             <Grid container item xs alignItems={"center"} gap={"1rem"}>
                 <Grid width={100} height={100} component={Link} href={"/"}>
-                    <Image src={"/assets/pictures/logo.png"} alt={"diwall-logo"} width={100} height={100}/>
+                    <Image src={"/icons/logo.png"} alt={"diwall-logo"} width={100} height={100}/>
                 </Grid>
                 <Grid container item md={"auto"} component={"form"}
                       onSubmit={submitSearchHandler}
