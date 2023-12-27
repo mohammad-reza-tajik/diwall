@@ -1,3 +1,4 @@
+"use client"
 import MainNavigation from "../MainNavigation";
 import Badge from "@mui/material/Badge";
 import Button from "@mui/material/Button";

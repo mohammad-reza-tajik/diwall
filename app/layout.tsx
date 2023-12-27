@@ -4,12 +4,13 @@ import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/free-mode";
 import "swiper/scss/thumbs";
-// import Footer from "@/components/Globals/Footer";
-// import Header from "@/components/Globals/Header";
 import GlobalStyles from "@/components/Globals/GlobalStyles";
 import AutoLogin from "@/components/Globals/AutoLogin";
 // import LoadingBar from "@/components/Globals/LoadingBar";
 import Providers from "@/components/Globals/Providers";
+import Header from "@/components/Globals/Header";
+import Footer from "@/components/Globals/Footer";
+import Grid from "@mui/material/Grid";
 
 
 export const metadata: Metadata = {
@@ -32,20 +33,20 @@ export const metadata: Metadata = {
         locale: 'fa_IR',
         type: 'website',
         siteName: "دیوال",
-        images : {
-            alt : "دیوال : فروشگاه پوستر و کاغذ دیواری",
-            url : "/assets/pictures/og-banner.jpg"
+        images: {
+            alt: "دیوال : فروشگاه پوستر و کاغذ دیواری",
+            url: "/assets/pictures/og-banner.jpg"
         }
 
     },
-    twitter : {
+    twitter: {
         title: "دیوال : فروشگاه پوستر و کاغذ دیواری",
         description: "از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید",
         card: "summary_large_image",
-        site:"https://diwall.vercel.com",
-        images : {
-            alt : "دیوال : فروشگاه پوستر و کاغذ دیواری",
-            url : "/assets/pictures/og-banner.jpg"
+        site: "https://diwall.vercel.com",
+        images: {
+            alt: "دیوال : فروشگاه پوستر و کاغذ دیواری",
+            url: "/assets/pictures/og-banner.jpg"
         },
     },
     icons: {
@@ -77,10 +78,16 @@ function RootLayout({children}: Props) {
         <body>
 
         <Providers>
-            <GlobalStyles />
+            <GlobalStyles/>
             {/*<LoadingBar/>*/}
             <AutoLogin>
-                {children}
+                <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
+                    <Grid item xs={11} component={"main"}>
+                        <Header/>
+                        {children}
+                        <Footer/>
+                    </Grid>
+                </Grid>
             </AutoLogin>
         </Providers>
         </body>

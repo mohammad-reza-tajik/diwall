@@ -1,6 +1,7 @@
-import React from "react";
+"use client"
 import Grid from "@mui/material/Grid";
 import type {SxProps} from "@mui/material/styles";
+
 const styles = {
     backDrop : {
         width : "100vw",
@@ -15,7 +16,6 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 interface Props {
-    // eslint-disable-next-line no-unused-vars
     setOpen:(open : boolean)=>void;
     open:boolean;
 }

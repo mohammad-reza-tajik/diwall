@@ -1,7 +1,8 @@
+"use client"
 import React, {useState} from "react";
 import Link from "next/link";
 import Image from "next/legacy/image"
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 import Grid from "@mui/material/Grid";
 import {userActions, useAppDispatch, useAppSelector} from "@/store";
 import CircularProgress from "@mui/material/CircularProgress";

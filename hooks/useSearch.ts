@@ -1,5 +1,5 @@
 import {ChangeEvent, FormEvent, useCallback, useState} from "react";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 import type {ProductType} from "@/db/productModel";
 import fetcher from "@/utils/fetcher";
 

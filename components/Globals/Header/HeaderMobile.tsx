@@ -1,3 +1,4 @@
+"use client"
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -6,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import MenuItem from "@mui/material/MenuItem";
 import React, {useState} from "react";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 import Link from "next/link";
 import 'react-modern-drawer/dist/index.css'
 import {enqueueSnackbar} from "notistack";

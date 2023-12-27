@@ -1,8 +1,9 @@
+"use client"
 import Grid from "@mui/material/Grid";
 import React from "react";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 import type {SxProps} from "@mui/material/styles";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import HomeIcon from '@mui/icons-material/Home';

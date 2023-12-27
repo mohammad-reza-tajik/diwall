@@ -1,3 +1,4 @@
+"use client"
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
@@ -6,7 +7,7 @@ import Button from "@mui/material/Button";
 import Circle from "@mui/icons-material/Circle";
 import Link from "next/link";
 import React, {ChangeEvent, useEffect, useState} from "react";
-import {useRouter} from "next/router";
+import {useRouter,useSearchParams} from "next/navigation";
 
 interface Props {
     sortBy?:boolean;
@@ -17,21 +18,22 @@ interface Props {
 
 }
 
-const SectionHeading : React.FC<Props> = ({sortBy, route , text , seeAll ,white}) => {
+function SectionHeading ({sortBy, route , text , seeAll ,white} : Props) {
 
     const [sort, setSort] = useState(1);
     const router = useRouter()
+    const searchParams = useSearchParams();
 
     useEffect(() => {
-    if (sortBy && router.query.sortBy){
-            setSort(Number(router.query.sortBy))
+    if (sortBy && searchParams.get("soryBy")){
+            setSort(Number(searchParams.get("soryBy")))
     }
     }, [])
 
 
     const sortChangeHandler = (event : ChangeEvent<HTMLInputElement>) => {
         setSort(Number(event.target.value));
-        router.push({pathname: router.pathname, query: {...router.query, sortBy:event.target.value}})
+        router.push(`?sortBy=${event.target.value}`)
     }
 
     return (

@@ -1,3 +1,4 @@
+"use client"
 import Grid from "@mui/material/Grid";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {useTheme} from "@mui/material/styles";
@@ -8,7 +9,6 @@ import SectionHeading from "./SectionHeading";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Product from "./Product";
-import React from "react";
 import type {ProductType} from "@/db/productModel";
 
 let slidesPerView: number;
@@ -20,7 +20,7 @@ interface Props {
 
 }
 
-const SwiperProducts: React.FC<Props> = (props) => {
+function SwiperProducts (props : Props)  {
 
     const {products, mostPopular} = props;
 

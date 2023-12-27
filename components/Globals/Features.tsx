@@ -7,7 +7,7 @@ import WorkspacePremiumOutlined from "@mui/icons-material/WorkspacePremiumOutlin
 import React from "react"
 
 
-const Features: React.FC = () => {
+function Features () {
 
     return (
         <Grid container component={"section"} spacing={20}>

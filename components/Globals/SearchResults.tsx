@@ -1,10 +1,11 @@
+"use client"
 import {FormEvent} from "react";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import Image from "next/image";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 import type {ProductType} from "@/db/productModel";
 import type {SxProps} from "@mui/material/styles";
 
