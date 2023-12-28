@@ -5,6 +5,7 @@ import fetcher from "@/utils/fetcher";
 import {User} from "./userSlice";
 import {enqueueSnackbar} from "notistack";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
+import {addToCart, removeFromCart} from "@/actions/user/cart";
 
 
 interface CartAndWishListArgs {
@@ -72,19 +73,21 @@ const handleCart = (args: CartAndWishListArgs) => {
             if (user?.username) {
                 setAddToCartLoading(true);
                 if (isInCart) {
-                    await fetcher.delete(`/api/user/cart?productId=${productId}&_id=${user._id}&token=${user.token}`)
+                   const res = await removeFromCart(productId);
+                   if (!res.ok) {
+                       throw new Error(res.message)
+                   }
                     dispatch(userActions.removeFromCart(productId))
-                    enqueueSnackbar("از سبد خرید شما حذف شد", {
+                    enqueueSnackbar(res.message, {
                         variant: "info",
                     })
                 } else {
-                    await fetcher.put("/api/user/cart", {
-                        productId,
-                        _id: user._id,
-                        token: user.token
-                    })
-                    dispatch(userActions.addToCart(productId))
-                    enqueueSnackbar("به سبد خرید شما اضافه شد", {
+                    const res = await addToCart(productId);
+                    if (!res.ok) {
+                        throw new Error(res.message)
+                    }
+                    dispatch(userActions.addToCart(productId));
+                    enqueueSnackbar(res.message, {
                         variant: "success",
                     })
                 }
