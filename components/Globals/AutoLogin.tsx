@@ -1,8 +1,8 @@
 "use client"
-import fetcher from "@/utils/fetcher";
 import {userActions, useAppDispatch} from "@/store";
 import Cookies from "js-cookie";
 import {useEffect} from "react";
+import {getUser} from "@/actions/user/auth";
 
 interface Props {
     children: React.ReactNode
@@ -17,7 +17,7 @@ function AutoLogin({children}: Props) {
         (async () => {
             try {
                 if (token) {
-                    const res = await fetcher.get(`/api/user`);
+                    const res = await getUser();
                     dispatch(userActions.login({user: res.user, token: res.token}));
                 }
 

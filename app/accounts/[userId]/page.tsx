@@ -9,12 +9,12 @@ import {useEffect, useState} from "react";
 import TabPanel from "@/components/Globals/TabPanel";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
-import fetcher from "@/utils/fetcher";
 import type {SxProps} from "@mui/material/styles";
 import type {ProductType} from "@/db/productModel";
 import Favorite from "@mui/icons-material/Favorite";
 import Person from "@mui/icons-material/Person";
 import ShoppingBag from "@mui/icons-material/ShoppingBag";
+import {getUser} from "@/actions/user/auth";
 
 
 // import Moderation from "@/components/AccountPage/Moderation";
@@ -69,7 +69,7 @@ function AccountPage() {
         (async () => {
             if (user?.username) {
                 setIsLoading(true);
-                const res = await fetcher.get(`/api/user?populated=true`);
+                const res = await getUser(true);
                 setPopulatedWishlist(res.wishlist);
                 setPopulatedCart(res.cart);
                 setIsLoading(false);
