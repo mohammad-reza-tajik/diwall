@@ -8,7 +8,7 @@ import serialize from "@/utils/serialize";
 
 export async function addToWishlist(productId: string) {
     try {
-        const token = cookies().get("token").value;
+        const token = cookies().get("token")?.value;
 
         if (!token) {
             return redirect("/auth");
@@ -51,7 +51,7 @@ export async function removeFromWishlist(productId : string) {
 
     try {
 
-        const token = cookies().get("token").value;
+        const token = cookies().get("token")?.value;
 
         if (!token) {
             return redirect("/auth");

@@ -102,7 +102,7 @@ export async function getUser(populate: boolean = false) {
     try {
         await connect();
 
-        let token = cookies().get("token").value;
+        let token = cookies().get("token")?.value;
 
         if (!token) return
 
