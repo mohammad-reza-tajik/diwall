@@ -1,11 +1,11 @@
 import {userActions} from "./userSlice";
 import React from "react";
 import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
-import fetcher from "@/utils/fetcher";
 import {User} from "./userSlice";
 import {enqueueSnackbar} from "notistack";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
 import {addToCart, removeFromCart} from "@/actions/user/cart";
+import {addToWishlist, removeFromWishlist} from "@/actions/user/wishlist";
 
 
 interface CartAndWishListArgs {
@@ -25,22 +25,23 @@ const handleWishlist = (args: CartAndWishListArgs) => {
 
         try {
             if (user?.username) {
-                setAddToWishlistLoading(true)
+                setAddToWishlistLoading(true);
                 if (isInWishlist) {
-                    await fetcher.delete(`/api/user/wishlist?productId=${productId}&_id=${user._id}&token=${user.token}`)
-                    dispatch(userActions.removeFromWishlist(productId))
-                    enqueueSnackbar("از لیست علاقمندی شما حذف شد", {
+                    const res = await removeFromWishlist(productId);
+                    if (!res.ok) {
+                        throw new Error(res.message)
+                    }
+                    dispatch(userActions.removeFromWishlist(productId));
+                    enqueueSnackbar(res.message, {
                         variant: "info",
                     })
                 } else {
-                    await fetcher.put("/api/user/wishlist", {
-                        productId,
-                        _id: user._id,
-                        token: user.token
-                    })
-
-                    dispatch(userActions.addToWishlist(productId))
-                    enqueueSnackbar("به لیست علاقمندی شما افزوده شد", {
+                    const res = await addToWishlist(productId);
+                    if (!res.ok) {
+                        throw new Error(res.message)
+                    }
+                    dispatch(userActions.addToWishlist(productId));
+                    enqueueSnackbar(res.message, {
                         variant: "success",
                     })
                 }
@@ -48,7 +49,7 @@ const handleWishlist = (args: CartAndWishListArgs) => {
                 router.push("/auth")
             }
         } catch (err) {
-            enqueueSnackbar("متاسفانه عملیات با خطا مواجه شد", {
+            enqueueSnackbar(err.message, {
                 variant: "error",
             })
         } finally {
@@ -95,7 +96,7 @@ const handleCart = (args: CartAndWishListArgs) => {
                 router.push("/auth")
             }
         } catch (err) {
-            enqueueSnackbar("متاسفانه عملیات با خطا مواجه شد", {
+            enqueueSnackbar(err.message, {
                 variant: "error",
             })
         } finally {
