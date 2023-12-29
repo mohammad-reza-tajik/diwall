@@ -1,4 +1,3 @@
-import React from "react";
 import Grid from "@mui/material/Grid";
 import CircularProgress from "@mui/material/CircularProgress";
 import CartItem from "./CartItem";
@@ -6,15 +5,13 @@ import type {ProductType} from "@/db/productModel";
 import type {User} from "@/store/userSlice";
 import Typography from "@mui/material/Typography";
 
-
 interface Props {
     isLoading:boolean;
     populatedCart:ProductType[];
     user:User;
-
 }
 
-const Cart : React.FC<Props> = ({isLoading , populatedCart , user}) => {
+function Cart ({isLoading , populatedCart , user} : Props)  {
   return (
           <>
               {

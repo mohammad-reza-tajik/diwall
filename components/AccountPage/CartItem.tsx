@@ -6,47 +6,27 @@ import Link from "next/link";
 import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
 import Delete from "@mui/icons-material/Delete";
 import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
-
 import React, {ChangeEvent, useState} from "react";
-import {useAppDispatch, useAppSelector, userActions} from "@/store";
+import {useAppDispatch, userActions} from "@/store";
 import Image from "next/image";
-
 import type {ProductType} from "@/db/productModel";
-import fetcher from "@/utils/fetcher";
-import {enqueueSnackbar} from "notistack";
 import CircularProgress from "@mui/material/CircularProgress";
+import {useRouter} from "next/navigation";
 
+function CartItem ({title, slug, _id} : ProductType)  {
 
-const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
+    const [addToCartLoading, setAddToCartLoading] = useState(false);
+    const router = useRouter();
 
-    const [isLoading, setIsLoading] = useState(false);
+    const dispatch = useAppDispatch();
 
-    const user = useAppSelector(state => state.user)
-    const dispatch = useAppDispatch()
-
-    const [numberInCart, setNumberInCart] = useState(1)
+    const [numberInCart, setNumberInCart] = useState(1);
     const numbersInCartChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setNumberInCart(Number(event.target.value))
-
+        setNumberInCart(Number(event.target.value));
     }
 
-    const removeFromCart = async () => {
-        if (user?.username) {
-            try {
-                setIsLoading(true)
-                await fetcher.delete(`/api/user/cart?productId=${_id}&_id=${user._id}&token=${user.token}`)
-                dispatch(userActions.removeFromCart(_id));
-                enqueueSnackbar("از سبد خرید شما حذف شد", {
-                    variant: "info",
-                });
-            } catch (err) {
-                enqueueSnackbar("متاسفانه عملیات با خطا مواجه شد", {
-                    variant: "error",
-                })
-            } finally {
-                setIsLoading(true)
-            }
-        }
+    const cartHandler = () => {
+        dispatch(userActions.handleCart({productId: _id, setAddToCartLoading, router}));
     }
 
     return (
@@ -79,9 +59,9 @@ const CartItem: React.FC<ProductType> = ({title, slug, _id}) => {
                         }}>
                             <RemoveCircleOutline color={"primary"} sx={{fontSize: 25}}/>
                         </IconButton> :
-                        <IconButton onClick={removeFromCart} disabled={isLoading}>
+                        <IconButton onClick={cartHandler} disabled={addToCartLoading}>
                             {
-                                isLoading ?
+                                addToCartLoading ?
                                     <CircularProgress color={"primary"} size={25}/> :
                                     <Delete color={"primary"} sx={{fontSize: 22}}/>
                             }
