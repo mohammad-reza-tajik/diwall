@@ -8,13 +8,14 @@ import dynamic from "next/dynamic";
 import ReviewsForm from "./ReviewsForm";
 import SwiperProducts from "../Globals/SwiperProducts";
 import type {ProductType} from "@/db/productModel";
-import type {SxProps} from "@mui/material/styles";import ReviewsIcon from "@mui/icons-material/Reviews";
+import type {SxProps} from "@mui/material/styles";
+import ReviewsIcon from "@mui/icons-material/Reviews";
 import CreateIcon from "@mui/icons-material/Create";
 import InventoryIcon from '@mui/icons-material/Inventory';
 import {useTheme} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const Comments = dynamic(() => import("./Reviews"));
+const Reviews = dynamic(() => import("./Reviews"));
 
 const styles = {
     tab: {
@@ -30,13 +31,15 @@ const styles = {
 } satisfies Record<string, SxProps>
 
 interface Props {
-    products: ProductType[];
+   slug: string;
+    relatedProducts: ProductType[];
 }
 
-function Info({products}: Props) {
+function Info({slug , relatedProducts}: Props) {
 
     const [tab, setTab] = useState(0);
-    const [addComment, setAddComment] = useState(false);
+    const [addReview, setAddReview] = useState(false);
+
     const changeTabHandler = (_, newValue: number) => {
         setTab(newValue);
     };
@@ -58,13 +61,13 @@ function Info({products}: Props) {
             </Grid>
             <Grid item xs={12} py={30}>
                 <TabPanel index={0} tab={tab}>
-                    <SwiperProducts products={products}/>
+                    <SwiperProducts products={relatedProducts}/>
                 </TabPanel>
                 <TabPanel index={1} tab={tab}>
-                    <Comments addComment={addComment}/>
+                    <Reviews addReview={addReview} slug={slug} />
                 </TabPanel>
                 <TabPanel index={2} tab={tab}>
-                    <ReviewsForm setAddComment={setAddComment}/>
+                    <ReviewsForm setAddReview={setAddReview} slug={slug}/>
                 </TabPanel>
             </Grid>
         </Grid>

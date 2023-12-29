@@ -60,7 +60,7 @@ async function DetailsPage({params}: Props) {
             <Divider sx={{width: 1, mb: 30}}/>
             <Features/>
             <Divider sx={{width: 1, mt: 30}}/>
-            <Info products={relatedProducts}/>
+            <Info slug={decodeURI(params.slug)} relatedProducts={relatedProducts} />
         </>
     )
 }

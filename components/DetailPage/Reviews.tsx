@@ -1,18 +1,16 @@
+"use client"
 import {useEffect, useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from "swiper/modules";
-
-import fetcher from "@/utils/fetcher";
-import {useRouter} from "next/router";
 import CircularProgress from "@mui/material/CircularProgress";
 import Divider from "@mui/material/Divider";
 import Person from "@mui/icons-material/Person";
-
 import useMediaQuery from "@mui/material/useMediaQuery";
 import type {SxProps, Theme} from "@mui/material/styles";
 import theme from "@/styles/theme";
+import {getProduct} from "@/actions/product";
 
 const styles = {
 
@@ -29,7 +27,8 @@ const styles = {
 } satisfies Record<string, SxProps<Theme>>
 
 interface Props {
-    addComment: boolean
+    addReview: boolean;
+    slug : string;
 }
 
 interface Comment {
@@ -38,25 +37,23 @@ interface Comment {
     date: string;
 }
 
-function Reviews({addComment}: Props) {
+function Reviews({addReview , slug}: Props) {
 
-    // addComment is used to re-fetch comments anytime a new comment was submitted
-
-    const router = useRouter();
+    // addReview is used to re-fetch comments anytime a new comment was submitted
 
     const [isLoading, setIsLoading] = useState(true);
     const [comments, setComments] = useState<Comment[]>([]);
 
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"))
-
-    const slug = router.isReady && router.query.slug;
+    const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
     useEffect(() => {
-            const url = `/api/products/${slug}`;
             (async () => {
                 try {
                     setIsLoading(true);
-                    const res = await fetcher.get(url);
+                    const res = await getProduct(slug);
+                    if (!res.ok) {
+                        throw new Error(res.message);
+                    }
                     setComments(res.product.comments);
                 } catch (err) {
                     console.log(err)
@@ -65,7 +62,7 @@ function Reviews({addComment}: Props) {
                 }
             })()
         }
-        , [addComment, slug])
+        , [addReview, slug])
 
     return (
         <Grid container item xs={12} alignItems={"center"}>
