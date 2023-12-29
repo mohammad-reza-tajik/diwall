@@ -1,5 +1,9 @@
 @import "Fonts";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 ::placeholder {
   color: #666;
   font-size: 1.6rem;
