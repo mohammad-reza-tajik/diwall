@@ -1,17 +1,17 @@
-import {ChangeEvent, FormEvent, useCallback, useState} from "react";
+import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useCallback, useState} from "react";
 import {useRouter} from "next/navigation";
 import type {ProductType} from "@/db/productModel";
-import fetcher from "@/utils/fetcher";
+import {getAllProducts} from "@/actions/product";
 
 
-const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: (open:boolean) => void ) => {
+const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
 
     const router = useRouter()
 
-    const [search, setSearch] = useState("")
-    const [isWrong, setIsWrong] = useState(false)
-    const [isLoading, setIsLoading] = useState(true)
-    const [results, setResults] = useState<ProductType[]>([])
+    const [search, setSearch] = useState("");
+    const [isWrong, setIsWrong] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [results, setResults] = useState<ProductType[]>([]);
 
     const submitSearchHandler = async (event : FormEvent) => {
         event.preventDefault()
@@ -46,12 +46,12 @@ const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: (open:boo
     }, [])
 
     const searchChangeHandler = (event : ChangeEvent<HTMLInputElement>) => {
-        setSearch(event.target.value)
-        optimizedFn(event.target.value)
+        setSearch(event.target.value);
+        optimizedFn(event.target.value);
         if (event.target.value.trim() === "") {
-            setIsWrong(true)
+            setIsWrong(true);
             setTimeout(() => {
-                setIsWrong(false)
+                setIsWrong(false);
             }, 5000)
 
         } else {
@@ -74,10 +74,10 @@ const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: (open:boo
 
 
     const handleChange = async (search: string) => {
-        setIsLoading(true)
-        const res = await fetcher.get(`/api/products?search=${search}`)
+        setIsLoading(true);
+        const res = await getAllProducts({ search });
         setResults(res.products.slice(0, 4));
-        setIsLoading(false)
+        setIsLoading(false);
 
     };
     const optimizedFn = useCallback(debounce(handleChange), []);

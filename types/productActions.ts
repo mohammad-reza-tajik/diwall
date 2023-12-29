@@ -6,3 +6,10 @@ export interface CreateCommentParams {
         date : string;
     }
 }
+
+export interface GetAllProductsParams {
+    category?:string;
+    page?:number;
+    sortBy?:number;
+    search?:string;
+}

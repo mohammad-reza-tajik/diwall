@@ -3,33 +3,35 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import SectionHeading from "@/components/Globals/SectionHeading";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {useSearchParams} from "next/navigation";
 import Product from "@/components/Globals/Product";
 import Pagination from "@/components/Globals/Pagination";
-import fetcher from "@/utils/fetcher";
+import {getAllProducts} from "@/actions/product";
+import qs from "query-string";
+
 
 interface PageInformation {
     lastPage?: number;
     currentPage?: number;
 }
 
-const Products: React.FC = () => {
+function Products() {
 
-    const [products, setProducts] = useState([])
-    const [pageInformation, setPageInformation] = useState<PageInformation>({})
-    const [isLoading, setIsLoading] = useState(true)
+    const [products, setProducts] = useState([]);
+    const [pageInformation, setPageInformation] = useState<PageInformation>({});
+    const [isLoading, setIsLoading] = useState(true);
 
-    const searchParams = useSearchParams();
+    const {category, page, sortBy, search} = qs.parse(useSearchParams().toString()) as Record<string, string>;
+
 
     useEffect(() => {
         (async () => {
             try {
                 setIsLoading(true)
-                    const res = await fetcher.get(`/api/products?${searchParams.toString()}`)
-                    // console.log(res)
-                    setProducts(res.products)
-                    setPageInformation(res)
+                const res = await getAllProducts({category, page: +page, sortBy: +sortBy, search})
+                setProducts(res.products)
+                setPageInformation(res)
 
             } catch (err) {
                 console.log(err)
@@ -40,35 +42,35 @@ const Products: React.FC = () => {
 
         })()
 
-    }, [searchParams])
+    }, [category , page , sortBy , search])
 
 
     return (
         <Grid container item xs={12} direction={"column"}>
             <Grid item xs>
-                {searchParams.get("search") && !searchParams.get("category") &&
-                    <SectionHeading text={`محصولات مرتبط با ${searchParams.get("search")}`} sortBy={true}/>
+                {search && !category &&
+                    <SectionHeading text={`محصولات مرتبط با ${search}`} sortBy={true}/>
                 }
-            {/*
-                {!router.query.search && +router.query.sortBy === 2 && !router.query.category &&
+                {/*
+                {!router.searchParams.search && +router.searchParams.sortBy === 2 && !router.searchParams.category &&
                     <SectionHeading text={"پرفروش ترین محصولات"} sortBy={true}/>
                 }
-                {!router.query.search && +router.query.sortBy === 3 && !router.query.category &&
+                {!router.searchParams.search && +router.searchParams.sortBy === 3 && !router.searchParams.category &&
                     <SectionHeading text={"محبوب ترین محصولات"} sortBy={true}/>
                 }
-                {!router.query.search && (+router.query.sortBy === 1 || !router.query.sortBy) && !router.query.category &&
+                {!router.searchParams.search && (+router.searchParams.sortBy === 1 || !router.searchParams.sortBy) && !router.searchParams.category &&
                     <SectionHeading text={"جدید ترین محصولات"} sortBy={true}/>
                 }
-                {!router.query.search && router.query.category && router.query.category === "kitchen_poster" &&
+                {!router.searchParams.search && router.searchParams.category && router.searchParams.category === "kitchen_poster" &&
                     <SectionHeading text={"پوستر برای آشپزخانه"} sortBy={true}/>
                 }
-                {!router.query.search && router.query.category && router.query.category === "child_room_poster" &&
+                {!router.searchParams.search && router.searchParams.category && router.searchParams.category === "child_room_poster" &&
                     <SectionHeading text={"پوستر برای اتاق کودک"} sortBy={true}/>
                 }
-                {!router.query.search && router.query.category && router.query.category === "living_room_poster" &&
+                {!router.searchParams.search && router.searchParams.category && router.searchParams.category === "living_room_poster" &&
                     <SectionHeading text={"پوستر برای حال و پذیرایی"} sortBy={true}/>
                 }
-                {!router.query.search && router.query.category && router.query.category === "office_poster" &&
+                {!router.searchParams.search && router.searchParams.category && router.searchParams.category === "office_poster" &&
                     <SectionHeading text={"پوستر برای اداره و محل کار"} sortBy={true}/>
                 }*/}
 
@@ -104,4 +106,4 @@ const Products: React.FC = () => {
     )
 }
 
-export default React.memo(Products)
+export default Products
