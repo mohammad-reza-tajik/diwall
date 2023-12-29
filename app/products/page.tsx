@@ -28,51 +28,35 @@ function Products() {
     useEffect(() => {
         (async () => {
             try {
-                setIsLoading(true)
-                const res = await getAllProducts({category, page: +page, sortBy: +sortBy, search})
-                setProducts(res.products)
-                setPageInformation(res)
+                setIsLoading(true);
+                const res = await getAllProducts({category, page: +page, sortBy, search});
+                setProducts(res.products);
+                setPageInformation(res);
 
             } catch (err) {
-                console.log(err)
+                console.log(err);
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
 
             }
 
         })()
 
-    }, [category , page , sortBy , search])
+    }, [category , page , sortBy , search]);
 
 
     return (
         <Grid container item xs={12} direction={"column"}>
             <Grid item xs>
-                {search && !category &&
-                    <SectionHeading text={`محصولات مرتبط با ${search}`} sortBy={true}/>
+                {
+                    search && <SectionHeading text={`محصولات مرتبط با ${search}`} sortBy={true}/>
                 }
-                {/*
-                {!router.searchParams.search && +router.searchParams.sortBy === 2 && !router.searchParams.category &&
-                    <SectionHeading text={"پرفروش ترین محصولات"} sortBy={true}/>
+                {
+                    category &&  <SectionHeading text={`پوستر برای ${category.split("-").join(" ")}`} sortBy={true}/>
                 }
-                {!router.searchParams.search && +router.searchParams.sortBy === 3 && !router.searchParams.category &&
-                    <SectionHeading text={"محبوب ترین محصولات"} sortBy={true}/>
+                {
+                    !category && !search && sortBy && <SectionHeading text={`${sortBy.split("-").join(" ")} محصولات`} sortBy={true}/>
                 }
-                {!router.searchParams.search && (+router.searchParams.sortBy === 1 || !router.searchParams.sortBy) && !router.searchParams.category &&
-                    <SectionHeading text={"جدید ترین محصولات"} sortBy={true}/>
-                }
-                {!router.searchParams.search && router.searchParams.category && router.searchParams.category === "kitchen_poster" &&
-                    <SectionHeading text={"پوستر برای آشپزخانه"} sortBy={true}/>
-                }
-                {!router.searchParams.search && router.searchParams.category && router.searchParams.category === "child_room_poster" &&
-                    <SectionHeading text={"پوستر برای اتاق کودک"} sortBy={true}/>
-                }
-                {!router.searchParams.search && router.searchParams.category && router.searchParams.category === "living_room_poster" &&
-                    <SectionHeading text={"پوستر برای حال و پذیرایی"} sortBy={true}/>
-                }
-                {!router.searchParams.search && router.searchParams.category && router.searchParams.category === "office_poster" &&
-                    <SectionHeading text={"پوستر برای اداره و محل کار"} sortBy={true}/>
-                }*/}
 
             </Grid>
             <Grid container item xs spacing={10} alignItems={"center"}>
@@ -96,7 +80,7 @@ function Products() {
 
                 {
                     isLoading || products.length === 0 ?
-                        "" :
+                        null :
                         <Pagination {...pageInformation} />
                 }
 

@@ -13,17 +13,17 @@ const navLinks = [
     },
     {
         label : "جدیدترین ها",
-        href : "/products",
+        href : "/products?sortBy=جدیدترین",
         icon : WhatshotIcon
     },
     {
         label : "پرفروش ترین ها",
-        href : "/products?sortBy=2",
+        href : "/products?sortBy=پرفروش-ترین",
         icon : SellIcon
     },
     {
         label : "محبوب ترین ها",
-        href : "/products?sortBy=3",
+        href : "/products?sortBy=محبوب-ترین",
         icon : FavoriteIcon
     },
     {

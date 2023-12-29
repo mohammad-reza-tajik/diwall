@@ -36,7 +36,7 @@ export async function getProduct(slug: string) {
     }
 }
 
-export async function getAllProducts({category = null, page = 1, sortBy = 1, search = null}: GetAllProductsParams) {
+export async function getAllProducts({category = null, page = 1, sortBy = "جدیدترین", search = null}: GetAllProductsParams) {
     try {
 
         await connect();
@@ -46,15 +46,15 @@ export async function getAllProducts({category = null, page = 1, sortBy = 1, sea
         if (search && search !== "undefined" && search.trim().length !== 0) {
 
             // the only way to put a variable in a regex
-            const regexp = new RegExp(search, "g") // output => /req.body.search/g
+            const regexp = new RegExp(search, "g"); // output => /req.body.search/g
 
-            const productsCount = await Product.countDocuments({title: regexp})
+            const productsCount = await Product.countDocuments({title: regexp});
 
             let products;
 
-            if (sortBy === 2) { // best-selling products
+            if (sortBy === "پرفروش-ترین") { // best-selling products
                 products = await Product.find({title: regexp}).sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
-            } else if (sortBy === 3) { // most popular products
+            } else if (sortBy === "محبوب-ترین") { // most popular products
                 products = await Product.find({title: regexp}).sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else { // latest products
                 products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
@@ -73,9 +73,9 @@ export async function getAllProducts({category = null, page = 1, sortBy = 1, sea
             const productsCount = await Product.countDocuments()
             let products;
 
-            if (sortBy === 2) { // best-selling products
+            if (sortBy === "پرفروش-ترین") { // best-selling products
                 products = await Product.find().sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
-            } else if (sortBy === 3) { // most popular products
+            } else if (sortBy === "محبوب-ترین") { // most popular products
                 products = await Product.find().sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else { // latest products
                 products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
@@ -93,9 +93,9 @@ export async function getAllProducts({category = null, page = 1, sortBy = 1, sea
             const productsCount = await Product.countDocuments({categories: {$in: [category]}})
             let products;
 
-            if (sortBy === 2) { // best-selling products
+            if (sortBy === "پرفروش-ترین") { // best-selling products
                 products = await Product.find({categories: {$in: [category]}}).sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
-            } else if (sortBy === 3) { // most popular products
+            } else if (sortBy === "محبوب-ترین") { // most popular products
                 products = await Product.find({categories: {$in: [category]}}).sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
             } else { // latest products
                 products = await Product.find({categories: {$in: [category]}}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)

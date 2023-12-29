@@ -10,6 +10,6 @@ export interface CreateCommentParams {
 export interface GetAllProductsParams {
     category?:string;
     page?:number;
-    sortBy?:number;
+    sortBy?:string;
     search?:string;
 }
