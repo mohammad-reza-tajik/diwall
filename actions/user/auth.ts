@@ -1,6 +1,6 @@
 "use server";
 import connect from "@/db/connect";
-import User, {UserType} from "@/db/userModel";
+import User from "@/db/userModel";
 import generateToken from "@/utils/generateToken";
 import {LoginActionParams, SignupActionParams} from "@/types/userActions";
 import bcrypt from "bcrypt";
@@ -15,20 +15,20 @@ export async function signup({username, email, password}: SignupActionParams) {
 
         await connect();
 
-        const usernameRegex = new RegExp(`^${username}$`, "i")
-        const emailRegex = new RegExp(`^${email}$`, "i")
+        const usernameRegex = new RegExp(`^${username}$`, "i");
+        const emailRegex = new RegExp(`^${email}$`, "i");
 
-        const alreadyExists = await User.findOne({$or: [{username: usernameRegex}, {email: emailRegex}]})
+        let user = await User.findOne({$or: [{username: usernameRegex}, {email: emailRegex}]});
 
-        if (alreadyExists) {
-            throw {
+        if (user !== null) {
+            return serialize({
                 ok: false,
                 status: 409,
                 message: "این نام کاربری یا ایمیل  قبلا استفاده شده است"
-            }
+            })
         }
 
-        const user = new User(
+        const newUser = new User(
             {
                 username,
                 email,
@@ -37,22 +37,21 @@ export async function signup({username, email, password}: SignupActionParams) {
                 cart: []
             }
         )
-        await user.save();
+        await newUser.save();
 
-        const token = generateToken(user._id);
-        user.password = undefined;
+        const token = generateToken(newUser._id);
+        newUser.password = undefined;
 
-        return {
+        return serialize({
             ok: true,
             status: 201,
-            user,
+            newUser,
             token,
             message: "ثبت نام با موفقیت انجام شد.",
-        }
+        })
 
     } catch (err) {
         console.log(err);
-        return err
     }
 }
 
@@ -62,43 +61,41 @@ export async function login({identifier, password}: LoginActionParams) {
 
         await connect();
 
-        const regexp = new RegExp(`^${identifier}$`, "i")
+        const regexp = new RegExp(`^${identifier}$`, "i");
 
-        const user = await User.findOne({$or: [{username: regexp}, {email: regexp}]}).select("+password") // this syntax is for matching either username or email
+        const user = await User.findOne({$or: [{username: regexp}, {email: regexp}]}).select("+password").populate("cart").populate("wishlist"); // this syntax is for matching either username or email
         const token = generateToken(user._id);
 
         if (!user) {
-            throw {
+            return serialize({
                 ok: false,
                 status: 401,
                 message: "اطلاعات وارد شده صحیح نمیباشد"
-            }
+            })
         }
 
         if (await bcrypt.compare(password, user.password)) {
-            return {
+            return serialize({
                 ok: true,
                 status: 200,
                 message: "ورود با موفقیت انجام شد",
                 user,
                 token,
-
-            }
+            })
 
         } else {
-            throw {
+            return serialize({
                 ok: false,
                 status: 401,
                 message: "اطلاعات وارد شده صحیح نمیباشد"
-            }
+            })
         }
     } catch (err) {
         console.log(err);
-        return err;
     }
 }
 
-export async function getUser(populate: boolean = false) {
+export async function getUser() {
     try {
         await connect();
 
@@ -109,40 +106,30 @@ export async function getUser(populate: boolean = false) {
         const {_id} = await validateToken(token);
 
         if (!_id) {
-            throw serialize({
+            return serialize({
                 ok: false,
+                status: 401,
                 message: "توکن شما صحیح نیست"
             })
         }
 
-        const query = User.findById(_id);
-        let user : UserType ,data : any;
-
-        if (!populate) {
-            user = await query;
-            token = tokenGenerator(user._id);
-            data = {
-                user,
-                token
-            }
-        } else {
-            user = await query.populate("wishlist").populate("cart");
-            data = {
-                cart: user.cart,
-                wishlist: user.wishlist
-            }
-        }
+        const user = await User.findById(_id).populate("cart").populate("wishlist");
 
         if (!user) {
-            throw serialize({
-                message : "این کاربر وجود ندارد",
-                status : 404
+            return serialize({
+                ok: false,
+                message: "این کاربر وجود ندارد",
+                status: 404
             })
         }
 
-        return serialize(data);
+        token = tokenGenerator(user._id);
+        return serialize({
+            user,
+            token
+        })
 
     } catch (err) {
-        console.log(err)
+        console.log(err);
     }
 }
