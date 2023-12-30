@@ -5,65 +5,54 @@
 @tailwind utilities;
 
 ::placeholder {
-  color: #666;
-  font-size: 1.6rem;
+  @apply text-gray-600 text-2xl;
+}
+
+::-webkit-scrollbar {
+  @apply w-4;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-white;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary;
 }
 
 *,
 *:before,
 *:after {
-  margin: 0 ;
-  padding: 0 ;
-  box-sizing: border-box;
-  direction: rtl;
-  font-family: inherit;
+  @apply m-0 p-0 box-border;
 }
 
 html {
-  scroll-behavior: smooth;
-  font-size: 62.5%;
-  font-family: "dana-medium",tahoma ,sans-serif;
-
+  @apply scroll-smooth font-dana-medium text-[62.5%];
 }
 
 body {
-  overflow-x: hidden !important;
-  position: relative;
-  background-color: #f8f8f8;
-
+  @apply relative overflow-x-hidden bg-[#f8f8f8] #{!important};
 }
 
 a,
 a:active,
 a:checked {
-  text-decoration: none;
-  color: #555;
-
+  @apply text-gray-700;
 }
 
 /**** hide arrows in input[type=number] ****/
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+  @apply appearance-none m-0;
 }
 
 input[type=number] {
-  -moz-appearance: textfield;
+  @apply appearance-none;
 }
 
-/*************************/
-
-.pointer {
-  cursor: pointer;
-}
-.contain {
-  object-fit: contain;
-}
-.cover {
-  object-fit: cover;
-}
-.fill {
-  object-fit: fill;
+@layer utilities {
+  .contained {
+    @apply max-w-screen-xl mx-auto;
+  }
 }
