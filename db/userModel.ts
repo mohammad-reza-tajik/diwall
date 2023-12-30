@@ -1,12 +1,14 @@
 import {Schema, models, model , Model} from "mongoose";
 import bcrypt from "bcrypt";
+import {ProductType} from "@/db/productModel";
+
 export interface UserType {
     username: string;
     password: string;
     email: string;
     _id : string;
-    wishlist: string[];
-    cart: string[];
+    wishlist: ProductType[];
+    cart: ProductType[];
     role : string;
 }
 
