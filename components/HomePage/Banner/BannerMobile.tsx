@@ -1,51 +1,24 @@
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
-import {SxProps} from "@mui/material/styles";
-
-
-const styles = {
-    bannerTextBox: {
-        backgroundImage: "linear-gradient(rgba(44, 44, 44,.6),rgba(44, 44, 44,.6))",
-        py: 100,
-        px: {xs: 50, sm: 90},
-        gap: 60,
-        zIndex: 50
-    },
-    bannerButton: {
-        fontSize: 16,
-        width : {xs : 200 , sm : 300},
-        mx : "auto"
-    },
-
-} satisfies Record<string, SxProps>
 
 function BannerMobile ()  {
-
     return (
-        <Grid container item justifyContent={"center"}  mb={40} minWidth={"100vw"}
-              position={"relative"}>
-
-            <Grid container item direction={"column"} xs={12} sx={styles.bannerTextBox}>
-                <Typography fontFamily={"dana-black"} component={"h1"} fontSize={25}
-                            color={"white.main"} textAlign={"center"}>
+        <div className={"flex justify-center md:hidden mb-32 relative h-[80vh]"}>
+            <div className={"flex flex-col justify-center items-center px-2 gap-5 z-20 bg-gradient-to-r from-black/50 to-black/50"}>
+                <h1 className={"text-white text-center font-dana-black text-2xl"}>
                     خانه رویایی خود را به واقعیت تبدیل کنید
-                </Typography>
-                <Typography lineHeight={1.8} component={"p"} fontSize={{xs: 16, sm: 18}} color={"white.main"}
-                            textAlign={"center"}>
+                </h1>
+                <p className={"text-white text-center text-base sm:text-lg leading-10"}>
                     از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                     آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
-                </Typography>
-                <Button variant={"contained"} color={"primary"} size={"medium"} sx={styles.bannerButton} aria-label="مشاهده محصولات"
-                        component={Link} href={"/products"}>مشاهده محصولات</Button>
-
-            </Grid>
-            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner"} fill priority className={"cover"}/>
-        </Grid>
+                </p>
+                <Link className={"btn btn-primary max-w-max"} aria-label="مشاهده محصولات" href={"/products"}>
+                    مشاهده محصولات
+                </Link>
+            </div>
+            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner"} fill priority className={"object-cover"}/>
+        </div>
     );
-};
+}
 
 export default BannerMobile;

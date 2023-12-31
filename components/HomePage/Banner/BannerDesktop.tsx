@@ -1,57 +1,24 @@
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Image from "next/image"
-import Link from "next/link"
-import React from "react";
-import {SxProps} from "@mui/material/styles";
-
-const styles = {
-    bannerTextBox: {
-        bgcolor: "primary.main",
-        flexDirection : "column",
-        py: "10rem",
-        px: "4rem",
-        gap: "4rem",
-    },
-    bannerHeading : {
-        fontSize : {md : 20 ,lg:24},
-        color : "white.main",
-        fontFamily : "dana-black",
-    },
-    bannerText : {
-        textAlign : "justify",
-        color : "white.main",
-        lineHeight : 1.8 ,
-        fontSize : {md : 14 , lg : 16}
-    },
-    bannerButton: {
-        fontSize: {md : 14 , lg : 16},
-        width: {md : 150 , lg : 200} ,
-    }
-} satisfies Record<string, SxProps>
+import Image from "next/image";
+import Link from "next/link";
 
 function BannerDesktop () {
 
     return (
-
-        <Grid container item mb={40}>
-            <Grid container item md={4} sx={styles.bannerTextBox}>
-                <Typography  component={"h1"} sx={styles.bannerHeading}>
+        <div className={"hidden md:grid grid-cols-6 mb-10"}>
+            <div className={"flex flex-col justify-center gap-8 lg:gap-14 py-4 lg:py-8 bg-primary col-span-2 px-5"}>
+                <h1 className={"text-base lg:text-xl text-white font-dana-black"}>
                     خانه رویایی خود را به واقعیت تبدیل کنید
-                </Typography>
-                <Typography component={"p"} sx={styles.bannerText}>
+                </h1>
+                <p className={"text-justify text-white lg:leading-8 text-xs lg:text-base"}>
                     از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                     آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
-                </Typography>
-                <Button component={Link} href={"/products"} variant={"outlined"} color={"white"} aria-label="مشاهده محصولات" sx={styles.bannerButton}>
+                </p>
+                <Link className={"btn btn-sm lg:btn-md btn-ghost text-white border border-white"} href={"/products"} aria-label="مشاهده محصولات">
                     مشاهده محصولات
-                </Button>
-            </Grid>
-            <Grid item md>
-                    <Image src={"/assets/pictures/banner-desktop.jpg"} width={750} height={500} style={{width:"100%" , height : "100%"}} className={"cover"} priority alt={"banner-image"}/>
-            </Grid>
-        </Grid>
+                </Link>
+            </div>
+            <Image src={"/assets/pictures/banner-desktop.jpg"} width={750} height={500} className={"w-full h-full object-cover col-span-4"} priority alt={"banner-image"}/>
+        </div>
     )
 }
 export default BannerDesktop

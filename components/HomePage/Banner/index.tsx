@@ -1,22 +1,14 @@
 import BannerMobile from "./BannerMobile";
 import BannerDesktop from "./BannerDesktop";
-import React from "react";
-import Grid from "@mui/material/Grid";
 
-
-const Banner: React.FC = () => {
+function Banner () {
 
     return (
-        <>
-            <Grid component={"section"} display={{xs:"block",md:"none"}}>
+            <section>
                 <BannerMobile/>
-            </Grid>
-            <Grid component={"section"} width={1} display={{xs:"none",md:"block"}}>
                 <BannerDesktop/>
-            </Grid>
-        </>
-
+            </section>
     );
-};
+}
 
 export default Banner;
