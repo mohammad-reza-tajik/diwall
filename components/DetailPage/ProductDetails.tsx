@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from "react";
+import {useState} from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -14,6 +14,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import type {ProductType} from "@/db/productModel";
 import type {SxProps} from "@mui/material/styles";
+
 const styles = {
     title: {
         fontSize: {xs: 16, sm: 18, lg: 20},
@@ -68,11 +69,7 @@ const styles = {
     },
 } satisfies Record<string, SxProps>
 
-interface Props {
-    product: ProductType,
-}
-
-function ProductDetails ({product} : Props)  {
+function ProductDetails (product : ProductType)  {
     const [addToCartLoading, setAddToCartLoading] = useState(false);
     const [addToWishlistLoading, setAddToWishlistLoading] = useState(false);
     const [presetSizes, setPresetSizes] = useState(1);
@@ -81,8 +78,8 @@ function ProductDetails ({product} : Props)  {
 
     const router = useRouter();
     const dispatch = useAppDispatch();
-    const isInWishlist = user?.wishlist.includes(product._id);
-    const isInCart = user?.cart.includes(product._id);
+    const isInWishlist = user?.wishlist.find((prod : ProductType)=> prod._id === product._id);
+    const isInCart = user?.cart.find((prod : ProductType)=> prod._id === product._id);
 
     const presetSizesHandler = (_, presetSizes: number) => {
         if (presetSizes !== null)
@@ -90,11 +87,11 @@ function ProductDetails ({product} : Props)  {
     }
 
     const addToCartHandler = () => {
-        dispatch(userActions.handleCart({productId: product._id, setAddToCartLoading, router}));
+        dispatch(userActions.handleCart({product, setAddToCartLoading, router}));
     }
 
     const addToWishlistHandler = () => {
-        dispatch(userActions.handleWishlist({productId: product._id, setAddToWishlistLoading, router}));
+        dispatch(userActions.handleWishlist({product, setAddToWishlistLoading, router}));
     }
 
     return (

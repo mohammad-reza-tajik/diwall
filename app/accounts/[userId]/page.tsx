@@ -10,12 +10,9 @@ import TabPanel from "@/components/Globals/TabPanel";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
 import type {SxProps} from "@mui/material/styles";
-import type {ProductType} from "@/db/productModel";
 import Favorite from "@mui/icons-material/Favorite";
 import Person from "@mui/icons-material/Person";
 import ShoppingBag from "@mui/icons-material/ShoppingBag";
-import {getUser} from "@/actions/user/auth";
-
 
 // import Moderation from "@/components/AccountPage/Moderation";
 
@@ -42,12 +39,7 @@ function AccountPage() {
 
     const query = useSearchParams();
 
-    const [isLoading, setIsLoading] = useState(false);
-
     const user = useAppSelector(state => state.user);
-
-    const [populatedWishlist, setPopulatedWishlist] = useState<ProductType[]>([]);
-    const [populatedCart, setPopulatedCart] = useState<ProductType[]>([]);
 
     const [tab, setTab] = useState(1);
 
@@ -61,27 +53,13 @@ function AccountPage() {
         if (queryTab) {
             setTab(Number(queryTab));
         }
-
     }, [queryTab])
 
-
-    useEffect(() => {
-        (async () => {
-            if (user?.username) {
-                setIsLoading(true);
-                const res = await getUser(true);
-                setPopulatedWishlist(res.wishlist);
-                setPopulatedCart(res.cart);
-                setIsLoading(false);
-            }
-        })()
-    }, [user])
 
     const theme = useTheme();
     const matchesMD = useMediaQuery(theme.breakpoints.up("md"));
 
     return (
-        <>
             <Grid container columns={14} gap={10}>
                 <Grid item xs={14} md={3} sx={styles.tabsContainer}>
                     <Tabs onChange={tabChangeHandler} value={tab}
@@ -100,15 +78,15 @@ function AccountPage() {
                 <Grid item xs={14} md minHeight={300}>
 
                     <TabPanel tab={tab} index={0}>
-                        <Profile user={user}/>
+                        <Profile {...user}/>
                     </TabPanel>
 
                     <TabPanel tab={tab} index={1}>
-                        <Wishlist isLoading={isLoading} populatedWishlist={populatedWishlist} user={user}/>
+                        <Wishlist {...user}/>
                     </TabPanel>
 
                     <TabPanel tab={tab} index={2}>
-                        <Cart isLoading={isLoading} populatedCart={populatedCart} user={user}/>
+                        <Cart {...user}/>
                     </TabPanel>
 
                     {user.role === "admin" &&
@@ -123,7 +101,6 @@ function AccountPage() {
                     }
                 </Grid>
             </Grid>
-        </>
     )
 }
 

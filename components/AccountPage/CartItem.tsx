@@ -13,7 +13,7 @@ import type {ProductType} from "@/db/productModel";
 import CircularProgress from "@mui/material/CircularProgress";
 import {useRouter} from "next/navigation";
 
-function CartItem ({title, slug, _id} : ProductType)  {
+function CartItem (product : ProductType)  {
 
     const [addToCartLoading, setAddToCartLoading] = useState(false);
     const router = useRouter();
@@ -26,19 +26,19 @@ function CartItem ({title, slug, _id} : ProductType)  {
     }
 
     const cartHandler = () => {
-        dispatch(userActions.handleCart({productId: _id, setAddToCartLoading, router}));
+        dispatch(userActions.handleCart({product, setAddToCartLoading, router}));
     }
 
     return (
         <Grid container bgcolor={"white.main"} p={"1rem"} borderRadius={1}>
-            <Grid container item xs={12} md alignItems={"center"} gap={10} component={Link} href={`/products/${slug}`}>
+            <Grid container item xs={12} md alignItems={"center"} gap={10} component={Link} href={`/products/${product.slug}`}>
                 <Grid item xs={"auto"}>
-                    <Image src={`/assets/pictures/products/${slug}.jpg`} width={50} height={50}
+                    <Image src={`/assets/pictures/products/${product.slug}.jpg`} width={50} height={50}
                            style={{borderRadius: "50%"}}
-                           alt={title}/>
+                           alt={product.title}/>
                 </Grid>
                 <Grid item xs component={Typography} variant={"h4"} fontSize={{xs: 12, md: 16}}>
-                    {title}
+                    {product.title}
                 </Grid>
             </Grid>
             <Grid container item xs={12} md={"auto"} alignItems={"center"}

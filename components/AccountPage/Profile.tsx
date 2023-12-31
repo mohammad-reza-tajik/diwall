@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import type {User} from "@/store/userSlice";
 import {SxProps} from "@mui/material/styles";
+import {UserType} from "@/db/userModel";
 
 const styles = {
     keys: {
@@ -13,11 +13,7 @@ const styles = {
     }
 } satisfies Record<string, SxProps>
 
-interface Props {
-    user: User;
-}
-
-function Profile ({user} : Props)  {
+function Profile (product : UserType)  {
 
     return (
         <Grid container item xs={12} gap={40} p={20} bgcolor={"white.main"} borderRadius={1}>
@@ -32,13 +28,13 @@ function Profile ({user} : Props)  {
             <Grid container item xs={12} alignItems={"center"} gap={20}>
                 <Typography sx={styles.keys}>نام کاربری : </Typography>
                 <Typography variant={"subtitle1"} sx={styles.values}>
-                    {user?.username}
+                    {product.username}
                 </Typography>
             </Grid>
             <Grid container item xs={12} alignItems={"center"} gap={20}>
                 <Typography sx={styles.keys}>ایمیل : </Typography>
                 <Typography variant={"subtitle1"} sx={styles.values}>
-                    {user?.email}
+                    {product.email}
                 </Typography>
 
             </Grid>

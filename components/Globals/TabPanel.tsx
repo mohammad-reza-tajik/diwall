@@ -1,12 +1,10 @@
-import React from "react";
-
 interface Props {
     children?: React.ReactNode;
     index: number;
     tab: number;
 }
 
-const TabPanel: React.FC<Props> = ({children, tab, index}) => {
+function TabPanel ({children, tab, index} : Props) {
 
     return (
         <>

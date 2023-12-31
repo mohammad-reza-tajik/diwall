@@ -53,7 +53,7 @@ async function DetailsPage({params}: Props) {
                     <ThumbGallery product={product}/>
                 </Grid>
                 <Grid item xs={13} md={7} pr={{xs: 5, md: 30}} mt={{xs: 20, md: 0}}>
-                    <ProductDetails product={product}/>
+                    <ProductDetails {...product}/>
                 </Grid>
             </Grid>
 
