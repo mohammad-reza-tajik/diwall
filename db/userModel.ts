@@ -4,12 +4,12 @@ import {ProductType} from "@/db/productModel";
 
 export interface UserType {
     username: string;
-    password: string;
+    password?: string;
     email: string;
     _id : string;
     wishlist: ProductType[];
     cart: ProductType[];
-    role : string;
+    role : "user" | "admin";
 }
 
 const userSchema = new Schema<UserType>(
