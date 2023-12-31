@@ -1,6 +1,6 @@
 import Link from "next/link";
-import PhoneIcon from '@mui/icons-material/Phone';
 import navLinks from "@/constants/navLinks";
+import {Phone} from "@/components/Globals/Icons";
 
 function MainNav() {
 
@@ -10,8 +10,8 @@ function MainNav() {
                 {
                     navLinks.map((link , index) => (
                         <Link key={index} href={link.href} className={"flex items-center gap-1 hover:text-primary transition-colors"}>
-                            <link.icon />
-                            {link.label}
+                            {link.icon}
+                            {link.text}
                         </Link>
                         )
                     )
@@ -23,7 +23,7 @@ function MainNav() {
                     <span className={"text-sm text-center"}>پشتیبانی</span>
                 </div>
                 <div className={"flex justify-center items-center"}>
-                    <PhoneIcon sx={{fontSize: 30}} color={"primary"}/>
+                    <Phone className={"fill-primary size-8"} />
                 </div>
             </div>
         </div>
