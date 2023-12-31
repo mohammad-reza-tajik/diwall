@@ -9,7 +9,7 @@
 }
 
 ::-webkit-scrollbar {
-  @apply w-4;
+  @apply w-2;
 }
 
 ::-webkit-scrollbar-track {
@@ -27,7 +27,7 @@
 }
 
 html {
-  @apply scroll-smooth font-dana-medium text-[62.5%];
+  @apply scroll-smooth font-dana-medium;
 }
 
 body {
@@ -55,4 +55,10 @@ input[type=number] {
   .contained {
     @apply max-w-screen-xl mx-auto;
   }
+
+@layer components {
+  .btn,.checkbox,.badge,.alert {
+    @apply rounded;
+  }
+
 }
