@@ -69,15 +69,25 @@ export function Refrigerator(props: SVGProps<SVGSVGElement>) {
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path d="M9 8q-.425 0-.712-.288T8 7V6q0-.425.288-.712T9 5q.425 0 .713.288T10 6v1q0 .425-.288.713T9 8m0 9q-.425 0-.712-.288T8 16v-3q0-.425.288-.712T9 12q.425 0 .713.288T10 13v3q0 .425-.288.713T9 17m-3 5q-.825 0-1.412-.587T4 20V4q0-.825.588-1.412T6 2h12q.825 0 1.413.588T20 4v16q0 .825-.587 1.413T18 22zm0-2h12v-9H6zM6 9h12V4H6z"></path></svg>
     )
 }
-export function Guarantee(props: SVGProps<SVGSVGElement>) {
+
+
+export function Medal(props: SVGProps<SVGSVGElement>) {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path  d="M9.075 16.25L12 14.475l2.925 1.775l-.775-3.325l2.6-2.25l-3.425-.275L12 7.25l-1.325 3.15l-3.425.275l2.6 2.25zM12 23.3L8.65 20H4v-4.65L.7 12L4 8.65V4h4.65L12 .7L15.35 4H20v4.65L23.3 12L20 15.35V20h-4.65zm0-2.8l2.5-2.5H18v-3.5l2.5-2.5L18 9.5V6h-3.5L12 3.5L9.5 6H6v3.5L3.5 12L6 14.5V18h3.5zm0-8.5"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path d="M14.94 19.5L12 17.77L9.06 19.5l.78-3.34l-2.59-2.24l3.41-.29L12 10.5l1.34 3.13l3.41.29l-2.59 2.24M20 2H4v2l4.86 3.64a8 8 0 1 0 6.28 0L20 4m-2 11a6 6 0 1 1-7.18-5.88a5.86 5.86 0 0 1 2.36 0A6 6 0 0 1 18 15m-5.37-8h-1.26l-4-3h9.34Z"></path></svg>
     )
 }
 
+
+export function Package(props: SVGProps<SVGSVGElement>) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path d="M11 19.425v-6.85L5 9.1v6.85zm2 0l6-3.475V9.1l-6 3.475zm-2 2.3L4 17.7q-.475-.275-.737-.725t-.263-1v-7.95q0-.55.263-1T4 6.3l7-4.025Q11.475 2 12 2t1 .275L20 6.3q.475.275.738.725t.262 1v7.95q0 .55-.262 1T20 17.7l-7 4.025Q12.525 22 12 22t-1-.275m5-13.2l1.925-1.1L12 4l-1.95 1.125zm-4 2.325l1.95-1.125L8.025 6.3l-1.95 1.125z"></path></svg>
+    )
+}
+
+
 export function HeadPhones(props: SVGProps<SVGSVGElement>) {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path  d="M8.077 20H5.615q-.69 0-1.152-.462Q4 19.075 4 18.385V12q0-1.663.626-3.118q.626-1.455 1.713-2.543q1.088-1.087 2.543-1.713Q10.337 4 12 4q1.663 0 3.118.626q1.455.626 2.543 1.713q1.087 1.088 1.713 2.543Q20 10.337 20 12v6.385q0 .69-.462 1.152q-.463.463-1.153.463h-2.462v-6.154H19V12q0-2.925-2.037-4.962T12 5Q9.075 5 7.038 7.038T5 12v1.846h3.077zm-1-5.154H5v3.539q0 .23.192.423q.193.192.423.192h1.462zm9.846 0V19h1.462q.23 0 .423-.192q.192-.193.192-.423v-3.539zm-9.846 0H5zm9.846 0H19z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path d="M9 21H5q-.825 0-1.412-.587T3 19v-7q0-1.875.713-3.512t1.924-2.85q1.213-1.213 2.85-1.925T12 3q1.875 0 3.513.713t2.85 1.924q1.212 1.213 1.925 2.85T21 12v7q0 .825-.587 1.413T19 21h-4v-8h4v-1q0-2.925-2.037-4.962T12 5Q9.075 5 7.038 7.038T5 12v1h4zm-2-6H5v4h2zm10 0v4h2v-4zM7 15H5zm10 0h2z"></path></svg>
     )
 }
 export function Shipping(props: SVGProps<SVGSVGElement>) {
@@ -190,12 +200,6 @@ export function Person(props: SVGProps<SVGSVGElement>) {
     )
 }
 
-
-export function Package(props: SVGProps<SVGSVGElement>) {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48" {...props}><g fill="none" stroke="#000" strokeLinejoin="round" strokeWidth="4"><path d="M44 14L24 4L4 14v20l20 10l20-10z"></path><path stroke-linecap="round" d="m4 14l20 10m0 20V24m20-10L24 24M34 9L14 19"></path></g></svg>
-    )
-}
 
 export function Home(props: SVGProps<SVGSVGElement>) {
     return (
