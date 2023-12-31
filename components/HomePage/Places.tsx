@@ -1,49 +1,31 @@
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Circle from "@mui/icons-material/Circle";
 import Link from "next/link";
-import type {SxProps} from "@mui/material/styles";
 import places from "@/constants/places";
+import {Circle} from "@/components/Globals/Icons";
 
-const styles    = {
-    place: {
-        transition: "all .4s",
-        border: "1px solid rgba(44,44,44,.3)",
-        p: "2rem",
-        "&:hover": {
-            filter: "invert(32%) sepia(64%) saturate(541%) hue-rotate(107deg) brightness(94%) contrast(102%)"
-        }
-    },
-    title: {
-        fontSize: "1.6rem"
-
-    }
-} satisfies Record<string, SxProps>
-
-
-function Places ()  {
-
+function Places() {
     return (
-        <Grid container item component={"section"} my={80} gap={{xs: 50, md: 80}} xs={12}>
-            <Grid container item alignItems={"center"} justifyContent={"center"} gap={10} xs={12}>
-                <Circle color={"primary"} sx={{fontSize: {xs: 20, md: 30}}}/>
-                <Typography variant={"h2"} color={"#555"} fontFamily={"dana-black"} sx={{fontSize: {xs: 20, md: 30}}}>
-                    <Grid component={"span"} sx={{color: "primary.main"}}>برای کجا</Grid>
+        <section className={"flex flex-col gap-5 md:gap-8 my-32"}>
+            <div className={"flex items-center justify-center gap-2"}>
+                <Circle className={"fill-primary size-4 lg:size-7"}/>
+                <h2 className={"font-dana-black text-lg lg:text-2xl"}>
+                    <span className={"text-primary"}>برای کجا</span>
+                    &nbsp;
                     می خواهید ؟
-                </Typography>
-            </Grid>
-            <Grid container item xs={12} alignItems={"center"} bgcolor={"#fff"}>
+                </h2>
+            </div>
+            <div className={"flex flex-wrap items-center bg-white"}>
                 {
-                    places.map((item,index)=>{
-                        return  <Grid key={index} container item direction={"column"} xs={6} md={4} lg={2} alignItems={"center"} gap={20}
-                                      sx={styles.place} component={Link} href={item.href}>
-                            {item.icon}
-                            <Typography variant={"h3"} sx={styles.title} fontFamily={"dana-bold"}>{item.text}</Typography>
-                        </Grid>
+                    places.map((item, index) => {
+                        return (
+                            <Link key={index} className={"flex flex-col items-center w-1/2 md:w-1/3 lg:w-1/6 gap-5 p-8 border hover:fill-primary hover:text-primary transition-all"} href={item.href}>
+                                {item.icon}
+                                <span className={"font-dana-bold"}>{item.text}</span>
+                            </Link>
+                        )
                     })
                 }
-            </Grid>
-        </Grid>
+            </div>
+        </section>
     )
 }
 
