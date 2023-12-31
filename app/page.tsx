@@ -1,4 +1,3 @@
-import Grid from "@mui/material/Grid";
 import Features from "@/components/Globals/Features";
 import Banner from "@/components/HomePage/Banner";
 import ShowCase from "@/components/HomePage/ShowCase";
@@ -17,7 +16,7 @@ async function HomePage () {
     const bestSellingProducts = JSON.parse(JSON.stringify(await Product.find().sort({sells: "desc"}).limit(10)));
 
     return (
-        <Grid container  justifyContent={"center"}>
+        <>
             <Banner />
             <Features />
             <Places/>
@@ -28,7 +27,7 @@ async function HomePage () {
             <SectionHeading text={"پر فروش ترین محصولات"} seeAll route={"/products?sortBy=2"} />
             <SwiperProducts products={bestSellingProducts} />
             <ShowCase/>
-        </Grid>
+        </>
     )
 }
 
