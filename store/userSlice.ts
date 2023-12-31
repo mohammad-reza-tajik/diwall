@@ -2,8 +2,9 @@ import {createSlice} from "@reduxjs/toolkit";
 import type {PayloadAction} from "@reduxjs/toolkit"
 import type {UserType} from "@/db/userModel";
 import Cookies from "js-cookie";
+import {ProductType} from "@/db/productModel";
 
-export interface User extends Omit<UserType, "password">{
+export interface User extends Omit<UserType, "password"> {
     token: string,
 }
 
@@ -30,7 +31,7 @@ const userSlice = createSlice({
             state.role = role
             state.wishlist = wishlist;
             state.token = action.payload.token;
-            Cookies.set("token",state.token);
+            Cookies.set("token", state.token);
 
         },
         logout(state) {
@@ -45,34 +46,21 @@ const userSlice = createSlice({
 
 
         },
-        addToWishlist(state, action: PayloadAction<string>) {
-            const productId = action.payload;
-            if (!state.wishlist.includes(productId)) {
-                state.wishlist = [...state.wishlist, productId]
-
-            }
-
-
+        addToWishlist(state, action: PayloadAction<ProductType>) {
+            const product = action.payload;
+            state.wishlist = [...state.wishlist, product]
         },
-        removeFromWishlist(state, action: PayloadAction<string>) {
-            const productId = action.payload;
-            if (state.wishlist.includes(productId)) {
-                state.wishlist = state.wishlist.filter((id) => id !== productId)
-            }
-
+        removeFromWishlist(state, action: PayloadAction<ProductType>) {
+            const product = action.payload;
+            state.wishlist = state.wishlist.filter((prod) => prod._id !== product._id)
         },
-        addToCart(state, action: PayloadAction<string>) {
-            const productId = action.payload;
-            if (!state.cart.includes(productId)) {
-                state.cart = [...state.cart, productId]
-            }
-
+        addToCart(state, action: PayloadAction<ProductType>) {
+            const product = action.payload;
+            state.cart = [...state.cart, product]
         },
-        removeFromCart(state, action: PayloadAction<string>) {
-            const productId = action.payload;
-            if (state.cart.includes(productId)) {
-                state.cart = state.cart.filter((id) => id !== productId)
-            }
+        removeFromCart(state, action: PayloadAction<ProductType>) {
+            const product = action.payload;
+            state.cart = state.cart.filter((prod) => prod._id !== product._id)
         }
     }
 });
