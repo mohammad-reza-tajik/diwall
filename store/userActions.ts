@@ -1,6 +1,6 @@
 import {userActions} from "./userSlice";
 import React from "react";
-import {AnyAction, ThunkDispatch} from "@reduxjs/toolkit";
+import {ThunkDispatch, UnknownAction} from "@reduxjs/toolkit";
 import {User} from "./userSlice";
 import {enqueueSnackbar} from "notistack";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
@@ -20,7 +20,7 @@ const handleWishlist = (args: CartAndWishListArgs) => {
     const {product, router, setAddToWishlistLoading} = args;
     return async (dispatch: ThunkDispatch<{
         user: User
-    }, undefined, AnyAction> & React.Dispatch<AnyAction>, getState: () => { user: User }) => {
+    }, undefined, UnknownAction> & React.Dispatch<UnknownAction>, getState: () => { user: User }) => {
         const user = getState().user;
         const isInWishlist = user?.wishlist.find((prod: ProductType) => prod._id === product._id);
 
@@ -67,7 +67,7 @@ const handleCart = (args: CartAndWishListArgs) => {
 
     return async (dispatch: ThunkDispatch<{
         userReducer: User
-    }, undefined, AnyAction> & React.Dispatch<AnyAction>, getState: () => { user: User }) => {
+    }, undefined, UnknownAction> & React.Dispatch<UnknownAction>, getState: () => { user: User }) => {
         const user = getState().user;
         const isInCart = user?.cart.find((prod: ProductType) => prod._id === product._id);
 
