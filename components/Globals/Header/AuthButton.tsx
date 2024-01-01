@@ -17,7 +17,7 @@ function AuthButton(user: UserType) {
                     onClick={() => setOpenMenu((prevState)=>!prevState)}
             >
                 {user?.username}
-                <UserMenu user={user} open={openMenu} device={"desktop"}/>
+                <UserMenu user={user} open={openMenu}/>
             </button>
 
 
