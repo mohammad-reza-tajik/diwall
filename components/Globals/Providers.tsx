@@ -4,17 +4,12 @@ import {store} from "@/store";
 import theme from "@/styles/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import {SnackbarProvider, closeSnackbar} from 'notistack';
-import IconButton from "@mui/material/IconButton";
-import Close from "@mui/icons-material/Close";
-
+import {Close} from "@/components/Globals/Icons";
 
 const snackbarAction = (key: string) => (
-    <IconButton
-        size="large"
-        sx={{color:theme.palette.white.main, padding: 0}}
-        onClick={() => closeSnackbar(key)}>
-        <Close fontSize={"large"}/>
-    </IconButton>
+    <button className={"btn btn-ghost btn-sm btn-circle"} onClick={() => closeSnackbar(key)}>
+        <Close className={"size-8 fill-white"}/>
+    </button>
 )
 
 interface Props {
