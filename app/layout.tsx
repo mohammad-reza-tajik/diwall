@@ -1,12 +1,10 @@
 import type {Metadata, Viewport} from "next";
-import "@/styles/Globals.scss";
 import "swiper/scss";
 import "swiper/scss/navigation";
 import "swiper/scss/free-mode";
 import "swiper/scss/thumbs";
-import GlobalStyles from "@/components/Globals/GlobalStyles";
+import "@/styles/Globals.scss";
 import AutoLogin from "@/components/Globals/AutoLogin";
-// import LoadingBar from "@/components/Globals/LoadingBar";
 import Providers from "@/components/Globals/Providers";
 import Header from "@/components/Globals/Header";
 import Footer from "@/components/Globals/Footer";
@@ -77,17 +75,13 @@ function RootLayout({children}: Props) {
         <body>
 
         <Providers>
-            <GlobalStyles/>
-            {/*<LoadingBar/>*/}
             <AutoLogin>
-                <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
-                    <Grid item xs={11} component={"main"}>
+                    <main className={"contained"}>
                         <Header/>
                         <MainNav />
                         {children}
                         <Footer/>
-                    </Grid>
-                </Grid>
+                    </main>
             </AutoLogin>
         </Providers>
         </body>

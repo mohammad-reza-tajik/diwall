@@ -4,8 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+:root {
+  @apply bg-[#f9f9f9];
+  --swiper-theme-color:#fff;
+  --swiper-navigation-size : 15px;
+}
+
 ::placeholder {
-  @apply text-gray-600 text-2xl;
+  @apply text-gray-400 #{!important};
 }
 
 ::-webkit-scrollbar {
@@ -31,13 +38,7 @@ html {
 }
 
 body {
-  @apply relative overflow-x-hidden bg-[#f8f8f8] #{!important};
-}
-
-a,
-a:active,
-a:checked {
-  @apply text-gray-700;
+  @apply relative overflow-x-hidden text-gray-700  #{!important};
 }
 
 /**** hide arrows in input[type=number] ****/
@@ -51,14 +52,34 @@ input[type=number] {
   @apply appearance-none;
 }
 
-@layer utilities {
-  .contained {
-    @apply max-w-screen-xl mx-auto;
-  }
+.swiper {
+  @apply w-full;
+}
 
-@layer components {
-  .btn,.checkbox,.badge,.alert {
-    @apply rounded;
-  }
+.swiper-button-prev, .swiper-button-next {
+  @apply bg-primary rounded-full size-10 md:size-12 #{!important};
+}
 
+.notistack-MuiContent {
+  @apply flex p-1 gap-20 text-xs md:text-sm #{!important};
+}
+
+.go70336739 {
+  @apply mr-auto p-0 #{!important};
+}
+
+.notistack-MuiContent-success {
+  @apply bg-primary #{!important};
+}
+
+.notistack-MuiContent-error {
+  @apply bg-error #{!important};
+}
+
+.notistack-MuiContent-info {
+  @apply bg-info #{!important}
+}
+
+.contained {
+  @apply max-w-screen-xl mx-auto;
 }
