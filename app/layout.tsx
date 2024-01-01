@@ -10,7 +10,7 @@ import AutoLogin from "@/components/Globals/AutoLogin";
 import Providers from "@/components/Globals/Providers";
 import Header from "@/components/Globals/Header";
 import Footer from "@/components/Globals/Footer";
-import Grid from "@mui/material/Grid";
+import MainNav from "@/components/Globals/MainNav";
 
 
 export const metadata: Metadata = {
@@ -83,6 +83,7 @@ function RootLayout({children}: Props) {
                 <Grid container maxWidth={1400} mx={"auto"} justifyContent={"center"}>
                     <Grid item xs={11} component={"main"}>
                         <Header/>
+                        <MainNav />
                         {children}
                         <Footer/>
                     </Grid>

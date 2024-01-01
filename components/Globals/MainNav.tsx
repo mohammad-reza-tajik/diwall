@@ -5,11 +5,11 @@ import {Phone} from "@/components/Globals/Icons";
 function MainNav() {
 
     return (
-        <div className={"hidden md:flex justify-between px-1"}>
+        <div className={"hidden md:flex justify-between my-5"}>
             <nav className={"flex items-center gap-6 text-sm lg:text-base"}>
                 {
                     navLinks.map((link , index) => (
-                        <Link key={index} href={link.href} className={"flex items-center gap-1 hover:text-primary transition-colors"}>
+                        <Link key={index} href={link.href} className={"flex items-center gap-1 hover:text-primary hover:fill-primary transition-colors"}>
                             {link.icon}
                             {link.text}
                         </Link>
