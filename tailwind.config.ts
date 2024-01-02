@@ -61,7 +61,11 @@ const config: Config = {
       "dana-bold": ["dana-bold", "Helvetica","sans-serif"],
       "dana-black": ["dana-black","Helvetica","sans-serif"],
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "auth-pattern": "url(/assets/pictures/auth-bg.svg)",
+      }
+    },
   },
 }
 export default config
