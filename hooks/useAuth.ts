@@ -13,12 +13,6 @@ const useAuth = () => {
 
     const dispatch = useAppDispatch();
 
-    const formTypeHandler = (_, formType: "login" | "signup") => {
-        // the bottom line is written like this so that only one tab can be active or disabled at a time
-        if (formType !== null)
-            setFormType(formType);
-    }
-
     //********************************** form field refs **********************************//
 
     const usernameRef = useRef<HTMLInputElement>();
@@ -86,7 +80,7 @@ const useAuth = () => {
         identifierRef,
         usernameRef,
         formHandler,
-        formTypeHandler,
+        setFormType,
         passwordRef,
         formType
     }
