@@ -8,7 +8,7 @@ import {Close} from "@/components/Globals/Icons";
 
 const snackbarAction = (key: string) => (
     <button className={"btn btn-ghost btn-sm btn-circle"} onClick={() => closeSnackbar(key)}>
-        <Close className={"size-8 fill-white"}/>
+        <Close className={"size-5 fill-white"}/>
     </button>
 )
 
