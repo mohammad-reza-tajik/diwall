@@ -1,52 +1,21 @@
 "use client"
 import {FormEvent, useRef, useState, Dispatch, SetStateAction} from "react";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import {useAppSelector} from "@/store";
-import Button from "@mui/material/Button";
 import Link from "next/link";
-import CircularProgress from "@mui/material/CircularProgress";
-import Create from "@mui/icons-material/Create";
-import TextField from "@mui/material/TextField";
-import type {SxProps} from "@mui/material/styles";
 import {enqueueSnackbar} from "notistack";
 import {createComment} from "@/actions/product/comment";
-
-const styles = {
-    commentField: {
-        ".MuiInputBase-input": {
-            fontSize: {xs: 13, md: 16},
-            px: 10,
-            lineHeight: 1.8,
-            "&::-webkit-scrollbar": {
-                width: 5
-            },
-            "&::-webkit-scrollbar-thumb": {
-                borderRadius: 8,
-                backgroundClip: "content-box",
-                bgcolor: "primary.main",
-            },
-        },
-    },
-    commentButton: {
-        fontSize: {xs: 12, md: 15},
-        width: {xs: 1, md: 200},
-        gap: 10,
-        py: 15
-    },
-
-} satisfies Record<string, SxProps>
+import {Create} from "@/components/Globals/Icons";
 
 interface Props {
     setAddReview: Dispatch<SetStateAction<boolean>>;
-    slug : string;
+    slug: string;
 }
 
-function ReviewsForm({setAddReview , slug}: Props) {
+function ReviewsForm({setAddReview, slug}: Props) {
 
     const user = useAppSelector(state => state.user);
 
-    const commentRef = useRef<HTMLTextAreaElement>();
+    const reviewRef = useRef<HTMLTextAreaElement>();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -56,16 +25,17 @@ function ReviewsForm({setAddReview , slug}: Props) {
             setIsLoading(true);
             const res = await createComment({
                 comment: {
-                    content: commentRef.current.value,
+                    content: reviewRef.current.value,
                     author: user.username,
                     date: new Date().toLocaleDateString("fa")
-                }, slug })
+                }, slug
+            })
 
             if (!res.ok) {
                 throw new Error(res.message);
             }
 
-            commentRef.current.value = ""
+            reviewRef.current.value = ""
             enqueueSnackbar(res.message, {
                 variant: "success",
             })
@@ -73,48 +43,45 @@ function ReviewsForm({setAddReview , slug}: Props) {
             // we are changing this to re-run the useEffect in Reviews component to fetch new comments
             setAddReview((prevState) => !prevState);
         } catch (err) {
-                enqueueSnackbar(err.message, {
-                    variant: "error",
-                })
-            }
-        finally {
-                setIsLoading(false);
-            }
+            enqueueSnackbar(err.message, {
+                variant: "error",
+            })
+        } finally {
+            setIsLoading(false);
         }
-
-        return (
-            <>
-                {
-                    user.username ?
-                        <Grid container item xs={12} md={7} direction={"column"} gap={10} component={"form"}
-                              onSubmit={insertCommentHandler}>
-                            <TextField multiline minRows={7} sx={styles.commentField} maxRows={7} variant="outlined"
-                                       inputRef={commentRef} required placeholder="دیدگاه شما ..."/>
-                            <Button disabled={isLoading} type={"submit"} variant={"contained"} color={"primary"}
-                                    sx={styles.commentButton} startIcon={isLoading ?
-                                <CircularProgress color={"inherit"} size={25}/> : <Create sx={{color: "#fff"}}/>}
-                                    aria-label={"add comment button"}>
-                                درج دیدگاه
-                            </Button>
-                        </Grid>
-                        :
-                        <Grid container item direction={"column"} justifyContent={"center"} alignItems={"center"}
-                              xs={12}
-                              p={10}
-                              gap={20}>
-                            <Typography variant={"h4"} component={"span"} fontSize={{xs: 14, md: 16}}
-                                        textAlign={"center"}
-                                        lineHeight={1.7}>
-                                برای درج دیدگاه باید ابتدا وارد حساب کاربری خود شوید!
-                            </Typography>
-                            <Button variant={"contained"} color={"primary"} sx={{fontSize: 14}} component={Link}
-                                    href={"/auth"}>
-                                ورود به حساب کاربری
-                            </Button>
-                        </Grid>
-                }
-            </>
-        )
     }
 
-    export default ReviewsForm
+    return (
+        <>
+            {
+                user.username ?
+                    <form className={"flex flex-col gap-4 w-full md:w-1/2"} onSubmit={insertCommentHandler}>
+                        <textarea className={"textarea textarea-bordered focus:textarea-primary resize-none"} rows={8} ref={reviewRef}
+                                  required placeholder={"دیدگاه شما ..."}/>
+
+                        <button className={"btn btn-primary rounded-full w-full md:w-max px-10"} disabled={isLoading} type={"submit"}
+                                aria-label={"add comment button"}
+                        >
+                            {
+                                isLoading ?
+                                    <span className={"loading loading-spinner text-white"}></span> :
+                                    <Create className={"size-6 md:size-5 fill-white"}/>
+                            }
+                            درج دیدگاه
+                        </button>
+                    </form>
+                    :
+                    <div className={"flex flex-col justify-center items-center p-4 gap-5"}>
+                        <p className={"text-center text-sm md:text-base"}>
+                            برای درج دیدگاه باید ابتدا وارد حساب کاربری خود شوید!
+                        </p>
+                        <Link className={"btn btn-primary"} href={"/auth"}>
+                            ورود به حساب کاربری
+                        </Link>
+                    </div>
+            }
+        </>
+    )
+}
+
+export default ReviewsForm
