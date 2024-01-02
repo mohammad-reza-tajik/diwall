@@ -43,7 +43,12 @@ export async function addToWishlist(productId: string) {
             message: "به لیست علاقمندی شما افزوده شد",
         })
     } catch (err) {
-        console.log(err)
+        console.log(err);
+        return serialize({
+            status: 500,
+            ok:false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
     }
 }
 
@@ -88,5 +93,10 @@ export async function removeFromWishlist(productId : string) {
         })
     } catch (err) {
         console.log(err);
+        return serialize({
+            status: 500,
+            ok:false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
     }
 }

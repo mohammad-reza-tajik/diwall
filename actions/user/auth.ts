@@ -47,11 +47,16 @@ export async function signup({username, email, password}: SignupActionParams) {
             status: 201,
             newUser,
             token,
-            message: "ثبت نام با موفقیت انجام شد.",
+            message: "ثبت نام با موفقیت انجام شد",
         })
 
     } catch (err) {
         console.log(err);
+        return serialize({
+            status: 500,
+            ok:false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
     }
 }
 
@@ -64,7 +69,6 @@ export async function login({identifier, password}: LoginActionParams) {
         const regexp = new RegExp(`^${identifier}$`, "i");
 
         const user = await User.findOne({$or: [{username: regexp}, {email: regexp}]}).select("+password").populate("cart").populate("wishlist"); // this syntax is for matching either username or email
-        const token = generateToken(user._id);
 
         if (!user) {
             return serialize({
@@ -75,6 +79,7 @@ export async function login({identifier, password}: LoginActionParams) {
         }
 
         if (await bcrypt.compare(password, user.password)) {
+            const token = generateToken(user._id);
             return serialize({
                 ok: true,
                 status: 200,
@@ -92,6 +97,11 @@ export async function login({identifier, password}: LoginActionParams) {
         }
     } catch (err) {
         console.log(err);
+        return serialize({
+            status: 500,
+            ok:false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
     }
 }
 
@@ -131,5 +141,10 @@ export async function getUser() {
 
     } catch (err) {
         console.log(err);
+        return serialize({
+            status: 500,
+            ok:false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
     }
 }

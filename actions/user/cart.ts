@@ -43,7 +43,12 @@ export async function addToCart(productId: string) {
             message: "به سبد خرید شما افزوده شد",
         })
     } catch (err) {
-        console.log(err)
+        console.log(err);
+        return serialize({
+            status: 500,
+            ok:false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
     }
 }
 
@@ -88,5 +93,10 @@ export async function removeFromCart(productId : string) {
         })
     } catch (err) {
         console.log(err);
+        return serialize({
+            status: 500,
+            ok:false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
     }
 }

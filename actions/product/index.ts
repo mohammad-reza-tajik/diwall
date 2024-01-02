@@ -32,7 +32,12 @@ export async function getProduct(slug: string) {
         })
 
     } catch (err) {
-        console.log(err)
+        console.log(err);
+        return serialize({
+            status: 500,
+            ok:false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
     }
 }
 
@@ -109,6 +114,11 @@ export async function getAllProducts({category = null, page = 1, sortBy = "جد�
             })
         }
     } catch (err) {
-        console.log(err)
+        console.log(err);
+        return serialize({
+            status: 500,
+            ok:false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
     }
 }

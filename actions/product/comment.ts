@@ -31,6 +31,11 @@ export async function createComment({comment , slug} : CreateCommentParams) {
         return serialize({message: "دیدگاه شما با موفقیت ثبت شد" , ok:true , status : 201});
 
     } catch (err) {
-        console.log(err)
+        console.log(err);
+        return serialize({
+            status: 500,
+            ok:false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
     }
 }
