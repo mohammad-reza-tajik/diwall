@@ -56,7 +56,7 @@ function AuthForm() {
 
                         <div className="join items-center justify-center w-full">
                             <Person className={"fill-primary size-12 p-2 join-item rounded-s-full border h-full"}/>
-                            <input ref={passwordRef}
+                            <input ref={identifierRef}
                                    className="input input-bordered rounded-e-full w-full focus:input-primary join-item"
                                    required type={"text"}
                                    placeholder={"ایمیل یا نام کاربری"}/>
@@ -64,7 +64,7 @@ function AuthForm() {
                 }
                 <div className="join items-center justify-center w-full">
                     <Password className={"fill-primary size-12 p-2 join-item rounded-s-full border h-full"}/>
-                    <input ref={identifierRef}
+                    <input ref={passwordRef}
                            className="input input-bordered rounded-e-full w-full focus:input-primary join-item" required
                            type={"password"}
                            placeholder={"رمز ورود"}/>
