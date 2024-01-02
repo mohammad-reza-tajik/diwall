@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function BannerMobile ()  {
     return (
-        <div className={"flex justify-center md:hidden mb-32 relative h-[80vh]"}>
+        <div className={"flex justify-center md:hidden mb-32 relative w-screen h-[80vh]"}>
             <div className={"flex flex-col justify-center items-center px-2 gap-5 z-20 bg-gradient-to-r from-black/50 to-black/50"}>
                 <h1 className={"text-white text-center font-dana-black text-2xl"}>
                     خانه رویایی خود را به واقعیت تبدیل کنید
