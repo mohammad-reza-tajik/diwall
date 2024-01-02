@@ -8,7 +8,7 @@ function BannerDesktop () {
                 <h1 className={"text-bas lg:text-xl text-white font-dana-black"}>
                     خانه رویایی خود را به واقعیت تبدیل کنید
                 </h1>
-                <p className={"text-justify text-white lg:leading-8 text-xs lg:text-sm xl:text-base"}>
+                <p className={"text-justify text-white text-xs lg:text-sm xl:text-base lg:!leading-7"}>
                     از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                     آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
                 </p>
