@@ -22,11 +22,11 @@ function AuthForm() {
         <div className={"flex flex-col bg-white items-center w-screen h-screen overflow-hidden rounded md:size-[500px] gap-4"}>
             <div className="join w-full">
                 <button type={"button"}
-                        className={`btn no-animation ${formType === "login" && "btn-primary"} w-1/2 rounded-none`}
+                        className={`btn no-animation ${formType === "login" && "btn-primary"} flex-1 rounded-none`}
                         onClick={() => setFormType("login")}>ورود
                 </button>
                 <button type={"button"}
-                        className={`btn no-animation ${formType === "signup" && "btn-primary"} w-1/2 rounded-none`}
+                        className={`btn no-animation ${formType === "signup" && "btn-primary"} flex-1 rounded-none`}
                         onClick={() => setFormType("signup")}>ثبت نام
                 </button>
             </div>
@@ -73,8 +73,8 @@ function AuthForm() {
                     {
                         isLoading ?
                             <span className={"loading loading-spinner text-white"}></span> : formType === "signup" ?
-                                <Create className={"size-6 md:size-8 fill-white"}/> :
-                                <Login className={"size-6 md:size-8 fill-white"}/>
+                                <Create className={"size-6 fill-white"}/> :
+                                <Login className={"size-6 fill-white"}/>
                     }
                     {formType === "signup" ? "ثبت نام" : "ورود"}
                 </button>

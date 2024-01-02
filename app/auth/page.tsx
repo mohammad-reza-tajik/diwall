@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 function AuthPage() {
 
     return (
-        <div className={"fixed inset-0 bg-auth-pattern bg-repeat flex justify-center items-center z-20"}>
+        <div className={"fixed inset-0 bg-auth-pattern bg-no-repeat bg-cover flex justify-center items-center z-20"}>
             <AuthForm/>
         </div>
     )
