@@ -1,30 +1,12 @@
 "use client"
 import {useEffect, useState} from "react";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from "swiper/modules";
-import CircularProgress from "@mui/material/CircularProgress";
-import Divider from "@mui/material/Divider";
-import Person from "@mui/icons-material/Person";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import type {SxProps, Theme} from "@mui/material/styles";
-import theme from "@/styles/theme";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import {getProduct} from "@/actions/product";
-
-const styles = {
-
-    commentContainer: {
-        backgroundColor: theme.palette.white.main,
-    },
-    commentBody: {
-        minHeight: 300,
-        maxHeight: 300,
-        py: 30,
-        px: 50,
-    }
-
-} satisfies Record<string, SxProps<Theme>>
+import breakpoints from "@/constants/breakpoints";
+import {Person} from "@/components/Globals/Icons";
+import {enqueueSnackbar} from "notistack";
 
 interface Props {
     addReview: boolean;
@@ -44,7 +26,7 @@ function Reviews({addReview , slug}: Props) {
     const [isLoading, setIsLoading] = useState(true);
     const [comments, setComments] = useState<Comment[]>([]);
 
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+    const matchesMD = useMediaQuery(breakpoints.md);
 
     useEffect(() => {
             (async () => {
@@ -56,7 +38,7 @@ function Reviews({addReview , slug}: Props) {
                     }
                     setComments(res.product.comments);
                 } catch (err) {
-                    console.log(err)
+                    enqueueSnackbar(err.message,{variant:"error"})
                 } finally {
                     setIsLoading(false)
                 }
@@ -65,16 +47,16 @@ function Reviews({addReview , slug}: Props) {
         , [addReview, slug])
 
     return (
-        <Grid container item xs={12} alignItems={"center"}>
+        <div className={"flex items-center"}>
             <>
                 {isLoading ?
-                    <Grid container item xs minHeight={300} justifyContent={"center"} alignItems={"center"}>
-                        <CircularProgress color={"primary"} size={45}/>
-                    </Grid> :
+                    <div className={"flex justify-center items-center !h-[300px]"}>
+                        <span className={"loading loading-spinner text-white"}></span>
+                    </div> :
                     comments && comments.length !== 0 ?
-                        <Grid component={Swiper}
+                        <Swiper
                               spaceBetween={10}
-                              slidesPerView={matchesMD ? 1 : 2}
+                              slidesPerView={matchesMD ? 2 : 1}
                               modules={[Navigation, A11y]}
                               navigation
                         >
@@ -83,46 +65,38 @@ function Reviews({addReview , slug}: Props) {
                                 comments.map((comment, index) => {
 
                                     return (
-                                        <SwiperSlide key={index} style={styles.commentContainer}>
-                                            <Grid container item alignItems={"center"}>
-                                                <Grid item xs={"auto"} height={1}>
-                                                    <Person color="primary" sx={{fontSize: {xs: 35, md: 40}}}/>
-                                                </Grid>
-
-                                                <Grid container item direction={"column"} xs={true}
-                                                      p={10}
-                                                      gap={10}>
-
-                                                    <Typography variant={"h4"} component={"span"} fontSize={16}>
+                                        <SwiperSlide key={index} className={"bg-white rounded"}>
+                                            <div className={"flex items-center px-2"}>
+                                                <Person className={"size-5 lg:size-8 fill-primary"}/>
+                                                <div className={"flex flex-col py-1 px-3 gap-1"}>
+                                                    <span className={"text-sm"}>
                                                         توسط : {comment.author}
-                                                    </Typography>
-                                                    <Typography variant={"h4"} component={"span"} fontSize={12}>
+                                                    </span>
+                                                    <span className={"text-xs"}>
                                                         تاریخ : {comment.date}
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                            <Divider sx={{width: .9, mx: "auto"}}/>
-                                            <Grid item xs={12} sx={styles.commentBody}>
-                                                <Typography variant={"body1"} component={"p"} fontSize={14}
-                                                            lineHeight={1.7}>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="divider" />
+                                            <div className={"px-5 !h-[300px]"}>
+                                                <p className={"text-sm !leading-snug"}>
                                                     {comment.content}
-                                                </Typography>
-                                            </Grid>
+                                                </p>
+                                            </div>
 
                                         </SwiperSlide>
                                     )
 
                                 })
                             }
-                        </Grid>
+                        </Swiper>
                         :
-                        <Grid container item xs minHeight={200} component={Typography} variant={"body1"}
-                              fontSize={{xs: 14, md: 16}} justifyContent={"center"} alignItems={"center"}>
+                        <p className={"flex justify-center items-center h-[300px] w-full text-sm md:text-base"}>
                             برای این محصول دیدگاهی وجود ندارد !
-                        </Grid>
+                        </p>
                 }
             </>
-        </Grid>
+        </div>
     )
 }
 
