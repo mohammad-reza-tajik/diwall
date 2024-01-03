@@ -20,11 +20,11 @@ async function HomePage () {
             <Banner />
             <Features />
             <Places/>
-            <SwiperProducts products={mostPopularProducts} route={"/products?sortBy=3"} mostPopular />
-            <SectionHeading text={"محصولات جدید"} seeAll route={"/products"}/>
+            <SwiperProducts products={mostPopularProducts} route={"/products?sortBy=محبوب-ترین"} mostPopular />
+            <SectionHeading text={"محصولات جدید"} seeAll route={"/products?sortBy=جدیدترین"}/>
             <SwiperProducts products={latestProducts} />
             <MiddleSection/>
-            <SectionHeading text={"پر فروش ترین محصولات"} seeAll route={"/products?sortBy=2"} />
+            <SectionHeading text={"پر فروش ترین محصولات"} seeAll route={"/products?sortBy=پرفروش-ترین"} />
             <SwiperProducts products={bestSellingProducts} />
             <ShowCase/>
         </>
