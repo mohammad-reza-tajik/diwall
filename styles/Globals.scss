@@ -84,6 +84,9 @@ input[type=number] {
   .btn {
     @apply font-medium;
   }
+  .divider {
+    @apply my-1;
+  }
 }
 @layer utilities {
   .contained {
