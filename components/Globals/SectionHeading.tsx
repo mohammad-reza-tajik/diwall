@@ -1,14 +1,10 @@
 "use client"
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
-import Button from "@mui/material/Button";
-import Circle from "@mui/icons-material/Circle";
 import Link from "next/link";
 import {ChangeEvent, useEffect, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import formUrlQuery from "@/utils/formUrlQuery";
+import {Circle} from "@/components/Globals/Icons";
+import productFilters from "@/constants/productFilters";
 
 interface Props {
     sortBy?: boolean;
@@ -31,67 +27,55 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
         }
     }, [searchParams, sortBy])
 
-    const sortChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const sortChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         setSort(event.target.value);
-        router.push(formUrlQuery(searchParams.toString(),{
-            params : {
-                sortBy : event.target.value
+        router.push(formUrlQuery(searchParams.toString(), {
+            params: {
+                sortBy: event.target.value
             }
         }))
     }
 
     return (
-        <Grid container item xs={12} alignItems={"center"} justifyContent={"space-between"} my={20}>
-            <Grid container item xs={"auto"} md={8} gap={10} alignItems={"center"}>
-                <Circle fontSize={"large"}
-                        sx={{fontSize: {xs: 16, md: 20}, color: !white ? "primary.main" : "white.main"}}/>
-                <Typography fontFamily={"dana-black"} variant={"h4"} color={!white ? "#555" : "white.main"}
-                            sx={{fontSize: {xs: 14, md: 20}}}>
+        <div className={`flex justify-between items-center my-5 w-full ${white ? "lg:hidden" : "block"}`}>
+            <div className={"flex gap-2 items-center"}>
+                <Circle className={`size-5 ${white ? "fill-white" : "fill-primary"}`}/>
+                <h4 className={`font-dana-black text-sm md:text-lg ${white ? "text-white" : "text-inherit"}`}>
                     {text}
-                </Typography>
-            </Grid>
+                </h4>
+            </div>
             {
                 seeAll ?
-                    <Grid container item justifyContent={"flex-end"} xs={"auto"} md={2}>
-                        <Button variant={"outlined"} color={!white ? "primary" : "white"}
-                                sx={{fontSize: {xs: 12, md: 16}, borderRadius: 1}} component={Link} href={route}
-                                aria-label="مشاهده همه">مشاهده همه</Button>
-                    </Grid> : ""
+                    <Link className={`btn btn-outline btn-sm md:btn-md ${white ? "text-white border-white" : "btn-primary"} rounded-full text-sm md:text-base`} href={route}
+                          aria-label="مشاهده همه">
+                        مشاهده همه
+                    </Link> :
+                    null
             }
 
             {
                 sortBy ?
-                    <Grid container item justifyContent={"flex-end"} xs={"auto"}>
-                        <Grid container item justifyContent={"flex-end"} p={5} alignItems={"center"} xs={"auto"}
-                              sx={{display: {xs: "none", sm: "block"}}}>
-                            <Typography variant={"caption"} fontSize={15}>
-                                مرتب سازی بر اساس :
-                            </Typography>
-                        </Grid>
-
-                        <Grid container item justifyContent={"flex-end"} alignItems={"center"} xs={"auto"}>
-                            <Select value={sort} onChange={sortChangeHandler} autoWidth sx={{height: 35}}>
-                                <MenuItem value={"جدیدترین"}>
-                                    <Typography variant={"caption"} sx={{fontSize: {xs: 12, md: 15}}}>
-                                        جدید ترین
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem value={"پرفروش-ترین"}>
-                                    <Typography variant={"caption"} sx={{fontSize: {xs: 12, md: 15}}}>
-                                        پرفروش ترین
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem value={"محبوب-ترین"}>
-                                    <Typography variant={"caption"} sx={{fontSize: {xs: 12, md: 15}}}>
-                                        محبوب ترین
-                                    </Typography>
-                                </MenuItem>
-                            </Select>
-                        </Grid>
-                    </Grid> : ""
+                    <div className={"flex items-center gap-2"}>
+                        <span className={"text-sm md:text-base hidden md:inline-block"}>
+                            مرتب سازی بر اساس :
+                        </span>
+                        <select id="filters"
+                                className="border text-sm rounded focus:border-primary focus:outline-none p-2 "
+                                onChange={sortChangeHandler}>
+                            {
+                                productFilters.map((filter, index) => {
+                                    return (
+                                        <option value={filter.split(" ").join("-")} key={index}
+                                                selected={sort === filter}>{filter}</option>
+                                    )
+                                })
+                            }
+                        </select>
+                    </div> :
+                    null
             }
 
-        </Grid>
+        </div>
     )
 }
 
