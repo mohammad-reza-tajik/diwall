@@ -1,15 +1,12 @@
 "use client"
-import Grid from "@mui/material/Grid";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import {useTheme} from "@mui/material/styles";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper/modules';
 import Link from "next/link";
 import SectionHeading from "./SectionHeading";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Product from "./Product";
 import type {ProductType} from "@/db/productModel";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import breakpoints from "@/constants/breakpoints";
 
 let slidesPerView: number;
 
@@ -20,52 +17,44 @@ interface Props {
 
 }
 
-function SwiperProducts (props : Props)  {
+function SwiperProducts ({products , mostPopular , route} : Props)  {
 
-    const {products, mostPopular} = props;
-
-    const theme = useTheme()
-    const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
-    const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
-    const matchesLG = useMediaQuery(theme.breakpoints.down("lg"));
+    const matchesMD = useMediaQuery(breakpoints.md);
+    const matchesLG = useMediaQuery(breakpoints.lg);
 
     if (mostPopular) {
-        slidesPerView = matchesMD ? 2 : 3
+        slidesPerView = matchesMD ? 3 : 2
     } else {
-        slidesPerView = matchesLG ? matchesMD ? 2 : 3 : 4
+        slidesPerView = matchesLG ? 4 : matchesMD ? 3 : 2
     }
 
     return (
-        <Grid container component={"section"} minWidth={mostPopular && {xs :"100vw" , sm : "auto"}} justifyContent={"center"} alignItems={"center"} gap={30} bgcolor={ mostPopular ? "primary.main" : ""} px={mostPopular ? {xs: 5, lg: 50} : 0} py={mostPopular ? 20 : 0}>
-
+        <section className={`flex max-lg:flex-col justify-center items-center gap-10 rounded ${mostPopular ? "bg-primary px-2 py-4" : ""}`}>
 
             {
                 mostPopular &&
                 <>
-                <Grid item xs={12} display={{xs:"flex" , lg : "none"}}>
                     <SectionHeading text={"محبوب ترین محصولات"} seeAll route={"/products?sortBy=3"} white/>
-                </Grid>
-                    <Grid container item md={"auto"} direction={"column"} alignItems={"flex-start"} gap={50} display={{xs:"none" , lg : "flex"}} px={"1rem"}>
-                        <Typography variant={"h3"} lineHeight={1.4} color={"white.main"}
-                                    fontFamily={"dana-black"}
-                                    >
+                    <div className={"hidden lg:flex lg:flex-col gap-10 px-4"}>
+                        <h2 className={"text-white font-dana-black text-4xl !leading-snug"}>
                             محبوب ترین
                             <br/>
                             محصولات
                             <br/>
                             دیوال
-                        </Typography>
-                        <Button component={Link} aria-label="مشاهده همه" href={`${props.route}`}
-                                variant={"outlined"} color={"white"} sx={{fontSize: 16}}>مشاهده همه</Button>
-                    </Grid>
+                        </h2>
+                        <Link className={`btn btn-outline btn-sm md:btn-md ${mostPopular ? "text-white hover:border-white hover:bg-black/20" : "btn-primary"} rounded-full text-sm md:text-base`} href={route}
+                              aria-label="مشاهده همه">
+                            مشاهده همه
+                        </Link>
+                    </div>
                 </>
             }
 
-            <Grid container item component={Swiper} xs={12} lg spaceBetween={matchesSM ? 5 : 20}
+            <Swiper className={"w-full md:flex-1"} spaceBetween={10}
                   slidesPerView={slidesPerView}
                   modules={[Navigation, A11y]}
                   navigation
-
             >
                 {
                     products.map((product) =>
@@ -73,8 +62,8 @@ function SwiperProducts (props : Props)  {
                             <Product {...product} />
                         </SwiperSlide>)
                 }
-            </Grid>
-        </Grid>
+            </Swiper>
+        </section>
 
 
     )
