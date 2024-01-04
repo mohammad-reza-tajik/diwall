@@ -4,7 +4,7 @@ import {UserType} from "@/db/userModel";
 function Wishlist(user: UserType) {
 
     return (
-        <div className={"grid grid-cols-2 md:grid-cols-3 gap-1"}>
+        <div className={`grid grid-cols-2 min-h-full md:grid-cols-3 gap-1 ${user.wishlist.length !== 0 ? "content-start" : "content-center"}`}>
             {
                 !user.username || user.wishlist.length === 0 ?
                     <p className={"text-center flex justify-center items-center col-span-3 text-sm md:text-base"}>
