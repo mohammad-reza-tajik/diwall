@@ -1,21 +1,15 @@
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
 import Link from "next/link";
-import AddCircleOutline from "@mui/icons-material/AddCircleOutline";
-import Delete from "@mui/icons-material/Delete";
-import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
-import React, {ChangeEvent, useState} from "react";
+import {ChangeEvent, useState} from "react";
 import {useAppDispatch, userActions} from "@/store";
 import Image from "next/image";
 import type {ProductType} from "@/db/productModel";
 import CircularProgress from "@mui/material/CircularProgress";
 import {useRouter} from "next/navigation";
+import {Minus, Plus, Delete} from "@/components/Globals/Icons";
 
-function CartItem (product : ProductType)  {
+function CartItem(product: ProductType) {
 
-    const [addToCartLoading, setAddToCartLoading] = useState(false);
+    const [removeFromCartLoading, setRemoveFromCartLoading] = useState(false);
     const router = useRouter();
 
     const dispatch = useAppDispatch();
@@ -26,49 +20,43 @@ function CartItem (product : ProductType)  {
     }
 
     const cartHandler = () => {
-        dispatch(userActions.handleCart({product, setAddToCartLoading, router}));
+        if (numberInCart > 1) {
+            setNumberInCart((prevState) => Number(prevState) - 1)
+        } else {
+            dispatch(userActions.handleCart({product, setAddToCartLoading: setRemoveFromCartLoading, router}));
+        }
     }
 
     return (
-        <Grid container bgcolor={"white.main"} p={"1rem"} borderRadius={1}>
-            <Grid container item xs={12} md alignItems={"center"} gap={10} component={Link} href={`/products/${product.slug}`}>
-                <Grid item xs={"auto"}>
-                    <Image src={`/assets/pictures/products/${product.slug}.jpg`} width={50} height={50}
-                           style={{borderRadius: "50%"}}
-                           alt={product.title}/>
-                </Grid>
-                <Grid item xs component={Typography} variant={"h4"} fontSize={{xs: 12, md: 16}}>
-                    {product.title}
-                </Grid>
-            </Grid>
-            <Grid container item xs={12} md={"auto"} alignItems={"center"}
-                  justifyContent={"flex-end"}>
+        <div className={"flex max-md:flex-col items-center col-span-3 justify-between rounded md:rounded-full bg-white p-2"}>
+            <Link className={"flex items-center gap-2 text-xs md:text-sm self-start"} href={`/products/${product.slug}`}>
+                <Image src={`/assets/pictures/products/${product.slug}.jpg`} width={50} height={50}
+                       className={"rounded-full size-10"}
+                       alt={product.title}/>
+                {product.title}
+            </Link>
+            <div className={"flex items-center gap-2 self-end"}>
 
-                <IconButton onClick={() => {
+                <button className={"btn btn-circle btn-ghost btn-sm hover:!bg-transparent"} onClick={() => {
                     setNumberInCart((prevState) => Number(prevState) + 1)
                 }}>
-                    <AddCircleOutline color={"primary"} sx={{fontSize: 25}}/>
-                </IconButton>
-                <TextField onChange={numbersInCartChangeHandler} value={numberInCart} sx={{width: {xs: 40, md: 80}}}
-                           color={"primary"} type={"number"} size={"small"} variant={"standard"}/>
+                    <Plus className={"fill-primary size-5"}/>
+                </button>
+                <input className={"input input-sm input-primary w-11 md:w-24 text-center"} onChange={numbersInCartChangeHandler} value={numberInCart}
+                            type={"number"}/>
 
-                {
-                    numberInCart != 1 ?
-                        <IconButton onClick={() => {
-                            setNumberInCart((prevState) => Number(prevState) - 1)
-                        }}>
-                            <RemoveCircleOutline color={"primary"} sx={{fontSize: 25}}/>
-                        </IconButton> :
-                        <IconButton onClick={cartHandler} disabled={addToCartLoading}>
-                            {
-                                addToCartLoading ?
-                                    <CircularProgress color={"primary"} size={25}/> :
-                                    <Delete color={"primary"} sx={{fontSize: 22}}/>
-                            }
-                        </IconButton>
-                }
-            </Grid>
-        </Grid>
+                <button className={"btn btn-circle btn-ghost btn-sm hover:!bg-transparent"} onClick={cartHandler}>
+                    {
+                        numberInCart > 1 ?
+                            <Minus className={"fill-primary size-5"}/> :
+                            removeFromCartLoading ?
+                                <CircularProgress color={"primary"} size={25}/> :
+                                <Delete className={"fill-primary size-5"}/>
+                    }
+                </button>
+
+            </div>
+        </div>
     )
 }
 
