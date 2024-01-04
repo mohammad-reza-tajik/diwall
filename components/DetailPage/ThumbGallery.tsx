@@ -1,6 +1,5 @@
 "use client"
-import React, {useState} from "react";
-import Grid from "@mui/material/Grid";
+import {useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, FreeMode, Navigation, Thumbs} from "swiper/modules";
 import Image from "next/image";
@@ -10,24 +9,24 @@ interface Props {
     product: ProductType,
 }
 
-const ThumbGallery: React.FC<Props> = ({product}) => {
+function ThumbGallery ({product}:Props) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     return (
         <>
-            <Grid container item component={Swiper}
-                  spaceBetween={10}
+            <Swiper spaceBetween={10}
                   slidesPerView={1}
+                    className={"mb-2"}
                   thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
                   modules={[Navigation, A11y, FreeMode, Thumbs]}
                   navigation
 
             >
                 {
-                    Array.from({length: 7}, (_, index) => {
+                    Array.from({length: 4}, (_, index) => {
                         return (
                             <SwiperSlide key={index}>
-                                <Image style={{width: "100%", height: "auto"}}
+                                <Image className={"w-full h-auto"}
                                        src={`/assets/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
                                        alt={`${product ? product.title : "product placeholder"}`} width={510}
                                        height={385}
@@ -38,9 +37,8 @@ const ThumbGallery: React.FC<Props> = ({product}) => {
                 }
 
 
-            </Grid>
-            <Grid container item component={Swiper}
-                  onSwiper={setThumbsSwiper}
+            </Swiper>
+            <Swiper onSwiper={setThumbsSwiper}
                   spaceBetween={10}
                   slidesPerView={3}
                   freeMode={true}
@@ -48,10 +46,10 @@ const ThumbGallery: React.FC<Props> = ({product}) => {
                   modules={[FreeMode, Navigation, Thumbs]}
             >
                 {
-                    Array.from({length: 7}, (_, index) => {
+                    Array.from({length: 4}, (_, index) => {
                         return (
                             <SwiperSlide key={index}>
-                                <Image style={{width: "100%", height: "auto"}}
+                                <Image className={"w-full h-auto"}
                                        src={`/assets/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
                                        alt={`${product ? product.title : "product placeholder"}`}
                                        width={141}
@@ -61,7 +59,7 @@ const ThumbGallery: React.FC<Props> = ({product}) => {
                         )
                     })
                 }
-            </Grid>
+            </Swiper>
         </>
     )
 
