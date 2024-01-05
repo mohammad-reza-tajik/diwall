@@ -13,7 +13,7 @@ const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: Dispatch<
     const [isLoading, setIsLoading] = useState(true);
     const [results, setResults] = useState<ProductType[]>([]);
 
-    const submitSearchHandler = async (event : FormEvent) => {
+    const submitSearchHandler = (event : FormEvent) => {
         event.preventDefault()
         if (search.trim() === "") {
             setIsWrong(true)
