@@ -18,20 +18,18 @@ function SearchForm(props:FormHTMLAttributes<HTMLFormElement>) {
 
     return (
         <form onSubmit={submitSearchHandler} className={"relative flex items-center"} {...props}>
-            {/*<div className={`tooltip tooltip-error tooltip-bottom ${isWrong && "tooltip-open"}`} data-tip={"لطفا عبارتی برای جستجو وارد کنید!"}>*/}
-            <button className={"btn btn-sm btn-circle btn-ghost -ml-11 z-20"}>
-                <Search className={`fill-primary size-8 ${search && "opacity-0"}`}/>
+            <button className={"btn btn-sm btn-circle btn-ghost absolute right-2  z-20"}>
+                <Search className={`fill-primary size-8`}/>
             </button>
 
             <input
-                className={"input input-bordered focus:input-primary md:w-[350px] lg:w-[400px] pr-12"}
+                className={`input input-bordered focus:input-primary ${isWrong ? "input-error" : ""} rounded-full w-[350px] lg:w-[400px] py-7 pr-12`}
                 placeholder={"جستجو ..."}
                 value={search}
                 onChange={searchChangeHandler}
             />
-            {/*</div>*/}
             <button aria-label="clear search field"
-                    className={`btn btn-circle btn-sm btn-ghost -mr-11 ${!search && "opacity-0"}`}
+                    className={`btn btn-circle btn-sm btn-ghost absolute left-2 ${!search && "hidden"}`}
                     onClick={closeSearchHandlerDesktop}>
                 <Close className={`fill-primary size-8`}/>
             </button>
