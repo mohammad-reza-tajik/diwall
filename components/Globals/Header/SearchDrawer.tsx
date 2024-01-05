@@ -1,44 +1,7 @@
 "use client"
-import React from "react";
-import Grid from "@mui/material/Grid";
-import Tooltip from "@mui/material/Tooltip";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from "@mui/icons-material/Close";
-import Drawer from 'react-modern-drawer'
 import SearchResults from "../SearchResults";
 import useSearch from "@/hooks/useSearch";
-import type {SxProps} from "@mui/material/styles";
-
-const styles = {
-    searchField: {
-        width: 1,
-    },
-    searchIcon: {
-        fontSize: 25,
-        color: "primary.main",
-    },
-    closeIcon: {
-        color: "white.main",
-        bgcolor: "primary.main",
-        borderRadius: 1,
-        p: "1.5rem",
-        height: 54,
-        width: 54
-    },
-    searchDrawer: {
-        bgcolor: "background.paper",
-        minHeight: "100vh",
-        width: "100vw",
-        flexDirection: "column",
-        alignItems: "center",
-        px: "1rem",
-        py: "5rem",
-        gap: "1rem"
-    }
-} satisfies Record<string, SxProps>
+import {Close, Search} from "@/components/Globals/Icons";
 
 interface Props {
     setOpenSearchDrawer: React.Dispatch<React.SetStateAction<boolean>>;
@@ -58,52 +21,42 @@ function SearchDrawer ({setOpenSearchDrawer, openSearchDrawer} : Props) {
     } = useSearch("mobile", setOpenSearchDrawer);
 
     return (
-        <Drawer open={openSearchDrawer} direction={"top"} size={"auto"} lockBackgroundScroll>
-            <Grid container component={"form"} onSubmit={submitSearchHandler} sx={styles.searchDrawer}>
-                <Grid container item xs={12} sm={10} justifyContent={"space-between"} alignItems={"center"}
-                      gap={"1rem"}>
-                    <Grid item xs>
-                        <Tooltip title={"لطفا عبارتی برای جستجو وارد کنید!"} open={isWrong} placement={"bottom"}
-                                 arrow>
-                            <TextField
-                                error={isWrong}
-                                fullWidth
+        <form className="relative" onSubmit={submitSearchHandler}>
+            {openSearchDrawer && (
+                <div className="fixed inset-0 bg-black/60 z-50"
+                     onClick={() => setOpenSearchDrawer(false)}></div>
+            )}
+            <div
+                className={`fixed top-0 left-0 h-full w-full bg-white shadow-lg z-50 transform transition-transform ease-in-out duration-300 ${openSearchDrawer ? "translate-x-0" : "-translate-x-full"}`}>
+                <div className="flex flex-col gap-2 p-5">
+                        <div className="relative join items-center justify-between w-full gap-3">
+                            <button className={"btn btn-sm btn-circle btn-ghost absolute right-2  z-20"}>
+                                <Search className={`fill-primary size-8`}/>
+                            </button>
+
+                            <input
+                                className={`input input-bordered focus:input-primary ${isWrong ? "input-error" : ""} rounded-full max-sm:flex-1 sm:w-72 py-7 pr-12`}
                                 placeholder={"جستجو ..."}
                                 value={search}
                                 onChange={searchChangeHandler}
-                                sx={styles.searchField}
-                                variant="outlined"
-                                size={"medium"}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <IconButton type={"submit"} aria-label="search">
-                                                <SearchIcon sx={styles.searchIcon}/>
-                                            </IconButton>
-                                        </InputAdornment>
-                                    ),
-                                }}
                             />
-                        </Tooltip>
-                    </Grid>
-                    <Grid item xs={"auto"}>
-                        <IconButton onClick={closeSearchHandlerMobile} aria-label="close search drawer" sx={{p: 0}}>
-                            <CloseIcon sx={styles.closeIcon}/>
-                        </IconButton>
-                    </Grid>
-                </Grid>
-                <Grid container item xs={12} sm={10}>
+                        <button className={"btn btn-primary btn-circle fill-white"} onClick={closeSearchHandlerMobile}
+                                aria-label="close search drawer">
+                            <Close className={"size-5"}/>
+                        </button>
+                        </div>
+                    <div className={"relative"}>
+                        {
+                            search.trim().length >= 3 &&
+                            <SearchResults isLoading={isLoading} results={results} search={search}
+                                           submitSearchHandler={submitSearchHandler}
+                                           closeSearch={closeSearchHandlerMobile}/>
+                        }
 
-                {
-                    search.trim().length >= 3 &&
-                    <SearchResults isLoading={isLoading} results={results} search={search}
-                                   submitSearchHandler={submitSearchHandler} closeSearch={closeSearchHandlerMobile}/>
-                }
-
-                </Grid>
-            </Grid>
-        </Drawer>
-
+                    </div>
+                </div>
+            </div>
+        </form>
     )
 }
 
