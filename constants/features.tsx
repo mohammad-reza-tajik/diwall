@@ -9,17 +9,17 @@ const features = [
     {
         title : "بسته بندی رایگان",
         description : "بسته بندی امن برای حفاظت فیزیکی",
-        icon : <Package className={"size-[2rem] md:size-[4rem] fill-primary"} />
+        icon : <Package className={"size-10 fill-primary"} />
     },
     {
         title : "تضمین کیفیت",
         description : "تضمین کیفیت و گارانتی محصولات",
-        icon : <Medal className={"!size-[2rem] md:!size-[4rem] fill-primary"} />
+        icon : <Medal className={"size-10  fill-primary"} />
     },
     {
         title : "پشتیبانی آنلاین",
         description : "پشتیبانی به صورت شبانه روزی",
-        icon : <HeadPhones className={"size-8 fill-primary"} />
+        icon : <HeadPhones className={"size-10 fill-primary"} />
     }
 ]
 
