@@ -1,56 +1,28 @@
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import Image from "next/image"
 import Link from "next/link";
-import type {SxProps} from "@mui/material/styles";
 import {Metadata} from "next";
 
-const styles  = {
-    container: {
-        overflow: "hidden",
-        width: "100%",
-        height: "100vh",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        zIndex: 50,
-        flexDirection:"column",
-        gap: "2rem",
-    }
-
-} satisfies Record<string, SxProps>
-
 export const metadata: Metadata = {
-    title : " صفحه مورد نظر پیدا نشد"
+    title: " صفحه مورد نظر پیدا نشد"
 }
 
-function NotFound ()  {
+function NotFound() {
 
     return (
-            <Grid container justifyContent={{xs:"start", md: "center"}} alignItems={"center"} sx={styles.container}>
-                <Grid container justifyContent={"center"} item>
-                    <Image src={"/assets/pictures/not-found.svg"} width={400} height={400} style={{width:"100" , height:400}}
-                           alt={"صفحه مورد نظر شما یافت نشد !"}/>
-                </Grid>
-                <Grid container justifyContent={"center"} item>
-                    <Typography variant={"h1"} fontFamily={"dana-black"}
-                                sx={{color: "#333", fontSize: {xs: 25, md: 40}}}>
-                        صفحه مورد نظر پیدا نشد
-                    </Typography>
-                </Grid>
-                <Grid container justifyContent={"center"} item textAlign={"center"} px={"1rem"}>
-                    <Typography variant={"h4"} fontFamily={"dana-medium"}
-                                sx={{color: "#333", fontSize: {xs: 16, md: 20}}}>
-                        آدرس صفحه اشتباه است یا سایت با مشکل مواجه شده است
-                    </Typography>
-                </Grid>
-                <Grid container justifyContent={"center"} item>
-                    <Button component={Link} href={"/"} variant={"contained"} sx={{fontSize: {xs: 14, md: 16}}}>
-                        بازگشت به صفحه اصلی
-                    </Button>
-                </Grid>
-            </Grid>
+        <section
+            className={"flex flex-col md:justify-center items-center w-screen h-screen fixed inset-0 z-50 bg-white gap-5"}>
+            <Image src={"/assets/pictures/not-found.svg"} width={400} height={400} className={"w-80 h-auto"}
+                   alt={"صفحه مورد نظر شما یافت نشد !"}/>
+            <h1 className={"font-dana-black text-lg md:text-2xl text-center"}>
+                صفحه مورد نظر پیدا نشد
+            </h1>
+            <p className={"text-sm md:text-base px-5 text-center"}>
+                آدرس صفحه اشتباه است یا سایت با مشکل مواجه شده است
+            </p>
+            <Link className={"btn btn-primary btn-sm text-sm md:btn-md rounded-full"} href={"/"}>
+                بازگشت به صفحه اصلی
+            </Link>
+        </section>
     )
 }
 
