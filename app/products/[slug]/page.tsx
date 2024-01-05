@@ -1,12 +1,10 @@
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
 import dynamic from "next/dynamic";
-import ThumbGallery from "@/components/DetailPage/ThumbGallery";
 import ProductDetails from "@/components/DetailPage/ProductDetails";
 import type {ProductType} from "@/db/productModel"
 import Product from "@/db/productModel";
 import connect from "@/db/connect";
 import {Metadata} from "next";
+import ThumbGallery from "@/components/DetailPage/ThumbGallery";
 
 const Info = dynamic(() => import("@/components/DetailPage/Info"))
 const Features = dynamic(() => import("@/components/Globals/Features"));
@@ -48,18 +46,14 @@ async function DetailsPage({params}: Props) {
 
     return (
         <>
-            <Grid container columns={13}>
-                <Grid item xs={13} sm={10} md={6} mx={"auto"}>
+            <section className={"flex max-md:flex-col"}>
                     <ThumbGallery product={product}/>
-                </Grid>
-                <Grid item xs={13} md={7} pr={{xs: 5, md: 30}} mt={{xs: 20, md: 0}}>
                     <ProductDetails {...product}/>
-                </Grid>
-            </Grid>
+            </section>
 
-            <Divider sx={{width: 1, mb: 30}}/>
-            <Features/>
-            <Divider sx={{width: 1, mt: 30}}/>
+            <div className="divider my-7" />
+            <Features />
+            <div className="divider my-7"/>
             <Info slug={decodeURI(params.slug)} relatedProducts={relatedProducts} />
         </>
     )

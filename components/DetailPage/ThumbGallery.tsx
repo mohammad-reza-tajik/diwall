@@ -13,10 +13,9 @@ function ThumbGallery ({product}:Props) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     return (
-        <>
+        <div className={"flex flex-col gap-2 w-full md:w-1/2 md:pl-10"}>
             <Swiper spaceBetween={10}
                   slidesPerView={1}
-                    className={"mb-2"}
                   thumbs={{swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}
                   modules={[Navigation, A11y, FreeMode, Thumbs]}
                   navigation
@@ -60,7 +59,7 @@ function ThumbGallery ({product}:Props) {
                     })
                 }
             </Swiper>
-        </>
+        </div>
     )
 
 }
