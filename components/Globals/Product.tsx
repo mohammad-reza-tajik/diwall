@@ -21,9 +21,9 @@ function Product(product: ProductType) {
     }
 
     return (
-        <div className={"bg-white rounded flex flex-col p-1 md:p-2 relative gap-2 min-h-full"}>
+        <div className={"bg-white rounded flex flex-col p-2 relative gap-2 min-h-full"}>
             <button
-                className={`absolute left-3 top-3 z-20 rounded btn btn-circle btn-sm md:btn-md btn-ghost bg-black/30 ${addToWishlistLoading && "btn-disabled"}`}
+                className={`absolute left-3 top-3 z-10 btn btn-circle btn-sm md:btn-md btn-ghost bg-black/30 ${addToWishlistLoading && "btn-disabled"}`}
                 onClick={wishlistHandler} aria-label="add to wishlist" disabled={addToWishlistLoading}>
                 {
                     addToWishlistLoading ?
