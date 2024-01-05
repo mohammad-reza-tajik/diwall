@@ -73,7 +73,7 @@ function Products() {
             </div>
                 {
                     !isLoading || data?.products.length !== 0 ?
-                        <Pagination currentPage={data.currentPage} lastPage={data.lastPage}/> :
+                        <Pagination currentPage={data?.currentPage} lastPage={data?.lastPage}/> :
                         null
                 }
         </section>
