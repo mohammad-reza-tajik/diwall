@@ -3,7 +3,7 @@ import showcase from "@/constants/showcase";
 
 function ShowCase() {
     return (
-        <section className={"grid grid-cols-3 md:grid-cols-6 gap-10 p-5 my-10 rounded border"}>
+        <section className={"grid grid-cols-3 md:grid-cols-6 p-5 my-10 rounded border gap-10 sm:gap-16 lg:gap-20"}>
             {
                 showcase.map((image)=>{
                     return (
