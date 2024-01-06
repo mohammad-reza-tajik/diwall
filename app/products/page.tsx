@@ -52,8 +52,8 @@ function Products() {
                     category && <SectionHeading text={`پوستر برای ${category.split("-").join(" ")}`} sortBy={true}/>
                 }
                 {
-                    !category && !search && sortBy &&
-                    <SectionHeading text={`${sortBy.split("-").join(" ")} محصولات`} sortBy={true}/>
+                    !category && !search &&
+                    <SectionHeading text={`${(sortBy || "جدیدترین").split("-").join(" ")} محصولات`} sortBy={true}/>
                 }
             <div
                 className={`grid grid-cols-2 min-h-[300px] md:grid-cols-3 lg:grid-cols-4 gap-1 ${data?.products.length !== 0 || !isLoading ? "content-start" : "content-center"}`}>
