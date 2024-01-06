@@ -25,22 +25,19 @@ function MenuDrawer({openMenuDrawer, setOpenMenuDrawer}: Props) {
                      onClick={() => setOpenMenuDrawer(false)}></div>
             )}
             <div
-                className={`fixed top-0 right-0 h-full w-3/4 md:w-1/2 bg-white shadow-lg z-50 transform transition-transform ease-in-out duration-300 ${openMenuDrawer ? "translate-x-0" : "translate-x-full"}`}>
-                <div className="flex flex-col gap-2 p-5">
-
-                    <Logo onClick={() => menuItemsHandler("/")} className={"p-4 size-36"}/>
+                className={`fixed top-0 right-0 h-full w-3/4 sm:w-1/2 flex flex-col gap-2 p-5 bg-white shadow-lg z-50 transform transition-transform ease-in-out duration-300 ${openMenuDrawer ? "translate-x-0" : "translate-x-full"}`}>
+                    <Logo onClick={() => menuItemsHandler("/")} className={"size-20 sm:size-36"}/>
                     {
                         navLinks.map((link, index) => {
                             return (
                                 <button onClick={() => menuItemsHandler(link.href)} key={index}
-                                        className={"flex items-center gap-3 hover:bg-black/5 border-b p-4 hover:fill-primary transition-colors"}>
+                                        className={"flex items-center text-xs sm:text-sm gap-3 hover:bg-black/5 border-b p-2 sm:p-4 hover:fill-primary transition-colors"}>
                                     {link.icon}
                                     {link.text}
                                 </button>
                             )
                         })
                     }
-                </div>
             </div>
         </div>
 
