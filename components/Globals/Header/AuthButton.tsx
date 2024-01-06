@@ -14,12 +14,12 @@ function AuthButton(user: UserType) {
                 <Login className={"fill-white size-6"}/>
                 ورود / ثبت نام
             </Link> :
-            <button className={"btn btn-primary font-dana-bold w-48 relative py-2 rounded-full"} aria-label="show menu"
+            <div role={"button"} className={"flex justify-center items-center w-48 gap-2 bg-primary text-white fill-white shadow relative py-2 rounded-full"} aria-label="show menu"
                     onClick={() => setOpenMenu((prevState)=>!prevState)}
             >
-                {user?.username}
+                <span className={"line-clamp-1"}>{user?.username}</span>
                 <UserMenu user={user} open={openMenu}/>
-            </button>
+            </div>
 
 
     )
