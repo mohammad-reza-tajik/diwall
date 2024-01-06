@@ -3,7 +3,6 @@ import {ChangeEvent, useState} from "react";
 import {useAppDispatch, userActions} from "@/store";
 import Image from "next/image";
 import type {ProductType} from "@/db/productModel";
-import CircularProgress from "@mui/material/CircularProgress";
 import {useRouter} from "next/navigation";
 import {Minus, Plus, Delete} from "@/components/Globals/Icons";
 
@@ -50,7 +49,9 @@ function CartItem(product: ProductType) {
                         numberInCart > 1 ?
                             <Minus className={"fill-primary size-5"}/> :
                             removeFromCartLoading ?
-                                <CircularProgress color={"primary"} size={25}/> :
+                                <div className={"flex w-full justify-center items-center p-3"}>
+                                    <span className={"loading loading-spinner text-primary"}></span>
+                                </div> :
                                 <Delete className={"fill-primary size-5"}/>
                     }
                 </button>
