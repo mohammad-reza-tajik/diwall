@@ -23,7 +23,7 @@ function SearchForm(props:FormHTMLAttributes<HTMLFormElement>) {
             </button>
 
             <input
-                className={`input input-bordered focus:input-primary ${isWrong ? "input-error" : ""} rounded-full w-[350px] lg:w-[400px] py-7 pr-12`}
+                className={`input input-bordered focus:input-primary ${isWrong ? "input-error" : ""} rounded-full w-[300px] lg:w-[400px] py-7 pr-12`}
                 placeholder={"جستجو ..."}
                 value={search}
                 onChange={searchChangeHandler}
