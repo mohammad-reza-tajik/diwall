@@ -4,7 +4,7 @@ import {Circle} from "@/components/Globals/Icons";
 
 function Places() {
     return (
-        <section className={"flex flex-col gap-5 md:gap-8 my-32"}>
+        <section className={"flex flex-col gap-5 md:gap-8 my-20"}>
             <div className={"flex items-center justify-center gap-2"}>
                 <Circle className={"fill-primary size-4 lg:size-7"}/>
                 <h2 className={"font-dana-black text-lg lg:text-2xl"}>
