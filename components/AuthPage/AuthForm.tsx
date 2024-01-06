@@ -32,7 +32,7 @@ function AuthForm() {
             </div>
 
             <Logo/>
-            <form className={"flex flex-col gap-4 items-center w-full px-3 md:px-10"} onSubmit={formHandler}>
+            <form className={"flex flex-col gap-4 items-center w-full px-3 md:px-10 max-w-[30rem]"} onSubmit={formHandler}>
                 {
                     formType === "signup" ?
                         <>
