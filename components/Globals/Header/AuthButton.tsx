@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import {Login} from "@/components/Globals/Icons";
 import { useState} from "react";
@@ -9,11 +10,11 @@ function AuthButton(user: UserType) {
 
     return (
         user?.username === null ?
-            <Link className={"btn btn-primary w-48 py-2 rounded-full"} href={"/auth"} aria-label="login/signup">
+            <Link className={"btn btn-primary w-48 rounded-full"} href={"/auth"} aria-label="login/signup">
                 <Login className={"fill-white size-6"}/>
                 ورود / ثبت نام
             </Link> :
-            <button className={"btn btn-primary w-48 relative py-2 rounded-full"} aria-label="show menu"
+            <button className={"btn btn-primary font-dana-bold w-48 relative py-2 rounded-full"} aria-label="show menu"
                     onClick={() => setOpenMenu((prevState)=>!prevState)}
             >
                 {user?.username}
