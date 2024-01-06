@@ -45,7 +45,7 @@ export async function signup({username, email, password}: SignupActionParams) {
         return serialize({
             ok: true,
             status: 201,
-            newUser,
+            user:newUser,
             token,
             message: "ثبت نام با موفقیت انجام شد",
         })
