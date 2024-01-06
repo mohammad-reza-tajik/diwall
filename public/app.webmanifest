@@ -6,6 +6,7 @@
   "background_color": "#069f69",
   "display": "standalone",
   "scope": "/",
+  "id": "https://diwall.vercel.app",
   "start_url": "/",
   "lang": "fa-IR",
   "dir": "rtl",

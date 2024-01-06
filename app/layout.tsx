@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     keywords: ["پوستر دیواری", "کاغذ دیواری", "خرید کاغذ دیواری", "خرید پوستر دیواری"],
     category: "e-commerce",
     metadataBase: new URL("https://diwall.vercel.com"),
-    manifest: "/manifest.json",
+    manifest: "/app.webmanifest",
     applicationName: "دیوال",
     appleWebApp: {title: "دیوال", capable: true, statusBarStyle: "default"},
     formatDetection: {telephone: false},
