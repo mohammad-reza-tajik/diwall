@@ -7,6 +7,7 @@ import {getAllProducts} from "@/actions/product";
 import qs from "query-string";
 import Pagination from "@/components/Globals/Pagination";
 import {ProductType} from "@/db/productModel";
+import {enqueueSnackbar} from "notistack";
 
 
 interface Response {
@@ -32,7 +33,7 @@ function Products() {
                 setData(res);
 
             } catch (err) {
-                console.log(err);
+                enqueueSnackbar(err.message, {variant:"error"});
             } finally {
                 setIsLoading(false);
 
