@@ -23,7 +23,6 @@ function AutoLogin({children}: Props) {
 
             } catch (err) {
                 dispatch(userActions.logout());
-                console.log(err);
             }
 
         })();
