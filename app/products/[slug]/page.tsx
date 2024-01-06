@@ -46,7 +46,7 @@ async function DetailsPage({params}: Props) {
 
     return (
         <>
-            <section className={"flex max-md:flex-col"}>
+            <section className={"flex max-md:flex-col max-md:gap-3"}>
                     <ThumbGallery product={product}/>
                     <ProductDetails {...product}/>
             </section>
