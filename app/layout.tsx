@@ -73,7 +73,6 @@ function RootLayout({children}: Props) {
     return (
         <html lang="fa" dir={"rtl"}>
         <body>
-
         <Providers>
             <AutoLogin>
                     <main className={"contained"}>
