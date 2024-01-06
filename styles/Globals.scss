@@ -87,6 +87,9 @@ input[type=number] {
   .divider {
     @apply my-1;
   }
+  .skeleton {
+    animation-duration: 2s;
+  }
 }
 @layer utilities {
   .contained {
