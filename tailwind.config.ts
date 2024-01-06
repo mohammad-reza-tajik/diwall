@@ -64,7 +64,7 @@ const config: Config = {
     },
     extend: {
       backgroundImage: {
-        "auth-pattern": "url(/assets/pictures/auth-bg.svg)",
+        "auth-pattern": "url(/pictures/auth-bg.svg)",
       }
     },
   },

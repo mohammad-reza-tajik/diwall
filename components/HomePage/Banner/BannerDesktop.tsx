@@ -16,7 +16,7 @@ function BannerDesktop () {
                     مشاهده محصولات
                 </Link>
             </div>
-            <Image src={"/assets/pictures/banner-desktop.jpg"} width={750} height={500} className={"w-full h-full object-cover col-span-4"} priority alt={"banner-image"}/>
+            <Image src={"/pictures/banner-desktop.jpg"} width={750} height={500} className={"w-full h-full object-cover col-span-4"} priority alt={"banner-image"}/>
         </div>
     )
 }

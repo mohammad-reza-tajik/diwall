@@ -135,9 +135,9 @@ function Footer() {
                     </p>
                 </div>
                 <div className={"flex items-center gap-2"}>
-                    <Image src={"/assets/pictures/enamad.png"} alt={"نماد اعتماد الکترونیکی"} width={150}
+                    <Image src={"/pictures/enamad.png"} alt={"نماد اعتماد الکترونیکی"} width={150}
                            height={150} className="object-cover"/>
-                    <Image src={"/assets/pictures/national-digital-media-badge.png"}
+                    <Image src={"/pictures/national-digital-media-badge.png"}
                            alt={"نشان ملی ثبت رسانه های دیجیتال"} width={150} height={150} className="object-cover"/>
                 </div>
             </div>

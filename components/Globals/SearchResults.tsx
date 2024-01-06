@@ -42,7 +42,7 @@ function SearchResults({isLoading, results, search, submitSearchHandler, closeSe
                             <div className={"flex items-center gap-2"} role={"button"}
                                  onClick={() => goToProductHandler(result.slug)}>
                                 <Image
-                                    src={`/assets/pictures/products/${result.slug}.jpg`}
+                                    src={`/pictures/products/${result.slug}.jpg`}
                                     alt={result.title}
                                     width={50}
                                     height={50}

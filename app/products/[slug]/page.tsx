@@ -29,7 +29,7 @@ export const generateMetadata = async ({params}: Props): Promise<Metadata> => {
             description: product.description,
             type: "website",
             url: `https://diwall.vercel/products/${product.slug}`,
-            images: `/assets/pictures/products/${product.slug}.jpg`
+            images: `/pictures/products/${product.slug}.jpg`
         }
     }
 }

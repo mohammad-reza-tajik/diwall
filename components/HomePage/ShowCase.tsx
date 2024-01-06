@@ -7,7 +7,7 @@ function ShowCase() {
             {
                 showcase.map((image)=>{
                     return (
-                            <Image key={image.alt} src={`/assets/pictures/showcase/${image.name}.svg`} alt={image.alt}
+                            <Image key={image.alt} src={`/pictures/showcase/${image.name}.svg`} alt={image.alt}
                                    width={100} height={100}/>
                     )
                 })

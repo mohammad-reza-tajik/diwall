@@ -11,7 +11,7 @@ function NotFound() {
     return (
         <section
             className={"flex flex-col md:justify-center items-center w-screen h-screen fixed inset-0 z-50 bg-white gap-5"}>
-            <Image src={"/assets/pictures/not-found.svg"} width={400} height={400} className={"w-80 h-auto"}
+            <Image src={"/pictures/not-found.svg"} width={400} height={400} className={"w-80 h-auto"}
                    alt={"صفحه مورد نظر شما یافت نشد !"}/>
             <h1 className={"font-dana-black text-lg md:text-2xl text-center"}>
                 صفحه مورد نظر پیدا نشد

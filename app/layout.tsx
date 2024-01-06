@@ -33,7 +33,7 @@ export const metadata: Metadata = {
         siteName: "دیوال",
         images: {
             alt: "دیوال : فروشگاه پوستر و کاغذ دیواری",
-            url: "/assets/pictures/og-banner.jpg"
+            url: "/pictures/og-banner.jpg"
         }
 
     },
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
         site: "https://diwall.vercel.com",
         images: {
             alt: "دیوال : فروشگاه پوستر و کاغذ دیواری",
-            url: "/assets/pictures/og-banner.jpg"
+            url: "/pictures/og-banner.jpg"
         },
     },
     icons: {

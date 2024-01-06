@@ -34,7 +34,7 @@ function Product(product: ProductType) {
                 }
             </button>
             <Link href={`/products/${product.slug}`}>
-                <Image src={`/assets/pictures/products/${product.slug}.jpg`} alt={product.title} width={400} height={400}/>
+                <Image src={`/pictures/products/${product.slug}.jpg`} alt={product.title} width={400} height={400}/>
             </Link>
             <Link className={"h-[3rem] font-dana-bold text-xs md:text-sm text-gray-600"} href={`/products/${product.slug}`}>
                 {product.title}

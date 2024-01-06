@@ -16,7 +16,7 @@ function BannerMobile ()  {
                     مشاهده محصولات
                 </Link>
             </div>
-            <Image src={"/assets/pictures/banner-mobile.jpg"} alt={"banner"} fill priority className={"object-cover"}/>
+            <Image src={"/pictures/banner-mobile.jpg"} alt={"banner"} fill priority className={"object-cover"}/>
         </div>
     );
 }
