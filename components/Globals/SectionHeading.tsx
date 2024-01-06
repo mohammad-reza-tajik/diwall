@@ -60,13 +60,13 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
                             مرتب سازی بر اساس :
                         </span>
                         <select id="filters"
-                                className="border text-sm rounded focus:border-primary focus:outline-none p-2 "
+                                value={sort}
+                                className="border text-sm rounded focus:border-primary focus:outline-none p-2 appearance-none"
                                 onChange={sortChangeHandler}>
                             {
                                 productFilters.map((filter, index) => {
                                     return (
-                                        <option value={filter.split(" ").join("-")} key={index}
-                                                selected={sort === filter}>{filter}</option>
+                                        <option value={filter.split(" ").join("-")} key={index}>{filter}</option>
                                     )
                                 })
                             }
