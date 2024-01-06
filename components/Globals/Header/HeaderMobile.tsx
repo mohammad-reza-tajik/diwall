@@ -1,74 +1,32 @@
 "use client"
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
 import MenuDrawer from "./MenuDrawer";
-import Typography from "@mui/material/Typography";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import MenuItem from "@mui/material/MenuItem";
-import React, {useState} from "react";
-import {useRouter} from "next/navigation";
+import {useState} from "react";
 import Link from "next/link";
-import 'react-modern-drawer/dist/index.css'
-import {enqueueSnackbar} from "notistack";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LoginIcon from "@mui/icons-material/Login";
-import LogoutIcon from "@mui/icons-material/Logout";
-import HamburgerIcon from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
-import SearchIcon from "@mui/icons-material/Search";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import SearchDrawer from "./SearchDrawer";
-import {useAppDispatch, useAppSelector, userActions} from "@/store";
-import type {SxProps, Theme} from "@mui/material/styles";
+import {useAppSelector} from "@/store";
+import UserMenu from "@/components/Globals/Header/UserMenu";
+import {Hamburger, Person, Login, Search} from "@/components/Globals/Icons";
 
-const styles = {
-    headerIcon: {
-        fontSize: 30,
-    },
-    headerButton: {
-        p: 5,
-        borderRadius: 1,
-        border: (theme) => `1px solid ${theme.palette.primary.main}`
-    },
-    logo: {
-        width: "5rem",
-        height: "3rem",
-        fill: "#555"
-    },
-} satisfies Record<string, SxProps<Theme>>
-
-function HeaderMobile ()  {
-
-    const router = useRouter();
+function HeaderMobile() {
 
     const user = useAppSelector(state => state.user);
+    const [openMenu, setOpenMenu] = useState(false)
 
-    const dispatch = useAppDispatch();
 
     const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
     const [openSearchDrawer, setOpenSearchDrawer] = useState(false);
 
-
-    /*** menu logic ***/
-
-    const [anchorEl, setAnchorEl] = useState(null)
-    const openMenu = Boolean(anchorEl)
-    const closeMenu = () => {
-        setAnchorEl(null);
-    }
-
     return (
-        <Grid container py={"1rem"}>
-            <Grid container item xs alignItems={"baseline"} gap={"1rem"}>
-                <IconButton onClick={() => setOpenMenuDrawer(true)} color={"primary"}
-                            sx={styles.headerButton}
-                            aria-label="open menu drawer">
-                    <HamburgerIcon sx={styles.headerIcon}/>
-                </IconButton>
+        <div className={"flex justify-between md:hidden py-2"}>
+            <div className={"flex items-center gap-4"}>
+                <button className={"btn btn-circle border border-primary px-2"} onClick={() => setOpenMenuDrawer(true)}
+                        aria-label="open menu drawer">
+                    <Hamburger className={"size-8 fill-primary"}/>
+                </button>
 
                 <Link href={"/"}>
-                    <svg style={styles.logo} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140.4 56.16">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140.4 56.16"
+                         className={"size-12 fill-gray-700"}>
                         <g id="Layer_2" data-name="Layer 2">
                             <g id="Layer_1-2" data-name="Layer 1">
                                 <path
@@ -84,82 +42,32 @@ function HeaderMobile ()  {
                         </g>
                     </svg>
                 </Link>
-            </Grid>
+            </div>
 
-            <Grid container item xs={"auto"} gap={".2rem"}>
-                <IconButton color={"primary"} onClick={() => setOpenSearchDrawer(true)}
-                            sx={styles.headerButton}
-                            aria-label="open search drawer">
-                    <SearchIcon sx={styles.headerIcon}/>
-                </IconButton>
+            <div className={"flex gap-0.5"}>
+                <button className={"btn btn-circle border border-primary px-2"}
+                        onClick={() => setOpenSearchDrawer(true)}
+                        aria-label="open search drawer"
+                >
+                    <Search className={"size-8 fill-primary"}/>
+                </button>
 
                 <MenuDrawer setOpenMenuDrawer={setOpenMenuDrawer} openMenuDrawer={openMenuDrawer}/>
                 <SearchDrawer setOpenSearchDrawer={setOpenSearchDrawer} openSearchDrawer={openSearchDrawer}/>
 
                 {
-                    user.username === null ?
-                        <IconButton component={Link} href={"/auth"} color={"primary"} aria-label="login"
-                                    sx={styles.headerButton}>
-                            <LoginIcon sx={styles.headerIcon}/>
-                        </IconButton> :
-                        <>
-                            <IconButton aria-label="open user menu" color={"primary"} sx={styles.headerButton}
-                                        onClick={(event) => {
-                                            setAnchorEl(anchorEl ? null : event.currentTarget)
-                                        }}>
-                                <PersonIcon sx={styles.headerIcon}/>
-                            </IconButton>
-                            <Menu
-                                anchorEl={anchorEl}
-                                open={openMenu}
-                                onClose={closeMenu}
-                                onClick={closeMenu}
-                                transformOrigin={{horizontal: 'right', vertical: 'top'}}
-                                anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-                            >
-                                <MenuItem onClick={() => router.push(`/accounts/${user?._id}?tab=0`)}>
-                                    <ListItemIcon>
-                                        <PersonIcon sx={{fontSize: 25}} color={"primary"}/>
-                                    </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15}>
-                                        حساب کاربری
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem onClick={() => router.push(`/accounts/${user?._id}?tab=1`)}>
-                                    <ListItemIcon>
-                                        <FavoriteIcon sx={{fontSize: 25}} color={"primary"}/>
-                                    </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15}>
-                                        علاقمندی ها
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem
-                                    onClick={() => router.push(`/accounts/${user?._id}?tab=2`)}>
-                                    <ListItemIcon>
-                                        <ShoppingBagIcon sx={{fontSize: 25}} color={"primary"}/>
-                                    </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15}>
-                                        سبد خرید
-                                    </Typography>
-                                </MenuItem>
-                                <MenuItem onClick={() => {
-                                    dispatch(userActions.logout());
-                                    enqueueSnackbar("با موفقیت از حساب خود خارج شدید", {
-                                        variant: "info",
-                                    });
-                                }}>
-                                    <ListItemIcon>
-                                        <LogoutIcon sx={{fontSize: 25}} color={"primary"}/>
-                                    </ListItemIcon>
-                                    <Typography variant={"caption"} fontSize={15}>
-                                        خروج از حساب کاربری
-                                    </Typography>
-                                </MenuItem>
-                            </Menu>
-                        </>
+                    !user.username ?
+                        <Link className={"btn btn-circle border border-primary px-2"} href={"/auth"} aria-label="login">
+                            <Login className={"size-8 fill-primary"}/>
+                        </Link> :
+                        <div className={"relative flex justify-center items-center size-12 rounded-full border border-primary"} aria-label="open user menu"
+                             onClick={() => setOpenMenu(prevState => !prevState)}>
+                            <Person className={"size-8 fill-primary"}/>
+                            <UserMenu open={openMenu} user={user}/>
+                        </div>
                 }
-            </Grid>
-        </Grid>
+            </div>
+        </div>
     )
 }
 
