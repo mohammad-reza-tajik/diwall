@@ -1,3 +1,4 @@
+/*
 import {ChangeEvent, FormEvent, useRef, useState} from "react";
 // import {useAppSelector} from "@/hooks/useStore";
 import Grid from "@mui/material/Grid";
@@ -102,8 +103,8 @@ function AddProduct () {
             </Grid>
             <Grid container item xs={12} justifyContent={"space-between"} alignItems={"center"}>
                 <Grid item xs={"auto"}>
-                    { /* @ts-ignore */}
-                    <Grid ref={imagesRef} component={"input"} id={"images"} type={"file"} multiple accept={"image/*"}
+                    { /!* @ts-ignore *!/}
+                    <Grid ref={imagesRef} component={"input"} id={"images"} type={"file"} multiple accept={"image/!*"}
                           sx={{display: "none"}} onChange={uploadImageChangeHandler}/>
                     {
                         uploadedFileName === "" ?
@@ -132,4 +133,4 @@ function AddProduct () {
 
 }
 
-export default AddProduct
+export default AddProduct*/
