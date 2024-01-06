@@ -1,5 +1,5 @@
 "use client"
-import {HeartOutlined, Logout, Person, ShoppingBag} from "@/components/Globals/Icons";
+import {Logout} from "@/components/Globals/Icons";
 import Link from "next/link";
 import {useAppDispatch, userActions} from "@/store";
 import {enqueueSnackbar} from "notistack";
