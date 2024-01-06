@@ -18,12 +18,8 @@ export const metadata: Metadata = {
     },
     description: "خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب",
     keywords: ["پوستر دیواری", "کاغذ دیواری", "خرید کاغذ دیواری", "خرید پوستر دیواری"],
-    category: "e-commerce",
     metadataBase: new URL("https://diwall.vercel.com"),
     manifest: "/app.webmanifest",
-    applicationName: "دیوال",
-    appleWebApp: {title: "دیوال", capable: true, statusBarStyle: "default"},
-    formatDetection: {telephone: false},
     openGraph: {
         title: "دیوال : فروشگاه پوستر و کاغذ دیواری",
         description: "از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید",
@@ -35,7 +31,6 @@ export const metadata: Metadata = {
             alt: "دیوال : فروشگاه پوستر و کاغذ دیواری",
             url: "/pictures/og-banner.jpg"
         }
-
     },
     twitter: {
         title: "دیوال : فروشگاه پوستر و کاغذ دیواری",
@@ -48,9 +43,8 @@ export const metadata: Metadata = {
         },
     },
     icons: {
-        icon: "/icons/logo-144.png",
+        icon: "/icons/logo-192.png",
         apple: [
-            {url: "/icons/logo-144.png", sizes: "144x144", type: "image/png"},
             {url: "/icons/logo-192.png", sizes: "192x192", type: "image/png"},
         ]
     }

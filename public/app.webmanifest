@@ -6,32 +6,16 @@
   "background_color": "#069f69",
   "display": "standalone",
   "scope": "/",
-  "id": "https://diwall.vercel.app",
+  "id": "/",
   "start_url": "/",
   "lang": "fa-IR",
   "dir": "rtl",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/icons/logo-144.png",
-      "type": "image/png",
-      "sizes": "144x144"
-    },
-    {
-      "src": "/icons/logo-152.png",
-      "type": "image/png",
-      "sizes": "152x152"
-    },
-    {
       "src": "/icons/logo-192.png",
       "type": "image/png",
       "sizes": "192x192"
-    },
-    {
-      "src": "/icons/logo-192.png",
-      "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "maskable"
     },
     {
       "src": "/icons/logo-384.png",
@@ -42,6 +26,17 @@
       "src": "/icons/logo-512.png",
       "type": "image/png",
       "sizes": "512x512"
+    },
+    {
+      "src": "/icons/logo-512-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose" : "maskable"
+    },
+    {
+      "src": "/icons/logo-1024.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
     }
   ]
 }
