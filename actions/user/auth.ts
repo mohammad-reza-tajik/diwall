@@ -135,6 +135,7 @@ export async function getUser() {
 
         token = tokenGenerator(user._id);
         return serialize({
+            ok:true,
             user,
             token
         })
