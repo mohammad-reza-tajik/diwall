@@ -89,6 +89,7 @@ input[type=number] {
   }
   .skeleton {
     animation-duration: 2s;
+    @apply bg-gray-200 rounded #{!important};
   }
 }
 @layer utilities {

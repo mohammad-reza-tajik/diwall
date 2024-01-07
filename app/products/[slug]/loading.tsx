@@ -2,7 +2,7 @@ function Loading() {
 
     return (
         <>
-            <section className={"flex max-md:flex-col max-md:gap-3"}>
+            <div className={"flex max-md:flex-col max-md:gap-3"}>
                 <div className={"flex flex-col gap-2 w-full md:w-1/2 md:pl-10"}>
                     <div className={"skeleton w-full h-80"}/>
                     <div className={"skeleton w-full h-20 md:h-40"}/>
@@ -27,7 +27,7 @@ function Loading() {
                     </div>
                     <div className={"skeleton w-full md:w-1/2 h-16 self-end"}/>
                 </div>
-            </section>
+            </div>
             <div className="divider my-7"/>
             <div className={"skeleton w-full h-32"}/>
             <div className="divider my-7"/>
