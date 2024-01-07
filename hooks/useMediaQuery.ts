@@ -10,7 +10,7 @@ const useMediaQuery = (width:string | number , mode : "up" | "down" = "up") => {
     }
 
     const [isClient, setIsClient] = useState(false);
-    const [matches, setMatches] = useState(isClient ?window.matchMedia(query).matches : true);
+    const [matches, setMatches] = useState(isClient ? window.matchMedia(query).matches : false);
 
     const listener = (event : MediaQueryListEvent) => {
         setMatches(event.matches);
@@ -20,6 +20,7 @@ const useMediaQuery = (width:string | number , mode : "up" | "down" = "up") => {
     useEffect(() => {
         setIsClient(true);
         const mediaQuery = window.matchMedia(query);
+        setMatches(mediaQuery.matches);
         mediaQuery.addEventListener("change", listener);
         return () => mediaQuery.removeEventListener("change", listener);
     }, [query]);
