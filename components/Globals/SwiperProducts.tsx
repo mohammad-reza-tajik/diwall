@@ -34,7 +34,7 @@ function SwiperProducts ({products , mostPopular , route} : Props)  {
             {
                 mostPopular &&
                 <>
-                    <SectionHeading text={"محبوب ترین محصولات"} seeAll route={"/products?sortBy=3"} white/>
+                    <SectionHeading text={"محبوب ترین محصولات"} seeAll route={"/products?sortBy=محبوب-ترین"} white/>
                     <div className={"hidden lg:flex lg:flex-col gap-10 px-4"}>
                         <h2 className={"text-white font-dana-black text-4xl !leading-snug"}>
                             محبوب ترین
