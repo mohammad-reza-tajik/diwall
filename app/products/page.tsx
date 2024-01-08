@@ -34,7 +34,7 @@ async function Products({searchParams}:{searchParams : Record<string, string>}) 
                 {
 
                         data?.products.length === 0 ?
-                            <p className={"text-lg flex justify-center items-center"}>
+                            <p className={"text-center flex justify-center items-center col-span-4 text-sm md:text-base"}>
                                 هیچ محصول مرتبطی موجود نیست !
                             </p>
                             :
