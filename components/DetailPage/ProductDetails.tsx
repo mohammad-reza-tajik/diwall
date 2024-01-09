@@ -72,7 +72,7 @@ function ProductDetails(product: ProductType) {
             <div className={"flex items-center gap-2 justify-end w-full"}>
                 <button className={`btn btn-lg btn-circle btn-primary`}
                         onClick={addToWishlistHandler}
-                        aria-label="add to wishlist"
+                        aria-label={"افزودن به لیست علاقمندی ها"}
                         disabled={addToWishlistLoading}
                 >
                     {
@@ -85,7 +85,6 @@ function ProductDetails(product: ProductType) {
                 </button>
                 <button
                     className={`btn btn-lg text-sm max-md:flex-1 rounded-full ${isInCart ? "btn-error" : "btn-primary"}`}
-                    aria-label="add to cart"
                     disabled={addToCartLoading}
                     onClick={addToCartHandler}>
                     {

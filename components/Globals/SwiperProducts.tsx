@@ -43,8 +43,7 @@ function SwiperProducts ({products , mostPopular , route} : Props)  {
                             <br/>
                             دیوال
                         </h2>
-                        <Link className={`btn btn-outline btn-sm md:btn-md ${mostPopular ? "text-white hover:border-white hover:bg-black/20" : "btn-primary"} rounded-full text-sm md:text-base`} href={route}
-                              aria-label="مشاهده همه">
+                        <Link className={`btn btn-outline btn-sm md:btn-md ${mostPopular ? "text-white hover:border-white hover:bg-black/20" : "btn-primary"} rounded-full text-sm md:text-base`} href={route}>
                             مشاهده همه
                         </Link>
                     </div>

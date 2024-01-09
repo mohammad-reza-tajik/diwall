@@ -58,7 +58,7 @@ function Footer() {
                     {
                         socials.map((social)=>{
                             return (
-                                <a key={social.href} className={"btn btn-circle btn-outline btn-primary fill-primary hover:fill-white"} href={social.href} aria-label="telegram">
+                                <a key={social.href} className={"btn btn-circle btn-outline btn-primary fill-primary hover:fill-white"} href={social.href} aria-label={social.label}>
                                     {social.icon}
                                 </a>
                             )
@@ -152,10 +152,10 @@ function Footer() {
                     </h5>
 
                     <div className={"flex gap-2"}>
-                        <button className={"btn btn-outline btn-sm md:btn-md btn-circle btn-primary gap-1 fill-primary hover:fill-white"}>
+                        <button className={"btn btn-outline btn-sm md:btn-md btn-circle btn-primary gap-1 fill-primary hover:fill-white"} aria-label={"دریافت اپلیکیشن از google play"}>
                             <GooglePlay className={"md:size-5 size-4 "} />
                         </button>
-                        <button className={"btn btn-outline btn-sm md:btn-md btn-circle btn-primary gap-1 fill-primary hover:fill-white"}>
+                        <button className={"btn btn-outline btn-sm md:btn-md btn-circle btn-primary gap-1 fill-primary hover:fill-white"} aria-label={"دریافت اپلیکیشن از play store"}>
                             <Apple className={"md:size-5  size-4"} />
                         </button>
                     </div>

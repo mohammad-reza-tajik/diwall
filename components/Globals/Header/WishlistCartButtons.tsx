@@ -12,7 +12,7 @@ function WishlistCartButtons(user:UserType) {
                             </span>
                     <Link className={"btn btn-square btn-ghost border border-primary rounded-full"}
                           href={user.username ? `/accounts/${user?._id}?tab=1` : "/auth"}
-                          aria-label="go to wishlist">
+                          aria-label={"لیست علاقمندی ها"}>
                         <HeartOutlined className={"fill-primary size-7"}/>
                     </Link>
                 </div>
@@ -24,7 +24,7 @@ function WishlistCartButtons(user:UserType) {
                             </span>
                     <Link className={"btn btn-square btn-ghost border border-primary rounded-full"}
                           href={user.username ? `/accounts/${user?._id}?tab=2` : "/auth"}
-                          aria-label="go to cart">
+                          aria-label={"سبد خرید"}>
                         <ShoppingBag className={"fill-primary size-7"}/>
                     </Link>
                 </div>

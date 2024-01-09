@@ -51,14 +51,17 @@ export const footerLinks3 = [
 
 export const socials = [
     {
+        label:"telegram",
         href : "https://telegram.org/",
         icon : <Telegram className={"size-5"} />
     },
     {
+        label:"twitter",
         href : "https://twitter.com/?lang=en",
         icon : <Twitter className={"size-5"} />
     },
     {
+        label:"instagram",
         href : "https://www.instagram.com/",
         icon : <Instagram className={"size-5"} />
     },

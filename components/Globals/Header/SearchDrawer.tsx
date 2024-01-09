@@ -30,7 +30,7 @@ function SearchDrawer ({setOpenSearchDrawer, openSearchDrawer} : Props) {
                 className={`fixed top-0 left-0 h-full w-full bg-white shadow-lg z-50 transform transition-transform ease-in-out duration-300 ${openSearchDrawer ? "translate-x-0" : "-translate-x-full"}`}>
                 <div className="flex flex-col gap-2 p-5">
                         <div className="relative join items-center justify-between w-full gap-3">
-                            <button className={"btn btn-sm btn-circle btn-ghost absolute right-2  z-20"}>
+                            <button className={"btn btn-sm btn-circle btn-ghost absolute right-2  z-20"} aria-label={"جستجو"}>
                                 <Search className={`fill-primary size-8`}/>
                             </button>
 
@@ -41,7 +41,7 @@ function SearchDrawer ({setOpenSearchDrawer, openSearchDrawer} : Props) {
                                 onChange={searchChangeHandler}
                             />
                         <button className={"btn btn-primary btn-circle fill-white"} onClick={closeSearchHandlerMobile}
-                                aria-label="close search drawer">
+                                aria-label={"بستن منوی جستجو"}>
                             <Close className={"size-5"}/>
                         </button>
                         </div>

@@ -12,7 +12,7 @@ function BannerDesktop () {
                     از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                     آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
                 </p>
-                <Link className={"btn btn-sm lg:btn-md rounded-full w-max lg:w-56 !text-xs lg:!text-sm btn-ghost text-white border border-white hover:border-white"} href={"/products"} aria-label="مشاهده محصولات">
+                <Link className={"btn btn-sm lg:btn-md rounded-full w-max lg:w-56 !text-xs lg:!text-sm btn-ghost text-white border border-white hover:border-white"} href={"/products"}>
                     مشاهده محصولات
                 </Link>
             </div>

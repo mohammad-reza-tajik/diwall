@@ -5,8 +5,8 @@ import Image from "next/image";
 function Logo(props:AnchorHTMLAttributes<HTMLAnchorElement>) {
 
     return (
-        <Link href={"/"} {...props}>
-            <Image src={"/icons/logo.png"} alt={"diwall-logo"} width={100} height={100}/>
+        <Link href={"/"} {...props} aria-label={"لوگو"}>
+            <Image src={"/icons/logo.png"} alt={"لوگوی دیوال"} width={100} height={100}/>
         </Link>
     )
 }

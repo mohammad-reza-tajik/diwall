@@ -24,7 +24,7 @@ function Product(product: ProductType) {
         <div className={"bg-white rounded flex flex-col p-2 relative gap-2 min-h-full"}>
             <button
                 className={`absolute left-3 top-3 z-10 btn btn-circle btn-sm md:btn-md btn-ghost bg-black/30 ${addToWishlistLoading && "btn-disabled"}`}
-                onClick={wishlistHandler} aria-label="add to wishlist" disabled={addToWishlistLoading}>
+                onClick={wishlistHandler} aria-label={"افزودن به لیست علاقمندی ها"} disabled={addToWishlistLoading}>
                 {
                     addToWishlistLoading ?
                         <span className={"loading loading-spinner text-white"}></span> :
@@ -33,7 +33,7 @@ function Product(product: ProductType) {
                             <HeartOutlined className={"fill-white size-5 md:size-6"}/>
                 }
             </button>
-            <Link href={`/products/${product.slug}`}>
+            <Link href={`/products/${product.slug}`} aria-label={product.title}>
                 <Image src={`/pictures/products/${product.slug}.jpg`} alt={product.title} width={400} height={400}/>
             </Link>
             <Link className={"h-[3rem] font-dana-bold text-xs md:text-sm text-gray-600"} href={`/products/${product.slug}`}>

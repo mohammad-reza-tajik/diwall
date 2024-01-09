@@ -46,9 +46,8 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
             </div>
             {
                 seeAll ?
-                    <Link className={`btn btn-outline btn-sm md:btn-md ${white ? "text-white border-white" : "btn-primary"} rounded-full text-sm`} href={route}
-                          aria-label="مشاهده همه">
-                        مشاهده همه
+                    <Link className={`btn btn-outline btn-sm md:btn-md ${white ? "text-white border-white" : "btn-primary"} rounded-full text-sm`} href={route}>
+                        مشاهده بیشتر
                     </Link> :
                     null
             }

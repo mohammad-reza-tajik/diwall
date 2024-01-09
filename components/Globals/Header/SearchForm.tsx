@@ -18,7 +18,7 @@ function SearchForm(props:FormHTMLAttributes<HTMLFormElement>) {
 
     return (
         <form onSubmit={submitSearchHandler} className={"relative flex items-center"} {...props}>
-            <button className={"btn btn-sm btn-circle btn-ghost absolute right-2  z-20"}>
+            <button className={"btn btn-sm btn-circle btn-ghost absolute right-2  z-20"} aria-label={"جستجو"}>
                 <Search className={`fill-primary size-8`}/>
             </button>
 
@@ -28,7 +28,7 @@ function SearchForm(props:FormHTMLAttributes<HTMLFormElement>) {
                 value={search}
                 onChange={searchChangeHandler}
             />
-            <button aria-label="clear search field"
+            <button aria-label={"پاک کردن فیلد جستجو"}
                     className={`btn btn-circle btn-sm btn-ghost absolute left-2 ${!search && "hidden"}`}
                     onClick={closeSearchHandlerDesktop}>
                 <Close className={`fill-primary size-8`}/>

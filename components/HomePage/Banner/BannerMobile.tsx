@@ -12,7 +12,7 @@ function BannerMobile ()  {
                     از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به
                     آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید
                 </p>
-                <Link className={"btn btn-primary rounded-full w-max"} aria-label="مشاهده محصولات" href={"/products"}>
+                <Link className={"btn btn-primary rounded-full w-max"} href={"/products"}>
                     مشاهده محصولات
                 </Link>
             </div>
