@@ -4,7 +4,7 @@ import {useAppDispatch, userActions} from "@/store";
 import Image from "next/image";
 import type {ProductType} from "@/db/productModel";
 import {useRouter} from "next/navigation";
-import {Minus, Plus, Delete} from "@/components/Globals/Icons";
+import {Minus, Plus, Delete} from "@/components/shared/Icons";
 
 function CartItem(product: ProductType) {
 

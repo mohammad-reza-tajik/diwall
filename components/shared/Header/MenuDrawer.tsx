@@ -1,6 +1,6 @@
 "use client"
 import {useRouter} from "next/navigation";
-import Logo from "@/components/Globals/Logo";
+import Logo from "@/components/shared/Logo";
 import navLinks from "@/constants/navLinks";
 
 interface Props {

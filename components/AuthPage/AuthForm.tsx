@@ -1,8 +1,8 @@
 "use client"
 import Link from "next/link";
 import useAuth from "@/hooks/useAuth";
-import Logo from "@/components/Globals/Logo";
-import {Create, Email, Login, Password, Person} from "@/components/Globals/Icons";
+import Logo from "@/components/shared/Logo";
+import {Create, Email, Login, Password, Person} from "@/components/shared/Icons";
 
 function AuthForm() {
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import {ChangeEvent, useEffect, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import formUrlQuery from "@/utils/formUrlQuery";
-import {Circle} from "@/components/Globals/Icons";
+import {Circle} from "@/components/shared/Icons";
 import productFilters from "@/constants/productFilters";
 
 interface Props {
@@ -40,9 +40,9 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
         <div className={`flex justify-between items-center my-5 w-full ${white ? "lg:hidden" : "block"}`}>
             <div className={"flex gap-2 items-center"}>
                 <Circle className={`size-5 ${white ? "fill-white" : "fill-primary"}`}/>
-                <h4 className={`font-dana-black text-sm md:text-lg ${white ? "text-white" : "text-inherit"}`}>
+                <h2 className={`font-dana-black text-sm md:text-lg ${white ? "text-white" : "text-inherit"}`}>
                     {text}
-                </h4>
+                </h2>
             </div>
             {
                 seeAll ?

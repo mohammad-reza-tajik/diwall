@@ -5,7 +5,7 @@ import Image from "next/legacy/image"
 import {useRouter} from "next/navigation";
 import {userActions, useAppDispatch, useAppSelector} from "@/store";
 import type {ProductType} from "@/db/productModel";
-import {Heart, HeartOutlined} from "@/components/Globals/Icons";
+import {Heart, HeartOutlined} from "@/components/shared/Icons";
 
 function Product(product: ProductType) {
     const router = useRouter();

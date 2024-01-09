@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {HeartOutlined, ShoppingBag} from "@/components/Globals/Icons";
+import {HeartOutlined, ShoppingBag} from "@/components/shared/Icons";
 import {UserType} from "@/db/userModel";
 
 function WishlistCartButtons(user:UserType) {

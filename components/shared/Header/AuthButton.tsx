@@ -1,9 +1,9 @@
 "use client"
 import Link from "next/link";
-import {Login} from "@/components/Globals/Icons";
+import {Login} from "@/components/shared/Icons";
 import { useState} from "react";
 import {UserType} from "@/db/userModel";
-import UserMenu from "@/components/Globals/Header/UserMenu";
+import UserMenu from "@/components/shared/Header/UserMenu";
 
 function AuthButton(user: UserType) {
     const [openMenu, setOpenMenu] = useState(false)

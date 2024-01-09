@@ -1,9 +1,9 @@
 "use client"
 import {useAppSelector} from "@/store";
-import SearchForm from "@/components/Globals/Header/SearchForm";
-import AuthButton from "@/components/Globals/Header/AuthButton";
-import WishlistCartButtons from "@/components/Globals/Header/WishlistCartButtons";
-import Logo from "@/components/Globals/Logo";
+import SearchForm from "@/components/shared/Header/SearchForm";
+import AuthButton from "@/components/shared/Header/AuthButton";
+import WishlistCartButtons from "@/components/shared/Header/WishlistCartButtons";
+import Logo from "@/components/shared/Logo";
 
 function HeaderDesktop() {
 

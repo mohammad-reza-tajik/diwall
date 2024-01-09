@@ -2,7 +2,7 @@
 import {useState , useEffect} from "react";
 import {useRouter , useSearchParams} from "next/navigation";
 import formUrlQuery from "@/utils/formUrlQuery";
-import {Arrow} from "@/components/Globals/Icons";
+import {Arrow} from "@/components/shared/Icons";
 
 interface Props {
     lastPage:number;

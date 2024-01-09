@@ -1,7 +1,7 @@
 "use client"
 import SearchResults from "../SearchResults";
 import useSearch from "@/hooks/useSearch";
-import {Close, Search} from "@/components/Globals/Icons";
+import {Close, Search} from "@/components/shared/Icons";
 
 interface Props {
     setOpenSearchDrawer: React.Dispatch<React.SetStateAction<boolean>>;

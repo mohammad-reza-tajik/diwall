@@ -1,5 +1,5 @@
 import {UserType} from "@/db/userModel";
-import {HeartOutlined, Person, ShoppingBag} from "@/components/Globals/Icons";
+import {HeartOutlined, Person, ShoppingBag} from "@/components/shared/Icons";
 
 const profileData = (user : UserType) => [
     {

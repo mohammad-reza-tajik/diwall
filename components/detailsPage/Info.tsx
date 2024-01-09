@@ -2,9 +2,9 @@
 import {useState} from "react";
 import dynamic from "next/dynamic";
 import ReviewsForm from "./ReviewsForm";
-import SwiperProducts from "../Globals/SwiperProducts";
+import SwiperProducts from "@/components/shared/SwiperProducts";
 import type {ProductType} from "@/db/productModel";
-import {Create, Package, Review} from "@/components/Globals/Icons";
+import {Create, Package, Review} from "@/components/shared/Icons";
 
 const Reviews = dynamic(() => import("./Reviews"));
 

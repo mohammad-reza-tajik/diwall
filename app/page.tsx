@@ -1,10 +1,10 @@
-import Features from "@/components/Globals/Features";
-import Banner from "@/components/HomePage/Banner";
-import ShowCase from "@/components/HomePage/ShowCase";
-import Places from "@/components/HomePage/Places";
-import SwiperProducts from "@/components/Globals/SwiperProducts";
-import SectionHeading from "@/components/Globals/SectionHeading";
-import MiddleSection from "@/components/HomePage/MiddleSection";
+import Features from "@/components/shared/Features";
+import Banner from "@/components/homePage/Banner";
+import ShowCase from "@/components/homePage/ShowCase";
+import Places from "@/components/homePage/Places";
+import SwiperProducts from "@/components/shared/SwiperProducts";
+import SectionHeading from "@/components/shared/SectionHeading";
+import MiddleSection from "@/components/homePage/MiddleSection";
 import connect from "@/db/connect";
 import Product from "@/db/productModel";
 

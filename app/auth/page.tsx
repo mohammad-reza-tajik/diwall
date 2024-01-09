@@ -1,4 +1,4 @@
-import AuthForm from "@/components/AuthPage/AuthForm";
+import AuthForm from "@/components/authPage/AuthForm";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {

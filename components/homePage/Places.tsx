@@ -1,6 +1,6 @@
 import Link from "next/link";
 import places from "@/constants/places";
-import {Circle} from "@/components/Globals/Icons";
+import {Circle} from "@/components/shared/Icons";
 
 function Places() {
     return (

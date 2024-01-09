@@ -3,7 +3,7 @@ import {useState} from "react";
 import {useAppDispatch, useAppSelector, userActions} from "@/store";
 import {useRouter} from "next/navigation";
 import type {ProductType} from "@/db/productModel";
-import {Heart, HeartOutlined, ShoppingBag} from "@/components/Globals/Icons";
+import {Heart, HeartOutlined, ShoppingBag} from "@/components/shared/Icons";
 
 function ProductDetails(product: ProductType) {
     const [addToCartLoading, setAddToCartLoading] = useState(false);

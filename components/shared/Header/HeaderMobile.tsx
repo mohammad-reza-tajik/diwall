@@ -4,8 +4,8 @@ import {useState} from "react";
 import Link from "next/link";
 import SearchDrawer from "./SearchDrawer";
 import {useAppSelector} from "@/store";
-import UserMenu from "@/components/Globals/Header/UserMenu";
-import {Hamburger, Person, Login, Search} from "@/components/Globals/Icons";
+import UserMenu from "@/components/shared/Header/UserMenu";
+import {Hamburger, Person, Login, Search} from "@/components/shared/Icons";
 
 function HeaderMobile() {
 

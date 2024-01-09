@@ -1,6 +1,6 @@
 import Link from "next/link";
 import navLinks from "@/constants/navLinks";
-import {Phone} from "@/components/Globals/Icons";
+import {Phone} from "@/components/shared/Icons";
 
 function MainNav() {
 

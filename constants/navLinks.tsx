@@ -1,4 +1,4 @@
-import {Home, Flame, Info, Handshake, Tag, HeartOutlined} from "@/components/Globals/Icons";
+import {Home, Flame, Info, Handshake, Tag, HeartOutlined} from "@/components/shared/Icons";
 
 const navLinks = [
     {

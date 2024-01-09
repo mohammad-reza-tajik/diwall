@@ -1,13 +1,13 @@
 import dynamic from "next/dynamic";
-import ProductDetails from "@/components/DetailPage/ProductDetails";
+import ProductDetails from "@/components/detailsPage/ProductDetails";
 import type {ProductType} from "@/db/productModel"
 import Product from "@/db/productModel";
 import connect from "@/db/connect";
 import {Metadata} from "next";
-import ThumbGallery from "@/components/DetailPage/ThumbGallery";
+import ThumbGallery from "@/components/detailsPage/ThumbGallery";
 
-const Info = dynamic(() => import("@/components/DetailPage/Info"))
-const Features = dynamic(() => import("@/components/Globals/Features"));
+const Info = dynamic(() => import("@/components/detailsPage/Info"))
+const Features = dynamic(() => import("@/components/shared/Features"));
 
 interface Props {
     params: { slug: string };

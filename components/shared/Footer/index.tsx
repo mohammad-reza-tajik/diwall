@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {Apple, GooglePlay, Phone, Circle} from "@/components/Globals/Icons";
+import {Apple, GooglePlay, Phone, Circle} from "@/components/shared/Icons";
 import {footerLinks1, footerLinks2, footerLinks3, socials} from "@/constants/footerLinks";
 
 function Footer() {

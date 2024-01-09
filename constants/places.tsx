@@ -1,4 +1,4 @@
-import {Child, Refrigerator, Bed, Desk, OfficeBuilding, Sofa} from "@/components/Globals/Icons";
+import {Child, Refrigerator, Bed, Desk, OfficeBuilding, Sofa} from "@/components/shared/Icons";
 
 const places = [
     {

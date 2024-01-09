@@ -3,13 +3,13 @@ import {useSearchParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
-import {HeartOutlined, ShoppingBag, Person} from "@/components/Globals/Icons";
+import {HeartOutlined, ShoppingBag, Person} from "@/components/shared/Icons";
 import formUrlQuery from "@/utils/formUrlQuery";
 import {useRouter} from "next/navigation";
 
-const Profile = dynamic(() => import("@/components/AccountPage/Profile"));
-const Wishlist = dynamic(() => import("@/components/AccountPage/Wishlist"));
-const Cart = dynamic(() => import("@/components/AccountPage/Cart"));
+const Profile = dynamic(() => import("@/components/accountPage/Profile"));
+const Wishlist = dynamic(() => import("@/components/accountPage/Wishlist"));
+const Cart = dynamic(() => import("@/components/accountPage/Cart"));
 
 function AccountPage() {
 

@@ -1,4 +1,4 @@
-import {Instagram, Telegram, Twitter} from "@/components/Globals/Icons";
+import {Instagram, Telegram, Twitter} from "@/components/shared/Icons";
 
 export const footerLinks1 = [
     {

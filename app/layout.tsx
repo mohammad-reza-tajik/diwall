@@ -4,11 +4,11 @@ import "swiper/scss/navigation";
 import "swiper/scss/free-mode";
 import "swiper/scss/thumbs";
 import "@/styles/Globals.scss";
-import AutoLogin from "@/components/Globals/AutoLogin";
-import Providers from "@/components/Globals/Providers";
-import Header from "@/components/Globals/Header";
-import Footer from "@/components/Globals/Footer";
-import MainNav from "@/components/Globals/MainNav";
+import AutoLogin from "@/components/shared/AutoLogin";
+import Providers from "@/components/shared/Providers";
+import Header from "@/components/shared/Header";
+import Footer from "@/components/shared/Footer";
+import MainNav from "@/components/shared/MainNav";
 
 
 export const metadata: Metadata = {

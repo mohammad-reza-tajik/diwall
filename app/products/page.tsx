@@ -1,7 +1,7 @@
-import SectionHeading from "@/components/Globals/SectionHeading";
-import Product from "@/components/Globals/Product";
+import SectionHeading from "@/components/shared/SectionHeading";
+import Product from "@/components/shared/Product";
 import {getAllProducts} from "@/actions/product";
-import Pagination from "@/components/Globals/Pagination";
+import Pagination from "@/components/shared/Pagination";
 import {ProductType} from "@/db/productModel";
 
 interface Response {

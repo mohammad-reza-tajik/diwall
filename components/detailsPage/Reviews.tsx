@@ -5,7 +5,7 @@ import {A11y, Navigation} from "swiper/modules";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import {getProduct} from "@/actions/product";
 import breakpoints from "@/constants/breakpoints";
-import {Person} from "@/components/Globals/Icons";
+import {Person} from "@/components/shared/Icons";
 import {enqueueSnackbar} from "notistack";
 
 interface Props {

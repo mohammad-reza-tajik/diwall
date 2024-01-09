@@ -4,7 +4,7 @@ import {useAppSelector} from "@/store";
 import Link from "next/link";
 import {enqueueSnackbar} from "notistack";
 import {createComment} from "@/actions/product/comment";
-import {Create} from "@/components/Globals/Icons";
+import {Create} from "@/components/shared/Icons";
 
 interface Props {
     setAddReview: Dispatch<SetStateAction<boolean>>;

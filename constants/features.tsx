@@ -1,4 +1,4 @@
-import {Package , Medal , Shipping , HeadPhones} from "@/components/Globals/Icons";
+import {Package , Medal , Shipping , HeadPhones} from "@/components/shared/Icons";
 
 const features = [
     {

@@ -1,4 +1,4 @@
-import Product from "@/components/Globals/Product";
+import Product from "@/components/shared/Product";
 import {UserType} from "@/db/userModel";
 
 function Wishlist(user: UserType) {

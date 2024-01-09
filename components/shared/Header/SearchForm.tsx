@@ -1,6 +1,6 @@
 "use client"
-import {Close, Search} from "@/components/Globals/Icons";
-import SearchResults from "@/components/Globals/SearchResults";
+import {Close, Search} from "@/components/shared/Icons";
+import SearchResults from "@/components/shared/SearchResults";
 import {FormHTMLAttributes} from "react"
 import useSearch from "@/hooks/useSearch";
 

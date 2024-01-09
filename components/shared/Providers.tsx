@@ -2,7 +2,7 @@
 import {Provider as StoreProvider} from "react-redux";
 import {store} from "@/store";
 import {SnackbarProvider, closeSnackbar} from 'notistack';
-import {Close} from "@/components/Globals/Icons";
+import {Close} from "@/components/shared/Icons";
 
 const snackbarAction = (key: string) => (
     <button className={"btn btn-ghost btn-sm btn-circle"} onClick={() => closeSnackbar(key)}>
