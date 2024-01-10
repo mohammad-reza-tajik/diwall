@@ -5,6 +5,7 @@ import Product from "@/db/productModel";
 import connect from "@/db/connect";
 import {Metadata} from "next";
 import ThumbGallery from "@/components/detailsPage/ThumbGallery";
+import serialize from "@/utils/serialize";
 
 const Info = dynamic(() => import("@/components/detailsPage/Info"))
 const Features = dynamic(() => import("@/components/shared/Features"));
@@ -41,20 +42,20 @@ export async function generateStaticParams() {
 }
 
 async function DetailsPage({params}: Props) {
-    const product = JSON.parse(JSON.stringify(await getProduct(params.slug)));
-    const relatedProducts: ProductType[] = JSON.parse(JSON.stringify(await Product.find({categories: {$elemMatch: {$eq: product?.categories[1]}}})));
+    const product = serialize(await getProduct(params.slug));
+    const relatedProducts: ProductType[] = serialize(await Product.find({slug : {$ne : decodeURI(params.slug) },categories: {$elemMatch: {$eq: product?.categories[1]}}}));
 
     return (
         <>
             <section className={"flex max-md:flex-col max-md:gap-3"}>
-                    <ThumbGallery product={product}/>
-                    <ProductDetails {...product}/>
+                <ThumbGallery product={product}/>
+                <ProductDetails {...product}/>
             </section>
 
-            <div className="divider my-7" />
-            <Features />
             <div className="divider my-7"/>
-            <Info slug={decodeURI(params.slug)} relatedProducts={relatedProducts} />
+            <Features/>
+            <div className="divider my-7"/>
+            <Info slug={decodeURI(params.slug)} relatedProducts={relatedProducts}/>
         </>
     )
 }
