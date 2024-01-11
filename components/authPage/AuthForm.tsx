@@ -49,7 +49,7 @@ function AuthForm() {
                                 <input ref={emailRef}
                                        className="input input-bordered rounded-e-full w-full focus:input-primary join-item"
                                        required
-                                       type={"text"}
+                                       type={"email"}
                                        placeholder={"ایمیل"}/>
                             </div>
                         </> :
