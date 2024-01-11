@@ -1,5 +1,5 @@
 "use client"
-import SearchResults from "../SearchResults";
+import SearchResults from "./SearchResults";
 import useSearch from "@/hooks/useSearch";
 import {Close, Search} from "@/components/shared/Icons";
 

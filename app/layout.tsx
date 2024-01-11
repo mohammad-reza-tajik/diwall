@@ -6,7 +6,7 @@ import "swiper/scss/thumbs";
 import "@/styles/Globals.scss";
 import AutoLogin from "@/components/shared/AutoLogin";
 import Providers from "@/components/shared/Providers";
-import Header from "@/components/shared/Header";
+import Header from "components/shared/header";
 import Footer from "@/components/shared/Footer";
 import MainNav from "@/components/shared/MainNav";
 
