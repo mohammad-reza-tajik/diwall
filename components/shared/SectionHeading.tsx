@@ -1,10 +1,11 @@
 "use client"
 import Link from "next/link";
-import {ChangeEvent, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import formUrlQuery from "@/utils/formUrlQuery";
 import {Circle} from "@/components/shared/Icons";
 import productFilters from "@/constants/productFilters";
+import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue} from "@/components/ui/select";
 
 interface Props {
     sortBy?: boolean;
@@ -27,11 +28,11 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
         }
     }, [searchParams, sortBy])
 
-    const sortChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-        setSort(event.target.value);
+    const sortChangeHandler = (value : string) => {
+        setSort(value);
         router.push(formUrlQuery(searchParams.toString(), {
             params: {
-                sortBy: event.target.value
+                sortBy: value
             }
         }))
     }
@@ -58,18 +59,22 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
                         <span className={"text-sm md:text-base hidden md:inline-block"}>
                             مرتب سازی بر اساس :
                         </span>
-                        <select id="filters"
-                                value={sort}
-                                className="border text-sm rounded focus:border-primary focus:outline-none p-2 appearance-none"
-                                onChange={sortChangeHandler}>
-                            {
-                                productFilters.map((filter, index) => {
-                                    return (
-                                        <option value={filter.split(" ").join("-")} key={index}>{filter}</option>
-                                    )
-                                })
-                            }
-                        </select>
+                        <Select onValueChange={sortChangeHandler} defaultValue={sort}>
+                            <SelectTrigger className={"w-36 md:w-44"}>
+                                <SelectValue>
+                                    {sort.split("-").join(" ")}
+                                </SelectValue>
+                            </SelectTrigger>
+                            <SelectContent>
+                                    {
+                                        productFilters.map((filter, index) => {
+                                            return (
+                                                <SelectItem value={filter.split(" ").join("-")} key={index}>{filter}</SelectItem>
+                                            )
+                                        })
+                                    }
+                            </SelectContent>
+                        </Select>
                     </div> :
                     null
             }
