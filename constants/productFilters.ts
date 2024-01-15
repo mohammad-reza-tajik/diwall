@@ -1,3 +1,3 @@
-const productFilters = [" جدید ترین","پرفروش ترین","محبوب ترین"];
+const productFilters = ["جدید ترین","پرفروش ترین","محبوب ترین"];
 
 export default productFilters;

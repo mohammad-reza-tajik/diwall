@@ -1,9 +1,9 @@
 import type {Metadata, Viewport} from "next";
-import "swiper/scss";
-import "swiper/scss/navigation";
-import "swiper/scss/free-mode";
-import "swiper/scss/thumbs";
-import "@/styles/Globals.scss";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/free-mode";
+import "swiper/css/thumbs";
+import "@/styles/globals.css";
 import AutoLogin from "@/components/shared/AutoLogin";
 import Providers from "@/components/shared/Providers";
 import Header from "components/shared/header";
