@@ -6,6 +6,8 @@ import {useRouter} from "next/navigation";
 import {userActions, useAppDispatch, useAppSelector} from "@/store";
 import type {ProductType} from "@/db/productModel";
 import {Heart, HeartOutlined} from "@/components/shared/Icons";
+import {Button} from "@/components/ui/button";
+import Loader from "@/components/shared/Loader";
 
 function Product(product: ProductType) {
     const router = useRouter();
@@ -22,17 +24,17 @@ function Product(product: ProductType) {
 
     return (
         <div className={"bg-white rounded flex flex-col p-2 relative gap-2 min-h-full"}>
-            <button
-                className={`absolute left-3 top-3 z-10 btn btn-circle btn-sm md:btn-md btn-ghost bg-black/30 ${addToWishlistLoading && "btn-disabled"}`}
-                onClick={wishlistHandler} aria-label={"افزودن به لیست علاقمندی ها"} disabled={addToWishlistLoading}>
+            <Button variant={"outline"} size={"icon"} disabled={addToWishlistLoading}
+                className={"absolute right-3 top-3 z-10 bg-black/30 border-none hover:bg-black/20 disabled:opacity-100"}
+                onClick={wishlistHandler} aria-label={"افزودن به لیست علاقمندی ها"}>
                 {
                     addToWishlistLoading ?
-                        <span className={"loading loading-spinner text-white"}></span> :
+                        <Loader className={"border-white"} /> :
                         isInWishlist ?
                             <Heart className={"fill-primary size-5 md:size-6"}/> :
                             <HeartOutlined className={"fill-white size-5 md:size-6"}/>
                 }
-            </button>
+            </Button>
             <Link href={`/products/${product.slug}`} aria-label={product.title}>
                 <Image src={`/pictures/products/${product.slug}.jpg`} alt={product.title} width={400} height={400}/>
             </Link>
