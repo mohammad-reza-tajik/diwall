@@ -1,35 +1,32 @@
-import {Schema, models, model , Model} from "mongoose";
+import {Schema, models, model, Model} from "mongoose";
 import bcrypt from "bcrypt";
-import {ProductType} from "@/db/productModel";
+import {type IUserSchema} from "@/types/user";
 
-export interface UserType {
-    username: string;
-    password?: string;
-    email: string;
-    _id : string;
-    wishlist: ProductType[];
-    cart: ProductType[];
-    role : "user" | "admin";
-}
-
-const userSchema = new Schema<UserType>(
+const userSchema = new Schema<IUserSchema>(
     {
         username: {
             type: String,
             required: true,
+            unique: true,
+            lowercase: true,
+            trim: true
         },
         password: {
             type: String,
-            select : false,
-            required: true
+            select: false,
+            required: true,
+            minlength: [6, "رمز ورود باید بیشتر از 6 کاراکتر باشد"],
         },
         email: {
             type: String,
-            required: true
+            required: true,
+            unique: true,
+            lowercase: true,
         },
-        role : {
-          type : String,
-          default : "user"
+        role: {
+            type: String,
+            enum: ["user", "admin"],
+            default: "user"
         },
         wishlist: [
             {
@@ -50,7 +47,7 @@ const userSchema = new Schema<UserType>(
 
 userSchema.pre("save", async function (next) {
     this.password = await bcrypt.hash(this.password, 12);
-    next()
+    next();
 })
 
-export default models.User as Model<UserType> || model<UserType>('User', userSchema);
+export default models.User as Model<IUserSchema> || model<IUserSchema>("User", userSchema);

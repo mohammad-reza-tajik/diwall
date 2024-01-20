@@ -1,24 +1,7 @@
 import {Schema, models, model , Model} from "mongoose";
-export interface ProductType {
-    _id: string;
-    title: string;
-    price: number;
-    description: string;
-    likes : number;
-    sells : number;
-    slug : string;
-    images : string[];
-    quantity: number;
-    categories:string[];
-    comments : Array<{
-        author:string;
-        date:string;
-        content:string;
-    }>
-}
+import {type IProductSchema} from "@/types/product";
 
-const productSchema = new Schema<ProductType>({
-
+const productSchema = new Schema<IProductSchema>({
     title: {
         type: String,
         trim: true,
@@ -48,7 +31,7 @@ const productSchema = new Schema<ProductType>({
         default: 0
     },
     categories: [String],
-    comments: [{
+    reviews: [{
         content: {
             type: String,
             required: true
@@ -65,14 +48,15 @@ const productSchema = new Schema<ProductType>({
 
     }]
 
-
 }, {timestamps: true})
 
 
-
+productSchema.pre("save", function (next) {
+    this.slug = this.title.split(" ").join("-");
+    next();
+})
 
 // I was getting an error which was saying that you're re-creating model, so I find below solution from stack overflow
-export default models.Product as Model<ProductType> || model<ProductType>('Product', productSchema);
-
+export default models.Product as Model<IProductSchema> || model<IProductSchema>("Product", productSchema);
 
 
