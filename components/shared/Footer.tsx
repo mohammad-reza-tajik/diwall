@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import {Apple, GooglePlay, Phone, Circle} from "@/components/shared/Icons";
 import {footerLinks1, footerLinks2, footerLinks3, socials} from "@/constants/footerLinks";
+import {Button} from "@/components/ui/button";
+import {Separator} from "@/components/ui/separator";
 
 function Footer() {
 
@@ -12,7 +14,9 @@ function Footer() {
                 {
                     footerLinks1.map((link, index) => {
                         return (
-                            <Link key={index} className={"flex items-center gap-2 text-xs md:text-sm hover:text-primary transition-colors"} href={"cloth"}>
+                            <Link key={index}
+                                  className={"flex items-center gap-2 text-xs md:text-sm hover:text-primary transition-colors"}
+                                  href={"cloth"}>
                                 <Circle className={"size-2"}/>
                                 {link.text}
                             </Link>
@@ -26,7 +30,9 @@ function Footer() {
                 {
                     footerLinks2.map((link, index) => {
                         return (
-                            <Link key={index} className={"flex items-center gap-2 text-xs md:text-sm hover:text-primary transition-colors"} href={"cloth"}>
+                            <Link key={index}
+                                  className={"flex items-center gap-2 text-xs md:text-sm hover:text-primary transition-colors"}
+                                  href={"cloth"}>
                                 <Circle className={"size-2"}/>
                                 {link.text}
                             </Link>
@@ -39,7 +45,9 @@ function Footer() {
                 {
                     footerLinks3.map((link, index) => {
                         return (
-                            <Link key={index} className={"flex items-center gap-2 text-xs md:text-sm hover:text-primary transition-colors"} href={"cloth"}>
+                            <Link key={index}
+                                  className={"flex items-center gap-2 text-xs md:text-sm hover:text-primary transition-colors"}
+                                  href={"cloth"}>
                                 <Circle className={"size-2"}/>
                                 {link.text}
                             </Link>
@@ -56,24 +64,26 @@ function Footer() {
                 </h5>
                 <div className={"flex items-center gap-2"}>
                     {
-                        socials.map((social)=>{
+                        socials.map((social) => {
                             return (
-                                <a key={social.href} className={"btn btn-circle btn-outline btn-primary fill-primary hover:fill-white"} href={social.href} aria-label={social.label}>
-                                    {social.icon}
-                                </a>
+                                <Button asChild key={social.href} variant={"ghost"} size={"icon"}>
+                                    <a href={social.href} aria-label={social.label}>
+                                        {social.icon}
+                                    </a>
+                                </Button>
                             )
                         })
                     }
                 </div>
-                    <h4 className={"text-sm md:text-base"}>
-                        از جدیدترین تخفیفات
-                        &nbsp;
-                        <span className={"text-primary"}>
+                <h4 className={"text-sm md:text-base"}>
+                    از جدیدترین تخفیفات
+                    &nbsp;
+                    <span className={"text-primary"}>
                             دیوال
                         </span>
-                        &nbsp;
-                        با خبر شوید!
-                    </h4>
+                    &nbsp;
+                    با خبر شوید!
+                </h4>
             </div>
 
             <div className={"items-center justify-between my-7 hidden md:flex col-span-4"}>
@@ -144,24 +154,25 @@ function Footer() {
 
             {/*****************************************************************************************/}
 
-            <div className="divider col-span-4" />
+            <Separator className={"col-span-full my-5"} />
 
-                <div className={"flex items-center justify-center col-span-4 gap-2"}>
-                    <h5  className={"text-xs md:text-base"}>
-                        دانلود اپلیکیشن دیوال :
-                    </h5>
+            <div className={"flex items-center justify-center col-span-4 gap-2"}>
+                <h5 className={"text-xs md:text-base"}>
+                    دانلود اپلیکیشن دیوال :
+                </h5>
 
-                    <div className={"flex gap-2"}>
-                        <button className={"btn btn-outline btn-sm md:btn-md btn-circle btn-primary gap-1 fill-primary hover:fill-white"} aria-label={"دریافت اپلیکیشن از google play"}>
-                            <GooglePlay className={"md:size-5 size-4 "} />
-                        </button>
-                        <button className={"btn btn-outline btn-sm md:btn-md btn-circle btn-primary gap-1 fill-primary hover:fill-white"} aria-label={"دریافت اپلیکیشن از play store"}>
-                            <Apple className={"md:size-5  size-4"} />
-                        </button>
-                    </div>
+                <div className={"flex gap-2"}>
+                    <Button variant={"outline"} size={"icon"} aria-label={"دریافت اپلیکیشن از google play"}>
+                        <GooglePlay className={"md:size-5 size-4"}/>
+                    </Button>
+                    <Button variant={"outline"} size={"icon"} aria-label={"دریافت اپلیکیشن از play store"}>
+                        <Apple className={"md:size-5 size-4"}/>
+                    </Button>
                 </div>
+            </div>
 
-            <div className="divider col-span-4" />
+
+            <Separator className={"col-span-full my-5"} />
 
             <h6 className={"text-center my-4 text-xs md:text-sm col-span-4"}>
                 تمامی حقوق مادی و معنوی این سایت متعلق به دیوال می باشد و هر گونه کپی برداری پیگرد قانونی خواهد
