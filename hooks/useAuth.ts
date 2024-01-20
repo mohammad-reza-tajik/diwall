@@ -1,61 +1,41 @@
-import {FormEvent, useRef, useState} from "react";
 import {useRouter} from "next/navigation";
 import {userActions, useAppDispatch} from "@/store";
 import {login, signup} from "@/actions/user/auth";
 import {enqueueSnackbar} from "notistack";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {loginSchema, TLoginSchema, signupSchema, TSignupSchema} from "@/types/authForms";
+import {zodResolver} from "@hookform/resolvers/zod";
 
-const useAuth = () => {
-
-    const [formType, setFormType] = useState<"login" | "signup">("login");
-    const [isLoading, setIsLoading] = useState(false);
-
-    const router = useRouter();
+const useAuth = (formType: "login" | "signup" = "login") => {
 
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
-    //********************************** form field refs **********************************//
+    const form = useForm<TLoginSchema | TSignupSchema>({
+        resolver: zodResolver(formType === "login" ? loginSchema : signupSchema),
+        defaultValues: {
+            identifier: "",
+            username: "",
+            email: "",
+            password: "",
+        }
+    });
 
-    const usernameRef = useRef<HTMLInputElement>();
-    const emailRef = useRef<HTMLInputElement>();
-    const passwordRef = useRef<HTMLInputElement>();
-    const identifierRef = useRef<HTMLInputElement>();
-
-
-    //********************************* form submission **********************************!//
-
-
-    const formHandler = async (event: FormEvent) => {
+    const submitHandler: SubmitHandler<TLoginSchema | TSignupSchema> = async (data) => {
         try {
-            event.preventDefault();
-            setIsLoading(true);
-
             let res: any;
 
             if (formType === "signup") {
-                res = await signup({
-                    username: usernameRef.current?.value,
-                    email: emailRef.current?.value,
-                    password: passwordRef.current?.value
-                })
+                res = await signup(signupSchema.parse(data));
             } else {
-                res = await login({
-                    identifier: identifierRef.current?.value,
-                    password: passwordRef.current?.value
-                })
+                res = await login(loginSchema.parse(data))
             }
 
             if (!res.ok) {
                 throw new Error(res.message);
             }
 
-            /** clearing fields **/
-            if (formType === "login") {
-                identifierRef.current.value = "";
-            } else {
-                usernameRef.current.value = "";
-                emailRef.current.value = "";
-            }
-            passwordRef.current.value = "";
+            form.reset();
 
             dispatch(userActions.login({user: res.user, token: res.token}));
             enqueueSnackbar(res.message, {
@@ -63,27 +43,14 @@ const useAuth = () => {
             });
 
             router.push("/");
-
-        } catch (err) {
+        } catch (err : any) {
             enqueueSnackbar(err.message, {
                 variant: "error",
             })
-
-        } finally {
-            setIsLoading(false);
         }
     }
 
-    return {
-        isLoading,
-        emailRef,
-        identifierRef,
-        usernameRef,
-        formHandler,
-        setFormType,
-        passwordRef,
-        formType
-    }
+    return {submitHandler,form}
 
 }
 
