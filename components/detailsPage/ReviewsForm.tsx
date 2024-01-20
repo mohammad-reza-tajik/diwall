@@ -1,10 +1,18 @@
 "use client"
-import {FormEvent, useRef, useState, Dispatch, SetStateAction} from "react";
+import {Dispatch, SetStateAction} from "react";
 import {useAppSelector} from "@/store";
 import Link from "next/link";
 import {enqueueSnackbar} from "notistack";
-import {createComment} from "@/actions/product/comment";
+import {createReview} from "@/actions/product/reviews";
 import {Create} from "@/components/shared/Icons";
+import {Button} from "@/components/ui/button";
+import {Form, FormControl, FormField, FormItem, FormMessage,} from "@/components/ui/form"
+import {SubmitHandler, useForm} from "react-hook-form";
+import {reviewSchema} from "@/types/review";
+import {zodResolver} from "@hookform/resolvers/zod"
+import Loader from "@/components/shared/Loader";
+import {Textarea} from "@/components/ui/textarea";
+
 
 interface Props {
     setAddReview: Dispatch<SetStateAction<boolean>>;
@@ -14,20 +22,20 @@ interface Props {
 function ReviewsForm({setAddReview, slug}: Props) {
 
     const user = useAppSelector(state => state.user);
+    const form = useForm<{ content: string }>({
+        resolver: zodResolver(reviewSchema.omit({date: true, author: true})),
+        defaultValues: {
+            content: "",
+        }
+    });
 
-    const reviewRef = useRef<HTMLTextAreaElement>();
-
-    const [isLoading, setIsLoading] = useState(false);
-
-    const insertCommentHandler = async (event: FormEvent) => {
-        event.preventDefault();
+    const insertReviewHandler: SubmitHandler<{ content: string }> = async (data) => {
         try {
-            setIsLoading(true);
-            const res = await createComment({
-                comment: {
-                    content: reviewRef.current.value,
+            const res = await createReview({
+                review: {
+                    content: data.content,
                     author: user.username,
-                    date: new Date().toLocaleDateString("fa")
+                    date: new Date()
                 }, slug
             })
 
@@ -35,19 +43,18 @@ function ReviewsForm({setAddReview, slug}: Props) {
                 throw new Error(res.message);
             }
 
-            reviewRef.current.value = ""
+            form.reset();
+
             enqueueSnackbar(res.message, {
                 variant: "success",
             })
 
             // we are changing this to re-run the useEffect in Reviews component to fetch new comments
             setAddReview((prevState) => !prevState);
-        } catch (err) {
+        } catch (err: any) {
             enqueueSnackbar(err.message, {
                 variant: "error",
             })
-        } finally {
-            setIsLoading(false);
         }
     }
 
@@ -55,29 +62,46 @@ function ReviewsForm({setAddReview, slug}: Props) {
         <>
             {
                 user.username ?
-                    <form className={"flex flex-col gap-4 w-full md:w-1/2"} onSubmit={insertCommentHandler}>
-                        <textarea className={"textarea textarea-bordered focus:textarea-primary resize-none"} rows={8} ref={reviewRef}
-                                  required placeholder={"دیدگاه شما ..."}/>
-
-                        <button className={"btn btn-primary rounded-full w-full md:w-max px-10"} disabled={isLoading} type={"submit"}
-                                aria-label={"add comment button"}
-                        >
-                            {
-                                isLoading ?
-                                    <span className={"loading loading-spinner text-white"}></span> :
-                                    <Create className={"size-6 md:size-5 fill-white"}/>
-                            }
-                            درج دیدگاه
-                        </button>
-                    </form>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(insertReviewHandler)} className={"space-y-5"}>
+                            <FormField
+                                control={form.control}
+                                name={"content"}
+                                render={({field}) => (
+                                    <FormItem>
+                                        <FormControl>
+                                            <Textarea
+                                                placeholder={"دیدگاه خود را وارد کنید ..."}
+                                                rows={8}
+                                                {...field}
+                                                className={"focus:border-primary w-full md:w-1/2"}
+                                            />
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+                            <Button disabled={form.formState.isSubmitting} size={"lg"} type={"submit"}
+                                    className={"w-full md:w-max"}>
+                                {
+                                    form.formState.isSubmitting ?
+                                        <Loader className={"border-white size-6"}/> :
+                                        <Create className={"size-6 md:size-5 fill-white"}/>
+                                }
+                                درج دیدگاه
+                            </Button>
+                        </form>
+                    </Form>
                     :
                     <div className={"flex flex-col justify-center items-center p-4 gap-5"}>
                         <p className={"text-center text-sm md:text-base"}>
                             برای درج دیدگاه باید ابتدا وارد حساب کاربری خود شوید!
                         </p>
-                        <Link className={"btn btn-primary"} href={"/auth"}>
-                            ورود به حساب کاربری
-                        </Link>
+                        <Button asChild className={"text-xs md:text-sm"}>
+                            <Link href={"/auth"}>
+                                ورود به حساب کاربری
+                            </Link>
+                        </Button>
                     </div>
             }
         </>
