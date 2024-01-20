@@ -1,7 +1,7 @@
-import ReviewType from "@/types/review";
+import type IReview from "@/types/review";
+import {Document} from "mongoose";
 
-export default interface ProductType {
-    _id: string;
+export interface IProduct extends Document{
     title: string;
     price: number;
     description: string;
@@ -11,5 +11,7 @@ export default interface ProductType {
     images : string[];
     quantity: number;
     categories:string[];
-    comments : ReviewType[];
+    reviews : IReview[];
 }
+
+export interface IProductSchema  extends IProduct {}
