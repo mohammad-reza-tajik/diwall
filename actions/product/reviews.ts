@@ -2,13 +2,13 @@
 import connect from "@/db/connect";
 import Product from "@/db/productModel";
 import serialize from "@/utils/serialize";
-import {CreateCommentParams} from "@/types/productActions";
+import {ICreateReviewParams} from "@/types/productActions";
 import {revalidatePath} from "next/cache";
 
-export async function createComment({comment , slug} : CreateCommentParams) {
+export async function createReview({review , slug} : ICreateReviewParams) {
     try {
         await connect();
-        const {content, author, date} = comment;
+        const {content, author, date} = review;
         const regexp = new RegExp(slug, "g");
 
 
@@ -18,7 +18,7 @@ export async function createComment({comment , slug} : CreateCommentParams) {
                 ok: false
             })
         }
-        const product = await Product.findOneAndUpdate({slug: regexp},{$push: {comments:comment}}, {new: true});
+        const product = await Product.findOneAndUpdate({slug: regexp},{$push: {reviews:review}}, {new: true});
 
         if (!product) {
             return serialize({

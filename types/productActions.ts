@@ -1,10 +1,8 @@
-export interface CreateCommentParams {
+import {TReview} from "@/types/review";
+
+export interface ICreateReviewParams {
     slug : string;
-    comment : {
-        content: string;
-        author : string;
-        date : string;
-    }
+    review : TReview;
 }
 
 export interface GetAllProductsParams {
