@@ -43,7 +43,7 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
         <div className={cn("flex justify-between items-center my-5 w-full", {"lg:hidden": white})}>
             <div className={"flex gap-2 items-center"}>
                 <Circle className={cn("size-5", {"fill-white": white , "fill-primary" : !white})}/>
-                <h2 className={cn("font-dana-black text-sm md:text-lg", {"text-white": white})}>
+                <h2 className={cn("font-dana-bold text-sm md:text-lg", {"text-white": white})}>
                     {text}
                 </h2>
             </div>
