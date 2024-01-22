@@ -1,99 +1,79 @@
 "use client"
-import {useState} from "react";
-import {useAppDispatch, useAppSelector, userActions} from "@/store";
-import {useRouter} from "next/navigation";
-import type {ProductType} from "@/db/productModel";
+import {type Product} from "@/types/product";
 import {Heart, HeartOutlined, ShoppingBag} from "@/components/shared/Icons";
+import useProduct from "@/hooks/useProduct";
+import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group";
+import {Badge} from "@/components/ui/badge";
+import {Button} from "@/components/ui/button";
+import Loader from "@/components/shared/Loader";
+import {Input} from "@/components/ui/input";
 
-function ProductDetails(product: ProductType) {
-    const [addToCartLoading, setAddToCartLoading] = useState(false);
-    const [addToWishlistLoading, setAddToWishlistLoading] = useState(false);
+function ProductDetails(product: Product) {
 
-    const user = useAppSelector(state => state.user);
-
-    const router = useRouter();
-    const dispatch = useAppDispatch();
-    const isInWishlist = user?.wishlist.find((prod: ProductType) => prod._id === product._id);
-    const isInCart = user?.cart.find((prod: ProductType) => prod._id === product._id);
-
-    const addToCartHandler = () => {
-        dispatch(userActions.handleCart({product, setAddToCartLoading, router}));
-    }
-
-    const addToWishlistHandler = () => {
-        dispatch(userActions.handleWishlist({product, setAddToWishlistLoading, router}));
-    }
+    const {isWishlistLoading, isInWishlist, isCartLoading, isInCart, handleProduct} = useProduct(product);
 
     return (
         <section className={"flex flex-col gap-10 max-md:p-1 w-full md:w-1/2"}>
             <div className={"flex justify-between items-center"}>
-                <h1 className={"font-dana-bold text-base md:text-xl"}>
+                <h1 className={"font-dana-bold lg:text-lg"}>
                     {product.title}
                 </h1>
-                <span className={`badge ${product.quantity > 0 ? "badge-primary" : "badge-error"}`}>
-                        {product.quantity > 0 ? "موجود" : "ناموجود"}
-                </span>
+                <Badge variant={product.quantity === 0 ? "destructive" : "default"}>
+                    {product.quantity > 0 ? "موجود" : "ناموجود"}
+                </Badge>
             </div>
-            <span className={"text-primary text-sm md:text-base"}>
+            <span className={"text-primary text-sm lg:text-base"}>
                     {product.price + " تومان هر متر مربع"}
             </span>
-            <p className={"text-sm md:text-base !leading-7"}>
+            <p className={"text-sm lg:text-base !leading-7"}>
                 {product.description}
             </p>
 
-            <span className={"text-sm md:text-base"}>
+            <span className={"text-sm lg:text-base"}>
                 سایز های آماده :
             </span>
 
-            <div className="join w-full border rounded-full">
-                <input className="join-item btn max-md:btn-sm flex-1" type="radio" name="options" value={"10mx3m"}
-                       aria-label={"10mx3m"}/>
-                <input className="join-item btn max-md:btn-sm flex-1" type="radio" name="options" value={"20mx3m"}
-                       aria-label={"20mx3m"}/>
-                <input className="join-item btn max-md:btn-sm flex-1" type="radio" name="options" value={"30mx3m"}
-                       aria-label={"30mx3m"}/>
-            </div>
+            <ToggleGroup type={"single"} defaultValue={"10x3"} className={"w-full grid grid-cols-3"} variant={"outline"}>
+                <ToggleGroupItem value={"10x3"}>10x3</ToggleGroupItem>
+                <ToggleGroupItem value={"20x3"}>20x3</ToggleGroupItem>
+                <ToggleGroupItem value={"30x3"}>30x3</ToggleGroupItem>
+            </ToggleGroup>
 
-            <span className={"text-sm md:text-base"}>
+            <span className={"text-sm lg:text-base"}>
                         سایز دلخواه (واحد متر) :
             </span>
             <div className={"flex items-center flex-col gap-6 md:flex-row"}>
-                <div className="join w-full items-center gap-2">
+                <div className="flex w-full items-center gap-2">
                     <label htmlFor={"width"} className={"text-sm"}>طول : </label>
-                    <input className={"input input-bordered input-sm focus:input-primary w-32"} type={"number"}
-                           id={"width"}/>
+                    <Input className={"w-20"} type={"number"} id={"width"}/>
                 </div>
-                <div className="join w-full items-center gap-2">
+                <div className="flex w-full items-center gap-2">
                     <label htmlFor={"height"} className={"text-sm"}>عرض : </label>
-                    <input className={"input input-bordered input-sm focus:input-primary w-32"} type={"number"}
-                           id={"height"}/>
+                    <Input className={"w-20"} type={"number"} id={"height"}/>
                 </div>
             </div>
             <div className={"flex items-center gap-2 justify-end w-full"}>
-                <button className={`btn btn-lg btn-circle btn-primary`}
-                        onClick={addToWishlistHandler}
+                <Button size={"icon"} className={"size-14"}
+                        onClick={() => handleProduct("wishlist")}
                         aria-label={"افزودن به لیست علاقمندی ها"}
-                        disabled={addToWishlistLoading}
+                        disabled={isWishlistLoading}
                 >
                     {
-                        addToWishlistLoading ?
-                            <span className={"loading loading-spinner text-white"}></span> :
+                        isWishlistLoading ?
+                            <Loader className={"border-white size-6"}/> :
                             isInWishlist ?
                                 <Heart className={"size-5 fill-white"}/> :
                                 <HeartOutlined className={"size-5 fill-white"}/>
                     }
-                </button>
-                <button
-                    className={`btn btn-lg text-sm max-md:flex-1 rounded-full ${isInCart ? "btn-error" : "btn-primary"}`}
-                    disabled={addToCartLoading}
-                    onClick={addToCartHandler}>
+                </Button>
+                <Button className={"gap-2 p-7"} disabled={isCartLoading} onClick={() => handleProduct("cart")} variant={isInCart ? "destructive" : "default"}>
                     {
-                        addToCartLoading ?
-                            <span className={"loading loading-spinner text-white"}></span> :
+                        isCartLoading ?
+                            <Loader className={"border-white size-6"}/> :
                             <ShoppingBag className={"size-5 fill-white"}/>
                     }
                     {isInCart ? "حذف از سبد خرید" : "افزودن به سبد خرید"}
-                </button>
+                </Button>
             </div>
         </section>
     )
