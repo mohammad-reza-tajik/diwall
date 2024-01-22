@@ -5,7 +5,9 @@ import {useRouter, useSearchParams} from "next/navigation";
 import formUrlQuery from "@/utils/formUrlQuery";
 import {Circle} from "@/components/shared/Icons";
 import productFilters from "@/constants/productFilters";
-import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue} from "@/components/ui/select";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import {Button} from "@/components/ui/button";
+import {cn} from "@/lib/utils";
 
 interface Props {
     sortBy?: boolean;
@@ -13,7 +15,6 @@ interface Props {
     text: string;
     white?: boolean;
     route?: string
-
 }
 
 function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
@@ -21,14 +22,15 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
     const [sort, setSort] = useState("جدیدترین");
     const router = useRouter();
     const searchParams = useSearchParams();
+    const sortQuery = searchParams.get("sortBy");
 
     useEffect(() => {
-        if (sortBy && searchParams.get("sortBy")) {
-            setSort(searchParams.get("sortBy"));
+        if (sortBy && sortQuery) {
+            setSort(sortQuery);
         }
-    }, [searchParams, sortBy])
+    }, [sortBy, sortQuery])
 
-    const sortChangeHandler = (value : string) => {
+    const sortChangeHandler = (value: string) => {
         setSort(value);
         router.push(formUrlQuery(searchParams.toString(), {
             params: {
@@ -38,18 +40,21 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
     }
 
     return (
-        <div className={`flex justify-between items-center my-5 w-full ${white ? "lg:hidden" : "block"}`}>
+        <div className={cn("flex justify-between items-center my-5 w-full", {"lg:hidden": white})}>
             <div className={"flex gap-2 items-center"}>
-                <Circle className={`size-5 ${white ? "fill-white" : "fill-primary"}`}/>
-                <h2 className={`font-dana-black text-sm md:text-lg ${white ? "text-white" : "text-inherit"}`}>
+                <Circle className={cn("size-5", {"fill-white": white , "fill-primary" : !white})}/>
+                <h2 className={cn("font-dana-black text-sm md:text-lg", {"text-white": white})}>
                     {text}
                 </h2>
             </div>
             {
-                seeAll ?
-                    <Link className={`btn btn-outline btn-sm md:btn-md ${white ? "text-white border-white" : "btn-primary"} rounded-full text-sm`} href={route}>
-                        مشاهده بیشتر
-                    </Link> :
+                seeAll && route ?
+                    <Button asChild variant={"outline"}
+                            className={cn("max-md:text-xs max-md:p-2", {"text-white border-white": white})}>
+                        <Link href={route}>
+                            مشاهده بیشتر
+                        </Link>
+                    </Button> :
                     null
             }
 
@@ -66,13 +71,14 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
                                 </SelectValue>
                             </SelectTrigger>
                             <SelectContent>
-                                    {
-                                        productFilters.map((filter, index) => {
-                                            return (
-                                                <SelectItem value={filter.split(" ").join("-")} key={index}>{filter}</SelectItem>
-                                            )
-                                        })
-                                    }
+                                {
+                                    productFilters.map((filter, index) => {
+                                        return (
+                                            <SelectItem value={filter.split(" ").join("-")}
+                                                        key={index}>{filter}</SelectItem>
+                                        )
+                                    })
+                                }
                             </SelectContent>
                         </Select>
                     </div> :
