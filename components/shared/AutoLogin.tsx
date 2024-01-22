@@ -18,9 +18,8 @@ function AutoLogin({children}: Props) {
             try {
                 if (token) {
                     const res = await getUser();
-                    dispatch(userActions.login({user: res.user, token: res.token}));
+                    dispatch(userActions.login(res.user));
                 }
-
             } catch (err) {
                 dispatch(userActions.logout());
             }
