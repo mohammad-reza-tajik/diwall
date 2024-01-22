@@ -3,48 +3,49 @@ import {Logout} from "@/components/shared/Icons";
 import Link from "next/link";
 import {useAppDispatch, userActions} from "@/store";
 import {enqueueSnackbar} from "notistack";
-import {UserType} from "@/db/userModel";
-import {useCallback} from "react";
+import {type User} from "@/types/user";
 import userMenu from "@/constants/userMenu";
+import {DropdownMenu,DropdownMenuContent,DropdownMenuTrigger,DropdownMenuItem} from "@/components/ui/dropdown-menu";
+import {Button} from "@/components/ui/button";
 
 interface Props {
-    open: boolean;
-    user: UserType;
+    user: User;
 }
 
-function UserMenu({open, user}: Props) {
+function UserMenu({user}: Props) {
 
     const dispatch = useAppDispatch();
 
-    const logoutHandler = useCallback(() => {
+    const logoutHandler = () => {
         dispatch(userActions.logout());
-        enqueueSnackbar("با موفقیت از حساب خود خارج شدید", {
-            variant: "info",
-        });
-    },[dispatch])
+        enqueueSnackbar("با موفقیت از حساب خود خارج شدید", {variant: "info"});
+    }
 
     return (
-        <ul className={`menu bg-white w-56 absolute ${!open ? "invisible" : "visible"} z-50 top-full left-0 p-1 text-gray-600 text-xs md:text-sm rounded`}>
-            {
-                userMenu(user).map((item,index)=>{
-                    return (
-                        <li className={index === 1 || index === 2 ? "md:hidden" : ""} key={item.href}>
-                            <Link href={`/accounts/${item.href}`}>
-                                {item.icon}
-                                {item.text}
-                            </Link>
-                        </li>
-                    )
-                })
-            }
-
-            <li>
-                <button onClick={logoutHandler}>
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button className={"w-48"}>{user.username}</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+                {
+                    userMenu(user).map((item, index) => {
+                        return (
+                            <DropdownMenuItem className={index === 1 || index === 2 ? "md:hidden" : ""} key={item.href}>
+                                <Link href={`/accounts/${item.href}`} className={"flex gap-2"}>
+                                    {item.icon}
+                                    {item.text}
+                                </Link>
+                            </DropdownMenuItem>
+                        )
+                    })
+                }
+                <DropdownMenuItem onClick={logoutHandler}>
                     <Logout className={"fill-primary size-5"}/>
-                    خروج از حساب کاربری
-                </button>
-            </li>
-        </ul>
+                    <span>خروج از حساب کاربری</span>
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+
     )
 }
 
