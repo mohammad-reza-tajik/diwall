@@ -11,8 +11,8 @@ function AuthButton({user}: Props) {
 
     return (
         !user ?
-            <Button asChild>
-                <Link className={"w-48 gap-2"} href={"/auth"}>
+            <Button asChild className={"w-48 h-12 gap-2"}>
+                <Link href={"/auth"}>
                     <Login className={"fill-white size-6"}/>
                     ورود / ثبت نام
                 </Link>

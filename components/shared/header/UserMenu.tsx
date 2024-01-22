@@ -24,7 +24,7 @@ function UserMenu({user}: Props) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button className={"w-48"}>{user.username}</Button>
+                <Button className={"w-48 h-12 gap-2"}>{user.username}</Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 {
