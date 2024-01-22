@@ -1,4 +1,4 @@
-import userActions from "@/store/userActions";
+import {userActions} from "./userSlice";
 import {useAppDispatch,useAppSelector} from "@/hooks/useStore";
 import store from "./store"
 
