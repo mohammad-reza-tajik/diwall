@@ -2,14 +2,14 @@ import {z} from "zod";
 import { Product } from "@/types/product";
 import {Types , Document} from "mongoose";
 
-export interface User extends Partial<{
+export interface User {
     _id:string;
     username: string;
     email: string;
     wishlist: Product[];
     cart: Product[];
     role: "user" | "admin";
-}>{}
+}
 
 export interface UserSchema extends Omit<Required<User>, "wishlist" | "cart" | "_id"> , Document {
     password:string;
