@@ -17,7 +17,7 @@ export async function addToCart(productId: string) {
         const {_id} = await validateToken(token);
 
         if (!_id) {
-            throw serialize({
+            return serialize({
                 ok: false,
                 message: "توکن شما صحیح نیست"
             })
@@ -25,10 +25,10 @@ export async function addToCart(productId: string) {
 
         await connect();
 
-        const user = await User.findByIdAndUpdate(_id, {$push: {cart: productId}}, {new: true});
+        const user = await User.findByIdAndUpdate(_id, {$push: {cart: productId}}, {new: true}).populate("wishlist").populate("cart");
 
         if (!user) {
-            throw serialize({
+            return serialize({
                 ok: false,
                 message: "این کاربر وجود ندارد",
                 status: 404
@@ -65,7 +65,7 @@ export async function removeFromCart(productId : string) {
         const {_id} = await validateToken(token);
 
         if (!_id) {
-            throw serialize({
+            return serialize({
                 ok: false,
                 message: "توکن شما صحیح نیست"
             })
@@ -73,10 +73,10 @@ export async function removeFromCart(productId : string) {
 
         await connect();
 
-        const user = await User.findByIdAndUpdate(_id, {$pull: {cart: productId}}, {new: true});
+        const user = await User.findByIdAndUpdate(_id, {$pull: {cart: productId}}, {new: true}).populate("wishlist").populate("cart");
 
         if (!user) {
-            throw serialize({
+            return serialize({
                 ok: false,
                 message: "این کاربر وجود ندارد",
                 status: 404

@@ -2,7 +2,7 @@
 import connect from "@/db/connect";
 import User from "@/db/userModel";
 import generateToken from "@/utils/generateToken";
-import {LoginActionParams, SignupActionParams} from "@/types/userActions";
+import {LoginSchema, SignupSchema} from "@/types/user";
 import bcrypt from "bcrypt";
 import validateToken from "@/utils/validateToken";
 import tokenGenerator from "@/utils/generateToken";
@@ -10,7 +10,7 @@ import {cookies} from "next/headers";
 import serialize from "@/utils/serialize";
 
 
-export async function signup({username, email, password}: SignupActionParams) {
+export async function signup({username, email, password}: SignupSchema) {
     try {
 
         await connect();
@@ -18,7 +18,7 @@ export async function signup({username, email, password}: SignupActionParams) {
         const usernameRegex = new RegExp(`^${username}$`, "i");
         const emailRegex = new RegExp(`^${email}$`, "i");
 
-        let user = await User.findOne({$or: [{username: usernameRegex}, {email: emailRegex}]});
+        let user = await User.findOne({$or: [{username: usernameRegex}, {email: emailRegex}]}).populate("wishlist").populate("cart");
 
         if (user !== null) {
             return serialize({
@@ -40,12 +40,11 @@ export async function signup({username, email, password}: SignupActionParams) {
         await newUser.save();
 
         const token = generateToken(newUser._id);
-        newUser.password = undefined;
 
         return serialize({
             ok: true,
             status: 201,
-            user:newUser,
+            user: newUser,
             token,
             message: "ثبت نام با موفقیت انجام شد",
         })
@@ -54,13 +53,13 @@ export async function signup({username, email, password}: SignupActionParams) {
         console.log(err);
         return serialize({
             status: 500,
-            ok:false,
+            ok: false,
             message: "متاسفانه عملیات با خطا مواجه شد"
         })
     }
 }
 
-export async function login({identifier, password}: LoginActionParams) {
+export async function login({identifier, password}: LoginSchema) {
 
     try {
 
@@ -99,7 +98,7 @@ export async function login({identifier, password}: LoginActionParams) {
         console.log(err);
         return serialize({
             status: 500,
-            ok:false,
+            ok: false,
             message: "متاسفانه عملیات با خطا مواجه شد"
         })
     }
@@ -135,7 +134,7 @@ export async function getUser() {
 
         token = tokenGenerator(user._id);
         return serialize({
-            ok:true,
+            ok: true,
             user,
             token
         })
@@ -144,7 +143,7 @@ export async function getUser() {
         console.log(err);
         return serialize({
             status: 500,
-            ok:false,
+            ok: false,
             message: "متاسفانه عملیات با خطا مواجه شد"
         })
     }
