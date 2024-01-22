@@ -1,34 +1,44 @@
 import Link from "next/link";
 import {HeartOutlined, ShoppingBag} from "@/components/shared/Icons";
-import {UserType} from "@/db/userModel";
+import {Button} from "@/components/ui/button";
+import {type User} from "@/types/user";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
 
-function WishlistCartButtons(user:UserType) {
+interface Props {
+    user ?: User
+}
+
+function WishlistCartButtons({user}:Props) {
     return (
         <div className={"flex items-center gap-2"}>
-            <div className="tooltip tooltip-bottom" data-tip="کالاهای مورد علاقه شما">
-                <div className="indicator">
-                            <span className="indicator-item indicator-start badge badge-primary size-7 rounded-full">
-                                {user?.wishlist.length || 0}
-                            </span>
-                    <Link className={"btn btn-square btn-ghost border border-primary rounded-full"}
-                          href={user.username ? `/accounts/${user?._id}?tab=1` : "/auth"}
-                          aria-label={"لیست علاقمندی ها"}>
-                        <HeartOutlined className={"fill-primary size-7"}/>
-                    </Link>
-                </div>
-            </div>
-            <div className="tooltip tooltip-bottom" data-tip="سبد خرید شما">
-                <div className="indicator">
-                            <span className="indicator-item indicator-start badge badge-primary size-7 rounded-full">
-                                {user?.cart.length || 0}
-                            </span>
-                    <Link className={"btn btn-square btn-ghost border border-primary rounded-full"}
-                          href={user.username ? `/accounts/${user?._id}?tab=2` : "/auth"}
-                          aria-label={"سبد خرید"}>
-                        <ShoppingBag className={"fill-primary size-7"}/>
-                    </Link>
-                </div>
-            </div>
+            <TooltipProvider delayDuration={400}>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <Button size={"icon"} variant={"outline"} asChild className={"relative size-12 border-primary"}>
+                            <Link href={user ? `/accounts/${user._id}?tab=1` : "/auth"}
+                                  aria-label={"لیست علاقمندی ها"}>
+                                <HeartOutlined className={"fill-primary size-7"}/>
+                            </Link>
+                        </Button>
+                    </TooltipTrigger>
+                    <TooltipContent data-side={"top"} className={"bg-gray-800 text-primary-foreground"}>
+                        <p>کالاهای مورد علاقه شما</p>
+                    </TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                    <TooltipTrigger>
+                            <Button size={"icon"} variant={"outline"} asChild className={"relative size-12 border-primary"}>
+                                <Link href={user ? `/accounts/${user._id}?tab=2` : "/auth"}
+                                      aria-label={"سبد خرید"}>
+                                    <ShoppingBag className={"fill-primary size-7"}/>
+                                </Link>
+                            </Button>
+                    </TooltipTrigger>
+                    <TooltipContent data-side={"top"} className={"bg-gray-800 text-primary-foreground"}>
+                        <p>سبد خرید شما</p>
+                    </TooltipContent>
+                </Tooltip>
+            </TooltipProvider>
         </div>
     )
 }
