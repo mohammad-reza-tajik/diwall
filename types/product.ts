@@ -1,7 +1,7 @@
-import type IReview from "@/types/review";
+import {Review} from "@/types/review";
 import {Document} from "mongoose";
 
-export interface IProduct extends Document{
+export interface Product extends Document{
     title: string;
     price: number;
     description: string;
@@ -11,7 +11,14 @@ export interface IProduct extends Document{
     images : string[];
     quantity: number;
     categories:string[];
-    reviews : IReview[];
+    reviews : Review[];
 }
 
-export interface IProductSchema  extends IProduct {}
+export interface ProductSchema  extends Product {}
+
+export interface GetAllProductsParams extends Partial<{
+    category:string;
+    page:number;
+    sortBy:string;
+    search:string;
+}>{}
