@@ -2,22 +2,24 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, Navigation} from 'swiper/modules';
 import Link from "next/link";
-import SectionHeading from "./SectionHeading";
-import Product from "./Product";
-import type {ProductType} from "@/db/productModel";
+import SectionHeading from "@/components/shared/SectionHeading";
+import ProductCard from "@/components/shared/ProductCard";
+import {type Product} from "@/types/product";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import breakpoints from "@/constants/breakpoints";
+import {cn} from "@/lib/utils";
+import {Button} from "@/components/ui/button";
 
 let slidesPerView: number;
 
 interface Props {
     mostPopular?: boolean;
     route?: string;
-    products: ProductType[];
+    products: Product[];
 
 }
 
-function SwiperProducts ({products , mostPopular , route} : Props)  {
+function SwiperProducts({products, mostPopular, route}: Props) {
 
     const matchesMD = useMediaQuery(breakpoints.md);
     const matchesLG = useMediaQuery(breakpoints.lg);
@@ -29,36 +31,41 @@ function SwiperProducts ({products , mostPopular , route} : Props)  {
     }
 
     return (
-        <section className={`flex max-lg:flex-col justify-center items-center gap-10 rounded ${mostPopular ? "bg-primary px-2 py-4" : ""}`}>
+        <section
+            className={cn("flex max-lg:flex-col justify-center items-center gap-10 rounded", {"bg-primary px-2 py-4": mostPopular})}>
 
             {
-                mostPopular &&
-                <>
-                    <SectionHeading text={"محبوب ترین محصولات"} seeAll route={"/products?sortBy=محبوب-ترین"} white/>
-                    <div className={"hidden lg:flex lg:flex-col gap-10 px-4"}>
-                        <h2 className={"text-white font-dana-black text-4xl !leading-snug"}>
-                            محبوب ترین
-                            <br/>
-                            محصولات
-                            <br/>
-                            دیوال
-                        </h2>
-                        <Link className={`btn btn-outline btn-sm md:btn-md ${mostPopular ? "text-white hover:border-white hover:bg-black/20" : "btn-primary"} rounded-full text-sm md:text-base`} href={route}>
-                            مشاهده همه
-                        </Link>
-                    </div>
-                </>
+                mostPopular && route ?
+                    <>
+                        <SectionHeading text={"محبوب ترین محصولات"} seeAll route={"/products?sortBy=محبوب-ترین"} white/>
+                        <div className={"hidden lg:flex lg:flex-col gap-10 px-4"}>
+                            <h2 className={"text-white font-dana-black text-4xl !leading-snug"}>
+                                محبوب ترین
+                                <br/>
+                                محصولات
+                                <br/>
+                                دیوال
+                            </h2>
+                            <Button asChild variant={"outline"}
+                                    className={cn("max-md:text-xs max-md:p-2", {"text-white border-white": mostPopular})}>
+                                <Link href={route}>
+                                    مشاهده بیشتر
+                                </Link>
+                            </Button>
+                        </div>
+                    </> :
+                    null
             }
 
             <Swiper className={"w-full md:flex-1"} spaceBetween={10}
-                  slidesPerView={slidesPerView}
-                  modules={[Navigation, A11y]}
-                  navigation
+                    slidesPerView={slidesPerView}
+                    modules={[Navigation, A11y]}
+                    navigation
             >
                 {
                     products.map((product) =>
                         <SwiperSlide key={product && product._id}>
-                            <Product {...product} />
+                            <ProductCard {...product} />
                         </SwiperSlide>)
                 }
             </Swiper>
@@ -68,4 +75,5 @@ function SwiperProducts ({products , mostPopular , route} : Props)  {
     )
 
 }
+
 export default SwiperProducts
