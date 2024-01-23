@@ -1,5 +1,5 @@
 "use client"
-import {type Product} from "@/types/product";
+import type {Product} from "@/types/product";
 import {Heart, HeartOutlined, ShoppingBag} from "@/components/shared/Icons";
 import useProduct from "@/hooks/useProduct";
 import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group";
@@ -8,7 +8,10 @@ import {Button} from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
 import {Input} from "@/components/ui/input";
 
-function ProductDetails(product: Product) {
+interface Props {
+    product : Product
+}
+function ProductDetails({product}: Props) {
 
     const {isWishlistLoading, isInWishlist, isCartLoading, isInCart, handleProduct} = useProduct(product);
 
