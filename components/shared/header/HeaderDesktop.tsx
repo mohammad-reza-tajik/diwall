@@ -5,9 +5,10 @@ import AuthButton from "@/components/shared/header/AuthButton";
 import WishlistCartButtons from "@/components/shared/header/WishlistCartButtons";
 import Logo from "@/components/shared/Logo";
 
+
 function HeaderDesktop() {
 
-    const user = useAppSelector(state => state.user);
+    const user = useAppSelector(state => state.user.user);
 
     return (
         <div className={"hidden md:flex justify-between py-5"}>
@@ -16,8 +17,8 @@ function HeaderDesktop() {
                 <SearchForm />
             </div>
             <div className={"flex items-center gap-2 lg:gap-5"}>
-                <WishlistCartButtons {...user} />
-                <AuthButton {...user} />
+                <WishlistCartButtons user={user} />
+                <AuthButton user={user} />
             </div>
         </div>
     )
