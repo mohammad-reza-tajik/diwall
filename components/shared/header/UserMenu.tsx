@@ -1,11 +1,11 @@
 "use client"
-import {Logout} from "@/components/shared/Icons";
+import {Logout, Person} from "@/components/shared/Icons";
 import Link from "next/link";
 import {useAppDispatch, userActions} from "@/store";
 import {enqueueSnackbar} from "notistack";
 import {type User} from "@/types/user";
 import userMenu from "@/constants/userMenu";
-import {DropdownMenu,DropdownMenuContent,DropdownMenuTrigger,DropdownMenuItem} from "@/components/ui/dropdown-menu";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem} from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 
 interface Props {
@@ -24,7 +24,13 @@ function UserMenu({user}: Props) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button className={"w-48 h-12 gap-2"}>{user.username}</Button>
+                <div>
+                    <Button className={"w-48 h-12 gap-2 max-md:hidden"}>{user.username}</Button>
+                    <Button size={"icon"} variant={"outline"} className={"md:hidden"}
+                            aria-label={"باز کردن منوی کاربر"}>
+                        <Person className={"size-8 fill-primary"}/>
+                    </Button>
+                </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 {
