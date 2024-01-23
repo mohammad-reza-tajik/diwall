@@ -1,34 +1,35 @@
 "use client"
-import {useState , useEffect} from "react";
-import {useRouter , useSearchParams} from "next/navigation";
+import {useState, useEffect} from "react";
+import {useRouter, useSearchParams} from "next/navigation";
 import formUrlQuery from "@/utils/formUrlQuery";
 import {Arrow} from "@/components/shared/Icons";
+import {Button} from "@/components/ui/button";
 
 interface Props {
-    lastPage:number;
-    currentPage:number;
+    lastPage: number;
+    currentPage: number;
 }
-function Pagination  ({lastPage,currentPage} : Props)  {
+
+function Pagination({lastPage, currentPage}: Props) {
 
     const [page, setPage] = useState(1);
     const router = useRouter();
     const searchParams = useSearchParams();
+    const pageQuery = searchParams.get("page")
 
-    useEffect(()=>{
-        if (searchParams.get("page")){
-            setPage(+searchParams.get("page"))
+    useEffect(() => {
+        if (pageQuery) {
+            setPage(+pageQuery)
         }
+    }, [pageQuery])
 
-
-    },[searchParams])
-
-    const handlePageChange = (page : number) => {
+    const handlePageChange = (page: number) => {
         setPage(page);
-        router.push(formUrlQuery(searchParams.toString(),{
-            params : {
+        router.push(formUrlQuery(searchParams.toString(), {
+            params: {
                 page
             }
-        }),{scroll : true})
+        }), {scroll: true})
     };
 
     const renderPageNumbers = () => {
@@ -37,15 +38,14 @@ function Pagination  ({lastPage,currentPage} : Props)  {
         if (lastPage <= 5) {
             for (let i = 1; i <= lastPage; i++) {
                 pageNumbers.push(
-                    <li
-                        key={i}
-                        className={`${
-                            currentPage === i ? 'btn-primary' : 'btn-ghost'
-                        } btn btn-circle btn-sm md:btn-md text-sm `}
-                        onClick={() => handlePageChange(i)}
-                    >
-                        {i}
-                    </li>
+                    <Button asChild size={"icon"} variant={currentPage === i ? "default" : "outline"}>
+                        <li
+                            key={i}
+                            onClick={() => handlePageChange(i)}
+                        >
+                            {i}
+                        </li>
+                    </Button>
                 );
             }
         } else {
@@ -60,27 +60,32 @@ function Pagination  ({lastPage,currentPage} : Props)  {
 
             if (startPage > 1) {
                 pageNumbers.push(
-                    <li
-                        key="start-ellipsis"
-                        className="px-3 py-2 text-gray-700"
-                        onClick={() => handlePageChange(startPage - 1)}
-                    >
-                        …
-                    </li>
+                    <Button asChild size={"icon"} variant={"outline"}>
+                        <li
+                            key="start-ellipsis"
+                            className="px-3 py-2 text-gray-700"
+                            onClick={() => handlePageChange(startPage - 1)}
+                        >
+                            …
+                        </li>
+                    </Button>
                 );
             }
 
             for (let i = startPage; i <= endPage; i++) {
                 pageNumbers.push(
-                    <li
-                        key={i}
-                        className={`${
-                            page === i ? 'btn-primary' : 'btn-ghost'
-                        } btn btn-circle btn-sm md:btn-md text-sm`}
-                        onClick={() => handlePageChange(i)}
-                    >
-                        {i}
-                    </li>
+                    <Button asChild size={"icon"} variant={currentPage === i ? "default" : "outline"}>
+
+                        <li
+                            key={i}
+                            className={`${
+                                page === i ? 'btn-primary' : 'btn-ghost'
+                            } btn btn-circle btn-sm md:btn-md text-sm`}
+                            onClick={() => handlePageChange(i)}
+                        >
+                            {i}
+                        </li>
+                    </Button>
                 );
             }
 
@@ -104,26 +109,25 @@ function Pagination  ({lastPage,currentPage} : Props)  {
         <section className="flex justify-center w-full my-7">
             <ul className="flex gap-2">
                 <li>
-                    <button
-                        className={`btn btn-circle text-sm btn-sm md:btn-md ${page === 1 ? 'btn-disabled' : 'btn-ghost'} `}
-                        onClick={() => handlePageChange(page - 1)}
-                        disabled={page === 1}
+                    <Button size={"icon"} variant={"outline"}
+                            onClick={() => handlePageChange(page - 1)}
+                            disabled={page === 1}
                     >
-                        <Arrow className={"size-5 rotate-180"} />
-                    </button>
+                        <Arrow className={"size-5 rotate-180"}/>
+                    </Button>
                 </li>
                 {renderPageNumbers()}
                 <li>
-                    <button
-                        className={`btn btn-circle text-sm btn-sm md:btn-md ${page === lastPage ? 'btn-disabled' : 'btn-ghost'} `}
-                        onClick={() => handlePageChange(page + 1)}
-                        disabled={page === lastPage}
+                    <Button size={"icon"} variant={"outline"}
+                            onClick={() => handlePageChange(page + 1)}
+                            disabled={page === lastPage}
                     >
-                        <Arrow className={"size-5"} />
-                    </button>
+                        <Arrow className={"size-5"}/>
+                    </Button>
                 </li>
             </ul>
         </section>
     );
 }
+
 export default Pagination;

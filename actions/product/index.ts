@@ -45,7 +45,7 @@ export async function getAllProducts({category = undefined, page = 1, sortBy = "
     try {
 
         await connect();
-        
+
         const ITEMS_PER_PAGE = 10;
 
         if (search && search !== "undefined" && search.trim().length !== 0) {
