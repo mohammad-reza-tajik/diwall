@@ -2,11 +2,14 @@
 import {FormEventHandler} from "react";
 import Image from "next/image";
 import {useRouter} from "next/navigation";
-import type {ProductType} from "@/db/productModel";
+import Loader from "@/components/shared/Loader";
+import type {Product} from "@/types/product";
+import {cn} from "@/lib/utils";
+import {Button} from "@/components/ui/button";
 
 interface Props {
     isLoading: boolean;
-    results: ProductType[];
+    results: Product[];
     search: string;
     submitSearchHandler: FormEventHandler
     closeSearch: () => void;
@@ -24,9 +27,8 @@ function SearchResults({isLoading, results, search, submitSearchHandler, closeSe
     }
 
     const showResults = () => {
-        if (isLoading) {
-            return <div className={"flex w-full justify-center items-center p-3"}><span
-                className={"loading loading-spinner text-primary"}></span></div>
+        if (isLoading && search.trim().length >= 3) {
+            return <div className={"flex w-full justify-center items-center p-3"}><Loader /></div>
         } else {
             if (results.length === 0 && search.trim().length >= 3) {
                 return (
@@ -38,7 +40,7 @@ function SearchResults({isLoading, results, search, submitSearchHandler, closeSe
             } else if (search.trim().length >= 3 && results.length !== 0) {
                 return results.map((result) => {
                     return (
-                        <li key={result._id}>
+                        <li key={result._id} className={"p-2 hover:bg-muted rounded transition-all"}>
                             <div className={"flex items-center gap-2"} role={"button"}
                                  onClick={() => goToProductHandler(result.slug)}>
                                 <Image
@@ -53,22 +55,19 @@ function SearchResults({isLoading, results, search, submitSearchHandler, closeSe
                                 </span>
                             </div>
                         </li>
-
                     )
-
                 })
             }
         }
     }
 
-
     return (
-        <ul className="menu bg-white w-full absolute z-50 top-full right-0 p-1 rounded">
+        <ul className={cn("p-1 bg-white w-full absolute z-50 top-full right-0 rounded border border-t-transparent" , {"hidden" : search.trim().length < 3})}>
             {showResults()}
             {results.length !== 0 && search.trim() !== "" &&
-                <button className={"btn btn-primary btn-sm rounded-full mt-3 w-full"} onClick={submitSearchHandler}>
+                <Button className={"mt-3 w-full"} onClick={submitSearchHandler}>
                     مشاهده بیشتر
-                </button>
+                </Button>
             }
         </ul>
 
