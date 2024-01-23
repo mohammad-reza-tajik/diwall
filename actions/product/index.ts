@@ -2,7 +2,7 @@
 import connect from "@/db/connect";
 import serialize from "@/utils/serialize";
 import Product from "@/db/productModel";
-import {GetAllProductsParams} from "@/types/productActions";
+import {GetAllProductsParams} from "@/types/product";
 
 export async function getProduct(slug: string) {
     try {
@@ -41,11 +41,11 @@ export async function getProduct(slug: string) {
     }
 }
 
-export async function getAllProducts({category = null, page = 1, sortBy = "جدیدترین", search = null}: GetAllProductsParams) {
+export async function getAllProducts({category = undefined, page = 1, sortBy = "جدیدترین", search = undefined}: GetAllProductsParams) {
     try {
 
         await connect();
-
+        
         const ITEMS_PER_PAGE = 10;
 
         if (search && search !== "undefined" && search.trim().length !== 0) {

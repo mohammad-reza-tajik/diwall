@@ -39,7 +39,7 @@ function LoginForm() {
                                                        placeholder={item.placeholder}/>
                                             </FormControl>
                                         </div>
-                                        <FormMessage></FormMessage>
+                                        <FormMessage />
                                     </FormItem>
                                 )
                             }}
@@ -55,8 +55,7 @@ function LoginForm() {
                     }
                     ورود
                 </Button>
-                <Link className={"text-primary text-xs"}
-                      href={"/forgot-password"}>
+                <Link className={"text-primary text-xs"} href={"/forgot-password"}>
                     رمز عبور خود را فراموش کرده ام
                 </Link>
             </form>
