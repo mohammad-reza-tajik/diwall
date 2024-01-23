@@ -3,46 +3,49 @@ import {Close, Search} from "@/components/shared/Icons";
 import SearchResults from "@/components/shared/header/SearchResults";
 import {FormHTMLAttributes} from "react"
 import useSearch from "@/hooks/useSearch";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
+import {cn} from "@/lib/utils";
 
-function SearchForm(props:FormHTMLAttributes<HTMLFormElement>) {
+function SearchForm(props: FormHTMLAttributes<HTMLFormElement>) {
 
     const {
         search,
+        isLoading,
+        isWrong,
         submitSearchHandler,
         searchChangeHandler,
-        isWrong,
         results,
-        isLoading,
         closeSearchHandlerDesktop
-    } = useSearch("desktop");
+    } = useSearch();
 
     return (
-        <form onSubmit={submitSearchHandler} className={"relative flex items-center"} {...props}>
-            <button className={"btn btn-sm btn-circle btn-ghost absolute right-2  z-20"} aria-label={"جستجو"}>
-                <Search className={`fill-primary size-8`}/>
-            </button>
-
-            <input
-                className={`input input-bordered focus:input-primary ${isWrong ? "input-error" : ""} rounded-full w-[300px] lg:w-[400px] py-7 pr-12`}
-                placeholder={"جستجو ..."}
-                value={search}
-                onChange={searchChangeHandler}
-            />
-            <button aria-label={"پاک کردن فیلد جستجو"}
-                    className={`btn btn-circle btn-sm btn-ghost absolute left-2 ${!search && "hidden"}`}
-                    onClick={closeSearchHandlerDesktop}>
-                <Close className={`fill-primary size-8`}/>
-            </button>
-
-            <div className={"flex absolute right-0 top-full z-20 w-full rounded"}>
+            <form onSubmit={submitSearchHandler} className={"flex items-center relative"} {...props}>
+                <Button variant={"ghost"} size={"icon"} className={"absolute right-2 z-20"} aria-label={"جستجو"}
+                        type={"submit"}>
+                    <Search className={"fill-primary size-8"}/>
+                </Button>
+                <Input
+                    placeholder={"جستجو ..."}
+                    onChange={searchChangeHandler}
+                    value={search}
+                    className={"w-full lg:w-[400px] py-7 pr-14 focus:border-primary"}
+                />
                 {
-                    search.trim().length >= 3 &&
-                    <SearchResults isLoading={isLoading} results={results} search={search}
-                                   submitSearchHandler={submitSearchHandler}
-                                   closeSearch={closeSearchHandlerDesktop}/>
+                    isWrong ?
+                        <p className={"absolute top-full right-0 text-destructive text-xs"}>
+                            حداقل باید سه کاراکتر وارد شود
+                        </p> :
+                        <SearchResults isLoading={isLoading} results={results} search={search}
+                                       submitSearchHandler={submitSearchHandler}
+                                       closeSearch={closeSearchHandlerDesktop}/>
                 }
-            </div>
-        </form>
+                <Button variant={"ghost"} size={"icon"} aria-label={"پاک کردن فیلد جستجو"} type={"button"}
+                        className={cn("absolute left-2 z-50", {"hidden": !search})}
+                        onClick={closeSearchHandlerDesktop}>
+                    <Close className={"fill-primary size-8"}/>
+                </Button>
+            </form>
     )
 }
 
