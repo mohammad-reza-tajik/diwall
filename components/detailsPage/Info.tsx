@@ -3,62 +3,64 @@ import {useState} from "react";
 import dynamic from "next/dynamic";
 import ReviewsForm from "./ReviewsForm";
 import SwiperProducts from "@/components/shared/SwiperProducts";
-import type {ProductType} from "@/db/productModel";
 import {Create, Package, Review} from "@/components/shared/Icons";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import {Product} from "@/types/product";
 
 const Reviews = dynamic(() => import("./Reviews"));
 
-
 interface Props {
     slug: string;
-    relatedProducts: ProductType[];
+    relatedProducts: Product[];
 }
 
 function Info({slug, relatedProducts}: Props) {
 
     const [addReview, setAddReview] = useState(false);
-    const [activeTab, setActiveTab] = useState(0);
 
     const tabs = [
         {
             label: "محصولات مشابه",
-            icon: <Package className={"size-6"}/>,
+            icon: <Package className={"size-4"}/>,
             content: <SwiperProducts products={relatedProducts}/>
         },
         {
             label: "دیدگاه ها",
-            icon: <Review className={"size-6"}/>,
+            icon: <Review className={"size-4"}/>,
             content: <Reviews addReview={addReview} slug={slug}/>
         },
         {
             label: "درج دیدگاه",
-            icon: <Create className={"size-6"}/>,
+            icon: <Create className={"size-4"}/>,
             content: <ReviewsForm setAddReview={setAddReview} slug={slug}/>
         },
     ];
 
     return (
-        <section className={"flex flex-col gap-5 my-10"}>
-            <div role="tablist" className="flex bg-white px-2 rounded text-xs md:text-sm">
+        <Tabs defaultValue={tabs[0].label} className={"my-12"}>
+            <TabsList className={"grid w-full grid-cols-3 lg:grid-cols-7 h-16 lg:h-20 md:px-3"}>
                 {
-                    tabs.map((tab, index) => (
-                        <button
-                            key={index}
-                            role={"tab"}
-                            className={`flex max-md:flex-col items-center border-b-2 border-b-transparent hover:bg-black/5 transition-all px-3 py-5 font-dana-bold gap-2 ${activeTab === index && "!border-primary text-primary fill-primary"}`}
-                            onClick={() => setActiveTab(index)}
+                    tabs.map((tab) => (
+                        <TabsTrigger key={tab.label}
+                                     className={"data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:fill-primary-foreground md:py-4"}
+                                     value={tab.label}
                         >
-                            {tab.icon}
-                            {tab.label}
-                        </button>
+                            <div className={"flex flex-col md:flex-row items-center gap-2 text-xs md:text-sm font-dana-bold"}>
+                                {tab.icon}
+                                {tab.label}
+                            </div>
+                        </TabsTrigger>
                     ))
                 }
-            </div>
-            <div role="tabpanel" className={"max-md:px-2"}>
-                {tabs[activeTab].content}
-            </div>
-        </section>
-
+            </TabsList>
+            {
+                tabs.map((tab) => (
+                    <TabsContent key={tab.label} value={tab.label} className={"h-full"}>
+                        {tab.content}
+                    </TabsContent>
+                ))
+            }
+        </Tabs>
     )
 }
 

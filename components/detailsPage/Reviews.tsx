@@ -7,24 +7,20 @@ import {getProduct} from "@/actions/product";
 import breakpoints from "@/constants/breakpoints";
 import {Person} from "@/components/shared/Icons";
 import {enqueueSnackbar} from "notistack";
+import type {Review} from "@/types/review";
+import Loader from "@/components/shared/Loader";
 
 interface Props {
     addReview: boolean;
-    slug : string;
+    slug: string;
 }
 
-interface Comment {
-    content: string;
-    author: string;
-    date: string;
-}
+function Reviews({addReview, slug}: Props) {
 
-function Reviews({addReview , slug}: Props) {
-
-    // addReview is used to re-fetch comments anytime a new comment was submitted
+    // addReview is used to re-fetch reviews anytime a new comment was submitted
 
     const [isLoading, setIsLoading] = useState(true);
-    const [comments, setComments] = useState<Comment[]>([]);
+    const [reviews, setReviews] = useState<Review[]>([]);
 
     const matchesMD = useMediaQuery(breakpoints.md);
 
@@ -36,9 +32,9 @@ function Reviews({addReview , slug}: Props) {
                     if (!res.ok) {
                         throw new Error(res.message);
                     }
-                    setComments(res.product.comments);
-                } catch (err) {
-                    enqueueSnackbar(err.message,{variant:"error"})
+                    setReviews(res.product.reviews);
+                } catch (err: any) {
+                    enqueueSnackbar(err.message, {variant: "error"})
                 } finally {
                     setIsLoading(false)
                 }
@@ -47,22 +43,21 @@ function Reviews({addReview , slug}: Props) {
         , [addReview, slug])
 
     return (
-        <div className={"flex items-center"}>
             <>
-                {isLoading ?
+                {
+                    isLoading ?
                     <div className={"flex justify-center items-center !h-[300px]"}>
-                        <span className={"loading loading-spinner text-white"}></span>
+                        <Loader className={"size-10 md:size-16"} />
                     </div> :
-                    comments && comments.length !== 0 ?
+                    reviews && reviews.length !== 0 ?
                         <Swiper
-                              spaceBetween={10}
-                              slidesPerView={matchesMD ? 2 : 1}
-                              modules={[Navigation, A11y]}
-                              navigation
+                            spaceBetween={10}
+                            slidesPerView={matchesMD ? 2 : 1}
+                            modules={[Navigation, A11y]}
+                            navigation
                         >
-
                             {
-                                comments.map((comment, index) => {
+                                reviews.map((comment, index) => {
 
                                     return (
                                         <SwiperSlide key={index} className={"bg-white rounded"}>
@@ -70,14 +65,16 @@ function Reviews({addReview , slug}: Props) {
                                                 <Person className={"size-5 lg:size-8 fill-primary"}/>
                                                 <div className={"flex flex-col py-1 px-3 gap-1"}>
                                                     <span className={"text-sm"}>
-                                                        توسط : {comment.author}
+                                                        توسط :
+                                                        {comment.author}
                                                     </span>
                                                     <span className={"text-xs"}>
-                                                        تاریخ : {comment.date}
+                                                        تاریخ :
+                                                        {comment.date.toString()}
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div className="divider" />
+                                            <div className="divider"/>
                                             <div className={"px-5 !h-[300px]"}>
                                                 <p className={"text-sm !leading-snug"}>
                                                     {comment.content}
@@ -96,7 +93,6 @@ function Reviews({addReview , slug}: Props) {
                         </p>
                 }
             </>
-        </div>
     )
 }
 

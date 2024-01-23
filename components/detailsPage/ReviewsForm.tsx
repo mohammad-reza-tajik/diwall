@@ -21,7 +21,7 @@ interface Props {
 
 function ReviewsForm({setAddReview, slug}: Props) {
 
-    const user = useAppSelector(state => state.user);
+    const user = useAppSelector(state => state.user.user);
     const form = useForm<{ content: string }>({
         resolver: zodResolver(reviewSchema.omit({date: true, author: true})),
         defaultValues: {
@@ -34,7 +34,7 @@ function ReviewsForm({setAddReview, slug}: Props) {
             const res = await createReview({
                 review: {
                     content: data.content,
-                    author: user.username,
+                    author: user!.username,
                     date: new Date()
                 }, slug
             })
@@ -45,23 +45,19 @@ function ReviewsForm({setAddReview, slug}: Props) {
 
             form.reset();
 
-            enqueueSnackbar(res.message, {
-                variant: "success",
-            })
+            enqueueSnackbar(res.message, {variant: "success"});
 
             // we are changing this to re-run the useEffect in Reviews component to fetch new comments
             setAddReview((prevState) => !prevState);
         } catch (err: any) {
-            enqueueSnackbar(err.message, {
-                variant: "error",
-            })
+            enqueueSnackbar(err.message, {variant: "error"});
         }
     }
 
     return (
         <>
             {
-                user.username ?
+                user ?
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(insertReviewHandler)} className={"space-y-5"}>
                             <FormField
