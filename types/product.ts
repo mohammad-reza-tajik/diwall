@@ -1,5 +1,6 @@
 import {Review} from "@/types/review";
 import {Document} from "mongoose";
+import {z} from "zod";
 
 export interface Product {
     _id:string;
@@ -23,3 +24,12 @@ export interface GetAllProductsParams extends Partial<{
     sortBy:string;
     search:string;
 }>{}
+
+export const searchSchema = z.object({
+    search : z.string({
+        required_error: "جستجو الزامی است",
+        invalid_type_error: "جستجو باید یک رشته باشد",
+    }).trim().min(3,"جستجو حداقل باید داری ۳ نویسه باشد ")
+})
+
+export interface SearchSchema extends z.infer<typeof searchSchema>{}
