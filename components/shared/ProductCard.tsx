@@ -1,34 +1,26 @@
 "use client"
-import {useState} from "react";
 import Link from "next/link";
 import Image from "next/legacy/image"
-import {useRouter} from "next/navigation";
-import {userActions, useAppDispatch, useAppSelector} from "@/store";
-import type {ProductType} from "@/db/productModel";
 import {Heart, HeartOutlined} from "@/components/shared/Icons";
+import type {Product} from "@/types/product";
 import {Button} from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
+import useProduct from "@/hooks/useProduct";
 
-function Product(product: ProductType) {
-    const router = useRouter();
+interface Props {
+    product : Product
+}
+function ProductCard( { product }: Props) {
 
-    const [addToWishlistLoading, setAddToWishlistLoading] = useState(false);
-
-    const dispatch = useAppDispatch();
-
-    const user = useAppSelector(state => state.user);
-    const isInWishlist = user?.wishlist.find((prod: ProductType) => prod._id === product._id);
-    const wishlistHandler = () => {
-        dispatch(userActions.handleWishlist({product, router, setAddToWishlistLoading}));
-    }
+    const {isWishlistLoading , isInWishlist , handleProduct} = useProduct(product);
 
     return (
-        <div className={"bg-white rounded flex flex-col p-2 relative gap-2 min-h-full"}>
-            <Button variant={"outline"} size={"icon"} disabled={addToWishlistLoading}
+        <div className={"rounded flex flex-col p-2 relative gap-2 min-h-full border border-gray-600/10"}>
+            <Button variant={"outline"} size={"icon"} disabled={isWishlistLoading}
                 className={"absolute right-3 top-3 z-10 bg-black/30 border-none hover:bg-black/20 disabled:opacity-100"}
-                onClick={wishlistHandler} aria-label={"افزودن به لیست علاقمندی ها"}>
+                onClick={()=>handleProduct("wishlist")} aria-label={"افزودن به لیست علاقمندی ها"}>
                 {
-                    addToWishlistLoading ?
+                    isWishlistLoading ?
                         <Loader className={"border-white"} /> :
                         isInWishlist ?
                             <Heart className={"fill-primary size-5 md:size-6"}/> :
@@ -44,9 +36,8 @@ function Product(product: ProductType) {
             <span className={"text-primary text-xs md:text-sm"}>
                 {product.price + " تومان هر متر مربع"}
             </span>
-
         </div>
     )
 }
 
-export default Product
+export default ProductCard
