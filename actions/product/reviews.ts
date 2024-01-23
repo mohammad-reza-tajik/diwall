@@ -2,10 +2,10 @@
 import connect from "@/db/connect";
 import Product from "@/db/productModel";
 import serialize from "@/utils/serialize";
-import {ICreateReviewParams} from "@/types/productActions";
+import {CreateReviewParams} from "@/types/review";
 import {revalidatePath} from "next/cache";
 
-export async function createReview({review , slug} : ICreateReviewParams) {
+export async function createReview({review , slug} : CreateReviewParams) {
     try {
         await connect();
         const {content, author, date} = review;
