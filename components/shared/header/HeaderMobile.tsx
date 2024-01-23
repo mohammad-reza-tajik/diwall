@@ -5,13 +5,12 @@ import Link from "next/link";
 import SearchDrawer from "./SearchDrawer";
 import {useAppSelector} from "@/store";
 import UserMenu from "@/components/shared/header/UserMenu";
-import {Hamburger, Person, Login, Search} from "@/components/shared/Icons";
+import {Hamburger, Login, Search} from "@/components/shared/Icons";
+import {Button} from "@/components/ui/button";
 
 function HeaderMobile() {
 
-    const user = useAppSelector(state => state.user);
-    const [openMenu, setOpenMenu] = useState(false)
-
+    const user = useAppSelector(state => state.user.user);
 
     const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
     const [openSearchDrawer, setOpenSearchDrawer] = useState(false);
@@ -19,10 +18,10 @@ function HeaderMobile() {
     return (
         <div className={"flex justify-between md:hidden py-2"}>
             <div className={"flex items-center gap-4"}>
-                <button className={"btn btn-circle border border-primary px-2"} onClick={() => setOpenMenuDrawer(true)}
+                <Button size={"icon"} variant={"outline"} onClick={() => setOpenMenuDrawer(true)}
                         aria-label={"باز کردن منو"}>
                     <Hamburger className={"size-8 fill-primary"}/>
-                </button>
+                </Button>
 
                 <Link href={"/"} aria-label={"لوگو"}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140.4 56.16"
@@ -45,26 +44,24 @@ function HeaderMobile() {
             </div>
 
             <div className={"flex gap-0.5"}>
-                <button className={"btn btn-circle border border-primary px-2"}
+                <Button size={"icon"} variant={"outline"}
                         onClick={() => setOpenSearchDrawer(true)}
                         aria-label={"باز کردن منوی جستجو"}
                 >
                     <Search className={"size-8 fill-primary"}/>
-                </button>
+                </Button>
 
                 <MenuDrawer setOpenMenuDrawer={setOpenMenuDrawer} openMenuDrawer={openMenuDrawer}/>
                 <SearchDrawer setOpenSearchDrawer={setOpenSearchDrawer} openSearchDrawer={openSearchDrawer}/>
 
                 {
-                    !user.username ?
-                        <Link className={"btn btn-circle border border-primary px-2"} href={"/auth"} aria-label={"ورود/ثبت نام"}>
-                            <Login className={"size-8 fill-primary"}/>
-                        </Link> :
-                        <div className={"relative flex justify-center items-center size-12 rounded-full border border-primary"} aria-label={"باز کردن منوی کاربر"}
-                             onClick={() => setOpenMenu(prevState => !prevState)}>
-                            <Person className={"size-8 fill-primary"}/>
-                            <UserMenu open={openMenu} user={user}/>
-                        </div>
+                    !user ?
+                        <Button asChild size={"icon"} variant={"outline"}>
+                            <Link href={"/auth"} aria-label={"ورود/ثبت نام"}>
+                                <Login className={"size-8 fill-primary"}/>
+                            </Link>
+                        </Button> :
+                        <UserMenu user={user}/>
                 }
             </div>
         </div>
