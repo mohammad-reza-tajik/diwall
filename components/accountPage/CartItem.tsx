@@ -1,33 +1,36 @@
+"use client"
 import Link from "next/link";
 import {ChangeEvent, useState} from "react";
-import {useAppDispatch, userActions} from "@/store";
 import Image from "next/image";
-import type {ProductType} from "@/db/productModel";
-import {useRouter} from "next/navigation";
 import {Minus, Plus, Delete} from "@/components/shared/Icons";
+import type {Product} from "@/types/product";
+import {Button} from "@/components/ui/button";
+import useProduct from "@/hooks/useProduct";
+import {Input} from "@/components/ui/input";
+import Loader from "@/components/shared/Loader";
 
-function CartItem(product: ProductType) {
+interface Props {
+    product : Product
+}
+function CartItem({product}: Props) {
 
-    const [removeFromCartLoading, setRemoveFromCartLoading] = useState(false);
-    const router = useRouter();
+    const [quantity, setQuantity] = useState(1);
+    const {isCartLoading , handleProduct} = useProduct(product)
 
-    const dispatch = useAppDispatch();
-
-    const [numberInCart, setNumberInCart] = useState(1);
     const numbersInCartChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setNumberInCart(Number(event.target.value));
+        setQuantity(Number(event.target.value));
     }
 
-    const cartHandler = () => {
-        if (numberInCart > 1) {
-            setNumberInCart((prevState) => Number(prevState) - 1)
+    const cartHandler = async () => {
+        if (quantity > 1) {
+            setQuantity((prevState) => Number(prevState) - 1)
         } else {
-            dispatch(userActions.handleCart({product, setAddToCartLoading: setRemoveFromCartLoading, router}));
+            await handleProduct("cart");
         }
     }
 
     return (
-        <div className={"flex max-md:flex-col items-center col-span-3 justify-between rounded md:rounded-full bg-white p-2"}>
+        <div className={"flex max-md:flex-col items-center col-span-3 justify-between rounded border border-gray-600/10 p-2"}>
             <Link className={"flex items-center gap-2 text-xs md:text-sm self-start"} href={`/products/${product.slug}`}>
                 <Image src={`/pictures/products/${product.slug}.jpg`} width={50} height={50}
                        className={"rounded-full size-10"}
@@ -36,25 +39,23 @@ function CartItem(product: ProductType) {
             </Link>
             <div className={"flex items-center gap-2 self-end"}>
 
-                <button className={"btn btn-circle btn-ghost btn-sm hover:!bg-transparent"} onClick={() => {
-                    setNumberInCart((prevState) => Number(prevState) + 1)
+                <Button size={"icon"} variant={"outline"} onClick={() => {
+                    setQuantity((prevState) => Number(prevState) + 1)
                 }}>
                     <Plus className={"fill-primary size-5"}/>
-                </button>
-                <input className={"input input-sm input-primary w-11 md:w-24 text-center"} onChange={numbersInCartChangeHandler} value={numberInCart}
+                </Button>
+                <Input className={"w-16 text-center"} min={0} onChange={numbersInCartChangeHandler} value={quantity}
                             type={"number"}/>
 
-                <button className={"btn btn-circle btn-ghost btn-sm hover:!bg-transparent"} onClick={cartHandler}>
+                <Button size={"icon"} variant={"outline"} onClick={cartHandler}>
                     {
-                        numberInCart > 1 ?
+                        quantity > 1 ?
                             <Minus className={"fill-primary size-5"}/> :
-                            removeFromCartLoading ?
-                                <div className={"flex w-full justify-center items-center p-3"}>
-                                    <span className={"loading loading-spinner text-primary"}></span>
-                                </div> :
+                            isCartLoading ?
+                                <Loader className={"border-white size-6"}/> :
                                 <Delete className={"fill-primary size-5"}/>
                     }
-                </button>
+                </Button>
 
             </div>
         </div>

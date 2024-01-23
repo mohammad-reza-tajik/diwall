@@ -1,12 +1,16 @@
-import {UserType} from "@/db/userModel";
 import profileData from "@/constants/profileData";
+import type {User} from "@/types/user";
 
-function Profile (user : UserType)  {
+interface Props {
+    user?: User
+}
+
+function Profile({user}: Props) {
 
     return (
         <ul className={"flex flex-col p-7 rounded gap-10 bg-white"}>
             {
-                profileData(user).map((data,index)=>{
+                profileData(user).map((data, index) => {
                     return (
                         <li key={index} className={"flex items-center gap-2"}>
                             <span className={"text-sm md:text-base font-dana-bold"}>{data.key}</span>

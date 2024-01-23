@@ -1,15 +1,23 @@
 import CartItem from "./CartItem";
-import {UserType} from "@/db/userModel";
+import type {User} from "@/types/user";
+import {cn} from "@/lib/utils";
 
-function Cart(user: UserType) {
+interface Props {
+    user?: User
+}
+
+function Cart({user}: Props) {
     return (
-        <ul className={`grid gap-3 min-h-full grid-cols-3 ${user.cart.length !== 0 ? "content-start" : "content-center"}`}>
+        <ul className={cn("grid gap-3 min-h-full grid-cols-3 ", {
+            "content-center": user?.cart.length === 0,
+            "content-start": user?.cart.length !== 0
+        })}>
             {
-                !user.username || user.cart.length === 0 ?
+                !user || user.cart.length === 0 ?
                     <p className={"text-center col-span-3 text-sm md:text-base"}>
                         سبد خرید شما خالی است !
                     </p> :
-                    user.cart.map((product) => <CartItem {...product} key={product._id}/>)
+                    user.cart.map((product) => <CartItem product={product} key={product._id}/>)
             }
         </ul>
     )
