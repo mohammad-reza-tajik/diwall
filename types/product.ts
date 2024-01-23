@@ -1,7 +1,8 @@
 import {Review} from "@/types/review";
 import {Document} from "mongoose";
 
-export interface Product extends Document{
+export interface Product {
+    _id:string;
     title: string;
     price: number;
     description: string;
@@ -14,7 +15,7 @@ export interface Product extends Document{
     reviews : Review[];
 }
 
-export interface ProductSchema  extends Product {}
+export interface ProductSchema  extends Omit<Product, "_id"> , Document {}
 
 export interface GetAllProductsParams extends Partial<{
     category:string;

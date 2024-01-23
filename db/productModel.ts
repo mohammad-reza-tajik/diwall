@@ -1,7 +1,7 @@
 import {Schema, models, model , Model} from "mongoose";
-import {type IProductSchema} from "@/types/product";
+import type {ProductSchema} from "@/types/product";
 
-const productSchema = new Schema<IProductSchema>({
+const productSchema = new Schema<ProductSchema>({
     title: {
         type: String,
         trim: true,
@@ -57,6 +57,6 @@ productSchema.pre("save", function (next) {
 })
 
 // I was getting an error which was saying that you're re-creating model, so I find below solution from stack overflow
-export default models.Product as Model<IProductSchema> || model<IProductSchema>("Product", productSchema);
+export default models.Product as Model<ProductSchema> || model<ProductSchema>("Product", productSchema);
 
 

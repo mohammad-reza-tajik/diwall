@@ -1,8 +1,8 @@
 import {Schema, models, model, Model} from "mongoose";
 import bcrypt from "bcrypt";
-import {type IUserSchema} from "@/types/user";
+import type {UserSchema} from "@/types/user";
 
-const userSchema = new Schema<IUserSchema>(
+const userSchema = new Schema<UserSchema>(
     {
         username: {
             type: String,
@@ -50,4 +50,4 @@ userSchema.pre("save", async function (next) {
     next();
 })
 
-export default models.User as Model<IUserSchema> || model<IUserSchema>("User", userSchema);
+export default models.User as Model<UserSchema> || model<UserSchema>("User", userSchema);
