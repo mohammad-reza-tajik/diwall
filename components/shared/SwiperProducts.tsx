@@ -63,10 +63,11 @@ function SwiperProducts({products, mostPopular, route}: Props) {
                     navigation
             >
                 {
-                    products.map((product) =>
+                    products.map((product) =>(
                         <SwiperSlide key={product && product._id}>
-                            <ProductCard {...product} />
+                            <ProductCard product={product} />
                         </SwiperSlide>)
+                    )
                 }
             </Swiper>
         </section>
