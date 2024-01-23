@@ -1,36 +1,32 @@
 import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useCallback, useState} from "react";
 import {useRouter} from "next/navigation";
-import type {ProductType} from "@/db/productModel";
 import {getAllProducts} from "@/actions/product";
+import type {Product} from "@/types/product";
 
-const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
+const useSearch = (setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
 
     const router = useRouter();
 
     const [search, setSearch] = useState("");
     const [isWrong, setIsWrong] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [results, setResults] = useState<ProductType[]>([]);
+    const [results, setResults] = useState<Product[]>([]);
 
-    const debounce = (func) => {
-        let timer;
-        return function (...args) {
-            const context = this;
+    const debounce = (func : Function) => {
+        let timer : NodeJS.Timeout | null;
+        return function (...args : any) {
             if (timer) clearTimeout(timer);
             timer = setTimeout(() => {
                 timer = null;
-                func.apply(context, args);
+                func(...args);
             }, 800);
         };
     };
 
-
     const handleChange = async (search: string) => {
-        setIsLoading(true);
         const res = await getAllProducts({ search });
         setResults(res.products.slice(0, 4));
         setIsLoading(false);
-
     };
     const optimizedFn = useCallback(debounce(handleChange), []);
 
@@ -38,16 +34,16 @@ const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: Dispatch<
         setIsWrong(false);
         setSearch("");
         setResults([]);
-
     }, [])
 
     const closeSearchHandlerMobile = useCallback(() => {
         setIsWrong(false);
         setSearch("");
         setResults([]);
-        setOpenSearchDrawer(false);
-
-    }, [])
+        if (setOpenSearchDrawer) {
+            setOpenSearchDrawer(false);
+        }
+    }, [setOpenSearchDrawer])
 
     const submitSearchHandler = (event : FormEvent) => {
         event.preventDefault();
@@ -59,7 +55,7 @@ const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: Dispatch<
             return
         }
         setIsWrong(false);
-        if (device === "mobile") {
+        if (setOpenSearchDrawer) {
             closeSearchHandlerMobile();
         } else {
             closeSearchHandlerDesktop();
@@ -84,8 +80,6 @@ const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: Dispatch<
     }
 
 
-    if (device === "desktop") {
-
         return {
             search,
             isWrong,
@@ -93,12 +87,10 @@ const useSearch = (device: "desktop" | "mobile", setOpenSearchDrawer?: Dispatch<
             searchChangeHandler,
             submitSearchHandler,
             results,
-            closeSearchHandlerDesktop
+            closeSearchHandlerDesktop,
+            closeSearchHandlerMobile
         }
-    } else {
-        return {search, isWrong, isLoading, searchChangeHandler, submitSearchHandler, results, closeSearchHandlerMobile}
 
-    }
 }
 
 export default useSearch
