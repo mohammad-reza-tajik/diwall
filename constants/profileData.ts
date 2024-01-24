@@ -1,6 +1,6 @@
-import {UserType} from "@/db/userModel";
+import type {User} from "@/types/user";
 
-const profileData = (user : UserType) => [
+const profileData = (user : User) => [
     {
         key:"نام و نام خانوادگی: ",
         value:"مشخص نشده !"

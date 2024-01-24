@@ -1,7 +1,7 @@
-import {UserType} from "@/db/userModel";
 import {HeartOutlined, Person, ShoppingBag} from "@/components/shared/Icons";
+import type {User} from "@/types/user";
 
-const profileData = (user : UserType) => [
+const profileData = (user : User) => [
     {
         href:`${user?._id}?tab=0`,
         icon:<Person className={"fill-primary size-5"}/>,

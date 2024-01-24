@@ -10,7 +10,7 @@ function Profile({user}: Props) {
     return (
         <ul className={"flex flex-col p-7 rounded gap-10 bg-white"}>
             {
-                profileData(user).map((data, index) => {
+                user && profileData(user).map((data, index) => {
                     return (
                         <li key={index} className={"flex items-center gap-2"}>
                             <span className={"text-sm md:text-base font-dana-bold"}>{data.key}</span>

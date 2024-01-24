@@ -5,7 +5,7 @@ import {store} from "@/store";
 import {SnackbarProvider, closeSnackbar} from 'notistack';
 import {Close} from "@/components/shared/Icons";
 
-const snackbarAction = (key: string) => (
+const snackbarAction = (key: string | number) => (
     <button className={"btn btn-ghost btn-sm btn-circle"} onClick={() => closeSnackbar(key)}>
         <Close className={"size-5 fill-white"}/>
     </button>
