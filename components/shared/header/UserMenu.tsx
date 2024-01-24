@@ -1,12 +1,13 @@
 "use client"
 import {Logout, Person} from "@/components/shared/Icons";
-import Link from "next/link";
 import {useAppDispatch, userActions} from "@/store";
 import {type User} from "@/types/user";
 import userMenu from "@/constants/userMenu";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem} from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import {useRouter} from "next/navigation";
 
 interface Props {
     user: User;
@@ -15,9 +16,11 @@ interface Props {
 function UserMenu({user}: Props) {
 
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const logoutHandler = () => {
         dispatch(userActions.logout());
+        Cookies.remove("token");
         toast.success("با موفقیت از حساب خود خارج شدید");
     }
 
@@ -37,10 +40,10 @@ function UserMenu({user}: Props) {
                     userMenu(user).map((item, index) => {
                         return (
                             <DropdownMenuItem className={index === 1 || index === 2 ? "md:hidden" : ""} key={item.href}>
-                                <Link href={`/accounts/${item.href}`} className={"flex gap-2"}>
+                                <div role={"button"} onClick={()=>router.push(`/accounts/${item.href}`)} className={"flex items-center gap-2"}>
                                     {item.icon}
                                     {item.text}
-                                </Link>
+                                </div>
                             </DropdownMenuItem>
                         )
                     })
