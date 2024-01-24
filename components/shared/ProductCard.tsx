@@ -21,7 +21,7 @@ function ProductCard( { product }: Props) {
                 onClick={()=>handleProduct("wishlist")} aria-label={"افزودن به لیست علاقمندی ها"}>
                 {
                     isWishlistLoading ?
-                        <Loader className={"border-white"} /> :
+                        <Loader className={"border-white size-5 md:size-6"} /> :
                         isInWishlist ?
                             <Heart className={"fill-primary size-5 md:size-6"}/> :
                             <HeartOutlined className={"fill-white size-5 md:size-6"}/>
