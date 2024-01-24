@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig =  {
+const nextConfig = {
 
-            reactStrictMode: true,
-            poweredByHeader: false,
+    reactStrictMode: true,
+    poweredByHeader: false,
+    experimental: {
+        missingSuspenseWithCSRBailout: false,
+    },
 }
 
 module.exports = nextConfig

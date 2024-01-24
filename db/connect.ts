@@ -13,7 +13,7 @@ const connect = async () => {
         isConnected = true;
     } catch (err) {
         isConnected = false;
-        console.log(err)
+        console.log(err);
     }
 }
 
