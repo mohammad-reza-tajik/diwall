@@ -40,7 +40,7 @@ function UserMenu({user}: Props) {
                     userMenu(user).map((item, index) => {
                         return (
                             <DropdownMenuItem className={index === 1 || index === 2 ? "md:hidden" : ""} key={item.href}>
-                                <div role={"button"} onClick={()=>router.push(`/accounts/${item.href}`)} className={"flex items-center gap-2"}>
+                                <div role={"button"} onClick={()=>router.push(`/accounts/${item.href}`)} className={"flex items-center gap-2 text-xs md:text-sm"}>
                                     {item.icon}
                                     {item.text}
                                 </div>
@@ -48,14 +48,17 @@ function UserMenu({user}: Props) {
                         )
                     })
                 }
-                <DropdownMenuItem onClick={logoutHandler}>
-                    <Logout className={"fill-primary size-5"}/>
-                    <span>خروج از حساب کاربری</span>
+                <DropdownMenuItem>
+                    <div role={"button"} onClick={logoutHandler}
+                         className={"flex items-center gap-2 text-xs md:text-sm"}>
+                        <Logout className={"fill-primary size-5"}/>
+                        خروج از حساب کاربری
+                    </div>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
 
-    )
+)
 }
 
 export default UserMenu;
