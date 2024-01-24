@@ -2,15 +2,17 @@
 import {useState} from "react";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {A11y, FreeMode, Navigation, Thumbs} from "swiper/modules";
+import type {Swiper as SwiperType} from "swiper/types";
 import Image from "next/image";
-import type {ProductType} from "@/db/productModel"
+import type {Product} from "@/types/product";
+
 
 interface Props {
-    product: ProductType,
+    product: Product,
 }
 
 function ThumbGallery ({product}:Props) {
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
     return (
         <div className={"flex flex-col gap-2 w-full md:w-1/2 md:pl-10"}>
