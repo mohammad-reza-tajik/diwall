@@ -45,7 +45,7 @@ function ProductDetails({product}: Props) {
             <span className={"text-sm lg:text-base"}>
                         سایز دلخواه (واحد متر) :
             </span>
-            <div className={"flex items-center flex-col gap-6 md:flex-row"}>
+            <div className={"flex items-center gap-6"}>
                 <div className="flex w-full items-center gap-2">
                     <label htmlFor={"width"} className={"text-sm"}>طول : </label>
                     <Input className={"w-20"} type={"number"} id={"width"}/>
@@ -63,16 +63,16 @@ function ProductDetails({product}: Props) {
                 >
                     {
                         isWishlistLoading ?
-                            <Loader className={"border-white size-6"}/> :
+                            <Loader className={"border-white size-5"}/> :
                             isInWishlist ?
                                 <Heart className={"size-5 fill-white"}/> :
                                 <HeartOutlined className={"size-5 fill-white"}/>
                     }
                 </Button>
-                <Button className={"gap-2 p-7"} disabled={isCartLoading} onClick={() => handleProduct("cart")} variant={isInCart ? "destructive" : "default"}>
+                <Button className={"max-sm:flex-1 gap-2 p-7"} disabled={isCartLoading} onClick={() => handleProduct("cart")} variant={isInCart ? "destructive" : "default"}>
                     {
                         isCartLoading ?
-                            <Loader className={"border-white size-6"}/> :
+                            <Loader className={"border-white size-5"}/> :
                             <ShoppingBag className={"size-5 fill-white"}/>
                     }
                     {isInCart ? "حذف از سبد خرید" : "افزودن به سبد خرید"}
