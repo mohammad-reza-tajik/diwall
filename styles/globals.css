@@ -116,14 +116,14 @@
   .swiper {
     @apply w-full;
   }
-
-  .swiper-button-prev, .swiper-button-next {
-    @apply bg-primary rounded-full size-10 md:size-12;
-  }
 }
 
 @layer utilities {
   .contained {
     @apply max-w-screen-xl px-1 mx-auto;
   }
+}
+
+.swiper-button-prev, .swiper-button-next {
+  @apply bg-primary rounded-full size-10 md:size-12;
 }

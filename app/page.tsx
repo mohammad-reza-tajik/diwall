@@ -31,10 +31,10 @@ async function HomePage () {
             </Suspense>
             <SwiperProducts products={latestProducts}/>
             <MiddleSection/>
-            <Suspense> fallback={<div className={`flex justify-between items-center my-5 w-full`}>
+            <Suspense fallback={<div className={`flex justify-between items-center my-5 w-full`}>
                 <Skeleton className={"w-28 md:w-44 h-5"}/>
                 <Skeleton className={"w-28 md:w-44 h-5"}/>
-            </div>}
+            </div>}>
             <SectionHeading text={"پر فروش ترین محصولات"} seeAll route={"/products?sortBy=پرفروش-ترین"} />
             </Suspense>
             <SwiperProducts products={bestSellingProducts} />
