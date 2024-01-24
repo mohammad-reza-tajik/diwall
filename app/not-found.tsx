@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link";
 import {Metadata} from "next";
+import {Button} from "@/components/ui/button";
 
 export const metadata: Metadata = {
     title: " صفحه مورد نظر پیدا نشد"
@@ -19,9 +20,11 @@ function NotFound() {
             <p className={"text-sm md:text-base px-5 text-center"}>
                 آدرس صفحه اشتباه است یا سایت با مشکل مواجه شده است
             </p>
-            <Link className={"btn btn-primary btn-sm text-sm md:btn-md rounded-full"} href={"/"}>
-                بازگشت به صفحه اصلی
-            </Link>
+            <Button asChild>
+                <Link href={"/"}>
+                    بازگشت به صفحه اصلی
+                </Link>
+            </Button>
         </section>
     )
 }

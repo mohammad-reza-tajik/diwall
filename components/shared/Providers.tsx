@@ -17,7 +17,7 @@ function Providers({children}: Props) {
         <StoreProvider store={store}>
             <DirectionProvider dir={"rtl"}>
                 {children}
-                <Toaster toastOptions={{duration: 5000,position:"bottom-center",style:{fontSize : 12}}}>
+                <Toaster toastOptions={{duration: 5000,position:"bottom-center",style:{fontSize : 14}}}>
                     {(t) => (
                         <ToastBar toast={t}>
                             {({icon, message}) => (
