@@ -9,6 +9,8 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import breakpoints from "@/constants/breakpoints";
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
+import {Suspense} from "react";
+import {Skeleton} from "@/components/ui/skeleton";
 
 let slidesPerView: number;
 
@@ -37,7 +39,15 @@ function SwiperProducts({products, mostPopular, route}: Props) {
             {
                 mostPopular && route ?
                     <>
-                        <SectionHeading text={"محبوب ترین محصولات"} seeAll route={"/products?sortBy=محبوب-ترین"} white/>
+                        <Suspense fallback={
+                            <div className={`flex justify-between items-center my-5 w-full`}>
+                                <Skeleton className={"w-28 md:w-44 h-5"}/>
+                                <Skeleton className={"w-28 md:w-44 h-5"}/>
+                            </div>
+                        }>
+                            <SectionHeading text={"محبوب ترین محصولات"} seeAll route={"/products?sortBy=محبوب-ترین"}
+                                            white/>
+                        </Suspense>
                         <div className={"hidden lg:flex lg:flex-col gap-10 px-4"}>
                             <h2 className={"text-white font-dana-black text-4xl !leading-snug"}>
                                 محبوب ترین
@@ -63,9 +73,9 @@ function SwiperProducts({products, mostPopular, route}: Props) {
                     navigation
             >
                 {
-                    products.map((product) =>(
+                    products.map((product) => (
                         <SwiperSlide key={product && product._id}>
-                            <ProductCard product={product} />
+                            <ProductCard product={product}/>
                         </SwiperSlide>)
                     )
                 }

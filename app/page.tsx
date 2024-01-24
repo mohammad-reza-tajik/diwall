@@ -7,6 +7,8 @@ import SectionHeading from "@/components/shared/SectionHeading";
 import MiddleSection from "@/components/homePage/MiddleSection";
 import connect from "@/db/connect";
 import Product from "@/db/productModel";
+import {Suspense} from "react";
+import {Skeleton} from "@/components/ui/skeleton";
 
 async function HomePage () {
 
@@ -21,10 +23,20 @@ async function HomePage () {
             <Features />
             <Places/>
             <SwiperProducts products={mostPopularProducts} route={"/products?sortBy=محبوب-ترین"} mostPopular />
-            <SectionHeading text={"محصولات جدید"} seeAll route={"/products?sortBy=جدیدترین"}/>
-            <SwiperProducts products={latestProducts} />
+            <Suspense fallback={<div className={`flex justify-between items-center my-5 w-full`}>
+                <Skeleton className={"w-28 md:w-44 h-5"}/>
+                <Skeleton className={"w-28 md:w-44 h-5"}/>
+            </div>}>
+                <SectionHeading text={"محصولات جدید"} seeAll route={"/products?sortBy=جدیدترین"}/>
+            </Suspense>
+            <SwiperProducts products={latestProducts}/>
             <MiddleSection/>
+            <Suspense> fallback={<div className={`flex justify-between items-center my-5 w-full`}>
+                <Skeleton className={"w-28 md:w-44 h-5"}/>
+                <Skeleton className={"w-28 md:w-44 h-5"}/>
+            </div>}
             <SectionHeading text={"پر فروش ترین محصولات"} seeAll route={"/products?sortBy=پرفروش-ترین"} />
+            </Suspense>
             <SwiperProducts products={bestSellingProducts} />
             <ShowCase/>
         </>

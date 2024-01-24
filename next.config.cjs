@@ -3,9 +3,6 @@ const nextConfig = {
 
     reactStrictMode: true,
     poweredByHeader: false,
-    experimental: {
-        missingSuspenseWithCSRBailout: false,
-    },
 }
 
 module.exports = nextConfig
