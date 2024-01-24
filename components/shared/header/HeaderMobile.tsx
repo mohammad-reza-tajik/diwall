@@ -16,8 +16,8 @@ function HeaderMobile() {
     const [openSearchDrawer, setOpenSearchDrawer] = useState(false);
 
     return (
-        <div className={"flex justify-between md:hidden py-2"}>
-            <div className={"flex items-center gap-4"}>
+        <div className={"flex justify-between items-center md:hidden"}>
+            <div className={"flex items-center gap-2"}>
                 <Button size={"icon"} variant={"outline"} onClick={() => setOpenMenuDrawer(true)}
                         aria-label={"باز کردن منو"}>
                     <Hamburger className={"size-8 fill-primary"}/>
@@ -43,7 +43,7 @@ function HeaderMobile() {
                 </Link>
             </div>
 
-            <div className={"flex gap-0.5"}>
+            <div className={"flex gap-0.5 items-center"}>
                 <Button size={"icon"} variant={"outline"}
                         onClick={() => setOpenSearchDrawer(true)}
                         aria-label={"باز کردن منوی جستجو"}
