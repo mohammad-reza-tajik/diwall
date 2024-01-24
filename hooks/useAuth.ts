@@ -1,11 +1,11 @@
 import {useRouter} from "next/navigation";
 import {userActions, useAppDispatch} from "@/store";
 import {login, signup} from "@/actions/user/auth";
-import {enqueueSnackbar} from "notistack";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {loginSchema, LoginSchema, signupSchema, SignupSchema} from "@/types/user";
+import {loginSchema, type LoginSchema, signupSchema, type SignupSchema} from "@/types/user";
 import {zodResolver} from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 const useAuth = (formType: "login" | "signup" = "login") => {
 
@@ -40,15 +40,11 @@ const useAuth = (formType: "login" | "signup" = "login") => {
 
             dispatch(userActions.login(res.user));
             Cookies.set("token",res.token);
-            enqueueSnackbar(res.message, {
-                variant: "success",
-            });
+            toast.success(res.message);
 
             router.push("/");
         } catch (err : any) {
-            enqueueSnackbar(err.message, {
-                variant: "error",
-            })
+            toast.error(err.message);
         }
     }
 

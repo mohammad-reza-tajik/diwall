@@ -4,8 +4,8 @@ import {useAppDispatch, useAppSelector} from "@/hooks/useStore";
 import {useRouter} from "next/navigation";
 import {addToWishlist, removeFromWishlist} from "@/actions/user/wishlist";
 import {userActions} from "@/store/userSlice";
-import {enqueueSnackbar} from "notistack";
 import {addToCart, removeFromCart} from "@/actions/user/cart";
+import toast from "react-hot-toast";
 
 function useProduct( product: Product) {
 
@@ -34,14 +34,14 @@ function useProduct( product: Product) {
                         throw new Error(res.message);
                     }
                     dispatch(userActions.login(res.user));
-                    enqueueSnackbar(res.message, {variant: "info"});
+                    toast.success(res.message);
                 } else {
                     const res = await addToWishlist(product._id);
                     if (!res.ok) {
                         throw new Error(res.message)
                     }
                     dispatch(userActions.login(res.user));
-                    enqueueSnackbar(res.message, {variant: "success"});
+                    toast.success(res.message);
                 }
             } else if (type === "cart") {
                 setIsCartLoading(true);
@@ -52,19 +52,19 @@ function useProduct( product: Product) {
                         throw new Error(res.message);
                     }
                     dispatch(userActions.login(res.user))
-                    enqueueSnackbar(res.message, {variant: "info"});
+                    toast.success(res.message);
                 } else {
                     const res = await addToCart(product._id);
                     if (!res.ok) {
                         throw new Error(res.message)
                     }
                     dispatch(userActions.login(res.user));
-                    enqueueSnackbar(res.message, {variant: "success"})
+                    toast.success(res.message);
                 }
             }
 
         } catch (err: any) {
-            enqueueSnackbar(err.message, {variant: "error"})
+            toast.error(err.message);
         } finally {
             setIsWishlistLoading(false);
             setIsCartLoading(false);

@@ -2,11 +2,11 @@
 import {Logout, Person} from "@/components/shared/Icons";
 import Link from "next/link";
 import {useAppDispatch, userActions} from "@/store";
-import {enqueueSnackbar} from "notistack";
 import {type User} from "@/types/user";
 import userMenu from "@/constants/userMenu";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem} from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 interface Props {
     user: User;
@@ -18,7 +18,7 @@ function UserMenu({user}: Props) {
 
     const logoutHandler = () => {
         dispatch(userActions.logout());
-        enqueueSnackbar("با موفقیت از حساب خود خارج شدید", {variant: "info"});
+        toast.success("با موفقیت از حساب خود خارج شدید");
     }
 
     return (

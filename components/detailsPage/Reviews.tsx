@@ -6,9 +6,9 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import {getProduct} from "@/actions/product";
 import breakpoints from "@/constants/breakpoints";
 import {Person} from "@/components/shared/Icons";
-import {enqueueSnackbar} from "notistack";
 import type {Review} from "@/types/review";
 import Loader from "@/components/shared/Loader";
+import toast from "react-hot-toast";
 
 interface Props {
     addReview: boolean;
@@ -34,7 +34,7 @@ function Reviews({addReview, slug}: Props) {
                     }
                     setReviews(res.product.reviews);
                 } catch (err: any) {
-                    enqueueSnackbar(err.message, {variant: "error"})
+                    toast.error(err.message);
                 } finally {
                     setIsLoading(false)
                 }

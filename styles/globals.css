@@ -120,42 +120,8 @@
   .swiper-button-prev, .swiper-button-next {
     @apply bg-primary rounded-full size-10 md:size-12;
   }
-
-  .notistack-MuiContent {
-    @apply flex p-1 gap-20 text-xs md:text-sm;
-  }
-
-  .go70336739 {
-    @apply mr-auto p-0;
-  }
-
-  .notistack-MuiContent-success {
-    @apply bg-primary;
-  }
-
-  .notistack-MuiContent-error {
-    @apply bg-error;
-  }
-
-  .notistack-MuiContent-info {
-    @apply bg-info;
-  }
-
-
 }
 
-@layer components {
-  .btn {
-    @apply font-medium;
-  }
-  .divider {
-    @apply my-1;
-  }
-  .skeleton {
-    animation-duration: 2s;
-    @apply bg-gray-200 rounded;
-  }
-}
 @layer utilities {
   .contained {
     @apply max-w-screen-xl px-1 mx-auto;

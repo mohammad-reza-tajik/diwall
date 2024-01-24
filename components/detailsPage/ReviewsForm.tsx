@@ -2,7 +2,6 @@
 import {Dispatch, SetStateAction} from "react";
 import {useAppSelector} from "@/store";
 import Link from "next/link";
-import {enqueueSnackbar} from "notistack";
 import {createReview} from "@/actions/product/reviews";
 import {Create} from "@/components/shared/Icons";
 import {Button} from "@/components/ui/button";
@@ -12,6 +11,7 @@ import {reviewSchema} from "@/types/review";
 import {zodResolver} from "@hookform/resolvers/zod"
 import Loader from "@/components/shared/Loader";
 import {Textarea} from "@/components/ui/textarea";
+import toast from "react-hot-toast";
 
 
 interface Props {
@@ -45,12 +45,12 @@ function ReviewsForm({setAddReview, slug}: Props) {
 
             form.reset();
 
-            enqueueSnackbar(res.message, {variant: "success"});
+            toast.success(res.message);
 
             // we are changing this to re-run the useEffect in Reviews component to fetch new comments
             setAddReview((prevState) => !prevState);
         } catch (err: any) {
-            enqueueSnackbar(err.message, {variant: "error"});
+            toast.error(err.message);
         }
     }
 
