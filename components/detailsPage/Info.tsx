@@ -42,10 +42,10 @@ function Info({slug, relatedProducts}: Props) {
                 {
                     tabs.map((tab) => (
                         <TabsTrigger key={tab.label}
-                                     className={"data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:fill-primary-foreground md:py-4"}
+                                     className={"data-[state=active]:bg-primary data-[state=active]:text-primary-foreground fill-muted-foreground data-[state=active]:fill-primary-foreground md:py-4 text-xs md:text-sm "}
                                      value={tab.label}
                         >
-                            <div className={"flex flex-col md:flex-row items-center gap-2 text-xs md:text-sm font-dana-bold"}>
+                            <div className={"flex flex-col md:flex-row items-center gap-2"}>
                                 {tab.icon}
                                 {tab.label}
                             </div>
