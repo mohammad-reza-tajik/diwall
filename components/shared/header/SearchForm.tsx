@@ -6,6 +6,8 @@ import useSearch from "@/hooks/useSearch";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import breakpoints from "@/constants/breakpoints";
 
 function SearchForm(props: FormHTMLAttributes<HTMLFormElement>) {
 
@@ -16,8 +18,11 @@ function SearchForm(props: FormHTMLAttributes<HTMLFormElement>) {
         submitSearchHandler,
         searchChangeHandler,
         results,
-        closeSearchHandlerDesktop
+        closeSearchHandlerDesktop,
+        closeSearchHandlerMobile,
     } = useSearch();
+
+    const matchesMD = useMediaQuery(breakpoints.md);
 
     return (
             <form onSubmit={submitSearchHandler} className={"flex items-center relative"} {...props}>
@@ -38,10 +43,10 @@ function SearchForm(props: FormHTMLAttributes<HTMLFormElement>) {
                         </p> :
                         <SearchResults isLoading={isLoading} results={results} search={search}
                                        submitSearchHandler={submitSearchHandler}
-                                       closeSearch={closeSearchHandlerDesktop}/>
+                                       closeSearch={matchesMD ? closeSearchHandlerDesktop : closeSearchHandlerMobile}/>
                 }
                 <Button variant={"ghost"} size={"icon"} aria-label={"پاک کردن فیلد جستجو"} type={"button"}
-                        className={cn("absolute left-2 z-50", {"hidden": !search})}
+                        className={cn("absolute left-2 z-50", {"hidden": search.trim().length === 0})}
                         onClick={closeSearchHandlerDesktop}>
                     <Close className={"fill-primary size-8"}/>
                 </Button>
