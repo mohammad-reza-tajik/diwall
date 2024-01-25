@@ -16,7 +16,7 @@ function HeaderMobile() {
     const [openSearchDrawer, setOpenSearchDrawer] = useState(false);
 
     return (
-        <div className={"flex justify-between items-center md:hidden"}>
+        <div className={"flex justify-between items-center md:hidden py-1"}>
             <div className={"flex items-center gap-2"}>
                 <Button size={"icon"} variant={"outline"} onClick={() => setOpenMenuDrawer(true)}
                         aria-label={"باز کردن منو"}>

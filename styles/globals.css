@@ -125,5 +125,5 @@
 }
 
 .swiper-button-prev, .swiper-button-next {
-  @apply bg-primary rounded-full size-10 md:size-12;
+  @apply bg-primary rounded size-10 md:size-12;
 }

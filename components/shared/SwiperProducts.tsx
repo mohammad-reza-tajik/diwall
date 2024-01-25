@@ -34,7 +34,7 @@ function SwiperProducts({products, mostPopular, route}: Props) {
 
     return (
         <section
-            className={cn("flex max-lg:flex-col justify-center items-center gap-10 rounded", {"bg-primary px-2 py-4": mostPopular})}>
+            className={cn("flex max-lg:flex-col justify-center items-center gap-2 rounded", {"bg-primary px-2 py-4": mostPopular})}>
 
             {
                 mostPopular && route ?
