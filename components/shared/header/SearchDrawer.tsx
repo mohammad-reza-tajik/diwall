@@ -21,12 +21,12 @@ function SearchDrawer ({setOpenSearchDrawer, openSearchDrawer} : Props) {
             <div
                 className={cn("fixed inset-0 bg-white z-50 transform transition-transform ease-in-out duration-300 ",{"-translate-x-full" : !openSearchDrawer})}>
                 <div className="flex flex-col gap-5 p-2">
-                    <Button size={"icon"} variant={"outline"}  onClick={()=>setOpenSearchDrawer(false)}
+                    <Button size={"icon"}  onClick={()=>setOpenSearchDrawer(false)}
                             aria-label={"بستن منوی جستجو"}>
-                        <Close className={"size-5"}/>
+                        <Close className={"size-5 fill-white"}/>
                     </Button>
 
-                    <SearchForm/>
+                    <SearchForm setOpenSearchDrawer={setOpenSearchDrawer}/>
                 </div>
             </div>
         </div>

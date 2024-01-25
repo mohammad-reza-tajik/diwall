@@ -1,15 +1,16 @@
 "use client"
 import {Close, Search} from "@/components/shared/Icons";
 import SearchResults from "@/components/shared/header/SearchResults";
-import {FormHTMLAttributes} from "react"
+import {Dispatch, SetStateAction} from "react"
 import useSearch from "@/hooks/useSearch";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
-import useMediaQuery from "@/hooks/useMediaQuery";
-import breakpoints from "@/constants/breakpoints";
 
-function SearchForm(props: FormHTMLAttributes<HTMLFormElement>) {
+interface Props {
+    setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>
+}
+function SearchForm({setOpenSearchDrawer}: Props) {
 
     const {
         search,
@@ -18,14 +19,11 @@ function SearchForm(props: FormHTMLAttributes<HTMLFormElement>) {
         submitSearchHandler,
         searchChangeHandler,
         results,
-        closeSearchHandlerDesktop,
-        closeSearchHandlerMobile,
-    } = useSearch();
-
-    const matchesMD = useMediaQuery(breakpoints.md);
+        closeSearchHandler,
+    } = useSearch(setOpenSearchDrawer);
 
     return (
-            <form onSubmit={submitSearchHandler} className={"flex items-center relative"} {...props}>
+            <form onSubmit={submitSearchHandler} className={"flex items-center relative"}>
                 <Button variant={"ghost"} size={"icon"} className={"absolute right-2 z-20"} aria-label={"جستجو"}
                         type={"submit"}>
                     <Search className={"fill-primary size-8"}/>
@@ -38,16 +36,16 @@ function SearchForm(props: FormHTMLAttributes<HTMLFormElement>) {
                 />
                 {
                     isWrong ?
-                        <p className={"absolute top-full right-0 text-destructive text-xs"}>
+                        <p className={"absolute top-[120%] right-0 text-destructive text-xs"}>
                             حداقل باید سه کاراکتر وارد شود
                         </p> :
                         <SearchResults isLoading={isLoading} results={results} search={search}
                                        submitSearchHandler={submitSearchHandler}
-                                       closeSearch={matchesMD ? closeSearchHandlerDesktop : closeSearchHandlerMobile}/>
+                                       closeSearch={closeSearchHandler}/>
                 }
                 <Button variant={"ghost"} size={"icon"} aria-label={"پاک کردن فیلد جستجو"} type={"button"}
                         className={cn("absolute left-2 z-50", {"hidden": search.trim().length === 0})}
-                        onClick={closeSearchHandlerDesktop}>
+                        onClick={closeSearchHandler}>
                     <Close className={"fill-primary size-8"}/>
                 </Button>
             </form>
