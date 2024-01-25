@@ -6,15 +6,15 @@ export interface User {
     _id:string;
     username: string;
     email: string;
-    wishlist: Product[];
-    cart: Product[];
     role: "user" | "admin";
+    wishlist: Product[];
+    cart:{ product : Product , quantity:number }[];
 }
 
 export interface UserSchema extends Omit<Required<User>, "wishlist" | "cart" | "_id"> , Document {
     password:string;
     wishlist: Types.ObjectId[];
-    cart: Types.ObjectId[];
+    cart: { product : Types.ObjectId , quantity:number }[];
 }
 
 export const signupSchema = z.object({
