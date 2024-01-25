@@ -3,9 +3,12 @@ import connect from "@/db/connect";
 import serialize from "@/utils/serialize";
 import Product from "@/db/productModel";
 import {GetAllProductsParams} from "@/types/product";
+import {z} from "zod";
 
 export async function getProduct(slug: string) {
     try {
+
+        z.string().min(1).parse(slug);
 
         await connect();
 

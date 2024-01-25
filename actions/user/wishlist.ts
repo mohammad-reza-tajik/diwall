@@ -5,9 +5,13 @@ import {cookies} from "next/headers";
 import validateToken from "@/utils/validateToken"
 import {redirect} from "next/navigation";
 import serialize from "@/utils/serialize";
+import {z} from "zod";
 
 export async function addToWishlist(productId: string) {
     try {
+
+        z.string().min(1).parse(productId);
+
         const token = cookies().get("token")?.value;
 
         if (!token) {
@@ -55,6 +59,8 @@ export async function addToWishlist(productId: string) {
 export async function removeFromWishlist(productId : string) {
 
     try {
+
+        z.string().min(1).parse(productId);
 
         const token = cookies().get("token")?.value;
 

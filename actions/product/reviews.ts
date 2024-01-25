@@ -2,15 +2,17 @@
 import connect from "@/db/connect";
 import Product from "@/db/productModel";
 import serialize from "@/utils/serialize";
-import {CreateReviewParams} from "@/types/review";
+import {CreateReviewParams, createReviewSchema} from "@/types/review";
 import {revalidatePath} from "next/cache";
 
-export async function createReview({review , slug} : CreateReviewParams) {
+export async function createReview(params : CreateReviewParams) {
     try {
+
+        const {review , slug} = createReviewSchema.parse(params);
+
         await connect();
         const {content, author, date} = review;
         const regexp = new RegExp(slug, "g");
-
 
         if (!content || content.trim() === "" || !author || !date) {
             return serialize({

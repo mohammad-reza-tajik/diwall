@@ -2,7 +2,7 @@
 import connect from "@/db/connect";
 import User from "@/db/userModel";
 import generateToken from "@/utils/generateToken";
-import {LoginSchema, SignupSchema} from "@/types/user";
+import {loginSchema, type LoginSchema, signupSchema, type SignupSchema} from "@/types/user";
 import bcrypt from "bcrypt";
 import validateToken from "@/utils/validateToken";
 import tokenGenerator from "@/utils/generateToken";
@@ -10,7 +10,10 @@ import {cookies} from "next/headers";
 import serialize from "@/utils/serialize";
 
 
-export async function signup({username, email, password}: SignupSchema) {
+export async function signup(params: SignupSchema) {
+
+    const {username, email, password} = signupSchema.parse(params);
+
     try {
 
         await connect();
@@ -59,9 +62,10 @@ export async function signup({username, email, password}: SignupSchema) {
     }
 }
 
-export async function login({identifier, password}: LoginSchema) {
-
+export async function login(params: LoginSchema) {
     try {
+
+        const {identifier, password} = loginSchema.parse(params);
 
         await connect();
 

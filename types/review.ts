@@ -17,7 +17,9 @@ export const reviewSchema = z.object({
 
 export interface Review extends z.infer<typeof reviewSchema>{}
 
-export interface CreateReviewParams {
-    slug : string;
-    review : Review;
-}
+
+export const createReviewSchema = z.object({
+    slug:z.string().min(1),
+    review : reviewSchema
+})
+export interface CreateReviewParams extends z.infer<typeof createReviewSchema>{}
