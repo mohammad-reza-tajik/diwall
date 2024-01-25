@@ -12,9 +12,9 @@ const useSearch = (setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
     const [isLoading, setIsLoading] = useState(true);
     const [results, setResults] = useState<Product[]>([]);
 
-    const debounce = (func : Function) => {
-        let timer : NodeJS.Timeout | null;
-        return function (...args : any) {
+    const debounce = (func: Function) => {
+        let timer: NodeJS.Timeout | null;
+        return function (...args: any) {
             if (timer) clearTimeout(timer);
             timer = setTimeout(() => {
                 timer = null;
@@ -24,19 +24,13 @@ const useSearch = (setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
     };
 
     const handleChange = async (search: string) => {
-        const res = await getAllProducts({ search });
+        const res = await getAllProducts({search});
         setResults(res.products.slice(0, 4));
         setIsLoading(false);
     };
     const optimizedFn = useCallback(debounce(handleChange), []);
 
-    const closeSearchHandlerDesktop = useCallback(() => {
-        setIsWrong(false);
-        setSearch("");
-        setResults([]);
-    }, [])
-
-    const closeSearchHandlerMobile = useCallback(() => {
+    const closeSearchHandler = useCallback(() => {
         setIsWrong(false);
         setSearch("");
         setResults([]);
@@ -45,7 +39,7 @@ const useSearch = (setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
         }
     }, [setOpenSearchDrawer])
 
-    const submitSearchHandler = (event : FormEvent) => {
+    const submitSearchHandler = (event: FormEvent) => {
         event.preventDefault();
         if (search.trim() === "") {
             setIsWrong(true)
@@ -55,16 +49,12 @@ const useSearch = (setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
             return
         }
         setIsWrong(false);
-        if (setOpenSearchDrawer) {
-            closeSearchHandlerMobile();
-        } else {
-            closeSearchHandlerDesktop();
-        }
+        closeSearchHandler();
         router.push(`/products?search=${search}`);
     }
 
 
-    const searchChangeHandler = (event : ChangeEvent<HTMLInputElement>) => {
+    const searchChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setIsLoading(true);
         setSearch(event.target.value);
         optimizedFn(event.target.value);
@@ -80,16 +70,15 @@ const useSearch = (setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
     }
 
 
-        return {
-            search,
-            isWrong,
-            isLoading,
-            searchChangeHandler,
-            submitSearchHandler,
-            results,
-            closeSearchHandlerDesktop,
-            closeSearchHandlerMobile
-        }
+    return {
+        search,
+        isWrong,
+        isLoading,
+        searchChangeHandler,
+        submitSearchHandler,
+        results,
+        closeSearchHandler,
+    }
 
 }
 
