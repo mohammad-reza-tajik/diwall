@@ -46,7 +46,7 @@ function Reviews({addReview, slug}: Props) {
             <>
                 {
                     isLoading ?
-                    <div className={"flex justify-center items-center !h-[300px]"}>
+                    <div className={"flex justify-center items-center h-[300px]"}>
                         <Loader className={"size-10 md:size-16"} />
                     </div> :
                     reviews && reviews.length !== 0 ?

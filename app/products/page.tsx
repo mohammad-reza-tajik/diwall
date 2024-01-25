@@ -33,8 +33,7 @@ async function Products({searchParams}: { searchParams: Record<string, string> }
                 <SectionHeading text={`${(sortBy || "جدیدترین").split("-").join(" ")} محصولات`} sortBy={true}/>
             }
             <div
-                className={cn("grid grid-cols-2 min-h-[300px] md:grid-cols-3 lg:grid-cols-4 gap-1", {
-                    "content-start": data?.products.length !== 0,
+                className={cn("grid grid-cols-2 min-h-[300px] md:grid-cols-3 lg:grid-cols-4 gap-1 content-start", {
                     "content-center": data?.products.length === 0
                 })}>
                 {

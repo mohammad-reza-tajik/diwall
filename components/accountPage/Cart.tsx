@@ -8,13 +8,12 @@ interface Props {
 
 function Cart({user}: Props) {
     return (
-        <ul className={cn("grid gap-3 min-h-full grid-cols-3 ", {
+        <ul className={cn("grid gap-3 min-h-full grid-cols-3 content-start", {
             "content-center": user?.cart.length === 0,
-            "content-start": user?.cart.length !== 0
         })}>
             {
                 !user || user.cart.length === 0 ?
-                    <p className={"text-center col-span-3 text-sm md:text-base"}>
+                    <p className={"text-center flex justify-center items-center col-span-3 text-sm md:text-base h-[300px]"}>
                         سبد خرید شما خالی است !
                     </p> :
                     user.cart.map((product) => <CartItem product={product} key={product._id}/>)
