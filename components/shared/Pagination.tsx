@@ -15,7 +15,7 @@ function Pagination({lastPage, currentPage}: Props) {
     const [page, setPage] = useState(1);
     const router = useRouter();
     const searchParams = useSearchParams();
-    const pageQuery = searchParams.get("page")
+    const pageQuery = searchParams.get("page");
 
     useEffect(() => {
         if (pageQuery) {
@@ -38,10 +38,8 @@ function Pagination({lastPage, currentPage}: Props) {
         if (lastPage <= 5) {
             for (let i = 1; i <= lastPage; i++) {
                 pageNumbers.push(
-                    <Button asChild size={"icon"} variant={currentPage === i ? "default" : "outline"}>
-                        <li
-                            key={i}
-                            onClick={() => handlePageChange(i)}
+                    <Button asChild size={"icon"} variant={currentPage === i ? "default" : "outline"}  key={i}>
+                        <li onClick={() => handlePageChange(i)}
                         >
                             {i}
                         </li>
@@ -60,9 +58,8 @@ function Pagination({lastPage, currentPage}: Props) {
 
             if (startPage > 1) {
                 pageNumbers.push(
-                    <Button asChild size={"icon"} variant={"outline"}>
+                    <Button asChild size={"icon"} variant={"outline"} key="start-ellipsis">
                         <li
-                            key="start-ellipsis"
                             className="px-3 py-2 text-gray-700"
                             onClick={() => handlePageChange(startPage - 1)}
                         >
@@ -74,10 +71,8 @@ function Pagination({lastPage, currentPage}: Props) {
 
             for (let i = startPage; i <= endPage; i++) {
                 pageNumbers.push(
-                    <Button asChild size={"icon"} variant={currentPage === i ? "default" : "outline"}>
-
+                    <Button asChild size={"icon"} variant={currentPage === i ? "default" : "outline"}  key={i}>
                         <li
-                            key={i}
                             className={`${
                                 page === i ? 'btn-primary' : 'btn-ghost'
                             } btn btn-circle btn-sm md:btn-md text-sm`}
