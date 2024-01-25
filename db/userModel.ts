@@ -28,19 +28,15 @@ const userSchema = new Schema<UserSchema>(
             enum: ["user", "admin"],
             default: "user"
         },
-        wishlist: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Product",
-
-            }],
-
-        cart: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Product"
-            }
-        ],
+        wishlist: [{
+            type: Schema.Types.ObjectId,
+            ref: "Product",
+        }],
+        
+        cart: [{
+            product: {_id: false, type: Schema.Types.ObjectId, ref: "Product"},
+            quantity: Number
+        }],
 
     }
 )
