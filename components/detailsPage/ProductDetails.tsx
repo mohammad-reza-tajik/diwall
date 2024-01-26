@@ -58,7 +58,7 @@ function ProductDetails({product}: Props) {
                     <Input className={"w-20"} type={"number"} id={"height"}/>
                 </div>
             </div>
-            <div className={"flex items-center gap-2 justify-end w-full"}>
+            <div className={"flex items-center gap-2 justify-center md:justify-end w-full"}>
                 <Button size={"icon"} className={"size-14"}
                         onClick={() => handleProduct("wishlist")}
                         aria-label={"افزودن به لیست علاقمندی ها"}

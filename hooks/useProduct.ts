@@ -7,7 +7,7 @@ import {userActions} from "@/store/userSlice";
 import {addToCart, removeFromCart} from "@/actions/user/cart";
 import toast from "react-hot-toast";
 
-function useProduct( product: Product) {
+function useProduct(product: Product) {
 
     const [isWishlistLoading, setIsWishlistLoading] = useState(false);
     const [isCartLoading, setIsCartLoading] = useState(false);
@@ -15,7 +15,7 @@ function useProduct( product: Product) {
     const dispatch = useAppDispatch();
     const router = useRouter();
     const user = useAppSelector(state => state.user.user);
-    const isInWishlist =user?.wishlist.find((item) => item._id === product._id);
+    const isInWishlist = user?.wishlist.find((item) => item._id === product._id);
     const isInCart = user?.cart.find((item) => item.product._id.toString() === product._id);
 
     const handleProduct = async (type: "wishlist" | "cart:add" | "cart:remove") => {
@@ -45,22 +45,25 @@ function useProduct( product: Product) {
                 }
             } else if (type === "cart:add") {
                 setIsCartLoading(true);
-                    const res = await addToCart(product._id);
-                    if (!res.ok) {
-                        throw new Error(res.message)
-                    }
-                    dispatch(userActions.login(res.user));
+                const res = await addToCart(product._id);
+                if (!res.ok) {
+                    throw new Error(res.message);
+                }
+                dispatch(userActions.login(res.user));
+                if (!isInCart) {
                     toast.success(res.message);
-            }
 
-            else if (type === "cart:remove") {
+                }
+            } else if (type === "cart:remove") {
                 setIsCartLoading(true);
                 const res = await removeFromCart(product._id);
                 if (!res.ok) {
                     throw new Error(res.message);
                 }
-                dispatch(userActions.login(res.user))
-                toast.success(res.message);
+                dispatch(userActions.login(res.user));
+                if (Number(isInCart?.quantity) === 1) {
+                    toast.success(res.message);
+                }
             }
 
         } catch (err: any) {
@@ -72,7 +75,7 @@ function useProduct( product: Product) {
 
     };
 
-    return {isCartLoading, isWishlistLoading, handleProduct , isInCart , isInWishlist , user}
+    return {isCartLoading, isWishlistLoading, handleProduct, isInCart, isInWishlist, user}
 
 }
 
