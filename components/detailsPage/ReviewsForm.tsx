@@ -78,7 +78,7 @@ function ReviewsForm({setAddReview, slug}: Props) {
                                 )}
                             />
                             <Button disabled={form.formState.isSubmitting} size={"lg"} type={"submit"}
-                                    className={"w-full md:w-max"}>
+                                    className={"w-full md:w-max gap-2"}>
                                 {
                                     form.formState.isSubmitting ?
                                         <Loader className={"border-white size-6"}/> :
