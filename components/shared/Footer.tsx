@@ -16,7 +16,7 @@ function Footer() {
                         return (
                             <Link key={index}
                                   className={"flex items-center gap-2 text-xs md:text-sm hover:text-primary transition-colors"}
-                                  href={"cloth"}>
+                                  href={link.href}>
                                 <Circle className={"size-2"}/>
                                 {link.text}
                             </Link>
@@ -32,7 +32,7 @@ function Footer() {
                         return (
                             <Link key={index}
                                   className={"flex items-center gap-2 text-xs md:text-sm hover:text-primary transition-colors"}
-                                  href={"cloth"}>
+                                  href={link.href}>
                                 <Circle className={"size-2"}/>
                                 {link.text}
                             </Link>
@@ -47,7 +47,7 @@ function Footer() {
                         return (
                             <Link key={index}
                                   className={"flex items-center gap-2 text-xs md:text-sm hover:text-primary transition-colors"}
-                                  href={"cloth"}>
+                                  href={link.href}>
                                 <Circle className={"size-2"}/>
                                 {link.text}
                             </Link>

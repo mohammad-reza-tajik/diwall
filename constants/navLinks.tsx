@@ -23,12 +23,12 @@ const navLinks = [
     },
     {
         text : "درباره ما",
-        href : "/about",
+        href :  "", //"/about",
         icon : <Info className={"size-5"} />
     },
     {
         text : "همکاری با ما",
-        href : "/collaboration",
+        href :  "" ,//"/collaboration",
         icon : <Handshake className={"size-5"} />
     },
 ];
