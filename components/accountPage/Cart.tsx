@@ -16,7 +16,7 @@ function Cart({user}: Props) {
                     <p className={"text-center flex justify-center items-center col-span-3 text-sm md:text-base h-[300px]"}>
                         سبد خرید شما خالی است !
                     </p> :
-                    user.cart.map((product) => <CartItem product={product} key={product._id}/>)
+                    user.cart.map((item) => <CartItem product={item.product} key={item.product._id}/>)
             }
         </ul>
     )
