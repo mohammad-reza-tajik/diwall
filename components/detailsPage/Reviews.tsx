@@ -1,14 +1,11 @@
 "use client"
 import {useEffect, useState} from "react";
-import {Swiper, SwiperSlide} from "swiper/react";
-import {A11y, Navigation} from "swiper/modules";
-import useMediaQuery from "@/hooks/useMediaQuery";
 import {getProduct} from "@/actions/product";
-import breakpoints from "@/constants/breakpoints";
 import {Person} from "@/components/shared/Icons";
 import type {Review} from "@/types/review";
 import Loader from "@/components/shared/Loader";
 import toast from "react-hot-toast";
+import getTimestamp from "@/utils/getTimestamp";
 
 interface Props {
     addReview: boolean;
@@ -17,12 +14,9 @@ interface Props {
 
 function Reviews({addReview, slug}: Props) {
 
-    // addReview is used to re-fetch reviews anytime a new comment was submitted
 
     const [isLoading, setIsLoading] = useState(true);
     const [reviews, setReviews] = useState<Review[]>([]);
-
-    const matchesMD = useMediaQuery(breakpoints.md);
 
     useEffect(() => {
             (async () => {
@@ -40,59 +34,50 @@ function Reviews({addReview, slug}: Props) {
                 }
             })()
         }
+        // addReview is used to re-fetch reviews anytime a new comment was submitted
         , [addReview, slug])
 
     return (
-            <>
-                {
-                    isLoading ?
-                    <div className={"flex justify-center items-center h-[300px]"}>
-                        <Loader className={"size-10 md:size-16"} />
+        <div className={"grid grid-cols-1 md:grid-cols-2 gap-2"}>
+            {
+                isLoading ?
+                    <div className={"flex justify-center items-center h-[300px] col-span-full"}>
+                        <Loader className={"size-10 md:size-16"}/>
                     </div> :
                     reviews && reviews.length !== 0 ?
-                        <Swiper
-                            spaceBetween={10}
-                            slidesPerView={matchesMD ? 2 : 1}
-                            modules={[Navigation, A11y]}
-                            navigation
-                        >
-                            {
-                                reviews.map((comment, index) => {
-
-                                    return (
-                                        <SwiperSlide key={index} className={"bg-white rounded"}>
-                                            <div className={"flex items-center px-2"}>
-                                                <Person className={"size-5 lg:size-8 fill-primary"}/>
-                                                <div className={"flex flex-col py-1 px-3 gap-1"}>
+                        reviews.map((comment, index) => {
+                            return (
+                                <div key={index} className={"rounded border border-gray-600/10"}>
+                                    <div className={"flex items-center px-2 bg-muted"}>
+                                        <Person className={"size-5 lg:size-8 fill-primary"}/>
+                                        <div className={"flex flex-col py-1 px-3 gap-1 "}>
                                                     <span className={"text-sm"}>
                                                         توسط :
                                                         {comment.author}
                                                     </span>
-                                                    <span className={"text-xs"}>
+                                            <span className={"text-xs"}>
                                                         تاریخ :
-                                                        {comment.date.toString()}
+                                                &nbsp;
+                                                {getTimestamp(comment.date)}
                                                     </span>
-                                                </div>
-                                            </div>
-                                            <div className="divider"/>
-                                            <div className={"px-5 !h-[300px]"}>
-                                                <p className={"text-sm !leading-snug"}>
-                                                    {comment.content}
-                                                </p>
-                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={"p-5 h-[200px] overflow-auto"}>
+                                        <p className={"text-sm leading-relaxed"}>
+                                            {comment.content}
+                                        </p>
+                                    </div>
+                                </div>
+                            )
 
-                                        </SwiperSlide>
-                                    )
+                        })
 
-                                })
-                            }
-                        </Swiper>
                         :
                         <p className={"flex justify-center items-center h-[300px] w-full text-sm md:text-base"}>
                             برای این محصول دیدگاهی وجود ندارد !
                         </p>
-                }
-            </>
+            }
+        </div>
     )
 }
 
