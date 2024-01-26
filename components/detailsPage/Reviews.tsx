@@ -41,7 +41,7 @@ function Reviews({addReview, slug}: Props) {
         <div className={"grid grid-cols-1 md:grid-cols-2 gap-2"}>
             {
                 isLoading ?
-                    <div className={"flex justify-center items-center h-[300px] col-span-full"}>
+                    <div className={"flex justify-center items-center h-[200px] col-span-full"}>
                         <Loader className={"size-10 md:size-16"}/>
                     </div> :
                     reviews && reviews.length !== 0 ?
@@ -62,7 +62,7 @@ function Reviews({addReview, slug}: Props) {
                                                     </span>
                                         </div>
                                     </div>
-                                    <div className={"p-5 h-[200px] overflow-auto"}>
+                                    <div className={"p-5 h-[200px] overflow-auto col-span-full"}>
                                         <p className={"text-sm leading-relaxed"}>
                                             {comment.content}
                                         </p>
@@ -73,7 +73,7 @@ function Reviews({addReview, slug}: Props) {
                         })
 
                         :
-                        <p className={"flex justify-center items-center h-[300px] w-full text-sm md:text-base"}>
+                        <p className={"flex justify-center items-center h-[200px] w-full text-sm md:text-base"}>
                             برای این محصول دیدگاهی وجود ندارد !
                         </p>
             }

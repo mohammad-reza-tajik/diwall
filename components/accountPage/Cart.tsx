@@ -14,12 +14,12 @@ function Cart({user}: Props) {
         })}>
             {
                 !user || user.cart.length === 0 ?
-                    <p className={"text-center flex justify-center items-center col-span-3 text-sm md:text-base h-[300px]"}>
+                    <p className={"text-center flex justify-center items-center col-span-full text-sm md:text-base h-[200px]"}>
                         سبد خرید شما خالی است !
                     </p> :
                     user.cart.map((item) => <CartItem product={item.product} key={item.product._id}/>)
             }
-            <div className={"flex items-center col-span-3 justify-center md:justify-end gap-2 py-7 text-xs md:text-sm"}>
+            <div className={"flex items-center col-span-full justify-center md:justify-end gap-2 py-7 text-xs md:text-sm"}>
                 <Circle className={"fill-primary size-4"} />
                 <span className={"font-dana-bold"}>بهای قابل پرداخت :</span>
                 <span>

@@ -15,7 +15,7 @@ function Wishlist({user}: Props) {
             })}>
             {
                 !user || user.wishlist.length === 0 ?
-                    <p className={"text-center flex justify-center items-center col-span-3 text-sm md:text-base h-[300px]"}>
+                    <p className={"text-center flex justify-center items-center col-span-full text-sm md:text-base h-[200px]"}>
                         لیست علاقمندی های شما خالی است!
                     </p> :
                     user.wishlist.map(product => (
