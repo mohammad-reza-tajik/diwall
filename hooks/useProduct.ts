@@ -15,10 +15,10 @@ function useProduct( product: Product) {
     const dispatch = useAppDispatch();
     const router = useRouter();
     const user = useAppSelector(state => state.user.user);
-    const isInWishlist =user?.wishlist.find((prod) => prod._id === product._id);
-    const isInCart =user?.cart.find((prod) => prod._id === product._id);
+    const isInWishlist =user?.wishlist.find((item) => item._id === product._id);
+    const isInCart = user?.cart.find((item) => item.product._id.toString() === product._id);
 
-    const handleProduct = async (type: "wishlist" | "cart") => {
+    const handleProduct = async (type: "wishlist" | "cart:add" | "cart:remove") => {
 
         try {
             if (!user) {
@@ -43,24 +43,24 @@ function useProduct( product: Product) {
                     dispatch(userActions.login(res.user));
                     toast.success(res.message);
                 }
-            } else if (type === "cart") {
+            } else if (type === "cart:add") {
                 setIsCartLoading(true);
-
-                if (isInCart) {
-                    const res = await removeFromCart(product._id);
-                    if (!res.ok) {
-                        throw new Error(res.message);
-                    }
-                    dispatch(userActions.login(res.user))
-                    toast.success(res.message);
-                } else {
                     const res = await addToCart(product._id);
                     if (!res.ok) {
                         throw new Error(res.message)
                     }
                     dispatch(userActions.login(res.user));
                     toast.success(res.message);
+            }
+
+            else if (type === "cart:remove") {
+                setIsCartLoading(true);
+                const res = await removeFromCart(product._id);
+                if (!res.ok) {
+                    throw new Error(res.message);
                 }
+                dispatch(userActions.login(res.user))
+                toast.success(res.message);
             }
 
         } catch (err: any) {
@@ -72,7 +72,7 @@ function useProduct( product: Product) {
 
     };
 
-    return {isCartLoading, isWishlistLoading, handleProduct , isInCart , isInWishlist}
+    return {isCartLoading, isWishlistLoading, handleProduct , isInCart , isInWishlist , user}
 
 }
 
