@@ -7,10 +7,12 @@ import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
 import Loader from "@/components/shared/Loader";
 import {Input} from "@/components/ui/input";
+import CartItemCounter from "@/components/shared/CartItemCounter";
 
 interface Props {
-    product : Product
+    product: Product
 }
+
 function ProductDetails({product}: Props) {
 
     const {isWishlistLoading, isInWishlist, isCartLoading, isInCart, handleProduct} = useProduct(product);
@@ -36,7 +38,8 @@ function ProductDetails({product}: Props) {
                 سایز های آماده :
             </span>
 
-            <ToggleGroup type={"single"} defaultValue={"10x3"} className={"w-full grid grid-cols-3"} variant={"outline"}>
+            <ToggleGroup type={"single"} defaultValue={"10x3"} className={"w-full grid grid-cols-3"}
+                         variant={"outline"}>
                 <ToggleGroupItem value={"10x3"}>10x3</ToggleGroupItem>
                 <ToggleGroupItem value={"20x3"}>20x3</ToggleGroupItem>
                 <ToggleGroupItem value={"30x3"}>30x3</ToggleGroupItem>
@@ -69,14 +72,18 @@ function ProductDetails({product}: Props) {
                                 <HeartOutlined className={"size-5 fill-white"}/>
                     }
                 </Button>
-                <Button className={"max-sm:flex-1 gap-2 p-7"} disabled={isCartLoading} onClick={() => handleProduct("cart")} variant={isInCart ? "destructive" : "default"}>
-                    {
-                        isCartLoading ?
-                            <Loader className={"border-white size-5"}/> :
-                            <ShoppingBag className={"size-5 fill-white"}/>
-                    }
-                    {isInCart ? "حذف از سبد خرید" : "افزودن به سبد خرید"}
-                </Button>
+                {isInCart ?
+                    <CartItemCounter product={product} size={"lg"}/> :
+                    <Button className={"max-sm:flex-1 gap-2 p-7"} disabled={isCartLoading}
+                            onClick={() => handleProduct("cart:add")}>
+                        {
+                            isCartLoading ?
+                                <Loader className={"border-white size-5"}/> :
+                                <ShoppingBag className={"size-5 fill-white"}/>
+                        }
+                        افزودن به سبد خرید
+                    </Button>
+                }
             </div>
         </section>
     )
