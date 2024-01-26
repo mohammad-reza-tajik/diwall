@@ -21,7 +21,7 @@ export async function signup(params: SignupSchema) {
         const usernameRegex = new RegExp(`^${username}$`, "i");
         const emailRegex = new RegExp(`^${email}$`, "i");
 
-        let user = await User.findOne({$or: [{username: usernameRegex}, {email: emailRegex}]}).populate("wishlist").populate("cart");
+        let user = await User.findOne({$or: [{username: usernameRegex}, {email: emailRegex}]}).populate("wishlist").populate("cart.product");
 
         if (user !== null) {
             return serialize({
@@ -71,7 +71,7 @@ export async function login(params: LoginSchema) {
 
         const regexp = new RegExp(`^${identifier}$`, "i");
 
-        const user = await User.findOne({$or: [{username: regexp}, {email: regexp}]}).select("+password").populate("cart").populate("wishlist"); // this syntax is for matching either username or email
+        const user = await User.findOne({$or: [{username: regexp}, {email: regexp}]}).select("+password").populate("cart.product").populate("wishlist"); // this syntax is for matching either username or email
 
         if (!user) {
             return serialize({
@@ -126,7 +126,7 @@ export async function getUser() {
             })
         }
 
-        const user = await User.findById(_id).populate("cart").populate("wishlist");
+        const user = await User.findById(_id).populate("cart.product").populate("wishlist");
 
         if (!user) {
             return serialize({

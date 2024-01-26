@@ -29,7 +29,7 @@ export async function addToWishlist(productId: string) {
 
         await connect();
 
-        const user = await User.findByIdAndUpdate(_id, {$push: {wishlist: productId}}, {new: true}).populate("wishlist").populate("cart");
+        const user = await User.findByIdAndUpdate(_id, {$push: {wishlist: productId}}, {new: true}).populate("wishlist").populate("cart.product");
 
         if (!user) {
             return serialize({
@@ -79,7 +79,7 @@ export async function removeFromWishlist(productId : string) {
 
         await connect();
 
-        const user = await User.findByIdAndUpdate(_id, {$pull: {wishlist: productId}}, {new: true}).populate("wishlist").populate("cart");
+        const user = await User.findByIdAndUpdate(_id, {$pull: {wishlist: productId}}, {new: true}).populate("wishlist").populate("cart.product");
 
         if (!user) {
             return serialize({

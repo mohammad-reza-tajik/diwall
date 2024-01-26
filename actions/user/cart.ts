@@ -5,6 +5,7 @@ import {cookies} from "next/headers";
 import validateToken from "@/utils/validateToken"
 import {redirect} from "next/navigation";
 import serialize from "@/utils/serialize";
+import type {User as UserType} from "@/types/user";
 import {z} from "zod";
 
 export async function addToCart(productId: string) {
@@ -29,7 +30,7 @@ export async function addToCart(productId: string) {
 
         await connect();
 
-        const user = await User.findByIdAndUpdate(_id, {$push: {cart: productId}}, {new: true}).populate("wishlist").populate("cart");
+        const user = await User.findById(_id);
 
         if (!user) {
             return serialize({
@@ -39,8 +40,26 @@ export async function addToCart(productId: string) {
             })
         }
 
+        const itemIndex = user.cart.findIndex((item) => item.product.toString() === productId);
+        let updatedUser: UserType;
+        let updatedCart = [...user.cart];
+
+        if (itemIndex >= 0) {
+            updatedCart[itemIndex].quantity += 1;
+            updatedUser = await User.findByIdAndUpdate(_id, {cart: updatedCart}, {new: true}).populate("cart.product").populate("wishlist") as UserType;
+        } else {
+            updatedUser = await User.findByIdAndUpdate(_id, {
+                $push: {
+                    cart: {
+                        product: productId,
+                        quantity: 1
+                    }
+                }
+            }, {new: true}).populate("cart.product").populate("wishlist") as UserType;
+        }
+
         return serialize({
-            user,
+            user: updatedUser,
             token,
             ok: true,
             status: 200,
@@ -57,7 +76,6 @@ export async function addToCart(productId: string) {
 }
 
 export async function removeFromCart(productId : string) {
-
     try {
 
         z.string().min(1).parse(productId);
@@ -79,7 +97,7 @@ export async function removeFromCart(productId : string) {
 
         await connect();
 
-        const user = await User.findByIdAndUpdate(_id, {$pull: {cart: productId}}, {new: true}).populate("wishlist").populate("cart");
+        const user = await User.findById(_id);
 
         if (!user) {
             return serialize({
@@ -89,9 +107,25 @@ export async function removeFromCart(productId : string) {
             })
         }
 
+        const itemIndex = user.cart.findIndex((item) => item.product.toString() === productId);
+        let updatedUser: UserType;
+        let updatedCart = [...user.cart];
+
+        if (itemIndex >= 0 && updatedCart[itemIndex].quantity > 1) {
+            updatedCart[itemIndex].quantity -= 1;
+            updatedUser = await User.findByIdAndUpdate(_id, {cart: updatedCart}, {new: true}).populate("cart.product").populate("wishlist") as UserType;
+        } else {
+            updatedUser = await User.findByIdAndUpdate(_id, {
+                $pull: {
+                    cart: {
+                        product: productId
+                    }
+                }
+            }, {new: true}).populate("cart.product").populate("wishlist") as UserType;
+        }
 
         return serialize({
-            user,
+            user: updatedUser,
             token,
             ok: true,
             status: 200,
