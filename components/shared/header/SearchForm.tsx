@@ -1,16 +1,12 @@
 "use client"
 import {Close, Search} from "@/components/shared/Icons";
 import SearchResults from "@/components/shared/header/SearchResults";
-import {Dispatch, SetStateAction} from "react"
 import useSearch from "@/hooks/useSearch";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 
-interface Props {
-    setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>
-}
-function SearchForm({setOpenSearchDrawer}: Props) {
+function SearchForm() {
 
     const {
         search,
@@ -20,7 +16,7 @@ function SearchForm({setOpenSearchDrawer}: Props) {
         searchChangeHandler,
         results,
         closeSearchHandler,
-    } = useSearch(setOpenSearchDrawer);
+    } = useSearch();
 
     return (
             <form onSubmit={submitSearchHandler} className={"flex items-center relative"}>

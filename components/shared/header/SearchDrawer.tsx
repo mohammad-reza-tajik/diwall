@@ -26,7 +26,7 @@ function SearchDrawer ({setOpenSearchDrawer, openSearchDrawer} : Props) {
                         <Close className={"size-5 fill-white"}/>
                     </Button>
 
-                    <SearchForm setOpenSearchDrawer={setOpenSearchDrawer}/>
+                    <SearchForm />
                 </div>
             </div>
         </div>

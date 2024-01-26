@@ -1,9 +1,9 @@
-import {ChangeEvent, Dispatch, FormEvent, SetStateAction, useCallback, useState} from "react";
+import {ChangeEvent, FormEvent, useCallback, useState} from "react";
 import {useRouter} from "next/navigation";
 import {getAllProducts} from "@/actions/product";
 import type {Product} from "@/types/product";
 
-const useSearch = (setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
+const useSearch = () => {
 
     const router = useRouter();
 
@@ -34,10 +34,7 @@ const useSearch = (setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
         setIsWrong(false);
         setSearch("");
         setResults([]);
-        if (setOpenSearchDrawer) {
-            setOpenSearchDrawer(false);
-        }
-    }, [setOpenSearchDrawer])
+    }, [])
 
     const submitSearchHandler = (event: FormEvent) => {
         event.preventDefault();
@@ -74,6 +71,7 @@ const useSearch = (setOpenSearchDrawer?: Dispatch<SetStateAction<boolean>>) => {
         search,
         isWrong,
         isLoading,
+        setSearch,
         searchChangeHandler,
         submitSearchHandler,
         results,
