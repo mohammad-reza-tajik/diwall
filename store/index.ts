@@ -1,6 +1,7 @@
-import {userActions} from "./userSlice";
+import {userActions} from "@/store/userSlice";
+import {drawerActions} from "@/store/drawerSlice";
 import {useAppDispatch,useAppSelector} from "@/hooks/useStore";
-import store from "./store"
+import store from "@/store/store"
 
 /**
 * we create an index file so to import everything related to redux
@@ -11,4 +12,4 @@ import store from "./store"
 * */
 
 
-export { store, userActions , useAppDispatch , useAppSelector  }
+export { store, userActions , useAppDispatch , useAppSelector, drawerActions }
