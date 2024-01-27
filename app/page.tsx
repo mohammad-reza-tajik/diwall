@@ -5,14 +5,14 @@ import Places from "@/components/homePage/Places";
 import SwiperProducts from "@/components/shared/SwiperProducts";
 import SectionHeading from "@/components/shared/SectionHeading";
 import MiddleSection from "@/components/homePage/MiddleSection";
-import connect from "@/db/connect";
-import Product from "@/db/productModel";
+import connectToDB from "@/utils/connectToDB";
+import {Product} from "@/models";
 import {Suspense} from "react";
 import {Skeleton} from "@/components/ui/skeleton";
 
 async function HomePage () {
 
-    await connect();
+    await connectToDB();
     const latestProducts = JSON.parse(JSON.stringify(await Product.find().sort({createdAt: "desc"}).limit(10)));
     const mostPopularProducts = JSON.parse(JSON.stringify(await Product.find().sort({likes: "desc"}).limit(10)));
     const bestSellingProducts = JSON.parse(JSON.stringify(await Product.find().sort({sells: "desc"}).limit(10)));

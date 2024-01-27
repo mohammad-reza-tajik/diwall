@@ -1,6 +1,6 @@
 "use server"
-import connect from "@/db/connect";
-import Product from "@/db/productModel";
+import connectToDB from "@/utils/connectToDB";
+import {Product} from "@/models";
 import serialize from "@/utils/serialize";
 import {CreateReviewParams, createReviewSchema} from "@/types/review";
 import {revalidatePath} from "next/cache";
@@ -10,7 +10,7 @@ export async function createReview(params : CreateReviewParams) {
 
         const {review , slug} = createReviewSchema.parse(params);
 
-        await connect();
+        await connectToDB();
         const {content, author, date} = review;
         const regexp = new RegExp(slug, "g");
 

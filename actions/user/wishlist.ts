@@ -1,6 +1,6 @@
 "use server"
-import connect from "@/db/connect";
-import User from "@/db/userModel";
+import connectToDB from "@/utils/connectToDB";
+import {User} from "@/models";
 import {cookies} from "next/headers";
 import validateToken from "@/utils/validateToken"
 import {redirect} from "next/navigation";
@@ -27,7 +27,7 @@ export async function addToWishlist(productId: string) {
             })
         }
 
-        await connect();
+        await connectToDB();
 
         const user = await User.findByIdAndUpdate(_id, {$push: {wishlist: productId}}, {new: true}).populate("wishlist").populate("cart.product");
 
@@ -77,7 +77,7 @@ export async function removeFromWishlist(productId : string) {
             })
         }
 
-        await connect();
+        await connectToDB();
 
         const user = await User.findByIdAndUpdate(_id, {$pull: {wishlist: productId}}, {new: true}).populate("wishlist").populate("cart.product");
 

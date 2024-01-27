@@ -1,8 +1,8 @@
 "use server"
-import connect from "@/db/connect";
+import connectToDB from "@/utils/connectToDB";
 import serialize from "@/utils/serialize";
-import Product from "@/db/productModel";
-import {GetAllProductsParams} from "@/types/product";
+import {Product} from "@/models";
+import type {GetAllProductsParams} from "@/types/product";
 import {z} from "zod";
 
 export async function getProduct(slug: string) {
@@ -10,7 +10,7 @@ export async function getProduct(slug: string) {
 
         z.string().min(1).parse(slug);
 
-        await connect();
+        await connectToDB();
 
         const regexp = new RegExp(slug, "g");
 
@@ -47,7 +47,7 @@ export async function getProduct(slug: string) {
 export async function getAllProducts({category = undefined, page = 1, sortBy = "جدیدترین", search = undefined}: GetAllProductsParams) {
     try {
 
-        await connect();
+        await connectToDB();
 
         const ITEMS_PER_PAGE = 10;
 

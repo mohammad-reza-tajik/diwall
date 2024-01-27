@@ -1,6 +1,6 @@
 "use server"
-import connect from "@/db/connect";
-import User from "@/db/userModel";
+import connectToDB from "@/utils/connectToDB";
+import {User} from "@/models";
 import {cookies} from "next/headers";
 import validateToken from "@/utils/validateToken"
 import {redirect} from "next/navigation";
@@ -28,7 +28,7 @@ export async function addToCart(productId: string) {
             })
         }
 
-        await connect();
+        await connectToDB();
 
         const user = await User.findById(_id);
 
@@ -95,7 +95,7 @@ export async function removeFromCart(productId : string) {
             })
         }
 
-        await connect();
+        await connectToDB();
 
         const user = await User.findById(_id);
 

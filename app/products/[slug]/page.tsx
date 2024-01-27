@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import ProductDetails from "@/components/detailsPage/ProductDetails";
-import Product from "@/db/productModel";
-import connect from "@/db/connect";
-import {Metadata} from "next";
+import {Product} from "@/models";
+import connectToDB from "@/utils/connectToDB";
+import type {Metadata} from "next";
 import ThumbGallery from "@/components/detailsPage/ThumbGallery";
 import serialize from "@/utils/serialize";
 import {notFound} from "next/navigation";
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const getProduct = async (slug: string) => {
-    await connect();
+    await connectToDB();
     return Product.findOne({slug: decodeURI(slug)});
 }
 
@@ -39,7 +39,7 @@ export const generateMetadata = async ({params}: Props): Promise<Metadata> => {
 }
 
 export async function generateStaticParams() {
-    await connect();
+    await connectToDB();
     const bestSellingProducts = await Product.find().sort({sells: "desc"}).limit(20);
     return bestSellingProducts.map(product => ({slug: product.slug}));
 }
@@ -58,11 +58,11 @@ async function DetailsPage({params}: Props) {
                 <ProductDetails product={product}/>
             </section>
 
-            <Separator className="my-7"/>
+            <Separator className={"my-7"}/>
 
             <Features/>
 
-            <Separator className="my-7"/>
+            <Separator className={"my-7"}/>
             <Info slug={decodeURI(params.slug)} relatedProducts={relatedProducts}/>
         </>
     )

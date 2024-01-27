@@ -1,6 +1,6 @@
 "use server";
-import connect from "@/db/connect";
-import User from "@/db/userModel";
+import connectToDB from "@/utils/connectToDB";
+import {User} from "@/models";
 import generateToken from "@/utils/generateToken";
 import {loginSchema, type LoginSchema, signupSchema, type SignupSchema} from "@/types/user";
 import bcrypt from "bcrypt";
@@ -16,7 +16,7 @@ export async function signup(params: SignupSchema) {
 
     try {
 
-        await connect();
+        await connectToDB();
 
         const usernameRegex = new RegExp(`^${username}$`, "i");
         const emailRegex = new RegExp(`^${email}$`, "i");
@@ -67,7 +67,7 @@ export async function login(params: LoginSchema) {
 
         const {identifier, password} = loginSchema.parse(params);
 
-        await connect();
+        await connectToDB();
 
         const regexp = new RegExp(`^${identifier}$`, "i");
 
@@ -110,7 +110,7 @@ export async function login(params: LoginSchema) {
 
 export async function getUser() {
     try {
-        await connect();
+        await connectToDB();
 
         let token = cookies().get("token")?.value;
 
