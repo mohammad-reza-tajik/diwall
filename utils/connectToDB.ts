@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 
 let isConnected = false;
 
-const connect = async () => {
+const connectToDB = async () => {
 
     if (isConnected) {
         return
     }
 
     try {
-        await mongoose.connect(process.env.MONGODB_URL)
+        await mongoose.connect(process.env.MONGODB_URL);
         isConnected = true;
     } catch (err) {
         isConnected = false;
@@ -17,4 +17,4 @@ const connect = async () => {
     }
 }
 
-export default connect
+export default connectToDB
