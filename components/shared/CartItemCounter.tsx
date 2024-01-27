@@ -17,7 +17,7 @@ function CartItemCounter({product, size = "md"}: Props) {
 
     return (
         <div className={"flex items-center gap-2 self-end"}>
-            <Button size={"icon"} variant={"outline"} className={cn({"size-14": size === "lg"})} onClick={ ()=> handleProduct("cart:add")}>
+            <Button size={"icon"} variant={"outline"} className={cn({"size-14": size === "lg"})} onClick={ ()=> handleProduct("cart:add")} disabled={isCartLoading}>
                 <Plus className={"fill-primary size-5"}/>
             </Button>
             <div className={cn("flex items-center justify-center size-12" , {"size-14": size === "lg"})}>
@@ -27,7 +27,7 @@ function CartItemCounter({product, size = "md"}: Props) {
                         isInCart?.quantity
                 }
             </div>
-            <Button size={"icon"} variant={"outline"} className={cn({"size-14": size === "lg"})} onClick={ ()=> handleProduct("cart:remove")}>
+            <Button size={"icon"} variant={"outline"} className={cn({"size-14": size === "lg"})} onClick={ ()=> handleProduct("cart:remove")} disabled={isCartLoading}>
                 {
                     Number(isInCart?.quantity) > 1 ?
                         <Minus className={"fill-primary size-5"}/> :
