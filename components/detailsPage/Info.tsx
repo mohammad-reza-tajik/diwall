@@ -1,13 +1,13 @@
 "use client"
 import {useState} from "react";
 import dynamic from "next/dynamic";
-import ReviewsForm from "./ReviewsForm";
+import ReviewsForm from "@/components/detailsPage/ReviewsForm";
 import SwiperProducts from "@/components/shared/SwiperProducts";
 import {Create, Package, Review} from "@/components/shared/Icons";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Product} from "@/types/product";
 
-const Reviews = dynamic(() => import("./Reviews"));
+const Reviews = dynamic(() => import("@/components/detailsPage/Reviews"));
 
 interface Props {
     slug: string;
@@ -42,7 +42,7 @@ function Info({slug, relatedProducts}: Props) {
                 {
                     tabs.map((tab) => (
                         <TabsTrigger key={tab.label}
-                                     className={"data-[state=active]:bg-primary data-[state=active]:text-primary-foreground fill-muted-foreground data-[state=active]:fill-primary-foreground md:py-4 text-xs md:text-sm "}
+                                     className={"text-foreground fill-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:fill-primary-foreground md:py-4 text-xs md:text-sm"}
                                      value={tab.label}
                         >
                             <div className={"flex flex-col md:flex-row items-center gap-2"}>
