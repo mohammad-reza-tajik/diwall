@@ -62,7 +62,7 @@ function Reviews({addReview, slug}: Props) {
                                                     </span>
                                         </div>
                                     </div>
-                                    <div className={"p-5 h-[200px] overflow-auto col-span-full"}>
+                                    <div className={"p-5 h-[200px] overflow-auto"}>
                                         <p className={"text-sm leading-relaxed"}>
                                             {comment.content}
                                         </p>
@@ -70,10 +70,8 @@ function Reviews({addReview, slug}: Props) {
                                 </div>
                             )
 
-                        })
-
-                        :
-                        <p className={"flex justify-center items-center h-[200px] w-full text-sm md:text-base"}>
+                        }) :
+                        <p className={"flex justify-center items-center h-[200px] w-full text-sm md:text-base col-span-full"}>
                             برای این محصول دیدگاهی وجود ندارد !
                         </p>
             }
