@@ -2,30 +2,28 @@
 import {useRouter} from "next/navigation";
 import Logo from "@/components/shared/Logo";
 import navLinks from "@/constants/navLinks";
+import {useAppSelector , useAppDispatch , drawerActions} from "@/store";
+import {cn} from "@/lib/utils";
 
-interface Props {
-    setOpenMenuDrawer: React.Dispatch<React.SetStateAction<boolean>>;
-    openMenuDrawer: boolean;
-
-}
-
-function MenuDrawer({openMenuDrawer, setOpenMenuDrawer}: Props) {
+function MenuDrawer() {
 
     const router = useRouter();
+    const dispatch = useAppDispatch();
+    const {menuDrawerOpen} = useAppSelector(state => state.drawer);
 
     const menuItemsHandler = (url: string) => {
-        setOpenMenuDrawer(false);
+        dispatch(drawerActions.closeMenuDrawer());
         router.push(url);
     }
 
     return (
         <div className="relative">
-            {openMenuDrawer && (
-                <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-50"
-                     onClick={() => setOpenMenuDrawer(false)}></div>
+            {menuDrawerOpen && (
+                <div className="fixed inset-0 bg-foreground opacity-50 z-50"
+                     onClick={() => dispatch(drawerActions.closeMenuDrawer())} />
             )}
             <div
-                className={`fixed top-0 right-0 h-full w-3/4 sm:w-1/2 flex flex-col gap-2 p-5 bg-white shadow-lg z-50 transform transition-transform ease-in-out duration-300 ${openMenuDrawer ? "translate-x-0" : "translate-x-full"}`}>
+                className={cn("fixed top-0 right-0 h-full w-3/4 sm:w-1/2 flex flex-col gap-2 p-5 bg-white z-50 transition-transform ease-in-out duration-300" , {"translate-x-full" : !menuDrawerOpen})}>
                     <Logo onClick={() => menuItemsHandler("/")} className={"size-20 sm:size-36"}/>
                     {
                         navLinks.map((link, index) => {

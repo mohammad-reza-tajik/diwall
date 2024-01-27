@@ -1,24 +1,21 @@
 "use client"
-import MenuDrawer from "./MenuDrawer";
-import {useState} from "react";
+import MenuDrawer from "@/components/shared/header/MenuDrawer";
 import Link from "next/link";
-import SearchDrawer from "./SearchDrawer";
-import {useAppSelector} from "@/store";
+import SearchDrawer from "@/components/shared/header/SearchDrawer";
+import {drawerActions, useAppDispatch, useAppSelector} from "@/store";
 import UserMenu from "@/components/shared/header/UserMenu";
 import {Hamburger, Login, Search} from "@/components/shared/Icons";
 import {Button} from "@/components/ui/button";
 
 function HeaderMobile() {
 
+    const dispatch = useAppDispatch();
     const user = useAppSelector(state => state.user.user);
-
-    const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
-    const [openSearchDrawer, setOpenSearchDrawer] = useState(false);
 
     return (
         <div className={"flex justify-between items-center md:hidden py-1"}>
             <div className={"flex items-center gap-2"}>
-                <Button size={"icon"} variant={"outline"} onClick={() => setOpenMenuDrawer(true)}
+                <Button size={"icon"} variant={"outline"} onClick={() => dispatch(drawerActions.openMenuDrawer())}
                         aria-label={"باز کردن منو"}>
                     <Hamburger className={"size-8 fill-primary"}/>
                 </Button>
@@ -45,14 +42,14 @@ function HeaderMobile() {
 
             <div className={"flex gap-0.5 items-center"}>
                 <Button size={"icon"} variant={"outline"}
-                        onClick={() => setOpenSearchDrawer(true)}
+                        onClick={() => dispatch(drawerActions.openSearchDrawer())}
                         aria-label={"باز کردن منوی جستجو"}
                 >
                     <Search className={"size-8 fill-primary"}/>
                 </Button>
 
-                <MenuDrawer setOpenMenuDrawer={setOpenMenuDrawer} openMenuDrawer={openMenuDrawer}/>
-                <SearchDrawer setOpenSearchDrawer={setOpenSearchDrawer} openSearchDrawer={openSearchDrawer}/>
+                <MenuDrawer />
+                <SearchDrawer />
 
                 {
                     !user ?

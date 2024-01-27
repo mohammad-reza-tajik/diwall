@@ -21,7 +21,7 @@ function WishlistCartButtons({user}:Props) {
                             </Link>
                         </Button>
                     </TooltipTrigger>
-                    <TooltipContent data-side={"top"} className={"bg-gray-800 text-primary-foreground"}>
+                    <TooltipContent data-side={"top"} className={"bg-foreground text-primary-foreground"}>
                         <p>کالاهای مورد علاقه شما</p>
                     </TooltipContent>
                 </Tooltip>
@@ -34,7 +34,7 @@ function WishlistCartButtons({user}:Props) {
                                 </Link>
                             </Button>
                     </TooltipTrigger>
-                    <TooltipContent data-side={"top"} className={"bg-gray-800 text-primary-foreground"}>
+                    <TooltipContent data-side={"top"} className={"bg-foreground text-primary-foreground"}>
                         <p>سبد خرید شما</p>
                     </TooltipContent>
                 </Tooltip>
