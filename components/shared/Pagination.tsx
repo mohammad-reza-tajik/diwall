@@ -60,7 +60,7 @@ function Pagination({lastPage, currentPage}: Props) {
                 pageNumbers.push(
                     <Button asChild size={"icon"} variant={"outline"} key="start-ellipsis">
                         <li
-                            className="px-3 py-2 text-gray-700"
+                            className="px-3 py-2"
                             onClick={() => handlePageChange(startPage - 1)}
                         >
                             …
@@ -88,7 +88,7 @@ function Pagination({lastPage, currentPage}: Props) {
                 pageNumbers.push(
                     <li
                         key="end-ellipsis"
-                        className="px-3 py-2 text-gray-700"
+                        className="px-3 py-2"
                         onClick={() => handlePageChange(endPage + 1)}
                     >
                         …
