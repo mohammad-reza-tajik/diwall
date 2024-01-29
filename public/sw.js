@@ -3,17 +3,20 @@ const DYNAMIC_CACHE_NAME = "dynamic-v1";
 
 const addToStaticCache = async (resources) => {
     const staticCache = await caches.open(STATIC_CACHE_NAME);
-    await staticCache.addAll(resources)
+    await staticCache.addAll(resources);
 }
 
 const addToDynamicCache = async (resources) => {
     const dynamicCache = await caches.open(DYNAMIC_CACHE_NAME);
-    await dynamicCache.addAll(resources)
+    const isAlreadyInCache = await caches.match(resources[0]);
+    if (!isAlreadyInCache) {
+        await dynamicCache.addAll(resources);
+    }
 }
 
 const cacheFirst = async (event) => {
     try {
-        let res = await caches.match(event.request);
+        const res = await caches.match(event.request);
         // console.log(event.request)
         if (res) {
             return res
@@ -31,11 +34,11 @@ self.addEventListener("install", event => {
 
     console.log("-----[ service worker installed ]-----");
 
-   /* event.waitUntil(
-        addToStaticCache(
-            [
-                "/",
-            ]))*/
+    /* event.waitUntil(
+         addToStaticCache(
+             [
+                 "/",
+             ]))*/
     // Force the waiting service worker to become the active service worker.
     self.skipWaiting(); // returned promise can be ignored safely
 
@@ -49,7 +52,7 @@ self.addEventListener("activate", event => {
             const keys = await caches.keys();
             keys.forEach(key => {
                 if (key !== STATIC_CACHE_NAME || key !== DYNAMIC_CACHE_NAME)
-                    caches.delete(key)
+                    caches.delete(key);
             })
 
         })()
@@ -59,11 +62,10 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", (event) => {
-    console.log(event.request.destination);
     if (event.request.destination === "font" || event.request.destination === "style") {
-        addToDynamicCache([event.request.url]);
+        addToDynamicCache([event.request]);
     }
-    // event.respondWith(cacheFirst(event))
+    event.respondWith(cacheFirst(event));
 
 });
 
