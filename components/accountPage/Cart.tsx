@@ -24,9 +24,9 @@ function Cart({user}: Props) {
                 <span className={"font-dana-bold"}>بهای قابل پرداخت :</span>
                 <span>
                 {
-                    user?.cart.reduce((finalPrice , item )=>{
-                        return item.quantity * item.product.price + finalPrice
-                    },0)
+                    user?.cart.reduce((finalPrice , item )=>(
+                         item.quantity * item.product.price + finalPrice
+                    ),0).toLocaleString()
                 }
                 &nbsp;
                 تومان
