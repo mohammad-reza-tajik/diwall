@@ -10,6 +10,7 @@ function SearchForm() {
 
     const {
         search,
+        setSearch,
         isLoading,
         isWrong,
         submitSearchHandler,
@@ -41,7 +42,7 @@ function SearchForm() {
                 }
                 <Button variant={"ghost"} size={"icon"} aria-label={"پاک کردن فیلد جستجو"} type={"button"}
                         className={cn("absolute left-2 z-50", {"hidden": search.trim().length === 0})}
-                        onClick={closeSearchHandler}>
+                        onClick={() => setSearch("") }>
                     <Close className={"fill-primary size-8"}/>
                 </Button>
             </form>

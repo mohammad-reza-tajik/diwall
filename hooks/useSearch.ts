@@ -45,7 +45,7 @@ const useSearch = () => {
 
     const submitSearchHandler = (event: FormEvent) => {
         event.preventDefault();
-        if (search.trim() === "") {
+        if (search.trim().length < 3) {
             setIsWrong(true)
             setTimeout(() => {
                 setIsWrong(false)
@@ -60,17 +60,9 @@ const useSearch = () => {
 
     const searchChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setIsLoading(true);
+        setIsWrong(false);
         setSearch(event.target.value);
         optimizedFn(event.target.value);
-        if (event.target.value.trim() === "") {
-            setIsWrong(true);
-            setTimeout(() => {
-                setIsWrong(false);
-            }, 5000)
-
-        } else {
-            setIsWrong(false);
-        }
     }
 
     return {
