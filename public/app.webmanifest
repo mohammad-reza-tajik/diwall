@@ -5,6 +5,14 @@
   "theme_color": "#069f69",
   "background_color": "#069f69",
   "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "browser"
+  ],
+  "categories": [
+    "shopping"
+  ],
   "scope": "/",
   "id": "/",
   "start_url": "/",
@@ -25,13 +33,14 @@
     {
       "src": "/icons/logo-512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any"
     },
     {
       "src": "/icons/logo-512-maskable.png",
       "type": "image/png",
       "sizes": "512x512",
-      "purpose" : "maskable"
+      "purpose": "maskable"
     },
     {
       "src": "/icons/logo-1024.png",
@@ -39,7 +48,7 @@
       "sizes": "1024x1024"
     }
   ],
-  "screenshots" : [
+  "screenshots": [
     {
       "src": "/pictures/screenshots/screenshot-desktop.png",
       "sizes": "1356x920",
@@ -51,6 +60,52 @@
       "sizes": "720x1600",
       "type": "image/png",
       "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "محبوب ترین محصولات",
+      "url": "/products?sortBy=محبوب-ترین",
+      "icons": [
+        {
+          "src": "/icons/logo-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "پرفروش ترین محصولات",
+      "url": "/products?sortBy=پرفروش-ترین",
+      "icons": [
+        {
+          "src": "/icons/logo-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "جدیدترین محصولات",
+      "url": "/products?sortBy=جدیدترین",
+      "icons": [
+        {
+          "src": "/icons/logo-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "ورود / ثبت نام",
+      "url": "/auth",
+      "icons": [
+        {
+          "src": "/icons/logo-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
