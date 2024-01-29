@@ -1,5 +1,5 @@
-const STATIC_CACHE_NAME = "static-v2";
-const DYNAMIC_CACHE_NAME = "dynamic-v1";
+const STATIC_CACHE_NAME = "static-v3";
+const DYNAMIC_CACHE_NAME = "dynamic-v3";
 
 const addToStaticCache = async (resources) => {
     const staticCache = await caches.open(STATIC_CACHE_NAME);
@@ -8,10 +8,11 @@ const addToStaticCache = async (resources) => {
 
 const addToDynamicCache = async (resources) => {
     const dynamicCache = await caches.open(DYNAMIC_CACHE_NAME);
-    const isAlreadyInCache = await caches.match(resources[0]);
-    if (!isAlreadyInCache) {
+    const areAlreadyInCache = resources.every(resource => caches.match(resource));
+    if (!areAlreadyInCache) {
         await dynamicCache.addAll(resources);
     }
+
 }
 
 const cacheFirst = async (event) => {
@@ -34,11 +35,19 @@ self.addEventListener("install", event => {
 
     console.log("-----[ service worker installed ]-----");
 
-    /* event.waitUntil(
+     event.waitUntil(
          addToStaticCache(
              [
                  "/",
-             ]))*/
+                 "/fonts/dana-black.woff2",
+                 "/fonts/dana-fanum-bold.woff2",
+                 "/fonts/dana-fanum-medium.woff2",
+                 "/pictures/auth-bg.svg",
+                 "/pictures/banner-desktop.jpg",
+                 "/pictures/banner-mobile.jpg",
+                 "/icons/logo.png"
+
+             ]))
     // Force the waiting service worker to become the active service worker.
     self.skipWaiting(); // returned promise can be ignored safely
 
@@ -51,8 +60,9 @@ self.addEventListener("activate", event => {
 
             const keys = await caches.keys();
             keys.forEach(key => {
-                if (key !== STATIC_CACHE_NAME || key !== DYNAMIC_CACHE_NAME)
+                if (key !== STATIC_CACHE_NAME && key !== DYNAMIC_CACHE_NAME){
                     caches.delete(key);
+                }
             })
 
         })()
@@ -62,7 +72,7 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", (event) => {
-    if (event.request.destination === "font" || event.request.destination === "style") {
+    if (event.request.destination === "style") {
         addToDynamicCache([event.request]);
     }
     event.respondWith(cacheFirst(event));
