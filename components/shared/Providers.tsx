@@ -5,6 +5,7 @@ import {store} from "@/store";
 import {Close} from "@/components/shared/Icons";
 import toast, {Toaster, ToastBar} from 'react-hot-toast';
 import {Button} from "@/components/ui/button";
+import {useEffect} from "react";
 
 
 interface Props {
@@ -13,9 +14,14 @@ interface Props {
 
 function Providers({children}: Props) {
 
-    if (typeof navigator.serviceWorker !== 'undefined') {
-        navigator.serviceWorker.register('sw.js')
-    }
+    useEffect(()=>{
+        (async ()=>{
+            if (typeof navigator.serviceWorker !== 'undefined') {
+                await navigator.serviceWorker.register('sw.js');
+            }
+        })();
+    },[])
+
 
     return (
         <StoreProvider store={store}>
