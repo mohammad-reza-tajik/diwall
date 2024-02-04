@@ -12,23 +12,15 @@ function SearchDrawer() {
     const {searchDrawerOpen} = useAppSelector(state => state.drawer);
 
     return (
-        <div className="relative">
-            {searchDrawerOpen && (
-                <div className="fixed inset-0 bg-black/60 z-50"
-                     onClick={() => dispatch(drawerActions.closeSearchDrawer())}></div>
-            )}
             <div
-                className={cn("fixed inset-0 bg-white z-50 transform transition-transform ease-in-out duration-300 ", {"-translate-x-full": !searchDrawerOpen})}>
-                <div className="flex flex-col gap-5 p-2">
-                    <Button size={"icon"} onClick={() => dispatch(drawerActions.closeSearchDrawer())}
+                className={cn("fixed inset-0 bg-background z-50 flex flex-col gap-5 p-2 transform transition-transform ease-in-out duration-300 ", {"-translate-x-full": !searchDrawerOpen})}>
+                    <Button size={"icon"} variant={"outline"} onClick={() => dispatch(drawerActions.closeSearchDrawer())}
                             aria-label={"بستن منوی جستجو"}>
-                        <Close className={"size-5 fill-white"}/>
+                        <Close />
                     </Button>
 
                     <SearchForm/>
-                </div>
             </div>
-        </div>
     )
 }
 
