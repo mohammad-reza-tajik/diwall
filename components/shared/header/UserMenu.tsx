@@ -27,13 +27,12 @@ function UserMenu({user}: Props) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <div>
                     <Button className={"w-48 h-12 gap-2 max-md:hidden"}>{user.username}</Button>
-                    <Button size={"icon"} variant={"outline"} className={"md:hidden"}
-                            aria-label={"باز کردن منوی کاربر"}>
-                        <Person className={"size-8 fill-primary"}/>
-                    </Button>
-                </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild>
+                <Button size={"icon"} variant={"outline"} className={"md:hidden"} aria-label={"باز کردن منوی کاربر"}>
+                    <Person className={"size-8 fill-primary"}/>
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 {
