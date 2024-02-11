@@ -8,7 +8,7 @@ interface Props {
 function Profile({user}: Props) {
 
     return (
-        <ul className={"flex flex-col p-7 rounded gap-10 bg-white"}>
+        <ul className={"flex flex-col p-7 rounded gap-10"}>
             {
                 user && profileData(user).map((data, index) => {
                     return (

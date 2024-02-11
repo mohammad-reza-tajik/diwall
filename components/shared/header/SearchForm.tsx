@@ -29,7 +29,7 @@ function SearchForm() {
                     placeholder={"جستجو ..."}
                     onChange={searchChangeHandler}
                     value={search}
-                    className={"w-full lg:w-[400px] py-7 pr-14 focus:border-primary"}
+                    className={"w-full lg:w-80 py-7 pr-14 focus:border-primary"}
                 />
                 {
                     isWrong ?

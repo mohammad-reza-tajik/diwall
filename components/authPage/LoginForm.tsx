@@ -17,7 +17,7 @@ function LoginForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(submitHandler)}
-                  className={"bg-white p-6 h-full flex flex-col items-center gap-3 rounded"}>
+                  className={"bg-background p-6 h-full flex flex-col items-center gap-3 rounded"}>
                 <Logo/>
                 {loginFields.map((item) => {
                     return (

@@ -13,7 +13,7 @@ function Places() {
                     می خواهید ؟
                 </h2>
             </div>
-            <div className={"flex flex-wrap items-center bg-white"}>
+            <div className={"flex flex-wrap items-center"}>
                 {
                     places.map((item, index) => {
                         return (

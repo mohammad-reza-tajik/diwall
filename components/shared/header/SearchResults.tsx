@@ -62,7 +62,7 @@ function SearchResults({isLoading, results, search, submitSearchHandler, closeSe
     }
 
     return (
-        <ul className={cn("p-1 bg-white w-full absolute z-50 top-full right-0 rounded border border-t-transparent" , {"hidden" : search.trim().length < 3})}>
+        <ul className={cn("p-1 bg-background w-full absolute z-50 top-full right-0 rounded border border-t-transparent" , {"hidden" : search.trim().length < 3})}>
             {showResults()}
             {results.length !== 0 && search.trim() !== "" &&
                 <Button className={"mt-3 w-full"} onClick={submitSearchHandler}>
