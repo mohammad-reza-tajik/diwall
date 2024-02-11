@@ -82,6 +82,10 @@
     @apply m-0 p-0 box-border border-border;
   }
 
+  a,a:visited,a:active {
+    @apply fill-foreground;
+  }
+
   ::-webkit-scrollbar {
     @apply w-2;
   }
