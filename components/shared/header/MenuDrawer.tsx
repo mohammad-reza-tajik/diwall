@@ -41,7 +41,7 @@ function MenuDrawer() {
                 }
                 <div className={"flex items-center gap-2 absolute top-3 left-3"}>
                     <ThemeSwitcher/>
-                    <Button size={"icon"} variant={"outline"} onClick={() => dispatch(drawerActions.closeMenuDrawer())}>
+                    <Button size={"icon"} variant={"outline"} onClick={() => dispatch(drawerActions.closeMenuDrawer())} aria-label={"بستن منو"}>
                         <Close/>
                     </Button>
                 </div>

@@ -13,7 +13,7 @@ function HeaderMobile() {
     const user = useAppSelector(state => state.user.user);
 
     return (
-        <div className={"flex justify-between items-center md:hidden py-1"}>
+        <div className={"flex justify-between items-center md:hidden py-2"}>
             <div className={"flex items-center gap-2"}>
                 <Button size={"icon"} variant={"outline"} onClick={() => dispatch(drawerActions.openMenuDrawer())}
                         aria-label={"باز کردن منو"}>
