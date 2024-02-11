@@ -3,6 +3,7 @@ import {HeartOutlined, ShoppingBag} from "@/components/shared/Icons";
 import {Button} from "@/components/ui/button";
 import {type User} from "@/types/user";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip";
+// import Cart from "@/components/accountPage/Cart";
 
 interface Props {
     user ?: User
@@ -21,7 +22,7 @@ function WishlistCartButtons({user}:Props) {
                             </Link>
                         </Button>
                     </TooltipTrigger>
-                    <TooltipContent data-side={"top"} className={"bg-foreground text-primary-foreground"}>
+                    <TooltipContent data-side={"top"} className={"bg-background text-foreground"}>
                         <p>کالاهای مورد علاقه شما</p>
                     </TooltipContent>
                 </Tooltip>
@@ -34,7 +35,8 @@ function WishlistCartButtons({user}:Props) {
                                 </Link>
                             </Button>
                     </TooltipTrigger>
-                    <TooltipContent data-side={"top"} className={"bg-foreground text-primary-foreground"}>
+                    <TooltipContent data-side={"top"} className={"bg-background text-foreground"}>
+                        {/*<Cart user={user} />*/}
                         <p>سبد خرید شما</p>
                     </TooltipContent>
                 </Tooltip>

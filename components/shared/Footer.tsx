@@ -10,7 +10,7 @@ function Footer() {
     return (
         <footer className={"grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 mt-7 gap-y-2"}>
             <div className={"flex flex-col gap-3"}>
-                <h5 className={"text-sm md:text-lg font-dana-bold"}>فروشگاه دیوال</h5>
+                <h3 className={"text-sm md:text-lg font-dana-bold"}>فروشگاه دیوال</h3>
                 {
                     footerLinks1.map((link, index) => {
                         return (
@@ -23,10 +23,9 @@ function Footer() {
                         )
                     })
                 }
-
             </div>
             <div className={"flex flex-col gap-3 "}>
-                <h5 className={"text-sm md:text-lg font-dana-bold"}>خدمات دیوال</h5>
+                <h3 className={"text-sm md:text-lg font-dana-bold"}>خدمات دیوال</h3>
                 {
                     footerLinks2.map((link, index) => {
                         return (
@@ -41,7 +40,7 @@ function Footer() {
                 }
             </div>
             <div className={"hidden sm:flex flex-col gap-3"}>
-                <h5 className={"text-sm md:text-lg font-dana-bold"}>خدمات مشتریان</h5>
+                <h3 className={"text-sm md:text-lg font-dana-bold"}>خدمات مشتریان</h3>
                 {
                     footerLinks3.map((link, index) => {
                         return (
@@ -58,10 +57,10 @@ function Footer() {
 
             {/********************************************************************************/}
 
-            <div className={"flex flex-col gap-5 max-lg:col-span-4 my-5"}>
-                <h5 className={"text-sm md:text-base font-dana-bold"}>
+            <div className={"flex flex-col gap-5 max-lg:col-span-full my-5"}>
+                <h3 className={"text-sm md:text-base font-dana-bold"}>
                     دیوال را دنبال کنید
-                </h5>
+                </h3>
                 <div className={"flex items-center gap-2"}>
                     {
                         socials.map((social) => {
@@ -75,7 +74,7 @@ function Footer() {
                         })
                     }
                 </div>
-                <h4 className={"text-sm md:text-base"}>
+                <p className={"text-sm md:text-base"}>
                     از جدیدترین تخفیفات
                     &nbsp;
                     <span className={"text-primary"}>
@@ -83,10 +82,10 @@ function Footer() {
                         </span>
                     &nbsp;
                     با خبر شوید!
-                </h4>
+                </p>
             </div>
 
-            <div className={"items-center justify-between my-7 hidden md:flex col-span-4"}>
+            <div className={"items-center justify-between my-7 hidden md:flex col-span-full"}>
                 <div className={"flex flex-col gap-2"}>
                     <h4 className={"font-dana-bold text-xl"}>
                         الو
@@ -94,12 +93,10 @@ function Footer() {
                         <span className={"text-primary"}>
                             دیوال
                         </span>
-
                     </h4>
                     <p>
                         24 ساعت در هفت روز هفته آماده خدمت رسانی به مشتریان هستیم
                     </p>
-
                 </div>
                 <div className={"flex"}>
                     <div className={"flex flex-col"}>
@@ -112,8 +109,7 @@ function Footer() {
                 </div>
             </div>
 
-
-            <div className={"flex max-lg:flex-col justify-between items-center gap-2 col-span-4"}>
+            <div className={"flex max-lg:flex-col justify-between items-center gap-2 col-span-full"}>
                 <div className={"flex flex-col gap-2 lg:flex-1"}>
                     <h4 className={"text-sm md:text-lg font-dana-bold"}>
                         فروشگاه اینترنتی
@@ -156,10 +152,10 @@ function Footer() {
 
             <Separator className={"col-span-full my-5"} />
 
-            <div className={"flex items-center justify-center col-span-4 gap-2"}>
-                <h5 className={"text-xs md:text-base"}>
+            <div className={"flex items-center justify-center col-span-full gap-2"}>
+                <h3 className={"text-xs md:text-base"}>
                     دانلود اپلیکیشن دیوال :
-                </h5>
+                </h3>
 
                 <div className={"flex gap-2"}>
                     <Button variant={"outline"} size={"icon"} aria-label={"دریافت اپلیکیشن از google play"}>
@@ -174,11 +170,11 @@ function Footer() {
 
             <Separator className={"col-span-full my-5"} />
 
-            <h6 className={"text-center my-4 text-xs md:text-sm col-span-4"}>
+            <h4 className={"text-center my-4 text-xs md:text-sm col-span-full"}>
                 تمامی حقوق مادی و معنوی این سایت متعلق به دیوال می باشد و هر گونه کپی برداری پیگرد قانونی خواهد
                 داشت
                 .
-            </h6>
+            </h4>
 
         </footer>
     )

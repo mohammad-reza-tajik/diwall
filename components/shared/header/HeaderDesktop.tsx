@@ -12,11 +12,11 @@ function HeaderDesktop() {
 
     return (
         <div className={"hidden md:flex justify-between py-5"}>
-            <div className={"flex items-center gap-5 lg:gap-10"}>
+            <div className={"flex items-center gap-5"}>
                 <Logo className={"size-[100px]"} />
                 <SearchForm />
             </div>
-            <div className={"flex items-center gap-2 lg:gap-5"}>
+            <div className={"flex items-center gap-2"}>
                 <WishlistCartButtons user={user} />
                 <AuthButton user={user} />
             </div>
