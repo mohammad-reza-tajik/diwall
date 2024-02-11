@@ -26,11 +26,9 @@ function UserMenu({user}: Props) {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                    <Button className={"w-48 h-12 gap-2 max-md:hidden"}>{user.username}</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuTrigger asChild>
-                <Button size={"icon"} variant={"outline"} className={"md:hidden"} aria-label={"باز کردن منوی کاربر"}>
+            <DropdownMenuTrigger>
+                <span className={"w-48 h-12 gap-2 max-md:hidden"}>{user.username}</span>
+                <Button size={"icon"} variant={"outline"} className={"md:hidden"} aria-label={"باز کردن منوی کاربر"} asChild>
                     <Person className={"size-8 fill-primary"}/>
                 </Button>
             </DropdownMenuTrigger>
@@ -39,7 +37,8 @@ function UserMenu({user}: Props) {
                     userMenu(user).map((item, index) => {
                         return (
                             <DropdownMenuItem className={index === 1 || index === 2 ? "md:hidden" : ""} key={item.href}>
-                                <div role={"button"} onClick={()=>router.push(`/accounts/${item.href}`)} className={"flex items-center gap-2 text-xs md:text-sm"}>
+                                <div role={"button"} onClick={() => router.push(`/accounts/${item.href}`)}
+                                     className={"flex items-center gap-2 text-xs md:text-sm"}>
                                     {item.icon}
                                     {item.text}
                                 </div>
@@ -57,7 +56,7 @@ function UserMenu({user}: Props) {
             </DropdownMenuContent>
         </DropdownMenu>
 
-)
+    )
 }
 
 export default UserMenu;
