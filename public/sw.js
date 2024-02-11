@@ -5,14 +5,14 @@ const addToStaticCache = async (resources) => {
     const staticCache = await caches.open(STATIC_CACHE_NAME);
     await staticCache.addAll(resources);
 }
-
+/*
 const addToDynamicCache = async (resources) => {
     const dynamicCache = await caches.open(DYNAMIC_CACHE_NAME);
     const areAlreadyInCache = resources.every(resource => caches.match(resource));
     if (!areAlreadyInCache) {
         await dynamicCache.addAll(resources);
     }
-}
+}*/
 
 const cacheFirst = async (event) => {
     try {
@@ -68,9 +68,9 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", (event) => {
     // console.log(event.request.destination)
-    if (event.request.destination === "style") {
-        addToDynamicCache([event.request]);
-    }
+    // if (event.request.destination === "style") {
+    //     addToDynamicCache([event.request]);
+    // }
     event.respondWith(cacheFirst(event));
 
 });
