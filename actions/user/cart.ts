@@ -19,9 +19,9 @@ export async function addToCart(productId: string) {
             return redirect("/auth");
         }
 
-        const {_id} = await validateToken(token);
+        const decoded = await validateToken(token);
 
-        if (!_id) {
+        if (!decoded || typeof decoded === "string" || !decoded._id) {
             return serialize({
                 ok: false,
                 message: "توکن شما صحیح نیست"
@@ -30,7 +30,7 @@ export async function addToCart(productId: string) {
 
         await connectToDB();
 
-        const user = await User.findById(_id);
+        const user = await User.findById(decoded._id);
 
         if (!user) {
             return serialize({
@@ -46,9 +46,9 @@ export async function addToCart(productId: string) {
 
         if (itemIndex >= 0) {
             updatedCart[itemIndex].quantity += 1;
-            updatedUser = await User.findByIdAndUpdate(_id, {cart: updatedCart}, {new: true}).populate("cart.product").populate("wishlist") as UserType;
+            updatedUser = await User.findByIdAndUpdate(decoded._id, {cart: updatedCart}, {new: true}).populate("cart.product").populate("wishlist") as UserType;
         } else {
-            updatedUser = await User.findByIdAndUpdate(_id, {
+            updatedUser = await User.findByIdAndUpdate(decoded._id, {
                 $push: {
                     cart: {
                         product: productId,
@@ -86,9 +86,9 @@ export async function removeFromCart(productId : string) {
             return redirect("/auth");
         }
 
-        const {_id} = await validateToken(token);
+        const decoded = await validateToken(token);
 
-        if (!_id) {
+        if (!decoded || typeof decoded === "string" || !decoded._id) {
             return serialize({
                 ok: false,
                 message: "توکن شما صحیح نیست"
@@ -97,7 +97,7 @@ export async function removeFromCart(productId : string) {
 
         await connectToDB();
 
-        const user = await User.findById(_id);
+        const user = await User.findById(decoded._id);
 
         if (!user) {
             return serialize({
@@ -113,9 +113,9 @@ export async function removeFromCart(productId : string) {
 
         if (itemIndex >= 0 && updatedCart[itemIndex].quantity > 1) {
             updatedCart[itemIndex].quantity -= 1;
-            updatedUser = await User.findByIdAndUpdate(_id, {cart: updatedCart}, {new: true}).populate("cart.product").populate("wishlist") as UserType;
+            updatedUser = await User.findByIdAndUpdate(decoded._id, {cart: updatedCart}, {new: true}).populate("cart.product").populate("wishlist") as UserType;
         } else {
-            updatedUser = await User.findByIdAndUpdate(_id, {
+            updatedUser = await User.findByIdAndUpdate(decoded._id, {
                 $pull: {
                     cart: {
                         product: productId

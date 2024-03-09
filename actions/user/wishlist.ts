@@ -18,9 +18,9 @@ export async function addToWishlist(productId: string) {
             return redirect("/auth");
         }
 
-        const {_id} = await validateToken(token);
+        const decoded = await validateToken(token);
 
-        if (!_id) {
+        if (!decoded || typeof decoded === "string" || !decoded._id) {
             return serialize({
                 ok: false,
                 message: "توکن شما صحیح نیست"
@@ -29,7 +29,7 @@ export async function addToWishlist(productId: string) {
 
         await connectToDB();
 
-        const user = await User.findByIdAndUpdate(_id, {$push: {wishlist: productId}}, {new: true}).populate("wishlist").populate("cart.product");
+        const user = await User.findByIdAndUpdate(decoded._id, {$push: {wishlist: productId}}, {new: true}).populate("wishlist").populate("cart.product");
 
         if (!user) {
             return serialize({
@@ -68,9 +68,9 @@ export async function removeFromWishlist(productId : string) {
             return redirect("/auth");
         }
 
-        const {_id} = await validateToken(token);
+        const decoded = await validateToken(token);
 
-        if (!_id) {
+        if (!decoded || typeof decoded === "string" || !decoded._id) {
             return serialize({
                 ok: false,
                 message: "توکن شما صحیح نیست"
@@ -79,7 +79,7 @@ export async function removeFromWishlist(productId : string) {
 
         await connectToDB();
 
-        const user = await User.findByIdAndUpdate(_id, {$pull: {wishlist: productId}}, {new: true}).populate("wishlist").populate("cart.product");
+        const user = await User.findByIdAndUpdate(decoded._id, {$pull: {wishlist: productId}}, {new: true}).populate("wishlist").populate("cart.product");
 
         if (!user) {
             return serialize({
