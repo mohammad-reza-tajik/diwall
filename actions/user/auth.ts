@@ -44,11 +44,12 @@ export async function signup(params: SignupSchema) {
 
         const token = generateToken(newUser._id);
 
+        cookies().set("token", token, {httpOnly: true})
+
         return serialize({
             ok: true,
             status: 201,
             user: newUser,
-            token,
             message: "ثبت نام با موفقیت انجام شد",
         })
 
@@ -82,13 +83,13 @@ export async function login(params: LoginSchema) {
         }
 
         if (await bcrypt.compare(password, user.password)) {
-            const token = generateToken(user._id);
+            const token = generateToken(user._id)
+            cookies().set("token", token, {httpOnly: true})
             return serialize({
                 ok: true,
                 status: 200,
                 message: "ورود با موفقیت انجام شد",
                 user,
-                token,
             })
 
         } else {
@@ -116,9 +117,9 @@ export async function getUser() {
 
         if (!token) return
 
-        const {_id} = await validateToken(token);
+        const decoded = await validateToken(token);
 
-        if (!_id) {
+        if (!decoded || typeof decoded === "string" || !decoded._id) {
             return serialize({
                 ok: false,
                 status: 401,
@@ -126,7 +127,7 @@ export async function getUser() {
             })
         }
 
-        const user = await User.findById(_id).populate("cart.product").populate("wishlist");
+        const user = await User.findById(decoded._id).populate("cart.product").populate("wishlist");
 
         if (!user) {
             return serialize({
@@ -137,10 +138,29 @@ export async function getUser() {
         }
 
         token = tokenGenerator(user._id);
+        cookies().set("token", token, {httpOnly: true})
         return serialize({
             ok: true,
             user,
-            token
+        })
+
+    } catch (err) {
+        console.log(err);
+        return serialize({
+            status: 500,
+            ok: false,
+            message: "متاسفانه عملیات با خطا مواجه شد"
+        })
+    }
+}
+
+export async function logout() {
+    try {
+        cookies().set("token", "logged-out", {httpOnly: true, expires: Date.now() + 5000});
+        return serialize({
+            status: 200,
+            ok: true,
+            message: "با موفقیت از حساب خود خارج شدید"
         })
 
     } catch (err) {

@@ -4,7 +4,6 @@ import {login, signup} from "@/actions/user/auth";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {loginSchema, type LoginSchema, signupSchema, type SignupSchema} from "@/types/user";
 import {zodResolver} from "@hookform/resolvers/zod";
-import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 
 const useAuth = (formType: "login" | "signup" = "login") => {
@@ -39,7 +38,6 @@ const useAuth = (formType: "login" | "signup" = "login") => {
             form.reset();
 
             dispatch(userActions.login(res.user));
-            Cookies.set("token",res.token);
             toast.success(res.message);
 
             router.push("/");

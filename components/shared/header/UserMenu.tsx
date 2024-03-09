@@ -6,8 +6,8 @@ import userMenu from "@/constants/userMenu";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuItem} from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
 import {useRouter} from "next/navigation";
+import {logout} from "@/actions/user/auth";
 
 interface Props {
     user: User;
@@ -18,10 +18,20 @@ function UserMenu({user}: Props) {
     const dispatch = useAppDispatch();
     const router = useRouter();
 
-    const logoutHandler = () => {
-        dispatch(userActions.logout());
-        Cookies.remove("token");
-        toast.success("با موفقیت از حساب خود خارج شدید");
+    const logoutHandler = async () => {
+        await toast.promise(logout(), {
+            loading: "در حال خروج از حساب ...",
+            success: (res) => {
+                if (!res.ok) {
+                    throw new Error(res.message)
+                }
+                dispatch(userActions.logout());
+                return res.message
+            },
+            error: (err) => {
+                return err.message
+            }
+        });
     }
 
     return (

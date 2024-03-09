@@ -1,6 +1,5 @@
 "use client"
 import {userActions, useAppDispatch} from "@/store";
-import Cookies from "js-cookie";
 import {useEffect} from "react";
 import {getUser} from "@/actions/user/auth";
 
@@ -11,23 +10,21 @@ interface Props {
 function AutoLogin({children}: Props) {
 
     const dispatch = useAppDispatch();
-    const token = Cookies.get("token");
 
     useEffect(() => {
         (async () => {
             try {
-                if (token) {
-                    const res = await getUser();
-                    dispatch(userActions.login(res.user));
-                }
+                const res = await getUser();
+                if (!res) return
+                dispatch(userActions.login(res.user));
+
             } catch (err) {
                 dispatch(userActions.logout());
             }
-
         })();
-    }, [dispatch,token]);
+    }, [dispatch]);
 
- return (
+    return (
         <>
             {children}
         </>
