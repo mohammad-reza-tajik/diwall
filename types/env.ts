@@ -1,7 +1,10 @@
 import {z} from "zod";
 
 const envSchema = z.object({
-    MONGODB_URL : z.string()
+    MONGODB_URL : z.string(),
+    JWT_SECRET : z.string(),
+    JWT_EXPIRES_IN : z.string(),
+
 })
 
 
