@@ -41,7 +41,6 @@ export async function addToWishlist(productId: string) {
 
         return serialize({
             user,
-            token,
             ok: true,
             status: 200,
             message: "به لیست علاقمندی شما افزوده شد",
@@ -92,7 +91,6 @@ export async function removeFromWishlist(productId : string) {
 
         return serialize({
             user,
-            token,
             ok: true,
             status: 200,
             message: "از لیست علاقمندی شما حذف شد",

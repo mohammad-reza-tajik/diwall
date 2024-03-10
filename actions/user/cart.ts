@@ -14,7 +14,7 @@ export async function addToCart(productId: string) {
        z.string().min(1).parse(productId);
 
         const token = cookies().get("token")?.value;
-
+        
         if (!token) {
             return redirect("/auth");
         }
@@ -60,7 +60,6 @@ export async function addToCart(productId: string) {
 
         return serialize({
             user: updatedUser,
-            token,
             ok: true,
             status: 200,
             message: "به سبد خرید شما افزوده شد",
@@ -126,7 +125,6 @@ export async function removeFromCart(productId : string) {
 
         return serialize({
             user: updatedUser,
-            token,
             ok: true,
             status: 200,
             message: "از سبد خرید شما حذف شد",
