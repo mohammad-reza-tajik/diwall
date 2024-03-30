@@ -18,8 +18,8 @@ function ThemeSwitcher(props: ButtonHTMLAttributes<HTMLButtonElement>) {
 
     return (
         <Button size={"icon"} variant={"outline"} {...props} onClick={switchThemeHandler} aria-label={"تغییر تم سایت"}>
-            <Sun className={"inline-block dark:hidden"}/>
-            <Moon className={"hidden dark:inline-block"}/>
+            <Moon className={"inline-block dark:hidden"}/>
+            <Sun className={"hidden dark:inline-block"}/>
         </Button>
     )
 }
