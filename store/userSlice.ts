@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {User} from "@/types/user";
-import {WritableDraft} from "immer/src/types/types-external";
 
 const initialState: { user: User | undefined } = {
     user: undefined
@@ -11,10 +10,10 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         login(state, action: PayloadAction<User>) {
-            state.user = action.payload as WritableDraft<User>;
+            state.user = action.payload ;
         },
         logout(state) {
-           state.user = initialState.user as WritableDraft<User>;
+           state.user = initialState.user;
         }
     }
 });
