@@ -44,12 +44,11 @@ export async function getProduct(slug: string) {
     }
 }
 
-export async function getAllProducts({category = undefined, page = 1, sortBy = "جدیدترین", search = undefined}: GetAllProductsParams) {
+export async function getAllProducts({category = undefined, page = 1, sortBy = "جدیدترین", search = undefined,itemsPerPage = 10}: GetAllProductsParams) {
     try {
 
         await connectToDB();
 
-        const ITEMS_PER_PAGE = 10;
 
         if (search && search !== "undefined" && search.trim().length !== 0) {
 
@@ -61,17 +60,15 @@ export async function getAllProducts({category = undefined, page = 1, sortBy = "
             let products;
 
             if (sortBy === "پرفروش-ترین") { // best-selling products
-                products = await Product.find({title: regexp}).sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
+                products = await Product.find({title: regexp}).sort({sells: "desc"}).skip((page - 1) * itemsPerPage).limit(itemsPerPage)
             } else if (sortBy === "محبوب-ترین") { // most popular products
-                products = await Product.find({title: regexp}).sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
+                products = await Product.find({title: regexp}).sort({likes: "desc"}).skip((page - 1) * itemsPerPage).limit(itemsPerPage)
             } else { // latest products
-                products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
+                products = await Product.find({title: regexp}).sort({createdAt: "desc"}).skip((page - 1) * itemsPerPage).limit(itemsPerPage)
             }
             return serialize({
                 products,
-                productsCount,
-                currentPage: page,
-                lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
+                productsCount
             })
 
 
@@ -82,18 +79,16 @@ export async function getAllProducts({category = undefined, page = 1, sortBy = "
             let products;
 
             if (sortBy === "پرفروش-ترین") { // best-selling products
-                products = await Product.find().sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
+                products = await Product.find().sort({sells: "desc"}).skip((page - 1) * itemsPerPage).limit(itemsPerPage)
             } else if (sortBy === "محبوب-ترین") { // most popular products
-                products = await Product.find().sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
+                products = await Product.find().sort({likes: "desc"}).skip((page - 1) * itemsPerPage).limit(itemsPerPage)
             } else { // latest products
-                products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
+                products = await Product.find().sort({createdAt: "desc"}).skip((page - 1) * itemsPerPage).limit(itemsPerPage)
             }
 
             return serialize({
                 products,
-                productsCount,
-                currentPage: page,
-                lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
+                productsCount
             })
         } else if (category) {
             // console.log("from category")
@@ -102,18 +97,16 @@ export async function getAllProducts({category = undefined, page = 1, sortBy = "
             let products;
 
             if (sortBy === "پرفروش-ترین") { // best-selling products
-                products = await Product.find({categories: {$in: [category]}}).sort({sells: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
+                products = await Product.find({categories: {$in: [category]}}).sort({sells: "desc"}).skip((page - 1) * itemsPerPage).limit(itemsPerPage)
             } else if (sortBy === "محبوب-ترین") { // most popular products
-                products = await Product.find({categories: {$in: [category]}}).sort({likes: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
+                products = await Product.find({categories: {$in: [category]}}).sort({likes: "desc"}).skip((page - 1) * itemsPerPage).limit(itemsPerPage)
             } else { // latest products
-                products = await Product.find({categories: {$in: [category]}}).sort({createdAt: "desc"}).skip((page - 1) * ITEMS_PER_PAGE).limit(ITEMS_PER_PAGE)
+                products = await Product.find({categories: {$in: [category]}}).sort({createdAt: "desc"}).skip((page - 1) * itemsPerPage).limit(itemsPerPage)
             }
 
             return serialize({
                 products,
-                productsCount,
-                currentPage: page,
-                lastPage: Math.ceil(productsCount / ITEMS_PER_PAGE),
+                productsCount
             })
         }
     } catch (err) {

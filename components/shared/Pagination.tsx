@@ -10,7 +10,7 @@ interface Props {
 }
 
 
-const Pager = ({totalCount, siblingCount = 1, itemsPerPage}: Props) => {
+const Pagination = ({totalCount, siblingCount = 1, itemsPerPage}: Props) => {
 
 
     const {paginationRange, pageChangeHandler, currentPage} = usePagination({
@@ -50,4 +50,4 @@ const Pager = ({totalCount, siblingCount = 1, itemsPerPage}: Props) => {
     );
 };
 
-export default Pager;
+export default Pagination;

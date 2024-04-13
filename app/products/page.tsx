@@ -13,10 +13,12 @@ interface Response {
     lastPage: number;
 }
 
+const itemsPerPage = 10;
+
 async function Products({searchParams}: { searchParams: Record<string, string> }) {
 
     const {category, page, sortBy, search} = searchParams;
-    const data: Response = await getAllProducts({category, page: page ? +page : undefined, sortBy, search});
+    const data: Response = await getAllProducts({category, page: page ? +page : undefined, sortBy, search , itemsPerPage});
 
     let text : string;
     if (search) {
@@ -48,7 +50,7 @@ async function Products({searchParams}: { searchParams: Record<string, string> }
                 }
             </div>
 
-            <Pagination lastPage={data.lastPage} currentPage={data.currentPage} />
+            <Pagination totalCount={data.productsCount} itemsPerPage={itemsPerPage} />
 
         </section>
     )

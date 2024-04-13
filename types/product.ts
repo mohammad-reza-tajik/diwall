@@ -23,6 +23,7 @@ export interface GetAllProductsParams extends Partial<{
     page:number;
     sortBy:string;
     search:string;
+    itemsPerPage?:number;
 }>{}
 
 export const searchSchema = z.object({
