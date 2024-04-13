@@ -1,128 +1,53 @@
 "use client"
-import {useState, useEffect} from "react";
-import {useRouter, useSearchParams} from "next/navigation";
-import formUrlQuery from "@/utils/formUrlQuery";
-import {Arrow} from "@/components/shared/Icons";
+import usePagination from '@/hooks/usePagination';
 import {Button} from "@/components/ui/button";
+import {Arrow} from "@/components/shared/Icons";
 
 interface Props {
-    lastPage: number;
-    currentPage: number;
+    totalCount: number;
+    siblingCount?: number;
+    itemsPerPage: number;
 }
 
-function Pagination({lastPage, currentPage}: Props) {
 
-    const [page, setPage] = useState(1);
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const pageQuery = searchParams.get("page");
+const Pager = ({totalCount, siblingCount = 1, itemsPerPage}: Props) => {
 
-    useEffect(() => {
-        if (pageQuery) {
-            setPage(+pageQuery)
-        }
-    }, [pageQuery])
 
-    const handlePageChange = (page: number) => {
-        setPage(page);
-        router.push(formUrlQuery(searchParams.toString(), {
-            params: {
-                page
-            }
-        }), {scroll: true})
-    };
+    const {paginationRange, pageChangeHandler, currentPage} = usePagination({
+        totalCount,
+        siblingCount,
+        itemsPerPage
+    });
 
-    const renderPageNumbers = () => {
-        const pageNumbers = [];
-
-        if (lastPage <= 5) {
-            for (let i = 1; i <= lastPage; i++) {
-                pageNumbers.push(
-                    <Button asChild size={"icon"} variant={currentPage === i ? "default" : "outline"}  key={i}>
-                        <li onClick={() => handlePageChange(i)}
-                        >
-                            {i}
-                        </li>
-                    </Button>
-                );
-            }
-        } else {
-            let startPage = Math.max(1, currentPage - 2);
-            let endPage = Math.min(lastPage, currentPage + 2);
-
-            if (currentPage <= 3) {
-                endPage = 5;
-            } else if (currentPage >= lastPage - 2) {
-                startPage = lastPage - 4;
-            }
-
-            if (startPage > 1) {
-                pageNumbers.push(
-                    <Button asChild size={"icon"} variant={"outline"} key="start-ellipsis">
-                        <li
-                            className="px-3 py-2"
-                            onClick={() => handlePageChange(startPage - 1)}
-                        >
-                            …
-                        </li>
-                    </Button>
-                );
-            }
-
-            for (let i = startPage; i <= endPage; i++) {
-                pageNumbers.push(
-                    <Button asChild size={"icon"} variant={currentPage === i ? "default" : "outline"}  key={i}>
-                        <li
-                            className={`${
-                                page === i ? 'btn-primary' : 'btn-ghost'
-                            } btn btn-circle btn-sm md:btn-md text-sm`}
-                            onClick={() => handlePageChange(i)}
-                        >
-                            {i}
-                        </li>
-                    </Button>
-                );
-            }
-
-            if (endPage < lastPage) {
-                pageNumbers.push(
-                    <li
-                        key="end-ellipsis"
-                        className="px-3 py-2"
-                        onClick={() => handlePageChange(endPage + 1)}
-                    >
-                        …
-                    </li>
-                );
-            }
-        }
-
-        return pageNumbers;
-    };
+    if (currentPage === 0 || paginationRange.length < 2) {
+        return null;
+    }
 
     return (
-        <section className="flex justify-center w-full my-7">
-            <ul className="flex gap-2">
-                <li>
-                    <Button size={"icon"} variant={"outline"}
-                            onClick={() => handlePageChange(page - 1)}
-                            disabled={page === 1}
+        <div className={"flex justify-center w-full gap-2 items-center"}>
+            <Button size={"icon"} variant={"outline"} onClick={() => pageChangeHandler(currentPage - 1)}
+                    disabled={currentPage === 1}>
+                <Arrow className={"rotate-180"}/>
+            </Button>
+            {paginationRange.map((pageItem, index) => {
+                if (pageItem === "...") {
+                    return <span key={index}>&#8230;</span>;
+                }
+                return (
+                    <Button size={"icon"} variant={currentPage === pageItem ? "default" : "outline"}
+                            key={index}
+                            onClick={() => pageChangeHandler(pageItem)}
                     >
-                        <Arrow className={"size-5 rotate-180"}/>
+                        {pageItem}
                     </Button>
-                </li>
-                {renderPageNumbers()}
-                <li>
-                    <Button size={"icon"} variant={"outline"}
-                            onClick={() => handlePageChange(page + 1)}
-                            disabled={page === lastPage}
-                    >
-                        <Arrow className={"size-5"}/>
-                    </Button>
-                </li>
-            </ul>
-        </section>
+                );
+            })}
+            <Button size={"icon"} variant={"outline"} onClick={() => pageChangeHandler(currentPage + 1)}
+                    disabled={currentPage === Math.ceil(totalCount / itemsPerPage)}>
+                <Arrow/>
+            </Button>
+        </div>
     );
-}
+};
 
-export default Pagination;
+export default Pager;
