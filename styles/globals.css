@@ -6,7 +6,7 @@
 
 :root {
     --swiper-theme-color: #fff;
-    --swiper-navigation-size: 15px;
+    --swiper-navigation-size: 1.4rem;
 
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -102,5 +102,5 @@ input[type=number] {
 }
 
 .swiper-button-prev, .swiper-button-next {
-    @apply bg-primary rounded size-10 md:size-12 !important;
+    @apply bg-primary rounded size-10;
 }
