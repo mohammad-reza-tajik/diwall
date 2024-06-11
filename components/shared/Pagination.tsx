@@ -24,7 +24,7 @@ const Pagination = ({totalCount, siblingCount = 1, itemsPerPage}: Props) => {
     }
 
     return (
-        <div className={"flex justify-center w-full gap-2 items-center"}>
+        <div className={"flex justify-center w-full gap-2 items-center my-5"}>
             <Button size={"icon"} variant={"outline"} onClick={() => pageChangeHandler(currentPage - 1)}
                     disabled={currentPage === 1}>
                 <Arrow className={"rotate-180"}/>
