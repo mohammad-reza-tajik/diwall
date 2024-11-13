@@ -19,7 +19,7 @@ const Pagination = ({totalCount, siblingCount = 1, itemsPerPage}: Props) => {
         itemsPerPage
     });
 
-    if (currentPage === 0 || paginationRange.length < 2) {
+    if (totalCount <= itemsPerPage) {
         return null;
     }
 
