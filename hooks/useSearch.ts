@@ -44,9 +44,9 @@ const useSearch = () => {
     const submitSearchHandler = (event: FormEvent) => {
         event.preventDefault();
         if (search.trim().length < 3) {
-            setIsWrong(true)
+            setIsWrong(true);
             setTimeout(() => {
-                setIsWrong(false)
+                setIsWrong(false);
             }, 5000)
             return
         }

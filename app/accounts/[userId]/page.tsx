@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
 import {HeartOutlined, ShoppingBag, Person} from "@/components/shared/Icons";
-import formUrlQuery from "@/utils/formUrlQuery";
+import { formUrlQuery } from "@/lib/utils";
 import {useRouter} from "next/navigation";
 import {cn} from "@/lib/utils";
 
@@ -58,10 +58,11 @@ function AccountPage() {
                                 className={cn("flex justify-center max-md:flex-col items-center max-md:px-3 py-2 md:py-4 font-dana-bold gap-2",{"text-white bg-primary fill-white" : activeTab === index})}
                                 onClick={() => {
                                     setActiveTab(index);
-                                    router.push(formUrlQuery(searchParams.toString(), {
+                                    router.push(formUrlQuery({
                                         params: {
                                             tab:index
-                                        }
+                                        },
+                                        currentParams : searchParams.toString()
                                     }))
                                 }}
                             >

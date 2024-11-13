@@ -66,7 +66,7 @@ interface Props {
 
 function RootLayout({children}: Props) {
     return (
-        <html lang="fa" dir={"rtl"} className={"scroll-smooth font-dana-medium"} suppressHydrationWarning>
+        <html lang={"fa"} dir={"rtl"} className={"scroll-smooth font-dana-medium"} suppressHydrationWarning>
         <body className={"bg-background text-foreground fill-foreground relative overflow-x-hidden"}>
         <Providers>
             <AutoLogin>

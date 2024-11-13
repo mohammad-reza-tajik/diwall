@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState} from "react";
 import {Product} from "@/types/product";
 import {useAppDispatch, useAppSelector} from "@/hooks/useStore";
 import {useRouter} from "next/navigation";
