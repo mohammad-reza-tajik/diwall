@@ -44,7 +44,10 @@ export async function signup(params: SignupSchema) {
 
         const token = generateToken(newUser._id);
 
-        cookies().set("token", token, {httpOnly: true , secure : true, expires: Date.now() + (7 * 3600 *1000)})
+        const reqCookies = await cookies();
+
+
+        reqCookies.set("token", token, {httpOnly: true, secure: true, expires: Date.now() + (7 * 3600 * 1000)});
 
         return serialize({
             ok: true,
@@ -83,8 +86,10 @@ export async function login(params: LoginSchema) {
         }
 
         if (await bcrypt.compare(password, user.password)) {
-            const token = generateToken(user._id)
-            cookies().set("token", token, {httpOnly: true , secure : true, expires: Date.now() + (7 * 3600 *1000)})
+            const token = generateToken(user._id);
+            const reqCookies = await cookies();
+            reqCookies.set("token", token, {httpOnly: true, secure: true, expires: Date.now() + (7 * 3600 * 1000)});
+
             return serialize({
                 ok: true,
                 status: 200,
@@ -113,7 +118,9 @@ export async function getUser() {
     try {
         await connectToDB();
 
-        let token = cookies().get("token")?.value;
+        const reqCookies = await cookies();
+
+        let token = reqCookies.get("token")?.value;
 
         if (!token) return
 
@@ -138,7 +145,9 @@ export async function getUser() {
         }
 
         token = tokenGenerator(user._id);
-        cookies().set("token", token, {httpOnly: true , secure : true, expires: Date.now() + (7 * 3600 * 1000)})
+
+        reqCookies.set("token", token, {httpOnly: true, secure: true, expires: Date.now() + (7 * 3600 * 1000)});
+
         return serialize({
             ok: true,
             user,
@@ -156,7 +165,9 @@ export async function getUser() {
 
 export async function logout() {
     try {
-        cookies().set("token", "logged-out", {httpOnly: true , secure : true, expires: Date.now() + 5000});
+        const reqCookies = await cookies();
+
+        reqCookies.set("token", "logged-out", {httpOnly: true, secure: true, expires: Date.now() + 5000});
         return serialize({
             status: 200,
             ok: true,

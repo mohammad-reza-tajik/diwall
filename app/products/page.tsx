@@ -15,9 +15,9 @@ interface Response {
 
 const itemsPerPage = 10;
 
-async function Products({searchParams}: { searchParams: Record<string, string> }) {
+async function Products({searchParams}: { searchParams: Promise<Record<string, string>> }) {
 
-    const {category, page, sortBy, search} = searchParams;
+    const {category, page, sortBy, search} = await searchParams;
     const data: Response = await getAllProducts({category, page: page ? +page : undefined, sortBy, search , itemsPerPage});
 
     let text : string;

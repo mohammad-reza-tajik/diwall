@@ -11,7 +11,7 @@ export interface User {
     cart:{ product : Product , quantity:number }[];
 }
 
-export interface UserSchema extends Omit<Required<User>, "wishlist" | "cart" | "_id"> , Document {
+export interface UserSchema extends Omit<Required<User>, "wishlist" | "cart" | "_id"> , Document<string> {
     password:string;
     wishlist: Types.ObjectId[];
     cart: { product : Types.ObjectId , quantity:number }[];

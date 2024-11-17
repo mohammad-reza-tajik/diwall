@@ -12,7 +12,7 @@ const Info = dynamic(() => import("@/components/detailsPage/Info"))
 const Features = dynamic(() => import("@/components/shared/Features"));
 
 interface Props {
-    params: { slug: string };
+    params: Promise<{ slug: string }>
 }
 
 const getProduct = async (slug: string) => {
@@ -21,7 +21,8 @@ const getProduct = async (slug: string) => {
 }
 
 export const generateMetadata = async ({params}: Props): Promise<Metadata> => {
-    const product = await getProduct(params.slug);
+    const pageParams = await params;
+    const product = await getProduct(pageParams.slug);
     if (!product) {
         notFound();
     }
@@ -45,9 +46,10 @@ export async function generateStaticParams() {
 }
 
 async function DetailsPage({params}: Props) {
-    const product = serialize(await getProduct(params.slug));
+        const pageParams = await params;
+    const product = serialize(await getProduct(pageParams.slug));
     const relatedProducts = serialize(await Product.find({
-        slug: {$ne: decodeURI(params.slug)},
+        slug: {$ne: decodeURI(pageParams.slug)},
         categories: {$elemMatch: {$eq: product?.categories[1]}}
     }));
 
@@ -63,7 +65,7 @@ async function DetailsPage({params}: Props) {
             <Features/>
 
             <Separator className={"my-7"}/>
-            <Info slug={decodeURI(params.slug)} relatedProducts={relatedProducts}/>
+            <Info slug={decodeURI(pageParams.slug)} relatedProducts={relatedProducts}/>
         </>
     )
 }

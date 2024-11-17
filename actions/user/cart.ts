@@ -11,10 +11,12 @@ import {z} from "zod";
 export async function addToCart(productId: string) {
     try {
 
-       z.string().min(1).parse(productId);
+        z.string().min(1).parse(productId);
 
-        const token = cookies().get("token")?.value;
-        
+        const reqCookies = await cookies();
+
+        const token = reqCookies.get("token")?.value;
+
         if (!token) {
             return redirect("/auth");
         }
@@ -46,7 +48,7 @@ export async function addToCart(productId: string) {
 
         if (itemIndex >= 0) {
             updatedCart[itemIndex].quantity += 1;
-            updatedUser = await User.findByIdAndUpdate(decoded._id, {cart: updatedCart}, {new: true}).populate("cart.product").populate("wishlist") as UserType;
+            updatedUser = await User.findByIdAndUpdate(decoded._id, {cart: updatedCart}, {new: true}).populate("cart.product").populate("wishlist") as unknown as UserType;
         } else {
             updatedUser = await User.findByIdAndUpdate(decoded._id, {
                 $push: {
@@ -55,7 +57,7 @@ export async function addToCart(productId: string) {
                         quantity: 1
                     }
                 }
-            }, {new: true}).populate("cart.product").populate("wishlist") as UserType;
+            }, {new: true}).populate("cart.product").populate("wishlist") as unknown as UserType;
         }
 
         return serialize({
@@ -68,18 +70,20 @@ export async function addToCart(productId: string) {
         console.log(err);
         return serialize({
             status: 500,
-            ok:false,
+            ok: false,
             message: "متاسفانه عملیات با خطا مواجه شد"
         })
     }
 }
 
-export async function removeFromCart(productId : string) {
+export async function removeFromCart(productId: string) {
     try {
 
         z.string().min(1).parse(productId);
 
-        const token = cookies().get("token")?.value;
+        const reqCookies = await cookies();
+        
+        const token = reqCookies.get("token")?.value;
 
         if (!token) {
             return redirect("/auth");
@@ -107,12 +111,12 @@ export async function removeFromCart(productId : string) {
         }
 
         const itemIndex = user.cart.findIndex((item) => item.product.toString() === productId);
-        let updatedUser: UserType;
+        let updatedUser;
         let updatedCart = [...user.cart];
 
         if (itemIndex >= 0 && updatedCart[itemIndex].quantity > 1) {
             updatedCart[itemIndex].quantity -= 1;
-            updatedUser = await User.findByIdAndUpdate(decoded._id, {cart: updatedCart}, {new: true}).populate("cart.product").populate("wishlist") as UserType;
+            updatedUser = await User.findByIdAndUpdate(decoded._id, {cart: updatedCart}, {new: true}).populate("cart.product").populate("wishlist");
         } else {
             updatedUser = await User.findByIdAndUpdate(decoded._id, {
                 $pull: {
@@ -120,7 +124,7 @@ export async function removeFromCart(productId : string) {
                         product: productId
                     }
                 }
-            }, {new: true}).populate("cart.product").populate("wishlist") as UserType;
+            }, {new: true}).populate("cart.product").populate("wishlist");
         }
 
         return serialize({
@@ -133,7 +137,7 @@ export async function removeFromCart(productId : string) {
         console.log(err);
         return serialize({
             status: 500,
-            ok:false,
+            ok: false,
             message: "متاسفانه عملیات با خطا مواجه شد"
         })
     }

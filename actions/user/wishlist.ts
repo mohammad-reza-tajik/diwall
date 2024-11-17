@@ -10,9 +10,11 @@ import {z} from "zod";
 export async function addToWishlist(productId: string) {
     try {
 
+        const reqCookies = await cookies();
+
         z.string().min(1).parse(productId);
 
-        const token = cookies().get("token")?.value;
+        const token = reqCookies.get("token")?.value;
 
         if (!token) {
             return redirect("/auth");
@@ -49,19 +51,22 @@ export async function addToWishlist(productId: string) {
         console.log(err);
         return serialize({
             status: 500,
-            ok:false,
+            ok: false,
             message: "متاسفانه عملیات با خطا مواجه شد"
         })
     }
 }
 
-export async function removeFromWishlist(productId : string) {
+export async function removeFromWishlist(productId: string) {
 
     try {
 
         z.string().min(1).parse(productId);
 
-        const token = cookies().get("token")?.value;
+        const reqCookies = await cookies();
+
+
+        const token = reqCookies.get("token")?.value;
 
         if (!token) {
             return redirect("/auth");
@@ -88,7 +93,6 @@ export async function removeFromWishlist(productId : string) {
             })
         }
 
-
         return serialize({
             user,
             ok: true,
@@ -99,7 +103,7 @@ export async function removeFromWishlist(productId : string) {
         console.log(err);
         return serialize({
             status: 500,
-            ok:false,
+            ok: false,
             message: "متاسفانه عملیات با خطا مواجه شد"
         })
     }
