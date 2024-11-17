@@ -2,7 +2,7 @@
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
-import { formUrlQuery } from "@/lib/utils";
+import { buildURL } from "@/lib/utils";
 import {Circle} from "@/components/shared/Icons";
 import productFilters from "@/constants/productFilters";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
@@ -32,11 +32,10 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
 
     const sortChangeHandler = (value: string) => {
         setSort(value);
-        router.push(formUrlQuery({
+        router.push(buildURL({
             params: {
                 sortBy: value
-            },
-            currentParams : searchParams.toString()
+            }
         }))
     }
 

@@ -25,7 +25,7 @@ const useSearch = () => {
         setResults(res.products.slice(0, 4));
         setIsLoading(false);
     };
-    const debouncedHandleChange = useCallback(debounce(handleChange,800), []);
+    const debouncedHandleChange = useCallback(debounce<typeof handleChange>(handleChange,800), []);
 
     const searchChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value);
