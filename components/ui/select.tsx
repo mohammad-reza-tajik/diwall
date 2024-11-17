@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
-import {Arrow} from "@/components/shared/Icons";
+import {Arrow, Circle} from "@/components/shared/Icons";
 
 import { cn } from "@/lib/utils"
 
@@ -125,7 +125,7 @@ const SelectItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
-
+        <Circle className={"size-2"} />
       </SelectPrimitive.ItemIndicator>
     </span>
 

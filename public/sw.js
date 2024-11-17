@@ -1,39 +1,59 @@
-const STATIC_CACHE_NAME = "static-v3";
-const DYNAMIC_CACHE_NAME = "dynamic-v3";
+const STATIC_CACHE_NAME = "static-version";
+const DYNAMIC_CACHE_NAME = "dynamic-version";
 
-const addToStaticCache = async (resources) => {
-    const staticCache = await caches.open(STATIC_CACHE_NAME);
-    await staticCache.addAll(resources);
-}
-/*
-const addToDynamicCache = async (resources) => {
-    const dynamicCache = await caches.open(DYNAMIC_CACHE_NAME);
-    const areAlreadyInCache = resources.every(resource => caches.match(resource));
-    if (!areAlreadyInCache) {
-        await dynamicCache.addAll(resources);
+const addToStaticCache = async (...resources) => {
+    try {
+        const staticCache = await caches.open(STATIC_CACHE_NAME);
+        await staticCache.addAll(resources);
+    } catch (err) {
+        console.error("Failed to add to static cache:", err);
     }
-}*/
+}
+
+const addToDynamicCache = async (request) => {
+    try {
+        const dynamicCache = await caches.open(DYNAMIC_CACHE_NAME);
+        const response = await fetch(request);
+        await dynamicCache.put(request, response.clone());
+        return response;
+    } catch (err) {
+        console.error("Failed to add to dynamic cache:", err);
+        throw err; // Re-throw the error to handle it in the calling function
+    }
+}
 
 const cacheFirst = async (event) => {
     try {
         const res = await caches.match(event.request);
         if (res) {
-            return res
+            return res;
         } else {
-            return fetch(event.request);
+
+            /**
+             * Check if the request is from the same origin as the service worker to avoid caching external resources
+             * like Chrome extension scripts and ...
+             */
+
+            const { origin } = new URL(event.request.url);
+            const isFromMySite = origin === self.location.origin;
+
+            if (isFromMySite && (event.request.destination === "script" || event.request.destination === "style")) {
+                return await addToDynamicCache(event.request);
+            }
+            return await fetch(event.request);
         }
     } catch (err) {
-        console.log(err);
+        console.error("Fetch failed:", err);
+        // Optionally, return a fallback response here
     }
 }
 
-self.addEventListener("install", event => {
-
+self.addEventListener("install", (event) => {
     console.log("-----[ service worker installed ]-----");
 
-    event.waitUntil(
-        addToStaticCache(
-            [
+    event.waitUntil((async () => {
+        try {
+            await addToStaticCache(
                 "/",
                 "/fonts/dana-black.woff2",
                 "/fonts/dana-fanum-bold.woff2",
@@ -43,52 +63,46 @@ self.addEventListener("install", event => {
                 "/pictures/banner-mobile.jpg",
                 "/icons/logo-192.png"
 
-            ]))
-    // Force the waiting service worker to become the active service worker.
-    self.skipWaiting(); // returned promise can be ignored safely
-
+            );
+            // Force the waiting service worker to become the active service worker.
+            await self.skipWaiting(); // returned promise can be ignored safely
+        } catch (err) {
+            console.error("Install event failed:", err);
+        }
+    })());
 });
-self.addEventListener("activate", event => {
 
+self.addEventListener("activate", (event) => {
     console.log("-----[ service worker activated ]-----");
 
     event.waitUntil((async () => {
-
+        try {
             const keys = await caches.keys();
-            keys.forEach(key => {
-                if (key !== STATIC_CACHE_NAME && key !== DYNAMIC_CACHE_NAME) {
-                    caches.delete(key);
-                }
-            })
-        })()
-    )
-    // Tell the active service worker to take control of the page immediately.
-    self.clients.claim();
+            await Promise.all(
+                keys.map(key => {
+                    if (key !== STATIC_CACHE_NAME && key !== DYNAMIC_CACHE_NAME) {
+                        return caches.delete(key);
+                    }
+                })
+            );
+
+            const allClients = await self.clients.matchAll({ includeUncontrolled: true });
+            allClients.forEach(client => {
+                client.postMessage("activated");
+            });
+
+            // Tell the active service worker to take control of the page immediately.
+            await self.clients.claim();
+        } catch (err) {
+            console.error("Activate event failed:", err);
+        }
+    })());
 });
 
 self.addEventListener("fetch", (event) => {
-    // console.log(event.request.destination)
-    // if (event.request.destination === "style") {
-    //     addToDynamicCache([event.request]);
-    // }
     event.respondWith(cacheFirst(event));
-
 });
 
-
-/*self.addEventListener("sync",(event)=>{
-   if (event.tag === "sync-auth"){
-       console.log("syncing initialized ...");
-       const authStore = new ObjectStore("sync-auth");
-       event.waitUntil(( async () => {
-           const user = await authStore.getFromIDB("user");
-           console.log("this is from sw sync")
-           // const res = await axios.post(`/api/${user.username ? "signup" : "login"}`, user)
-
-           // console.log(res)
-           // console.log(userData);
-           // axios.po
-       })())
-
-   }
-})*/
+self.addEventListener("message", (event) => {
+    console.log(event.data);
+});

@@ -82,7 +82,7 @@ export async function removeFromCart(productId: string) {
         z.string().min(1).parse(productId);
 
         const reqCookies = await cookies();
-        
+
         const token = reqCookies.get("token")?.value;
 
         if (!token) {

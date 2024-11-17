@@ -7,6 +7,7 @@ import toast, {Toaster, ToastBar} from 'react-hot-toast';
 import {Button} from "@/components/ui/button";
 import {useEffect} from "react";
 import {ThemeProvider} from "next-themes";
+import {useRouter} from "next/navigation";
 
 
 interface Props {
@@ -15,11 +16,18 @@ interface Props {
 
 function Providers({children}: Props) {
 
+    const router = useRouter();
+
     useEffect(() => {
         (async () => {
             if (typeof navigator.serviceWorker !== "undefined") {
-                await navigator.serviceWorker.register("/sw.js");
-            }
+                    await navigator.serviceWorker.register("/sw.js");
+                    navigator.serviceWorker.addEventListener("message", (event) => {
+                        if (event.data === "activated") {
+                            router.refresh();
+                        }
+                    });
+                }
         })();
     }, [])
 
