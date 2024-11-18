@@ -15,7 +15,7 @@ function AutoLogin({children}: Props) {
         (async () => {
             try {
                 const res = await getUser();
-                if (!res) return
+                if (!res) return;
                 dispatch(userActions.login(res.user));
 
             } catch (err) {

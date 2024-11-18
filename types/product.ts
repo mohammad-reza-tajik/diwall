@@ -16,7 +16,7 @@ export interface Product {
     reviews : Review[];
 }
 
-export interface ProductSchema  extends Omit<Product, "_id"> , Document {}
+export interface ProductSchema  extends Omit<Product, "_id"> , Document<string> {}
 
 export interface GetAllProductsParams extends Partial<{
     category:string;
