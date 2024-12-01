@@ -1,7 +1,8 @@
 "use client"
 import {Close} from "@/components/shared/Icons";
 import SearchForm from "@/components/shared/header/SearchForm";
-import {cn} from "@/lib/utils";
+import  cn  from "@/lib/utils/cn"
+
 import {Button} from "@/components/ui/button";
 import {useAppDispatch, useAppSelector, drawerActions} from "@/store";
 

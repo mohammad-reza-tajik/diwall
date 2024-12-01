@@ -4,9 +4,10 @@ import {useEffect, useState} from "react";
 import {useAppSelector} from "@/store";
 import dynamic from "next/dynamic";
 import {HeartOutlined, ShoppingBag, Person} from "@/components/shared/Icons";
-import { buildURL } from "@/lib/utils";
+import buildURL from "@/lib/utils/buildURL";
 import {useRouter} from "next/navigation";
-import {cn} from "@/lib/utils";
+import  cn  from "@/lib/utils/cn"
+
 
 const Profile = dynamic(() => import("@/components/accountPage/Profile"));
 const Wishlist = dynamic(() => import("@/components/accountPage/Wishlist"));
@@ -49,7 +50,7 @@ function AccountPage() {
 
     return (
             <section className={"flex flex-col md:flex-row gap-2 my-10"}>
-                <div role="tablist" className="flex flex-row basis-5/5 md:basis-1/5 md:flex-col bg-muted text-muted-foreground fill-muted-foreground rounded overflow-hidden text-xs lg:text-sm gap-2">
+                <div role={"tablist"} className={"flex flex-row basis-5/5 md:basis-1/5 md:flex-col bg-muted text-muted-foreground fill-muted-foreground rounded overflow-hidden text-xs lg:text-sm gap-2"}>
                     {
                         tabs.map((tab, index) => (
                             <button
@@ -71,7 +72,7 @@ function AccountPage() {
                         ))
                     }
                 </div>
-                <div role="tabpanel" className={"basis-4/5"}>
+                <div role={"tabpanel"} className={"basis-4/5"}>
                     {tabs[activeTab].content}
                 </div>
             </section>

@@ -5,7 +5,7 @@ import {Person} from "@/components/shared/Icons";
 import type {Review} from "@/types/review";
 import Loader from "@/components/shared/Loader";
 import toast from "react-hot-toast";
-import {getTimestamp} from "@/lib/utils";
+import getTimestamp from "@/lib/utils/getTimeStamp";
 
 interface Props {
     addReview: boolean;

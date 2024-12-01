@@ -1,6 +1,7 @@
 import CartItem from "./CartItem";
 import type {User} from "@/types/user";
-import {cn} from "@/lib/utils";
+import  cn  from "@/lib/utils/cn"
+
 import {Circle} from "@/components/shared/Icons";
 
 interface Props {

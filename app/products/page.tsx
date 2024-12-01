@@ -4,7 +4,8 @@ import {getAllProducts} from "@/actions/product";
 import type {Product} from "@/types/product";
 import Pagination from "@/components/shared/Pagination";
 
-import {cn} from "@/lib/utils";
+import  cn  from "@/lib/utils/cn"
+
 
 interface Response {
     products: Product[];

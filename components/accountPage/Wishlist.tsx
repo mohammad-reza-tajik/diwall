@@ -1,6 +1,7 @@
 import ProductCard from "@/components/shared/ProductCard";
 import type {User} from "@/types/user";
-import {cn} from "@/lib/utils";
+import  cn  from "@/lib/utils/cn"
+
 
 interface Props {
     user?: User

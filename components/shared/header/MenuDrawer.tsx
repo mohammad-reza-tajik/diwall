@@ -3,7 +3,8 @@ import {useRouter} from "next/navigation";
 import Logo from "@/components/shared/Logo";
 import navLinks from "@/constants/navLinks";
 import {useAppSelector, useAppDispatch, drawerActions} from "@/store";
-import {cn} from "@/lib/utils";
+import  cn  from "@/lib/utils/cn"
+
 import ThemeSwitcher from "@/components/shared/ThemeSwitcher";
 import {Close} from "@/components/shared/Icons";
 import {Button} from "@/components/ui/button";

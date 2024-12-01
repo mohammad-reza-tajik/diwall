@@ -2,7 +2,7 @@ import {ChangeEvent, FormEvent, useCallback, useState} from "react";
 import {useRouter} from "next/navigation";
 import {getAllProducts} from "@/actions/product";
 import type {Product} from "@/types/product";
-import {debounce} from "@/lib/utils";
+import debounce from "@/lib/utils/debounce";
 import {drawerActions, useAppDispatch, useAppSelector} from "@/store";
 
 const useSearch = () => {

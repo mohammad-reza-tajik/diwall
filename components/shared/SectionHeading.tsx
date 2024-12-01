@@ -2,12 +2,12 @@
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
-import { buildURL } from "@/lib/utils";
+import buildURL from "@/lib/utils/buildURL";
 import {Circle} from "@/components/shared/Icons";
 import productFilters from "@/constants/productFilters";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {Button} from "@/components/ui/button";
-import {cn} from "@/lib/utils";
+import cn from "@/lib/utils/cn";
 
 interface Props {
     sortBy?: boolean;

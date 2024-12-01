@@ -4,7 +4,8 @@ import {Button} from "@/components/ui/button";
 import useProduct from "@/hooks/useProduct";
 import Loader from "@/components/shared/Loader";
 import type {Product} from "@/types/product";
-import {cn} from "@/lib/utils";
+import  cn  from "@/lib/utils/cn"
+
 
 interface Props {
     product: Product;

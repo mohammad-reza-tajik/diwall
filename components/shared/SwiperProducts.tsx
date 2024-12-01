@@ -7,7 +7,7 @@ import ProductCard from "@/components/shared/ProductCard";
 import {type Product} from "@/types/product";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import breakpoints from "@/constants/breakpoints";
-import {cn} from "@/lib/utils";
+import cn from "@/lib/utils/cn";
 import {Button} from "@/components/ui/button";
 import {Suspense} from "react";
 import {Skeleton} from "@/components/ui/skeleton";

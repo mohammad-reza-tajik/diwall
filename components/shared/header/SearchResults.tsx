@@ -4,7 +4,8 @@ import Image from "next/image";
 import {useRouter} from "next/navigation";
 import Loader from "@/components/shared/Loader";
 import type {Product} from "@/types/product";
-import {cn} from "@/lib/utils";
+import  cn  from "@/lib/utils/cn"
+
 import {Button} from "@/components/ui/button";
 
 interface Props {
