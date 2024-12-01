@@ -12,8 +12,6 @@ export async function getProduct(slug: string) {
 
         await connectToDB();
 
-        const regexp = new RegExp(slug, "g");
-
         if (!slug) {
             return serialize({
                 ok: false,
@@ -21,7 +19,15 @@ export async function getProduct(slug: string) {
                 message: "لطفا شناسه محصول را وارد کنید"
             })
         }
-        const product = await Product.findOne({slug: regexp});
+        const product = await Product.findOne({slug});
+
+        if (!product) {
+            return serialize({
+                ok: false,
+                status: 404,
+                message: "محصولی با این شناسه یافت نشد"
+            });
+        }
 
         // for reference about mongodb operators see https://www.bmc.com/blogs/mongodb-operators/
         // the bottom line returns all matches that are equal to second element in category
@@ -44,7 +50,7 @@ export async function getProduct(slug: string) {
     }
 }
 
-export async function getAllProducts({category = undefined, page = 1, sortBy = "جدیدترین", search = undefined,itemsPerPage = 10}: GetAllProductsParams) {
+export async function getAllProducts({category, page = 1, sortBy = "جدیدترین", search,itemsPerPage = 10}: GetAllProductsParams) {
     try {
 
         await connectToDB();

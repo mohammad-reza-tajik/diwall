@@ -1,13 +1,12 @@
 "use client"
 import {useState} from "react";
-import dynamic from "next/dynamic";
 import ReviewsForm from "@/components/detailsPage/ReviewsForm";
 import SwiperProducts from "@/components/shared/SwiperProducts";
 import {Create, Package, Review} from "@/components/shared/Icons";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
-import {Product} from "@/types/product";
+import Reviews from "@/components/detailsPage/Reviews";
+import type {Product} from "@/types/product";
 
-const Reviews = dynamic(() => import("@/components/detailsPage/Reviews"));
 
 interface Props {
     slug: string;
