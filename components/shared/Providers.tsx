@@ -35,7 +35,7 @@ function Providers({children}: Props) {
     return (
         <StoreProvider store={store}>
             <DirectionProvider dir={"rtl"}>
-                <ThemeProvider attribute={"class"} defaultTheme={"system"} enableSystem disableTransitionOnChange>
+                <ThemeProvider attribute={"class"} defaultTheme={"light"} disableTransitionOnChange>
                     {children}
                     <Toaster toastOptions={{duration: 5000, position: "bottom-center", style: {fontSize: 14}}}>
                         {(t) => (

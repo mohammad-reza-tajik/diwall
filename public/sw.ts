@@ -62,6 +62,7 @@ serviceWorker.addEventListener("install", (event ) => {
                 "/fonts/dana-fanum-bold.woff2",
                 "/fonts/dana-fanum-medium.woff2",
                 "/offline.html",
+                "/app.webmanifest"
             );
             // Force the waiting service worker to become the active service worker.
             await serviceWorker.skipWaiting(); // returned promise can be ignored safely
