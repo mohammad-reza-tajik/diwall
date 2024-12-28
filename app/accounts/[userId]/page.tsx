@@ -60,7 +60,7 @@ function AccountPage() {
                                 onClick={() => {
                                     setActiveTab(index);
                                     router.push(buildURL({
-                                        params: {
+                                        query: {
                                             tab: index + ""
                                         },
                                     }))

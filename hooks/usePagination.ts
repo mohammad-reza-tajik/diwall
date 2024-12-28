@@ -39,10 +39,10 @@ function usePagination({itemsPerPage, siblingCount = 1, totalCount}: Params) {
      * Callback function to handle page changes.
      * @param page - The new page number to navigate to.
      */
-    const pageChangeHandler = useCallback((page: number | string) => {
+    const pageChangeHandler = useCallback((page: string | number) => {
         setPage(+page);
         router.push(
-            buildURL({params: {page : page + ""}}),
+            buildURL({query: { page : page + "" }}),
             {scroll: true}
         );
     }, []);

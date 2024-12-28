@@ -3,7 +3,7 @@ import {Provider as StoreProvider} from "react-redux";
 import {DirectionProvider} from '@radix-ui/react-direction';
 import {store} from "@/store";
 import {Close} from "@/components/shared/Icons";
-import toast, {Toaster, ToastBar} from 'react-hot-toast';
+import toast, {Toaster, ToastBar} from "react-hot-toast";
 import {Button} from "@/components/ui/button";
 import {useEffect} from "react";
 import {ThemeProvider} from "next-themes";

@@ -33,7 +33,7 @@ function SectionHeading({sortBy, route, text, seeAll, white}: Props) {
     const sortChangeHandler = (value: string) => {
         setSort(value);
         router.push(buildURL({
-            params: {
+            query: {
                 sortBy: value
             }
         }))

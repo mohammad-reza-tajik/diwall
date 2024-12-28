@@ -1,7 +1,7 @@
 
 interface Options {
   url?: string;
-  params?: Record<string, string | null | undefined>;
+  query?: Record<string, string | null | undefined >;
   hash?: string | null | undefined;
 }
 
@@ -22,8 +22,8 @@ function buildURL(options: Options): string {
   const urlObj = new URL(url);
 
   // Set query parameters
-  if (options.params) {
-    for (const [key, value] of Object.entries(options.params)) {
+  if (options.query) {
+    for (const [key, value] of Object.entries(options.query)) {
       if (value !== null && value !== undefined) {
         urlObj.searchParams.set(key, value);
       } else {
