@@ -8,11 +8,13 @@ import range from "@/lib/utils/range";
  * @param totalCount - Total number of items to paginate.
  * @param itemsPerPage - Number of items to display per page.
  * @param siblingCount - Number of sibling pages to display on either side of the current page (default is 1).
+ * @param scroll - Whether to scroll to the top of the page when changing the page (default is true).
  */
 interface Params {
     totalCount: number;
     itemsPerPage: number;
     siblingCount?: number;
+    scroll: boolean;
 }
 
 /**
@@ -20,7 +22,7 @@ interface Params {
  * @param params - Parameters for pagination including total count, items per page, and sibling count.
  * @returns An object containing the pagination range, current page, and a handler to change the page.
  */
-function usePagination({itemsPerPage, siblingCount = 1, totalCount}: Params) {
+function usePagination({itemsPerPage, siblingCount = 1, totalCount , scroll}: Params) {
     const [currentPage, setPage] = useState(1);
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -43,7 +45,7 @@ function usePagination({itemsPerPage, siblingCount = 1, totalCount}: Params) {
         setPage(+page);
         router.push(
             buildURL({query: { page : page + "" }}),
-            {scroll: true}
+            {scroll}
         );
     }, []);
 

@@ -7,16 +7,17 @@ interface Props {
     totalCount: number;
     siblingCount?: number;
     itemsPerPage: number;
+    className?: string;
+    scroll?: boolean;
 }
 
-
-const Pagination = ({totalCount, siblingCount = 1, itemsPerPage}: Props) => {
-
+function Pagination({totalCount, siblingCount = 1, itemsPerPage,className, scroll = true}: Props) {
 
     const {paginationRange, pageChangeHandler, currentPage} = usePagination({
         totalCount,
         siblingCount,
-        itemsPerPage
+        itemsPerPage,
+        scroll
     });
 
     if (totalCount <= itemsPerPage) {
@@ -24,7 +25,7 @@ const Pagination = ({totalCount, siblingCount = 1, itemsPerPage}: Props) => {
     }
 
     return (
-        <div className={"flex justify-center w-full gap-2 items-center my-5"}>
+        <div className={`flex justify-center w-full gap-2 items-center my-5 ${className}`}>
             <Button size={"icon"} variant={"outline"} onClick={() => pageChangeHandler(currentPage - 1)}
                     disabled={currentPage === 1}>
                 <Arrow className={"rotate-180"}/>
@@ -48,6 +49,6 @@ const Pagination = ({totalCount, siblingCount = 1, itemsPerPage}: Props) => {
             </Button>
         </div>
     );
-};
+}
 
 export default Pagination;
