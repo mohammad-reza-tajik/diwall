@@ -6,6 +6,8 @@ import type {Review} from "@/types/review";
 import Loader from "@/components/shared/Loader";
 import toast from "react-hot-toast";
 import getTimestamp from "@/lib/utils/getTimeStamp";
+import Pagination from "@/components/shared/Pagination";
+import {useSearchParams} from "next/navigation";
 
 interface Props {
     addReview: boolean;
@@ -17,6 +19,10 @@ function Reviews({addReview, slug}: Props) {
 
     const [isLoading, setIsLoading] = useState(true);
     const [reviews, setReviews] = useState<Review[]>([]);
+
+    const currentPage = useSearchParams().get("page") || 1;
+
+    const currentReviews = reviews.slice((+currentPage - 1) * 4, +currentPage * 4);
 
     useEffect(() => {
             (async () => {
@@ -45,32 +51,41 @@ function Reviews({addReview, slug}: Props) {
                         <Loader className={"size-10 md:size-16"}/>
                     </div> :
                     reviews && reviews.length !== 0 ?
-                        reviews.map((comment, index) => {
-                            return (
-                                <div key={index} className={"rounded border border-gray-600/10"}>
-                                    <div className={"flex items-center px-2 bg-muted"}>
-                                        <Person className={"size-5 lg:size-8 fill-primary"}/>
-                                        <div className={"flex flex-col py-1 px-3 gap-1 "}>
+                        <>
+                            {
+                                currentReviews.map((comment, index) => {
+                                    return (
+                                        <div key={index} className={"rounded border border-muted"}>
+                                            <div className={"flex items-center px-2 bg-muted"}>
+                                                <Person className={"size-5 lg:size-8 fill-primary"}/>
+                                                <div className={"flex flex-col py-1 px-3 gap-1 "}>
                                                     <span className={"text-sm"}>
                                                         توسط :
                                                         {comment.author}
                                                     </span>
-                                            <span className={"text-xs"}>
+                                                    <span className={"text-xs"}>
                                                         تاریخ :
-                                                &nbsp;
-                                                {getTimestamp(comment.date)}
+                                                        &nbsp;
+                                                        {getTimestamp(comment.date)}
                                                     </span>
+                                                </div>
+                                            </div>
+                                            <div className={"p-5 h-[200px] overflow-auto"}>
+                                                <p className={"text-sm leading-relaxed"}>
+                                                    {comment.content}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className={"p-5 h-[200px] overflow-auto"}>
-                                        <p className={"text-sm leading-relaxed"}>
-                                            {comment.content}
-                                        </p>
-                                    </div>
-                                </div>
-                            )
+                                    )
 
-                        }) :
+
+                                })
+                            }
+                            <Pagination totalCount={reviews.length} itemsPerPage={4} className={"col-span-full"}
+                                        scroll={false}/>
+                        </>
+
+                        :
                         <p className={"flex justify-center items-center h-[200px] w-full text-sm md:text-base col-span-full"}>
                             برای این محصول دیدگاهی وجود ندارد !
                         </p>
