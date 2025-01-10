@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     description: "خرید بهترین پوستر و کاغذ دیواری با قیمت مناسب",
     keywords: ["پوستر دیواری", "کاغذ دیواری", "خرید کاغذ دیواری", "خرید پوستر دیواری"],
     metadataBase: new URL("https://diwall.vercel.app"),
-    manifest: "/app.webmanifest",
+    manifest: "/manifest.json",
     openGraph: {
         title: "دیوال : فروشگاه پوستر و کاغذ دیواری",
         description: "از بین هزاران طرح کاغذ و پوستر دیواری فروشگاه دیوال برای فضای خانه و محل کار خود انتخاب و به آسانی آنرا سفارشی کرده وآنلاین تحویل بگیرید",
