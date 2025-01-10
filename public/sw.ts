@@ -16,7 +16,7 @@ async function addToDynamicCache(request : Request)  {
     try {
         const dynamicCache = await caches.open(DYNAMIC_CACHE_NAME);
         const response = await fetch(request);
-        await dynamicCache.put(request, response.clone());
+        await dynamicCache.add(request);
         return response;
     } catch (err) {
         console.error("Failed to add to dynamic cache:", err);
