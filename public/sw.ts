@@ -39,7 +39,7 @@ async function cacheFirst(event : FetchEvent) {
             const { origin } = new URL(event.request.url);
             const isFromMySite = origin === serviceWorker.location.origin;
 
-            if (isFromMySite && (event.request.destination === "script" || event.request.destination === "style")) {
+            if (isFromMySite && (event.request.destination === "script" || event.request.destination === "style" || event.request.destination === "image")) {
                 return await addToDynamicCache(event.request);
             }
             return await fetch(event.request);
