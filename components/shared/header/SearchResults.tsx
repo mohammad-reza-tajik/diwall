@@ -4,8 +4,7 @@ import Image from "next/image";
 import {useRouter} from "next/navigation";
 import Loader from "@/components/shared/Loader";
 import type {Product} from "@/types/product";
-import  cn  from "@/lib/utils/cn"
-
+import cn from "@/lib/utils/cn"
 import {Button} from "@/components/ui/button";
 
 interface Props {
@@ -21,15 +20,18 @@ function SearchResults({isLoading, results, search, submitSearchHandler, closeSe
 
     const router = useRouter();
 
-    const goToProductHandler = (slug: string) => {
+    function goToProductHandler(slug: string) {
         closeSearch();
         router.push(`/products/${slug}`);
-
     }
 
-    const showResults = () => {
+    function showResults () {
         if (isLoading && search.trim().length >= 3) {
-            return <div className={"flex w-full justify-center items-center p-3"}><Loader /></div>
+            return (
+                <div className={"flex w-full justify-center items-center p-3"}>
+                    <Loader/>
+                </div>
+            )
         } else {
             if (results.length === 0 && search.trim().length >= 3) {
                 return (
@@ -63,7 +65,7 @@ function SearchResults({isLoading, results, search, submitSearchHandler, closeSe
     }
 
     return (
-        <ul className={cn("p-1 bg-background w-full absolute z-50 top-full right-0 rounded border border-t-transparent" , {"hidden" : search.trim().length < 3})}>
+        <ul className={cn("p-1 bg-background w-full absolute z-50 top-full right-0 rounded border border-t-transparent", {"hidden": search.trim().length < 3})}>
             {showResults()}
             {results.length !== 0 && search.trim() !== "" &&
                 <Button className={"mt-3 w-full"} onClick={submitSearchHandler}>

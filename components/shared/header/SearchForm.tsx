@@ -21,15 +21,17 @@ function SearchForm() {
     } = useSearch();
 
     return (
-            <form onSubmit={submitSearchHandler} className={"flex items-center relative"}>
-                <Button variant={"ghost"} size={"icon"} className={"absolute right-2 z-20"} aria-label={"جستجو"}
-                        type={"submit"}>
+            <search className={"flex items-center relative"}>
+                <Button variant={"ghost"} size={"icon"} className={"absolute right-2 z-20"}
+                        onClick={submitSearchHandler} aria-label={"جستجو"}
+                >
                     <Search className={"fill-primary size-8"}/>
                 </Button>
                 <Input
                     placeholder={"جستجو ..."}
                     onChange={searchChangeHandler}
                     value={search}
+                    type={"search"}
                     className={"w-full lg:w-80 py-7 pr-14 focus:border-primary"}
                 />
                 {
@@ -41,12 +43,12 @@ function SearchForm() {
                                        submitSearchHandler={submitSearchHandler}
                                        closeSearch={closeSearchHandler}/>
                 }
-                <Button variant={"ghost"} size={"icon"} aria-label={"پاک کردن فیلد جستجو"} type={"button"}
+                <Button variant={"ghost"} size={"icon"} aria-label={"پاک کردن فیلد جستجو"} onClick={() => setSearch("")}
                         className={cn("absolute left-2 z-50", {"hidden": search.trim().length === 0})}
-                        onClick={() => setSearch("") }>
+                >
                     <Close className={"fill-primary size-8"}/>
                 </Button>
-            </form>
+            </search>
     )
 }
 
