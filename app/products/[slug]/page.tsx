@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import ProductDetails from "@/components/detailsPage/ProductDetails";
 import {Product} from "@/models";
 import connectToDB from "@/utils/connectToDB";
@@ -7,9 +6,8 @@ import ThumbGallery from "@/components/detailsPage/ThumbGallery";
 import serialize from "@/utils/serialize";
 import {notFound} from "next/navigation";
 import {Separator} from "@/components/ui/separator";
-
-const Info = dynamic(() => import("@/components/detailsPage/Info"))
-const Features = dynamic(() => import("@/components/shared/Features"));
+import Info from "@/components/detailsPage/Info";
+import Features from "@/components/shared/Features";
 
 interface Props {
     params: Promise<{ slug: string }>

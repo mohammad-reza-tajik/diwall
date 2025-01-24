@@ -5,7 +5,7 @@ import {type User} from "@/types/user";
 import {Button} from "@/components/ui/button";
 
 interface Props {
-    user ?: User
+    user? : User
 }
 function AuthButton({user}: Props) {
 

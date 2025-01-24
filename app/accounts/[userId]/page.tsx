@@ -2,16 +2,13 @@
 import {useSearchParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import {useAppSelector} from "@/store";
-import dynamic from "next/dynamic";
 import {HeartOutlined, ShoppingBag, Person} from "@/components/shared/Icons";
 import buildURL from "@/lib/utils/buildURL";
 import {useRouter} from "next/navigation";
 import  cn  from "@/lib/utils/cn"
-
-
-const Profile = dynamic(() => import("@/components/accountPage/Profile"));
-const Wishlist = dynamic(() => import("@/components/accountPage/Wishlist"));
-const Cart = dynamic(() => import("@/components/accountPage/Cart"));
+import Profile from "@/components/accountPage/Profile";
+import Wishlist from "@/components/accountPage/Wishlist";
+import Cart from "@/components/accountPage/Cart";
 
 function AccountPage() {
 
