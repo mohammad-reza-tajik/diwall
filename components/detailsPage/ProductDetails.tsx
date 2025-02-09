@@ -30,7 +30,7 @@ function ProductDetails({product}: Props) {
             <span className={"text-primary text-sm lg:text-base"}>
                     {product.price + " تومان هر متر مربع"}
             </span>
-            <p className={"text-sm lg:text-base !leading-7"}>
+            <p className={"text-sm lg:text-base leading-7!"}>
                 {product.description}
             </p>
 

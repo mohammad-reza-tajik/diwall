@@ -49,7 +49,7 @@ function SwiperProducts({products, mostPopular, route}: Props) {
                                             white/>
                         </Suspense>
                         <div className={"hidden lg:flex lg:flex-col gap-10 px-4"}>
-                            <h2 className={"text-white font-dana-black text-4xl !leading-snug"}>
+                            <h2 className={"text-white font-dana-black text-4xl leading-snug!"}>
                                 محبوب ترین
                                 <br/>
                                 محصولات

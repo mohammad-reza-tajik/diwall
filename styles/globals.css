@@ -1,8 +1,7 @@
-@import "fonts.css";
+@import "./fonts.css" layer(base);
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@custom-variant dark (&:is(.dark *));
 
 :root {
     --swiper-theme-color: #fff;
@@ -61,46 +60,88 @@
     --ring: 212.7 26.8% 83.9%;
 }
 
-*,
-*:before,
-*:after {
-    @apply border-border;
+@theme {
+    --font-dana-medium: dana-medium, Helvetica, sans-serif;
+    --font-dana-bold: dana-bold, Helvetica, sans-serif;
+    --font-dana-black: dana-black, Helvetica, sans-serif;
+
+    --background-image-auth-pattern: url(/pictures/auth-bg.svg);
+
+    --color-border: hsl(var(--border));
+    --color-input: hsl(var(--input));
+    --color-ring: hsl(var(--ring));
+    --color-background: hsl(var(--background));
+    --color-foreground: hsl(var(--foreground));
+
+    --color-primary: hsl(var(--primary));
+    --color-primary-foreground: hsl(var(--primary-foreground));
+
+    --color-secondary: hsl(var(--secondary));
+    --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+    --color-destructive: hsl(var(--destructive));
+    --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+    --color-muted: hsl(var(--muted));
+    --color-muted-foreground: hsl(var(--muted-foreground));
+
+    --color-accent: hsl(var(--accent));
+    --color-accent-foreground: hsl(var(--accent-foreground));
+
+    --color-popover: hsl(var(--popover));
+    --color-popover-foreground: hsl(var(--popover-foreground));
+
+    --color-card: hsl(var(--card));
+    --color-card-foreground: hsl(var(--card-foreground));
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
 }
 
-a, a:visited, a:active {
-    @apply fill-foreground;
-}
+@layer base {
 
-::-webkit-scrollbar {
-    @apply w-2;
-}
+    *,
+    *:before,
+    *:after {
+        @apply border-border;
+    }
 
-::-webkit-scrollbar-track {
-    @apply bg-transparent;
-}
+    a, a:visited, a:active {
+        @apply fill-foreground;
+    }
 
-::-webkit-scrollbar-thumb {
-    @apply bg-primary;
-}
+    ::-webkit-scrollbar {
+        @apply w-2;
+    }
 
-/**** hide arrows in input[type=number] ****/
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    @apply appearance-none m-0;
-}
+    ::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
 
-input[type=number] {
-    @apply appearance-none;
-}
+    ::-webkit-scrollbar-thumb {
+        @apply bg-primary;
+    }
 
-.swiper {
-    @apply w-full;
-}
+    /**** hide arrows in input[type=number] ****/
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        @apply appearance-none m-0;
+    }
 
-.contained {
-    @apply max-w-screen-xl px-1 mx-auto;
-}
+    input[type=number] {
+        @apply appearance-none;
+    }
 
-.swiper-button-prev, .swiper-button-next {
-    @apply bg-primary rounded size-10;
+    .swiper {
+        @apply w-full;
+    }
+
+    .contained {
+        @apply max-w-(--breakpoint-xl) px-1 mx-auto;
+    }
+
+    .swiper-button-prev, .swiper-button-next {
+        @apply bg-primary rounded size-10;
+    }
 }

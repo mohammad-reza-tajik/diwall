@@ -118,7 +118,7 @@ function Footer() {
                         دیوال
                         </span>
                     </h4>
-                    <p className={"text-xs md:text-sm !leading-7"}>
+                    <p className={"text-xs md:text-sm leading-7!"}>
                         پوستر دیواری الگوی بسیار مناسبی از یک متریال ایده آل و
                         پرکاربرد در
                         دکوراسیون
