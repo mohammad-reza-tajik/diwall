@@ -1,4 +1,4 @@
-import Image from "next/legacy/image"
+import Image from "next/image"
 import showcase from "@/constants/showcase";
 
 function ShowCase() {
@@ -7,7 +7,7 @@ function ShowCase() {
             {
                 showcase.map((image)=>{
                     return (
-                            <Image key={image.alt} src={`/pictures/showcase/${image.name}.svg`} alt={image.alt}
+                            <Image key={image.alt} src={`/images/showcase/${image.name}.svg`} alt={image.alt}
                                    width={100} height={100}/>
                     )
                 })

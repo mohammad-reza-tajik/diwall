@@ -19,7 +19,7 @@ function BannerDesktop() {
                     </Link>
                 </Button>
             </div>
-            <Image src={"/pictures/banner-desktop.jpg"} width={750} height={500}
+            <Image src={"/images/banner-desktop.jpg"} width={750} height={500}
                    className={"w-full h-full object-cover col-span-4"} priority alt={"banner-image"}/>
         </div>
     )

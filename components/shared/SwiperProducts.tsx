@@ -74,7 +74,7 @@ function SwiperProducts({products, mostPopular, route}: Props) {
             >
                 {
                     products.map((product) => (
-                        <SwiperSlide key={product && product._id}>
+                        <SwiperSlide key={product._id}>
                             <ProductCard product={product}/>
                         </SwiperSlide>)
                     )

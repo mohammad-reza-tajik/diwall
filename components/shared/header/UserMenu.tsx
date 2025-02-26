@@ -21,14 +21,14 @@ function UserMenu({user}: Props) {
     const logoutHandler = async () => {
         await toast.promise(logout(), {
             loading: "در حال خروج از حساب ...",
-            success: (res) => {
+            success: (res : any) => {
                 if (!res.ok) {
                     throw new Error(res.message)
                 }
                 dispatch(userActions.logout());
                 return res.message
             },
-            error: (err) => {
+            error: (err : Error) => {
                 return err.message
             }
         });

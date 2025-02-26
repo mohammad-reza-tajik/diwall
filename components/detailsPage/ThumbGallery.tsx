@@ -28,7 +28,7 @@ function ThumbGallery ({product}:Props) {
                         return (
                             <SwiperSlide key={index}>
                                 <Image className={"w-full h-auto"}
-                                       src={`/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
+                                       src={`/images/products/${product.slug}.jpg`}
                                        alt={`${product ? product.title : "product placeholder"}`} width={510}
                                        height={385}
                                 />
@@ -51,7 +51,7 @@ function ThumbGallery ({product}:Props) {
                         return (
                             <SwiperSlide key={index}>
                                 <Image className={"w-full h-auto"}
-                                       src={`/pictures/products/${product ? product.slug : "placeholder"}.jpg`}
+                                       src={`/images/products/${product.slug}.jpg`}
                                        alt={`${product ? product.title : "product placeholder"}`}
                                        width={141}
                                        height={123}

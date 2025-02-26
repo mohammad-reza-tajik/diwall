@@ -19,7 +19,7 @@ function BannerMobile() {
                     </Link>
                 </Button>
             </div>
-            <Image src={"/pictures/banner-mobile.jpg"} alt={"banner"} fill priority className={"object-cover"}/>
+            <Image src={"/images/banner-mobile.jpg"} alt={"banner"} fill priority className={"object-cover"}/>
         </div>
     );
 }
