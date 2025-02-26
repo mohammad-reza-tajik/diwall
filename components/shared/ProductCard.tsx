@@ -28,7 +28,7 @@ function ProductCard( { product }: Props) {
                 }
             </Button>
             <Link href={`/products/${product.slug}`} aria-label={product.title}>
-                <Image src={`/images/products/${product.slug}.jpg`} alt={product.title} width={317} height={239} className="size-full"/>
+                <Image src={`/images/products/${product.slug}.jpg`} alt={product.title} width={317} height={239} className={"size-full"}/>
             </Link>
             <Link className={"h-[3rem] font-dana-bold text-xs md:text-sm"} href={`/products/${product.slug}`}>
                 {product.title}

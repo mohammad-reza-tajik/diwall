@@ -65,7 +65,7 @@
     --font-dana-bold: dana-bold, Helvetica, sans-serif;
     --font-dana-black: dana-black, Helvetica, sans-serif;
 
-    --background-image-auth-pattern: url(/pictures/auth-bg.svg);
+    --background-image-auth-pattern: url(/images/auth-bg.svg);
 
     --color-border: hsl(var(--border));
     --color-input: hsl(var(--input));
@@ -132,16 +132,17 @@
     input[type=number] {
         @apply appearance-none;
     }
-
-    .swiper {
-        @apply w-full;
-    }
-
+    
     .contained {
         @apply max-w-(--breakpoint-xl) px-1 mx-auto;
     }
 
-    .swiper-button-prev, .swiper-button-next {
-        @apply bg-primary rounded size-10;
-    }
+}
+
+.swiper {
+    @apply w-full;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    @apply bg-primary rounded size-10;
 }
