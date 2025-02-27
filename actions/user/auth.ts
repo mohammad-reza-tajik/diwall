@@ -3,7 +3,7 @@ import connectToDB from "@/utils/connectToDB";
 import {User} from "@/models";
 import generateToken from "@/utils/generateToken";
 import {loginSchema, type LoginSchema, signupSchema, type SignupSchema} from "@/types/user";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import validateToken from "@/utils/validateToken";
 import tokenGenerator from "@/utils/generateToken";
 import {cookies} from "next/headers";
